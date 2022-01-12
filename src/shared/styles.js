@@ -16,8 +16,8 @@ export const color = {
   blue200: "#3669CD",
 
   // Monochrome
-  white100: "#FFFFFF",
-  black100: "#212529",
+  white: "#FFFFFF",
+  black: "#212529",
 
   gray25: "#F8F9FA",
   gray50: "#F1F3F5",
@@ -57,8 +57,7 @@ export const spacing = {
 
 export const typography = {
   type: {
-    primary:
-      'Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif',
+    primary: '"Pretendard Variable"',
     code: '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace',
   },
   weight: {
@@ -68,8 +67,8 @@ export const typography = {
     black: "900",
   },
   size: {
-    b1: "12",
-    b2: "14",
+    b1: "0.875rem",
+    b2: "0.75rem",
 
     h1: "3rem",
     h2: "2.25rem",

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import { background, color, typography } from "../shared/styles";
+import { color, typography } from "../shared/styles";
 
 const BadgeWrapper = styled.div`
   display: inline-block;

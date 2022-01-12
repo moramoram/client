@@ -3,7 +3,7 @@ import { color, typography } from "./styles";
 
 export const bodyStyles = css`
   font-family: ${typography.type.primary};
-  font-size: ${typography.size.s3}px;
+  font-size: ${typography.size.paragraph}px;
   color: ${color.gray700};
 
   -webkit-font-smoothing: antialiased;

@@ -1,79 +1,67 @@
-import React from 'react';
-import { Button } from '../Button/Button';
-import { Icon } from '../Icon/Icon';
-
+import React from "react";
+import { Button } from "../Button/Button";
+import { Icon } from "../Icon/Icon";
 
 export const Standard = (args) => <Button {...args} />;
 Standard.args = {
   appearance: "primary",
-  children:  "primary"
+  children: "primary",
 };
 
 export default {
-  title: 'Design System/Button',
+  title: "Design System/Button",
   component: Button,
 };
 
-
 export const Primary = (args) => (
   <div>
-    <h1>
-      Primary
-    </h1>
-    <hr/>
-    <p/>
+    <h1>Primary</h1>
+    <hr />
+    <p />
     <Button appearance="primary">Primary</Button>
-    <p/>
+    <p />
     <Button appearance="primary" isDisabled>
       Disabled
     </Button>
-    <p/>
+    <p />
     <Button appearance="primary" isLoading>
       Primary
     </Button>
-    <p/>
-    <Button appearance="primary" >
+    <p />
+    <Button appearance="primary">
       <Icon icon="info" aria-label="Link" />
       Primary
     </Button>
   </div>
 );
 
-Primary.storyName= 'Primary';
-
+Primary.storyName = "Primary";
 
 export const Secondary = (args) => (
   <div>
-    <h1>
-      Secondary
-    </h1>
+    <h1>Secondary</h1>
     <Button appearance="secondary">Secondary</Button>
-    <p/>
+    <p />
     <Button appearance="secondary" isLoading>
-    Loading...
+      Loading...
     </Button>
-    <p/>
+    <p />
     <Button appearance="secondary" isDisabled>
       Disabled
     </Button>
-    <p/>
-    <Button appearance="secondary" >
+    <p />
+    <Button appearance="secondary">
       <Icon icon="info" aria-label="Link" />
       Secondary
     </Button>
   </div>
 );
 
-Secondary.storyName= 'Secondary';
-
-
-
+Secondary.storyName = "Secondary";
 
 export const SmallButtons = (args) => (
   <div>
-    <h1>
-      SmallButtons
-    </h1>
+    <h1>SmallButtons</h1>
     <Button appearance="primary" size="small">
       Primary
     </Button>
@@ -93,5 +81,4 @@ export const SmallButtons = (args) => (
   </div>
 );
 
-SmallButtons.storyName= 'SmallButtons';
-
+SmallButtons.storyName = "SmallButtons";

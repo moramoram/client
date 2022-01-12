@@ -20,40 +20,38 @@ const BadgeWrapper = styled.div`
   }
 
   ${(props) =>
-    props.status === "positive" &&
     css`
-      color: ${color.positive};
-      background: ${background.positive};
+      color: ${color[props.color]};
+      background: ${color[props.blackgroundColor]};
     `};
 
   ${(props) =>
-    props.status === "negative" &&
+    props.type === TYPE.PRIMARY &&
     css`
-      color: ${color.negative};
-      background: ${background.negative};
+      color: ${color.white100};
+      background: ${color.blue200};
     `};
 
   ${(props) =>
-    props.status === "warning" &&
+    props.type === TYPE.SECONDARY &&
     css`
-      color: ${color.warning};
-      background: ${background.warning};
+      color: ${color.gray600};
+      background: ${color.gray300};
     `};
 
   ${(props) =>
-    props.status === "error" &&
+    props.type === TYPE.DARK &&
     css`
-      color: ${color.lightest};
-      background: ${color.negative};
-    `};
-
-  ${(props) =>
-    props.status === "neutral" &&
-    css`
-      color: ${color.dark};
-      background: ${color.mediumlight};
+      color: ${color.gray25};
+      background: ${color.gray700};
     `};
 `;
+
+const TYPE = {
+  PRIMARY: "primary",
+  SECONDARY: "secondary",
+  DARK: "dark",
+};
 
 /**
  * **Badges?!** We don't need no stinkin' badges!!
@@ -62,15 +60,15 @@ export function Badge({ ...props }) {
   return <BadgeWrapper {...props} />;
 }
 Badge.propTypes = {
-  status: PropTypes.oneOf([
-    "positive",
-    "negative",
-    "neutral",
-    "error",
-    "warning",
-  ]),
+  type: PropTypes.oneOf(Object.values(TYPE)),
+  blackgroundColor: PropTypes.string,
+  color: PropTypes.string,
+  isLoading: PropTypes.bool,
 };
 
 Badge.defaultProps = {
-  status: "neutral",
+  type: "primary",
+  blackgroundColor: "blue200",
+  color: "white100",
+  isLoading: false,
 };

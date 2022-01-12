@@ -4,7 +4,7 @@ import { color, typography } from "./styles";
 export const bodyStyles = css`
   font-family: ${typography.type.primary};
   font-size: ${typography.size.s3}px;
-  color: ${color.darkest};
+  color: ${color.gray700};
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

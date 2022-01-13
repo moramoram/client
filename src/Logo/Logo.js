@@ -29,11 +29,11 @@ const Wordmark = styled.path`
   }};
 `;
 
-export function Logo({ type, ...props }) {
+export function Logo({ width, height, type, ...props }) {
   return (
     <Svg
-      width="1000"
-      height="260"
+      width={width}
+      height={height}
       viewBox="0 0 1000 260"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -78,4 +78,6 @@ Logo.propTypes = {
 
 Logo.defaultProps = {
   type: TYPES.LIGHT,
+  width: 1000,
+  height: 260,
 };

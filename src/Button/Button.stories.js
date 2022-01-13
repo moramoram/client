@@ -40,17 +40,36 @@ Primary.storyName = "Primary";
 export const Secondary = (args) => (
   <div>
     <h1>Secondary</h1>
+    <hr />
     <Button appearance="secondary">Secondary</Button>
-    <p />
-    <Button appearance="secondary" isLoading>
-      Loading...
-    </Button>
     <p />
     <Button appearance="secondary" isDisabled>
       Disabled
     </Button>
     <p />
+    <Button appearance="secondary" isLoading>
+      Loading...
+    </Button>
+    <p />
     <Button appearance="secondary">
+      <Icon icon="info" aria-label="Link" />
+      Secondary
+    </Button>
+    <h1>Dark Mode</h1>
+    <hr />
+    <Button appearance="secondary" isDarkmode>
+      Secondary
+    </Button>
+    <p />
+    <Button appearance="secondary" isDisabled isDarkmode>
+      Disabled
+    </Button>
+    <p />
+    <Button appearance="secondary" isLoading isDarkmode>
+      Loading...
+    </Button>
+    <p />
+    <Button appearance="secondary" isDarkmode>
       <Icon icon="info" aria-label="Link" />
       Secondary
     </Button>

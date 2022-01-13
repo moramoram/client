@@ -1,20 +1,11 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { color, typography, shadow } from "../shared/styles";
-import { easing } from "../shared/animation";
+import { color, shadow } from "../shared/styles";
 
 const Text = styled.span`
   display: inline-block;
   vertical-align: top;
-`;
-
-const Loading = styled.span`
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  opacity: 0;
 `;
 
 const APPEARANCES = {
@@ -28,30 +19,39 @@ const SIZES = {
 };
 
 const StyledButton = styled.button`
+  display: inline-block;
+  overflow: hidden;
+
+  margin: 0;
   border: 0;
   border-radius: 8px;
   cursor: pointer;
-  display: inline-block;
-  overflow: hidden;
   padding: ${(props) =>
     props.size === SIZES.SMALL ? "8px 16px" : "13px 20px"};
   min-width: ${(props) => (props.size === SIZES.SMALL ? "80px" : "130px")};
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  transition: all 150ms ease-out;
-  transform: translate3d(0, 0, 0);
-  vertical-align: top;
-  white-space: nowrap;
-  user-select: none;
-  margin: 0;
+
   background: transparent;
   box-shadow: ${shadow.button};
 
-  font-size: ${(props) =>
-    props.size === SIZES.SMALL ? typography.size.b1 : typography.size.b2}px;
-  font-weight: ${typography.weight.extrabold};
+  text-align: center;
+  text-decoration: none;
+  vertical-align: top;
   line-height: 1;
+  font-weight: 700;
+  white-space: nowrap;
+
+  transition: all 150ms ease-out;
+  transform: translate3d(0, 0, 0);
+  user-select: none;
+
+  svg {
+    height: ${(props) => (props.size === SIZES.SMALL ? "14" : "16")}px;
+    width: ${(props) => (props.size === SIZES.SMALL ? "14" : "16")}px;
+    margin-right: ${(props) => (props.size === SIZES.SMALL ? "4" : "6")}px;
+    margin-top: ${(props) => (props.size === SIZES.SMALL ? "-1" : "-2")}px;
+    margin-bottom: ${(props) => (props.size === SIZES.SMALL ? "-1" : "-2")}px;
+    vertical-align: top;
+  }
 
   ${(props) =>
     props.disabled &&
@@ -59,28 +59,6 @@ const StyledButton = styled.button`
       cursor: not-allowed !important;
       opacity: 0.5;
     `}
-
-  ${Text} {
-    transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
-    transition: transform 700ms ${easing.rubber};
-    opacity: 1;
-  }
-
-  ${Loading} {
-    transform: translate3d(0, 100%, 0);
-  }
-
-  svg {
-    height: ${(props) => (props.size === SIZES.SMALL ? "14" : "16")}px;
-    width: ${(props) => (props.size === SIZES.SMALL ? "14" : "16")}px;
-    vertical-align: top;
-    margin-right: ${(props) => (props.size === SIZES.SMALL ? "4" : "6")}px;
-    margin-top: ${(props) => (props.size === SIZES.SMALL ? "-1" : "-2")}px;
-    margin-bottom: ${(props) => (props.size === SIZES.SMALL ? "-1" : "-2")}px;
-
-    /* Necessary for js mouse events to not glitch out when hovering on svgs */
-    pointer-events: none;
-  }
 
   ${(props) =>
     props.minWidth &&
@@ -102,17 +80,6 @@ const StyledButton = styled.button`
     props.isLoading &&
     `
       cursor: progress !important;
-
-      ${Loading} {
-        transition: transform 700ms ${easing.rubber};
-        transform: translate3d(0, -50%, 0);
-        opacity: 1;
-      }
-
-      ${Text} {
-        transform: scale3d(0, 0, 1) translate3d(0, -100%, 0);
-        opacity: 0;
-      }
       &:hover {
         transform: none;
       }
@@ -142,10 +109,9 @@ const StyledButton = styled.button`
 
   ${(props) =>
     props.appearance === APPEARANCES.PRIMARY &&
-    !props.isDarkmode &&
     `
       background: ${color.blue100};
-      color: ${color.white100};
+      color: ${color.white};
       ${
         !props.isLoading &&
         !props.disabled &&
@@ -158,64 +124,28 @@ const StyledButton = styled.button`
     `}
 
   ${(props) =>
-    props.appearance === APPEARANCES.PRIMARY &&
-    props.isDarkmode &&
-    `
-      background: ${color.black100};
-      color: ${color.white100};
-      ${
-        !props.isLoading &&
-        !props.disabled &&
-        `
-          &:hover {
-            background: ${color.blue200};      
-          }
-      `
-      }
-    `}
-
-
-  ${(props) =>
     props.appearance === APPEARANCES.SECONDARY &&
-    !props.isDarkmode &&
     `
-      color: ${color.gray600};
-      border: 1px solid ${color.gray300};
-
+      border: 1px solid ${props.isDarkmode ? color.gray500 : color.gray300};
+      background:${props.isDarkmode ? color.gray700 : color.white}; 
+      color: ${props.isDarkmode ? color.gray25 : color.gray600};
+      
       ${
         !props.isLoading &&
         !props.disabled &&
         `
-          background: ${color.white100};
-          &:hover {
-            background: ${color.gray300};
-          }
-        `
-      }
-      ${props.isLoading && `background: ${color.white100};`}
-    `}
 
-  ${(props) =>
-    props.appearance === APPEARANCES.SECONDARY &&
-    props.isDarkmode &&
-    `
-      color: ${color.gray600};
-      border: 1px solid ${color.gray300};
-      ${
-        !props.isLoading &&
-        !props.disabled &&
-        `
-          background: ${color.white100};
           &:hover {
-            background: ${color.gray300};
+            background: ${props.isDarkmode ? color.gray500 : color.gray300}; 
           }
         `
       }
-      ${props.isLoading && `background: ${color.white100};`}
+      ${
+        props.isLoading &&
+        `background: ${props.isDarkmode ? color.gray500 : color.gray300}`
+      }
     `}
 `;
-
-const ButtonLink = StyledButton.withComponent("a");
 
 const applyStyle = (ButtonWrapper) =>
   ButtonWrapper &&
@@ -235,10 +165,7 @@ export function Button({
   ...props
 }) {
   const buttonInner = (
-    <>
-      <Text>{children}</Text>
-      {isLoading && <Loading>{loadingText || "Loading..."}</Loading>}
-    </>
+    <>{isLoading ? <Text>Loading</Text> : <Text>{children}</Text>}</>
   );
 
   const StyledButtonWrapper = React.useMemo(
@@ -249,10 +176,7 @@ export function Button({
   let SelectedButton = StyledButton;
   if (ButtonWrapper) {
     SelectedButton = StyledButtonWrapper;
-  } else if (isLink) {
-    SelectedButton = ButtonLink;
   }
-
   return (
     <SelectedButton isLoading={isLoading} disabled={isDisabled} {...props}>
       {buttonInner}
@@ -262,16 +186,10 @@ export function Button({
 
 Button.propTypes = {
   isLoading: PropTypes.bool,
-  loadingText: PropTypes.node,
-
-  isLink: PropTypes.bool,
   children: PropTypes.node.isRequired,
   appearance: PropTypes.oneOf(Object.values(APPEARANCES)),
   isDisabled: PropTypes.bool,
   isDarkmode: PropTypes.bool,
-  /**
-   Prevents users from clicking on a button multiple times (for things like payment forms)
-  */
   isUnclickable: PropTypes.bool,
   containsIcon: PropTypes.bool,
   size: PropTypes.oneOf(Object.values(SIZES)),
@@ -281,8 +199,6 @@ Button.propTypes = {
 
 Button.defaultProps = {
   isLoading: false,
-  loadingText: null,
-  isLink: false,
   appearance: APPEARANCES.TERTIARY,
   isDarkmode: false,
   isDisabled: false,

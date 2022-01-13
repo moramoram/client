@@ -20,6 +20,16 @@ export const glow = keyframes`
   50% { opacity: .4; }
 `;
 
+export const glowLight = keyframes`
+  0%, 100% { background: ${color.gray50} }
+  50% { background: ${color.gray25}  }
+`;
+
+export const glowDark = keyframes`
+  0%, 100% { opacity: 1; }
+  50% { opacity: .4; }
+`;
+
 export const float = keyframes`
   0% { transform: translateY(1px); }
   25% { transform: translateY(0px); }

@@ -14,10 +14,6 @@ const Svg = styled.svg`
   stroke-linejoin: round;
 `;
 
-const Path = styled.path`
-  fill: currentColor;
-`;
-
 /**
  * An Icon is a piece of visual element, but we must ensure its accessibility while using it.
  * It can have 2 purposes:

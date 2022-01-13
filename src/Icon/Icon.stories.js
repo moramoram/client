@@ -1,8 +1,15 @@
-import React, { Fragment } from "react";
-import styled, { css } from "styled-components";
+import React from "react";
+import styled from "styled-components";
 
 import { Icon } from "./Icon";
+import { IconSocial } from "./IconSocial";
 import { icons } from "../shared/icons";
+import { iconsSocial } from "../shared/iconsSocial";
+
+export default {
+  title: "Design System/Icon",
+  component: Icon,
+};
 
 const Meta = styled.div`
   color: #666;
@@ -20,27 +27,7 @@ const Item = styled.li`
 
   svg {
     margin-right: 10px;
-    width: 24px;
-    height: 24px;
-    stroke-width: 2;
   }
-
-  ${(props) =>
-    props.minimal &&
-    css`
-      flex: none;
-      min-width: auto;
-      padding: 0;
-      background: #fff;
-      border: 1px solid #666;
-
-      svg {
-        display: block;
-        margin-right: 0;
-        width: 48px;
-        height: 48px;
-      }
-    `};
 `;
 
 const List = styled.ul`
@@ -49,13 +36,8 @@ const List = styled.ul`
   list-style: none;
 `;
 
-export default {
-  title: "Design System/Icon",
-  component: Icon,
-};
-
-export const Labels = (args) => (
-  <Fragment>
+export const Basic = (args) => (
+  <>
     There are {Object.keys(icons).length} icons
     <List>
       {Object.keys(icons).map((key) => (
@@ -65,38 +47,31 @@ export const Labels = (args) => (
         </Item>
       ))}
     </List>
-  </Fragment>
+  </>
 );
 
-export const NoLabels = (args) => (
-  <List>
-    {Object.keys(icons).map((key) => (
-      <Item minimal key={key}>
-        <Icon icon={key} aria-label={key} />
-      </Item>
-    ))}
-  </List>
+export const Standard = (args) => (
+  <>
+    This is a <Icon {...args} /> icon
+  </>
 );
 
-NoLabels.storyName = "no labels";
-
-export const Inline = (args) => (
-  <Fragment>
-    this is an inline <Icon {...args} /> icon (default)
-  </Fragment>
-);
-Inline.args = {
+Standard.args = {
   icon: "smile",
   "aria-label": "smile",
+  block: false,
 };
 
-export const Block = (args) => (
-  <Fragment>
-    this is a block <Icon {...args} /> icon
-  </Fragment>
+export const Social = (args) => (
+  <>
+    There are {Object.keys(iconsSocial).length} social icons
+    <List>
+      {Object.keys(iconsSocial).map((key) => (
+        <Item key={key}>
+          <IconSocial icon={key} aria-hidden />
+          <Meta>{key}</Meta>
+        </Item>
+      ))}
+    </List>
+  </>
 );
-Block.args = {
-  icon: "smile",
-  "aria-label": "smile",
-  block: true,
-};

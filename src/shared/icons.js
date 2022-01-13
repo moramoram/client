@@ -6,6 +6,7 @@ const svgAttr = {
 
 // Icon paths
 export const icons = {
+  // feather icons
   activity: (
     <>
       <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" {...svgAttr} />
@@ -2277,6 +2278,24 @@ export const icons = {
       <circle cx="11" cy="11" r="8" {...svgAttr} />
       <line x1="21" y1="21" x2="16.65" y2="16.65" {...svgAttr} />
       <line x1="8" y1="11" x2="14" y2="11" {...svgAttr} />
+    </>
+  ),
+
+  // heroicons
+  building: (
+    <>
+      <path
+        d="M19 21V5C19 3.89543 18.1046 3 17 3H7C5.89543 3 5 3.89543 5 5V21M19 21L21 21M19 21H14M5 21L3 21M5 21H10M9 6.99998H10M9 11H10M14 6.99998H15M14 11H15M10 21V16C10 15.4477 10.4477 15 11 15H13C13.5523 15 14 15.4477 14 16V21M10 21H14"
+        {...svgAttr}
+      />
+    </>
+  ),
+  computer: (
+    <>
+      <path
+        d="M9.75 17L9 20L8 21H16L15 20L14.25 17M3 13H21M5 17H19C20.1046 17 21 16.1046 21 15V5C21 3.89543 20.1046 3 19 3H5C3.89543 3 3 3.89543 3 5V15C3 16.1046 3.89543 17 5 17Z"
+        {...svgAttr}
+      />
     </>
   ),
 };

@@ -3,6 +3,11 @@ import { Text } from "./Text";
 import { Icon } from "../Icon/Icon";
 import { typography } from "../shared/styles";
 
+export const Standard = (args) => <Text {...args} />;
+Standard.args = {
+  children: "Typography",
+};
+
 export default {
   title: "Design System/Text",
   component: Text,

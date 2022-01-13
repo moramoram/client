@@ -7,10 +7,12 @@ const TextWrapper = styled.div`
   border: 0;
   letter-spacing: -0.02rem;
   font-weight: ${typography.weight.regular}
-    ${(props) =>
-      css`
-        background: ${color[props.blackgroundColor]};
-      `};
+  background-color : none;
+
+  ${(props) =>
+    css`
+      color: ${color[props.color]};
+    `};
 
   ${(props) =>
     props.type === TYPE.H1 &&
@@ -85,5 +87,5 @@ Text.propTypes = {
 
 Text.defaultProps = {
   type: "primary",
-  color: "white",
+  color: "black",
 };

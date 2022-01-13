@@ -4,12 +4,19 @@ import { color } from "../shared/styles";
 
 const StyledBackground = styled.div`
   display: flex;
-  padding: 2rem;
+  padding: 5rem;
   border-radius: 12px;
-  background-color: ${(props) =>
-    props.isDarkmode ? color.black : color.white};
+  background-color: ${(props) => {
+    if (props.isDarkmode || props.type === "dark") {
+      return color.black;
+    } else if (props.isBlue || props.type === "blue") {
+      return color.blue100;
+    } else {
+      return color.white;
+    }
+  }};
 `;
 
-export function Background({ ...props }) {
-  return <StyledBackground {...props}></StyledBackground>;
+export function Background({ type, ...props }) {
+  return <StyledBackground {...props} type={type}></StyledBackground>;
 }

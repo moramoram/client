@@ -25,6 +25,6 @@ export const All = (args) => (
 
 export const Standard = (args) => (
   <Background {...args}>
-    <Logo {...args} />;
+    <Logo {...args} />
   </Background>
 );

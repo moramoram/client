@@ -9,11 +9,13 @@ export default {
 
 export const AllBadges = (args) => (
   <div>
-    <Badge type="primary">Primary</Badge>
-    <Badge type="secondary">Secondary</Badge>
-    <Badge type="dark">Dark</Badge>
+    <Badge type="primary">BADGE</Badge>
+    <Badge type="secondary">BADGE</Badge>
+    <Badge type="secondary" isDarkmode>
+      BADGE
+    </Badge>
     <Badge blackgroundColor="blue200" color="white100">
-      Custom
+      BADGE
     </Badge>
     <Badge status="positive">
       <Icon {...args} />
@@ -30,7 +32,11 @@ AllBadges.storyName = "all badges";
 
 export const Primary = () => <Badge type="primary">Primary</Badge>;
 export const Secondary = () => <Badge type="secondary">Secondary</Badge>;
-export const Dark = () => <Badge type="dark">Dark</Badge>;
+export const Dark = () => (
+  <Badge type="secondary" isDarkmode>
+    Dark
+  </Badge>
+);
 export const Custom = () => (
   <Badge blackgroundColor="blue200" color="white100">
     Custom

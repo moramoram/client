@@ -75,9 +75,6 @@ const TYPE = {
   BUTTON: "button",
 };
 
-/**
- * **Texts?!** We don't need no stinkin' Texts!!
- */
 export function Text({ children, ...props }) {
   return <TextWrapper {...props}>{children}</TextWrapper>;
 }

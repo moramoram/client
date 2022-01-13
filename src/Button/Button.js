@@ -1,13 +1,9 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { color, typography, shadow } from "../shared/styles";
+import { color, shadow } from "../shared/styles";
 import { easing } from "../shared/animation";
-
-const Text = styled.span`
-  display: inline-block;
-  vertical-align: top;
-`;
+import { Text } from "../Text/Text";
 
 const Loading = styled.span`
   position: absolute;
@@ -36,7 +32,6 @@ const StyledButton = styled.button`
   padding: ${(props) =>
     props.size === SIZES.SMALL ? "8px 16px" : "13px 20px"};
   min-width: ${(props) => (props.size === SIZES.SMALL ? "80px" : "130px")};
-  position: relative;
   text-align: center;
   text-decoration: none;
   transition: all 150ms ease-out;
@@ -47,10 +42,6 @@ const StyledButton = styled.button`
   margin: 0;
   background: transparent;
   box-shadow: ${shadow.button};
-
-  font-size: ${(props) =>
-    props.size === SIZES.SMALL ? typography.size.b1 : typography.size.b2}px;
-  font-weight: ${typography.weight.extrabold};
   line-height: 1;
 
   ${(props) =>
@@ -236,7 +227,7 @@ export function Button({
 }) {
   const buttonInner = (
     <>
-      <Text>{children}</Text>
+      <Text type="button">{children}</Text>
       {isLoading && <Loading>{loadingText || "Loading..."}</Loading>}
     </>
   );
@@ -266,7 +257,7 @@ Button.propTypes = {
 
   isLink: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  appearance: PropTypes.oneOf(Object.values(APPEARANCES)),
+  type: PropTypes.oneOf(Object.values(APPEARANCES)),
   isDisabled: PropTypes.bool,
   isDarkmode: PropTypes.bool,
   /**
@@ -283,7 +274,7 @@ Button.defaultProps = {
   isLoading: false,
   loadingText: null,
   isLink: false,
-  appearance: APPEARANCES.TERTIARY,
+  type: APPEARANCES.TERTIARY,
   isDarkmode: false,
   isDisabled: false,
   isUnclickable: false,

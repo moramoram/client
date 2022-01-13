@@ -22,6 +22,7 @@ const Item = styled.li`
     margin-right: 10px;
     width: 24px;
     height: 24px;
+    stroke-width: 2;
   }
 
   ${(props) =>
@@ -85,8 +86,8 @@ export const Inline = (args) => (
   </Fragment>
 );
 Inline.args = {
-  icon: "facehappy",
-  "aria-label": "Happy face",
+  icon: "smile",
+  "aria-label": "smile",
 };
 
 export const Block = (args) => (
@@ -95,7 +96,7 @@ export const Block = (args) => (
   </Fragment>
 );
 Block.args = {
-  icon: "facehappy",
-  "aria-label": "Happy face",
+  icon: "smile",
+  "aria-label": "smile",
   block: true,
 };

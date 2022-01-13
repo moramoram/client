@@ -25,13 +25,16 @@ const Path = styled.path`
 export function Icon({ icon, block, ...props }) {
   return (
     <Svg
-      viewBox="0 0 1024 1024"
-      width="20px"
-      height="20px"
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
       block={block}
+      stroke="currentColor"
       {...props}
     >
-      <Path d={icons[icon]} />
+      {icons[icon]}
     </Svg>
   );
 }

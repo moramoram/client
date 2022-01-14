@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { color, typography } from "../shared/styles";
 
 import { SubNavbarItem } from "./SubNavbarItem";
 
@@ -32,7 +31,7 @@ const SubNavbarWrapper = styled.button`
 `;
 
 export function SubNavbar({ items, theme, onClick, ...props }) {
-  const [selectedIndex, setSelectedIndex] = React.useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const handleNavItemClick = (e, idx) => {
     setSelectedIndex(idx);

@@ -106,4 +106,6 @@ TocItem.propTypes = {
 TocItem.defaultProps = {
   theme: THEME.LIGHT,
   status: STATUS.DEFAULT,
+  children: "메뉴",
+  number: "n",
 };

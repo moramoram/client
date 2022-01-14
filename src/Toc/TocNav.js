@@ -1,26 +1,9 @@
 import { React, useState } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { TocItem } from "./TocItem";
 import { color } from "../shared/styles";
-
-const tocData = [
-  {
-    name: "info",
-    title: "공고",
-    number: null,
-  },
-  {
-    name: "study",
-    title: "스터디",
-    number: 5,
-  },
-  {
-    name: "comments",
-    title: "댓글",
-    number: 20,
-  },
-];
 
 const THEME = {
   DARK: "dark",
@@ -37,7 +20,7 @@ const borderColor = {
   light: color.gray200,
 };
 
-const StyledToc = styled.div`
+const TocNavWrapper = styled.div`
   display: flex;
   align-items: flex-end;
 
@@ -50,23 +33,50 @@ const StyledToc = styled.div`
   background-color: ${(props) => bgColors[props.theme]};
 `;
 
-export function TocNav({ theme, ...props }) {
+export function TocNav({ items, theme, ...props }) {
   const [current, setCurrent] = useState("info");
 
   return (
-    <StyledToc theme={theme} {...props}>
-      {tocData.map(({ name, title, number }) => {
+    <TocNavWrapper theme={theme} {...props}>
+      {items.map(({ name, title, number }, index) => {
         return (
           <TocItem
             onClick={() => setCurrent(name)}
             status={current === name ? "active" : "default"}
             number={number}
             theme={theme}
+            key={index}
           >
             {title}
           </TocItem>
         );
       })}
-    </StyledToc>
+    </TocNavWrapper>
   );
 }
+
+TocNavWrapper.propTypes = {
+  items: PropTypes.array.isRequired,
+  theme: PropTypes.oneOf(Object.values(THEME)),
+};
+
+TocNavWrapper.defaultProps = {
+  theme: THEME.LIGHT,
+  items: [
+    {
+      name: "info",
+      title: "공고",
+      number: null,
+    },
+    {
+      name: "study",
+      title: "스터디",
+      number: 5,
+    },
+    {
+      name: "comments",
+      title: "댓글",
+      number: 20,
+    },
+  ],
+};

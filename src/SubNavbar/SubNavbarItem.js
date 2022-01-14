@@ -55,17 +55,17 @@ const SubNavbarItemWrapper = styled.button`
   display: inline-block;
   overflow: hidden;
 
+  border: 0;
+  border-radius: 8px;
   width: 200px;
   height: 42px;
   margin: 0;
-  border: 0;
-  border-radius: 8px;
 
   background: ${(props) => background[props.theme][props.status]};
 
+  color: ${(props) => textColor[props.theme][props.status]};
   font-size: ${typography.size.paragraph};
   font-weight: ${(props) => textWeight[props.status]};
-  color: ${(props) => textColor[props.theme][props.status]};
   text-align: center;
   text-decoration: none;
   white-space: nowrap;

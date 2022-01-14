@@ -2,21 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import { color } from "../shared/styles";
 
+const bgColors = {
+  dark: color.black,
+  blue: color.blue100,
+  light: color.white,
+};
+
 const StyledBackground = styled.div`
   display: flex;
   padding: 5rem;
   border-radius: 12px;
-  background-color: ${(props) => {
-    if (props.isDarkmode || props.type === "dark") {
-      return color.black;
-    } else if (props.isBlue || props.type === "blue") {
-      return color.blue100;
-    } else {
-      return color.white;
-    }
-  }};
+  background-color: ${(props) => bgColors[props.theme]};
 `;
 
-export function Background({ type, ...props }) {
-  return <StyledBackground {...props} type={type}></StyledBackground>;
+export function Background({ theme, ...props }) {
+  return <StyledBackground theme={theme} {...props}></StyledBackground>;
 }

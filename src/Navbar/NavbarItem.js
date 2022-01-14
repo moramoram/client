@@ -1,15 +1,51 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+
 import { color, typography } from "../shared/styles";
+
+const THEME = {
+  DARK: "dark",
+  LIGHT: "light",
+};
+
+const STATUS = {
+  DEFAULT: "default",
+  ACTIVE: "active",
+};
+
+const textColor = {
+  dark: color.gray25,
+  light: color.gray900,
+};
+
+const textHoverColor = {
+  dark: color.gray300,
+  light: color.gray500,
+};
+
+const textWeight = {
+  active: typography.weight.bold,
+  default: typography.weight.regular,
+};
+
+const borderColor = {
+  active: color.blue100,
+  default: "#00000000",
+};
 
 const Text = styled.span`
   display: inline-block;
-  color: ${(props) => (props.isDarkmode ? color.gray25 : color.gray900)};
-  font-size: ${typography.size.paragraph};
-  font-weight: ${(props) =>
-    props.isActive ? typography.weight.bold : typography.weight.regular};
+
+  color: ${(props) => textColor[props.theme]};
+  font-size: ${typography.size.large};
+  font-weight: ${(props) => textWeight[props.status]};
   text-decoration: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 const StyledNavbarItem = styled.div`
@@ -18,14 +54,13 @@ const StyledNavbarItem = styled.div`
   align-items: center;
 
   height: 80px;
-  width: 100px;
-  border-bottom: 3px solid
-    ${(props) => (props.isActive ? color.blue100 : "#00000000")};
+  width: 120px;
+  border-bottom: 3px solid ${(props) => borderColor[props.status]};
 
   cursor: pointer;
   :hover {
     span {
-      color: ${(props) => (props.isDarkmode ? color.gray200 : color.gray600)};
+      color: ${(props) => textHoverColor[props.theme]};
       transition: 0.3s;
     }
   }
@@ -40,7 +75,12 @@ export function NavbarItem({ children, ...props }) {
 }
 
 NavbarItem.propTypes = {
-  isActive: PropTypes.bool,
-  isDarkmode: PropTypes.bool,
+  status: PropTypes.oneOf(Object.values(STATUS)),
+  theme: PropTypes.oneOf(Object.values(THEME)),
   children: PropTypes.node.isRequired,
+};
+
+NavbarItem.defaultProps = {
+  theme: THEME.LIGHT,
+  status: STATUS.DEFAULT,
 };

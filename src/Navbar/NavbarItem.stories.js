@@ -1,31 +1,34 @@
 import React from "react";
 import { NavbarItem } from "./NavbarItem";
+import { Navbar } from "./Navbar";
 import { Background } from "../Background/Background";
 
 export default {
-  title: "Design System/NavbarItem",
+  title: "Design System/Navbar",
   component: NavbarItem,
 };
 
 export const All = (args) => (
   <>
-    <h1>Light Mode</h1>
+    <h1>Light theme</h1>
     <hr />
     <Background>
-      <NavbarItem isActive>Active</NavbarItem>
+      <NavbarItem status="active">Active</NavbarItem>
       <NavbarItem>Default</NavbarItem>
     </Background>
     <br />
-    <h1>Dark Mode</h1>
+    <h1>Dark theme</h1>
     <hr />
-    <Background isDarkmode>
-      <NavbarItem isActive isDarkmode>
+    <Background theme="dark">
+      <NavbarItem status="active" theme="dark">
         Active
       </NavbarItem>
-      <NavbarItem isDarkmode>Default</NavbarItem>
+      <NavbarItem theme="dark">Default</NavbarItem>
     </Background>
   </>
 );
+
+All.storyName = "Item (All)";
 
 export const Standard = (args) => (
   <Background {...args}>
@@ -35,6 +38,10 @@ export const Standard = (args) => (
 
 Standard.args = {
   children: "Menu",
-  isActive: false,
-  isDarkmode: false,
+  status: "active",
+  theme: "light",
 };
+
+Standard.storyName = "Item (Standard)";
+
+export const Layout = (args) => <Navbar {...args} />;

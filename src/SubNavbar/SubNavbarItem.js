@@ -3,6 +3,54 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { color, typography } from "../shared/styles";
 
+const THEME = {
+  LIGHT: "light",
+  DARK: "dark",
+};
+
+const STATUS = {
+  DEFAULT: "default",
+  ACTIVE: "active",
+};
+
+const textColor = {
+  light: {
+    default: color.gray500,
+    active: color.gray900,
+  },
+  dark: {
+    default: color.gray500,
+    active: color.gray25,
+  },
+};
+
+const textHoverColor = {
+  light: color.gray700,
+  dark: color.gray300,
+};
+
+const textWeight = {
+  default: typography.weight.regular,
+
+  active: typography.weight.bold,
+};
+
+const background = {
+  light: {
+    default: "#00000000",
+    active: color.gray25,
+  },
+  dark: {
+    default: "#00000000",
+    active: color.gray700,
+  },
+};
+
+const cursor = {
+  default: "pointer",
+  active: "default !important",
+};
+
 const SubNavbarItemWrapper = styled.button`
   display: inline-block;
   overflow: hidden;
@@ -13,36 +61,24 @@ const SubNavbarItemWrapper = styled.button`
   border: 0;
   border-radius: 8px;
 
-  background: transparent;
+  background: ${(props) => background[props.theme][props.status]};
 
+  font-size: ${typography.size.paragraph};
+  font-weight: ${(props) => textWeight[props.status]};
+  color: ${(props) => textColor[props.theme][props.status]};
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
-  font-size: ${typography.size.paragraph};
-  font-weight: ${(props) =>
-    props.isActive ? typography.weight.bold : typography.weight.regular};
 
+  cursor: ${(props) => cursor[props.status]};
   user-select: none;
-  cursor: pointer;
-
-  ${(props) =>
-    props.isActive &&
-    `
-    background: ${props.isDarkmode ? color.gray700 : color.gray50};
-    color: ${props.isDarkmode ? color.gray25 : color.gray900};
-    `}
-
-  ${(props) =>
-    !props.isActive &&
-    `
-    color: ${color.gray500};
-    `}
 
   :hover {
-    span {
-      color: ${(props) => (props.isDarkmode ? color.gray300 : color.gray700)};
+     {
+      color: ${(props) => textHoverColor[props.theme]};
       transition: 0.3s;
     }
+  }
 
   svg {
     height: "16";
@@ -52,10 +88,6 @@ const SubNavbarItemWrapper = styled.button`
     margin-bottom: "-2";
     vertical-align: top;
   }
-
-
-
-
 `;
 
 export function SubNavbarItem({ children, ...props }) {
@@ -64,15 +96,12 @@ export function SubNavbarItem({ children, ...props }) {
 
 SubNavbarItem.propTypes = {
   children: PropTypes.node.isRequired,
-  isDarkmode: PropTypes.bool,
-  isActive: PropTypes.bool,
-  containsIcon: PropTypes.bool,
-  ButtonWrapper: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  theme: PropTypes.oneOf(Object.values(THEME)),
+  status: PropTypes.oneOf(Object.values(STATUS)),
 };
 
 SubNavbarItem.defaultProps = {
-  theme: false,
-  isActive: false,
+  theme: THEME.LIGHT,
+  status: STATUS.DEFAULT,
   containsIcon: false,
-  ButtonWrapper: undefined,
 };

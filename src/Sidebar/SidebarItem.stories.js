@@ -26,6 +26,14 @@ export const All = (args) => (
     <SidebarItem {...args} />
     <SidebarItem {...args} />
 
+    <h1> Loading Light Sub Navbar Item</h1>
+    <hr />
+    <p />
+    <SidebarItem {...args} isLoading />
+    <SidebarItem {...args} isLoading />
+    <SidebarItem {...args} isLoading />
+    <SidebarItem {...args} isLoading />
+
     <h1>Dark Sub Navbar Item</h1>
     <hr />
     <p />
@@ -33,6 +41,14 @@ export const All = (args) => (
     <SidebarItem theme="dark" {...args} />
     <SidebarItem theme="dark" {...args} />
     <SidebarItem theme="dark" {...args} />
+
+    <h1> Loading Dark Sub Navbar Item</h1>
+    <hr />
+    <p />
+    <SidebarItem {...args} theme="dark" isLoading />
+    <SidebarItem {...args} theme="dark" isLoading />
+    <SidebarItem {...args} theme="dark" isLoading />
+    <SidebarItem {...args} theme="dark" isLoading />
   </>
 );
 

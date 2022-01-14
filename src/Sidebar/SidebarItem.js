@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Icon } from "../Icon/Icon";
+import { glowLight, glowDark } from "../shared/animation";
 
 import { color, typography } from "../shared/styles";
 
@@ -15,69 +16,79 @@ const textColor = {
   dark: color.gray25,
 };
 
-const Title = styled.span`
+const loadingAnimation = {
+  light: css`
+    ${glowLight} 1.5s ease-in-out infinite
+  `,
+  dark: css`
+    ${glowDark} 1.5s ease-in-out infinite
+  `,
+};
+
+const Title = styled.div`
   display: inline-block;
   overflow: hidden;
-
   width: 124px;
-  height: 20px
+  height: 20px;
 
   font-size: ${typography.size.paragraph};
   font-weight: ${typography.weight.bold};
-  line-height: ${typography.size.paragraph};
   text-overflow: ellipsis;
   white-space: nowrap;
 
   svg {
     height: ${typography.size.large};
-    width: ${typography.size.large};
+    width: ${typography.size.h4};
     margin-right: 10px;
     margin-top: -2px;
   }
 `;
 
-const Content = styled.span`
+const Content = styled.div`
   display: inline-block;
   overflow: hidden;
-
-  height: 20px
+  height: 20px;
 
   font-size: ${typography.size.paragraph};
   font-weight: ${typography.weight.regular};
-  line-height: ${typography.size.paragraph};
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
 
 const SidebarItemWrapper = styled.div`
   display: flex;
+  border-radius: 8px;
 
   width: 400px;
   height: 36px;
   padding: 8px 10px;
 
   color: ${(props) => textColor[props.theme]};
+  animation: ${(props) => props.isLoading && loadingAnimation[props.theme]};
 `;
 
-export function SidebarItem({ contents, ...props }) {
+export function SidebarItem({ contents, isLoading, ...props }) {
+  const textcontents = isLoading ? {} : contents;
   return (
-    <SidebarItemWrapper {...props}>
+    <SidebarItemWrapper isLoading={isLoading} {...props}>
       <Title {...props}>
-        <Icon icon={contents.icon} />
-        {contents.title}
+        <Icon icon={textcontents.icon} />
+        {textcontents.title}
       </Title>
-      <Content>{contents.description}</Content>
+      <Content>{textcontents.description}</Content>
     </SidebarItemWrapper>
   );
 }
 
 SidebarItem.propTypes = {
-  contents: PropTypes.objectOf(PropTypes.string).isRequired,
   theme: PropTypes.oneOf(Object.values(THEME)),
+  isLoading: PropTypes.bool,
+  contents: PropTypes.objectOf(String).isRequired,
 };
 
 SidebarItem.defaultProps = {
   theme: THEME.LIGHT,
+  isLoading: false,
   contents: {
     title: "직무",
     description: "프론트엔드",

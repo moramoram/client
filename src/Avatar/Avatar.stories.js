@@ -7,11 +7,14 @@ export default {
   component: Avatar,
 };
 
-export const Standard = (args) => <Avatar {...args} />;
-Standard.args = {
+export const Default = (args) => <Avatar {...args} />;
+
+Default.args = {
   size: "large",
-  username: "Tom Coleman",
-  src: "https://avatars2.githubusercontent.com/u/132554",
+  username: "김싸페",
+
+  // TODO : 기본 이미지 소스
+  src: "https://user-images.githubusercontent.com/87457066/149450675-18c3f878-2cf9-40cd-884c-1b7db140708b.png",
 };
 
 export const Sizes = (args) => (
@@ -19,20 +22,20 @@ export const Sizes = (args) => (
     <Avatar {...args} size="large" />
     <Avatar {...args} size="medium" />
     <Avatar {...args} size="small" />
-    <Avatar {...args} size="tiny" />
   </div>
 );
+
 Sizes.args = {
-  username: "Tom Coleman",
-  src: "https://avatars2.githubusercontent.com/u/132554",
+  username: "김싸페",
+  src: "https://user-images.githubusercontent.com/87457066/149450675-18c3f878-2cf9-40cd-884c-1b7db140708b.png",
 };
 
 export const Initials = (args) => (
   <div>
-    <Avatar username="Tom Coleman" />
-    <Avatar username="Dominic Nguyen" />
-    <Avatar username="Kyle Suss" />
-    <Avatar username="Michael Shilman" />
+    <Avatar username="James" />
+    <Avatar username="Mary" />
+    <Avatar username="김싸페" />
+    <Avatar username="홍길동" />
   </div>
 );
 
@@ -41,9 +44,9 @@ export const Loading = (args) => (
     <Avatar {...args} size="large" />
     <Avatar {...args} size="medium" />
     <Avatar {...args} size="small" />
-    <Avatar {...args} size="tiny" />
   </div>
 );
+
 Loading.args = {
   loading: true,
 };
@@ -51,11 +54,11 @@ Loading.args = {
 export const Large = (args) => (
   <div>
     <Avatar loading size="large" />
-    <Avatar size="large" username="Tom Coleman" />
+    <Avatar size="large" username="김싸페" />
     <Avatar
       size="large"
-      username="Tom Coleman"
-      src="https://avatars2.githubusercontent.com/u/132554"
+      username="김싸페"
+      src="https://user-images.githubusercontent.com/87457066/149450675-18c3f878-2cf9-40cd-884c-1b7db140708b.png"
     />
   </div>
 );

@@ -52,7 +52,7 @@ const cursor = {
 };
 
 const SubNavbarItemWrapper = styled.button`
-  display: inline-block;
+  display: block;
   overflow: hidden;
 
   border: 0;
@@ -90,14 +90,19 @@ const SubNavbarItemWrapper = styled.button`
   }
 `;
 
-export function SubNavbarItem({ children, ...props }) {
-  return <SubNavbarItemWrapper {...props}>{children}</SubNavbarItemWrapper>;
+export function SubNavbarItem({ children, onClick, ...props }) {
+  return (
+    <SubNavbarItemWrapper onClick={() => onClick()} {...props}>
+      {children}
+    </SubNavbarItemWrapper>
+  );
 }
 
 SubNavbarItem.propTypes = {
   children: PropTypes.node.isRequired,
   theme: PropTypes.oneOf(Object.values(THEME)),
   status: PropTypes.oneOf(Object.values(STATUS)),
+  onClick: PropTypes.func,
 };
 
 SubNavbarItem.defaultProps = {

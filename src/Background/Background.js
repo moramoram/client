@@ -12,9 +12,9 @@ const StyledBackground = styled.div`
   display: flex;
   padding: 5rem;
   border-radius: 12px;
-  background-color: ${(props) => bgColors[props.mode]};
+  background-color: ${(props) => bgColors[props.theme]};
 `;
 
-export function Background({ mode, ...props }) {
-  return <StyledBackground mode={mode} {...props}></StyledBackground>;
+export function Background({ theme, ...props }) {
+  return <StyledBackground theme={theme} {...props}></StyledBackground>;
 }

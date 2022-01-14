@@ -10,20 +10,20 @@ export default {
 
 export const All = (args) => (
   <>
-    <h1>Light Mode</h1>
+    <h1>Light theme</h1>
     <hr />
     <Background>
       <NavbarItem status="active">Active</NavbarItem>
       <NavbarItem>Default</NavbarItem>
     </Background>
     <br />
-    <h1>Dark Mode</h1>
+    <h1>Dark theme</h1>
     <hr />
-    <Background mode="dark">
-      <NavbarItem status="active" mode="dark">
+    <Background theme="dark">
+      <NavbarItem status="active" theme="dark">
         Active
       </NavbarItem>
-      <NavbarItem mode="dark">Default</NavbarItem>
+      <NavbarItem theme="dark">Default</NavbarItem>
     </Background>
   </>
 );
@@ -39,7 +39,7 @@ export const Standard = (args) => (
 Standard.args = {
   children: "Menu",
   status: "active",
-  mode: "light",
+  theme: "light",
 };
 
 Standard.storyName = "Item (Standard)";

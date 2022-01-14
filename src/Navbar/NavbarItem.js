@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { color, typography } from "../shared/styles";
 
-const MODE = {
+const THEME = {
   DARK: "dark",
   LIGHT: "light",
 };
@@ -37,7 +37,7 @@ const borderColor = {
 const Text = styled.span`
   display: inline-block;
 
-  color: ${(props) => textColor[props.mode]};
+  color: ${(props) => textColor[props.theme]};
   font-size: ${typography.size.large};
   font-weight: ${(props) => textWeight[props.status]};
   text-decoration: none;
@@ -60,7 +60,7 @@ const StyledNavbarItem = styled.div`
   cursor: pointer;
   :hover {
     span {
-      color: ${(props) => textHoverColor[props.mode]};
+      color: ${(props) => textHoverColor[props.theme]};
       transition: 0.3s;
     }
   }
@@ -76,11 +76,11 @@ export function NavbarItem({ children, ...props }) {
 
 NavbarItem.propTypes = {
   status: PropTypes.oneOf(Object.values(STATUS)),
-  mode: PropTypes.oneOf(Object.values(MODE)),
+  theme: PropTypes.oneOf(Object.values(THEME)),
   children: PropTypes.node.isRequired,
 };
 
 NavbarItem.defaultProps = {
-  mode: MODE.LIGHT,
+  theme: THEME.LIGHT,
   status: STATUS.DEFAULT,
 };

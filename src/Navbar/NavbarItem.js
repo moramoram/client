@@ -7,6 +7,7 @@ import { color, typography } from "../shared/styles";
 const THEME = {
   DARK: "dark",
   LIGHT: "light",
+  TRANSPARENT: "transparent",
 };
 
 const STATUS = {
@@ -17,11 +18,13 @@ const STATUS = {
 const textColor = {
   dark: color.gray25,
   light: color.gray900,
+  transparent: color.gray25,
 };
 
 const textHoverColor = {
   dark: color.gray300,
   light: color.gray500,
+  transparent: color.gray300,
 };
 
 const textWeight = {
@@ -58,12 +61,17 @@ const StyledNavbarItem = styled.div`
   border-bottom: 3px solid ${(props) => borderColor[props.status]};
 
   cursor: pointer;
-  :hover {
-    span {
-      color: ${(props) => textHoverColor[props.theme]};
-      transition: 0.3s;
+
+  ${(props) =>
+    props.status === STATUS.DEFAULT &&
+    `
+      :hover {
+        span {
+          color: ${textHoverColor[props.theme]};
+          transition: 0.3s;
+        }
     }
-  }
+  `}
 `;
 
 export function NavbarItem({ children, ...props }) {

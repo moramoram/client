@@ -26,8 +26,8 @@ export const glowLight = keyframes`
 `;
 
 export const glowDark = keyframes`
-  0%, 100% { opacity: 1; }
-  50% { opacity: .4; }
+  0%, 100% { background: ${color.gray800}}
+  50% { background: ${color.gray900}}
 `;
 
 export const float = keyframes`

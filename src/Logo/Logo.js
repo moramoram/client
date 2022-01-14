@@ -7,18 +7,21 @@ const THEME = {
   DARK: "dark",
   BLUE: "blue",
   LIGHT: "light",
+  TRANSPARENT: "transparent",
 };
 
 const symbolColors = {
   dark: color.blue100,
   blue: color.white,
   light: color.blue100,
+  transparent: color.blue100,
 };
 
 const wordColors = {
   dark: color.gray25,
   blue: color.white,
   light: color.gray900,
+  transparent: color.gray25,
 };
 
 const Svg = styled.svg`

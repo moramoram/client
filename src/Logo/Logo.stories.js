@@ -11,14 +11,14 @@ export default {
 
 export const All = (args) => (
   <>
-    <Background>
-      <Logo />
+    <Background mode="light">
+      <Logo mode="light" />
     </Background>
-    <Background isBlue>
-      <Logo type="blue" />
+    <Background mode="blue">
+      <Logo mode="blue" />
     </Background>
-    <Background isDarkmode>
-      <Logo type="dark" />
+    <Background mode="dark">
+      <Logo mode="dark" />
     </Background>
   </>
 );

@@ -1,68 +1,52 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
-import { color, typography } from "../shared/styles";
-import { glow } from "../shared/animation";
-import { Icon } from "../Icon/Icon";
+import styled from "styled-components";
 
-export const sizes = {
+import { color } from "../shared/styles";
+import { glow } from "../shared/animation";
+import { UserAlt } from "./UserAlt";
+
+const SIZE = {
+  LARGE: "large",
+  MEDIUM: "medium",
+  SMALL: "small",
+};
+
+const sizeNum = {
   large: 40,
   medium: 28,
   small: 20,
-  tiny: 16,
+};
+
+const fontSize = {
+  large: "1.25rem",
+  medium: "0.875rem",
+  small: "0.625rem",
 };
 
 const Image = styled.div`
-  background: ${(props) => (!props.loading ? "transparent" : color.light)};
-  border-radius: 50%;
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
+
+  height: ${(props) => sizeNum[props.size]}px;
+  width: ${(props) => sizeNum[props.size]}px;
+  border-radius: 50%;
+
+  background-color: ${color.gray200};
+
+  line-height: ${(props) => sizeNum[props.size]}px;
   text-transform: uppercase;
-
-  height: ${sizes.medium}px;
-  width: ${sizes.medium}px;
-  line-height: ${sizes.medium}px;
-
-  ${(props) =>
-    props.size === "tiny" &&
-    css`
-      height: ${sizes.tiny}px;
-      width: ${sizes.tiny}px;
-      line-height: ${sizes.tiny}px;
-    `}
-
-  ${(props) =>
-    props.size === "small" &&
-    css`
-      height: ${sizes.small}px;
-      width: ${sizes.small}px;
-      line-height: ${sizes.small}px;
-    `}
-
-  ${(props) =>
-    props.size === "large" &&
-    css`
-      height: ${sizes.large}px;
-      width: ${sizes.large}px;
-      line-height: ${sizes.large}px;
-    `}
-
-  ${(props) =>
-    !props.src &&
-    css`
-      background: ${!props.loading && "#37D5D3"};
-    `}
 
   img {
     width: 100%;
     height: auto;
     display: block;
+    object-fit: cover;
   }
 
   svg {
     position: relative;
-    bottom: -2px;
     height: 100%;
     width: 100%;
     vertical-align: top;
@@ -74,37 +58,17 @@ const Image = styled.div`
   }
 `;
 
-// prettier-ignore
 const Initial = styled.div`
   color: ${color.lightest};
   text-align: center;
 
-  font-size: ${typography.size.s2}px;
-  line-height: ${sizes.medium}px;
-
-  ${props => props.size === "tiny" && css`
-    font-size: ${typography.size.s1 - 2}px;
-    line-height: ${sizes.tiny}px;
-  `}
-
-  ${props => props.size === "small" && css`
-    font-size: ${typography.size.s1}px;
-    line-height: ${sizes.small}px;
-  `}
-
-  ${props => props.size === "large" && css`
-    font-size: ${typography.size.s3}px;
-    line-height: ${sizes.large}px;
-  `}
+  color: ${color.gray800};
+  font-size: ${(props) => fontSize[props.size]};
+  line-height: ${(props) => sizeNum[props.size]}px;
 `;
 
-/**
- * Use an avatar for attributing actions or content to specific users.
- *   The user’s name should always be present when using Avatar – either printed beside
- *   the avatar or in a tooltip.
- **/
 export function Avatar({ loading, username, src, size, ...props }) {
-  let avatarFigure = <Icon icon="useralt" />;
+  let avatarFigure = <UserAlt />;
   const a11yProps = {};
 
   if (loading) {
@@ -129,27 +93,15 @@ export function Avatar({ loading, username, src, size, ...props }) {
 }
 
 Avatar.propTypes = {
-  /**
-   Use the loading state to indicate that the data Avatar needs is still loading. 
-  */
   loading: PropTypes.bool,
-  /**
-   Avatar falls back to the user’s initial when no image is provided. Supply a `username` and omit `src` to see what this looks like.
-  */
   username: PropTypes.string,
-  /**
-   The URL of the Avatar's image.
-  */
   src: PropTypes.string,
-  /**
-   Avatar comes in four sizes. In most cases, you’ll be fine with `medium`. 
-  */
-  size: PropTypes.oneOf(Object.keys(sizes)),
+  size: PropTypes.oneOf(Object.values(SIZE)),
 };
 
 Avatar.defaultProps = {
   loading: false,
-  username: "loading",
+  username: "김싸페",
   src: null,
-  size: "medium",
+  size: "large",
 };

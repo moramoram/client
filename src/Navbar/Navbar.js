@@ -71,7 +71,7 @@ const StyledNavbarRight = styled.div`
 `;
 
 export function Navbar({ theme, ...props }) {
-  let [current, setCurrent] = useState(null);
+  const [current, setCurrent] = useState(null);
 
   return (
     <StyledNavbar theme={theme} {...props}>

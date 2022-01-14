@@ -6,7 +6,7 @@ import { color } from "../shared/styles";
 
 const StyledInput = styled.input`
   display: none;
-  &:checked + label {
+  :checked + label {
     background-color: ${color.blue100};
     .switch {
       transform: translateX(20px);
@@ -15,24 +15,29 @@ const StyledInput = styled.input`
 `;
 
 const StyledLabel = styled.label`
-  position: relative;
   display: block;
-  height: 24px;
+  position: relative;
+
   width: 44px;
+  height: 24px;
   border-radius: 44px;
-  transition: 0.3s;
   background-color: ${color.gray200};
+
+  cursor: pointer;
+  transition: 0.3s;
 `;
 
 const Switch = styled.div`
   position: absolute;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
   top: 2px;
   left: 2px;
-  transition: transform 0.2s linear;
+
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
   background-color: ${color.white};
+
+  transition: transform 0.2s linear;
 `;
 
 export function Toggle({ isChecked, handleToggle, ...props }) {
@@ -45,7 +50,7 @@ export function Toggle({ isChecked, handleToggle, ...props }) {
         id="asdf"
       />
       <StyledLabel htmlFor="asdf">
-        <Switch className="switch"></Switch>
+        <Switch className="switch" />
       </StyledLabel>
     </>
   );

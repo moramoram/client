@@ -61,7 +61,7 @@ const CharCounter = styled.span`
   color: ${color.gray500};
 `;
 
-const ButtonsBox = styled.div`
+const ButtonBox = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -125,7 +125,7 @@ export function CommentInput({ theme, ...props }) {
       />
       <Footer>
         <CharCounter>{comment.count}/500</CharCounter>
-        <ButtonsBox>
+        <ButtonBox>
           <Icon icon="smile" aria-hidden />
           <Button
             disabled={!comment.value ? "true" : ""}
@@ -134,7 +134,7 @@ export function CommentInput({ theme, ...props }) {
           >
             등록
           </Button>
-        </ButtonsBox>
+        </ButtonBox>
       </Footer>
     </Layout>
   );

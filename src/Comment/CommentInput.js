@@ -20,7 +20,7 @@ const textColor = {
   light: color.gray900,
 };
 
-const CommentInputWrapper = styled.label`
+const Layout = styled.label`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -34,7 +34,7 @@ const CommentInputWrapper = styled.label`
   background-color: ${(props) => bgColor[props.theme]};
 `;
 
-const TextareaWrapper = styled.textarea`
+const Textarea = styled.textarea`
   width: 100%;
   resize: none;
 
@@ -48,20 +48,20 @@ const TextareaWrapper = styled.textarea`
   }
 `;
 
-const BottomWrapper = styled.div`
+const Footer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
 `;
 
-const NumofChars = styled.span`
+const CharCounter = styled.span`
   display: block;
   font-size: 10px;
   color: ${color.gray500};
 `;
 
-const ButtonsWrapper = styled.div`
+const ButtonsBox = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -114,8 +114,8 @@ export function CommentInput({ theme, ...props }) {
   }, [comment]);
 
   return (
-    <CommentInputWrapper theme={theme} {...props}>
-      <TextareaWrapper
+    <Layout theme={theme} {...props}>
+      <Textarea
         placeholder="댓글로 의견을 나눠보세요 :)"
         ref={textareaRef}
         onChange={onChange}
@@ -123,9 +123,9 @@ export function CommentInput({ theme, ...props }) {
         value={comment.value}
         theme={theme}
       />
-      <BottomWrapper>
-        <NumofChars>{comment.count}/500</NumofChars>
-        <ButtonsWrapper>
+      <Footer>
+        <CharCounter>{comment.count}/500</CharCounter>
+        <ButtonsBox>
           <Icon icon="smile" aria-hidden />
           <Button
             disabled={!comment.value ? "true" : ""}
@@ -134,9 +134,9 @@ export function CommentInput({ theme, ...props }) {
           >
             등록
           </Button>
-        </ButtonsWrapper>
-      </BottomWrapper>
-    </CommentInputWrapper>
+        </ButtonsBox>
+      </Footer>
+    </Layout>
   );
 }
 

@@ -8,13 +8,13 @@ const bgColors = {
   light: color.white,
 };
 
-const StyledBackground = styled.div`
+const Layout = styled.div`
   display: flex;
   padding: 5rem;
   border-radius: 12px;
   background-color: ${(props) => bgColors[props.theme]};
 `;
 
-export function Background({ theme, ...props }) {
-  return <StyledBackground theme={theme} {...props}></StyledBackground>;
+export function Background({ ...props }) {
+  return <Layout {...props} />;
 }

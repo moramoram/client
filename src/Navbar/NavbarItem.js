@@ -51,7 +51,7 @@ const Text = styled.span`
   user-select: none;
 `;
 
-const StyledNavbarItem = styled.div`
+const Layout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,19 +76,20 @@ const StyledNavbarItem = styled.div`
 
 export function NavbarItem({ children, ...props }) {
   return (
-    <StyledNavbarItem {...props}>
+    <Layout {...props}>
       <Text {...props}>{children}</Text>
-    </StyledNavbarItem>
+    </Layout>
   );
 }
 
 NavbarItem.propTypes = {
-  status: PropTypes.oneOf(Object.values(STATUS)),
-  theme: PropTypes.oneOf(Object.values(THEME)),
   children: PropTypes.node.isRequired,
+  theme: PropTypes.oneOf(Object.values(THEME)),
+  status: PropTypes.oneOf(Object.values(STATUS)),
 };
 
 NavbarItem.defaultProps = {
   theme: THEME.LIGHT,
   status: STATUS.DEFAULT,
+  children: "Menu",
 };

@@ -20,7 +20,7 @@ const borderColor = {
   light: color.gray200,
 };
 
-const TocNavWrapper = styled.div`
+const Layout = styled.div`
   display: flex;
   align-items: flex-end;
 
@@ -33,34 +33,34 @@ const TocNavWrapper = styled.div`
   background-color: ${(props) => bgColors[props.theme]};
 `;
 
-export function TocNav({ items, theme, ...props }) {
+export function TocNav({ items, ...props }) {
   const [current, setCurrent] = useState("info");
 
   return (
-    <TocNavWrapper theme={theme} {...props}>
+    <Layout {...props}>
       {items.map(({ name, title, number }, index) => {
         return (
           <TocItem
             onClick={() => setCurrent(name)}
             status={current === name ? "active" : "default"}
             number={number}
-            theme={theme}
             key={index}
+            {...props}
           >
             {title}
           </TocItem>
         );
       })}
-    </TocNavWrapper>
+    </Layout>
   );
 }
 
-TocNavWrapper.propTypes = {
+TocNav.propTypes = {
   items: PropTypes.array.isRequired,
   theme: PropTypes.oneOf(Object.values(THEME)),
 };
 
-TocNavWrapper.defaultProps = {
+TocNav.defaultProps = {
   theme: THEME.LIGHT,
   items: [
     {

@@ -62,7 +62,7 @@ const Number = styled.span`
   font-size: 0.8rem;
 `;
 
-const StyledTocItem = styled.div`
+const Layout = styled.div`
   display: flex;
   justify-content: center;
   align-items: baseline;
@@ -88,12 +88,12 @@ const StyledTocItem = styled.div`
 
 export function TocItem({ children, number, ...props }) {
   return (
-    <StyledTocItem {...props}>
+    <Layout {...props}>
       <Text className="menu" {...props}>
         {children}
       </Text>
       <Number>{number}</Number>
-    </StyledTocItem>
+    </Layout>
   );
 }
 

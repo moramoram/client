@@ -43,7 +43,7 @@ const borderColor = {
   transparent: color.gray700,
 };
 
-const StyledNavbar = styled.div`
+const Layout = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -53,35 +53,35 @@ const StyledNavbar = styled.div`
   border-bottom: 1px solid ${(props) => borderColor[props.theme]};
 `;
 
-const StyledNavbarLeft = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const StyledNavbarItems = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: 5rem;
-`;
-
-const StyledNavbarRight = styled.div`
+const FlexBox = styled.div`
   display: flex;
   gap: 2rem;
   align-items: center;
+
+  svg,
+  div {
+    cursor: pointer;
+  }
 `;
 
-export function Navbar({ theme, ...props }) {
+const NavbarItemBox = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 3rem;
+`;
+
+export function Navbar({ ...props }) {
   const [current, setCurrent] = useState(null);
 
   return (
-    <StyledNavbar theme={theme} {...props}>
-      <StyledNavbarLeft>
-        <Logo width="100" height="26" theme={theme} />
-        <StyledNavbarItems>
+    <Layout {...props}>
+      <FlexBox>
+        <Logo width="100" height="26" {...props} />
+        <NavbarItemBox>
           {navData.map(({ name, title }) => {
             return (
               <NavbarItem
-                theme={theme}
+                {...props}
                 onClick={() => setCurrent(name)}
                 status={current === name ? "active" : "default"}
               >
@@ -89,20 +89,20 @@ export function Navbar({ theme, ...props }) {
               </NavbarItem>
             );
           })}
-        </StyledNavbarItems>
-      </StyledNavbarLeft>
-      <StyledNavbarRight>
+        </NavbarItemBox>
+      </FlexBox>
+      <FlexBox>
         <Icon icon="bell" stroke={color.gray400} aria-hidden />
         <Avatar />
-      </StyledNavbarRight>
-    </StyledNavbar>
+      </FlexBox>
+    </Layout>
   );
 }
 
-NavbarItem.propTypes = {
+Navbar.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
 };
 
-NavbarItem.defaultProps = {
+Navbar.defaultProps = {
   theme: THEME.LIGHT,
 };

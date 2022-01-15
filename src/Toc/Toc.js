@@ -15,40 +15,40 @@ const borderColor = {
   light: color.gray200,
 };
 
-const TocWrapper = styled.div`
+const Layout = styled.div`
   display: flex;
   width: 100%;
   border-bottom: 1px solid ${(props) => borderColor[props.theme]};
 `;
 
-export function Toc({ items, theme, ...props }) {
+export function Toc({ items, ...props }) {
   const [current, setCurrent] = useState("info");
 
   return (
-    <TocWrapper theme={theme} {...props}>
+    <Layout {...props}>
       {items.map(({ name, title, number }, index) => {
         return (
           <TocItem
             onClick={() => setCurrent(name)}
             status={current === name ? "active" : "default"}
             number={number}
-            theme={theme}
             key={index}
+            {...props}
           >
             {title}
           </TocItem>
         );
       })}
-    </TocWrapper>
+    </Layout>
   );
 }
 
-TocWrapper.propTypes = {
+Toc.propTypes = {
   items: PropTypes.array.isRequired,
   theme: PropTypes.oneOf(Object.values(THEME)),
 };
 
-TocWrapper.defaultProps = {
+Toc.defaultProps = {
   theme: THEME.LIGHT,
   items: [
     {

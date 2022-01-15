@@ -1,9 +1,6 @@
 import React from "react";
 
 import { TocItem } from "./TocItem";
-import { Toc } from "./Toc";
-import { TocNav } from "./TocNav";
-
 import { Background } from "../Background/Background";
 
 export default {

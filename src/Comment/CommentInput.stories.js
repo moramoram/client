@@ -14,13 +14,13 @@ export const Default = (args) => (
   </Background>
 );
 
-export const All = (args) => (
+export const All = () => (
   <>
     <Background theme="light">
-      <CommentInput theme="light" {...args} />
+      <CommentInput theme="light" />
     </Background>
     <Background theme="dark">
-      <CommentInput theme="dark" {...args} />
+      <CommentInput theme="dark" />
     </Background>
   </>
 );

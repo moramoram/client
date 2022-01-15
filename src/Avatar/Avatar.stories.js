@@ -7,58 +7,46 @@ export default {
   component: Avatar,
 };
 
+// TODO : 기본 이미지 소스
+const defaultSrc =
+  "https://user-images.githubusercontent.com/87457066/149450675-18c3f878-2cf9-40cd-884c-1b7db140708b.png";
+
 export const Default = (args) => <Avatar {...args} />;
 
 Default.args = {
   size: "large",
   username: "김싸페",
-
-  // TODO : 기본 이미지 소스
-  src: "https://user-images.githubusercontent.com/87457066/149450675-18c3f878-2cf9-40cd-884c-1b7db140708b.png",
+  src: defaultSrc,
 };
 
-export const Sizes = (args) => (
+export const All = () => (
   <div>
-    <Avatar {...args} size="large" />
-    <Avatar {...args} size="medium" />
-    <Avatar {...args} size="small" />
-  </div>
-);
+    <h1>Sizes</h1>
+    <hr />
+    <div>
+      <h2 style={{ marginBottom: "0.5rem" }}>Images</h2>
+      <Avatar size="large" src={defaultSrc} />
+      <Avatar size="medium" src={defaultSrc} />
+      <Avatar size="small" src={defaultSrc} />
+    </div>
+    <div style={{ marginTop: "1rem" }}>
+      <h2 style={{ marginBottom: "0.5rem" }}>Initials</h2>
+      <Avatar size="large" />
+      <Avatar size="medium" />
+      <Avatar size="small" />
+    </div>
+    <div style={{ marginTop: "1rem" }}>
+      <h2 style={{ marginBottom: "0.5rem" }}>Lodings</h2>
+      <Avatar size="large" loading />
+      <Avatar size="medium" loading />
+      <Avatar size="small" loading />
+    </div>
 
-Sizes.args = {
-  username: "김싸페",
-  src: "https://user-images.githubusercontent.com/87457066/149450675-18c3f878-2cf9-40cd-884c-1b7db140708b.png",
-};
-
-export const Initials = (args) => (
-  <div>
+    <h1 style={{ marginTop: "3rem" }}>Initials</h1>
+    <hr />
     <Avatar username="James" />
     <Avatar username="Mary" />
     <Avatar username="김싸페" />
     <Avatar username="홍길동" />
-  </div>
-);
-
-export const Loading = (args) => (
-  <div>
-    <Avatar {...args} size="large" />
-    <Avatar {...args} size="medium" />
-    <Avatar {...args} size="small" />
-  </div>
-);
-
-Loading.args = {
-  loading: true,
-};
-
-export const Large = (args) => (
-  <div>
-    <Avatar loading size="large" />
-    <Avatar size="large" username="김싸페" />
-    <Avatar
-      size="large"
-      username="김싸페"
-      src="https://user-images.githubusercontent.com/87457066/149450675-18c3f878-2cf9-40cd-884c-1b7db140708b.png"
-    />
   </div>
 );

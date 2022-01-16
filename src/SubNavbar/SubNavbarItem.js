@@ -81,11 +81,10 @@ const SubNavbarItemWrapper = styled.button`
   }
 
   svg {
-    height: "16";
-    width: "16";
-    margin-right: "6";
-    margin-top: "-2";
-    margin-bottom: "-2";
+    height: 16px;
+    width: 16px;
+    margin-right: 6px;
+    margin-bottom: -2px;
     vertical-align: top;
   }
 `;

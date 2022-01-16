@@ -69,6 +69,7 @@ export const typography = {
   size: {
     b1: "0.875rem",
     b2: "0.75rem",
+    b3: "0.625rem",
 
     h1: "3rem",
     h2: "2.25rem",

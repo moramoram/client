@@ -1,26 +1,67 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import { color } from "../shared/styles";
+import { color, typography } from "../shared/styles";
 import { glowLight, glowDark } from "../shared/animation";
 
-const Text = styled.span`
-  display: inline-block;
-  vertical-align: top;
-`;
+const THEME = {
+  LIGHT: "light",
+  DARK: "dark",
+};
+
+const MODE = {
+  PRIMARY: "primary",
+  SECONDARY: "secondary",
+};
+
+const textColor = {
+  light: {
+    primary: color.white,
+    secondary: color.gray600,
+  },
+  dark: {
+    primary: color.white,
+    secondary: color.white,
+  },
+};
+
+const bgColor = {
+  light: {
+    primary: color.blue100,
+    secondary: color.white,
+  },
+  dark: {
+    primary: color.blue100,
+    secondary: color.gray700,
+  },
+};
+
+const loadingAnimation = {
+  light: css`
+    ${glowLight} 1.5s ease-in-out infinite;
+  `,
+  dark: css`
+    ${glowDark} 1.5s ease-in-out infinite;
+  `,
+};
 
 const BadgeWrapper = styled.div`
   display: inline-block;
 
-  height: 20px;
   min-width: 48px;
+  height: 20px;
   padding: 4px 8px;
   border-radius: 8px;
 
+  background: ${(props) => bgColor[props.theme][props.mode]};
+
+  font-size: ${typography.size.b3};
+  font-weight: ${(props) =>
+    props.isBold ? typography.weight.bold : typography.weight.regular};
+  color: ${(props) => textColor[props.theme][props.mode]};
   text-align: center;
   vertical-align: center;
   line-height: 0.75rem;
-  font-size: 0.625rem;
 
   svg {
     height: 0.625rem;
@@ -28,58 +69,11 @@ const BadgeWrapper = styled.div`
     margin-right: 4px;
   }
 
-  animation: ${(props) =>
-    props.isLoading &&
-    props.isDarkmode &&
-    css`
-      ${glowDark} 1.5s ease-in-out infinite;
-    `};
-
-  animation: ${(props) =>
-    props.isLoading &&
-    !props.isDarkmode &&
-    css`
-      ${glowLight} 1.5s ease-in-out infinite;
-    `};
-
-  ${(props) =>
-    css`
-      background: ${color[props.blackgroundColor]};
-      font-weight: ${props.isBold ? "700" : "400"};
-      color: ${color[props.color]};
-    `};
-
-  ${(props) =>
-    props.type === TYPE.PRIMARY &&
-    css`
-      background: ${color.blue100};
-      color: ${color.white};
-    `};
-
-  ${(props) =>
-    props.type === TYPE.SECONDARY &&
-    css`
-      background: ${props.isDarkmode ? color.gray800 : color.gray100};
-      color: ${props.isDarkmode ? color.gray25 : color.gray600};
-    `};
-
-  ${(props) =>
-    props.isLoading &&
-    `
-        background: ${props.isDarkmode ? color.gray800 : color.gray50};
-      `};
+  animation: ${(props) => props.isLoading && loadingAnimation[props.theme]};
 `;
 
-const TYPE = {
-  PRIMARY: "primary",
-  SECONDARY: "secondary",
-};
-
-/**
- * **Badges?!** We don't need no stinkin' badges!!
- */
 export function Badge({ children, isLoading, ...props }) {
-  const badgeinner = <>{isLoading ? <Text></Text> : <Text>{children}</Text>}</>;
+  const badgeinner = isLoading ? null : children;
   return (
     <BadgeWrapper isLoading={isLoading} {...props}>
       {badgeinner}
@@ -88,19 +82,16 @@ export function Badge({ children, isLoading, ...props }) {
 }
 
 Badge.propTypes = {
-  type: PropTypes.oneOf(Object.values(TYPE)),
-  blackgroundColor: PropTypes.string,
-  color: PropTypes.string,
+  children: PropTypes.node.isRequired,
+  theme: PropTypes.oneOf(Object.values(THEME)),
+  mode: PropTypes.oneOf(Object.values(MODE)),
   isBold: PropTypes.bool,
   isLoading: PropTypes.bool,
-  isDarkmode: PropTypes.bool,
 };
 
 Badge.defaultProps = {
-  type: "primary",
-  blackgroundColor: "blue200",
-  color: "white",
+  theme: THEME.LIGHT,
+  mode: MODE.PRIMARY,
   isBold: false,
   isLoading: false,
-  isDarkmode: false,
 };

@@ -28,7 +28,7 @@ const textColor = {
 const bgColor = {
   light: {
     primary: color.blue100,
-    secondary: color.white,
+    secondary: color.gray100,
   },
   dark: {
     primary: color.blue100,

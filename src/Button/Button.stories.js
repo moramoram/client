@@ -4,7 +4,7 @@ import { Icon } from "../Icon/Icon";
 
 export const Standard = (args) => <Button {...args} />;
 Standard.args = {
-  appearance: "primary",
+  mode: "primary",
   children: "primary",
 };
 
@@ -15,20 +15,13 @@ export default {
 
 export const Primary = (args) => (
   <div>
-    <h1>Primary</h1>
-    <hr />
+    <Button>Primary</Button>
     <p />
-    <Button appearance="primary">Primary</Button>
+    <Button isDisabled>Disabled</Button>
     <p />
-    <Button appearance="primary" isDisabled>
-      Disabled
-    </Button>
+    <Button isLoading>Primary</Button>
     <p />
-    <Button appearance="primary" isLoading>
-      Primary
-    </Button>
-    <p />
-    <Button appearance="primary">
+    <Button>
       <Icon icon="info" aria-label="Link" />
       Primary
     </Button>
@@ -39,37 +32,17 @@ Primary.storyName = "Primary";
 
 export const Secondary = (args) => (
   <div>
-    <h1>Secondary</h1>
-    <hr />
-    <Button appearance="secondary">Secondary</Button>
+    <Button mode="secondary">Secondary</Button>
     <p />
-    <Button appearance="secondary" isDisabled>
+    <Button mode="secondary" isDisabled>
       Disabled
     </Button>
     <p />
-    <Button appearance="secondary" isLoading>
+    <Button mode="secondary" isLoading>
       Loading...
     </Button>
     <p />
-    <Button appearance="secondary">
-      <Icon icon="info" aria-label="Link" />
-      Secondary
-    </Button>
-    <h1>Dark Mode</h1>
-    <hr />
-    <Button appearance="secondary" isDarkmode>
-      Secondary
-    </Button>
-    <p />
-    <Button appearance="secondary" isDisabled isDarkmode>
-      Disabled
-    </Button>
-    <p />
-    <Button appearance="secondary" isLoading isDarkmode>
-      Loading...
-    </Button>
-    <p />
-    <Button appearance="secondary" isDarkmode>
+    <Button mode="secondary">
       <Icon icon="info" aria-label="Link" />
       Secondary
     </Button>
@@ -78,26 +51,25 @@ export const Secondary = (args) => (
 
 Secondary.storyName = "Secondary";
 
-export const SmallButtons = (args) => (
+export const Dark = (args) => (
   <div>
-    <h1>SmallButtons</h1>
-    <Button appearance="primary" size="small">
-      Primary
-    </Button>
-    <Button appearance="secondary" size="small">
+    <Button mode="secondary" theme="dark">
       Secondary
     </Button>
-    <Button appearance="primary" isDisabled size="small">
+    <p />
+    <Button mode="secondary" isDisabled theme="dark">
       Disabled
     </Button>
-    <Button appearance="outline" size="small" containsIcon>
-      <Icon icon="link" aria-label="Link" />
+    <p />
+    <Button mode="secondary" isLoading theme="dark">
+      Loading...
     </Button>
-    <Button appearance="outline" size="small">
-      <Icon icon="link" />
-      Link
+    <p />
+    <Button mode="secondary" theme="dark">
+      <Icon icon="info" aria-label="Link" />
+      Secondary
     </Button>
   </div>
 );
 
-SmallButtons.storyName = "SmallButtons";
+Dark.storyName = "Dark Secondary";

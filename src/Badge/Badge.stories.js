@@ -15,38 +15,33 @@ export default {
 export const AllBadges = (args) => (
   <div>
     <h4>Primary</h4>
-    <Badge type="primary">BADGE</Badge>
+    <Badge mode="primary">BADGE</Badge>
     <p />
     <h4>Secondary</h4>
-    <Badge type="secondary">BADGE</Badge>
+    <Badge mode="secondary">BADGE</Badge>
     <p />
     <h4>Secondary Dark</h4>
-    <Badge type="secondary" isDarkmode>
+    <Badge mode="secondary" theme="dark">
       BADGE
     </Badge>
     <p />
     <h4>Secondary Bold</h4>
-    <Badge type="secondary" weight="800">
-      BADGE
-    </Badge>
-    <p />
-    <h4>Custom</h4>
-    <Badge blackgroundColor="blue200" color="white100">
+    <Badge mode="secondary" weight="800">
       BADGE
     </Badge>
     <p />
     <h4>Loading Light</h4>
-    <Badge type="primary" isLoading>
+    <Badge mode="primary" isLoading>
       BADGE
     </Badge>
     <p />
     <h4>Loading Dark</h4>
-    <Badge type="primary" isLoading isDarkmode>
+    <Badge mode="primary" isLoading theme="dark">
       BADGE
     </Badge>
     <p />
     <h4>With Icon</h4>
-    <Badge status="positive">
+    <Badge>
       <Icon {...args} />
       BADGE
     </Badge>
@@ -59,31 +54,3 @@ AllBadges.args = {
 };
 
 AllBadges.storyName = "all badges";
-
-export const Primary = () => <Badge type="primary">Primary</Badge>;
-export const Secondary = () => <Badge type="secondary">Secondary</Badge>;
-export const Dark = () => (
-  <Badge type="secondary" isDarkmode>
-    Dark
-  </Badge>
-);
-export const Custom = () => (
-  <Badge blackgroundColor="blue200" color="white100">
-    Custom
-  </Badge>
-);
-
-export const WithIcon = (args) => (
-  <Badge {...args}>
-    <Icon {...args} />
-    with icon
-  </Badge>
-);
-
-WithIcon.args = {
-  status: "warning",
-  icon: "check",
-  inline: true,
-};
-
-WithIcon.storyName = "with icon";

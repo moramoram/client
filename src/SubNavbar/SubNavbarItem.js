@@ -52,7 +52,7 @@ const cursor = {
 };
 
 const SubNavbarItemWrapper = styled.button`
-  display: inline-block;
+  display: block;
   overflow: hidden;
 
   border: 0;
@@ -81,23 +81,27 @@ const SubNavbarItemWrapper = styled.button`
   }
 
   svg {
-    height: "16";
-    width: "16";
-    margin-right: "6";
-    margin-top: "-2";
-    margin-bottom: "-2";
+    height: 16px;
+    width: 16px;
+    margin-right: 6px;
+    margin-bottom: -2px;
     vertical-align: top;
   }
 `;
 
-export function SubNavbarItem({ children, ...props }) {
-  return <SubNavbarItemWrapper {...props}>{children}</SubNavbarItemWrapper>;
+export function SubNavbarItem({ children, onClick, ...props }) {
+  return (
+    <SubNavbarItemWrapper onClick={() => onClick()} {...props}>
+      {children}
+    </SubNavbarItemWrapper>
+  );
 }
 
 SubNavbarItem.propTypes = {
   children: PropTypes.node.isRequired,
   theme: PropTypes.oneOf(Object.values(THEME)),
   status: PropTypes.oneOf(Object.values(STATUS)),
+  onClick: PropTypes.func,
 };
 
 SubNavbarItem.defaultProps = {

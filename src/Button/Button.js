@@ -1,69 +1,99 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { color, shadow } from "../shared/styles";
+import { color, typography, shadow } from "../shared/styles";
 
-const Text = styled.span`
-  display: inline-block;
-  vertical-align: top;
-`;
+const THEME = {
+  LIGHT: "light",
+  DARK: "dark",
+};
 
-const APPEARANCES = {
+const MODE = {
   PRIMARY: "primary",
   SECONDARY: "secondary",
 };
 
-const SIZES = {
-  SMALL: "small",
-  MEDIUM: "medium",
+const borderColor = {
+  light: {
+    primary: color.blue100,
+    secondary: color.gray300,
+  },
+  dark: {
+    primary: color.blue100,
+    secondary: color.gray500,
+  },
 };
 
-const StyledButton = styled.button`
+const textColor = {
+  light: {
+    primary: color.white,
+    secondary: color.gray600,
+  },
+  dark: {
+    primary: color.white,
+    secondary: color.white,
+  },
+};
+
+const bgColor = {
+  light: {
+    primary: color.blue100,
+    secondary: color.white,
+  },
+  dark: {
+    primary: color.blue100,
+    secondary: color.gray700,
+  },
+};
+
+const hoverBgColor = {
+  light: {
+    primary: color.blue200,
+    secondary: color.gray300,
+  },
+  dark: {
+    primary: color.blue200,
+    secondary: color.gray500,
+  },
+};
+
+const ButtonWrapper = styled.button`
   display: inline-block;
   overflow: hidden;
 
+  min-width: ${(props) => props.minWidth};
   margin: 0;
-  border: 0;
+  padding: 11px 27px;
   border-radius: 8px;
-  cursor: pointer;
-  padding: ${(props) =>
-    props.size === SIZES.SMALL ? "8px 16px" : "13px 20px"};
-  min-width: ${(props) => (props.size === SIZES.SMALL ? "80px" : "130px")};
+  border: ${(props) => `1px solid ${borderColor[props.theme][props.mode]}`};
 
-  background: transparent;
+  background: ${(props) => bgColor[props.theme][props.mode]};
   box-shadow: ${shadow.button};
 
+  color: ${(props) => textColor[props.theme][props.mode]};
+  font-weight: 700;
+  font-size: ${typography.size.paragraph};
   text-align: center;
   text-decoration: none;
-  vertical-align: top;
-  line-height: 1;
-  font-weight: 700;
   white-space: nowrap;
 
   transition: all 150ms ease-out;
   transform: translate3d(0, 0, 0);
   user-select: none;
+  cursor: pointer;
 
   svg {
-    height: ${(props) => (props.size === SIZES.SMALL ? "14" : "16")}px;
-    width: ${(props) => (props.size === SIZES.SMALL ? "14" : "16")}px;
-    margin-right: ${(props) => (props.size === SIZES.SMALL ? "4" : "6")}px;
-    margin-top: ${(props) => (props.size === SIZES.SMALL ? "-1" : "-2")}px;
-    margin-bottom: ${(props) => (props.size === SIZES.SMALL ? "-1" : "-2")}px;
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
     vertical-align: top;
   }
 
   ${(props) =>
-    props.disabled &&
+    props.isDisabled &&
     `
       cursor: not-allowed !important;
       opacity: 0.5;
-    `}
-
-  ${(props) =>
-    props.minWidth &&
-    `
-      min-width: ${props.minWidth}px;
     `}
 
   ${(props) =>
@@ -85,126 +115,46 @@ const StyledButton = styled.button`
       }
     `}
 
-  ${(props) =>
-    props.containsIcon &&
-    `
-      svg {
-        display: block;
-        margin: 0;
-      }
-      padding: ${props.size === SIZES.SMALL ? "7" : "12"}px;
-    `}
-  
+
   ${(props) =>
     !props.isLoading &&
-    !props.disabled &&
+    !props.isDisabled &&
     `
       &:hover {
         box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
+        background: ${hoverBgColor[props.theme][props.mode]};      
       }
       &:active {
         box-shadow: ${shadow.base};
       }
     `}
-
-  ${(props) =>
-    props.appearance === APPEARANCES.PRIMARY &&
-    `
-      background: ${color.blue100};
-      color: ${color.white};
-      ${
-        !props.isLoading &&
-        !props.disabled &&
-        `
-          &:hover {
-            background: ${color.blue200};      
-          }
-      `
-      }
-    `}
-
-  ${(props) =>
-    props.appearance === APPEARANCES.SECONDARY &&
-    `
-      border: 1px solid ${props.isDarkmode ? color.gray500 : color.gray300};
-      background:${props.isDarkmode ? color.gray700 : color.white}; 
-      color: ${props.isDarkmode ? color.gray25 : color.gray600};
-      
-      ${
-        !props.isLoading &&
-        !props.disabled &&
-        `
-
-          &:hover {
-            background: ${props.isDarkmode ? color.gray500 : color.gray300}; 
-          }
-        `
-      }
-      ${
-        props.isLoading &&
-        `background: ${props.isDarkmode ? color.gray500 : color.gray300}`
-      }
-    `}
 `;
 
-const applyStyle = (ButtonWrapper) =>
-  ButtonWrapper &&
-  StyledButton.withComponent(
-    ({ containsIcon, isLoading, isUnclickable, ...rest }) => (
-      <ButtonWrapper {...rest} />
-    )
-  );
+export function Button({ isLoading, loadingText, isLink, children, ...props }) {
+  const buttonInner = isLoading ? "Loading" : children;
 
-export function Button({
-  isDisabled,
-  isLoading,
-  loadingText,
-  isLink,
-  children,
-  ButtonWrapper,
-  ...props
-}) {
-  const buttonInner = (
-    <>{isLoading ? <Text>Loading</Text> : <Text>{children}</Text>}</>
-  );
-
-  const StyledButtonWrapper = React.useMemo(
-    () => applyStyle(ButtonWrapper),
-    [ButtonWrapper]
-  );
-
-  let SelectedButton = StyledButton;
-  if (ButtonWrapper) {
-    SelectedButton = StyledButtonWrapper;
-  }
   return (
-    <SelectedButton isLoading={isLoading} disabled={isDisabled} {...props}>
+    <ButtonWrapper isLoading={isLoading} {...props}>
       {buttonInner}
-    </SelectedButton>
+    </ButtonWrapper>
   );
 }
 
 Button.propTypes = {
-  isLoading: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  appearance: PropTypes.oneOf(Object.values(APPEARANCES)),
+  theme: PropTypes.oneOf(Object.values(THEME)),
+  mode: PropTypes.oneOf(Object.values(MODE)),
+  isLoading: PropTypes.bool,
   isDisabled: PropTypes.bool,
-  isDarkmode: PropTypes.bool,
   isUnclickable: PropTypes.bool,
-  containsIcon: PropTypes.bool,
-  size: PropTypes.oneOf(Object.values(SIZES)),
-  ButtonWrapper: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  minWidth: PropTypes.number,
+  minWidth: PropTypes.any,
 };
 
 Button.defaultProps = {
+  theme: THEME.LIGHT,
+  mode: MODE.PRIMARY,
   isLoading: false,
-  appearance: APPEARANCES.TERTIARY,
-  isDarkmode: false,
   isDisabled: false,
   isUnclickable: false,
-  containsIcon: false,
-  size: SIZES.MEDIUM,
-  ButtonWrapper: undefined,
-  minWidth: undefined,
+  minWidth: "136px",
 };

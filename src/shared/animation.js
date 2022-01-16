@@ -17,7 +17,7 @@ export const rotate360 = keyframes`
 
 export const glow = keyframes`
   0%, 100% { opacity: 1; }
-  50% { opacity: .4; }
+  50% { opacity: 0; }
 `;
 
 export const glowLight = keyframes`

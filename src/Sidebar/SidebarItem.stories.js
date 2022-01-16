@@ -1,5 +1,6 @@
 import React from "react";
 import { SidebarItem } from "./SidebarItem";
+import { Sidebar } from "./SideBar";
 
 export default {
   title: "Design System/SidebarItem",
@@ -18,6 +19,7 @@ Default.args = {
 
 export const All = (args) => (
   <>
+    <Sidebar theme="dark" />
     <h1>Light Sub Navbar Item</h1>
     <hr />
     <p />
@@ -25,7 +27,6 @@ export const All = (args) => (
     <SidebarItem {...args} />
     <SidebarItem {...args} />
     <SidebarItem {...args} />
-
     <h1> Loading Light Sub Navbar Item</h1>
     <hr />
     <p />
@@ -33,7 +34,6 @@ export const All = (args) => (
     <SidebarItem {...args} isLoading />
     <SidebarItem {...args} isLoading />
     <SidebarItem {...args} isLoading />
-
     <h1>Dark Sub Navbar Item</h1>
     <hr />
     <p />
@@ -41,7 +41,6 @@ export const All = (args) => (
     <SidebarItem theme="dark" {...args} />
     <SidebarItem theme="dark" {...args} />
     <SidebarItem theme="dark" {...args} />
-
     <h1> Loading Dark Sub Navbar Item</h1>
     <hr />
     <p />
@@ -59,3 +58,10 @@ All.args = {
     icon: "briefcase",
   },
 };
+
+export const Layout = (args) => (
+  <>
+    <Sidebar />
+    <Sidebar theme="dark" />
+  </>
+);

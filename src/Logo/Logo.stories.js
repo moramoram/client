@@ -9,22 +9,22 @@ export default {
   component: Logo,
 };
 
-export const All = (args) => (
-  <>
-    <Background theme="light">
-      <Logo theme="light" />
-    </Background>
-    <Background theme="blue">
-      <Logo theme="blue" />
-    </Background>
-    <Background theme="dark">
-      <Logo theme="dark" />
-    </Background>
-  </>
-);
-
-export const Standard = (args) => (
+export const Default = (args) => (
   <Background {...args}>
     <Logo {...args} />
   </Background>
+);
+
+export const All = () => (
+  <div style={{ display: "flex" }}>
+    <Background theme="light">
+      <Logo theme="light" width="200" />
+    </Background>
+    <Background theme="blue">
+      <Logo theme="blue" width="200" />
+    </Background>
+    <Background theme="dark">
+      <Logo theme="dark" width="200" />
+    </Background>
+  </div>
 );

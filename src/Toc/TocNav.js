@@ -10,57 +10,34 @@ const THEME = {
   LIGHT: "light",
 };
 
-const bgColors = {
-  dark: color.black,
-  light: color.white,
-};
-
-const borderColor = {
-  dark: color.gray700,
-  light: color.gray200,
-};
-
-const TocNavWrapper = styled.div`
-  display: flex;
-  align-items: flex-end;
-
-  width: 100%;
-  height: 60px;
-  // TODO : 레이아웃에 맞게 맞추기
-  padding-left: 468px;
-  border-bottom: 1px solid ${(props) => borderColor[props.theme]};
-
-  background-color: ${(props) => bgColors[props.theme]};
-`;
-
-export function TocNav({ items, theme, ...props }) {
+export const TocNav = ({ items, ...props }) => {
   const [current, setCurrent] = useState("info");
 
   return (
-    <TocNavWrapper theme={theme} {...props}>
+    <Layout {...props}>
       {items.map(({ name, title, number }, index) => {
         return (
           <TocItem
             onClick={() => setCurrent(name)}
             status={current === name ? "active" : "default"}
             number={number}
-            theme={theme}
             key={index}
+            {...props}
           >
             {title}
           </TocItem>
         );
       })}
-    </TocNavWrapper>
+    </Layout>
   );
-}
+};
 
-TocNavWrapper.propTypes = {
+TocNav.propTypes = {
   items: PropTypes.array.isRequired,
   theme: PropTypes.oneOf(Object.values(THEME)),
 };
 
-TocNavWrapper.defaultProps = {
+TocNav.defaultProps = {
   theme: THEME.LIGHT,
   items: [
     {
@@ -80,3 +57,26 @@ TocNavWrapper.defaultProps = {
     },
   ],
 };
+
+const bgColors = {
+  dark: color.black,
+  light: color.white,
+};
+
+const borderColor = {
+  dark: color.gray700,
+  light: color.gray200,
+};
+
+const Layout = styled.div`
+  display: flex;
+  align-items: flex-end;
+
+  width: 100%;
+  height: 60px;
+  // TODO : 레이아웃에 맞게 맞추기
+  padding-left: 468px;
+  border-bottom: 1px solid ${(props) => borderColor[props.theme]};
+
+  background-color: ${(props) => bgColors[props.theme]};
+`;

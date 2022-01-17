@@ -21,25 +21,23 @@ Default.args = {
   theme: "light",
 };
 
-export const All = (args) => (
+export const All = () => (
   <>
     <h1>Light theme</h1>
     <hr />
     <Background theme="light">
-      <TocItem theme="light" status="active" {...args} />
-      <TocItem theme="light" status="default" {...args} />
+      <TocItem theme="light" status="active" />
+      <TocItem theme="light" status="default" />
     </Background>
     <br />
     <h1>Dark theme</h1>
     <hr />
     <Background theme="dark">
-      <TocItem theme="dark" status="active" {...args} />
-      <TocItem theme="dark" status="default" {...args} />
+      <TocItem theme="dark" status="active" />
+      <TocItem theme="dark" status="default" />
     </Background>
   </>
 );
-
-All.storyName = "All Items";
 
 All.args = {
   children: "메뉴",

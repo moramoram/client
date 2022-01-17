@@ -3,12 +3,53 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { NavbarItem } from "./NavbarItem";
-
 import { Logo } from "../Logo/Logo";
 import { Icon } from "../Icon/Icon";
 import { Avatar } from "../Avatar/Avatar";
-
 import { color } from "../shared/styles";
+
+const THEME = {
+  DARK: "dark",
+  LIGHT: "light",
+  TRANSPARENT: "transparent",
+};
+
+export const Navbar = ({ ...props }) => {
+  const [current, setCurrent] = useState(null);
+
+  return (
+    <Layout {...props}>
+      <FlexBox>
+        <Logo width="100" height="26" {...props} />
+        <NavbarItemBox>
+          {navData.map(({ name, title }) => {
+            return (
+              <NavbarItem
+                {...props}
+                onClick={() => setCurrent(name)}
+                status={current === name ? "active" : "default"}
+              >
+                {title}
+              </NavbarItem>
+            );
+          })}
+        </NavbarItemBox>
+      </FlexBox>
+      <FlexBox>
+        <Icon icon="bell" stroke={color.gray400} aria-hidden />
+        <Avatar />
+      </FlexBox>
+    </Layout>
+  );
+};
+
+Navbar.propTypes = {
+  theme: PropTypes.oneOf(Object.values(THEME)),
+};
+
+Navbar.defaultProps = {
+  theme: THEME.LIGHT,
+};
 
 const navData = [
   {
@@ -25,12 +66,6 @@ const navData = [
   },
 ];
 
-const THEME = {
-  DARK: "dark",
-  LIGHT: "light",
-  TRANSPARENT: "transparent",
-};
-
 const bgColor = {
   dark: color.black,
   light: color.white,
@@ -43,7 +78,7 @@ const borderColor = {
   transparent: color.gray700,
 };
 
-const StyledNavbar = styled.div`
+const Layout = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -53,56 +88,19 @@ const StyledNavbar = styled.div`
   border-bottom: 1px solid ${(props) => borderColor[props.theme]};
 `;
 
-const StyledNavbarLeft = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const StyledNavbarItems = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: 5rem;
-`;
-
-const StyledNavbarRight = styled.div`
+const FlexBox = styled.div`
   display: flex;
   gap: 2rem;
   align-items: center;
+
+  svg,
+  div {
+    cursor: pointer;
+  }
 `;
 
-export function Navbar({ theme, ...props }) {
-  const [current, setCurrent] = useState(null);
-
-  return (
-    <StyledNavbar theme={theme} {...props}>
-      <StyledNavbarLeft>
-        <Logo width="100" height="26" theme={theme} />
-        <StyledNavbarItems>
-          {navData.map(({ name, title }) => {
-            return (
-              <NavbarItem
-                theme={theme}
-                onClick={() => setCurrent(name)}
-                status={current === name ? "active" : "default"}
-              >
-                {title}
-              </NavbarItem>
-            );
-          })}
-        </StyledNavbarItems>
-      </StyledNavbarLeft>
-      <StyledNavbarRight>
-        <Icon icon="bell" stroke={color.gray400} aria-hidden />
-        <Avatar />
-      </StyledNavbarRight>
-    </StyledNavbar>
-  );
-}
-
-NavbarItem.propTypes = {
-  theme: PropTypes.oneOf(Object.values(THEME)),
-};
-
-NavbarItem.defaultProps = {
-  theme: THEME.LIGHT,
-};
+const NavbarItemBox = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 3rem;
+`;

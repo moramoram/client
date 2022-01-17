@@ -36,7 +36,19 @@ const List = styled.ul`
   list-style: none;
 `;
 
-export const Basic = (args) => (
+export const Default = (args) => (
+  <>
+    This is a {args.block ? "block" : "inline"} <Icon {...args} /> icon
+  </>
+);
+
+Default.args = {
+  icon: "smile",
+  "aria-label": "smile",
+  block: false,
+};
+
+export const All = () => (
   <>
     There are {Object.keys(icons).length} icons
     <List>
@@ -50,19 +62,7 @@ export const Basic = (args) => (
   </>
 );
 
-export const Standard = (args) => (
-  <>
-    This is a <Icon {...args} /> icon
-  </>
-);
-
-Standard.args = {
-  icon: "smile",
-  "aria-label": "smile",
-  block: false,
-};
-
-export const Social = (args) => (
+export const Social = () => (
   <>
     There are {Object.keys(iconsSocial).length} social icons
     <List>

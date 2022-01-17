@@ -15,6 +15,26 @@ const STATUS = {
   ACTIVE: "active",
 };
 
+export const NavbarItem = ({ children, ...props }) => {
+  return (
+    <Layout {...props}>
+      <Text {...props}>{children}</Text>
+    </Layout>
+  );
+};
+
+NavbarItem.propTypes = {
+  children: PropTypes.node.isRequired,
+  theme: PropTypes.oneOf(Object.values(THEME)),
+  status: PropTypes.oneOf(Object.values(STATUS)),
+};
+
+NavbarItem.defaultProps = {
+  theme: THEME.LIGHT,
+  status: STATUS.DEFAULT,
+  children: "Menu",
+};
+
 const textColor = {
   dark: color.gray25,
   light: color.gray900,
@@ -51,7 +71,7 @@ const Text = styled.span`
   user-select: none;
 `;
 
-const StyledNavbarItem = styled.div`
+const Layout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,22 +93,3 @@ const StyledNavbarItem = styled.div`
     }
   `}
 `;
-
-export function NavbarItem({ children, ...props }) {
-  return (
-    <StyledNavbarItem {...props}>
-      <Text {...props}>{children}</Text>
-    </StyledNavbarItem>
-  );
-}
-
-NavbarItem.propTypes = {
-  status: PropTypes.oneOf(Object.values(STATUS)),
-  theme: PropTypes.oneOf(Object.values(THEME)),
-  children: PropTypes.node.isRequired,
-};
-
-NavbarItem.defaultProps = {
-  theme: THEME.LIGHT,
-  status: STATUS.DEFAULT,
-};

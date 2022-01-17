@@ -1,13 +1,11 @@
 import React from "react";
 
-import { Toc } from "./Toc";
 import { TocNav } from "./TocNav";
-
 import { Background } from "../Background/Background";
 
 export default {
-  title: "Design System/Toc",
-  component: Toc,
+  title: "Design System/TocNavbar",
+  component: TocNav,
 };
 
 const items = [
@@ -28,11 +26,7 @@ const items = [
   },
 ];
 
-export const Default = (args) => (
-  <Background {...args}>
-    <Toc {...args} />
-  </Background>
-);
+export const Default = (args) => <TocNav {...args} />;
 
 Default.args = {
   items,
@@ -40,12 +34,8 @@ Default.args = {
 
 export const All = () => (
   <>
-    <Background theme="light">
-      <Toc theme="light" items={items} />
-    </Background>
+    <TocNav theme="light" items={items} />
     <br />
-    <Background theme="dark">
-      <Toc theme="dark" items={items} />
-    </Background>
+    <TocNav theme="dark" items={items} />
   </>
 );

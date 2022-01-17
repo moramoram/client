@@ -3,12 +3,24 @@ import styled from "styled-components";
 
 import { Icon } from "./Icon";
 import { IconSocial } from "./IconSocial";
+import { IconBookMark } from "./IconBookMark";
+
 import { icons } from "../shared/icons";
 import { iconsSocial } from "../shared/iconsSocial";
 
 export default {
   title: "Design System/Icon",
   component: Icon,
+};
+
+const THEME = {
+  LIGHT: "light",
+  DARK: "dark",
+};
+
+const MODE = {
+  PRIMARY: "primary",
+  SECONDARY: "secondary",
 };
 
 const Meta = styled.div`
@@ -73,5 +85,13 @@ export const Social = () => (
         </Item>
       ))}
     </List>
+  </>
+);
+
+export const BookMark = (args) => (
+  <>
+    <IconBookMark />
+    <IconBookMark mode="secondary" />
+    <IconBookMark mode="secondary" theme="dark" />
   </>
 );

@@ -14,45 +14,7 @@ const THEME = {
   DARK: "dark",
 };
 
-const loadingAnimation = {
-  light: css`
-    ${glowLight} 1.5s ease-in-out infinite;
-  `,
-  dark: css`
-    ${glowDark} 1.5s ease-in-out infinite;
-  `,
-};
-
-const ContentBox = styled.div`
-  margin: 10px 0px;
-`;
-
-const BadgeBox = styled.div`
-  margin: 20px 10px;
-`;
-
-const SidebarWrapper = styled.div`
-  display: block;
-  border-radius: 16px;
-  width: 400px;
-  height: 540px;
-
-  justify-content: center;
-  align-items: center;
-  animation: ${(props) => props.isLoading && loadingAnimation[props.theme]};
-
-  button {
-    margin: 5px 10px;
-  }
-  .thumbnail {
-    margin-buttom: 5px;
-  }
-  .badge-item {
-    margin-right: 5px;
-  }
-`;
-
-export function Sidebar({ theme, isLoading, name, src, ...props }) {
+export const Sidebar = ({ theme, isLoading, name, src, ...props }) => {
   let items = theme === THEME.LIGHT ? <Logo /> : <Logo theme="dark" />;
 
   const contents = [
@@ -90,7 +52,7 @@ export function Sidebar({ theme, isLoading, name, src, ...props }) {
   return (
     <SidebarWrapper theme={theme} isLoading={isLoading} {...props}>
       <ImageBox className="thumbnail" theme={theme} />
-      <ContentBox>
+      <SidebarBox>
         {contents.map((content, id) => {
           return (
             <SidebarItem
@@ -101,7 +63,7 @@ export function Sidebar({ theme, isLoading, name, src, ...props }) {
             />
           );
         })}
-      </ContentBox>
+      </SidebarBox>
       <BadgeBox>
         {badges.map((children, id) => {
           return (
@@ -129,7 +91,7 @@ export function Sidebar({ theme, isLoading, name, src, ...props }) {
       </Button>
     </SidebarWrapper>
   );
-}
+};
 
 Sidebar.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
@@ -144,3 +106,39 @@ Sidebar.defaultProps = {
   src: null,
   name: "logo",
 };
+
+const loadingAnimation = {
+  light: css`
+    ${glowLight} 1.5s ease-in-out infinite;
+  `,
+  dark: css`
+    ${glowDark} 1.5s ease-in-out infinite;
+  `,
+};
+
+const SidebarBox = styled.div`
+  margin: 10px 0px;
+`;
+
+const BadgeBox = styled.div`
+  margin: 20px 10px;
+`;
+
+const SidebarWrapper = styled.div`
+  display: block;
+  border-radius: 16px;
+  width: 400px;
+  height: 540px;
+
+  animation: ${(props) => props.isLoading && loadingAnimation[props.theme]};
+
+  button {
+    margin: 5px 10px;
+  }
+  .thumbnail {
+    margin-buttom: 5px;
+  }
+  .badge-item {
+    margin-right: 5px;
+  }
+`;

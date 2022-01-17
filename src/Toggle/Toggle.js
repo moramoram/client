@@ -1,18 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { color } from "../shared/styles";
-
-const StyledInput = styled.input`
-  display: none;
-  :checked + label {
-    background-color: ${color.blue100};
-    .switch {
-      transform: translateX(20px);
-    }
-  }
-`;
 
 const StyledLabel = styled.label`
   display: block;
@@ -25,6 +15,12 @@ const StyledLabel = styled.label`
 
   cursor: pointer;
   transition: 0.3s;
+`;
+
+const StyledInput = styled.input`
+  :checked + div {
+    transform: translateX(20px);
+  }
 `;
 
 const Switch = styled.div`
@@ -40,16 +36,18 @@ const Switch = styled.div`
   transition: transform 0.2s linear;
 `;
 
-export function Toggle({ isChecked, handleToggle, ...props }) {
+export function Toggle({ ...props }) {
+  const [isChecked, setIsChecked] = useState(false);
+  const handleToggle = () => setIsChecked(!isChecked);
+
   return (
     <>
-      <StyledInput
-        type="checkbox"
-        checked={isChecked}
-        onChange={handleToggle}
-        id="asdf"
-      />
-      <StyledLabel htmlFor="asdf">
+      <StyledLabel checked={isChecked}>
+        <StyledInput
+          type="checkbox"
+          checked={isChecked}
+          onChange={handleToggle}
+        />
         <Switch className="switch" />
       </StyledLabel>
     </>

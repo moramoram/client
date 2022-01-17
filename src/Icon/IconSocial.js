@@ -3,12 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { iconsSocial } from "../shared/iconsSocial";
 
-const Svg = styled.svg`
-  display: ${(props) => (props.block ? "block" : "inline-block")};
-  vertical-align: middle;
-`;
-
-export function IconSocial({ icon, block, ...props }) {
+export const IconSocial = ({ icon, block, ...props }) => {
   return (
     <Svg
       viewBox="0 0 20 20"
@@ -22,4 +17,9 @@ export function IconSocial({ icon, block, ...props }) {
       {iconsSocial[icon]}
     </Svg>
   );
-}
+};
+
+const Svg = styled.svg`
+  display: ${(props) => (props.block ? "block" : "inline-block")};
+  vertical-align: middle;
+`;

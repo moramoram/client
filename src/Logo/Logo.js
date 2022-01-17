@@ -10,33 +10,7 @@ const THEME = {
   TRANSPARENT: "transparent",
 };
 
-const symbolColors = {
-  dark: color.blue100,
-  blue: color.white,
-  light: color.blue100,
-  transparent: color.blue100,
-};
-
-const wordColors = {
-  dark: color.gray25,
-  blue: color.white,
-  light: color.gray900,
-  transparent: color.gray25,
-};
-
-const Svg = styled.svg`
-  display: block;
-`;
-
-const Symbol = styled.path`
-  fill: ${(props) => symbolColors[props.theme]};
-`;
-
-const Wordmark = styled.path`
-  fill: ${(props) => wordColors[props.theme]};
-`;
-
-export function Logo({ width, height, theme, ...props }) {
+export const Logo = ({ width, height, theme }) => {
   return (
     <Svg
       width={width}
@@ -77,7 +51,7 @@ export function Logo({ width, height, theme, ...props }) {
       />
     </Svg>
   );
-}
+};
 
 Logo.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
@@ -88,3 +62,29 @@ Logo.defaultProps = {
   width: 1000,
   height: 260,
 };
+
+const symbolColors = {
+  dark: color.blue100,
+  blue: color.white,
+  light: color.blue100,
+  transparent: color.blue100,
+};
+
+const wordColors = {
+  dark: color.gray25,
+  blue: color.white,
+  light: color.gray900,
+  transparent: color.gray25,
+};
+
+const Svg = styled.svg`
+  display: block;
+`;
+
+const Symbol = styled.path`
+  fill: ${(props) => symbolColors[props.theme]};
+`;
+
+const Wordmark = styled.path`
+  fill: ${(props) => wordColors[props.theme]};
+`;

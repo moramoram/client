@@ -10,6 +10,65 @@ const THEME = {
   LIGHT: "light",
 };
 
+export const CommentInput = ({ theme, ...props }) => {
+  // 텍스트 입력 시 글자수 카운트 및 버튼 활성화
+  const [comment, setComment] = useState({
+    value: "",
+    count: 0,
+  });
+
+  const onChange = (e) => {
+    setComment({
+      value: e.target.value,
+      count: e.target.value.length,
+    });
+  };
+
+  // 텍스트 입력 시 textarea 세로 사이즈 조정
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    const node = textareaRef.current;
+
+    node.style.height = "auto"; // 기본 height 값 초기화 (없을 경우 텍스트 삭제 시 높이 유지)
+    node.style.height = `${node.scrollHeight}px`;
+  }, [comment]);
+
+  return (
+    <Layout theme={theme} {...props}>
+      <Textarea
+        theme={theme}
+        ref={textareaRef}
+        onChange={onChange}
+        value={comment.value}
+        placeholder="댓글로 의견을 나눠보세요 :)"
+        maxLength="500"
+      />
+      <Footer>
+        <CharCounter>{comment.count}/500</CharCounter>
+        <ButtonBox>
+          <Icon icon="smile" aria-hidden />
+          <Button
+            disabled={!comment.value ? "true" : ""}
+            theme={theme}
+            {...props}
+          >
+            등록
+          </Button>
+        </ButtonBox>
+      </Footer>
+    </Layout>
+  );
+};
+
+CommentInput.propTypes = {
+  theme: PropTypes.oneOf(Object.values(THEME)),
+};
+
+CommentInput.defaultProps = {
+  theme: THEME.LIGHT,
+};
+
 const bgColor = {
   dark: color.gray900,
   light: color.gray25,
@@ -37,7 +96,7 @@ const Layout = styled.label`
 const Textarea = styled.textarea`
   width: 100%;
   resize: none;
-
+  overflow: hidden;
   border: none;
   background-color: ${(props) => bgColor[props.theme]};
 
@@ -90,60 +149,3 @@ const Button = styled.button`
     cursor: default;
   }
 `;
-
-export function CommentInput({ theme, ...props }) {
-  const textareaRef = useRef(null);
-
-  const [comment, setComment] = useState({
-    value: "",
-    count: 0,
-  });
-
-  const onChange = (e) => {
-    setComment({
-      value: e.target.value,
-      count: e.target.value.length,
-    });
-  };
-
-  useEffect(() => {
-    const node = textareaRef.current;
-
-    node.style.height = "auto"; // 기본 height 값 초기화 (없을 경우 텍스트 삭제 시 높이 유지)
-    node.style.height = `${node.scrollHeight}px`;
-  }, [comment]);
-
-  return (
-    <Layout theme={theme} {...props}>
-      <Textarea
-        placeholder="댓글로 의견을 나눠보세요 :)"
-        ref={textareaRef}
-        onChange={onChange}
-        maxLength="500"
-        value={comment.value}
-        theme={theme}
-      />
-      <Footer>
-        <CharCounter>{comment.count}/500</CharCounter>
-        <ButtonBox>
-          <Icon icon="smile" aria-hidden />
-          <Button
-            disabled={!comment.value ? "true" : ""}
-            theme={theme}
-            {...props}
-          >
-            등록
-          </Button>
-        </ButtonBox>
-      </Footer>
-    </Layout>
-  );
-}
-
-CommentInput.propTypes = {
-  theme: PropTypes.oneOf(Object.values(THEME)),
-};
-
-CommentInput.defaultProps = {
-  theme: THEME.LIGHT,
-};

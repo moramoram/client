@@ -1,6 +1,6 @@
 import React from "react";
 
-export function UserAlt({ ...props }) {
+export const UserAlt = ({ ...props }) => {
   return (
     <svg
       width="40"
@@ -33,4 +33,4 @@ export function UserAlt({ ...props }) {
       </defs>
     </svg>
   );
-}
+};

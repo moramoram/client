@@ -10,30 +10,7 @@ const THEME = {
   LIGHT: "light",
 };
 
-const bgColors = {
-  dark: color.black,
-  light: color.white,
-};
-
-const borderColor = {
-  dark: color.gray700,
-  light: color.gray200,
-};
-
-const Layout = styled.div`
-  display: flex;
-  align-items: flex-end;
-
-  width: 100%;
-  height: 60px;
-  // TODO : 레이아웃에 맞게 맞추기
-  padding-left: 468px;
-  border-bottom: 1px solid ${(props) => borderColor[props.theme]};
-
-  background-color: ${(props) => bgColors[props.theme]};
-`;
-
-export function TocNav({ items, ...props }) {
+export const TocNav = ({ items, ...props }) => {
   const [current, setCurrent] = useState("info");
 
   return (
@@ -53,7 +30,7 @@ export function TocNav({ items, ...props }) {
       })}
     </Layout>
   );
-}
+};
 
 TocNav.propTypes = {
   items: PropTypes.array.isRequired,
@@ -80,3 +57,26 @@ TocNav.defaultProps = {
     },
   ],
 };
+
+const bgColors = {
+  dark: color.black,
+  light: color.white,
+};
+
+const borderColor = {
+  dark: color.gray700,
+  light: color.gray200,
+};
+
+const Layout = styled.div`
+  display: flex;
+  align-items: flex-end;
+
+  width: 100%;
+  height: 60px;
+  // TODO : 레이아웃에 맞게 맞추기
+  padding-left: 468px;
+  border-bottom: 1px solid ${(props) => borderColor[props.theme]};
+
+  background-color: ${(props) => bgColors[props.theme]};
+`;

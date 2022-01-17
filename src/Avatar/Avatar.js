@@ -12,6 +12,45 @@ const SIZE = {
   SMALL: "small",
 };
 
+export const Avatar = ({ loading, username, src, size, ...props }) => {
+  let avatarFigure = <UserAlt />;
+  const a11yProps = {};
+
+  if (loading) {
+    a11yProps["aria-busy"] = true;
+    a11yProps["aria-label"] = "Loading avatar ...";
+  } else if (src) {
+    avatarFigure = <img src={src} alt={username} />;
+  } else {
+    a11yProps["aria-label"] = username;
+    avatarFigure = (
+      <Initial size={size} aria-hidden="true">
+        {username.substring(0, 1)}
+      </Initial>
+    );
+  }
+
+  return (
+    <Image size={size} loading={loading} src={src} {...a11yProps} {...props}>
+      {avatarFigure}
+    </Image>
+  );
+};
+
+Avatar.propTypes = {
+  loading: PropTypes.bool,
+  username: PropTypes.string,
+  src: PropTypes.string,
+  size: PropTypes.oneOf(Object.values(SIZE)),
+};
+
+Avatar.defaultProps = {
+  loading: false,
+  username: "김싸페",
+  src: null,
+  size: "large",
+};
+
 const sizeNum = {
   large: 40,
   medium: 28,
@@ -66,42 +105,3 @@ const Initial = styled.div`
   font-size: ${(props) => fontSize[props.size]};
   line-height: ${(props) => sizeNum[props.size]}px;
 `;
-
-export function Avatar({ loading, username, src, size, ...props }) {
-  let avatarFigure = <UserAlt />;
-  const a11yProps = {};
-
-  if (loading) {
-    a11yProps["aria-busy"] = true;
-    a11yProps["aria-label"] = "Loading avatar ...";
-  } else if (src) {
-    avatarFigure = <img src={src} alt={username} />;
-  } else {
-    a11yProps["aria-label"] = username;
-    avatarFigure = (
-      <Initial size={size} aria-hidden="true">
-        {username.substring(0, 1)}
-      </Initial>
-    );
-  }
-
-  return (
-    <Image size={size} loading={loading} src={src} {...a11yProps} {...props}>
-      {avatarFigure}
-    </Image>
-  );
-}
-
-Avatar.propTypes = {
-  loading: PropTypes.bool,
-  username: PropTypes.string,
-  src: PropTypes.string,
-  size: PropTypes.oneOf(Object.values(SIZE)),
-};
-
-Avatar.defaultProps = {
-  loading: false,
-  username: "김싸페",
-  src: null,
-  size: "large",
-};

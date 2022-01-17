@@ -14,6 +14,30 @@ const STATUS = {
   ACTIVE: "active",
 };
 
+export const TocItem = ({ children, number, ...props }) => {
+  return (
+    <Layout {...props}>
+      <Text className="menu" {...props}>
+        {children}
+      </Text>
+      <Number>{number}</Number>
+    </Layout>
+  );
+};
+
+TocItem.propTypes = {
+  status: PropTypes.oneOf(Object.values(STATUS)),
+  theme: PropTypes.oneOf(Object.values(THEME)),
+  children: PropTypes.node.isRequired,
+};
+
+TocItem.defaultProps = {
+  theme: THEME.LIGHT,
+  status: STATUS.DEFAULT,
+  children: "메뉴",
+  number: "n",
+};
+
 const textColor = {
   dark: {
     active: color.gray25,
@@ -85,27 +109,3 @@ const Layout = styled.div`
     }
   `}
 `;
-
-export function TocItem({ children, number, ...props }) {
-  return (
-    <Layout {...props}>
-      <Text className="menu" {...props}>
-        {children}
-      </Text>
-      <Number>{number}</Number>
-    </Layout>
-  );
-}
-
-TocItem.propTypes = {
-  status: PropTypes.oneOf(Object.values(STATUS)),
-  theme: PropTypes.oneOf(Object.values(THEME)),
-  children: PropTypes.node.isRequired,
-};
-
-TocItem.defaultProps = {
-  theme: THEME.LIGHT,
-  status: STATUS.DEFAULT,
-  children: "메뉴",
-  number: "n",
-};

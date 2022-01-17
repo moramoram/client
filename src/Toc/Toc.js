@@ -10,18 +10,7 @@ const THEME = {
   LIGHT: "light",
 };
 
-const borderColor = {
-  dark: color.gray700,
-  light: color.gray200,
-};
-
-const Layout = styled.div`
-  display: flex;
-  width: 100%;
-  border-bottom: 1px solid ${(props) => borderColor[props.theme]};
-`;
-
-export function Toc({ items, ...props }) {
+export const Toc = ({ items, ...props }) => {
   const [current, setCurrent] = useState("info");
 
   return (
@@ -41,7 +30,7 @@ export function Toc({ items, ...props }) {
       })}
     </Layout>
   );
-}
+};
 
 Toc.propTypes = {
   items: PropTypes.array.isRequired,
@@ -68,3 +57,14 @@ Toc.defaultProps = {
     },
   ],
 };
+
+const borderColor = {
+  dark: color.gray700,
+  light: color.gray200,
+};
+
+const Layout = styled.div`
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid ${(props) => borderColor[props.theme]};
+`;

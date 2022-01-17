@@ -84,6 +84,7 @@ const loadingAnimation = {
 };
 
 const ImageBoxWrapper = styled.div`
+  display: flex;
   width: ${(props) => imageWidth[props.size]};
   height: ${(props) => imageHeight[props.size]};
   border-radius: 16px;
@@ -102,5 +103,6 @@ const ImageBoxWrapper = styled.div`
   img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 `;

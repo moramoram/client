@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import { glowLight, glowDark } from "../shared/animation";
+
 import { ImageBox } from "../ImageBox/ImageBox";
+
+import { glowLight, glowDark } from "../shared/animation";
 import { color, typography } from "../shared/styles";
 
 const THEME = {
@@ -14,7 +16,6 @@ export const CardSmall = ({ theme, isLoading, contents, ...props }) => {
   if (isLoading) {
     contents = {
       title: "",
-
       highlight: "",
       src: "",
     };
@@ -30,8 +31,8 @@ export const CardSmall = ({ theme, isLoading, contents, ...props }) => {
         isLoading={isLoading}
       />
       <TextBox theme={theme} isLoading={isLoading}>
-        <Title>{title}</Title>
-        <Highlight>{highlight}</Highlight>
+        <Title theme={theme}>{title}</Title>
+        <Highlight theme={theme}>{highlight}</Highlight>
       </TextBox>
     </Layout>
   );
@@ -40,12 +41,14 @@ export const CardSmall = ({ theme, isLoading, contents, ...props }) => {
 CardSmall.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   isLoading: PropTypes.bool,
+  isLiked: PropTypes.bool,
   contents: PropTypes.objectOf(String).isRequired,
 };
 
 CardSmall.defaultProps = {
   theme: THEME.LIGHT,
   isLoading: false,
+  isLiked: false,
   contents: {
     title: "",
     highlight: "",
@@ -95,7 +98,6 @@ const Highlight = styled.div`
 const Title = styled.div`
   min-width: 160px;
   min-height: ${typography.size.paragraph};
-  margin: 4px 0px;
 
   font-weight: ${typography.weight.bold};
   font-size: ${typography.size.b1};

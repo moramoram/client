@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import { glowLight, glowDark } from "../shared/animation";
+
+import { IconBookMark } from "../Icon/IconBookMark";
 import { ImageBox } from "../ImageBox/ImageBox";
 import { Badge } from "../Badge/Badge";
+
 import { color, typography } from "../shared/styles";
+import { glowLight, glowDark } from "../shared/animation";
 
 const THEME = {
   LIGHT: "light",
@@ -15,6 +18,7 @@ export const Card = ({
   theme,
   size,
   isLoading,
+  isLiked,
   contents,
   badges,
   ...props
@@ -28,10 +32,13 @@ export const Card = ({
     };
     badges = ["", "", ""];
   }
+
+  const bookMark = !isLoading && isLiked && <IconBookMark theme={theme} />;
   const { title, subtitle, highlight, src } = contents;
 
   return (
     <Layout {...props}>
+      <BookMark>{bookMark}</BookMark>
       <ImageBox
         className="thumbnail"
         src={src}
@@ -54,7 +61,6 @@ export const Card = ({
               isLoading={isLoading}
               mode="secondary"
               color="gray100"
-              isBold
             >
               {children}
             </Badge>
@@ -65,9 +71,17 @@ export const Card = ({
   );
 };
 
+Card.propTypes = {
+  theme: PropTypes.oneOf(Object.values(THEME)),
+  isLoading: PropTypes.bool,
+  isLiked: PropTypes.bool,
+  contents: PropTypes.objectOf(String).isRequired,
+};
+
 Card.defaultProps = {
   theme: THEME.LIGHT,
   isLoading: false,
+  isLiked: false,
   contents: {
     title: "",
     subtitle: "",
@@ -98,12 +112,21 @@ const loadingAnimation = {
 
 const Layout = styled.div`
   width: 300px;
+  position: relative;
   .thumbnail {
     margin-bottom: 16px;
   }
 `;
-
+const BookMark = styled.div`
+   {
+    position: absolute;
+    left: 20px;
+    top: -5px;
+  }
+`;
 const TextBox = styled.div`
+  margin-bottom: 8px;
+
   div {
     display: inline-block;
     border-radius: 8px;
@@ -114,6 +137,7 @@ const TextBox = styled.div`
 const Highlight = styled.div`
   min-width: 70px;
   min-height: ${typography.size.b1};
+  margin-bottom: 8px;
   font-size: ${typography.size.b1};
   font-weight: ${typography.weight.bold};
   color: ${color.blue100};
@@ -122,7 +146,7 @@ const Highlight = styled.div`
 const Title = styled.div`
   min-width: 240px;
   min-height: ${typography.size.h3};
-  margin: 4px 0px;
+  margin-bottom: 4px;
   font-weight: ${typography.weight.bold};
   font-size: ${typography.size.h4};
   color: ${(props) => titleColor[props.theme]};

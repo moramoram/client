@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Logo } from "../Logo/Logo";
 import styled, { css } from "styled-components";
+
+import { Logo } from "../Logo/Logo";
 import { glowLight, glowDark } from "../shared/animation";
 import { color } from "../shared/styles";
 
@@ -16,10 +17,51 @@ const SIZE = {
   SMALL: "small",
 };
 
-const imageBackground = {
+export const ImageBox = ({ theme, isLoading, src, name, ...props }) => {
+  let imageContent = theme === THEME.LIGHT ? <Logo /> : <Logo theme="dark" />;
+  const a11yProps = {};
+
+  if (isLoading) {
+    imageContent = null;
+    a11yProps["aria-busy"] = true;
+    a11yProps["aria-label"] = "Loading";
+  } else if (src) {
+    imageContent = <img src={src} alt={name} />;
+  }
+
+  return (
+    <ImageBoxWrapper
+      theme={theme}
+      isLoading={isLoading}
+      {...a11yProps}
+      {...props}
+    >
+      {imageContent}
+    </ImageBoxWrapper>
+  );
+};
+
+ImageBox.propTypes = {
+  theme: PropTypes.oneOf(Object.values(THEME)),
+  size: PropTypes.oneOf(Object.values(SIZE)),
+  isLoading: PropTypes.bool,
+  src: PropTypes.string,
+  name: PropTypes.string,
+};
+
+ImageBox.defaultProps = {
+  theme: THEME.LIGHT,
+  size: SIZE.LARGE,
+  isLoading: false,
+  src: null,
+  name: "thumbnail",
+};
+
+const imageBgColor = {
   light: color.gray25,
   dark: color.gray900,
 };
+
 const imageWidth = {
   large: "400px",
   medium: "300px",
@@ -42,58 +84,23 @@ const loadingAnimation = {
 };
 
 const ImageBoxWrapper = styled.div`
-  display: flex;
-  border-radius: 16px;
   width: ${(props) => imageWidth[props.size]};
   height: ${(props) => imageHeight[props.size]};
-  background: ${(props) => imageBackground[props.theme]};
+  border-radius: 16px;
 
-  justify-content: center;
+  background: ${(props) => imageBgColor[props.theme]};
+
   align-items: center;
+  justify-content: center;
   animation: ${(props) => props.isLoading && loadingAnimation[props.theme]};
 
   svg {
     width: 33%;
     height: 33%;
   }
-`;
 
-export function ImageBox({ theme, isLoading, name, src, ...props }) {
-  let imageContent = theme === THEME.LIGHT ? <Logo /> : <Logo theme="dark" />;
-  const a11yProps = {};
-
-  if (isLoading) {
-    imageContent = null;
-    a11yProps["aria-busy"] = true;
-    a11yProps["aria-label"] = "Loading";
-  } else if (src) {
-    imageContent = <img src={src} alt={name} />;
+  img {
+    width: 100%;
+    height: 100%;
   }
-
-  return (
-    <ImageBoxWrapper
-      theme={theme}
-      isLoading={isLoading}
-      {...a11yProps}
-      {...props}
-    >
-      {imageContent}
-    </ImageBoxWrapper>
-  );
-}
-
-ImageBox.propTypes = {
-  theme: PropTypes.oneOf(Object.values(THEME)),
-  isLoading: PropTypes.bool,
-  src: PropTypes.string,
-  contents: PropTypes.objectOf(String).isRequired,
-  size: PropTypes.oneOf(Object.values(SIZE)),
-};
-
-ImageBox.defaultProps = {
-  theme: THEME.LIGHT,
-  size: SIZE.LARGE,
-  isLoading: false,
-  src: null,
-  name: "logo",
-};
+`;

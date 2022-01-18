@@ -2,7 +2,6 @@ import React from "react";
 
 import { Toggle } from "./Toggle";
 import { Background } from "../Background/Background";
-import _ from "lodash";
 
 export default {
   title: "Design System/Toggle",

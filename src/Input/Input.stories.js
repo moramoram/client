@@ -14,13 +14,20 @@ export const All = () => (
     <Input theme="light" />
     <Input theme="light" icon="mail" />
     <Input theme="dark" />
-    <Input theme="dark"  icon="mail" />
+    <Input theme="dark" icon="mail" />
   </div>
 );
 
 export const Dark = (args) => (
   <div>
     <Input theme="dark" />
-    <Input theme="dark"  icon="mail" />
+    <Input theme="dark" icon="mail" />
+  </div>
+);
+
+export const Label = (args) => (
+  <div>
+    <Label>라벨</Label>
+    <Input theme="light" />
   </div>
 );

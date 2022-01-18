@@ -18,14 +18,16 @@ const STATUS = {
 export const Input = ({ icon, ...props }) => {
   const inner = icon ? <Icon icon={icon} /> : null;
   return (
-    <>
     <Layout {...props}>
       {inner}
       <InputBox placeholder="Placeholder" {...props} />
     </Layout>
-    </>
   );
-}
+};
+
+export const Label = ({ ...props }) => {
+  return <LabelText {...props} />;
+};
 
 Input.propTypes = {
   icon: PropTypes.any,
@@ -92,4 +94,11 @@ const InputBox = styled.input`
     color: ${color.gray500};
     font-size: ${typography.size.paragraph};
   }
+`;
+
+const LabelText = styled.label`
+  font-size: ${typography.size.paragraph};
+  border: none;
+  background: none;
+  padding-left: 10px;
 `;

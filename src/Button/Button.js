@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { color, typography, shadow } from "../shared/styles";
+import { glowLight, glowDark } from "../shared/animation";
 
 const THEME = {
   LIGHT: "light",
@@ -57,11 +58,21 @@ const hoverBgColor = {
   },
 };
 
+const loadingAnimation = {
+  light: css`
+    ${glowLight} 1.5s ease-in-out infinite;
+  `,
+  dark: css`
+    ${glowDark} 1.5s ease-in-out infinite;
+  `,
+};
+
 const ButtonWrapper = styled.button`
   display: inline-block;
   overflow: hidden;
 
   min-width: ${(props) => props.minWidth};
+  height: 42px;
   margin: 0;
   padding: 11px 27px;
   border-radius: 8px;
@@ -81,6 +92,7 @@ const ButtonWrapper = styled.button`
   transform: translate3d(0, 0, 0);
   user-select: none;
   cursor: pointer;
+  animation: ${(props) => props.isLoading && loadingAnimation[props.theme]};
 
   svg {
     height: 20px;
@@ -109,6 +121,7 @@ const ButtonWrapper = styled.button`
   ${(props) =>
     props.isLoading &&
     `
+      border: none;
       cursor: progress !important;
       &:hover {
         transform: none;
@@ -131,7 +144,7 @@ const ButtonWrapper = styled.button`
 `;
 
 export function Button({ isLoading, loadingText, isLink, children, ...props }) {
-  const buttonInner = isLoading ? "Loading" : children;
+  const buttonInner = isLoading ? "" : children;
 
   return (
     <ButtonWrapper isLoading={isLoading} {...props}>

@@ -37,7 +37,7 @@ Input.defaultProps = {
 };
 
 const textColor = {
-  light: color.gray500,
+  light: color.black,
   dark: color.gray500,
 };
 
@@ -66,9 +66,6 @@ const Layout = styled.div`
   border-radius: 8px;
   padding-left: 10px;
 
-  color: ${(props) => textColor[props.theme]};
-  font-weight: 400;
-
   svg {
     height: 18px;
     width: 18px;
@@ -85,6 +82,8 @@ const InputBox = styled.input`
   border: none;
   background: none;
   padding-left: 8px;
+  color: ${(props) => textColor[props.theme]};
+  font-weight: 400;
 
   ::placeholder {
     color: ${color.gray500};

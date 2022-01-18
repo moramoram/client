@@ -25,10 +25,6 @@ export const Input = ({ icon, ...props }) => {
   );
 };
 
-export const Label = ({ ...props }) => {
-  return <LabelText {...props} />;
-};
-
 Input.propTypes = {
   icon: PropTypes.any,
   theme: PropTypes.oneOf(Object.values(THEME)),
@@ -94,11 +90,4 @@ const InputBox = styled.input`
     color: ${color.gray500};
     font-size: ${typography.size.paragraph};
   }
-`;
-
-const LabelText = styled.label`
-  font-size: ${typography.size.paragraph};
-  border: none;
-  background: none;
-  padding-left: 10px;
 `;

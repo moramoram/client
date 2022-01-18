@@ -24,10 +24,3 @@ export const Dark = (args) => (
     <Input theme="dark" icon="mail" />
   </div>
 );
-
-export const Label = (args) => (
-  <div>
-    <Label>라벨</Label>
-    <Input theme="light" />
-  </div>
-);

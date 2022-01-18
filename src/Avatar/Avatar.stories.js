@@ -37,9 +37,9 @@ export const All = () => (
     </div>
     <div style={{ marginTop: "1rem" }}>
       <h2 style={{ marginBottom: "0.5rem" }}>Lodings</h2>
-      <Avatar size="large" loading />
-      <Avatar size="medium" loading />
-      <Avatar size="small" loading />
+      <Avatar size="large" isLoading />
+      <Avatar size="medium" isLoading />
+      <Avatar size="small" isLoading />
     </div>
 
     <h1 style={{ marginTop: "3rem" }}>Initials</h1>

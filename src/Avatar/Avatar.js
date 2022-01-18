@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { UserAlt } from "./UserAlt";
+
 import { color } from "../shared/styles";
 import { glow } from "../shared/animation";
-import { UserAlt } from "./UserAlt";
 
 const SIZE = {
   LARGE: "large",
@@ -12,11 +13,11 @@ const SIZE = {
   SMALL: "small",
 };
 
-export const Avatar = ({ loading, username, src, size, ...props }) => {
+export const Avatar = ({ isLoading, username, src, size, ...props }) => {
   let avatarFigure = <UserAlt />;
   const a11yProps = {};
 
-  if (loading) {
+  if (isLoading) {
     a11yProps["aria-busy"] = true;
     a11yProps["aria-label"] = "Loading avatar ...";
   } else if (src) {
@@ -31,21 +32,27 @@ export const Avatar = ({ loading, username, src, size, ...props }) => {
   }
 
   return (
-    <Image size={size} loading={loading} src={src} {...a11yProps} {...props}>
+    <Image
+      size={size}
+      isLoading={isLoading}
+      src={src}
+      {...a11yProps}
+      {...props}
+    >
       {avatarFigure}
     </Image>
   );
 };
 
 Avatar.propTypes = {
-  loading: PropTypes.bool,
+  isLoading: PropTypes.bool,
   username: PropTypes.string,
   src: PropTypes.string,
   size: PropTypes.oneOf(Object.values(SIZE)),
 };
 
 Avatar.defaultProps = {
-  loading: false,
+  isLoading: false,
   username: "김싸페",
   src: null,
   size: "large",
@@ -72,7 +79,7 @@ const Image = styled.div`
   width: ${(props) => sizeNum[props.size]}px;
   border-radius: 50%;
 
-  background-color: ${color.gray200};
+  background-color: ${color.gray100};
 
   line-height: ${(props) => sizeNum[props.size]}px;
   text-transform: uppercase;
@@ -92,7 +99,6 @@ const Image = styled.div`
   }
 
   path {
-    fill: ${color.medium};
     animation: ${glow} 1.5s ease-in-out infinite;
   }
 `;

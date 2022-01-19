@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import { GlobalStyle } from '../src/shared/global';
+import { GlobalStyle } from "../src/shared/global";
 
 // 모든 스토리에 스타일을 적용하기 위한 글로벌 decorator
 export const decorators = [
-  Story => (
+  (Story) => (
     <>
       <GlobalStyle />
       <Story />
@@ -13,9 +13,14 @@ export const decorators = [
 ];
 
 export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
+  actions: { argTypesRegex: "^on[A-Z].*" },
   a11y: {
-    element: '#root',
+    element: "#root",
     manual: false,
   },
+  // options: {
+  //   storySort: {
+  //     order: ["Foundations", "Components", "Layouts", "*"],
+  //   },
+  // },
 };

@@ -30,12 +30,12 @@ export const color = {
   gray700: "#3D4248",
   gray800: "#31363B",
   gray900: "#292D32",
-  border: "rgba(0,0,0,.1)",
+  // border: "rgba(0,0,0,.1)",
 
-  // Status
-  positive: "#66BF3C",
-  negative: "#FF4400",
-  warning: "#E69D00",
+  // // Status
+  // positive: "#66BF3C",
+  // negative: "#FF4400",
+  // warning: "#E69D00",
 };
 
 export const shadow = {

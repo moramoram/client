@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { SubNavbarItem } from "../../Components/SideBarItem";
+import { SubNavbarItem } from "../../Components/SubNavbarItem";
 
 const THEME = {
   LIGHT: "light",
@@ -35,7 +35,6 @@ const SubNavbar = ({ items, theme, onClick, ...props }) => {
 
   const handleNavItemClick = (e, idx) => {
     setSelectedIndex(idx);
-    onClick();
   };
 
   return (
@@ -65,7 +64,6 @@ SubNavbar.propTypes = {
 SubNavbar.defaultProps = {
   theme: THEME.LIGHT,
   status: STATUS.DEFAULT,
-  containsIcon: false,
   items: [
     {
       id: 1,

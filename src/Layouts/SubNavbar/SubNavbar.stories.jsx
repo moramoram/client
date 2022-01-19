@@ -1,9 +1,9 @@
 import React from "react";
-import { SubNavbar } from ".";
+import { SubNavbar } from "./";
 
 export default {
-  title: "Layout/SubNavbar",
-  component: Default,
+  title: "Layouts/SubNavbar",
+  component: SubNavbar,
 };
 
 export const Default = (args) => (

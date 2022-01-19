@@ -1,1 +1,1 @@
-export { default as SubNavBar } from "./SubNavBar";
+export { default as SubNavbar } from "./SubNavbar";

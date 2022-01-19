@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { Logo } from "../Logo/Logo";
-import { glowLight, glowDark } from "../shared/animation";
-import { color } from "../shared/styles";
+import Logo from "../../Foundations/Logo/Logo";
+import { glowLight, glowDark } from "../../shared/animation";
+import { color } from "../../shared/styles";
 
 const THEME = {
   LIGHT: "light",
@@ -17,7 +17,7 @@ const SIZE = {
   SMALL: "small",
 };
 
-export const ImageBox = ({ theme, isLoading, src, name, ...props }) => {
+const ImageBox = ({ theme, isLoading, src, name, ...props }) => {
   let imageContent = theme === THEME.LIGHT ? <Logo /> : <Logo theme="dark" />;
   const a11yProps = {};
 
@@ -56,6 +56,8 @@ ImageBox.defaultProps = {
   src: null,
   name: "thumbnail",
 };
+
+export default ImageBox;
 
 const imageBgColor = {
   light: color.gray25,

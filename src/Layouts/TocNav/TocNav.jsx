@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import TocItem from "../../Components/TocItem/TocItem";
+import { TocItem } from "../../Components";
 import { color } from "../../shared/styles";
 
 const THEME = {

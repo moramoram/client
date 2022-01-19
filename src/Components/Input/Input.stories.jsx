@@ -1,10 +1,10 @@
 import React from "react";
-import Input from "./Input";
+import { Input } from "./";
 
 export const Default = (args) => <Input {...args} />;
 
 export default {
-  title: "Design System/Input",
+  title: "Components/Input",
   component: Input,
 };
 

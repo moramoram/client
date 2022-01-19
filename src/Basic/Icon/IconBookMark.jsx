@@ -61,6 +61,4 @@ const iconColor = {
 const Svg = styled.svg`
   display: ${(props) => (props.block ? "block" : "inline-block")};
   vertical-align: middle;
-  fill: #4a83ef;
-  stroke: #4a83ef;
 `;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TocNav } from "./TocNav";
+import TocNav from "./TocNav";
 
 export default {
   title: "Layouts/TocNavbar",

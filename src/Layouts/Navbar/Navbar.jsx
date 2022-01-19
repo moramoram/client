@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import NavItem from "../../Components/NavItem/NavItem";
-import Logo from "../../Foundations/Logo/Logo";
-import Icon from "../../Foundations/Icon/Icon";
-import Avatar from "../../Foundations/Avatar/Avatar";
+import Logo from "../../Basic/Logo/Logo";
+import Icon from "../../Basic/Icon/Icon";
+import Avatar from "../../Basic/Avatar/Avatar";
 import { color } from "../../shared/styles";
 
 const THEME = {
@@ -14,7 +14,7 @@ const THEME = {
   TRANSPARENT: "transparent",
 };
 
-export const Navbar = ({ ...props }) => {
+const Navbar = ({ ...props }) => {
   const [current, setCurrent] = useState(null);
 
   return (
@@ -50,6 +50,8 @@ Navbar.propTypes = {
 Navbar.defaultProps = {
   theme: THEME.LIGHT,
 };
+
+export default Navbar;
 
 const navData = [
   {

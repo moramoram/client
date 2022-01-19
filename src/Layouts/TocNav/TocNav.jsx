@@ -10,7 +10,7 @@ const THEME = {
   LIGHT: "light",
 };
 
-export const Toc = ({ items, ...props }) => {
+const TocNav = ({ items, ...props }) => {
   const [current, setCurrent] = useState("info");
 
   return (
@@ -32,12 +32,12 @@ export const Toc = ({ items, ...props }) => {
   );
 };
 
-Toc.propTypes = {
+TocNav.propTypes = {
   items: PropTypes.array.isRequired,
   theme: PropTypes.oneOf(Object.values(THEME)),
 };
 
-Toc.defaultProps = {
+TocNav.defaultProps = {
   theme: THEME.LIGHT,
   items: [
     {
@@ -58,6 +58,13 @@ Toc.defaultProps = {
   ],
 };
 
+export default TocNav;
+
+const bgColors = {
+  dark: color.black,
+  light: color.white,
+};
+
 const borderColor = {
   dark: color.gray700,
   light: color.gray200,
@@ -65,6 +72,13 @@ const borderColor = {
 
 const Layout = styled.div`
   display: flex;
+  align-items: flex-end;
+
   width: 100%;
+  height: 60px;
+  // TODO : 레이아웃에 맞게 맞추기
+  padding-left: 468px;
   border-bottom: 1px solid ${(props) => borderColor[props.theme]};
+
+  background-color: ${(props) => bgColors[props.theme]};
 `;

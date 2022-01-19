@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Toc } from "./Toc";
+import Toc from "./Toc";
 import { Background } from "../../Background/Background";
 
 export default {

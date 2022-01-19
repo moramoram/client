@@ -1,11 +1,10 @@
 import React from "react";
-// import styled from "styled-components";
 
 import Logo from "./Logo";
 import { Background } from "../../Background/Background";
 
 export default {
-  title: "Foundations/Logo",
+  title: "Basic/Logo",
   component: Logo,
 };
 

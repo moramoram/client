@@ -2,23 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 import { Icon, IconSocial, IconBookMark } from "./";
-
 import { icons } from "../../shared/icons";
 import { iconsSocial } from "../../shared/iconsSocial";
 
 export default {
-  title: "Foundations/Icons",
+  title: "Basic/Icon",
   component: Icon,
-};
-
-const THEME = {
-  LIGHT: "light",
-  DARK: "dark",
-};
-
-const MODE = {
-  PRIMARY: "primary",
-  SECONDARY: "secondary",
 };
 
 const Meta = styled.div`
@@ -86,10 +75,10 @@ export const Social = () => (
   </>
 );
 
-export const BookMark = (args) => (
+export const BookMark = () => (
   <>
-    <IconBookMark />
-    <IconBookMark mode="secondary" />
+    <IconBookMark mode="primary" theme="light" />
+    <IconBookMark mode="secondary" theme="light" />
     <IconBookMark mode="secondary" theme="dark" />
   </>
 );

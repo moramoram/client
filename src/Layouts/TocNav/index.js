@@ -1,1 +1,1 @@
-export { default as TocNav } from "./TocNav";
+export { default } from "./TocNav";

@@ -41,7 +41,7 @@ InputWithLabel.defaultProps = {
 export default InputWithLabel;
 
 const textColor = {
-  light: color.gray500,
+  light: color.black,
   dark: color.gray500,
 };
 
@@ -53,6 +53,11 @@ const bgColor = {
 const borderColor = {
   light: color.gray300,
   dark: color.gray700,
+};
+
+const labelColor = {
+  light: color.gray900,
+  dark: color.gray25,
 };
 
 const msgText = {
@@ -69,14 +74,11 @@ const Layout = styled.div`
   margin: 6px;
 
   background-color: ${(props) => bgColor[props.theme]};
-  box-shadow: ${shadow.input};
+  box-shadow: ${shadow.button};
 
   border: 1px solid ${(props) => borderColor[props.theme]};
   border-radius: 8px;
   padding-left: 10px;
-
-  color: ${(props) => textColor[props.theme]};
-  font-weight: 400;
 
   :focus-within {
     border: 1px solid ${color.blue100};
@@ -89,6 +91,8 @@ const InputBox = styled.input`
   border: none;
   background: none;
   padding-left: 8px;
+  color: ${(props) => textColor[props.theme]};
+  font-weight: 400;
 
   ::placeholder {
     color: ${color.gray500};
@@ -100,10 +104,10 @@ const Label = styled.div`
   font-size: ${typography.size.small};
   padding-left: 11px;
   font-weight: ${typography.weight.bold};
-  color: ${color.gray900};
+  color: ${(props) => labelColor[props.theme]};
 `;
 
-const Msg = styled.div`
+const Message = styled.div`
   font-size: ${typography.size.small};
   padding-left: 10px;
   font-weight: ${typography.weight.regular};

@@ -1,7 +1,7 @@
 import React from "react";
 
 import Logo from "./";
-import { Background } from "../Background";
+import { Background } from "../";
 
 export default {
   title: "Basic/Logo",

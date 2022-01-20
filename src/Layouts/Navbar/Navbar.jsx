@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { NavItem } from "../../Components";
-import Logo from "../../Basic/Logo/Logo";
-import Icon from "../../Basic/Icon/Icon";
-import Avatar from "../../Basic/Avatar/Avatar";
+import { Logo, Icon, Avatar } from "../../Basic";
 import { color } from "../../shared/styles";
 
 const THEME = {

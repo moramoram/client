@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { Icon } from "../../Basic";
 import { color, typography, shadow } from "../../shared/styles";
-import { Icon } from "../../Basic/Icon";
 
 const THEME = {
   LIGHT: "light",

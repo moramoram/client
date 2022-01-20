@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import IconSocial from ".";
+import IconSocial from "./";
 import { iconsSocial } from "../../shared/iconsSocial";
 
 export default {

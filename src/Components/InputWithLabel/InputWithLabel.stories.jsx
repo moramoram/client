@@ -1,5 +1,5 @@
 import React from "react";
-import InputWithLabel from "./InputWithLabel";
+import InputWithLabel from "./";
 
 export const Default = (args) => <InputWithLabel {...args} />;
 

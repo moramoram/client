@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import { glowLight, glowDark } from "../../shared/animation";
 
-import { Icon } from "../../Basic/Icon";
+import { Icon } from "../../Basic";
 import { ImageBox, Badge, Button, SideBarItem } from "../../Components";
 
 const THEME = {

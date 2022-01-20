@@ -2,9 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { IconBookMark } from "../../Basic/Icon";
-import { ImageBox } from "../../Components/ImageBox";
-import { Badge } from "../../Components/Badge";
+import { BookMark } from "../../Basic";
+import { Badge, ImageBox } from "../../Components";
 
 import { color, typography } from "../../shared/styles";
 import { glowLight, glowDark } from "../../shared/animation";

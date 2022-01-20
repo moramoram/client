@@ -43,12 +43,10 @@ const ProgressItem = ({ step, title, description, status, ...props }) => {
   );
 };
 
-export default ProgressItem;
-
 ProgressItem.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   status: PropTypes.oneOf(Object.values(STATUS)),
-  step: PropTypes.node.isRequired,
+  step: PropTypes.number.isRequired,
   title: PropTypes.node.isRequired,
   description: PropTypes.node.isRequired,
 };
@@ -60,6 +58,8 @@ ProgressItem.defaultProps = {
   title: "공고 요약",
   description: "공고를 한 눈에 볼 수 있도록 요약해주세요.",
 };
+
+export default ProgressItem;
 
 const borderColor = {
   light: color.gray300,

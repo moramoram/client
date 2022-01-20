@@ -1,11 +1,18 @@
 import React from "react";
 
-import Progress from ".";
+import Progress from "./";
 import { Background } from "../../Basic";
 
 export default {
   title: "Layouts/Progress",
   component: Progress,
+  argTypes: {
+    items: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 const items = [

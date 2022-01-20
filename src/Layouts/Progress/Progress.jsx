@@ -40,12 +40,13 @@ const Progress = ({ items, ...props }) => {
   );
 };
 
-ProgressItem.propTypes = {
-  items: PropTypes.array.isRequired,
+Progress.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
+  items: PropTypes.array.isRequired,
 };
 
-ProgressItem.defaultProps = {
+Progress.defaultProps = {
+  theme: THEME.LIGHT,
   items: [
     {
       step: 1,
@@ -66,7 +67,6 @@ ProgressItem.defaultProps = {
       status: "default",
     },
   ],
-  theme: THEME.LIGHT,
 };
 
 export default Progress;

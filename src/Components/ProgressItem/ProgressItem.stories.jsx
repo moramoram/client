@@ -1,6 +1,6 @@
 import React from "react";
 
-import ProgressItem from ".";
+import ProgressItem from "./";
 import { Background } from "../../Basic";
 
 export default {
@@ -17,6 +17,7 @@ const item = {
 export const Default = (args) => <ProgressItem {...args} />;
 
 Default.args = {
+  ...Default.args,
   ...item,
 };
 

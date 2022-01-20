@@ -5,8 +5,8 @@ import IconSocial from "./";
 import { iconsSocial } from "../../shared/iconsSocial";
 
 export default {
-  title: "Basic/Icon",
-  component: Icon,
+  title: "Basic/IconSocial",
+  component: IconSocial,
 };
 
 const Meta = styled.div`
@@ -45,13 +45,5 @@ export const Social = () => (
         </Item>
       ))}
     </List>
-  </>
-);
-
-export const BookMark = () => (
-  <>
-    <IconBookMark mode="primary" theme="light" />
-    <IconBookMark mode="secondary" theme="light" />
-    <IconBookMark mode="secondary" theme="dark" />
   </>
 );

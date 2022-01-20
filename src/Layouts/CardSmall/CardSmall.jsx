@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { ImageBox } from "../../Components/ImageBox/";
+import { ImageBox } from "../../Components";
 import { glowLight, glowDark } from "../../shared/animation";
 import { color, typography } from "../../shared/styles";
 

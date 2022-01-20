@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import { Icon } from "../../Basic/Icon";
+import { Icon } from "../../Basic";
 import { glowLight, glowDark } from "../../shared/animation";
 import { color, typography } from "../../shared/styles";
 

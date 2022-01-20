@@ -1,6 +1,6 @@
 import React from "react";
-import { Typography } from "./";
-import { Icon } from "../Icon";
+import Typography from "./";
+import { Icon } from "../";
 
 export default {
   title: "Basic/Typography",
@@ -52,7 +52,7 @@ export const All = (args) => (
 );
 
 All.args = {
-  icon: "facehappy",
+  icon: "smile",
   inline: true,
 };
 

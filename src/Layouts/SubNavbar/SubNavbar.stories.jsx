@@ -1,5 +1,5 @@
 import React from "react";
-import { SubNavbar } from "./";
+import SubNavbar from "./";
 
 export default {
   title: "Layouts/SubNavbar",

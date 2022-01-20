@@ -1,7 +1,7 @@
 import React from "react";
 
-import Toggle from "./Toggle";
-import { Background } from "../../Background/Background";
+import Toggle from "./";
+import { Background } from "../../Basic";
 
 export default {
   title: "Components/Toggle",

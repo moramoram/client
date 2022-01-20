@@ -1,7 +1,7 @@
 import React from "react";
 
-import Toc from "./Toc";
-import { Background } from "../../Background/Background";
+import Toc from "./";
+import { Background } from "../../Basic";
 
 export default {
   title: "Layouts/Toc",

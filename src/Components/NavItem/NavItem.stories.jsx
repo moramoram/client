@@ -1,7 +1,7 @@
 import React from "react";
 
-import NavItem from "./NavItem";
-import { Background } from "../../Background/Background";
+import NavItem from "./";
+import { Background } from "../../Basic";
 
 export default {
   title: "Components/NavItem",

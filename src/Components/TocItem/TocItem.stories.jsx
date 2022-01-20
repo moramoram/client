@@ -1,7 +1,7 @@
 import React from "react";
 
-import TocItem from "./TocItem";
-import { Background } from "../../Background/Background";
+import TocItem from "./";
+import { Background } from "../../Basic";
 
 export default {
   title: "Components/TocItem",

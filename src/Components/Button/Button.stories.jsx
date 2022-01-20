@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "./";
-import { Icon } from "../../Basic/Icon";
+import Button from "./";
+import { Icon } from "../../Basic";
 
 export const Standard = (args) => <Button {...args} />;
 Standard.args = {

@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { color } from "../shared/styles";
 
-export const Background = ({ ...props }) => {
+import { color } from "../../shared/styles";
+
+const Background = ({ ...props }) => {
   return <Layout {...props} />;
 };
 
@@ -18,3 +19,5 @@ const Layout = styled.div`
   border-radius: 12px;
   background-color: ${(props) => bgColors[props.theme]};
 `;
+
+export default Background;

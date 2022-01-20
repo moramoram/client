@@ -5,6 +5,7 @@ export { default as ImageBox } from "./ImageBox";
 export { default as Input } from "./Input";
 export { default as InputWithLabel } from "./InputWithLabel";
 export { default as NavItem } from "./NavItem";
+export { default as ProgressItem } from "./ProgressItem";
 export { default as SideBarItem } from "./SideBarItem";
 export { default as SubNavbarItem } from "./SubNavbarItem";
 export { default as TocItem } from "./TocItem";

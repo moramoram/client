@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { Icon } from "../../Basic/Icon";
+import { Icon } from "../../Basic";
 import { color, typography } from "../../shared/styles";
 
 const THEME = {
@@ -16,7 +16,7 @@ const STATUS = {
   COMPLETED: "completed",
 };
 
-const ProgressStepItem = ({ step, title, description, status, ...props }) => {
+const ProgressItem = ({ step, title, description, status, ...props }) => {
   const stepNumRender = {
     default: step,
     current: null,
@@ -24,26 +24,28 @@ const ProgressStepItem = ({ step, title, description, status, ...props }) => {
   };
 
   return (
-    <Item {...props}>
-      <Content>
-        <StepNum status={status} {...props}>
+    <Layout {...props}>
+      <FlexBox>
+        <StepCircle status={status} {...props}>
           {stepNumRender[status]}
-        </StepNum>
+        </StepCircle>
         <TextBox>
-          <Title status={status}>{title}</Title>
+          <Title status={status} {...props}>
+            {title}
+          </Title>
           <Description>{description}</Description>
         </TextBox>
-      </Content>
+      </FlexBox>
       <ArrowBox className="arrow">
-        <Arrow />
+        <Arrow {...props} />
       </ArrowBox>
-    </Item>
+    </Layout>
   );
 };
 
-export default ProgressStepItem;
+export default ProgressItem;
 
-ProgressStepItem.propTypes = {
+ProgressItem.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   status: PropTypes.oneOf(Object.values(STATUS)),
   step: PropTypes.node.isRequired,
@@ -51,7 +53,7 @@ ProgressStepItem.propTypes = {
   description: PropTypes.node.isRequired,
 };
 
-ProgressStepItem.defaultProps = {
+ProgressItem.defaultProps = {
   theme: THEME.LIGHT,
   status: STATUS.DEFAULT,
   step: 1,
@@ -59,77 +61,105 @@ ProgressStepItem.defaultProps = {
   description: "공고를 한 눈에 볼 수 있도록 요약해주세요.",
 };
 
-const borderWidth = {
+const borderColor = {
+  light: color.gray300,
+  dark: color.gray600,
+};
+
+const bgColor = {
+  light: color.white,
+  dark: color.black,
+};
+
+const circleBorder = {
   current: "12px",
   default: "3px",
   completed: "3px",
 };
 
-const borderColor = {
-  current: color.blue100,
-  default: color.gray300,
-  completed: color.blue100,
+const circleColor = {
+  light: {
+    current: color.blue100,
+    default: color.gray300,
+    completed: color.blue100,
+  },
+  dark: {
+    current: color.blue100,
+    default: color.gray700,
+    completed: color.blue100,
+  },
 };
 
 const titleColor = {
-  current: color.blue100,
-  default: color.gray900,
-  completed: color.gray900,
+  light: {
+    current: color.blue100,
+    default: color.gray900,
+    completed: color.gray900,
+  },
+  dark: {
+    current: color.blue100,
+    default: color.gray100,
+    completed: color.gray25,
+  },
 };
 
-const Item = styled.div`
-  float: left;
-  height: 5rem;
+const Layout = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  border: 1px solid ${color.gray300};
+  align-items: center;
+  flex-grow: 1;
+
+  min-height: 5rem;
+  border: 1px solid ${(props) => borderColor[props.theme]};
   border-right: none;
   border-left: none;
-  background-color: ${color.white};
+
+  background-color: ${(props) => bgColor[props.theme]};
   color: ${color.black};
-  width: 33%;
-  position: relative;
 
   :first-child {
     border-radius: 8px 0 0 8px;
-    border-left: 1px solid ${color.gray300};
+    border-left: 1px solid ${(props) => borderColor[props.theme]};
   }
   :last-child {
     border-radius: 0 8px 8px 0;
-    border-right: 1px solid ${color.gray300};
+    border-right: 1px solid ${(props) => borderColor[props.theme]};
 
     .arrow {
       display: none;
     }
   }
+
+  cursor: pointer;
 `;
 
-const Content = styled.div`
+const FlexBox = styled.div`
   display: flex;
+  align-items: center;
   gap: 1rem;
   padding-left: 2rem;
 `;
 
-const StepNum = styled.div`
+const StepCircle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 
   width: 40px;
+  min-width: 40px;
   height: 40px;
-  border: ${(props) => borderWidth[props.status]} solid
-    ${(props) => borderColor[props.status]};
-  background-color: ${color.white};
-
+  border: ${(props) => circleBorder[props.status]} solid
+    ${(props) => circleColor[props.theme][props.status]};
   border-radius: 50%;
+
+  background-color: ${(props) => bgColor[props.theme]};
   color: ${color.gray500};
+
+  transition: 0.3s;
 
   svg {
     stroke: ${color.blue100};
   }
-
-  transition: 0.3s;
 `;
 
 const TextBox = styled.div`
@@ -143,32 +173,35 @@ const Title = styled.span`
   display: block;
   font-weight: 700;
   font-size: ${typography.paragraph};
-  color: ${(props) => titleColor[props.status]};
+  color: ${(props) => titleColor[props.theme][props.status]};
 
   transition: 0.3s;
 `;
 
 const Description = styled.span`
   display: block;
-  font-size: 12px;
-  overflow-wrap: normal;
+  font-size: 0.75rem;
   color: ${color.gray500};
 `;
 
 const ArrowBox = styled.div`
-  width: 2rem;
-  height: 5rem;
   overflow: hidden;
   left: 14rem;
+
+  width: 2rem;
+  min-width: 2rem;
+  height: 5rem;
 `;
 
 const Arrow = styled.div`
   float: left;
   position: relative;
-  transform: rotate(45deg) skew(15deg, 15deg);
-  background-color: ${color.white};
-  border: 1px solid ${color.gray300};
+  left: -50px;
+
   width: 5rem;
   height: 5rem;
-  left: -58px;
+  border: 1px solid ${(props) => borderColor[props.theme]};
+
+  background-color: ${(props) => bgColor[props.theme]};
+  transform: rotate(45deg) skew(15deg, 15deg);
 `;

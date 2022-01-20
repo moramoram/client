@@ -14,7 +14,7 @@ const bgColors = {
 };
 
 const Layout = styled.div`
-  display: flex;
+  /* display: flex; */
   padding: 5rem;
   border-radius: 12px;
   background-color: ${(props) => bgColors[props.theme]};

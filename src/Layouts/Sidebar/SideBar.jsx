@@ -4,10 +4,7 @@ import styled, { css } from "styled-components";
 import { glowLight, glowDark } from "../../shared/animation";
 
 import { Icon } from "../../Basic/Icon";
-import { ImageBox } from "../../Components/ImageBox/";
-import { Badge } from "../../Components/Badge";
-import { Button } from "../../Components/Button";
-import { SideBarItem } from "../../Components/SideBarItem";
+import { ImageBox, Badge, Button, SideBarItem } from "../../Components";
 
 const THEME = {
   LIGHT: "light",

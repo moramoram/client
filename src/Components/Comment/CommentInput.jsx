@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import Icon from "../../Basic/Icon/Icon";
+import { Icon } from "../../Basic";
 import { color, shadow } from "../../shared/styles";
 
 const THEME = {

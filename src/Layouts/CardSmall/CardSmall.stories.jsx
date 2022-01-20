@@ -1,14 +1,14 @@
 import React from "react";
-import Card from "./";
+import CardSmall from ".";
 
 export default {
   title: "Layouts/Card",
-  component: Card,
+  component: CardSmall,
 };
 
 export const Default = (args) => (
   <>
-    <Card {...args} />
+    <CardSmall {...args} />
   </>
 );
 
@@ -24,12 +24,10 @@ Default.args = {
 
 export const All = (args) => (
   <>
-    <Card {...args} />
-    <Card isLiked {...args} />
-    <Card isLoading {...args} />
-    <Card theme="dark" {...args} />
-    <Card theme="dark" isLiked {...args} />
-    <Card theme="dark" isLoading {...args} />
+    <CardSmall {...args} />
+    <CardSmall isLoading {...args} />
+    <CardSmall theme="dark" {...args} />
+    <CardSmall theme="dark" isLoading {...args} />
   </>
 );
 

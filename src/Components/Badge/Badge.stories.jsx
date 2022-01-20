@@ -1,6 +1,6 @@
 import React from "react";
-import Badge from "./Badge";
-import { Icon } from "../../Basic/Icon";
+import Badge from "./";
+import { Icon } from "../../Basic";
 
 export const Standard = (args) => <Badge {...args} />;
 Standard.args = {

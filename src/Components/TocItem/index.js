@@ -1,1 +1,1 @@
-export { default as TocItem } from "./TocItem";
+export { default } from "./TocItem";

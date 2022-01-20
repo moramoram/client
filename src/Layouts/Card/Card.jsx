@@ -2,9 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { IconBookMark } from "../../Basic/Icon";
-import { ImageBox } from "../../Components/ImageBox";
-import { Badge } from "../../Components/Badge";
+import { BookMark } from "../../Basic";
+import { Badge, ImageBox } from "../../Components";
 
 import { color, typography } from "../../shared/styles";
 import { glowLight, glowDark } from "../../shared/animation";
@@ -33,12 +32,12 @@ const Card = ({
     badges = ["", "", ""];
   }
 
-  const bookMark = !isLoading && isLiked && <IconBookMark theme={theme} />;
+  const bookMark = !isLoading && isLiked && <BookMark theme={theme} />;
   const { title, subtitle, highlight, src } = contents;
 
   return (
     <Layout {...props}>
-      <BookMark>{bookMark}</BookMark>
+      <BookMarkBox>{bookMark}</BookMarkBox>
       <ImageBox
         className="thumbnail"
         src={src}
@@ -119,7 +118,7 @@ const Layout = styled.div`
     margin-bottom: 16px;
   }
 `;
-const BookMark = styled.div`
+const BookMarkBox = styled.div`
    {
     position: absolute;
     left: 20px;

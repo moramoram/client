@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import Icon from "./";
-import { icons } from "../../shared/icons";
+import IconSocial from "./";
+import { iconsSocial } from "../../shared/iconsSocial";
 
 export default {
-  title: "Basic/Icon",
-  component: Icon,
+  title: "Basic/IconSocial",
+  component: IconSocial,
 };
 
 const Meta = styled.div`
@@ -34,25 +34,13 @@ const List = styled.ul`
   list-style: none;
 `;
 
-export const Default = (args) => (
+export const Social = () => (
   <>
-    This is a {args.block ? "block" : "inline"} <Icon {...args} /> icon
-  </>
-);
-
-Default.args = {
-  icon: "smile",
-  "aria-label": "smile",
-  block: false,
-};
-
-export const All = () => (
-  <>
-    There are {Object.keys(icons).length} icons
+    There are {Object.keys(iconsSocial).length} social icons
     <List>
-      {Object.keys(icons).map((key) => (
+      {Object.keys(iconsSocial).map((key) => (
         <Item key={key}>
-          <Icon icon={key} aria-hidden />
+          <IconSocial icon={key} aria-hidden />
           <Meta>{key}</Meta>
         </Item>
       ))}

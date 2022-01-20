@@ -1,1 +1,1 @@
-export { default as SubNavbarItem } from "./SubNavbarItem";
+export { default } from "./SubNavbarItem";

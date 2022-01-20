@@ -1,5 +1,5 @@
 import React from "react";
-import { SubNavbarItem } from "./";
+import SubNavbarItem from "./";
 
 export default {
   title: "Components/SubNavbarItem",

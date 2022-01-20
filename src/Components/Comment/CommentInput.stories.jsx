@@ -1,7 +1,7 @@
 import React from "react";
 
-import CommentInput from "./CommentInput";
-import { Background } from "../../Background/Background";
+import CommentInput from "./";
+import { Background } from "../../Basic";
 
 export default {
   title: "Components/Comment",

@@ -33,7 +33,9 @@ const ProgressItem = ({ step, title, description, status, ...props }) => {
           <Title status={status} {...props}>
             {title}
           </Title>
-          <Description>{description}</Description>
+          <Description status={status} {...props}>
+            {description}
+          </Description>
         </TextBox>
       </FlexBox>
       <ArrowBox className="arrow">
@@ -56,7 +58,7 @@ ProgressItem.defaultProps = {
   status: STATUS.DEFAULT,
   step: 1,
   title: "공고 요약",
-  description: "공고를 한 눈에 볼 수 있도록 요약해주세요.",
+  description: "한 눈에 들어오게 요약해주세요",
 };
 
 export default ProgressItem;
@@ -176,12 +178,26 @@ const Title = styled.span`
   color: ${(props) => titleColor[props.theme][props.status]};
 
   transition: 0.3s;
+
+  ${(props) =>
+    props.status !== "current" &&
+    `
+    transform: translateY(8px);
+  `}
 `;
 
 const Description = styled.span`
   display: block;
   font-size: 0.75rem;
   color: ${color.gray500};
+
+  transition: 0.3s;
+
+  ${(props) =>
+    props.status !== "current" &&
+    `
+    opacity: 0
+  `}
 `;
 
 const ArrowBox = styled.div`

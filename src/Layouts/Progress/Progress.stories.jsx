@@ -19,19 +19,19 @@ const items = [
   {
     step: 1,
     title: "공고 요약",
-    description: "공고를 한 눈에 볼 수 있도록 요약해주세요.",
+    description: "한 눈에 들어오게 요약해주세요",
     status: "default",
   },
   {
     step: 2,
     title: "상세 내용 입력",
-    description: "에디터를 이용해 공고 원본을 그대로 담아주세요.",
+    description: "공고 내용을 그대로 옮겨주세요",
     status: "default",
   },
   {
     step: 3,
     title: "미리보기",
-    description: "채용 공고가 잘 작성되었는지 확인해보세요.",
+    description: "잘 작성되었는지 확인해보세요.",
     status: "default",
   },
 ];

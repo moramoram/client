@@ -11,7 +11,7 @@ export default {
 const item = {
   step: 1,
   title: "공고 요약",
-  description: "공고를 한 눈에 볼 수 있도록 요약해주세요.",
+  description: "한 눈에 들어오게 요약해주세요",
 };
 
 export const Default = (args) => <ProgressItem {...args} />;

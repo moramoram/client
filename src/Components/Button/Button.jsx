@@ -39,8 +39,8 @@ const Layout = styled.button`
   animation: ${(props) => props.isLoading && loadingAnimation[props.theme]};
 
   svg {
-    height: 20px;
     width: 20px;
+    height: 20px;
     margin-right: 10px;
     vertical-align: top;
   }
@@ -48,15 +48,16 @@ const Layout = styled.button`
   ${(props) =>
     props.isDisabled &&
     `
-      cursor: not-allowed !important;
       opacity: 0.5;
+      cursor: not-allowed !important;
     `}
 
   ${(props) =>
     props.isLoading &&
     `
-      cursor: progress !important;
       border: none;
+      cursor: progress !important;
+
       &:hover {
         transform: none;
       }

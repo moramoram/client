@@ -32,7 +32,8 @@ export const color = {
   gray900: "#292D32",
   // border: "rgba(0,0,0,.1)",
 
-  // // Status
+  //Status
+  error: "#F04438",
   // positive: "#66BF3C",
   // negative: "#FF4400",
   // warning: "#E69D00",

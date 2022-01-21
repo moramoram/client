@@ -12,28 +12,35 @@ const THEME = {
 
 const STATUS = {
   DEFAULT: "default",
-  FOCUS: "focus",
+  ERROR: "error",
 };
 
-const Input = ({ icon, ...props }) => {
+const Input = ({ title, placeholder, message, status, icon, ...props }) => {
   const inner = icon ? <Icon icon={icon} /> : null;
   return (
-    <Layout {...props}>
-      {inner}
-      <InputBox placeholder="Placeholder" {...props} />
-    </Layout>
+    <>
+      <Label {...props}>{title}</Label>
+      <Layout status={status} {...props}>
+        {inner}
+        <InputBox placeholder={placeholder} {...props} />
+      </Layout>
+      <Message status={status}>{message}</Message>
+    </>
   );
 };
 
 Input.propTypes = {
-  icon: PropTypes.any,
   theme: PropTypes.oneOf(Object.values(THEME)),
   status: PropTypes.oneOf(Object.values(STATUS)),
+  title: PropTypes.string,
+  placeholder: PropTypes.string,
+  message: PropTypes.string,
 };
 
 Input.defaultProps = {
   theme: THEME.LIGHT,
   status: STATUS.DEFAULT,
+  placeholder: "Placeholder",
 };
 
 export default Input;
@@ -50,23 +57,39 @@ const bgColor = {
 
 const borderColor = {
   light: color.gray300,
-  dark: color.gray700,
+  dark: color.gray500,
+};
+
+const labelColor = {
+  light: color.gray900,
+  dark: color.gray25,
+};
+
+const msgColor = {
+  default: color.gray400,
+  error: color.error,
+};
+
+const focusColor = {
+  default: color.blue100,
+  error: color.error,
 };
 
 const Layout = styled.div`
-  height: 42px;
+  display: flex;
   width: 300px;
-
-  font-size: ${typography.size.paragraph};
+  height: 42px;
+  margin: 6px;
   padding: 10px;
-  margin: 10px;
-
-  background-color: ${(props) => bgColor[props.theme]};
-  box-shadow: ${shadow.input};
-
+  padding-left: 10px;
   border: 1px solid ${(props) => borderColor[props.theme]};
   border-radius: 8px;
-  padding-left: 10px;
+
+  background-color: ${(props) => bgColor[props.theme]};
+  font-size: ${typography.size.paragraph};
+  color: ${color.gray500};
+  box-shadow: ${shadow.button};
+  align-items: center;
 
   svg {
     height: 18px;
@@ -74,16 +97,17 @@ const Layout = styled.div`
   }
 
   :focus-within {
-    border: 1px solid ${color.blue100};
+    border: 1px solid ${(props) => focusColor[props.status]};
     transition: 0.3s;
   }
 `;
 
 const InputBox = styled.input`
-  font-size: ${typography.size.paragraph};
+  padding-left: 8px;
   border: none;
   background: none;
-  padding-left: 8px;
+
+  font-size: ${typography.size.paragraph};
   color: ${(props) => textColor[props.theme]};
   font-weight: 400;
 
@@ -91,4 +115,18 @@ const InputBox = styled.input`
     color: ${color.gray500};
     font-size: ${typography.size.paragraph};
   }
+`;
+
+const Label = styled.div`
+  padding-left: 10px;
+  font-size: ${typography.size.small};
+  font-weight: ${typography.weight.bold};
+  color: ${(props) => labelColor[props.theme]};
+`;
+
+const Message = styled.div`
+  padding-left: 10px;
+  font-size: ${typography.size.small};
+  font-weight: ${typography.weight.regular};
+  color: ${(props) => msgColor[props.status]};
 `;

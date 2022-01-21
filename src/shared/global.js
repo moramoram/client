@@ -14,6 +14,7 @@ export const bodyStyles = css`
 
   * {
     box-sizing: border-box;
+    letter-spacing: -0.02rem;
   }
 
   h1,

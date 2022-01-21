@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { icons } from "../../shared/icons";
+import { icons } from "../../_shared";
 
 const Icon = ({ icon, block, ...props }) => {
   return (

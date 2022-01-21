@@ -24,7 +24,7 @@ const ProgressItem = ({ step, title, description, status, ...props }) => {
   };
 
   return (
-    <Layout {...props}>
+    <Layout status={status} {...props}>
       <FlexBox>
         <StepCircle status={status} {...props}>
           {stepNumRender[status]}
@@ -132,7 +132,11 @@ const Layout = styled.div`
     }
   }
 
-  cursor: pointer;
+  ${(props) =>
+    props.status !== STATUS.DEFAULT &&
+    `
+    cursor: pointer;
+  `}
 `;
 
 const FlexBox = styled.div`
@@ -180,7 +184,7 @@ const Title = styled.span`
   transition: 0.3s;
 
   ${(props) =>
-    props.status !== "current" &&
+    props.status !== STATUS.CURRENT &&
     `
     transform: translateY(8px);
   `}
@@ -194,7 +198,7 @@ const Description = styled.span`
   transition: 0.3s;
 
   ${(props) =>
-    props.status !== "current" &&
+    props.status !== STATUS.CURRENT &&
     `
     opacity: 0
   `}

@@ -1,6 +1,5 @@
 import React from "react";
 import Badge from "./";
-import { Icon } from "../../Basic";
 
 export const Standard = (args) => <Badge {...args} />;
 Standard.args = {
@@ -26,7 +25,7 @@ export const AllBadges = (args) => (
     </Badge>
     <p />
     <h4>Secondary Bold</h4>
-    <Badge mode="secondary" weight="800">
+    <Badge mode="secondary" isBold>
       BADGE
     </Badge>
     <p />
@@ -39,18 +38,9 @@ export const AllBadges = (args) => (
     <Badge mode="primary" isLoading theme="dark">
       BADGE
     </Badge>
-    <p />
-    <h4>With Icon</h4>
-    <Badge>
-      <Icon {...args} />
-      BADGE
-    </Badge>
   </div>
 );
 
-AllBadges.args = {
-  icon: "smile",
-  inline: true,
-};
+AllBadges.args = {};
 
 AllBadges.storyName = "all badges";

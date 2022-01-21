@@ -14,6 +14,30 @@ const MODE = {
   SECONDARY: "secondary",
 };
 
+const Badge = ({ children, isLoading, ...props }) => {
+  const badgeinner = isLoading ? null : children;
+  return (
+    <Layout isLoading={isLoading} {...props}>
+      {badgeinner}
+    </Layout>
+  );
+};
+
+Badge.propTypes = {
+  children: PropTypes.node.isRequired,
+  theme: PropTypes.oneOf(Object.values(THEME)),
+  mode: PropTypes.oneOf(Object.values(MODE)),
+  isBold: PropTypes.bool,
+  isLoading: PropTypes.bool,
+};
+
+Badge.defaultProps = {
+  theme: THEME.LIGHT,
+  mode: MODE.PRIMARY,
+  isBold: false,
+  isLoading: false,
+};
+
 const textColor = {
   light: {
     primary: color.white,
@@ -45,14 +69,12 @@ const loadingAnimation = {
   `,
 };
 
-const BadgeWrapper = styled.div`
+const Layout = styled.div`
   display: inline-block;
-
   min-width: 48px;
   height: 20px;
   padding: 4px 8px;
   border-radius: 8px;
-
   background: ${(props) => bgColor[props.theme][props.mode]};
 
   font-size: ${typography.size.b3};
@@ -60,40 +82,7 @@ const BadgeWrapper = styled.div`
     props.isBold ? typography.weight.bold : typography.weight.regular};
   color: ${(props) => textColor[props.theme][props.mode]};
   text-align: center;
-  vertical-align: center;
-  line-height: 0.75rem;
-
-  svg {
-    height: 0.625rem;
-    width: 0.625rem;
-    margin-right: 4px;
-  }
 
   animation: ${(props) => props.isLoading && loadingAnimation[props.theme]};
 `;
-
-const Badge = ({ children, isLoading, ...props }) => {
-  const badgeinner = isLoading ? null : children;
-  return (
-    <BadgeWrapper isLoading={isLoading} {...props}>
-      {badgeinner}
-    </BadgeWrapper>
-  );
-};
-
-Badge.propTypes = {
-  children: PropTypes.node.isRequired,
-  theme: PropTypes.oneOf(Object.values(THEME)),
-  mode: PropTypes.oneOf(Object.values(MODE)),
-  isBold: PropTypes.bool,
-  isLoading: PropTypes.bool,
-};
-
-Badge.defaultProps = {
-  theme: THEME.LIGHT,
-  mode: MODE.PRIMARY,
-  isBold: false,
-  isLoading: false,
-};
-
 export default Badge;

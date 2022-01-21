@@ -39,12 +39,6 @@ export const AllBadges = (args) => (
     <Badge mode="primary" isLoading theme="dark">
       BADGE
     </Badge>
-    <p />
-    <h4>With Icon</h4>
-    <Badge>
-      <Icon {...args} />
-      BADGE
-    </Badge>
   </div>
 );
 

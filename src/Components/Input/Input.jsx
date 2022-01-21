@@ -77,6 +77,7 @@ const focusColor = {
 
 const Layout = styled.div`
   display: flex;
+
   width: 300px;
   height: 42px;
   margin: 6px;

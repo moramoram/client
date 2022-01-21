@@ -1,19 +1,21 @@
 import React from "react";
+
 import Button from "./";
 import { Icon } from "../../Basic";
-
-export const Standard = (args) => <Button {...args} />;
-Standard.args = {
-  mode: "primary",
-  children: "primary",
-};
 
 export default {
   title: "Components/Button",
   component: Button,
 };
 
-export const Primary = (args) => (
+export const Standard = (args) => <Button {...args} />;
+
+Standard.args = {
+  mode: "primary",
+  children: "primary",
+};
+
+export const Primary = () => (
   <div>
     <Button>Primary</Button>
     <p />
@@ -30,7 +32,7 @@ export const Primary = (args) => (
 
 Primary.storyName = "Primary";
 
-export const Secondary = (args) => (
+export const Secondary = () => (
   <div>
     <Button mode="secondary">Secondary</Button>
     <p />
@@ -51,7 +53,7 @@ export const Secondary = (args) => (
 
 Secondary.storyName = "Secondary";
 
-export const Dark = (args) => (
+export const Dark = () => (
   <div>
     <Button mode="secondary" theme="dark">
       Secondary

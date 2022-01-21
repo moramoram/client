@@ -1,4 +1,5 @@
 import React from "react";
+
 import Typography from "./";
 import { Icon } from "../";
 
@@ -8,6 +9,7 @@ export default {
 };
 
 export const Default = (args) => <Typography {...args} />;
+
 Default.args = {
   children: "Typography",
 };
@@ -55,5 +57,3 @@ All.args = {
   icon: "smile",
   inline: true,
 };
-
-All.storyName = "all Typographys";

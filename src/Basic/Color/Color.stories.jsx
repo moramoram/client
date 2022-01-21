@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-import { color } from "../../shared/styles";
+import { colors } from "../../_shared";
 
 export default {
   title: "Basic/Color",
 };
 
 const ColorBox = styled.div`
-  display: flex;
+  /* display: flex; */
 `;
 
 const Color = styled.div`
@@ -17,16 +17,18 @@ const Color = styled.div`
 `;
 
 const Meta = styled.div`
-  color: ${color.gray500};
+  color: ${colors.gray500};
   font-size: 12px;
 `;
 
 export const All = () => (
   <ColorBox>
-    {Object.keys(color).map((key) => (
+    {Object.keys(colors).map((key) => (
       <div>
-        <Color style={{ backgroundColor: color[key] }}></Color>
-        <Meta>{key}</Meta>
+        <Color style={{ backgroundColor: colors[key] }}></Color>
+        <Meta>
+          {key} : {colors[key]}
+        </Meta>
       </div>
     ))}
   </ColorBox>

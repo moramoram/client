@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Icon from "./";
-import { icons } from "../../shared/icons";
+import { icons } from "../../_shared";
 
 export default {
   title: "Basic/Icon",

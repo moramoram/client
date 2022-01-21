@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import IconSocial from "./";
-import { iconsSocial } from "../../shared/iconsSocial";
+import { iconsSocial } from "../../_shared";
 
 export default {
   title: "Basic/IconSocial",
@@ -34,7 +34,7 @@ const List = styled.ul`
   list-style: none;
 `;
 
-export const Social = () => (
+export const Default = () => (
   <>
     There are {Object.keys(iconsSocial).length} social icons
     <List>

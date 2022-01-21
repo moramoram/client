@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
-import { color, typography, shadow } from "../../shared/styles";
-import { glowLight, glowDark } from "../../shared/animation";
+import styled from "styled-components";
+
+import { colors, fontSize, fontWeight, shadows, loadings } from "../../_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -14,29 +14,102 @@ const MODE = {
   SECONDARY: "secondary",
 };
 
+const Button = ({ isLoading, loadingText, isLink, children, ...props }) => {
+  const buttonInner = isLoading ? "" : children;
+
+  return (
+    <Layout isLoading={isLoading} {...props}>
+      {buttonInner}
+    </Layout>
+  );
+};
+
+Button.propTypes = {
+  children: PropTypes.node.isRequired,
+  theme: PropTypes.oneOf(Object.values(THEME)),
+  mode: PropTypes.oneOf(Object.values(MODE)),
+  isLoading: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  isUnclickable: PropTypes.bool,
+  minWidth: PropTypes.any,
+};
+
+Button.defaultProps = {
+  theme: THEME.LIGHT,
+  mode: MODE.PRIMARY,
+  isLoading: false,
+  isDisabled: false,
+  isUnclickable: false,
+  minWidth: "136px",
+};
+
+export default Button;
+
+const borderColor = {
+  light: {
+    primary: colors.blue100,
+    secondary: colors.gray300,
+  },
+  dark: {
+    primary: colors.blue100,
+    secondary: colors.gray500,
+  },
+};
+
+const textColor = {
+  light: {
+    primary: colors.white,
+    secondary: colors.gray600,
+  },
+  dark: {
+    primary: colors.white,
+    secondary: colors.white,
+  },
+};
+
+const bgColor = {
+  light: {
+    primary: colors.blue100,
+    secondary: colors.white,
+  },
+  dark: {
+    primary: colors.blue100,
+    secondary: colors.gray700,
+  },
+};
+
+const hoverBgColor = {
+  light: {
+    primary: colors.blue200,
+    secondary: colors.gray100,
+  },
+  dark: {
+    primary: colors.blue200,
+    secondary: colors.gray500,
+  },
+};
+
 const Layout = styled.button`
   display: inline-block;
-  overflow: hidden;
 
-  min-width: ${(props) => props.minWidth};
   height: 42px;
+  min-width: ${(props) => props.minWidth};
   border-radius: 8px;
-  border: ${(props) => `1px solid ${borderColor[props.theme][props.mode]}`};
+  border: 1px solid ${(props) => borderColor[props.theme][props.mode]};
 
   background: ${(props) => bgColor[props.theme][props.mode]};
-  box-shadow: ${shadow.button};
+  box-shadow: ${shadows.button};
 
   color: ${(props) => textColor[props.theme][props.mode]};
-  font-weight: 700;
-  font-size: ${typography.size.paragraph};
+  font-weight: ${fontWeight.bold};
+  font-size: ${fontSize.p};
   text-align: center;
   text-decoration: none;
 
   transition: all 150ms ease-out;
-  transform: translate3d(0, 0, 0);
   user-select: none;
   cursor: pointer;
-  animation: ${(props) => props.isLoading && loadingAnimation[props.theme]};
+  animation: ${(props) => props.isLoading && loadings[props.theme]};
 
   svg {
     width: 20px;
@@ -72,91 +145,7 @@ const Layout = styled.button`
           background: ${hoverBgColor[props.theme][props.mode]};      
         }
         &:active {
-          box-shadow: ${shadow.base};
+          box-shadow: ${shadows.base};
         }
       `}
 `;
-
-const Button = ({ isLoading, loadingText, isLink, children, ...props }) => {
-  const buttonInner = isLoading ? "" : children;
-
-  return (
-    <Layout isLoading={isLoading} {...props}>
-      {buttonInner}
-    </Layout>
-  );
-};
-
-Button.propTypes = {
-  children: PropTypes.node.isRequired,
-  theme: PropTypes.oneOf(Object.values(THEME)),
-  mode: PropTypes.oneOf(Object.values(MODE)),
-  isLoading: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  isUnclickable: PropTypes.bool,
-  minWidth: PropTypes.any,
-};
-
-Button.defaultProps = {
-  theme: THEME.LIGHT,
-  mode: MODE.PRIMARY,
-  isLoading: false,
-  isDisabled: false,
-  isUnclickable: false,
-  minWidth: "136px",
-};
-
-export default Button;
-
-const borderColor = {
-  light: {
-    primary: color.blue100,
-    secondary: color.gray300,
-  },
-  dark: {
-    primary: color.blue100,
-    secondary: color.gray500,
-  },
-};
-
-const textColor = {
-  light: {
-    primary: color.white,
-    secondary: color.gray600,
-  },
-  dark: {
-    primary: color.white,
-    secondary: color.white,
-  },
-};
-
-const bgColor = {
-  light: {
-    primary: color.blue100,
-    secondary: color.white,
-  },
-  dark: {
-    primary: color.blue100,
-    secondary: color.gray700,
-  },
-};
-
-const loadingAnimation = {
-  light: css`
-    ${glowLight} 1.5s ease-in-out infinite;
-  `,
-  dark: css`
-    ${glowDark} 1.5s ease-in-out infinite;
-  `,
-};
-
-const hoverBgColor = {
-  light: {
-    primary: color.blue200,
-    secondary: color.gray300,
-  },
-  dark: {
-    primary: color.blue200,
-    secondary: color.gray500,
-  },
-};

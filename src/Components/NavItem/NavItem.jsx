@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { color, typography } from "../../shared/styles";
+import { colors, fontSize, fontWeight } from "../../_shared";
 
 const THEME = {
   DARK: "dark",
@@ -38,24 +38,24 @@ NavItem.defaultProps = {
 export default NavItem;
 
 const textColor = {
-  dark: color.gray25,
-  light: color.gray900,
-  transparent: color.gray25,
+  dark: colors.gray25,
+  light: colors.gray900,
+  transparent: colors.gray25,
 };
 
 const textHoverColor = {
-  dark: color.gray300,
-  light: color.gray500,
-  transparent: color.gray300,
+  dark: colors.gray300,
+  light: colors.gray500,
+  transparent: colors.gray300,
 };
 
 const textWeight = {
-  active: typography.weight.bold,
-  default: typography.weight.regular,
+  active: fontWeight.bold,
+  default: fontWeight.regular,
 };
 
 const borderColor = {
-  active: color.blue100,
+  active: colors.blue100,
   default: "#00000000",
 };
 
@@ -63,7 +63,7 @@ const Text = styled.span`
   display: inline-block;
 
   color: ${(props) => textColor[props.theme]};
-  font-size: ${typography.size.large};
+  font-size: ${fontSize.lg};
   font-weight: ${(props) => textWeight[props.status]};
   text-decoration: none;
 

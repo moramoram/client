@@ -14,22 +14,6 @@ const STATUS = {
   ACTIVE: "active",
 };
 
-const SubNavbarWrapper = styled.button`
-  width: auto;
-  height: auto;
-  border: 0;
-  margin: 0;
-  background: transparent;
-  svg {
-    height: "16";
-    width: "16";
-    margin-right: "6";
-    margin-top: "-2";
-    margin-bottom: "-2";
-    vertical-align: top;
-  }
-`;
-
 const SubNavbar = ({ items, theme, onClick, ...props }) => {
   const [selectedIndex, setSelectedIndex] = useState(null);
 
@@ -81,3 +65,20 @@ SubNavbar.defaultProps = {
 };
 
 export default SubNavbar;
+
+const SubNavbarWrapper = styled.button`
+  width: auto;
+  height: auto;
+  border: 0;
+  margin: 0;
+  background: transparent;
+
+  svg {
+    height: "16";
+    width: "16";
+    margin-right: "6";
+    margin-top: "-2";
+    margin-bottom: "-2";
+    vertical-align: top;
+  }
+`;

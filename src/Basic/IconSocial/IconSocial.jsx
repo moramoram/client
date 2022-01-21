@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { iconsSocial } from "../../shared/iconsSocial";
+import { iconsSocial } from "../../_shared";
 
 const IconSocial = ({ icon, block, ...props }) => {
   return (

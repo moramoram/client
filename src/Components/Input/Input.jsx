@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Icon } from "../../Basic";
-import { color, typography, shadow } from "../../shared/styles";
+import { colors, fontSize, fontWeight, shadows } from "../../_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -16,16 +16,15 @@ const STATUS = {
 };
 
 const Input = ({ title, placeholder, message, status, icon, ...props }) => {
-  const inner = icon ? <Icon icon={icon} /> : null;
   return (
-    <>
+    <Layout>
       <Label {...props}>{title}</Label>
-      <Layout status={status} {...props}>
-        {inner}
-        <InputBox placeholder={placeholder} {...props} />
-      </Layout>
+      <InputBox status={status} {...props}>
+        {icon && <Icon icon={icon} />}
+        <InputText placeholder={placeholder} {...props} />
+      </InputBox>
       <Message status={status}>{message}</Message>
-    </>
+    </Layout>
   );
 };
 
@@ -46,50 +45,55 @@ Input.defaultProps = {
 export default Input;
 
 const textColor = {
-  light: color.black,
-  dark: color.gray500,
+  light: colors.black,
+  dark: colors.gray500,
 };
 
 const bgColor = {
-  light: color.white,
-  dark: color.gray900,
+  light: colors.white,
+  dark: colors.gray900,
 };
 
 const borderColor = {
-  light: color.gray300,
-  dark: color.gray500,
+  light: colors.gray300,
+  dark: colors.gray700,
 };
 
 const labelColor = {
-  light: color.gray900,
-  dark: color.gray25,
+  light: colors.gray900,
+  dark: colors.gray25,
 };
 
 const msgColor = {
-  default: color.gray400,
-  error: color.error,
+  default: colors.gray400,
+  error: colors.error,
 };
 
 const focusColor = {
-  default: color.blue100,
-  error: color.error,
+  default: colors.blue100,
+  error: colors.error,
 };
 
 const Layout = styled.div`
   display: flex;
-  width: 300px;
+  flex-direction: column;
+  gap: 6px;
+`;
+
+const InputBox = styled.div`
+  display: flex;
+  align-items: center;
+
   height: 42px;
-  margin: 6px;
   padding: 10px;
-  padding-left: 10px;
   border: 1px solid ${(props) => borderColor[props.theme]};
   border-radius: 8px;
 
   background-color: ${(props) => bgColor[props.theme]};
-  font-size: ${typography.size.paragraph};
-  color: ${color.gray500};
-  box-shadow: ${shadow.button};
-  align-items: center;
+
+  font-size: ${fontSize.p};
+  color: ${colors.gray500};
+  box-shadow: ${shadows.button};
 
   svg {
     height: 18px;
@@ -102,31 +106,29 @@ const Layout = styled.div`
   }
 `;
 
-const InputBox = styled.input`
+const InputText = styled.input`
   padding-left: 8px;
   border: none;
   background: none;
 
-  font-size: ${typography.size.paragraph};
+  font-size: ${fontSize.p};
+  font-weight: ${fontWeight.regular};
   color: ${(props) => textColor[props.theme]};
-  font-weight: 400;
 
   ::placeholder {
-    color: ${color.gray500};
-    font-size: ${typography.size.paragraph};
+    color: ${colors.gray500};
+    font-size: ${fontSize.p};
   }
 `;
 
 const Label = styled.div`
-  padding-left: 10px;
-  font-size: ${typography.size.small};
-  font-weight: ${typography.weight.bold};
+  font-size: ${fontSize.sm};
+  font-weight: ${fontWeight.bold};
   color: ${(props) => labelColor[props.theme]};
 `;
 
 const Message = styled.div`
-  padding-left: 10px;
-  font-size: ${typography.size.small};
-  font-weight: ${typography.weight.regular};
+  font-size: ${fontSize.sm};
+  font-weight: ${fontWeight.regular};
   color: ${(props) => msgColor[props.status]};
 `;

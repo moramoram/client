@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { NavItem } from "../../Components";
 import { Logo, Icon, Avatar } from "../../Basic";
-import { color } from "../../shared/styles";
+import { colors } from "../../_shared";
 
 const THEME = {
   DARK: "dark",
@@ -34,7 +34,7 @@ const Navbar = ({ ...props }) => {
         </NavbarItemBox>
       </FlexBox>
       <FlexBox>
-        <Icon icon="bell" stroke={color.gray400} aria-hidden />
+        <Icon icon="bell" stroke={colors.gray400} aria-hidden />
         <Avatar />
       </FlexBox>
     </Layout>
@@ -67,15 +67,15 @@ const navData = [
 ];
 
 const bgColor = {
-  dark: color.black,
-  light: color.white,
+  dark: colors.black,
+  light: colors.white,
   transparent: "#00000000",
 };
 
 const borderColor = {
-  dark: color.gray700,
-  light: color.gray200,
-  transparent: color.gray700,
+  dark: colors.gray700,
+  light: colors.gray200,
+  transparent: colors.gray700,
 };
 
 const Layout = styled.div`

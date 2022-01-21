@@ -76,21 +76,19 @@ const focusColor = {
 };
 
 const Layout = styled.div`
-  height: 42px;
+  display: flex;
   width: 300px;
-
-  font-size: ${typography.size.paragraph};
-  padding: 10px;
+  height: 42px;
   margin: 6px;
-
-  background-color: ${(props) => bgColor[props.theme]};
-  box-shadow: ${shadow.button};
-
+  padding: 10px;
+  padding-left: 10px;
   border: 1px solid ${(props) => borderColor[props.theme]};
   border-radius: 8px;
-  padding-left: 10px;
+
+  background-color: ${(props) => bgColor[props.theme]};
+  font-size: ${typography.size.paragraph};
   color: ${color.gray500};
-  display: flex;
+  box-shadow: ${shadow.button};
   align-items: center;
 
   svg {
@@ -105,13 +103,13 @@ const Layout = styled.div`
 `;
 
 const InputBox = styled.input`
-  font-size: ${typography.size.paragraph};
+  padding-left: 8px;
   border: none;
   background: none;
-  padding-left: 8px;
+
+  font-size: ${typography.size.paragraph};
   color: ${(props) => textColor[props.theme]};
   font-weight: 400;
-  padding-top: 3.5px;
 
   ::placeholder {
     color: ${color.gray500};
@@ -120,15 +118,15 @@ const InputBox = styled.input`
 `;
 
 const Label = styled.div`
-  font-size: ${typography.size.small};
   padding-left: 10px;
+  font-size: ${typography.size.small};
   font-weight: ${typography.weight.bold};
   color: ${(props) => labelColor[props.theme]};
 `;
 
 const Message = styled.div`
-  font-size: ${typography.size.small};
   padding-left: 10px;
+  font-size: ${typography.size.small};
   font-weight: ${typography.weight.regular};
   color: ${(props) => msgColor[props.status]};
 `;

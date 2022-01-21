@@ -1,6 +1,5 @@
 import React from "react";
 import Badge from "./";
-import { Icon } from "../../Basic";
 
 export const Standard = (args) => <Badge {...args} />;
 Standard.args = {
@@ -42,7 +41,6 @@ export const AllBadges = (args) => (
   </div>
 );
 
-AllBadges.args = {
-};
+AllBadges.args = {};
 
 AllBadges.storyName = "all badges";

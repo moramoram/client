@@ -26,7 +26,7 @@ export const AllBadges = (args) => (
     </Badge>
     <p />
     <h4>Secondary Bold</h4>
-    <Badge mode="secondary" weight="800">
+    <Badge mode="secondary" isBold>
       BADGE
     </Badge>
     <p />
@@ -43,8 +43,6 @@ export const AllBadges = (args) => (
 );
 
 AllBadges.args = {
-  icon: "smile",
-  inline: true,
 };
 
 AllBadges.storyName = "all badges";

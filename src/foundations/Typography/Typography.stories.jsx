@@ -1,7 +1,7 @@
 import React from "react";
 
-import Typography from ".";
-import { Icon } from "./";
+import Typography from "./";
+import { Icon } from "@/foundations";
 
 export default {
   title: "Foundations/Typography",

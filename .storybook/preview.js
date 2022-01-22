@@ -1,6 +1,6 @@
 import React from "react";
 
-import { GlobalStyle } from "../src/shared/global";
+import { GlobalStyle } from "@/_shared/global";
 
 // 모든 스토리에 스타일을 적용하기 위한 글로벌 decorator
 export const decorators = [

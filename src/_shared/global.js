@@ -1,10 +1,10 @@
 import { createGlobalStyle, css } from "styled-components";
-import { color, typography } from "./styles";
+import { colors, fontFamily, fontSize, fontWeight } from "./";
 
 export const bodyStyles = css`
-  font-family: ${typography.type.primary};
-  font-size: ${typography.size.paragraph}px;
-  color: ${color.gray700};
+  font-family: ${fontFamily.sans};
+  font-size: ${fontSize.p}px;
+  color: ${colors.gray700};
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -23,7 +23,7 @@ export const bodyStyles = css`
   h4,
   h5,
   h6 {
-    font-weight: ${typography.weight.regular};
+    font-weight: ${fontWeight.regular};
     margin: 0;
     padding: 0;
   }
@@ -33,7 +33,7 @@ export const bodyStyles = css`
   textarea,
   select {
     outline: none;
-    font-family: ${typography.type.primary};
+    font-family: ${fontFamily.sans};
   }
 
   sub,
@@ -51,20 +51,20 @@ export const bodyStyles = css`
 
   b,
   em {
-    font-weight: ${typography.weight.bold};
+    font-weight: ${fontWeight.bold};
   }
 
   hr {
     border: none;
-    border-top: 1px solid ${color.border};
+    border-top: 1px solid ${colors.gray500};
     clear: both;
     margin-bottom: 1.25rem;
   }
 
   code,
   pre {
-    font-family: ${typography.type.code};
-    font-size: ${typography.size.s2 - 1}px;
+    font-family: ${fontFamily.mono};
+    font-size: ${fontSize.sm}px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -75,7 +75,7 @@ export const bodyStyles = css`
     padding-right: 2px;
     vertical-align: baseline;
 
-    color: ${color.secondary};
+    color: ${colors.gray500};
   }
 
   pre {
@@ -84,7 +84,7 @@ export const bodyStyles = css`
     white-space: pre-wrap;
 
     background: rgba(0, 0, 0, 0.05);
-    color: ${color.darkest};
+    color: ${colors.gray900};
     border-radius: 3px;
     margin: 1rem 0;
   }

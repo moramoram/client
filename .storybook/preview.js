@@ -18,9 +18,9 @@ export const parameters = {
     element: "#root",
     manual: false,
   },
-  // options: {
-  //   storySort: {
-  //     order: ["Foundations", "Components", "Layouts", "*"],
-  //   },
-  // },
+  options: {
+    storySort: {
+      order: ["Foundations", "Components", "Patterns", "Containers", "*"],
+    },
+  },
 };

@@ -2,10 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import UserAlt from "./UserAlt";
-
-import { color } from "../../shared/styles";
-import { glow } from "../../shared/animation";
+import AvatarBase from "./AvatarBase";
+import { animations, colors } from "../../_shared";
 
 const SIZE = {
   LARGE: "large",
@@ -14,7 +12,7 @@ const SIZE = {
 };
 
 const Avatar = ({ isLoading, username, src, size, ...props }) => {
-  let avatarFigure = <UserAlt />;
+  let avatarFigure = <AvatarBase avatar="user" />;
   const a11yProps = {};
 
   if (isLoading) {
@@ -81,7 +79,7 @@ const Image = styled.div`
   width: ${(props) => sizeNum[props.size]}px;
   border-radius: 50%;
 
-  background-color: ${color.gray100};
+  background-color: ${colors.gray100};
 
   line-height: ${(props) => sizeNum[props.size]}px;
   text-transform: uppercase;
@@ -101,15 +99,15 @@ const Image = styled.div`
   }
 
   path {
-    animation: ${glow} 1.5s ease-in-out infinite;
+    animation: ${animations.glow} 1.5s ease-in-out infinite;
   }
 `;
 
 const Initial = styled.div`
-  color: ${color.lightest};
+  color: ${colors.lightest};
   text-align: center;
 
-  color: ${color.gray800};
+  color: ${colors.gray800};
   font-size: ${(props) => fontSize[props.size]};
   line-height: ${(props) => sizeNum[props.size]}px;
 `;

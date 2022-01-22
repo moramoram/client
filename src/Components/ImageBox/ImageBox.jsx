@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { Logo } from "../../Basic";
-import { glowLight, glowDark } from "../../shared/animation";
-import { color } from "../../shared/styles";
+import { colors, loadings } from "../../_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -60,8 +59,8 @@ ImageBox.defaultProps = {
 export default ImageBox;
 
 const imageBgColor = {
-  light: color.gray25,
-  dark: color.gray900,
+  light: colors.gray25,
+  dark: colors.gray900,
 };
 
 const imageWidth = {
@@ -76,15 +75,6 @@ const imageHeight = {
   small: "110px",
 };
 
-const loadingAnimation = {
-  light: css`
-    ${glowLight} 1.5s ease-in-out infinite;
-  `,
-  dark: css`
-    ${glowDark} 1.5s ease-in-out infinite;
-  `,
-};
-
 const ImageBoxWrapper = styled.div`
   display: flex;
   width: ${(props) => imageWidth[props.size]};
@@ -95,7 +85,7 @@ const ImageBoxWrapper = styled.div`
 
   align-items: center;
   justify-content: center;
-  animation: ${(props) => props.isLoading && loadingAnimation[props.theme]};
+  animation: ${(props) => props.isLoading && loadings[props.theme]};
 
   svg {
     width: 33%;

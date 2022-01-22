@@ -17,7 +17,6 @@ const item = {
 export const Default = (args) => <ProgressItem {...args} />;
 
 Default.args = {
-  ...Default.args,
   ...item,
 };
 

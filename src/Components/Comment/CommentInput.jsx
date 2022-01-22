@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Icon } from "../../Basic";
-import { color, shadow } from "../../shared/styles";
+import { colors, shadows } from "../../_shared";
 
 const THEME = {
   DARK: "dark",
@@ -72,13 +72,13 @@ CommentInput.defaultProps = {
 };
 
 const bgColor = {
-  dark: color.gray900,
-  light: color.gray25,
+  dark: colors.gray900,
+  light: colors.gray25,
 };
 
 const textColor = {
-  dark: color.gray25,
-  light: color.gray900,
+  dark: colors.gray25,
+  light: colors.gray900,
 };
 
 const Layout = styled.label`
@@ -90,7 +90,7 @@ const Layout = styled.label`
   width: 620px;
   padding: 9px 13px;
   border-radius: 0.5rem;
-  box-shadow: ${shadow.base};
+  box-shadow: ${shadows.base};
 
   background-color: ${(props) => bgColor[props.theme]};
 `;
@@ -105,7 +105,7 @@ const Textarea = styled.textarea`
   color: ${(props) => textColor[props.theme]};
 
   ::placeholder {
-    color: ${color.gray500};
+    color: ${colors.gray500};
   }
 `;
 
@@ -119,7 +119,7 @@ const Footer = styled.div`
 const CharCounter = styled.span`
   display: block;
   font-size: 10px;
-  color: ${color.gray500};
+  color: ${colors.gray500};
 `;
 
 const ButtonBox = styled.div`
@@ -130,7 +130,7 @@ const ButtonBox = styled.div`
   svg {
     width: 20px;
     height: 20px;
-    stroke: ${color.gray500};
+    stroke: ${colors.gray500};
     cursor: pointer;
   }
 `;
@@ -138,11 +138,11 @@ const ButtonBox = styled.div`
 const Button = styled.button`
   width: 72px;
   height: 28px;
-  border: 1px solid ${color.blue100};
+  border: 1px solid ${colors.blue100};
   border-radius: 4px;
 
-  background-color: ${color.blue100};
-  color: ${color.white};
+  background-color: ${colors.blue100};
+  color: ${colors.white};
 
   cursor: pointer;
 

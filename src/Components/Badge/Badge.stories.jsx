@@ -11,7 +11,7 @@ export default {
   component: Badge,
 };
 
-export const AllBadges = (args) => (
+export const AllBadges = () => (
   <div>
     <h4>Primary</h4>
     <Badge mode="primary">BADGE</Badge>

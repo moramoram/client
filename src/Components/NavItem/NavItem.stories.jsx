@@ -22,7 +22,7 @@ export const All = () => (
   <>
     <h1>Light theme</h1>
     <hr />
-    <Background>
+    <Background theme="light" style={{ display: "flex" }}>
       <NavItem theme="light" status="active">
         Active
       </NavItem>
@@ -33,7 +33,7 @@ export const All = () => (
     <br />
     <h1>Dark theme</h1>
     <hr />
-    <Background theme="dark">
+    <Background theme="dark" style={{ display: "flex" }}>
       <NavItem theme="dark" status="active">
         Active
       </NavItem>

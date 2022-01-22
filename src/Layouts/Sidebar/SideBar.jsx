@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
-import { glowLight, glowDark } from "../../shared/animation";
+import styled from "styled-components";
 
 import { Icon } from "../../Basic";
 import { ImageBox, Badge, Button, SideBarItem } from "../../Components";
@@ -107,15 +106,6 @@ SideBar.defaultProps = {
 
 export default SideBar;
 
-const loadingAnimation = {
-  light: css`
-    ${glowLight} 1.5s ease-in-out infinite;
-  `,
-  dark: css`
-    ${glowDark} 1.5s ease-in-out infinite;
-  `,
-};
-
 const SideBarBox = styled.div`
   margin: 10px 0px;
 `;
@@ -131,10 +121,10 @@ const SideBarWrapper = styled.div`
   height: 540px;
 
   button {
-    margin: 5px 10px;
+    margin: 4px 10px;
   }
   .thumbnail {
-    margin-buttom: 5px;
+    margin-bottom: 12px;
   }
   .badge-item {
     margin-right: 5px;

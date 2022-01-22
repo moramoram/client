@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Icon } from "../../Basic";
-import { color, typography } from "../../shared/styles";
+import { colors, fontSize, fontWeight } from "../../_shared";
 
 const THEME = {
   DARK: "dark",
@@ -64,13 +64,13 @@ ProgressItem.defaultProps = {
 export default ProgressItem;
 
 const borderColor = {
-  light: color.gray300,
-  dark: color.gray600,
+  light: colors.gray300,
+  dark: colors.gray600,
 };
 
 const bgColor = {
-  light: color.white,
-  dark: color.black,
+  light: colors.white,
+  dark: colors.black,
 };
 
 const circleBorder = {
@@ -81,27 +81,27 @@ const circleBorder = {
 
 const circleColor = {
   light: {
-    current: color.blue100,
-    default: color.gray300,
-    completed: color.blue100,
+    current: colors.blue100,
+    default: colors.gray300,
+    completed: colors.blue100,
   },
   dark: {
-    current: color.blue100,
-    default: color.gray700,
-    completed: color.blue100,
+    current: colors.blue100,
+    default: colors.gray700,
+    completed: colors.blue100,
   },
 };
 
 const titleColor = {
   light: {
-    current: color.blue100,
-    default: color.gray900,
-    completed: color.gray900,
+    current: colors.blue100,
+    default: colors.gray900,
+    completed: colors.gray900,
   },
   dark: {
-    current: color.blue100,
-    default: color.gray100,
-    completed: color.gray25,
+    current: colors.blue100,
+    default: colors.gray100,
+    completed: colors.gray25,
   },
 };
 
@@ -117,7 +117,7 @@ const Layout = styled.div`
   border-left: none;
 
   background-color: ${(props) => bgColor[props.theme]};
-  color: ${color.black};
+  color: ${colors.black};
 
   :first-child {
     border-radius: 8px 0 0 8px;
@@ -159,12 +159,12 @@ const StepCircle = styled.div`
   border-radius: 50%;
 
   background-color: ${(props) => bgColor[props.theme]};
-  color: ${color.gray500};
+  color: ${colors.gray500};
 
   transition: 0.3s;
 
   svg {
-    stroke: ${color.blue100};
+    stroke: ${colors.blue100};
   }
 `;
 
@@ -172,13 +172,13 @@ const TextBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 4px;
+  gap: 0.25rem;
 `;
 
 const Title = styled.span`
   display: block;
-  font-weight: 700;
-  font-size: ${typography.paragraph};
+  font-weight: ${fontWeight.bold};
+  font-size: ${fontSize.p};
   color: ${(props) => titleColor[props.theme][props.status]};
 
   transition: 0.3s;
@@ -192,8 +192,8 @@ const Title = styled.span`
 
 const Description = styled.span`
   display: block;
-  font-size: 0.75rem;
-  color: ${color.gray500};
+  font-size: ${fontSize.xs};
+  color: ${colors.gray500};
 
   transition: 0.3s;
 

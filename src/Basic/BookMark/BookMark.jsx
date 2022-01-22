@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { color } from "../../shared/styles";
+import { colors } from "../../_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -49,12 +49,12 @@ export default IconBookMark;
 
 const iconColor = {
   light: {
-    primary: color.blue100,
-    secondary: color.gray300,
+    primary: colors.blue100,
+    secondary: colors.gray300,
   },
   dark: {
-    primary: color.blue100,
-    secondary: color.gray500,
+    primary: colors.blue100,
+    secondary: colors.gray500,
   },
 };
 

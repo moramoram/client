@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { color } from "../../shared/styles";
+import { colors } from "../../_shared";
 
 const THEME = {
   DARK: "dark",
@@ -67,17 +67,17 @@ Logo.defaultProps = {
 export default Logo;
 
 const symbolColors = {
-  dark: color.blue100,
-  blue: color.white,
-  light: color.blue100,
-  transparent: color.blue100,
+  dark: colors.blue100,
+  blue: colors.white,
+  light: colors.blue100,
+  transparent: colors.blue100,
 };
 
 const wordColors = {
-  dark: color.gray25,
-  blue: color.white,
-  light: color.gray900,
-  transparent: color.gray25,
+  dark: colors.gray25,
+  blue: colors.white,
+  light: colors.gray900,
+  transparent: colors.gray25,
 };
 
 const Svg = styled.svg`

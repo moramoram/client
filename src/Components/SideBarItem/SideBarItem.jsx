@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+
 import { Icon } from "../../Basic";
-import { glowLight, glowDark } from "../../shared/animation";
-import { color, typography } from "../../shared/styles";
+import { colors, fontSize, fontWeight, loadings } from "../../_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -11,8 +11,8 @@ const THEME = {
 };
 
 const textColor = {
-  light: color.gray900,
-  dark: color.gray25,
+  light: colors.gray900,
+  dark: colors.gray25,
 };
 
 const SideBarItem = ({ contents, isLoading, ...props }) => {
@@ -48,31 +48,22 @@ SideBarItem.defaultProps = {
 
 export default SideBarItem;
 
-const loadingAnimation = {
-  light: css`
-    ${glowLight} 1.5s ease-in-out infinite
-  `,
-  dark: css`
-    ${glowDark} 1.5s ease-in-out infinite
-  `,
-};
-
 const Title = styled.div`
   display: inline-block;
   overflow: hidden;
   width: 124px;
   height: 20px;
-  border-radius: 8px;
+  border-radius: 4px;
 
-  font-size: ${typography.size.paragraph};
-  font-weight: ${typography.weight.bold};
+  font-size: ${fontSize.p};
+  font-weight: ${fontWeight.bold};
   text-overflow: ellipsis;
   white-space: nowrap;
-  animation: ${(props) => props.isLoading && loadingAnimation[props.theme]};
+  animation: ${(props) => props.isLoading && loadings[props.theme]};
   margin-right: 10px;
   svg {
-    height: ${typography.size.large};
-    width: ${typography.size.h4};
+    height: ${fontSize.lg};
+    width: ${fontSize.h4};
     margin-right: 10px;
     margin-top: -2px;
   }
@@ -83,18 +74,18 @@ const Content = styled.div`
   overflow: hidden;
   width: 244px;
   height: 20px;
-  border-radius: 8px;
+  border-radius: 4px;
 
-  font-size: ${typography.size.paragraph};
-  font-weight: ${typography.weight.regular};
+  font-size: ${fontSize.p};
+  font-weight: ${fontWeight.regular};
   text-overflow: ellipsis;
   white-space: nowrap;
-  animation: ${(props) => props.isLoading && loadingAnimation[props.theme]};
+  animation: ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const SideBarItemWrapper = styled.div`
   display: flex;
-  border-radius: 8px;
+  border-radius: 4px;
 
   width: 400px;
   height: 36px;

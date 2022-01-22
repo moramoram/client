@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
-import { color, typography } from "../../shared/styles";
-import { glowLight, glowDark } from "../../shared/animation";
+import styled from "styled-components";
+
+import { colors, fontWeight, fontSize, loadings } from "../../_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -40,33 +40,24 @@ Badge.defaultProps = {
 
 const textColor = {
   light: {
-    primary: color.white,
-    secondary: color.gray600,
+    primary: colors.white,
+    secondary: colors.gray600,
   },
   dark: {
-    primary: color.white,
-    secondary: color.white,
+    primary: colors.white,
+    secondary: colors.white,
   },
 };
 
 const bgColor = {
   light: {
-    primary: color.blue100,
-    secondary: color.gray100,
+    primary: colors.blue100,
+    secondary: colors.gray100,
   },
   dark: {
-    primary: color.blue100,
-    secondary: color.gray700,
+    primary: colors.blue100,
+    secondary: colors.gray700,
   },
-};
-
-const loadingAnimation = {
-  light: css`
-    ${glowLight} 1.5s ease-in-out infinite;
-  `,
-  dark: css`
-    ${glowDark} 1.5s ease-in-out infinite;
-  `,
 };
 
 const Layout = styled.div`
@@ -77,12 +68,12 @@ const Layout = styled.div`
   border-radius: 8px;
   background: ${(props) => bgColor[props.theme][props.mode]};
 
-  font-size: ${typography.size.b3};
+  font-size: ${fontSize.xxs};
   font-weight: ${(props) =>
-    props.isBold ? typography.weight.bold : typography.weight.regular};
+    props.isBold ? fontWeight.bold : fontWeight.regular};
   color: ${(props) => textColor[props.theme][props.mode]};
   text-align: center;
 
-  animation: ${(props) => props.isLoading && loadingAnimation[props.theme]};
+  animation: ${(props) => props.isLoading && loadings[props.theme]};
 `;
 export default Badge;

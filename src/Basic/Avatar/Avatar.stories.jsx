@@ -6,9 +6,7 @@ export default {
   component: Avatar,
 };
 
-// TODO : 기본 이미지 소스
-const defaultSrc =
-  "https://user-images.githubusercontent.com/87457066/149450675-18c3f878-2cf9-40cd-884c-1b7db140708b.png";
+const defaultSrc = "/images/persona.svg";
 
 export const Default = (args) => <Avatar {...args} />;
 

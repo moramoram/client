@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { color, typography } from "../../shared/styles";
+import { colors, fontSize, fontWeight } from "../../_shared";
 
 const THEME = {
   DARK: "dark",
@@ -42,32 +42,32 @@ export default TocItem;
 
 const textColor = {
   dark: {
-    active: color.gray25,
-    default: color.gray500,
+    active: colors.gray25,
+    default: colors.gray500,
   },
   light: {
-    active: color.gray900,
-    default: color.gray500,
+    active: colors.gray900,
+    default: colors.gray500,
   },
 };
 
 const textHoverColor = {
-  dark: color.gray400,
-  light: color.gray800,
+  dark: colors.gray400,
+  light: colors.gray800,
 };
 
 const textWeight = {
-  active: typography.weight.bold,
-  default: typography.weight.regular,
+  active: fontWeight.bold,
+  default: fontWeight.regular,
 };
 
 const borderColor = {
   dark: {
-    active: color.gray25,
+    active: colors.gray25,
     default: "#00000000",
   },
   light: {
-    active: color.black,
+    active: colors.black,
     default: "#00000000",
   },
 };
@@ -76,7 +76,7 @@ const Text = styled.span`
   display: block;
 
   color: ${(props) => textColor[props.theme][props.status]};
-  font-size: ${typography.size.paragraph};
+  font-size: ${fontSize.p};
   font-weight: ${(props) => textWeight[props.status]};
   text-decoration: none;
 `;
@@ -84,7 +84,7 @@ const Text = styled.span`
 const Number = styled.span`
   display: block;
 
-  color: ${color.blue100};
+  color: ${colors.blue100};
   font-size: 0.8rem;
 `;
 

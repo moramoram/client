@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { TocItem } from "../../Components";
-import { color } from "../../shared/styles";
+import { colors } from "../../_shared";
 
 const THEME = {
   DARK: "dark",
@@ -61,13 +61,13 @@ TocNav.defaultProps = {
 export default TocNav;
 
 const bgColors = {
-  dark: color.black,
-  light: color.white,
+  dark: colors.black,
+  light: colors.white,
 };
 
 const borderColor = {
-  dark: color.gray700,
-  light: color.gray200,
+  dark: colors.gray700,
+  light: colors.gray200,
 };
 
 const Layout = styled.div`

@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { ImageBox } from "../../Components";
-import { glowLight, glowDark } from "../../shared/animation";
-import { color, typography } from "../../shared/styles";
+import { colors, fontSize, fontWeight, loadings } from "../../_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -12,13 +11,12 @@ const THEME = {
 };
 
 const CardSmall = ({ theme, isLoading, contents, ...props }) => {
-  if (isLoading) {
-    contents = {
-      title: "",
-      highlight: "",
-      src: "",
-    };
-  }
+  contents = isLoading && {
+    title: "",
+    highlight: "",
+    src: "",
+  };
+
   const { title, highlight, src } = contents;
   return (
     <Layout theme={theme} isLoading={isLoading} {...props}>
@@ -58,17 +56,8 @@ CardSmall.defaultProps = {
 export default CardSmall;
 
 const titleColor = {
-  light: color.gray900,
-  dark: color.gray25,
-};
-
-const loadingAnimation = {
-  light: css`
-    ${glowLight} 1.5s ease-in-out infinite;
-  `,
-  dark: css`
-    ${glowDark} 1.5s ease-in-out infinite;
-  `,
+  light: colors.gray900,
+  dark: colors.gray25,
 };
 
 const Layout = styled.div`
@@ -81,26 +70,26 @@ const Layout = styled.div`
 const TextBox = styled.div`
   div {
     display: inline-block;
-    border-radius: 8px;
-    animation: ${(props) => props.isLoading && loadingAnimation[props.theme]};
+    border-radius: 4px;
+    animation: ${(props) => props.isLoading && loadings[props.theme]};
   }
 `;
 
 const Highlight = styled.div`
   min-width: 70px;
-  min-height: ${typography.size.paragraph};
+  min-height: ${fontSize.p};
   margin: 8px 0px;
 
-  font-size: ${typography.size.b2};
-  font-weight: ${typography.weight.bold};
-  color: ${color.blue100};
+  font-size: ${fontSize.xs};
+  font-weight: ${fontWeight.bold};
+  color: ${colors.blue100};
 `;
 
 const Title = styled.div`
   min-width: 160px;
-  min-height: ${typography.size.paragraph};
+  min-height: ${fontSize.p};
 
-  font-weight: ${typography.weight.bold};
-  font-size: ${typography.size.b1};
+  font-weight: ${fontWeight.bold};
+  font-size: ${fontSize.sm};
   color: ${(props) => titleColor[props.theme]};
 `;

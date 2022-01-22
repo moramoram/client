@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { color } from "../../shared/styles";
+import { colors } from "../../_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -37,8 +37,8 @@ Toggle.defaultProps = {
 export default Toggle;
 
 const bgColor = {
-  light: color.gray200,
-  dark: color.gray700,
+  light: colors.gray200,
+  dark: colors.gray700,
 };
 
 const Layout = styled.label`
@@ -67,7 +67,7 @@ const CheckBox = styled.input`
   }
 
   :checked::before {
-    background-color: ${color.blue100};
+    background-color: ${colors.blue100};
   }
 
   :checked + div {
@@ -82,7 +82,7 @@ const Switch = styled.div`
   top: 5px;
   left: 6px;
   border-radius: 50%;
-  background-color: ${color.white};
+  background-color: ${colors.white};
 
   transition: transform 0.2s linear;
 `;

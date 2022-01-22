@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Layout from "Layout";
+import Layout from "@/Layout";
 
 const Router = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });

@@ -1,7 +1,7 @@
 import React, { StrictMode } from "react";
 import { RecoilRoot } from "recoil";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import Router from "./router/Router";
+import Router from "@/router/Router";
 
 const App = () => {
   return (

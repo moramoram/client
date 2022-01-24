@@ -28,10 +28,9 @@ const Navbar = ({ ...props }) => {
         <NavbarItemBox>
           {navData.map(({ name, title, url }, idx) => {
             return (
-              <NavItemLink to={url}>
+              <NavItemLink to={url} key={idx}>
                 <NavItem
                   {...props}
-                  key={idx}
                   onClick={() => setCurrent(name)}
                   status={current === name ? "active" : "default"}
                 >

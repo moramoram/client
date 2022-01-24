@@ -23,12 +23,12 @@ const SubNavbar = ({ items, theme, onClick, ...props }) => {
 
   return (
     <SubNavbarWrapper theme={theme} {...props}>
-      {items.map(({ id, title }) => {
+      {items.map(({ id, title }, idx) => {
         return (
           <SubNavbarItem
             theme={theme}
             onClick={(e) => handleNavItemClick(e, id)}
-            key={id}
+            key={idx}
             status={selectedIndex === id ? "active" : "default"}
           >
             {title}
@@ -66,7 +66,7 @@ SubNavbar.defaultProps = {
 
 export default SubNavbar;
 
-const SubNavbarWrapper = styled.button`
+const SubNavbarWrapper = styled.div`
   width: auto;
   height: auto;
   border: 0;

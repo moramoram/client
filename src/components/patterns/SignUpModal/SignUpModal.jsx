@@ -36,6 +36,14 @@ const SignUpModal = ({ children, ...props }) => {
   );
 };
 
+SignUpModal.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+SignUpModal.defaultProps = {
+  children: "개발자 계정으로 \n간편하게 시작하기",
+};
+
 export default SignUpModal;
 
 const bgColor = {

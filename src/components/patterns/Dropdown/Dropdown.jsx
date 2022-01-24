@@ -18,7 +18,7 @@ const Dropdown = ({ user, items, ...props }) => {
       </UserInfo>
       <MenuBox {...props}>
         {items.map((item) => (
-          <DropdownItem children={item} {...props} />
+          <DropdownItem children={item} key={item} {...props} />
         ))}
       </MenuBox>
       <MenuBox {...props}>

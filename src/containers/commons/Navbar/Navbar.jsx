@@ -18,11 +18,11 @@ const THEME = {
 const Navbar = ({ ...props }) => {
   const [current, setCurrent] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const ref = useRef();
+  const navbarRight = useRef();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownOpen && ref.current && !ref.current.contains(event.target)) {
+      if (dropdownOpen && !navbarRight?.current.contains(event.target)) {
         setDropdownOpen(false);
       }
     };
@@ -38,7 +38,6 @@ const Navbar = ({ ...props }) => {
         <Link to=".">
           <Logo width="100" height="26" {...props} />
         </Link>
-
         <NavbarItemBox>
           {navData.map(({ name, title, url }, idx) => {
             return (
@@ -55,7 +54,7 @@ const Navbar = ({ ...props }) => {
           })}
         </NavbarItemBox>
       </FlexBox>
-      <FlexBox ref={ref}>
+      <FlexBox ref={navbarRight}>
         <Icon icon="bell" stroke={colors.gray400} aria-hidden />
         <Avatar onClick={() => setDropdownOpen(!dropdownOpen)} />
         {dropdownOpen && <UserDropdown {...props} />}

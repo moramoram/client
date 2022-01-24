@@ -58,22 +58,22 @@ const textColor = {
 };
 
 const Layout = styled.div`
-  /* display: flex; */
-  /* flex-direction: column; */
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  width: 224px;
 
+  width: 224px;
   border-radius: 8px;
   border: 1px solid ${(props) => borderColor[props.theme]};
 
   background-color: ${(props) => bgColor[props.theme]};
-
   box-shadow: ${shadows.base};
 `;
 
 const UserInfo = styled.div`
   padding: 12px 16px;
   border-bottom: 1px solid ${(props) => borderColor[props.theme]};
+
   font-size: ${fontSize.sm};
   color: ${(props) => textColor[props.theme]};
 `;

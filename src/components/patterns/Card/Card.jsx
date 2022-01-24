@@ -56,7 +56,6 @@ const Card = ({
               theme={theme}
               isLoading={isLoading}
               mode="secondary"
-              color="gray100"
             >
               {children}
             </Badge>

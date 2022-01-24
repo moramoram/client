@@ -110,6 +110,7 @@ const CloseIconBox = styled.div`
   svg {
     width: 18px;
     stroke: ${colors.gray400};
+    cursor: pointer;
   }
 `;
 

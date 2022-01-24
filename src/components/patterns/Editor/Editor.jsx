@@ -2,21 +2,18 @@ import React from "react";
 // import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import hljs from "highlight.js";
-import "highlight.js/styles/base16/chalk.css";
-
 import ReactQuill, { Quill } from "react-quill";
 import MarkdownShortcuts from "quill-markdown-shortcuts";
 import "react-quill/dist/quill.snow.css";
 
+import hljs from "highlight.js";
+import "highlight.js/styles/base16/decaf.css";
+
+import { colors } from "@/_shared";
+
 const Editor = (props) => {
   Quill.register("modules/markdownShortcuts", MarkdownShortcuts);
   window.hljs = hljs;
-  // const { value, onChange } = props;
-  // hljs.configure({
-  //   // optionally configure hljs
-  //   languages: ["javascript", "ruby", "python"],
-  // });
 
   const modules = {
     syntax: {
@@ -24,68 +21,46 @@ const Editor = (props) => {
     },
     toolbar: [
       [{ header: [1, 2, 3, false] }],
-      ["bold", "italic", "strike", "blockquote"],
+      ["bold", "italic", "strike", "blockquote", "code-block"],
       [{ list: "ordered" }, { list: "bullet" }],
       ["link", "image", "video"],
-      [{ color: [] }, { background: [] }], // dropdown with defaults from theme
       ["clean"],
-      ["code-block"],
     ],
     markdownShortcuts: {},
   };
 
   const formats = [
-    //'font',
     "header",
     "bold",
     "italic",
-    "underline",
     "strike",
     "blockquote",
     "list",
     "bullet",
-    "indent",
     "link",
     "image",
     "video",
-    "align",
-    "color",
-    "background",
     "code-block",
+    "code",
   ];
 
-  return (
-    <QuillEditor
-      theme="snow"
-      modules={modules}
-      formats={formats}
-      // value={value || ""}
-      // onChange={(content, delta, source, editor) =>
-      //   onChange(editor.getHTML())
-      // }
-    />
-  );
+  return <QuillEditor modules={modules} formats={formats} />;
 };
 
 export default Editor;
 
-// const editorStyle = {
-//   width: "900px",
-//   height: "650px",
-// };
-
 const QuillEditor = styled(ReactQuill)`
   .ql-container {
-    font-size: 1rem;
+    border: 1px solid ${colors.gray500};
     border-radius: 0 0 1rem 1rem;
+    font-size: 1rem;
   }
 
   .ql-editor {
+    min-height: 600px;
+    padding: 1.25rem;
     font-family: Pretendard;
     letter-spacing: -0.02rem;
-
-    padding: 1.25rem;
-    min-height: 600px;
   }
 
   .ql-snow .ql-editor h1 {
@@ -102,24 +77,31 @@ const QuillEditor = styled(ReactQuill)`
   }
 
   .ql-toolbar.ql-snow {
-    border: 1px solid #ccc;
-    border-radius: 1rem 1rem 0 0;
-    background-color: #f8f9fa;
-    box-sizing: border-box;
-    font-family: Pretendard;
     padding: 1rem;
+    border: 1px solid ${colors.gray500};
+    border-radius: 1rem 1rem 0 0;
+    font-family: Pretendard;
+
+    /* .ql-stroke {
+      stroke: ${colors.gray500};
+    }
+
+    .ql-fill {
+      fill: ${colors.gray500};
+    } */
   }
 
-  /* .ql-snow .ql-tooltip {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    box-shadow: 0px 0px 5px #ddd;
-    color: #444;
-    padding: 5px 12px;
-    white-space: nowrap;
-  } */
-
   .ql-syntax {
-    font-family: monospace;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+      monospace;
+  }
+
+  .ql-snow .ql-editor pre.ql-syntax {
+    background-color: #1c2023;
+  }
+
+  .ql-video {
+    width: 560px;
+    height: 315px;
   }
 `;

@@ -84,5 +84,6 @@ const Switch = styled.div`
   border-radius: 50%;
   background-color: ${colors.white};
 
+  cursor: pointer;
   transition: transform 0.2s linear;
 `;

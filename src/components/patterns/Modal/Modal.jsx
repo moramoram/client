@@ -11,7 +11,7 @@ const THEME = {
   LIGHT: "light",
 };
 
-const Modal = ({ title, description, ...props }) => {
+const Modal = ({ title, description, secondary, primary, ...props }) => {
   return (
     <>
       <Overlay />
@@ -28,10 +28,10 @@ const Modal = ({ title, description, ...props }) => {
           </ContentBox>
           <ButtonBox>
             <Button mode="secondary" {...props}>
-              사양할게요
+              {secondary}
             </Button>
             <Button mode="primary" {...props}>
-              네! 들어갈게요
+              {primary}
             </Button>
           </ButtonBox>
         </Layout>
@@ -49,6 +49,8 @@ Modal.propTypes = {
 Modal.defaultProps = {
   title: "Job.ssafy로 연결됩니다",
   description: "연결시 Web DRM이 켜집니다.",
+  secondary: "사양할게요",
+  primary: "네! 들어갈게요",
   theme: THEME.LIGHT,
 };
 

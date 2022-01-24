@@ -1,12 +1,14 @@
 import React from "react";
+import styled from "styled-components";
 
+import { SubNavbar } from "@/components";
 import { CardGrid } from "@/containers";
 const JobsPage = () => {
   return (
-    <>
-      JobsPage
+    <Layout>
+      <SubNavbar />
       <CardGrid list={data} />
-    </>
+    </Layout>
   );
 };
 
@@ -74,3 +76,5 @@ const data = [
 ];
 
 export default JobsPage;
+
+const Layout = styled.div``;

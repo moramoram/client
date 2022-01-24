@@ -1,5 +1,5 @@
 import React from "react";
-import { SignUpModal } from "./";
+import SignUpModal from "./";
 
 export default {
   title: "Patterns/Modal/SignUpModal",

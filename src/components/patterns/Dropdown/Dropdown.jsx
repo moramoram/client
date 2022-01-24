@@ -31,7 +31,7 @@ const Dropdown = ({ user, items, ...props }) => {
 Dropdown.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   items: PropTypes.array.isRequired,
-  user: PropTypes.array.isRequired,
+  user: PropTypes.node.isRequired,
 };
 
 Dropdown.defaultProps = {

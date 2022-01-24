@@ -46,16 +46,6 @@ SignUpModal.defaultProps = {
 
 export default SignUpModal;
 
-const bgColor = {
-  dark: colors.black,
-  light: colors.white,
-};
-
-const textColor = {
-  dark: colors.gray25,
-  light: colors.gray900,
-};
-
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -91,7 +81,7 @@ const Layout = styled.div`
   border-radius: 12px;
   box-shadow: ${shadows.base};
 
-  background-color: ${(props) => bgColor[props.theme]};
+  background-color: ${colors.white};
   transform: translateY(-50%);
 `;
 
@@ -115,7 +105,7 @@ const ContentBox = styled.div`
 `;
 
 const Title = styled(Typography)`
-  color: ${(props) => textColor[props.theme]};
+  color: ${colors.gray900};
   text-align: center;
   white-space: pre-line;
 `;

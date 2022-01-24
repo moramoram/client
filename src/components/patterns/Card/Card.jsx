@@ -44,8 +44,8 @@ const Card = ({
       />
       <TextBox theme={theme} isLoading={isLoading}>
         <Highlight>{highlight}</Highlight>
-        <Title>{title}</Title>
-        <Subtitle>{subtitle}</Subtitle>
+        <Title theme={theme}>{title}</Title>
+        <Subtitle theme={theme}>{subtitle}</Subtitle>
       </TextBox>
       <BadgeBox>
         {badges.map((children, id) => {
@@ -55,6 +55,7 @@ const Card = ({
               key={id}
               theme={theme}
               isLoading={isLoading}
+              isBold
               mode="secondary"
             >
               {children}

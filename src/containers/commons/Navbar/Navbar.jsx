@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { Link } from "react-router-dom";
+
 import { NavItem } from "./NavItem";
 import { Avatar } from "@/components";
 import { Logo, Icon } from "@/foundations";
@@ -19,17 +21,22 @@ const Navbar = ({ ...props }) => {
   return (
     <Layout {...props}>
       <FlexBox>
-        <Logo width="100" height="26" {...props} />
+        <Link to=".">
+          <Logo width="100" height="26" {...props} />
+        </Link>
+
         <NavbarItemBox>
-          {navData.map(({ name, title }) => {
+          {navData.map(({ name, title, url }, idx) => {
             return (
-              <NavItem
-                {...props}
-                onClick={() => setCurrent(name)}
-                status={current === name ? "active" : "default"}
-              >
-                {title}
-              </NavItem>
+              <NavItemLink to={url} key={idx}>
+                <NavItem
+                  {...props}
+                  onClick={() => setCurrent(name)}
+                  status={current === name ? "active" : "default"}
+                >
+                  {title}
+                </NavItem>
+              </NavItemLink>
             );
           })}
         </NavbarItemBox>
@@ -56,14 +63,17 @@ const navData = [
   {
     name: "community",
     title: "커뮤니티",
+    url: "community",
   },
   {
     name: "study",
     title: "스터디",
+    url: "study",
   },
   {
-    name: "recruit",
+    name: "jobs",
     title: "취업정보",
+    url: "jobs",
   },
 ];
 
@@ -104,4 +114,8 @@ const NavbarItemBox = styled.div`
   display: flex;
   align-items: center;
   margin-left: 3rem;
+`;
+
+const NavItemLink = styled(Link)`
+  text-decoration: none;
 `;

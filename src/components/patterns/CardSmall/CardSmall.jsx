@@ -11,11 +11,13 @@ const THEME = {
 };
 
 const CardSmall = ({ theme, isLoading, contents, ...props }) => {
-  contents = isLoading && {
-    title: "",
-    highlight: "",
-    src: "",
-  };
+  if (isLoading) {
+    contents = {
+      title: "",
+      highlight: "",
+      src: "",
+    };
+  }
 
   const { title, highlight, src } = contents;
   return (

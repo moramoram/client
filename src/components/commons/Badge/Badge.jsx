@@ -62,8 +62,6 @@ const bgColor = {
 
 const Layout = styled.div`
   display: inline-block;
-  min-width: 48px;
-  height: 20px;
   padding: 4px 8px;
   border-radius: 8px;
   background: ${(props) => bgColor[props.theme][props.mode]};
@@ -75,5 +73,12 @@ const Layout = styled.div`
   text-align: center;
 
   animation: ${(props) => props.isLoading && loadings[props.theme]};
+
+  ${(props) =>
+    props.isLoading &&
+    `
+    min-width: 48px;
+    height: 20px;
+    `}
 `;
 export default Badge;

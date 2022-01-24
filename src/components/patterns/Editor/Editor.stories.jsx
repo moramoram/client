@@ -8,7 +8,12 @@ export default {
   component: Editor,
 };
 
-export const Default = (args) => <Editor {...args} />;
+export const Default = (args) => (
+  <>
+    <Editor {...args} />
+    <div></div>
+  </>
+);
 
 // export const AllTypes = () => (
 //   <>

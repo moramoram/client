@@ -110,4 +110,9 @@ const Initial = styled.div`
   color: ${colors.gray800};
   font-size: ${(props) => fontSize[props.size]};
   line-height: ${(props) => sizeNum[props.size]}px;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;

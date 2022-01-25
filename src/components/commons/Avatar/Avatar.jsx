@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import AvatarBase from "./AvatarBase";
 import { animations, colors } from "@/_shared";
@@ -20,7 +20,7 @@ const Avatar = ({ isLoading, username, src, size, ...props }) => {
     a11yProps["aria-label"] = "Loading avatar ...";
   } else if (src) {
     avatarFigure = <img src={src} alt={username} />;
-  } else {
+  } else if (username) {
     a11yProps["aria-label"] = username;
     avatarFigure = (
       <Initial size={size} aria-hidden="true">
@@ -51,7 +51,7 @@ Avatar.propTypes = {
 
 Avatar.defaultProps = {
   isLoading: false,
-  username: "김싸페",
+  username: null,
   src: null,
   size: "large",
 };
@@ -98,9 +98,13 @@ const Image = styled.div`
     vertical-align: top;
   }
 
-  path {
-    animation: ${animations.glow} 1.5s ease-in-out infinite;
-  }
+  ${(props) =>
+    props.isLoading &&
+    css`
+      path {
+        animation: ${animations.glow} 1.5s ease-in-out infinite;
+      }
+    `}
 `;
 
 const Initial = styled.div`

@@ -31,7 +31,6 @@ Button.propTypes = {
   isLoading: PropTypes.bool,
   isDisabled: PropTypes.bool,
   isUnclickable: PropTypes.bool,
-  minWidth: PropTypes.any,
 };
 
 Button.defaultProps = {
@@ -40,7 +39,6 @@ Button.defaultProps = {
   isLoading: false,
   isDisabled: false,
   isUnclickable: false,
-  minWidth: "136px",
 };
 
 export default Button;
@@ -94,7 +92,7 @@ const Layout = styled.div`
   justify-content: center;
   align-items: center;
   height: 42px;
-  min-width: ${(props) => props.minWidth};
+  padding: 0px 42px;
 
   margin: 10px;
   border-radius: 8px;

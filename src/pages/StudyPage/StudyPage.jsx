@@ -8,7 +8,7 @@ const StudyPage = () => {
   return (
     <Layout>
       <StudyIntro />
-      <SubNavbar />
+      <SubNavbar data={categoryData} />
       <CardGrid list={data} />
     </Layout>
   );
@@ -78,5 +78,20 @@ const data = [
 ];
 
 export default StudyPage;
+
+const categoryData = [
+  {
+    id: 0,
+    title: "커뮤니티",
+  },
+  {
+    id: 1,
+    title: "스터디",
+  },
+  {
+    id: 2,
+    title: "취업정보",
+  },
+];
 
 const Layout = styled.div``;

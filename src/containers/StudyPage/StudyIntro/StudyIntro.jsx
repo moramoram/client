@@ -65,6 +65,7 @@ const Layout = styled.div`
 const EmptyBox = styled.div`
   width: 100vw;
   height: 82px;
+  background: ${colors.gray25};
 `;
 
 const Title = styled.div`

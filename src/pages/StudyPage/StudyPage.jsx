@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { themeState, navTypeState } from "@/recoil/theme";
 
 import { SubNavbar } from "@/components";
 import { CardGrid, StudyIntro } from "@/containers";
 
 const StudyPage = () => {
+  const theme = useRecoilValue(themeState);
+  const setNavType = useSetRecoilState(navTypeState);
+
+  useEffect(() => {
+    setNavType("transparent");
+    return () => {
+      setNavType("default");
+    };
+  });
+
+  const handleCategory = (e) => {
+    console.log(e);
+  };
+
   return (
     <Layout>
       <StudyIntro />
       <ContentBox>
-        <StickyNav data={categoryData} />
-        <CardGrid data={cardData} />
+        <StickyNav data={categoryData} theme={theme} onClick={handleCategory} />
+        <CardGrid data={cardData} theme={theme} />
       </ContentBox>
     </Layout>
   );

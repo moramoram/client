@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { themeState } from "@/recoil/theme";
 
 import { NavItem } from "./NavItem";
 import { Avatar, Button, Dropdown, Switch } from "@/components";
@@ -22,7 +24,12 @@ const TYPE = {
 const Navbar = ({ isLogin, ...props }) => {
   const [current, setCurrent] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [theme, setTheme] = useRecoilState(themeState);
   const navbarRight = useRef();
+
+  const handleTheme = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -62,7 +69,7 @@ const Navbar = ({ isLogin, ...props }) => {
         {isLogin ? (
           <>
             <SwitchBox>
-              <Switch />
+              <Switch isSelected={theme !== "light"} onToggle={handleTheme} />
             </SwitchBox>
             <Icon icon="bell" stroke={colors.gray400} aria-hidden />
             <Avatar onClick={() => setDropdownOpen(!dropdownOpen)} />

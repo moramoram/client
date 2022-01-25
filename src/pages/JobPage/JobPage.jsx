@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
-import { useSetRecoilState } from "recoil";
-import { navTypeState } from "@/recoil/theme";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { themeState, navTypeState } from "@/recoil/theme";
 
 import { SubNavbar } from "@/components";
 import { CardGrid, JobIntro } from "@/containers";
 
 const JobsPage = () => {
+  const theme = useRecoilValue(themeState);
   const setNavType = useSetRecoilState(navTypeState);
 
   useEffect(() => {
     setNavType("transparent");
-
     return () => {
       setNavType("default");
     };
@@ -26,8 +26,8 @@ const JobsPage = () => {
     <Layout>
       <JobIntro />
       <ContentBox>
-        <StickyNav data={categoryData} onClick={handleCategory} />
-        <CardGrid data={cardData} />
+        <StickyNav data={categoryData} theme={theme} onClick={handleCategory} />
+        <CardGrid data={cardData} theme={theme} />
       </ContentBox>
     </Layout>
   );

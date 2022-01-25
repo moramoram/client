@@ -48,6 +48,17 @@ const animations = {
     15.78947% { transform:rotate(0deg) }
     100% { transform:rotate(0deg) }
   `,
+  dropdown: keyframes`
+    0% { opacity: 0; transform: translateY(-2px); }
+  `,
+  border: keyframes`
+  	0% {
+		width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  `,
 };
 
 // const inlineGlow = css`

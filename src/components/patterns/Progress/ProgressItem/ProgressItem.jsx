@@ -161,7 +161,7 @@ const StepCircle = styled.div`
   background-color: ${(props) => bgColor[props.theme]};
   color: ${colors.gray500};
 
-  transition: 0.3s;
+  transition: 0.3s cubic-bezier(0.3, 0, 0, 1);
 
   svg {
     stroke: ${colors.blue100};

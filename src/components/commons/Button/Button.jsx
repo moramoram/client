@@ -46,11 +46,11 @@ export default Button;
 const borderColor = {
   light: {
     primary: colors.blue100,
-    secondary: colors.gray300,
+    secondary: colors.gray200,
   },
   dark: {
     primary: colors.blue100,
-    secondary: colors.gray500,
+    secondary: colors.gray600,
   },
 };
 
@@ -79,22 +79,23 @@ const bgColor = {
 const hoverBgColor = {
   light: {
     primary: colors.blue200,
-    secondary: colors.gray100,
+    secondary: colors.gray50,
   },
   dark: {
     primary: colors.blue200,
-    secondary: colors.gray500,
+    secondary: colors.gray600,
   },
 };
 
-const Layout = styled.div`
+const Layout = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  width: ${(props) => props.width}px;
   height: 42px;
   padding: 0px 42px;
 
-  margin: 10px;
   border-radius: 8px;
   border: 1px solid ${(props) => borderColor[props.theme][props.mode]};
 
@@ -107,7 +108,7 @@ const Layout = styled.div`
   text-align: center;
   text-decoration: none;
 
-  transition: all 150ms ease-out;
+  transition: 0.2s;
   user-select: none;
   cursor: pointer;
   animation: ${(props) => props.isLoading && loadings[props.theme]};
@@ -143,7 +144,7 @@ const Layout = styled.div`
     `
         &:hover {
           box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
-          background: ${hoverBgColor[props.theme][props.mode]};      
+          background: ${hoverBgColor[props.theme][props.mode]};   
         }
         &:active {
           box-shadow: ${shadows.base};

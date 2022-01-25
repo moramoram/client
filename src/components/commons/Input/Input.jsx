@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { Icon } from "@/foundations";
 import { colors, fontSize, fontWeight, shadows } from "@/_shared";
@@ -69,9 +69,14 @@ const msgColor = {
   error: colors.error,
 };
 
-const focusColor = {
+const insetColor = {
   default: colors.blue100,
-  error: colors.error,
+  error: "#f04438cf",
+};
+
+const focusColor = {
+  default: "#4A83EF33",
+  error: "#f8736a33",
 };
 
 const Layout = styled.div`
@@ -100,9 +105,21 @@ const InputBox = styled.div`
     width: 18px;
   }
 
+  ${(props) =>
+    props.status === STATUS.ERROR &&
+    css`
+      box-shadow: 0 0 0 3px ${focusColor[props.status]},
+        inset 0 0 0 1px ${insetColor[props.status]};
+    `}
+
   :focus-within {
-    border: 1px solid ${(props) => focusColor[props.status]};
     transition: 0.3s;
+
+    ${(props) => `
+      box-shadow: 0 0 0 3px ${focusColor[props.status]}, inset 0 0 0 1px ${
+      insetColor[props.status]
+    }
+    `};
   }
 `;
 

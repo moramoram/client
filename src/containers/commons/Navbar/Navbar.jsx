@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { NavItem } from "./NavItem";
 import { Avatar, Button, Dropdown } from "@/components";
 import { Logo, Icon } from "@/foundations";
-import { colors } from "@/_shared";
+import { colors, animations } from "@/_shared";
 
 const THEME = {
   DARK: "dark",
@@ -176,7 +176,7 @@ const UserDropdown = styled(Dropdown)`
   z-index: 9999;
   top: 50px;
   right: 20px;
-  transition: height 0.3s ease-in;
+  animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
 `;
 
 const ButtonBox = styled.div`

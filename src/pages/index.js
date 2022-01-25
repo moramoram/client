@@ -1,4 +1,4 @@
 export * from "./CommunityPage";
-export * from "./JobsPage";
+export * from "./JobPage";
 export * from "./MyPage";
 export * from "./StudyPage";

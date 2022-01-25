@@ -73,7 +73,7 @@ const navData = [
   {
     name: "jobs",
     title: "취업정보",
-    url: "jobs",
+    url: "job",
   },
 ];
 

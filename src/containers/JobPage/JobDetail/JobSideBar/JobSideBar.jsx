@@ -10,28 +10,51 @@ const THEME = {
   DARK: "dark",
 };
 
-const SideBar = ({ theme, isLoading, contents, badges, src, ...props }) => {
+const JobSideBar = ({ data, badges, isLoading, ...props }) => {
   if (isLoading) {
-    contents = [{}, {}, {}, {}];
+    data = new Array(4);
     badges = ["", "", ""];
   }
+
+  const handClickPriamry = () => {
+    console.log("hello");
+  };
+  const handClickSecondary = () => {
+    console.log("hello");
+  };
+
   return (
-    <SideBarWrapper theme={theme} isLoading={isLoading} {...props}>
-      <ImageBox className="thumbnail" theme={theme} isLoading={isLoading} />
+    <SideBarWrapper isLoading={isLoading} {...props}>
+      <ImageBox className="thumbnail" isLoading={isLoading} />
       <SideBarBox>
-        {contents.map(({ title, icon, description }, idx) => {
-          return (
-            <SideBarItem
-              className="contents-item"
-              key={idx}
-              theme={theme}
-              isLoading={isLoading}
-              title={title}
-              icon={icon}
-              description={description}
-            />
-          );
-        })}
+        <SideBarItem
+          className="contents-item"
+          title="직무"
+          icon="briefcase"
+          description={data.task}
+          isLoading={isLoading}
+        />
+        <SideBarItem
+          className="contents-item"
+          title="고용 형태"
+          icon="building"
+          description={data.type}
+          isLoading={isLoading}
+        />
+        <SideBarItem
+          className="contents-item"
+          title="경력"
+          icon="monitor"
+          description={data.career}
+          isLoading={isLoading}
+        />
+        <SideBarItem
+          className="contents-item"
+          title="근무 위치"
+          icon="mapPin"
+          description={data.location}
+          isLoading={isLoading}
+        />
       </SideBarBox>
       <BadgeBox>
         {badges.map((children, idx) => {
@@ -39,7 +62,6 @@ const SideBar = ({ theme, isLoading, contents, badges, src, ...props }) => {
             <Badge
               className="badge-item"
               key={idx}
-              theme={theme}
               isLoading={isLoading}
               mode="secondary"
               color="gray100"
@@ -51,13 +73,17 @@ const SideBar = ({ theme, isLoading, contents, badges, src, ...props }) => {
         })}
       </BadgeBox>
 
-      <Button theme={theme} isLoading={isLoading} minWidth="380px">
+      <Button
+        onClick={() => handClickPriamry()}
+        isLoading={isLoading}
+        minWidth="380px"
+      >
         <Icon icon="edit" />
         지원하기
       </Button>
       <Button
-        theme={theme}
-        isLoading={isLoading}
+        onClick={() => handClickSecondary()}
+        sLoading={isLoading}
         mode="secondary"
         minWidth="380px"
       >
@@ -68,44 +94,19 @@ const SideBar = ({ theme, isLoading, contents, badges, src, ...props }) => {
   );
 };
 
-SideBar.propTypes = {
+JobSideBar.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   isLoading: PropTypes.bool,
-  src: PropTypes.string,
-  contents: PropTypes.arrayOf(Object),
+  data: PropTypes.arrayOf(Object),
   badges: PropTypes.arrayOf(String),
 };
 
-SideBar.defaultProps = {
+JobSideBar.defaultProps = {
   theme: THEME.LIGHT,
   isLoading: false,
-  src: null,
-  name: "logo",
-  contents: [
-    {
-      title: "직무",
-      description: "프론트엔드",
-      icon: "briefcase",
-    },
-    {
-      title: "고용형태",
-      description: "정규직",
-      icon: "briefcase",
-    },
-    {
-      title: "경력",
-      description: "신입",
-      icon: "briefcase",
-    },
-    {
-      title: "근무위치",
-      description: "서울 강남구",
-      icon: "briefcase",
-    },
-  ],
 };
 
-export default SideBar;
+export default JobSideBar;
 
 const SideBarBox = styled.div`
   margin: 10px 0px;

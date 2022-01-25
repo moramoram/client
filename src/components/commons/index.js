@@ -4,4 +4,5 @@ export { default as BookMark } from "./BookMark";
 export { default as Button } from "./Button";
 export { default as ImageBox } from "./ImageBox";
 export { default as Input } from "./Input";
+export { default as SideBarItem } from "./SideBarItem";
 export { default as Toggle } from "./Toggle";

@@ -4,16 +4,16 @@ import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
-import { Card } from "@/components";
+import { CardSmall } from "@/components";
 
-const CardGrid = ({ list, isLoading, ...props }) => {
+const CardSmallGrid = ({ data, isLoading, ...props }) => {
   const cards = isLoading ? (
-    <Card isLoading {...props} />
+    <CardSmall isLoading {...props} />
   ) : (
-    list.map(({ url, ...props }, idx) => {
+    data.map(({ url, ...props }, idx) => {
       return (
-        <CardItemLink to={url}>
-          <Card {...props} />
+        <CardItemLink to={url} key={idx}>
+          <CardSmall {...props} />
         </CardItemLink>
       );
     })
@@ -22,22 +22,17 @@ const CardGrid = ({ list, isLoading, ...props }) => {
   return <Layout {...props}>{cards}</Layout>;
 };
 
-CardGrid.propTypes = {
+CardSmallGrid.propTypes = {
   list: PropTypes.arrayOf(Object),
 };
 
-export default CardGrid;
+export default CardSmallGrid;
 
 const Layout = styled.div`
   display: flex;
-  max-width: 940px;
-  justify-content: center;
-
   gap: 20px;
   margin: auto;
-  flex-wrap: wrap;
   align-items: center;
-  padding: 0 90px;
 `;
 
 const CardItemLink = styled(Link)`

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { NavItem } from "./NavItem";
-import { Avatar, Button, Dropdown } from "@/components";
+import { Avatar, Button, Dropdown, Switch } from "@/components";
 import { Logo, Icon } from "@/foundations";
 import { colors, animations } from "@/_shared";
 
@@ -61,6 +61,9 @@ const Navbar = ({ isLogin, ...props }) => {
       <FlexBox ref={navbarRight}>
         {isLogin ? (
           <>
+            <SwitchBox>
+              <Switch />
+            </SwitchBox>
             <Icon icon="bell" stroke={colors.gray400} aria-hidden />
             <Avatar onClick={() => setDropdownOpen(!dropdownOpen)} />
             {dropdownOpen && <UserDropdown {...props} />}
@@ -170,6 +173,10 @@ const NavbarItemBox = styled.div`
 
 const NavItemLink = styled(Link)`
   text-decoration: none;
+`;
+
+const SwitchBox = styled.div`
+  width: 44px;
 `;
 
 const UserDropdown = styled(Dropdown)`

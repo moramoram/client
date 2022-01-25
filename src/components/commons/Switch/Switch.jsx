@@ -80,11 +80,11 @@ const CheckBox = styled.input`
   }
 
   :checked + div:active {
-    left: 2px;
+    left: -2px;
   }
 
   :checked:active + div {
-    left: 2px;
+    left: -2px;
   }
 `;
 
@@ -92,8 +92,8 @@ const SwitchButton = styled.div`
   position: absolute;
   width: 20px;
   height: 20px;
-  top: 5px;
-  left: 6px;
+  top: 2px;
+  left: 2px;
   border-radius: 20px;
   background-color: ${colors.white};
 

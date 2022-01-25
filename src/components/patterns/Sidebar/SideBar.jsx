@@ -71,8 +71,8 @@ SideBar.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   isLoading: PropTypes.bool,
   src: PropTypes.string,
-  contents: PropTypes.arrayOf(Object).isRequired,
-  badges: PropTypes.arrayOf(String).isRequired,
+  contents: PropTypes.arrayOf(Object),
+  badges: PropTypes.arrayOf(String),
 };
 
 SideBar.defaultProps = {
@@ -102,7 +102,6 @@ SideBar.defaultProps = {
       icon: "briefcase",
     },
   ],
-  badges: ["", "", "", ""],
 };
 
 export default SideBar;

@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
 
 import { Card } from "@/components";
 
-const CardGrid = ({ list, isLoading, ...props }) => {
+const CardGrid = ({ data, isLoading, ...props }) => {
   const cards = isLoading ? (
     <Card isLoading {...props} />
   ) : (
-    list.map(({ url, ...props }, idx) => {
+    data.map(({ url, ...props }, idx) => {
       return (
         <CardItemLink to={url} key={idx}>
           <Card {...props} />
@@ -23,7 +23,7 @@ const CardGrid = ({ list, isLoading, ...props }) => {
 };
 
 CardGrid.propTypes = {
-  list: PropTypes.arrayOf(Object),
+  data: PropTypes.arrayOf(Object),
 };
 
 export default CardGrid;
@@ -31,7 +31,6 @@ export default CardGrid;
 const Layout = styled.div`
   display: flex;
   max-width: 940px;
-  justify-content: center;
 
   gap: 20px;
   margin: auto;

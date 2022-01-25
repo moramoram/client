@@ -14,14 +14,16 @@ const THEME = {
 
 const StudyIntro = ({ ...props }) => {
   return (
-    <Layout>
-      <Title {...props}>스터디 모집</Title>
-
-      <SubTitle {...props}>함께 성장할 동료들을 찾아보세요.</SubTitle>
-      <ButtonLink to="/job/create">
-        <Button mode="primary">스터디 개설하기</Button>
-      </ButtonLink>
-    </Layout>
+    <>
+      <EmptyBox />
+      <Layout>
+        <Title {...props}>스터디 모집</Title>
+        <SubTitle {...props}>함께 성장할 동료들을 찾아보세요.</SubTitle>
+        <ButtonLink to="/job/create">
+          <Button mode="primary">스터디 개설하기</Button>
+        </ButtonLink>
+      </Layout>
+    </>
   );
 };
 
@@ -58,6 +60,11 @@ const Layout = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
+`;
+
+const EmptyBox = styled.div`
+  width: 100vw;
+  height: 82px;
 `;
 
 const Title = styled.div`

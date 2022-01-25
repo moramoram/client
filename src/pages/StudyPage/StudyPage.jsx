@@ -8,90 +8,174 @@ const StudyPage = () => {
   return (
     <Layout>
       <StudyIntro />
-      <SubNavbar data={categoryData} />
-      <CardGrid list={data} />
+      <ContentBox>
+        <StickyNav data={categoryData} />
+        <CardGrid data={cardData} />
+      </ContentBox>
     </Layout>
   );
 };
-
-const data = [
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-];
 
 export default StudyPage;
 
 const categoryData = [
   {
     id: 0,
-    title: "커뮤니티",
+    title: "전체",
   },
   {
     id: 1,
-    title: "스터디",
+    title: "인기순",
   },
   {
     id: 2,
-    title: "취업정보",
+    title: "나의 스터디",
+  },
+];
+const cardData = [
+  {
+    contents: {
+      title: "알고리즘 스터디 모집",
+      subtitle: "김싸피(6기 / 서울)",
+      highlight: "모집중",
+      src: "",
+    },
+    badges: ["JavaScript", "React", "Vue.js"],
+    url: "",
+  },
+  {
+    contents: {
+      title: "알고리즘 스터디 모집",
+      subtitle: "김싸피(6기 / 서울)",
+      highlight: "모집중",
+      src: "",
+    },
+    badges: ["JavaScript", "React", "Vue.js"],
+    url: "",
+  },
+  {
+    contents: {
+      title: "알고리즘 스터디 모집",
+      subtitle: "김싸피(6기 / 서울)",
+      highlight: "모집중",
+      src: "",
+    },
+    badges: ["JavaScript", "React", "Vue.js"],
+    url: "",
+  },
+  {
+    contents: {
+      title: "알고리즘 스터디 모집",
+      subtitle: "김싸피(6기 / 서울)",
+      highlight: "모집중",
+      src: "",
+    },
+    badges: ["JavaScript", "React", "Vue.js"],
+    url: "",
+  },
+  {
+    contents: {
+      title: "알고리즘 스터디 모집",
+      subtitle: "김싸피(6기 / 서울)",
+      highlight: "모집중",
+      src: "",
+    },
+    badges: ["JavaScript", "React", "Vue.js"],
+    url: "",
+  },
+  {
+    contents: {
+      title: "알고리즘 스터디 모집",
+      subtitle: "김싸피(6기 / 서울)",
+      highlight: "모집중",
+      src: "",
+    },
+    badges: ["JavaScript", "React", "Vue.js"],
+    url: "",
+  },
+  {
+    contents: {
+      title: "알고리즘 스터디 모집",
+      subtitle: "김싸피(6기 / 서울)",
+      highlight: "모집중",
+      src: "",
+    },
+    badges: ["JavaScript", "React", "Vue.js"],
+    url: "",
+  },
+  {
+    contents: {
+      title: "알고리즘 스터디 모집",
+      subtitle: "김싸피(6기 / 서울)",
+      highlight: "모집중",
+      src: "",
+    },
+    badges: ["JavaScript", "React", "Vue.js"],
+    url: "",
+  },
+  {
+    contents: {
+      title: "알고리즘 스터디 모집",
+      subtitle: "김싸피(6기 / 서울)",
+      highlight: "모집중",
+      src: "",
+    },
+    badges: ["JavaScript", "React", "Vue.js"],
+    url: "",
+  },
+  {
+    contents: {
+      title: "알고리즘 스터디 모집",
+      subtitle: "김싸피(6기 / 서울)",
+      highlight: "모집중",
+      src: "",
+    },
+    badges: ["JavaScript", "React", "Vue.js"],
+    url: "",
+  },
+  {
+    contents: {
+      title: "알고리즘 스터디 모집",
+      subtitle: "김싸피(6기 / 서울)",
+      highlight: "모집중",
+      src: "",
+    },
+    badges: ["JavaScript", "React", "Vue.js"],
+    url: "",
+  },
+  {
+    contents: {
+      title: "알고리즘 스터디 모집",
+      subtitle: "김싸피(6기 / 서울)",
+      highlight: "모집중",
+      src: "",
+    },
+    badges: ["JavaScript", "React", "Vue.js"],
+    url: "",
+  },
+  {
+    contents: {
+      title: "알고리즘 스터디 모집",
+      subtitle: "김싸피(6기 / 서울)",
+      highlight: "모집중",
+      src: "",
+    },
+    badges: ["JavaScript", "React", "Vue.js"],
+    url: "",
   },
 ];
 
-const Layout = styled.div``;
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ContentBox = styled.div`
+  display: flex;
+  margin: 90px;
+`;
+const StickyNav = styled(SubNavbar)`
+  position: sticky;
+  top: 150px;
+  align-self: flex-start;
+`;

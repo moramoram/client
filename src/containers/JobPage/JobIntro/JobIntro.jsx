@@ -11,12 +11,15 @@ const THEME = {
 
 const JobIntro = ({ ...props }) => {
   return (
-    <Layout>
-      <Title {...props}>채용정보</Title>
-      <SubTitle {...props}>
-        열정 가득한 당신을 원하는 회사들을 모아봤어요.
-      </SubTitle>
-    </Layout>
+    <>
+      <EmptyBox />
+      <Layout>
+        <Title {...props}>채용정보</Title>
+        <SubTitle {...props}>
+          열정 가득한 당신을 원하는 회사들을 모아봤어요.
+        </SubTitle>
+      </Layout>
+    </>
   );
 };
 
@@ -46,13 +49,19 @@ const Layout = styled.div`
 
   width: 100vw;
   height: 320px;
-  background: ${colors.gray25};
+  background: ${colors.gray200};
 
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+`;
+
+const EmptyBox = styled.div`
+  width: 100vw;
+  height: 82px;
+  background: ${colors.gray200};
 `;
 
 const Title = styled.div`

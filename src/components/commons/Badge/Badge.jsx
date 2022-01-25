@@ -60,9 +60,13 @@ const bgColor = {
   },
 };
 
-const Layout = styled.div`
-  display: inline-block;
-  padding: 4px 8px;
+const Layout = styled.span`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 20px;
+  padding: 0 8px;
   border-radius: 8px;
   background: ${(props) => bgColor[props.theme][props.mode]};
 

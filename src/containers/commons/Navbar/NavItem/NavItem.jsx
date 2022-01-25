@@ -7,12 +7,16 @@ import { colors, fontSize, fontWeight } from "@/_shared";
 const THEME = {
   DARK: "dark",
   LIGHT: "light",
-  TRANSPARENT: "transparent",
 };
 
 const STATUS = {
   DEFAULT: "default",
   ACTIVE: "active",
+};
+
+const TYPE = {
+  DEFAULT: "default",
+  TRANSPARENT: "transparent",
 };
 
 const NavItem = ({ children, ...props }) => {
@@ -24,29 +28,41 @@ const NavItem = ({ children, ...props }) => {
 };
 
 NavItem.propTypes = {
-  children: PropTypes.node.isRequired,
   theme: PropTypes.oneOf(Object.values(THEME)),
   status: PropTypes.oneOf(Object.values(STATUS)),
+  type: PropTypes.oneOf(Object.values(TYPE)),
+  children: PropTypes.node.isRequired,
 };
 
 NavItem.defaultProps = {
   theme: THEME.LIGHT,
   status: STATUS.DEFAULT,
+  type: TYPE.DEFAULT,
   children: "Menu",
 };
 
 export default NavItem;
 
 const textColor = {
-  dark: colors.gray25,
-  light: colors.gray900,
-  transparent: colors.gray25,
+  dark: {
+    default: colors.gray25,
+    transparent: colors.gray25,
+  },
+  light: {
+    default: colors.gray900,
+    transparent: colors.gray25,
+  },
 };
 
 const textHoverColor = {
-  dark: colors.gray300,
-  light: colors.gray500,
-  transparent: colors.gray300,
+  dark: {
+    default: colors.gray300,
+    transparent: colors.gray300,
+  },
+  light: {
+    default: colors.gray500,
+    transparent: colors.gray300,
+  },
 };
 
 const textWeight = {
@@ -62,7 +78,7 @@ const borderColor = {
 const Text = styled.span`
   display: inline-block;
 
-  color: ${(props) => textColor[props.theme]};
+  color: ${(props) => textColor[props.theme][props.type]};
   font-size: ${fontSize.lg};
   font-weight: ${(props) => textWeight[props.status]};
   text-decoration: none;
@@ -89,7 +105,7 @@ const Layout = styled.div`
     `
       :hover {
         span {
-          color: ${textHoverColor[props.theme]};
+          color: ${textHoverColor[props.theme][props.type]};
           transition: 0.3s;
         }
     }

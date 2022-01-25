@@ -22,11 +22,9 @@ const Layout = (props) => {
 export default Layout;
 
 const LayoutBox = styled.div`
-  width: 100%;
+  width: 100vw;
 `;
 
 const Nav = styled(Navbar)`
-  position: sticky;
-  top: 0;
-  right: 0;
+  z-index: 9999;
 `;

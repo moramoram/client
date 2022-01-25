@@ -99,6 +99,7 @@ const Layout = styled.div`
   border-bottom: 3px solid ${(props) => borderColor[props.theme][props.status]};
 
   cursor: pointer;
+  transition: 0.1s;
 
   ${(props) =>
     props.status === STATUS.DEFAULT &&

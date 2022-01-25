@@ -120,13 +120,23 @@ const ButtonBox = styled.div`
   .google {
     background-color: ${colors.gray25};
     color: ${colors.gray600};
+    transition: 0.3s;
+
+    :hover {
+      background-color: ${colors.gray50};
+    }
   }
 
   .github {
     background-color: black;
     color: ${colors.white};
+    transition: 0.3s;
 
-    svg {
+    :hover {
+      background-color: ${colors.black};
+    }
+
+    path {
       fill: white;
     }
   }

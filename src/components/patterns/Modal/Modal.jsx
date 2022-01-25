@@ -27,10 +27,10 @@ const Modal = ({ title, description, secondary, primary, ...props }) => {
             <Description type="paragraph">{description}</Description>
           </ContentBox>
           <ButtonBox>
-            <Button mode="secondary" {...props}>
+            <Button mode="secondary" width="200" {...props}>
               {secondary}
             </Button>
-            <Button mode="primary" {...props}>
+            <Button mode="primary" width="200" {...props}>
               {primary}
             </Button>
           </ButtonBox>
@@ -92,7 +92,6 @@ const Layout = styled.div`
   position: relative;
   top: 50%;
 
-  width: 360px;
   max-width: 480px;
   margin: auto;
   padding: 1rem;
@@ -119,6 +118,7 @@ const ContentBox = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  padding-bottom: 1.5rem;
 `;
 
 const Title = styled(Typography)`
@@ -132,7 +132,7 @@ const Description = styled(Typography)`
 const ButtonBox = styled.div`
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.5rem;
   padding-bottom: 1rem;
 `;
 

@@ -75,20 +75,6 @@ const borderColor = {
   default: "#00000000",
 };
 
-const Text = styled.span`
-  display: inline-block;
-
-  color: ${(props) => textColor[props.theme][props.type]};
-  font-size: ${fontSize.lg};
-  font-weight: ${(props) => textWeight[props.status]};
-  text-decoration: none;
-
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-`;
-
 const Layout = styled.div`
   display: flex;
   justify-content: center;
@@ -98,6 +84,7 @@ const Layout = styled.div`
   width: 120px;
   border-bottom: 3px solid ${(props) => borderColor[props.status]};
 
+  transition: 0.1s;
   cursor: pointer;
 
   ${(props) =>
@@ -110,4 +97,18 @@ const Layout = styled.div`
         }
     }
   `}
+`;
+
+const Text = styled.span`
+  display: inline-block;
+
+  color: ${(props) => textColor[props.theme][props.type]};
+  font-size: ${fontSize.lg};
+  font-weight: ${(props) => textWeight[props.status]};
+  text-decoration: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;

@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 import { SubNavbar } from "@/components";
-import { CardGrid } from "@/containers";
+import { CardGrid, JobIntro } from "@/containers";
 const JobsPage = () => {
   return (
     <Layout>
+      <JobIntro />
       <SubNavbar />
       <CardGrid list={data} />
     </Layout>

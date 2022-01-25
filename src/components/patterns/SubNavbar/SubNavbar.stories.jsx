@@ -6,22 +6,20 @@ export default {
   component: SubNavbar,
 };
 
-export const Default = (args) => (
-  <SubNavbar {...args}>{args.children}</SubNavbar>
-);
+export const Default = (args) => <SubNavbar {...args}></SubNavbar>;
 
 Default.args = {
-  items: [
+  data: [
     {
-      id: 1,
+      id: 0,
       title: "마감임박",
     },
     {
-      id: 2,
+      id: 1,
       title: "최신순",
     },
     {
-      id: 3,
+      id: 2,
       title: "인기순",
     },
   ],

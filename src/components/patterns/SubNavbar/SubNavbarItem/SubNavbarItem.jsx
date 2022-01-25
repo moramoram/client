@@ -104,7 +104,6 @@ SubNavbarItem.propTypes = {
 SubNavbarItem.defaultProps = {
   theme: THEME.LIGHT,
   status: STATUS.DEFAULT,
-  containsIcon: false,
 };
 
 export default SubNavbarItem;

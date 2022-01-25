@@ -1,7 +1,8 @@
 import React from "react";
 
-import {MemoryRouter} from 'react-router-dom';
+import { MemoryRouter } from "react-router-dom";
 import { GlobalStyle } from "@/_shared/global";
+import "normalize.css/normalize.css";
 
 // 모든 스토리에 스타일을 적용하기 위한 글로벌 decorator
 export const decorators = [

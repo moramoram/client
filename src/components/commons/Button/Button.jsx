@@ -89,11 +89,14 @@ const hoverBgColor = {
   },
 };
 
-const Layout = styled.button`
-  display: inline-block;
-
+const Layout = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 42px;
   min-width: ${(props) => props.minWidth};
+
+  margin: 10px;
   border-radius: 8px;
   border: 1px solid ${(props) => borderColor[props.theme][props.mode]};
 

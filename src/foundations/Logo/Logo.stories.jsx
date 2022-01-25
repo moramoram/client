@@ -15,15 +15,15 @@ export const Default = (args) => (
 );
 
 export const AllTypes = () => (
-  <div style={{ display: "flex" }}>
+  <div style={{ display: "flex", width: "100%" }}>
     <Background theme="light">
-      <Logo theme="light" width="200" />
+      <Logo theme="light" width="100%" />
     </Background>
     <Background theme="blue">
-      <Logo theme="blue" width="200" />
+      <Logo theme="blue" width="100%" />
     </Background>
     <Background theme="dark">
-      <Logo theme="dark" width="200" />
+      <Logo theme="dark" width="100%" />
     </Background>
   </div>
 );

@@ -4,6 +4,7 @@ export { default as Comment } from "./Comment";
 export { default as CommentInput } from "./CommentInput";
 export { default as Dropdown } from "./Dropdown";
 export { default as Editor } from "./Editor";
+export { default as FeedItem } from "./FeedItem";
 export { default as Modal } from "./Modal";
 export { default as Progress } from "./Progress";
 export { default as Sidebar } from "./Sidebar";

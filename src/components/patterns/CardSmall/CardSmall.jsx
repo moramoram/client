@@ -10,7 +10,7 @@ const THEME = {
   DARK: "dark",
 };
 
-const CardSmall = ({ theme, isLoading, contents, ...props }) => {
+const CardSmall = ({ isLoading, contents, ...props }) => {
   if (isLoading) {
     contents = {
       title: "",
@@ -21,17 +21,17 @@ const CardSmall = ({ theme, isLoading, contents, ...props }) => {
 
   const { title, highlight, src } = contents;
   return (
-    <Layout theme={theme} isLoading={isLoading} {...props}>
-      <ImageBox
+    <Layout isLoading={isLoading} {...props}>
+      <ThumbnailBox
         className="thumbnail"
         src={src}
         size="small"
-        theme={theme}
         isLoading={isLoading}
+        {...props}
       />
-      <TextBox theme={theme} isLoading={isLoading}>
-        <Title theme={theme}>{title}</Title>
-        <Highlight theme={theme}>{highlight}</Highlight>
+      <TextBox isLoading={isLoading}>
+        <Title {...props}>{title}</Title>
+        <Highlight {...props}>{highlight}</Highlight>
       </TextBox>
     </Layout>
   );
@@ -40,6 +40,7 @@ const CardSmall = ({ theme, isLoading, contents, ...props }) => {
 CardSmall.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   isLoading: PropTypes.bool,
+  isDisabled: PropTypes.bool,
   isLiked: PropTypes.bool,
   contents: PropTypes.objectOf(String).isRequired,
 };
@@ -47,12 +48,8 @@ CardSmall.propTypes = {
 CardSmall.defaultProps = {
   theme: THEME.LIGHT,
   isLoading: false,
+  isDisabled: false,
   isLiked: false,
-  contents: {
-    title: "",
-    highlight: "",
-    src: "",
-  },
 };
 
 export default CardSmall;
@@ -77,6 +74,10 @@ const TextBox = styled.div`
   }
 `;
 
+const ThumbnailBox = styled(ImageBox)`
+  filter: ${(props) => props.isDisabled && `blur(2px) grayscale(50%)`};
+`;
+
 const Highlight = styled.div`
   min-width: 70px;
   min-height: ${fontSize.p};
@@ -84,7 +85,7 @@ const Highlight = styled.div`
 
   font-size: ${fontSize.xs};
   font-weight: ${fontWeight.bold};
-  color: ${colors.blue100};
+  color: ${(props) => (props.isDisabled ? colors.gray400 : colors.blue100)};
 `;
 
 const Title = styled.div`

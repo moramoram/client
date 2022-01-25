@@ -3,9 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "@/Layout";
 
 import {
-  JobsPage,
-  JobsCreatePage,
-  JobsDetailPage,
+  JobPage,
+  JobCreatePage,
+  JobDetailPage,
   StudyPage,
   StudyCreatePage,
   StudyDetailPage,
@@ -18,11 +18,11 @@ const Router = () => {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route index element={<div>Landing Page</div>} />
+        <Route path="/" element={<div>Landing Page</div>} />
         <Route path="main" element={<div>Main Page</div>} />
-        <Route path="jobs" element={<JobsPage />} />
-        <Route path="jobs/create" element={<JobsCreatePage />} />
-        <Route path="jobs/:jobId" element={<JobsDetailPage />} />
+        <Route path="job" element={<JobPage />} />
+        <Route path="job/create" element={<JobCreatePage />} />
+        <Route path="job/:jobId" element={<JobDetailPage />} />
         <Route path="study" element={<StudyPage />} />
         <Route path="study/create" element={<StudyCreatePage />} />
         <Route path="study/:studyId" element={<StudyDetailPage />} />

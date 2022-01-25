@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "./";
+import Sidebar from ".";
 
 export default {
   title: "Patterns/Sidebar",

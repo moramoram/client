@@ -15,16 +15,18 @@ const textColor = {
   dark: colors.gray25,
 };
 
-const SideBarItem = ({ contents, isLoading, ...props }) => {
-  const textcontents = isLoading ? {} : contents;
+const SideBarItem = ({ title, description, icon, isLoading, ...props }) => {
+  const text = isLoading ? "" : title;
+  const desc = isLoading ? "" : description;
+  const iconname = isLoading ? "" : icon;
   return (
     <SideBarItemWrapper {...props}>
       <Title isLoading={isLoading} {...props}>
-        <Icon icon={textcontents.icon} />
-        {textcontents.title}
+        <Icon icon={iconname} />
+        {text}
       </Title>
       <Content isLoading={isLoading} {...props}>
-        {textcontents.description}
+        {desc}
       </Content>
     </SideBarItemWrapper>
   );
@@ -33,17 +35,14 @@ const SideBarItem = ({ contents, isLoading, ...props }) => {
 SideBarItem.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   isLoading: PropTypes.bool,
-  contents: PropTypes.objectOf(String).isRequired,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  icon: PropTypes.string,
 };
 
 SideBarItem.defaultProps = {
   theme: THEME.LIGHT,
   isLoading: false,
-  contents: {
-    title: "직무",
-    description: "프론트엔드",
-    icon: "briefcase",
-  },
 };
 
 export default SideBarItem;

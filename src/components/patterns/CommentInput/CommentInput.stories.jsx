@@ -4,7 +4,7 @@ import CommentInput from "./";
 import { Background } from "@/foundations";
 
 export default {
-  title: "Patterns/Comment",
+  title: "Patterns/CommentInput",
   component: CommentInput,
 };
 

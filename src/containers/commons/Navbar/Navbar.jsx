@@ -5,17 +5,21 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { NavItem } from "./NavItem";
-import { Avatar, Dropdown } from "@/components";
+import { Avatar, Button, Dropdown } from "@/components";
 import { Logo, Icon } from "@/foundations";
 import { colors } from "@/_shared";
 
 const THEME = {
   DARK: "dark",
   LIGHT: "light",
+};
+
+const TYPE = {
+  DEFAULT: "default",
   TRANSPARENT: "transparent",
 };
 
-const Navbar = ({ ...props }) => {
+const Navbar = ({ isLogout, ...props }) => {
   const [current, setCurrent] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navbarRight = useRef();
@@ -55,9 +59,22 @@ const Navbar = ({ ...props }) => {
         </NavbarItemBox>
       </FlexBox>
       <FlexBox ref={navbarRight}>
-        <Icon icon="bell" stroke={colors.gray400} aria-hidden />
-        <Avatar onClick={() => setDropdownOpen(!dropdownOpen)} />
-        {dropdownOpen && <UserDropdown {...props} />}
+        {isLogout ? (
+          <ButtonBox>
+            <Button mode="secondary" {...props}>
+              로그인
+            </Button>
+            <Button mode="primary" {...props}>
+              회원가입
+            </Button>
+          </ButtonBox>
+        ) : (
+          <>
+            <Icon icon="bell" stroke={colors.gray400} aria-hidden />
+            <Avatar onClick={() => setDropdownOpen(!dropdownOpen)} />
+            {dropdownOpen && <UserDropdown {...props} />}
+          </>
+        )}
       </FlexBox>
     </Layout>
   );
@@ -65,10 +82,16 @@ const Navbar = ({ ...props }) => {
 
 Navbar.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
+  type: PropTypes.oneOf(Object.values(TYPE)),
+  isLogout: PropTypes.bool,
+  isStatic: PropTypes.bool,
 };
 
 Navbar.defaultProps = {
   theme: THEME.LIGHT,
+  type: TYPE.DEFAULT,
+  isLogout: false,
+  isStatic: false,
 };
 
 export default Navbar;
@@ -92,25 +115,38 @@ const navData = [
 ];
 
 const bgColor = {
-  dark: colors.black,
-  light: colors.white,
-  transparent: "#00000000",
+  dark: {
+    default: colors.black,
+    transparent: "#00000000",
+  },
+  light: {
+    default: colors.white,
+    transparent: "#00000000",
+  },
 };
 
 const borderColor = {
-  dark: colors.gray700,
-  light: colors.gray200,
-  transparent: colors.gray700,
+  dark: {
+    default: colors.gray700,
+    transparent: colors.gray700,
+  },
+  light: {
+    default: colors.gray200,
+    transparent: colors.gray700,
+  },
 };
 
 const Layout = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 90px;
+  position: ${(props) => (props.isStatic ? "static" : "fixed")};
 
-  background-color: ${(props) => bgColor[props.theme]};
-  border-bottom: 1px solid ${(props) => borderColor[props.theme]};
+  width: 100%;
+  border-bottom: 1px solid ${(props) => borderColor[props.theme][props.type]};
+  background-color: ${(props) => bgColor[props.theme][props.type]};
+
+  transition: 0.3s;
 `;
 
 const FlexBox = styled.div`
@@ -118,6 +154,7 @@ const FlexBox = styled.div`
   gap: 2rem;
   align-items: center;
   position: relative;
+  padding: 0px 90px;
 
   svg,
   div {
@@ -136,8 +173,13 @@ const NavItemLink = styled(Link)`
 `;
 
 const UserDropdown = styled(Dropdown)`
-  z-index: 100;
+  z-index: 9999;
   top: 50px;
-  right: 0;
+  right: 20px;
   transition: height 0.3s ease-in;
+`;
+
+const ButtonBox = styled.div`
+  display: flex;
+  gap: 1rem;
 `;

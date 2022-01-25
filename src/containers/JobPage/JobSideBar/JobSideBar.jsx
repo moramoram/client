@@ -97,7 +97,7 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
 JobSideBar.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   isLoading: PropTypes.bool,
-  data: PropTypes.arrayOf(Object),
+  data: PropTypes.objectOf(String),
   badges: PropTypes.arrayOf(String),
 };
 

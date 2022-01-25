@@ -12,7 +12,7 @@ const CardGrid = ({ list, isLoading, ...props }) => {
   ) : (
     list.map(({ url, ...props }, idx) => {
       return (
-        <CardItemLink to={url}>
+        <CardItemLink to={url} key={idx}>
           <Card {...props} />
         </CardItemLink>
       );

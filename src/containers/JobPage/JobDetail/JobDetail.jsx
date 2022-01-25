@@ -4,15 +4,15 @@ import styled from "styled-components";
 
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 
-import { Toc, Comment } from "@/components";
-import { CardSmallGrid } from "@/containers";
+import { Toc, CommentInput } from "@/components";
+import { CardSmallGrid, CommentList } from "@/containers";
 
 const THEME = {
   LIGHT: "light",
   DARK: "dark",
 };
 
-const JobDetail = ({ titleData, cardData, ...props }) => {
+const JobDetail = ({ titleData, cardData, commentData, ...props }) => {
   return (
     <Layout>
       <TitleBox {...props}>
@@ -22,8 +22,15 @@ const JobDetail = ({ titleData, cardData, ...props }) => {
       </TitleBox>
       <Toc />
       <Content />
-      <CardSmallGrid data={cardData} />
-      <Comment />
+      <CardBox>
+        <BoxTitle>스터디</BoxTitle>
+        <CardSmallGrid data={cardData} />
+      </CardBox>
+      <CommentBox>
+        <BoxTitle>이 기업에 대한 의견을 나누세요</BoxTitle>
+        <CommentInput />
+        <CommentList data={commentData} />
+      </CommentBox>
     </Layout>
   );
 };
@@ -103,4 +110,17 @@ const SubTitle = styled.div`
 
 const Content = styled.div`
   min-height: 600px;
+`;
+
+const CardBox = styled.div``;
+const BoxTitle = styled.div`
+  min-height: ${lineHeight.h3};
+  font-weight: ${fontWeight.bold};
+  font-size: ${fontSize.h3};
+`;
+
+const CommentBox = styled.div`
+  > div {
+    margin: 30px 0px;
+  }
 `;

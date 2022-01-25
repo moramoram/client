@@ -2,11 +2,16 @@ import React from "react";
 import styled from "styled-components";
 
 import { JobDetail, JobSideBar } from "@/containers";
+import { daysFromToday } from "@/utils";
 
 const JobsDetailPage = () => {
   return (
     <Layout>
-      <JobDetail titleData={titleData} cardData={cardData}></JobDetail>
+      <JobDetail
+        titleData={titleData}
+        cardData={cardData}
+        commentData={commentData}
+      ></JobDetail>
       <FixedSidebar {...sidbarargs} />
     </Layout>
   );
@@ -53,6 +58,45 @@ const cardData = [
   },
 ];
 
+const commentData = [
+  {
+    username: null,
+    src: null,
+    created: daysFromToday("2022-01-24"),
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  },
+  {
+    username: null,
+    src: null,
+    created: daysFromToday("2022-01-24"),
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  },
+  {
+    username: null,
+    src: null,
+    created: daysFromToday("2022-01-24"),
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  },
+  {
+    username: null,
+    src: null,
+    created: daysFromToday("2022-01-24"),
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  },
+  {
+    username: null,
+    src: null,
+    created: daysFromToday("2022-01-24"),
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  },
+  {
+    username: null,
+    src: null,
+    created: daysFromToday("2022-01-24"),
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  },
+];
+
 const sidbarargs = {
   data: {
     task: "프론트엔드",
@@ -60,6 +104,7 @@ const sidbarargs = {
     career: "신입",
     location: "서울 강남구",
   },
+
   badges: ["JavaScript", "TypeScript", "Vue.js", "React", "Redux", "Svelte"],
 };
 
@@ -70,5 +115,5 @@ const Layout = styled.div`
 
 const FixedSidebar = styled(JobSideBar)`
   position: sticky;
-  top: 122px;
+  top: 222px;
 `;

@@ -1,1 +1,1 @@
-export { default } from "./CommentInput";
+export { default } from "./Comment";

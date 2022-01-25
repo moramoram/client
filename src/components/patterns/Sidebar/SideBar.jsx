@@ -123,6 +123,7 @@ const SideBarWrapper = styled.div`
 
   button {
     margin: 4px 10px;
+    width: calc(100% - 20px);
   }
   .thumbnail {
     margin-bottom: 12px;

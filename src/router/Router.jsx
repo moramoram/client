@@ -18,7 +18,7 @@ const Router = () => {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route index element={<div>Landing Page</div>} />
+        <Route path="/" element={<div>Landing Page</div>} />
         <Route path="main" element={<div>Main Page</div>} />
         <Route path="jobs" element={<JobsPage />} />
         <Route path="jobs/create" element={<JobsCreatePage />} />

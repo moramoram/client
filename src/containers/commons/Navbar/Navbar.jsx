@@ -19,7 +19,7 @@ const TYPE = {
   TRANSPARENT: "transparent",
 };
 
-const Navbar = ({ isLogout, ...props }) => {
+const Navbar = ({ isLogin, ...props }) => {
   const [current, setCurrent] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navbarRight = useRef();
@@ -59,7 +59,13 @@ const Navbar = ({ isLogout, ...props }) => {
         </NavbarItemBox>
       </FlexBox>
       <FlexBox ref={navbarRight}>
-        {isLogout ? (
+        {isLogin ? (
+          <>
+            <Icon icon="bell" stroke={colors.gray400} aria-hidden />
+            <Avatar onClick={() => setDropdownOpen(!dropdownOpen)} />
+            {dropdownOpen && <UserDropdown {...props} />}
+          </>
+        ) : (
           <ButtonBox>
             <Button mode="secondary" {...props}>
               로그인
@@ -68,12 +74,6 @@ const Navbar = ({ isLogout, ...props }) => {
               회원가입
             </Button>
           </ButtonBox>
-        ) : (
-          <>
-            <Icon icon="bell" stroke={colors.gray400} aria-hidden />
-            <Avatar onClick={() => setDropdownOpen(!dropdownOpen)} />
-            {dropdownOpen && <UserDropdown {...props} />}
-          </>
         )}
       </FlexBox>
     </Layout>
@@ -83,14 +83,14 @@ const Navbar = ({ isLogout, ...props }) => {
 Navbar.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   type: PropTypes.oneOf(Object.values(TYPE)),
-  isLogout: PropTypes.bool,
+  isLogin: PropTypes.bool,
   isStatic: PropTypes.bool,
 };
 
 Navbar.defaultProps = {
   theme: THEME.LIGHT,
   type: TYPE.DEFAULT,
-  isLogout: false,
+  isLogin: true,
   isStatic: false,
 };
 

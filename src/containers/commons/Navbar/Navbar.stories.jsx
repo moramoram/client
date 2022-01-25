@@ -10,13 +10,13 @@ export const Default = (args) => <Navbar {...args} />;
 
 export const AllTypes = () => (
   <>
-    <Navbar theme="light" isStatic isLogout />
+    <Navbar theme="light" isStatic isLogin={false} />
     <br />
     <Navbar theme="light" isStatic />
     <br />
     <Navbar theme="light" type="transparent" isStatic />
     <br />
-    <Navbar theme="dark" isStatic isLogout />
+    <Navbar theme="dark" isStatic isLogin={false} />
     <br />
     <Navbar theme="dark" isStatic />
     <br />

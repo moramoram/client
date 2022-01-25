@@ -46,7 +46,7 @@ export default Input;
 
 const textColor = {
   light: colors.black,
-  dark: colors.gray500,
+  dark: colors.white,
 };
 
 const bgColor = {
@@ -90,7 +90,7 @@ const InputBox = styled.div`
   align-items: center;
 
   height: 42px;
-  padding: 10px;
+  padding: 8px;
   border: 1px solid ${(props) => borderColor[props.theme]};
   border-radius: 8px;
 
@@ -112,6 +112,10 @@ const InputBox = styled.div`
         inset 0 0 0 1px ${insetColor[props.status]};
     `}
 
+  :hover {
+    border: 1px solid ${colors.gray500};
+  }
+
   :focus-within {
     transition: 0.3s;
 
@@ -121,9 +125,14 @@ const InputBox = styled.div`
     }
     `};
   }
+
+  :focus-within:hover {
+    border: 1px solid ${(props) => insetColor[props.status]};
+  }
 `;
 
 const InputText = styled.input`
+  width: 100%;
   padding-left: 8px;
   border: none;
   background: none;

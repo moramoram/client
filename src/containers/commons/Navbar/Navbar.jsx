@@ -40,7 +40,7 @@ const Navbar = ({ isLogin, ...props }) => {
     <Layout {...props}>
       <FlexBox>
         <Link to=".">
-          <Logo width="100" height="26" {...props} />
+          <Logo width="80" height="20 " {...props} />
         </Link>
         <NavbarItemBox>
           {navData.map(({ name, title, url }, idx) => {
@@ -61,8 +61,11 @@ const Navbar = ({ isLogin, ...props }) => {
       <FlexBox ref={navbarRight}>
         {isLogin ? (
           <>
-            <Icon icon="bell" stroke={colors.gray400} aria-hidden />
-            <Avatar onClick={() => setDropdownOpen(!dropdownOpen)} />
+            <Icon icon="bell" stroke={colors.gray400} width="20" aria-hidden />
+            <Avatar
+              size="medium"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            />
             {dropdownOpen && <UserDropdown {...props} />}
           </>
         ) : (
@@ -174,7 +177,7 @@ const NavItemLink = styled(Link)`
 
 const UserDropdown = styled(Dropdown)`
   z-index: 9999;
-  top: 50px;
+  top: 36px;
   right: 20px;
   animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
 `;

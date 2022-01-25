@@ -21,6 +21,12 @@ export const AllTypes = () => (
     <h1>Sizes</h1>
     <hr />
     <div>
+      <h2 style={{ marginBottom: "0.5rem" }}>Default</h2>
+      <Avatar size="large" />
+      <Avatar size="medium" />
+      <Avatar size="small" />
+    </div>
+    <div style={{ marginTop: "1rem" }}>
       <h2 style={{ marginBottom: "0.5rem" }}>Images</h2>
       <Avatar size="large" src={defaultSrc} />
       <Avatar size="medium" src={defaultSrc} />
@@ -28,9 +34,9 @@ export const AllTypes = () => (
     </div>
     <div style={{ marginTop: "1rem" }}>
       <h2 style={{ marginBottom: "0.5rem" }}>Initials</h2>
-      <Avatar size="large" />
-      <Avatar size="medium" />
-      <Avatar size="small" />
+      <Avatar size="large" username="김싸피" />
+      <Avatar size="medium" username="김싸피" />
+      <Avatar size="small" username="김싸피" />
     </div>
     <div style={{ marginTop: "1rem" }}>
       <h2 style={{ marginBottom: "0.5rem" }}>Lodings</h2>

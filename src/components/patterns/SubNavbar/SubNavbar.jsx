@@ -14,20 +14,21 @@ const STATUS = {
   ACTIVE: "active",
 };
 
-const SubNavbar = ({ items, theme, onClick, ...props }) => {
-  const [selectedIndex, setSelectedIndex] = useState(null);
+const SubNavbar = ({ data, theme, onClick, ...props }) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const handleNavItemClick = (e, idx) => {
+  const handleNavItemClick = (idx) => {
     setSelectedIndex(idx);
+    onClick(idx);
   };
 
   return (
     <SubNavbarWrapper theme={theme} {...props}>
-      {items.map(({ id, title }, idx) => {
+      {data.map(({ id, title }, idx) => {
         return (
           <SubNavbarItem
             theme={theme}
-            onClick={(e) => handleNavItemClick(e, id)}
+            onClick={() => handleNavItemClick(idx)}
             key={idx}
             status={selectedIndex === id ? "active" : "default"}
           >
@@ -40,7 +41,7 @@ const SubNavbar = ({ items, theme, onClick, ...props }) => {
 };
 
 SubNavbar.propTypes = {
-  items: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
   theme: PropTypes.oneOf(Object.values(THEME)),
   status: PropTypes.oneOf(Object.values(STATUS)),
 };
@@ -48,20 +49,6 @@ SubNavbar.propTypes = {
 SubNavbar.defaultProps = {
   theme: THEME.LIGHT,
   status: STATUS.DEFAULT,
-  items: [
-    {
-      id: 1,
-      title: "커뮤니티",
-    },
-    {
-      id: 2,
-      title: "스터디",
-    },
-    {
-      id: 3,
-      title: "취업정보",
-    },
-  ],
 };
 
 export default SubNavbar;

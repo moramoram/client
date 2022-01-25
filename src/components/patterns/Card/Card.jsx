@@ -143,8 +143,8 @@ const Title = styled.div`
 
 const Subtitle = styled.div`
   min-width: 140px;
-  min-height: ${fontSize.p};
-  font-size: ${fontSize.p};
+  min-height: ${fontSize.sm};
+  font-size: ${fontSize.sm};
   color: ${(props) => subtitleColor[props.theme]};
 `;
 

@@ -44,9 +44,9 @@ const ImageUploader = ({ aspect, ...props }) => {
     setImageSrc(null);
   }, []);
 
-  const onFileChange = async (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
+  const onFileChange = async (files) => {
+    if (files && files.length > 0) {
+      const file = files[0];
       let imageDataUrl = await readFile(file);
 
       setImageSrc(imageDataUrl);

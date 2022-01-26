@@ -14,7 +14,11 @@ const THEME = {
 
 const InputImage = (props) => {
   return (
-    <Dropzone onDrop={(acceptedFiles) => console.log(acceptedFiles)}>
+    <Dropzone
+      onDrop={(acceptedFiles) => {
+        props.onChange(acceptedFiles);
+      }}
+    >
       {({ getRootProps, getInputProps }) => (
         <Layout {...getRootProps()} {...props}>
           <input {...getInputProps()} accept="image/*" />

@@ -32,8 +32,10 @@ const Navbar = ({ isLogin, ...props }) => {
   };
 
   const handleClick = (name) => {
+    name === current
+      ? window.scrollTo({ top: 0, behavior: "smooth" })
+      : window.scrollTo({ top: 0 });
     setCurrent(name);
-    window.scrollTo(0, 0);
   };
 
   useEffect(() => {

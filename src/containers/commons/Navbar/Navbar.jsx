@@ -64,8 +64,11 @@ const Navbar = ({ isLogin, ...props }) => {
             <SwitchBox>
               <Switch />
             </SwitchBox>
-            <Icon icon="bell" stroke={colors.gray400} aria-hidden />
-            <Avatar onClick={() => setDropdownOpen(!dropdownOpen)} />
+            <Icon icon="bell" stroke={colors.gray400} width="20" aria-hidden />
+            <Avatar
+              size="medium"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            />
             {dropdownOpen && <UserDropdown {...props} />}
           </>
         ) : (
@@ -168,7 +171,7 @@ const FlexBox = styled.div`
 const NavbarItemBox = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 3rem;
+  margin-left: 2rem;
 `;
 
 const NavItemLink = styled(Link)`

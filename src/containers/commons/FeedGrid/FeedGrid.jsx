@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 
 import { FeedItem } from "@/components";
 
-const FeedGrid = ({ data, isLoading, ...props }) => {
+const FeedGrid = ({ data, isLoading, theme, ...props }) => {
   const feeds = isLoading ? (
-    <FeedItem isLoading {...props} />
+    <FeedItem isLoading theme={theme} {...props} />
   ) : (
     data.map(({ url, ...props }, idx) => {
       return (
         <FeedItemLink to={url} key={idx}>
-          <FeedItem {...props} />
+          <FeedItem theme={theme} {...props} />
         </FeedItemLink>
       );
     })

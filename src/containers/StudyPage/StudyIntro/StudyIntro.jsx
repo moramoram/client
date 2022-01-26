@@ -15,7 +15,6 @@ const THEME = {
 const StudyIntro = ({ ...props }) => {
   return (
     <>
-      <EmptyBox />
       <Layout>
         <Title {...props}>스터디 모집</Title>
         <SubTitle {...props}>함께 성장할 동료들을 찾아보세요.</SubTitle>
@@ -38,11 +37,6 @@ StudyIntro.defaultProps = {
 
 export default StudyIntro;
 
-const titleColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
-};
-
 const subtitleColor = {
   light: colors.gray400,
   dark: colors.gray500,
@@ -50,36 +44,30 @@ const subtitleColor = {
 
 const Layout = styled.div`
   display: flex;
-
-  width: 100vw;
-  height: 320px;
-  background: ${colors.gray25};
-
   flex-direction: column;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+
+  width: 100vw;
+  height: 400px;
+  background: url("https://i.imgur.com/75UN6MO.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
   overflow: hidden;
 `;
 
-const EmptyBox = styled.div`
-  width: 100vw;
-  height: 82px;
-  background: ${colors.gray25};
-`;
-
 const Title = styled.div`
-  line-height: ${lineHeight.h2};
-  margin-bottom: 15px;
+  padding-top: 2rem;
 
+  line-height: ${lineHeight.h2};
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h2};
-  color: ${(props) => titleColor[props.theme]};
+  color: ${colors.gray25};
 `;
 
 const SubTitle = styled.div`
-  height: ${lineHeight.h4};
-  margin-bottom: 27px;
+  padding: 1rem 0 2rem 0;
 
   font-size: ${fontSize.p};
   color: ${(props) => subtitleColor[props.theme]};

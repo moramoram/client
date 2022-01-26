@@ -12,7 +12,6 @@ const THEME = {
 const JobIntro = ({ ...props }) => {
   return (
     <>
-      <EmptyBox />
       <Layout>
         <Title {...props}>채용정보</Title>
         <SubTitle {...props}>
@@ -34,11 +33,6 @@ JobIntro.defaultProps = {
 
 export default JobIntro;
 
-const titleColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
-};
-
 const subtitleColor = {
   light: colors.gray400,
   dark: colors.gray500,
@@ -46,36 +40,30 @@ const subtitleColor = {
 
 const Layout = styled.div`
   display: flex;
-
-  width: 100vw;
-  height: 320px;
-  background: ${colors.gray200};
-
   flex-direction: column;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
+
+  width: 100vw;
+  height: 400px;
+  background: url("https://i.imgur.com/3QTKlkH.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
   overflow: hidden;
 `;
 
-const EmptyBox = styled.div`
-  width: 100vw;
-  height: 82px;
-  background: ${colors.gray200};
-`;
-
 const Title = styled.div`
+  padding-top: 2rem;
   line-height: ${lineHeight.h2};
-  margin-bottom: 15px;
-
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h2};
-  color: ${(props) => titleColor[props.theme]};
+  color: ${colors.gray25};
 `;
 
 const SubTitle = styled.div`
   height: ${lineHeight.h4};
-  margin-bottom: 27px;
 
   font-size: ${fontSize.p};
   color: ${(props) => subtitleColor[props.theme]};

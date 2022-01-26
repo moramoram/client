@@ -31,6 +31,11 @@ const Navbar = ({ isLogin, ...props }) => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
 
+  const handleClick = (name) => {
+    setCurrent(name);
+    window.scrollTo(0, 0);
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownOpen && !navbarRight?.current.contains(event.target)) {
@@ -55,7 +60,7 @@ const Navbar = ({ isLogin, ...props }) => {
               <NavItemLink to={url} key={idx}>
                 <NavItem
                   {...props}
-                  onClick={() => setCurrent(name)}
+                  onClick={() => handleClick(name)}
                   status={current === name ? "active" : "default"}
                 >
                   {title}

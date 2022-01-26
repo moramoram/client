@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { JobDetail, JobSideBar } from "@/containers";
 import { daysFromToday } from "@/utils";
 
-const JobsDetailPage = () => {
+const JobsDetailPage = ({ match }) => {
   return (
     <Layout>
       <JobDetail
@@ -110,6 +110,7 @@ const sidbarargs = {
 
 const Layout = styled.div`
   display: flex;
+  justify-content: center;
   gap: 50px;
 `;
 

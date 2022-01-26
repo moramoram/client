@@ -1,6 +1,6 @@
 import React from "react";
 
-const CommunityDetailPage = () => {
+const CommunityDetailPage = ({ match }) => {
   return <>CommunityDetailPage</>;
 };
 

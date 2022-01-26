@@ -3,17 +3,18 @@ import styled from "styled-components";
 
 import { Outlet } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { themeState } from "./recoil/theme";
+import { themeState, navTypeState } from "@/recoil/theme";
 
 import { Navbar } from "@/containers/commons";
+import { colors } from "@/_shared";
 
-const Layout = (props) => {
+const Layout = () => {
   const theme = useRecoilValue(themeState);
+  const navType = useRecoilValue(navTypeState);
 
   return (
-    // 네비게이션바, 모달, 알림 컴포넌트 추가예정
-    <LayoutBox>
-      <Nav theme={theme} />
+    <LayoutBox theme={theme}>
+      <Nav theme={theme} type={navType} />
       <Outlet />
     </LayoutBox>
   );
@@ -21,8 +22,14 @@ const Layout = (props) => {
 
 export default Layout;
 
+const bgColor = {
+  light: colors.white,
+  dark: colors.black,
+};
+
 const LayoutBox = styled.div`
   width: 100vw;
+  background: ${(props) => bgColor[props.theme]};
 `;
 
 const Nav = styled(Navbar)`

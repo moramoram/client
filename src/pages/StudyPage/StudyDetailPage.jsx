@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { StudyDetail, StudySideBar } from "@/containers";
 import { daysFromToday } from "@/utils";
 
-const StudyDetailPage = () => {
+const StudyDetailPage = ({ match }) => {
   return (
     <Layout>
       <StudyDetail
@@ -77,6 +77,7 @@ const sidbarargs = {
 
 const Layout = styled.div`
   display: flex;
+  justify-content: center;
   gap: 50px;
 `;
 

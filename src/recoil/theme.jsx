@@ -5,6 +5,11 @@ const THEME = {
   LIGHT: "light",
 };
 
+const TYPE = {
+  DEFAULT: "default",
+  TRANSPARENT: "transparent",
+};
+
 export const getTheme = () => {
   const theme = localStorage.getItem("theme");
 
@@ -17,4 +22,9 @@ export const getTheme = () => {
 export const themeState = atom({
   key: "themeState",
   default: getTheme(),
+});
+
+export const navTypeState = atom({
+  key: "navTypeState",
+  default: TYPE.DEFAULT,
 });

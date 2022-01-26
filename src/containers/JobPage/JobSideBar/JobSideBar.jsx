@@ -76,7 +76,7 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
       <Button
         onClick={() => handClickPriamry()}
         isLoading={isLoading}
-        minWidth="380px"
+        width="100%"
       >
         <Icon icon="edit" />
         지원하기
@@ -85,7 +85,7 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
         onClick={() => handClickSecondary()}
         sLoading={isLoading}
         mode="secondary"
-        minWidth="380px"
+        width="100%"
       >
         <Icon icon="bookmark" />
         북마크 하기

@@ -10,17 +10,7 @@ const THEME = {
   LIGHT: "light",
 };
 
-const FeedItemSmall = ({
-  username,
-  avatar,
-  campus,
-  ordinal,
-  created,
-  title,
-  category,
-
-  ...props
-}) => {
+const FeedItemSmall = ({ username, avatar, title, category, ...props }) => {
   const usernameRender = username || "User";
 
   return (

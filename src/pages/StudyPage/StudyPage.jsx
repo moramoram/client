@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -10,12 +10,20 @@ import { CardGrid, StudyIntro } from "@/containers";
 const StudyPage = () => {
   const theme = useRecoilValue(themeState);
   const setNavType = useSetRecoilState(navTypeState);
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    setNavType("transparent");
+    !!offset ? setNavType("default") : setNavType("transparent");
     return () => {
       setNavType("default");
     };
+  }, [offset, setNavType]);
+
+  useEffect(() => {
+    const onScroll = () => setOffset(window.pageYOffset);
+    window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   });
 
   const handleCategory = (e) => {

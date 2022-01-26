@@ -24,9 +24,9 @@ const CommunityPage = () => {
         <ContentBox>
           <FeedSmallGrid data={feedSmallData} />
           <EditorBox>
-            <Editor />
+            <Editor theme={theme} />
           </EditorBox>
-          <FeedGrid data={feedData} />
+          <FeedGrid data={feedData} theme={theme} />
         </ContentBox>
       </MainBox>
     </Layout>

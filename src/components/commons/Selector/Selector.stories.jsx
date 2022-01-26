@@ -1,8 +1,6 @@
 import React from "react";
 
 import Selector from "./";
-
-import { Input } from "@/components";
 import { Background } from "@/foundations";
 
 export default {

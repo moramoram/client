@@ -17,17 +17,17 @@ Standard.args = {
 
 export const Primary = () => (
   <div>
-    <Button width="200">Primary</Button>
+    <Button width="200px">Primary</Button>
     <p />
-    <Button width="200" isDisabled>
+    <Button width="200px" isDisabled>
       Disabled
     </Button>
     <p />
-    <Button width="200" isLoading>
+    <Button width="200px" isLoading>
       Primary
     </Button>
     <p />
-    <Button width="200">
+    <Button width="200px">
       <Icon icon="info" aria-label="Link" />
       Primary
     </Button>
@@ -38,19 +38,19 @@ Primary.storyName = "Primary";
 
 export const Secondary = () => (
   <div>
-    <Button mode="secondary" width="200">
+    <Button mode="secondary" width="200px">
       Secondary
     </Button>
     <p />
-    <Button mode="secondary" width="200" isDisabled>
+    <Button mode="secondary" width="200px" isDisabled>
       Disabled
     </Button>
     <p />
-    <Button mode="secondary" width="200" isLoading>
+    <Button mode="secondary" width="200px" isLoading>
       Loading...
     </Button>
     <p />
-    <Button mode="secondary" width="200">
+    <Button mode="secondary" width="200px">
       <Icon icon="info" aria-label="Link" />
       Secondary
     </Button>
@@ -61,19 +61,19 @@ Secondary.storyName = "Secondary";
 
 export const Dark = () => (
   <div>
-    <Button mode="secondary" width="200" theme="dark">
+    <Button mode="secondary" width="200px" theme="dark">
       Secondary
     </Button>
     <p />
-    <Button mode="secondary" width="200" isDisabled theme="dark">
+    <Button mode="secondary" width="200px" isDisabled theme="dark">
       Disabled
     </Button>
     <p />
-    <Button mode="secondary" width="200" isLoading theme="dark">
+    <Button mode="secondary" width="200px" isLoading theme="dark">
       Loading...
     </Button>
     <p />
-    <Button mode="secondary" width="200" theme="dark">
+    <Button mode="secondary" width="200px" theme="dark">
       <Icon icon="info" aria-label="Link" />
       Secondary
     </Button>

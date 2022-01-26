@@ -36,6 +36,8 @@ const Navbar = ({ isLogin, ...props }) => {
     };
   }, [dropdownOpen]);
 
+  const handleToggle = () => console.log("toggle");
+
   return (
     <Layout {...props}>
       <FlexBox>
@@ -62,7 +64,7 @@ const Navbar = ({ isLogin, ...props }) => {
         {isLogin ? (
           <>
             <SwitchBox>
-              <Switch />
+              <Switch onToggle={() => handleToggle} />
             </SwitchBox>
             <Icon icon="bell" stroke={colors.gray400} aria-hidden />
             <Avatar onClick={() => setDropdownOpen(!dropdownOpen)} />

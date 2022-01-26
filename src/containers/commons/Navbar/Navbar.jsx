@@ -166,7 +166,7 @@ const Layout = styled.div`
   border-bottom: 1px solid ${(props) => borderColor[props.theme][props.type]};
   background-color: ${(props) => bgColor[props.theme][props.type]};
 
-  transition: 0.3s;
+  transition: 0.5s;
 `;
 
 const FlexBox = styled.div`

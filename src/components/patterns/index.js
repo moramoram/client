@@ -6,6 +6,7 @@ export { default as Dropdown } from "./Dropdown";
 export { default as Editor } from "./Editor";
 export { default as FeedItem } from "./FeedItem";
 export { default as FeedItemSmall } from "./FeedItemSmall";
+export { default as ImageUploader } from "./ImageUploader";
 export { default as Modal } from "./Modal";
 export { default as Progress } from "./Progress";
 export { default as Sidebar } from "./Sidebar";

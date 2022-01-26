@@ -30,11 +30,8 @@ const JobsPage = () => {
     console.log(e);
   };
 
-  const handleScroll = (v) => {
-    console.log("handler", v);
-  };
   return (
-    <Layout onScroll={handleScroll}>
+    <Layout>
       <JobIntro />
       <ContentBox>
         <StickyNav data={categoryData} theme={theme} onClick={handleCategory} />

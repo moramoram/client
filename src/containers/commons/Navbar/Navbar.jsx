@@ -40,7 +40,7 @@ const Navbar = ({ isLogin, ...props }) => {
     <Layout {...props}>
       <FlexBox>
         <Link to=".">
-          <Logo width="100" height="26" {...props} />
+          <Logo width="80" height="20 " {...props} />
         </Link>
         <NavbarItemBox>
           {navData.map(({ name, title, url }, idx) => {
@@ -64,8 +64,11 @@ const Navbar = ({ isLogin, ...props }) => {
             <SwitchBox>
               <Switch />
             </SwitchBox>
-            <Icon icon="bell" stroke={colors.gray400} aria-hidden />
-            <Avatar onClick={() => setDropdownOpen(!dropdownOpen)} />
+            <Icon icon="bell" stroke={colors.gray400} width="20" aria-hidden />
+            <Avatar
+              size="medium"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            />
             {dropdownOpen && <UserDropdown {...props} />}
           </>
         ) : (
@@ -168,7 +171,7 @@ const FlexBox = styled.div`
 const NavbarItemBox = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 3rem;
+  margin-left: 2rem;
 `;
 
 const NavItemLink = styled(Link)`
@@ -176,12 +179,14 @@ const NavItemLink = styled(Link)`
 `;
 
 const SwitchBox = styled.div`
+  display: flex;
+  align-items: center;
   width: 44px;
 `;
 
 const UserDropdown = styled(Dropdown)`
   z-index: 9999;
-  top: 50px;
+  top: 36px;
   right: 20px;
   animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
 `;

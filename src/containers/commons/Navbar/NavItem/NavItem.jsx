@@ -80,8 +80,8 @@ const Layout = styled.div`
   justify-content: center;
   align-items: center;
 
-  height: 80px;
-  width: 120px;
+  height: 64px;
+  width: 105px;
   border-bottom: 3px solid ${(props) => borderColor[props.status]};
 
   transition: 0.1s;
@@ -101,9 +101,10 @@ const Layout = styled.div`
 
 const Text = styled.span`
   display: inline-block;
+  padding-top: 0.2rem;
 
   color: ${(props) => textColor[props.theme][props.type]};
-  font-size: ${fontSize.lg};
+  font-size: ${fontSize.md};
   font-weight: ${(props) => textWeight[props.status]};
   text-decoration: none;
 

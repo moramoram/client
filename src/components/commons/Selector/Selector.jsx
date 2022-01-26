@@ -115,11 +115,14 @@ const focusColor = {
   error: "#f8736a33",
 };
 
+const activeColor = {
+  default: "#4A83EF77",
+  error: "#f8736a77",
+};
+
 const customStyles = (props) => ({
   control: (provided) => ({
     ...provided,
-
-    height: "42px",
     padding: "2px 6px",
     border: `1px solid ${borderColor[props.theme]}`,
     borderRadius: "8px",
@@ -160,6 +163,7 @@ const customStyles = (props) => ({
   dropdownIndicator: (provided) => ({
     ...provided,
     color: colors.gray500,
+
     ":hover": {
       color: colors.gray500,
     },
@@ -200,6 +204,10 @@ const customStyles = (props) => ({
   option: (provided, state) => ({
     ...provided,
     background: state.isFocused ? focusColor.default : bgColor[props.theme],
+
+    ":active": {
+      background: activeColor.default,
+    },
     ":first-of-type": {
       borderRadius: "3px 3px 0 0",
     },
@@ -225,6 +233,11 @@ const customStyles = (props) => ({
     ...provided,
     borderRadius: "2px 8px 8px 2px",
     color: colors.gray500,
+
+    ":hover": {
+      backgroundColor: "#f8736a84",
+      color: "#850900",
+    },
   }),
 });
 

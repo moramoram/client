@@ -44,11 +44,13 @@ SubNavbar.propTypes = {
   data: PropTypes.array.isRequired,
   theme: PropTypes.oneOf(Object.values(THEME)),
   status: PropTypes.oneOf(Object.values(STATUS)),
+  onClick: PropTypes.func,
 };
 
 SubNavbar.defaultProps = {
   theme: THEME.LIGHT,
   status: STATUS.DEFAULT,
+  onClick: undefined,
 };
 
 export default SubNavbar;

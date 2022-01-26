@@ -73,7 +73,7 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
         onClick={() => handleonClick()}
         sLoading={isLoading}
         mode="secondary"
-        minWidth="380px"
+        width="100%"
       >
         <Icon icon="bookmark" />
         북마크 하기

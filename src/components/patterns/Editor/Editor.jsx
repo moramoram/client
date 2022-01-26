@@ -57,7 +57,7 @@ const QuillEditor = styled(ReactQuill)`
   }
 
   .ql-editor {
-    min-height: 600px;
+    min-height: 200px;
     padding: 1.25rem;
     font-family: Pretendard;
     letter-spacing: -0.02rem;

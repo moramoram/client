@@ -23,7 +23,7 @@ const StudyDetail = ({ titleData, commentData, ...props }) => {
           {titleData.subtitle}
         </SubTitle>
       </TitleBox>
-      <Toc />
+      <Toc items={tocItem} />
       <Content />
       <CommentBox>
         <BoxTitle>댓글</BoxTitle>
@@ -44,6 +44,20 @@ StudyDetail.defaultProps = {
 };
 
 export default StudyDetail;
+
+const tocItem = [
+  {
+    name: "info",
+    title: "공고",
+    number: null,
+  },
+
+  {
+    name: "comments",
+    title: "댓글",
+    number: 20,
+  },
+];
 
 const titleColor = {
   light: colors.gray900,

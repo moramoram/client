@@ -92,7 +92,7 @@ const Layout = styled.button`
   justify-content: center;
   align-items: center;
 
-  width: ${(props) => props.width}px;
+  width: ${(props) => props.width};
   height: 42px;
   padding: 0px 42px;
 

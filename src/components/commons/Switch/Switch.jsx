@@ -9,9 +9,12 @@ const THEME = {
   DARK: "dark",
 };
 
-const Switch = ({ theme, ...props }) => {
-  const [isChecked, setIsChecked] = useState(false);
-  const handleToggle = () => setIsChecked(!isChecked);
+const Switch = ({ theme, isSelected, onToggle, ...props }) => {
+  const [isChecked, setIsChecked] = useState(isSelected);
+  const handleToggle = () => {
+    setIsChecked(!isChecked);
+    onToggle();
+  };
 
   return (
     <Layout checked={isChecked}>
@@ -28,10 +31,13 @@ const Switch = ({ theme, ...props }) => {
 
 Switch.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
+  isSelected: PropTypes.bool,
+  onToggle: PropTypes.func,
 };
 
 Switch.defaultProps = {
   theme: THEME.LIGHT,
+  isSelected: false,
 };
 
 export default Switch;

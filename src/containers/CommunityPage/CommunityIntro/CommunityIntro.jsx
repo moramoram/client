@@ -9,30 +9,30 @@ const THEME = {
   DARK: "dark",
 };
 
-const JobIntro = ({ ...props }) => {
+const CommunityIntro = ({ ...props }) => {
   return (
     <>
       <EmptyBox />
       <Layout>
-        <Title {...props}>채용정보</Title>
-        <SubTitle {...props}>
-          열정 가득한 당신을 원하는 회사들을 모아봤어요.
-        </SubTitle>
+        <TextBox>
+          <Title {...props}>커뮤니티</Title>
+          <SubTitle {...props}>싸피인들끼리 자유롭게 소통하세요</SubTitle>
+        </TextBox>
       </Layout>
     </>
   );
 };
 
-JobIntro.propTypes = {
+CommunityIntro.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   data: PropTypes.arrayOf(Object),
 };
 
-JobIntro.defaultProps = {
+CommunityIntro.defaultProps = {
   theme: THEME.LIGHT,
 };
 
-export default JobIntro;
+export default CommunityIntro;
 
 const titleColor = {
   light: colors.gray900,
@@ -48,12 +48,12 @@ const Layout = styled.div`
   display: flex;
 
   width: 100vw;
-  height: 320px;
+  height: 200px;
   background: ${colors.gray200};
 
   flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   overflow: hidden;
 `;
@@ -62,6 +62,10 @@ const EmptyBox = styled.div`
   width: 100vw;
   height: 82px;
   background: ${colors.gray200};
+`;
+
+const TextBox = styled.div`
+  width: 33vw;
 `;
 
 const Title = styled.div`

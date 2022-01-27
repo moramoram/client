@@ -211,7 +211,7 @@ const StickyNavBox = styled.div``;
 
 const StickyNav = styled(SubNavbar)`
   position: sticky;
-  /* top: 300px; */
+  top: 150px;
 `;
 
 const CardGrid = styled(CardResponsiveGrid)`

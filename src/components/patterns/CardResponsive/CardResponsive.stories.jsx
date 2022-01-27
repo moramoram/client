@@ -6,11 +6,7 @@ export default {
   component: CardResponsive,
 };
 
-export const Default = (args) => (
-  <>
-    <CardResponsive {...args} />
-  </>
-);
+export const Default = (args) => <CardResponsive {...args} />;
 
 Default.args = {
   contents: {

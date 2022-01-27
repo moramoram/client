@@ -18,7 +18,9 @@ const Badge = ({ children, isLoading, ...props }) => {
   const badgeinner = isLoading ? null : children;
   return (
     <Layout isLoading={isLoading} {...props}>
-      {badgeinner}
+      <Text isLoading={isLoading} {...props}>
+        {badgeinner}
+      </Text>
     </Layout>
   );
 };
@@ -60,21 +62,12 @@ const bgColor = {
   },
 };
 
-const Layout = styled.span`
+const Layout = styled.div`
   display: inline-flex;
-  justify-content: center;
   align-items: center;
 
-  height: 20px;
-  padding: 0 8px;
   border-radius: 8px;
   background: ${(props) => bgColor[props.theme][props.mode]};
-
-  font-size: ${fontSize.xxs};
-  font-weight: ${(props) =>
-    props.isBold ? fontWeight.bold : fontWeight.regular};
-  color: ${(props) => textColor[props.theme][props.mode]};
-  text-align: center;
 
   animation: ${(props) => props.isLoading && loadings[props.theme]};
 
@@ -85,4 +78,15 @@ const Layout = styled.span`
     height: 20px;
     `}
 `;
+
+const Text = styled.span`
+  padding: 4px 8px;
+
+  color: ${(props) => textColor[props.theme][props.mode]};
+  font-size: ${fontSize.xxs};
+  font-weight: ${(props) =>
+    props.isBold ? fontWeight.bold : fontWeight.regular};
+  line-height: 12px;
+`;
+
 export default Badge;

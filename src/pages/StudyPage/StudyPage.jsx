@@ -5,7 +5,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { themeState, navTypeState } from "@/recoil/theme";
 
 import { SubNavbar } from "@/components";
-import { CardGrid, StudyIntro } from "@/containers";
+import { CardResponsiveGrid, StudyIntro } from "@/containers";
 
 const StudyPage = () => {
   const theme = useRecoilValue(themeState);
@@ -31,13 +31,19 @@ const StudyPage = () => {
   };
 
   return (
-    <Layout>
+    <>
       <StudyIntro />
       <ContentBox>
-        <StickyNav data={categoryData} theme={theme} onClick={handleCategory} />
+        <StickyNavBox>
+          <StickyNav
+            data={categoryData}
+            theme={theme}
+            onClick={handleCategory}
+          />
+        </StickyNavBox>
         <CardGrid data={cardData} theme={theme} />
       </ContentBox>
-    </Layout>
+    </>
   );
 };
 
@@ -57,6 +63,7 @@ const categoryData = [
     title: "나의 스터디",
   },
 ];
+
 const cardData = [
   {
     contents: {
@@ -190,17 +197,23 @@ const cardData = [
   },
 ];
 
-const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 const ContentBox = styled.div`
   display: flex;
-  margin: 90px;
+  justify-content: center;
+  gap: 100px;
+  max-width: 1280px;
+
+  padding: 80px 20px 20px 20px;
+  margin: auto;
 `;
+
+const StickyNavBox = styled.div``;
+
 const StickyNav = styled(SubNavbar)`
   position: sticky;
-  top: 150px;
-  align-self: flex-start;
+  top: 300px;
+`;
+
+const CardGrid = styled(CardResponsiveGrid)`
+  width: calc(100% - 320px);
 `;

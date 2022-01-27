@@ -29,6 +29,9 @@ const Navbar = ({ isLogin, ...props }) => {
 
   const handleTheme = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
+    theme === "light"
+      ? localStorage.setItem("theme", "dark")
+      : localStorage.setItem("theme", "light");
   };
 
   const handleClick = (name) => {

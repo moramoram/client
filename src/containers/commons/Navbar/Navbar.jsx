@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { themeState } from "@/recoil/theme";
 
+import { useMediaQuery } from "react-responsive";
+
 import { NavItem } from "./NavItem";
 import { Avatar, Button, Dropdown, Switch } from "@/components";
 import { Logo, Icon } from "@/foundations";
@@ -49,6 +51,13 @@ const Navbar = ({ isLogin, ...props }) => {
       document.removeEventListener("click", handleClickOutside, true);
     };
   }, [dropdownOpen]);
+
+  const isPc = useMediaQuery({
+    query: "(min-width:996px)",
+  });
+  const isMobile = useMediaQuery({
+    query: "(max-width:995px)",
+  });
 
   return (
     <Layout {...props}>

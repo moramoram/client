@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
-import { colors } from "@/_shared";
 import { SubNavbar } from "@/components";
 import { Authorization, MyInfo, MyFeed, MyComment } from "@/containers";
 

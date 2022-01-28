@@ -35,9 +35,7 @@ const Navbar = ({ isLogin, ...props }) => {
   };
 
   const handleClick = (name) => {
-    name === current
-      ? window.scrollTo({ top: 0, behavior: "smooth" })
-      : window.scrollTo({ top: 0 });
+    name === current && window.scrollTo({ top: 0, behavior: "smooth" });
     setCurrent(name);
   };
 

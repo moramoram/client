@@ -6,9 +6,7 @@ import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { themeState } from "@/recoil/theme";
 
-import { useMediaQuery } from "react-responsive";
-
-import { NavItem } from "./NavItem";
+import { NavDefaultItem } from "./NavDefaultItem";
 import { Avatar, Button, Dropdown, Switch } from "@/components";
 import { Logo, Icon } from "@/foundations";
 import { colors, animations } from "@/_shared";
@@ -23,7 +21,7 @@ const TYPE = {
   TRANSPARENT: "transparent",
 };
 
-const Navbar = ({ isLogin, ...props }) => {
+const NavDefault = ({ isLogin, navData, ...props }) => {
   const [current, setCurrent] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [theme, setTheme] = useRecoilState(themeState);
@@ -52,30 +50,23 @@ const Navbar = ({ isLogin, ...props }) => {
     };
   }, [dropdownOpen]);
 
-  const isPc = useMediaQuery({
-    query: "(min-width:996px)",
-  });
-  const isMobile = useMediaQuery({
-    query: "(max-width:995px)",
-  });
-
   return (
     <Layout {...props}>
       <FlexBox>
         <Link to=".">
-          <Logo width="80" height="20 " {...props} />
+          <Logo width="80" height="20" {...props} />
         </Link>
         <NavbarItemBox>
           {navData.map(({ name, title, url }, idx) => {
             return (
               <NavItemLink to={url} key={idx}>
-                <NavItem
+                <NavDefaultItem
                   {...props}
                   onClick={() => handleClick(name)}
                   status={current === name ? "active" : "default"}
                 >
                   {title}
-                </NavItem>
+                </NavDefaultItem>
               </NavItemLink>
             );
           })}
@@ -109,39 +100,22 @@ const Navbar = ({ isLogin, ...props }) => {
   );
 };
 
-Navbar.propTypes = {
+NavDefault.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   type: PropTypes.oneOf(Object.values(TYPE)),
   isLogin: PropTypes.bool,
   isStatic: PropTypes.bool,
+  navData: PropTypes.array,
 };
 
-Navbar.defaultProps = {
+NavDefault.defaultProps = {
   theme: THEME.LIGHT,
   type: TYPE.DEFAULT,
   isLogin: true,
   isStatic: false,
 };
 
-export default Navbar;
-
-const navData = [
-  {
-    name: "community",
-    title: "커뮤니티",
-    url: "community",
-  },
-  {
-    name: "study",
-    title: "스터디",
-    url: "study",
-  },
-  {
-    name: "jobs",
-    title: "취업정보",
-    url: "job",
-  },
-];
+export default NavDefault;
 
 const bgColor = {
   dark: {
@@ -170,6 +144,7 @@ const Layout = styled.div`
   justify-content: space-between;
   align-items: center;
   position: ${(props) => (props.isStatic ? "static" : "fixed")};
+  z-index: 9999;
 
   width: 100%;
   border-bottom: 1px solid ${(props) => borderColor[props.theme][props.type]};
@@ -183,7 +158,14 @@ const FlexBox = styled.div`
   gap: 2rem;
   align-items: center;
   position: relative;
-  padding: 0px 90px;
+
+  :first-child {
+    padding-left: 8%;
+  }
+
+  :last-child {
+    padding-right: 10%;
+  }
 
   svg,
   div {

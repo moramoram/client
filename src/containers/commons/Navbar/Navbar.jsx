@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 import { useMediaQuery } from "react-responsive";
 
-import Navbar from "../Navbar";
-import { NavVertical } from "../NavVertical";
+import { NavDefault } from "./NavDefault";
+import { NavMobile } from "./NavMobile";
 
 const THEME = {
   DARK: "dark",
@@ -16,7 +16,7 @@ const TYPE = {
   TRANSPARENT: "transparent",
 };
 
-const NavbarResponsive = ({ ...props }) => {
+const Navbar = ({ ...props }) => {
   const isPc = useMediaQuery({
     query: "(min-width:980px)",
   });
@@ -26,24 +26,24 @@ const NavbarResponsive = ({ ...props }) => {
 
   return (
     <>
-      {isPc && <Navbar {...props} />}
-      {isMobile && <NavVertical {...props} />}
+      {isPc && <NavDefault {...props} />}
+      {isMobile && <NavMobile {...props} />}
     </>
   );
 };
 
-NavbarResponsive.propTypes = {
+Navbar.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   type: PropTypes.oneOf(Object.values(TYPE)),
   isLogin: PropTypes.bool,
   isStatic: PropTypes.bool,
 };
 
-NavbarResponsive.defaultProps = {
+Navbar.defaultProps = {
   theme: THEME.LIGHT,
   type: TYPE.DEFAULT,
   isLogin: true,
   isStatic: false,
 };
 
-export default NavbarResponsive;
+export default Navbar;

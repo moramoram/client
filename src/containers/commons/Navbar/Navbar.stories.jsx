@@ -1,9 +1,9 @@
 import React from "react";
-import NavbarResponsive from ".";
+import Navbar from ".";
 
 export default {
-  title: "Containers/NavbarResponsive",
-  component: NavbarResponsive,
+  title: "Containers/Navbar",
+  component: Navbar,
 };
 
 const navData = [
@@ -37,7 +37,7 @@ const userMenuData = [
   },
 ];
 
-export const Default = (args) => <NavbarResponsive {...args} />;
+export const Default = (args) => <Navbar {...args} />;
 
 Default.args = {
   navData,
@@ -46,7 +46,7 @@ Default.args = {
 
 export const AllTypes = () => (
   <>
-    <NavbarResponsive
+    <Navbar
       theme="light"
       isStatic
       isLogin={false}
@@ -54,14 +54,14 @@ export const AllTypes = () => (
       userMenuData={userMenuData}
     />
     <br />
-    <NavbarResponsive
+    <Navbar
       theme="light"
       isStatic
       navData={navData}
       userMenuData={userMenuData}
     />
     <br />
-    <NavbarResponsive
+    <Navbar
       theme="light"
       type="transparent"
       isStatic
@@ -69,7 +69,7 @@ export const AllTypes = () => (
       userMenuData={userMenuData}
     />
     <br />
-    <NavbarResponsive
+    <Navbar
       theme="dark"
       isStatic
       isLogin={false}
@@ -77,14 +77,14 @@ export const AllTypes = () => (
       userMenuData={userMenuData}
     />
     <br />
-    <NavbarResponsive
+    <Navbar
       theme="dark"
       isStatic
       navData={navData}
       userMenuData={userMenuData}
     />
     <br />
-    <NavbarResponsive
+    <Navbar
       theme="dark"
       type="transparent"
       isStatic

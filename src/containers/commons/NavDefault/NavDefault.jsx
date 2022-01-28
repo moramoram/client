@@ -87,10 +87,10 @@ const NavDefault = ({ isLogin, navData, ...props }) => {
           </>
         ) : (
           <ButtonBox>
-            <Button mode="secondary" {...props}>
+            <Button mode="secondary" width="142px" {...props}>
               로그인
             </Button>
-            <Button mode="primary" {...props}>
+            <Button mode="primary" width="142px" {...props}>
               회원가입
             </Button>
           </ButtonBox>

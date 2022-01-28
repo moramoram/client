@@ -1,5 +1,5 @@
 import React from "react";
-import { NavDefault } from "./";
+import { NavDefault } from ".";
 
 export default {
   title: "Containers/Navbar/NavDefault",

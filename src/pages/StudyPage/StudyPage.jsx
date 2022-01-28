@@ -5,7 +5,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { themeState, navTypeState } from "@/recoil/theme";
 
 import { SubNavbar } from "@/components";
-import { CardResponsiveGrid, StudyIntro } from "@/containers";
+import { CardGrid, StudyIntro } from "@/containers";
 
 const StudyPage = () => {
   const theme = useRecoilValue(themeState);
@@ -41,7 +41,7 @@ const StudyPage = () => {
             onClick={handleCategory}
           />
         </StickyNavBox>
-        <CardGrid data={cardData} theme={theme} />
+        <CardGridBox data={cardData} theme={theme} />
       </ContentBox>
     </>
   );
@@ -73,7 +73,7 @@ const cardData = [
       src: "",
     },
     badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
+    id: "1",
   },
   {
     contents: {
@@ -83,7 +83,7 @@ const cardData = [
       src: "",
     },
     badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
+    id: "1",
   },
   {
     contents: {
@@ -93,7 +93,7 @@ const cardData = [
       src: "",
     },
     badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
+    id: "1",
   },
   {
     contents: {
@@ -103,7 +103,7 @@ const cardData = [
       src: "",
     },
     badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
+    id: "1",
   },
   {
     contents: {
@@ -113,7 +113,7 @@ const cardData = [
       src: "",
     },
     badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
+    id: "1",
   },
   {
     contents: {
@@ -123,7 +123,7 @@ const cardData = [
       src: "",
     },
     badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
+    id: "1",
   },
   {
     contents: {
@@ -133,7 +133,7 @@ const cardData = [
       src: "",
     },
     badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
+    id: "1",
   },
   {
     contents: {
@@ -143,7 +143,7 @@ const cardData = [
       src: "",
     },
     badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
+    id: "1",
   },
   {
     contents: {
@@ -153,7 +153,7 @@ const cardData = [
       src: "",
     },
     badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
+    id: "1",
   },
   {
     contents: {
@@ -163,7 +163,7 @@ const cardData = [
       src: "",
     },
     badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
+    id: "1",
   },
   {
     contents: {
@@ -173,7 +173,7 @@ const cardData = [
       src: "",
     },
     badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
+    id: "1",
   },
   {
     contents: {
@@ -183,7 +183,7 @@ const cardData = [
       src: "",
     },
     badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
+    id: "1",
   },
   {
     contents: {
@@ -193,7 +193,7 @@ const cardData = [
       src: "",
     },
     badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
+    id: "1",
   },
 ];
 
@@ -214,6 +214,6 @@ const StickyNav = styled(SubNavbar)`
   top: 150px;
 `;
 
-const CardGrid = styled(CardResponsiveGrid)`
+const CardGridBox = styled(CardGrid)`
   width: calc(100% - 320px);
 `;

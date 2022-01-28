@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
+import { useParams } from "react-router-dom";
+
 import { JobDetail, JobSideBar } from "@/containers";
 import { daysFromToday } from "@/utils";
 
-const JobsDetailPage = ({ match }) => {
+const JobsDetailPage = () => {
+  const itemId = useParams().jobId;
+  console.log(itemId);
+
   return (
     <Layout>
       <JobDetail

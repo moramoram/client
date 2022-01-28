@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
+import { useParams } from "react-router-dom";
+
 import { StudyDetail, StudySideBar } from "@/containers";
 import { daysFromToday } from "@/utils";
 
-const StudyDetailPage = ({ match }) => {
+const StudyDetailPage = () => {
+  const itemId = useParams().studyId;
+  console.log(itemId);
+
   return (
     <Layout>
       <StudyDetail

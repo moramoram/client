@@ -10,9 +10,9 @@ const FeedSmallGrid = ({ data, isLoading, ...props }) => {
   const feeds = isLoading ? (
     <FeedItemSmall isLoading {...props} />
   ) : (
-    data.map(({ url, ...props }, idx) => {
+    data.map(({ id, ...props }, idx) => {
       return (
-        <FeedItemLink to={url} key={idx}>
+        <FeedItemLink to={id} key={idx}>
           <FeedItemSmall {...props} />
         </FeedItemLink>
       );

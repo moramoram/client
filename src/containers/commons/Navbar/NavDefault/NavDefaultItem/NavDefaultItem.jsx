@@ -19,7 +19,7 @@ const TYPE = {
   TRANSPARENT: "transparent",
 };
 
-const NavItem = ({ children, ...props }) => {
+const NavDefaultItem = ({ children, ...props }) => {
   return (
     <Layout {...props}>
       <Text {...props}>{children}</Text>
@@ -27,21 +27,21 @@ const NavItem = ({ children, ...props }) => {
   );
 };
 
-NavItem.propTypes = {
+NavDefaultItem.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   status: PropTypes.oneOf(Object.values(STATUS)),
   type: PropTypes.oneOf(Object.values(TYPE)),
   children: PropTypes.node.isRequired,
 };
 
-NavItem.defaultProps = {
+NavDefaultItem.defaultProps = {
   theme: THEME.LIGHT,
   status: STATUS.DEFAULT,
   type: TYPE.DEFAULT,
   children: "Menu",
 };
 
-export default NavItem;
+export default NavDefaultItem;
 
 const textColor = {
   dark: {

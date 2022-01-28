@@ -1,9 +1,9 @@
 import React from "react";
-import Navbar from ".";
+import { NavMobile } from ".";
 
 export default {
-  title: "Containers/Navbar",
-  component: Navbar,
+  title: "Containers/Navbar/NavMobile",
+  component: NavMobile,
 };
 
 const navData = [
@@ -37,7 +37,7 @@ const userMenuData = [
   },
 ];
 
-export const Default = (args) => <Navbar {...args} />;
+export const Default = (args) => <NavMobile {...args} />;
 
 Default.args = {
   navData,
@@ -46,50 +46,18 @@ Default.args = {
 
 export const AllTypes = () => (
   <>
-    <Navbar
+    <NavMobile
+      navData={navData}
+      userMenuData={userMenuData}
       theme="light"
       isStatic
-      isLogin={false}
-      navData={navData}
-      userMenuData={userMenuData}
     />
     <br />
-    <Navbar
-      theme="light"
-      isStatic
+    <NavMobile
       navData={navData}
       userMenuData={userMenuData}
-    />
-    <br />
-    <Navbar
-      theme="light"
-      type="transparent"
-      isStatic
-      navData={navData}
-      userMenuData={userMenuData}
-    />
-    <br />
-    <Navbar
       theme="dark"
       isStatic
-      isLogin={false}
-      navData={navData}
-      userMenuData={userMenuData}
-    />
-    <br />
-    <Navbar
-      theme="dark"
-      isStatic
-      navData={navData}
-      userMenuData={userMenuData}
-    />
-    <br />
-    <Navbar
-      theme="dark"
-      type="transparent"
-      isStatic
-      navData={navData}
-      userMenuData={userMenuData}
     />
   </>
 );

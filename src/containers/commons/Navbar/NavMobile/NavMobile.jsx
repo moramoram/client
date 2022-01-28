@@ -66,19 +66,17 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
       {navbarOpen && (
         <NavDropdown {...props}>
           <LinkBox>
-            {navData.map(({ name, title, url }, idx) => {
-              return (
-                <NavItemLink to={url} key={idx}>
-                  <NavMobileItem
-                    {...props}
-                    onClick={() => handleClickItem(name)}
-                    status={current === name ? "active" : "default"}
-                  >
-                    {title}
-                  </NavMobileItem>
-                </NavItemLink>
-              );
-            })}
+            {navData.map(({ name, title, url }, idx) => (
+              <NavItemLink to={url} key={idx}>
+                <NavMobileItem
+                  {...props}
+                  onClick={() => handleClickItem(name)}
+                  status={current === name ? "active" : "default"}
+                >
+                  {title}
+                </NavMobileItem>
+              </NavItemLink>
+            ))}
           </LinkBox>
 
           {isLogin ? (
@@ -106,17 +104,15 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
                 </IconBox>
               </UserInfoBox>
               <LinkBox>
-                {userMenuData.map(({ name, title, url }, idx) => {
-                  return (
-                    <UserMobileItem
-                      {...props}
-                      onClick={() => handleClickItem(name)}
-                      status={current === name ? "active" : "default"}
-                    >
-                      {title}
-                    </UserMobileItem>
-                  );
-                })}
+                {userMenuData.map(({ name, title, url }, idx) => (
+                  <UserMobileItem
+                    {...props}
+                    onClick={() => handleClickItem(name)}
+                    status={current === name ? "active" : "default"}
+                  >
+                    {title}
+                  </UserMobileItem>
+                ))}
               </LinkBox>
             </>
           ) : (

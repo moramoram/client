@@ -57,19 +57,17 @@ const NavDefault = ({ isLogin, navData, ...props }) => {
           <Logo width="80" height="20" {...props} />
         </Link>
         <NavbarItemBox>
-          {navData.map(({ name, title, url }, idx) => {
-            return (
-              <NavItemLink to={url} key={idx}>
-                <NavDefaultItem
-                  {...props}
-                  onClick={() => handleClick(name)}
-                  status={current === name ? "active" : "default"}
-                >
-                  {title}
-                </NavDefaultItem>
-              </NavItemLink>
-            );
-          })}
+          {navData.map(({ name, title, url }, idx) => (
+            <NavItemLink to={url} key={idx}>
+              <NavDefaultItem
+                {...props}
+                onClick={() => handleClick(name)}
+                status={current === name ? "active" : "default"}
+              >
+                {title}
+              </NavDefaultItem>
+            </NavItemLink>
+          ))}
         </NavbarItemBox>
       </FlexBox>
       <FlexBox ref={navbarRight}>

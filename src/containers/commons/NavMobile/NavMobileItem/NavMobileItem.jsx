@@ -19,7 +19,7 @@ const TYPE = {
   TRANSPARENT: "transparent",
 };
 
-const NavVerticalItem = ({ children, ...props }) => {
+const NavMobileItem = ({ children, ...props }) => {
   return (
     <Layout {...props}>
       <Text {...props}>{children}</Text>
@@ -27,25 +27,25 @@ const NavVerticalItem = ({ children, ...props }) => {
   );
 };
 
-NavVerticalItem.propTypes = {
+NavMobileItem.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   status: PropTypes.oneOf(Object.values(STATUS)),
   type: PropTypes.oneOf(Object.values(TYPE)),
   children: PropTypes.node.isRequired,
 };
 
-NavVerticalItem.defaultProps = {
+NavMobileItem.defaultProps = {
   theme: THEME.LIGHT,
   status: STATUS.DEFAULT,
   type: TYPE.DEFAULT,
   children: "Menu",
 };
 
-export default NavVerticalItem;
+export default NavMobileItem;
 
 const bgColor = {
   default: "#00000000",
-  active: "#EDF3FE",
+  active: "rgba(74, 131, 239, 0.1);",
 };
 
 const textColor = {
@@ -85,8 +85,8 @@ const Layout = styled.div`
   display: flex;
   align-items: center;
 
-  height: 40px;
-  padding-left: 2rem;
+  height: 48px;
+  padding-left: 8%;
   border-left: 4px solid ${(props) => borderColor[props.status]};
 
   background-color: ${(props) => bgColor[props.status]};
@@ -97,10 +97,9 @@ const Layout = styled.div`
 
 const Text = styled.span`
   display: inline-block;
-  padding-top: 0.2rem;
 
   color: ${(props) => textColor[props.theme][props.type][props.status]};
-  font-size: ${fontSize.sm};
+  font-size: ${fontSize.p};
   font-weight: ${(props) => textWeight[props.status]};
   text-decoration: none;
 

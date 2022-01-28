@@ -221,6 +221,9 @@ const Navbar = styled.div`
 `;
 
 const NavDropdown = styled.div`
+  padding-bottom: 1rem;
+  box-shadow: ${(props) => boxShadow[props.theme]};
+
   ${(props) =>
     props.type === TYPE.TRANSPARENT &&
     `
@@ -232,11 +235,9 @@ const NavDropdown = styled.div`
     `}
 
   background-color: ${(props) => dropdownBgColor[props.theme][props.type]};
-  animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
-  box-shadow: ${(props) => boxShadow[props.theme]};
-  padding-bottom: 1rem;
-
   backdrop-filter: blur(10px);
+
+  animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
   transition: 0.3s;
 `;
 
@@ -256,6 +257,7 @@ const UserInfoBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 18px 10% 15px 8%;
   border-top: 1px solid ${(props) => borderColor[props.theme][props.type]};
 `;

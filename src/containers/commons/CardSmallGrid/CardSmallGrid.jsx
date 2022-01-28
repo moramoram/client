@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 
 import { CardSmall } from "@/components";
 
-const CardSmallGrid = ({ data, isLoading, ...props }) => {
+const CardSmallGrid = ({ theme, data, isLoading, ...props }) => {
   const cards = isLoading ? (
-    <CardSmall isLoading {...props} />
+    <CardSmall theme={theme} isLoading {...props} />
   ) : (
     data.map(({ url, ...props }, idx) => {
       return (
         <CardItemLink to={url} key={idx}>
-          <CardSmall {...props} />
+          <CardSmall theme={theme} {...props} />
         </CardItemLink>
       );
     })

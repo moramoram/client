@@ -21,8 +21,8 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
   };
 
   return (
-    <SideBarWrapper isLoading={isLoading} {...props}>
-      <ImageBox className="thumbnail" isLoading={isLoading} />
+    <Layout isLoading={isLoading} {...props}>
+      <ImageBox className="thumbnail" isLoading={isLoading} {...props} />
       <SideBarBox>
         <SideBarItem
           className="contents-item"
@@ -30,6 +30,7 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
           icon="target"
           description={data.type}
           isLoading={isLoading}
+          {...props}
         />
         <SideBarItem
           className="contents-item"
@@ -37,6 +38,7 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
           icon="building"
           description={data.target}
           isLoading={isLoading}
+          {...props}
         />
         <SideBarItem
           className="contents-item"
@@ -44,6 +46,7 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
           icon="users"
           description={data.people}
           isLoading={isLoading}
+          {...props}
         />
         <SideBarItem
           className="contents-item"
@@ -51,6 +54,7 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
           icon="mapPin"
           description={data.location}
           isLoading={isLoading}
+          {...props}
         />
       </SideBarBox>
       <BadgeBox>
@@ -63,6 +67,7 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
               mode="secondary"
               color="gray100"
               isBold
+              {...props}
             >
               {children}
             </Badge>
@@ -78,7 +83,7 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
         <Icon icon="bookmark" />
         북마크 하기
       </Button>
-    </SideBarWrapper>
+    </Layout>
   );
 };
 
@@ -102,9 +107,12 @@ const SideBarBox = styled.div`
 
 const BadgeBox = styled.div`
   margin: 20px 10px;
+  div {
+    margin-left: 4px;
+  }
 `;
 
-const SideBarWrapper = styled.div`
+const Layout = styled.div`
   display: block;
   border-radius: 16px;
   width: 400px;

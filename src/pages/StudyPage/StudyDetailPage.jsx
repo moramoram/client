@@ -2,21 +2,26 @@ import React from "react";
 import styled from "styled-components";
 
 import { useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { themeState } from "@/recoil/theme";
 
 import { StudyDetail, StudySideBar } from "@/containers";
 import { daysFromToday } from "@/utils";
 
 const StudyDetailPage = () => {
+  const theme = useRecoilValue(themeState);
+
   const itemId = useParams().studyId;
   console.log(itemId);
 
   return (
     <Layout>
       <StudyDetail
+        theme={theme}
         titleData={titleData}
         commentData={commentData}
       ></StudyDetail>
-      <FixedSidebar {...sidbarargs} />
+      <FixedSidebar theme={theme} {...sidbarargs} />
     </Layout>
   );
 };

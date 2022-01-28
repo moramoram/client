@@ -12,23 +12,23 @@ const THEME = {
   DARK: "dark",
 };
 
-const StudyDetail = ({ titleData, commentData, ...props }) => {
+const StudyDetail = ({ theme, titleData, commentData, ...props }) => {
   return (
     <Layout>
-      <TitleBox {...props}>
-        <Highlight {...props}>{titleData.highlight}</Highlight>
-        <Title {...props}>{titleData.title}</Title>
-        <SubTitle {...props}>
-          <Avatar size="medium" src={titleData.src} {...props} />
+      <TitleBox theme={theme}>
+        <Highlight theme={theme}>{titleData.highlight}</Highlight>
+        <Title theme={theme}>{titleData.title}</Title>
+        <SubTitle theme={theme}>
+          <Avatar size="medium" src={titleData.src} theme={theme} />
           {titleData.subtitle}
         </SubTitle>
       </TitleBox>
-      <Toc items={tocItem} />
+      <Toc items={tocItem} theme={theme} />
       <Content />
       <CommentBox>
-        <BoxTitle>댓글</BoxTitle>
-        <CommentInput />
-        <CommentList data={commentData} />
+        <BoxTitle theme={theme}>댓글</BoxTitle>
+        <CommentInput theme={theme} />
+        <CommentList data={commentData} theme={theme} />
       </CommentBox>
     </Layout>
   );

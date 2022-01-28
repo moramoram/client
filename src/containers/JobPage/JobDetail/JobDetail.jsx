@@ -12,24 +12,24 @@ const THEME = {
   DARK: "dark",
 };
 
-const JobDetail = ({ titleData, cardData, commentData, ...props }) => {
+const JobDetail = ({ theme, titleData, cardData, commentData, ...props }) => {
   return (
     <Layout>
-      <TitleBox {...props}>
-        <Highlight {...props}>{titleData.highlight}</Highlight>
-        <Title {...props}>{titleData.title}</Title>
-        <SubTitle {...props}>{titleData.subtitle}</SubTitle>
+      <TitleBox theme={theme}>
+        <Highlight theme={theme}>{titleData.highlight}</Highlight>
+        <Title theme={theme}>{titleData.title}</Title>
+        <SubTitle theme={theme}>{titleData.subtitle}</SubTitle>
       </TitleBox>
-      <Toc />
+      <Toc theme={theme} />
       <Content />
       <CardBox>
-        <BoxTitle>스터디</BoxTitle>
-        <CardSmallGrid data={cardData} />
+        <BoxTitle theme={theme}>스터디</BoxTitle>
+        <CardSmallGrid data={cardData} theme={theme} />
       </CardBox>
       <CommentBox>
         <BoxTitle>이 기업에 대한 의견을 나누세요</BoxTitle>
-        <CommentInput />
-        <CommentList data={commentData} />
+        <CommentInput theme={theme} />
+        <CommentList data={commentData} theme={theme} />
       </CommentBox>
     </Layout>
   );

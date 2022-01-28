@@ -10,7 +10,7 @@ const THEME = {
   DARK: "dark",
 };
 
-const JobSideBar = ({ data, badges, isLoading, ...props }) => {
+const JobSideBar = ({ theme, data, badges, isLoading, ...props }) => {
   if (isLoading) {
     data = new Array(4);
     badges = ["", "", ""];
@@ -25,12 +25,13 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
 
   return (
     <SideBarWrapper isLoading={isLoading} {...props}>
-      <ImageBox className="thumbnail" isLoading={isLoading} />
+      <ImageBox className="thumbnail" isLoading={isLoading} theme={theme} />
       <SideBarBox>
         <SideBarItem
           className="contents-item"
           title="직무"
           icon="briefcase"
+          theme={theme}
           description={data.task}
           isLoading={isLoading}
         />
@@ -38,6 +39,7 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
           className="contents-item"
           title="고용 형태"
           icon="building"
+          theme={theme}
           description={data.type}
           isLoading={isLoading}
         />
@@ -45,6 +47,7 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
           className="contents-item"
           title="경력"
           icon="monitor"
+          theme={theme}
           description={data.career}
           isLoading={isLoading}
         />
@@ -52,6 +55,7 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
           className="contents-item"
           title="근무 위치"
           icon="mapPin"
+          theme={theme}
           description={data.location}
           isLoading={isLoading}
         />
@@ -62,6 +66,7 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
             <Badge
               className="badge-item"
               key={idx}
+              theme={theme}
               isLoading={isLoading}
               mode="secondary"
               color="gray100"

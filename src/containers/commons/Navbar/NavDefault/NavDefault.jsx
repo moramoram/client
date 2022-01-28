@@ -87,10 +87,10 @@ const NavDefault = ({ isLogin, navData, ...props }) => {
           </>
         ) : (
           <ButtonBox>
-            <Button mode="secondary" width="142px" {...props}>
+            <Button mode="secondary" width="150px" {...props}>
               로그인
             </Button>
-            <Button mode="primary" width="142px" {...props}>
+            <Button mode="primary" width="150px" {...props}>
               회원가입
             </Button>
           </ButtonBox>
@@ -198,5 +198,5 @@ const UserDropdown = styled(Dropdown)`
 
 const ButtonBox = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
 `;

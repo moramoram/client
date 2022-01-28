@@ -1,20 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { Outlet } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { themeState, navTypeState } from "@/recoil/theme";
+import { isLogined } from "@/recoil/auth";
 
 import { Navbar } from "@/containers/commons";
 import { colors } from "@/_shared";
 
+import { SignUpModal } from "./components";
+
 const Layout = () => {
   const theme = useRecoilValue(themeState);
   const navType = useRecoilValue(navTypeState);
+  const LoginState = useRecoilValue(isLogined);
 
   return (
     <LayoutBox theme={theme}>
-      <Nav theme={theme} type={navType} />
+      <SignUpModal />
+      <Nav theme={theme} type={navType} isLogin={LoginState} />
       <Outlet />
     </LayoutBox>
   );
@@ -33,5 +38,5 @@ const LayoutBox = styled.div`
 `;
 
 const Nav = styled(Navbar)`
-  z-index: 9999;
+  z-index: 999;
 `;

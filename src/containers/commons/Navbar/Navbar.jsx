@@ -200,7 +200,7 @@ const SwitchBox = styled.div`
 `;
 
 const UserDropdown = styled(Dropdown)`
-  z-index: 9999;
+  z-index: 1000;
   top: 36px;
   right: 20px;
   animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);

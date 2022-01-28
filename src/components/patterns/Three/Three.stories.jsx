@@ -6,8 +6,4 @@ export default {
   component: Three,
 };
 
-export const Default = () => (
-  <>
-    <Three />
-  </>
-);
+export const Default = () => <Three />;

@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { themeState, navTypeState } from "@/recoil/theme";
 
+import { useMediaQuery } from "react-responsive";
+
 import { SubNavbar } from "@/components";
 import { CardResponsiveGrid, JobIntro } from "@/containers";
 
@@ -26,6 +28,13 @@ const JobsPage = () => {
     return () => window.removeEventListener("scroll", onScroll);
   });
 
+  const isPc = useMediaQuery({
+    query: "(min-width:980px)",
+  });
+  const isMobile = useMediaQuery({
+    query: "(max-width:979px)",
+  });
+
   const handleCategory = (e) => {
     console.log(e);
   };
@@ -34,14 +43,19 @@ const JobsPage = () => {
     <>
       <JobIntro />
       <ContentBox>
-        <StickyNavBox>
-          <StickyNav
-            data={categoryData}
-            theme={theme}
-            onClick={handleCategory}
-          />
-        </StickyNavBox>
-        <CardGrid data={cardData} theme={theme} />
+        {isPc && (
+          <>
+            <StickyNavBox>
+              <StickyNav
+                data={categoryData}
+                theme={theme}
+                onClick={handleCategory}
+              />
+            </StickyNavBox>
+            <CardGrid data={cardData} theme={theme} />
+          </>
+        )}
+        {isMobile && <CardResponsiveGrid data={cardData} theme={theme} />}
       </ContentBox>
     </>
   );

@@ -22,34 +22,16 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
     <SideBarWrapper isLoading={isLoading} {...props}>
       <ImageBox className="thumbnail" isLoading={isLoading} />
       <SideBarBox>
-        <SideBarItem
-          className="contents-item"
-          title="종류"
-          icon="target"
-          description={data.type}
-          isLoading={isLoading}
-        />
-        <SideBarItem
-          className="contents-item"
-          title="목표 기업"
-          icon="building"
-          description={data.target}
-          isLoading={isLoading}
-        />
-        <SideBarItem
-          className="contents-item"
-          title="모집 인원"
-          icon="users"
-          description={data.people}
-          isLoading={isLoading}
-        />
-        <SideBarItem
-          className="contents-item"
-          title="스터디 지역"
-          icon="mapPin"
-          description={data.location}
-          isLoading={isLoading}
-        />
+        {summaryData.map(({ title, icon, id }) => (
+          <SideBarItem
+            className="contents-item"
+            title={title}
+            icon={icon}
+            description={data[id]}
+            isLoading={isLoading}
+            {...props}
+          />
+        ))}
       </SideBarBox>
       <BadgeBox>
         {badges.map((children, idx) => {
@@ -101,6 +83,29 @@ StudySideBar.defaultProps = {
 };
 
 export default StudySideBar;
+
+const summaryData = [
+  {
+    title: "종류",
+    icon: "target",
+    id: "type",
+  },
+  {
+    title: "목표 기업",
+    icon: "building",
+    id: "target",
+  },
+  {
+    title: "모집 인원",
+    icon: "users",
+    id: "people",
+  },
+  {
+    title: "스터디 지역",
+    icon: "mapPin",
+    id: "location",
+  },
+];
 
 const SideBarBox = styled.div`
   margin: 10px 0px;

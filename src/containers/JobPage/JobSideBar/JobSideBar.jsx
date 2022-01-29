@@ -20,36 +20,18 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
 
   return (
     <SideBarWrapper isLoading={isLoading} {...props}>
-      <ImageBox className="thumbnail" isLoading={isLoading} />
-      <SideBarBox>
-        <SideBarItem
-          className="contents-item"
-          title="직무"
-          icon="briefcase"
-          description={data.task}
-          isLoading={isLoading}
-        />
-        <SideBarItem
-          className="contents-item"
-          title="고용 형태"
-          icon="building"
-          description={data.type}
-          isLoading={isLoading}
-        />
-        <SideBarItem
-          className="contents-item"
-          title="경력"
-          icon="monitor"
-          description={data.career}
-          isLoading={isLoading}
-        />
-        <SideBarItem
-          className="contents-item"
-          title="근무 위치"
-          icon="mapPin"
-          description={data.location}
-          isLoading={isLoading}
-        />
+      <ImageBox className="thumbnail" isLoading={isLoading} {...props} />
+      <SideBarBox {...props}>
+        {summaryData.map(({ title, icon, id }) => (
+          <SideBarItem
+            className="contents-item"
+            title={title}
+            icon={icon}
+            description={data[id]}
+            isLoading={isLoading}
+            {...props}
+          />
+        ))}
       </SideBarBox>
       <BadgeBox>
         {badges.map((children, idx) => {
@@ -61,6 +43,7 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
               mode="secondary"
               color="gray100"
               isBold
+              {...props}
             >
               {children}
             </Badge>
@@ -106,6 +89,29 @@ JobSideBar.defaultProps = {
 };
 
 export default JobSideBar;
+
+const summaryData = [
+  {
+    title: "직무",
+    icon: "briefcase",
+    id: "task",
+  },
+  {
+    title: "고용 형태",
+    icon: "building",
+    id: "type",
+  },
+  {
+    title: "경력",
+    icon: "monitor",
+    id: "career",
+  },
+  {
+    title: "근무 위치",
+    icon: "mapPin",
+    id: "location",
+  },
+];
 
 const SideBarBox = styled.div`
   margin: 10px 0px;

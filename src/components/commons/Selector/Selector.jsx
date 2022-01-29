@@ -106,6 +106,11 @@ const msgColor = {
   error: colors.error,
 };
 
+const hoverColor = {
+  default: "#4A83EF77",
+  error: "#f04438cf",
+};
+
 const insetColor = {
   default: colors.blue100,
   error: "#f04438cf",
@@ -124,7 +129,7 @@ const activeColor = {
 const customStyles = (props) => ({
   control: (provided) => ({
     ...provided,
-    padding: "2px 6px",
+    padding: "2px 16px",
     border: `1px solid ${borderColor[props.theme]}`,
     borderRadius: "8px",
     boxShadow: [
@@ -137,7 +142,8 @@ const customStyles = (props) => ({
     backgroundColor: bgColor[props.theme],
 
     ":hover": {
-      border: `1px solid ${colors.gray500}`,
+      border: `1px solid ${hoverColor[props.status]}`,
+      boxShadow: `inset 0 0 0 1px ${hoverColor[props.status]}`,
     },
 
     ":focus-within:hover": {

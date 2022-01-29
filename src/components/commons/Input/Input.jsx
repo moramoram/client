@@ -69,6 +69,11 @@ const msgColor = {
   error: colors.error,
 };
 
+const hoverColor = {
+  default: "#4A83EF77",
+  error: "#f04438cf",
+};
+
 const insetColor = {
   default: colors.blue100,
   error: "#f04438cf",
@@ -101,6 +106,8 @@ const InputBox = styled.div`
   color: ${colors.gray500};
   box-shadow: ${shadows.button};
 
+  transition: 0.3s ease;
+
   svg {
     height: 18px;
     width: 18px;
@@ -114,12 +121,11 @@ const InputBox = styled.div`
     `}
 
   :hover {
-    border: 1px solid ${colors.gray500};
+    border: 1px solid ${(props) => hoverColor[props.status]};
+    box-shadow: inset 0 0 0 1px ${(props) => hoverColor[props.status]};
   }
 
   :focus-within {
-    transition: 0.3s;
-
     ${(props) => `
       box-shadow: 0 0 0 3px ${focusColor[props.status]}, inset 0 0 0 1px ${
       insetColor[props.status]

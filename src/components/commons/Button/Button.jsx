@@ -12,6 +12,7 @@ const THEME = {
 const MODE = {
   PRIMARY: "primary",
   SECONDARY: "secondary",
+  ACTIVE: "active",
 };
 
 const Button = ({ isLoading, loadingText, isLink, children, ...props }) => {
@@ -58,32 +59,38 @@ const textColor = {
   light: {
     primary: colors.white,
     secondary: colors.gray600,
+    active: colors.blue200,
   },
   dark: {
     primary: colors.white,
     secondary: colors.white,
+    active: colors.white,
   },
 };
 
 const bgColor = {
   light: {
     primary: colors.blue100,
-    secondary: colors.white,
+    secondary: colors.gray50,
+    active: "#4A83EF22",
   },
   dark: {
     primary: colors.blue100,
     secondary: colors.gray700,
+    active: "#4A83EF33",
   },
 };
 
 const hoverBgColor = {
   light: {
     primary: colors.blue200,
-    secondary: colors.gray50,
+    secondary: colors.gray200,
+    active: "#4A83EF22",
   },
   dark: {
     primary: colors.blue200,
     secondary: colors.gray600,
+    active: "#4A83EF33",
   },
 };
 
@@ -97,14 +104,15 @@ const Layout = styled.button`
   padding: 0px 42px;
 
   border-radius: 8px;
-  border: 1px solid ${(props) => borderColor[props.theme][props.mode]};
+  border: none;
+  /* border: 1px solid ${(props) => borderColor[props.theme][props.mode]}; */
 
   background: ${(props) => bgColor[props.theme][props.mode]};
-  box-shadow: ${shadows.button};
+  /* box-shadow: ${shadows.button}; */
 
   color: ${(props) => textColor[props.theme][props.mode]};
   font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.p};
+  font-size: ${fontSize.sm};
   text-align: center;
   text-decoration: none;
 
@@ -130,7 +138,6 @@ const Layout = styled.button`
   ${(props) =>
     props.isLoading &&
     `
-      border: none;
       cursor: progress !important;
 
       &:hover {
@@ -143,7 +150,6 @@ const Layout = styled.button`
     !props.isDisabled &&
     `
         &:hover {
-          box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
           background: ${hoverBgColor[props.theme][props.mode]};   
         }
         &:active {

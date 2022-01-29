@@ -87,7 +87,7 @@ const Layout = styled.label`
   justify-content: space-between;
   gap: 1rem;
 
-  width: 620px;
+  width: 100%;
   padding: 9px 13px;
   border-radius: 0.5rem;
   box-shadow: ${shadows.base};

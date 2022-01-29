@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -14,16 +14,31 @@ const STATUS = {
   ACTIVE: "active",
 };
 
+const TYPE = {
+  DEFAULT: "default",
+  MOBILE: "mobile",
+};
+
 const SubNavbar = ({ data, theme, onClick, ...props }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const scrollRef = useRef(null);
+  const itemRef = useRef(null);
 
   const handleNavItemClick = (idx) => {
     setSelectedIndex(idx);
     onClick(idx);
+    const current = scrollRef.current;
+    const currentChileren = current.children[idx];
+
+    const move =
+      currentChileren.offsetLeft -
+      current.clientWidth / 2 +
+      currentChileren.clientWidth / 2;
+    current.scrollLeft = move;
   };
 
   return (
-    <SubNavbarWrapper theme={theme} {...props}>
+    <Layout theme={theme} ref={scrollRef} {...props}>
       {data.map(({ id, title }, idx) => {
         return (
           <SubNavbarItem
@@ -31,12 +46,13 @@ const SubNavbar = ({ data, theme, onClick, ...props }) => {
             onClick={() => handleNavItemClick(idx)}
             key={idx}
             status={selectedIndex === id ? "active" : "default"}
+            ref={itemRef}
           >
             {title}
           </SubNavbarItem>
         );
       })}
-    </SubNavbarWrapper>
+    </Layout>
   );
 };
 
@@ -44,30 +60,36 @@ SubNavbar.propTypes = {
   data: PropTypes.array.isRequired,
   theme: PropTypes.oneOf(Object.values(THEME)),
   status: PropTypes.oneOf(Object.values(STATUS)),
+  type: PropTypes.oneOf(Object.values(TYPE)),
   onClick: PropTypes.func,
 };
 
 SubNavbar.defaultProps = {
   theme: THEME.LIGHT,
   status: STATUS.DEFAULT,
+  type: STATUS.DEFAULT,
   onClick: undefined,
 };
 
 export default SubNavbar;
 
-const SubNavbarWrapper = styled.div`
-  width: auto;
-  height: auto;
-  border: 0;
-  margin: 0;
-  background: transparent;
+const Layout = styled.div`
+  display: flex;
+  overflow-x: scroll;
 
-  svg {
-    height: "16";
-    width: "16";
-    margin-right: "6";
-    margin-top: "-2";
-    margin-bottom: "-2";
-    vertical-align: top;
+  ${(props) =>
+    props.type === TYPE.DEFAULT &&
+    `
+      flex-direction: column;
+      align-items: stretch;
+      width: 200px;
+  `}
+
+  > div {
+    flex-shrink: 0;
+  }
+  scroll-behavior: smooth;
+  ::-webkit-scrollbar {
+    display: none;
   }
 `;

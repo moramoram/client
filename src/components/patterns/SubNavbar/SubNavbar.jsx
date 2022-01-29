@@ -22,7 +22,6 @@ const TYPE = {
 const SubNavbar = ({ data, theme, onClick, ...props }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const scrollRef = useRef(null);
-  const itemRef = useRef(null);
 
   const handleNavItemClick = (idx) => {
     setSelectedIndex(idx);
@@ -46,7 +45,6 @@ const SubNavbar = ({ data, theme, onClick, ...props }) => {
             onClick={() => handleNavItemClick(idx)}
             key={idx}
             status={selectedIndex === id ? "active" : "default"}
-            ref={itemRef}
           >
             {title}
           </SubNavbarItem>

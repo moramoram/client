@@ -53,9 +53,10 @@ const JobsPage = () => {
           </StickyNavBox>
           <CardGridBox>
             <InputBox>
-              <Input icon="search" placeholder="직무 검색하기" />
-              <Selector placeholder="기술 스택" isMulti />
+              <Input theme={theme} icon="search" placeholder="직무 검색하기" />
+              <Selector theme={theme} placeholder="기술 스택" isMulti />
               <Selector
+                theme={theme}
                 placeholder="직무"
                 options={[
                   { value: "Frontend", label: "프론트엔드" },
@@ -115,188 +116,16 @@ const categoryData = [
   },
 ];
 
-const cardData = [
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
+const cardData = new Array(24).fill({
+  contents: {
+    title: "주니어 프론트엔드 채용",
+    subtitle: "싸페 디자인 시스템",
+    highlight: "D-day",
+    src: "",
   },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "주니어 프론트엔드 채용",
-      subtitle: "싸페 디자인 시스템",
-      highlight: "D-day",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-];
+  badges: ["JavaScript", "React", "Vue.js"],
+  url: "/job/1",
+});
 
 const ContentBox = styled.div`
   display: flex;

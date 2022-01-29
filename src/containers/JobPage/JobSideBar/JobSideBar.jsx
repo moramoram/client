@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { ImageBox, Badge, Button, SideBarItem } from "@/components";
+import { ImageBox, Badge, Button, BookMark, SideBarItem } from "@/components";
 import { Icon } from "@/foundations";
 
 const THEME = {
@@ -11,17 +11,12 @@ const THEME = {
 };
 
 const JobSideBar = ({ data, badges, isLoading, ...props }) => {
+  const [isMarked, setIsMarked] = useState(false);
+
   if (isLoading) {
     data = new Array(4);
     badges = ["", "", ""];
   }
-
-  const handClickPriamry = () => {
-    console.log("hello");
-  };
-  const handClickSecondary = () => {
-    console.log("hello");
-  };
 
   return (
     <SideBarWrapper isLoading={isLoading} {...props}>
@@ -73,22 +68,26 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
         })}
       </BadgeBox>
 
-      <Button
-        onClick={() => handClickPriamry()}
-        isLoading={isLoading}
-        width="100%"
-      >
+      <Button isLoading={isLoading} minWidth="380px">
         <Icon icon="edit" />
         지원하기
       </Button>
       <Button
-        onClick={() => handClickSecondary()}
-        sLoading={isLoading}
-        mode="secondary"
-        width="100%"
+        isLoading={isLoading}
+        mode={isMarked ? "active" : "secondary"}
+        minWidth="380px"
+        onClick={() => setIsMarked(!isMarked)}
+        {...props}
       >
-        <Icon icon="bookmark" />
-        북마크 하기
+        {isMarked ? (
+          <>
+            <BookMark mode="primary" /> 북마크 완료
+          </>
+        ) : (
+          <>
+            <Icon icon="bookmark" /> 북마크 하기
+          </>
+        )}
       </Button>
     </SideBarWrapper>
   );
@@ -113,6 +112,8 @@ const SideBarBox = styled.div`
 `;
 
 const BadgeBox = styled.div`
+  display: flex;
+  gap: 5px;
   margin: 20px 10px;
 `;
 
@@ -123,12 +124,10 @@ const SideBarWrapper = styled.div`
   height: 540px;
 
   button {
-    margin: 4px 10px;
+    margin: 6px 10px;
+    width: calc(100% - 20px);
   }
   .thumbnail {
     margin-bottom: 12px;
-  }
-  .badge-item {
-    margin-right: 5px;
   }
 `;

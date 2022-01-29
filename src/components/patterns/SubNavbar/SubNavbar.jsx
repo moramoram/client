@@ -27,12 +27,12 @@ const SubNavbar = ({ data, theme, onClick, ...props }) => {
     setSelectedIndex(idx);
     onClick(idx);
     const current = scrollRef.current;
-    const currentChileren = current.children[idx];
+    const currentChildren = current.children[idx];
 
     const move =
-      currentChileren.offsetLeft -
+      currentChildren.offsetLeft -
       current.clientWidth / 2 +
-      currentChileren.clientWidth / 2;
+      currentChildren.clientWidth / 2;
     current.scrollLeft = move;
   };
 

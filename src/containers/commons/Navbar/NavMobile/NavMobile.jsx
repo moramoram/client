@@ -109,6 +109,7 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
                     {...props}
                     onClick={() => handleClickItem(name)}
                     status={current === name ? "active" : "default"}
+                    key={idx}
                   >
                     {title}
                   </UserMobileItem>

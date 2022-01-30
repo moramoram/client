@@ -25,8 +25,8 @@ const Layout = () => {
 
   return (
     <LayoutBox theme={theme}>
-      {isModal && <Modal />}
-      {isloginModal && <SignUpModal />}
+      {isModal && <Modal theme={theme} />}
+      {isloginModal && <SignUpModal theme={theme} />}
       <Nav theme={theme} type={navType} isLogin={isLogined} />
       <Outlet />
     </LayoutBox>

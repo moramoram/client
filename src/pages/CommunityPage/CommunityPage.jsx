@@ -61,7 +61,7 @@ const feedSmallData = [
       "https://image.bada.io/files//crawling/2021/04/05/bobaedream/1612930_i14788674553.jpg",
     title: "더 좋은 커뮤니티를 만들기 위한 약속 🤙",
     category: "공지",
-    url: "",
+    id: "1",
   },
   {
     username: "아이유",
@@ -69,7 +69,7 @@ const feedSmallData = [
       "https://image.bada.io/files//crawling/2021/04/05/bobaedream/1612930_i14788674553.jpg",
     title: "더 좋은 커뮤니티를 만들기 위한 약속 🤙",
     category: "공지",
-    url: "",
+    id: "1",
   },
   {
     username: "아이유",
@@ -77,7 +77,7 @@ const feedSmallData = [
       "https://image.bada.io/files//crawling/2021/04/05/bobaedream/1612930_i14788674553.jpg",
     title: "더 좋은 커뮤니티를 만들기 위한 약속 🤙",
     category: "공지",
-    url: "",
+    id: "1",
   },
 ];
 
@@ -97,7 +97,7 @@ const feedData = [
     likecount: numToMillion(1224),
     commentcount: numToMillion(2102),
     viewcount: numToMillion(2124128),
-    url: "",
+    id: "1",
   },
   {
     username: "아이유",
@@ -114,7 +114,7 @@ const feedData = [
     likecount: numToMillion(1224),
     commentcount: numToMillion(2102),
     viewcount: numToMillion(2124128),
-    url: "",
+    id: "1",
   },
   {
     username: "아이유",
@@ -131,7 +131,7 @@ const feedData = [
     likecount: numToMillion(1224),
     commentcount: numToMillion(2102),
     viewcount: numToMillion(2124128),
-    url: "",
+    id: "1",
   },
 ];
 

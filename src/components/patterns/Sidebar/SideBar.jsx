@@ -17,6 +17,7 @@ const SideBar = ({ theme, isLoading, contents, badges, src, ...props }) => {
     contents = [{}, {}, {}, {}];
     badges = ["", "", ""];
   }
+
   return (
     <SideBarWrapper theme={theme} isLoading={isLoading} {...props}>
       <ImageBox className="thumbnail" theme={theme} isLoading={isLoading} />

@@ -19,8 +19,8 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
   }
 
   return (
-    <SideBarWrapper isLoading={isLoading} {...props}>
-      <ImageBox className="thumbnail" isLoading={isLoading} />
+    <Layout isLoading={isLoading} {...props}>
+      <ImageBox className="thumbnail" isLoading={isLoading} {...props} />
       <SideBarBox>
         {summaryData.map(({ title, icon, id }) => (
           <SideBarItem
@@ -29,6 +29,7 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
             icon={icon}
             description={data[id]}
             isLoading={isLoading}
+            key={id}
             {...props}
           />
         ))}
@@ -43,6 +44,7 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
               mode="secondary"
               color="gray100"
               isBold
+              {...props}
             >
               {children}
             </Badge>
@@ -66,7 +68,7 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
           </>
         )}
       </Button>
-    </SideBarWrapper>
+    </Layout>
   );
 };
 
@@ -115,9 +117,12 @@ const BadgeBox = styled.div`
   display: flex;
   gap: 5px;
   margin: 20px 10px;
+  div {
+    margin-left: 4px;
+  }
 `;
 
-const SideBarWrapper = styled.div`
+const Layout = styled.div`
   display: block;
   border-radius: 16px;
   width: 400px;

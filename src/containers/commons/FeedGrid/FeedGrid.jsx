@@ -10,9 +10,9 @@ const FeedGrid = ({ data, isLoading, theme, ...props }) => {
   const feeds = isLoading ? (
     <FeedItem isLoading theme={theme} {...props} />
   ) : (
-    data.map(({ url, ...props }, idx) => {
+    data.map(({ id, ...props }, idx) => {
       return (
-        <FeedItemLink to={url} key={idx}>
+        <FeedItemLink to={id} key={idx}>
           <FeedItem theme={theme} {...props} />
         </FeedItemLink>
       );

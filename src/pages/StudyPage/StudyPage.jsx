@@ -7,7 +7,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { themeState, navTypeState } from "@/recoil/theme";
 
 import { SubNavbar, Input, Selector } from "@/components";
-import { CardResponsiveGrid, StudyIntro } from "@/containers";
+import { CardGrid, StudyIntro } from "@/containers";
 
 const StudyPage = () => {
   const theme = useRecoilValue(themeState);
@@ -70,7 +70,7 @@ const StudyPage = () => {
               />
               {/* <Selector placeholder="기술 스택" isMulti /> */}
             </InputBox>
-            <CardResponsiveGrid data={cardData} theme={theme} />
+            <CardGrid data={cardData} theme={theme} />
           </CardGridBox>
         </ContentBox>
       )}
@@ -86,7 +86,7 @@ const StudyPage = () => {
             <Input icon="search" placeholder="직무 검색하기" theme={theme} />
           </SearchBox>
           <ContentBox>
-            <CardResponsiveGrid data={cardData} theme={theme} />
+            <CardGrid data={cardData} theme={theme} />
           </ContentBox>
         </>
       )}
@@ -119,7 +119,7 @@ const cardData = new Array(20).fill({
     src: "",
   },
   badges: ["JavaScript", "React", "Vue.js"],
-  url: "/study/1",
+  id: "/study/1",
 });
 
 const ContentBox = styled.div`

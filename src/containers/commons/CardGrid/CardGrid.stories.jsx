@@ -1,13 +1,12 @@
 import React from "react";
-import CardResponsiveGrid from ".";
-import { colors } from "@/_shared";
+import CardGrid from ".";
 
 export default {
-  title: "containers/CardResponsiveGrid",
-  component: CardResponsiveGrid,
+  title: "containers/CardGrid",
+  component: CardGrid,
 };
 
-export const Default = (args) => <CardResponsiveGrid {...args} />;
+export const Default = (args) => <CardGrid {...args} />;
 
 Default.args = {
   theme: "light",
@@ -20,7 +19,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -30,7 +29,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -40,7 +39,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -50,7 +49,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -60,7 +59,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -70,7 +69,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -80,7 +79,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -90,7 +89,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -100,7 +99,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -110,7 +109,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -120,7 +119,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -130,7 +129,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -140,7 +139,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -150,7 +149,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -160,7 +159,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -170,7 +169,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -180,7 +179,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -190,7 +189,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
   ],
 };

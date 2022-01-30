@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+// import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
@@ -9,7 +10,7 @@ import { useMediaQuery } from "react-responsive";
 import { JobDetail, JobDetailMobile, JobSideBar } from "@/containers";
 import { daysFromToday } from "@/utils";
 
-const JobsDetailPage = ({ match }) => {
+const JobsDetailPage = () => {
   const theme = useRecoilValue(themeState);
 
   const isPc = useMediaQuery({

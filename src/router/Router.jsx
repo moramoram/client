@@ -13,9 +13,8 @@ import {
   CommunityDetailPage,
   MyPage,
 } from "@/pages";
-const Router = () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
 
+const Router = () => {
   return (
     <Routes>
       <Route element={<Layout />}>

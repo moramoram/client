@@ -16,7 +16,7 @@ const STATUS = {
   ACTIVE: "active",
 };
 
-const TYPE = {
+const VIEW = {
   DEFAULT: "default",
   MOBILE: "mobile",
 };
@@ -63,14 +63,14 @@ SubNavbar.propTypes = {
   data: PropTypes.array.isRequired,
   theme: PropTypes.oneOf(Object.values(THEME)),
   status: PropTypes.oneOf(Object.values(STATUS)),
-  type: PropTypes.oneOf(Object.values(TYPE)),
+  view: PropTypes.oneOf(Object.values(VIEW)),
   onClick: PropTypes.func,
 };
 
 SubNavbar.defaultProps = {
   theme: THEME.LIGHT,
   status: STATUS.DEFAULT,
-  type: STATUS.DEFAULT,
+  view: VIEW.DEFAULT,
   onClick: undefined,
 };
 
@@ -81,7 +81,7 @@ const Layout = styled.div`
   overflow-x: scroll;
 
   ${(props) =>
-    props.type === TYPE.DEFAULT &&
+    props.view === VIEW.DEFAULT &&
     `
       flex-direction: column;
       align-items: stretch;

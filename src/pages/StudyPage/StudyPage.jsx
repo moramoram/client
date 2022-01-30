@@ -80,10 +80,10 @@ const StudyPage = () => {
             data={categoryData}
             theme={theme}
             onClick={handleCategory}
-            type="mobile"
+            view="mobile"
           />
           <SearchBox>
-            <Input icon="search" placeholder="직무 검색하기" />
+            <Input icon="search" placeholder="직무 검색하기" theme={theme} />
           </SearchBox>
           <ContentBox>
             <CardResponsiveGrid data={cardData} theme={theme} />

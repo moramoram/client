@@ -6,7 +6,7 @@ import { themeState, navTypeState } from "@/recoil/theme";
 
 import { useMediaQuery } from "react-responsive";
 
-import { SubNavbar } from "@/components";
+import { SubNavbar, Input, Selector } from "@/components";
 import { CardResponsiveGrid, JobIntro } from "@/containers";
 
 const JobsPage = () => {
@@ -42,21 +42,50 @@ const JobsPage = () => {
   return (
     <>
       <JobIntro />
-      <ContentBox>
-        {isPc && (
-          <>
-            <StickyNavBox>
-              <StickyNav
-                data={categoryData}
-                theme={theme}
-                onClick={handleCategory}
+      {isPc && (
+        <ContentBox>
+          <StickyNavBox>
+            <StickyNav
+              data={categoryData}
+              theme={theme}
+              onClick={handleCategory}
+            />
+          </StickyNavBox>
+          <CardGridBox>
+            <InputBox>
+              <Input icon="search" placeholder="직무 검색하기" />
+              <Selector placeholder="기술 스택" isMulti />
+              <Selector
+                placeholder="직무"
+                options={[
+                  { value: "Frontend", label: "프론트엔드" },
+                  { value: "Backend", label: "백엔드" },
+                  { value: "Android", label: "안드로이드" },
+                  { value: "iOS", label: "iOS" },
+                  { value: "임베디드", label: "임베디드" },
+                ]}
               />
-            </StickyNavBox>
-            <CardGrid data={cardData} theme={theme} />
-          </>
-        )}
-        {isMobile && <CardResponsiveGrid data={cardData} theme={theme} />}
-      </ContentBox>
+            </InputBox>
+            <CardResponsiveGrid data={cardData} theme={theme} />
+          </CardGridBox>
+        </ContentBox>
+      )}
+      {isMobile && (
+        <>
+          <SubNavMobile
+            data={categoryData}
+            theme={theme}
+            onClick={handleCategory}
+            type="mobile"
+          />
+          <SearchBox>
+            <Input icon="search" placeholder="직무 검색하기" />
+          </SearchBox>
+          <ContentBox>
+            <CardResponsiveGrid data={cardData} theme={theme} />
+          </ContentBox>
+        </>
+      )}
     </>
   );
 };
@@ -275,17 +304,39 @@ const ContentBox = styled.div`
   gap: 100px;
   max-width: 1280px;
 
-  padding: 80px 20px 20px 20px;
+  padding: 20px;
   margin: auto;
 `;
 
-const StickyNavBox = styled.div``;
+const StickyNavBox = styled.div`
+  padding-top: 86px;
+`;
 
 const StickyNav = styled(SubNavbar)`
   position: sticky;
   top: 150px;
 `;
 
-const CardGrid = styled(CardResponsiveGrid)`
+const SubNavMobile = styled(SubNavbar)`
+  padding: 20px 20px 0 20px;
+`;
+
+const CardGridBox = styled.div`
   width: calc(100% - 320px);
+  padding-top: 80px;
+`;
+
+const InputBox = styled.div`
+  display: flex;
+  gap: 0.5rem;
+
+  padding-bottom: 1rem;
+
+  > div {
+    flex-grow: 1;
+  }
+`;
+
+const SearchBox = styled.div`
+  padding: 20px;
 `;

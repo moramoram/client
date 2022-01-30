@@ -88,15 +88,16 @@ const Layout = styled.div`
 const InputBox = styled.div`
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 
   height: 42px;
-  padding: 8px;
+  padding: 0 16px;
   border: 1px solid ${(props) => borderColor[props.theme]};
   border-radius: 8px;
 
   background-color: ${(props) => bgColor[props.theme]};
 
-  font-size: ${fontSize.p};
+  font-size: ${fontSize.sm};
   color: ${colors.gray500};
   box-shadow: ${shadows.button};
 
@@ -133,7 +134,7 @@ const InputBox = styled.div`
 
 const InputText = styled.input`
   width: 100%;
-  padding-left: 8px;
+  margin-left: 8px;
   border: none;
   background: none;
 
@@ -144,6 +145,10 @@ const InputText = styled.input`
   ::placeholder {
     color: ${colors.gray500};
     font-size: ${fontSize.p};
+  }
+
+  :focus {
+    outline: none;
   }
 `;
 

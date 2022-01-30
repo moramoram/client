@@ -24,7 +24,6 @@ const Selector = ({ title, options, placeholder, message, ...props }) => {
         styles={customStyles(props)}
         options={options}
         placeholder={placeholder}
-        isMulti
         {...props}
       />
       <Message {...props}>{message}</Message>
@@ -37,6 +36,7 @@ Selector.propTypes = {
   status: PropTypes.oneOf(Object.values(STATUS)),
   options: PropTypes.array,
   placeholder: PropTypes.string,
+  isMulti: PropTypes.bool,
 };
 
 Selector.defaultProps = {
@@ -66,6 +66,7 @@ Selector.defaultProps = {
     { value: "Vue.js", label: "Vue.js" },
   ],
   placeholder: "Placeholder",
+  isMulti: false,
 };
 
 export default Selector;
@@ -151,6 +152,11 @@ const customStyles = (props) => ({
   }),
 
   input: (provided) => ({
+    ...provided,
+    color: textColor[props.theme],
+  }),
+
+  singleValue: (provided) => ({
     ...provided,
     color: textColor[props.theme],
   }),

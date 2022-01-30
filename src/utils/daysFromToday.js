@@ -16,8 +16,18 @@ const daysFromToday = (value) => {
   }
 
   const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
-  if (betweenTimeDay < 365) {
+  if (betweenTimeDay < 7) {
     return `${betweenTimeDay}일 전`;
+  }
+
+  const betweenTimeDayWeek = Math.floor(betweenTime / 60 / 24 / 7);
+  if (betweenTimeDayWeek < 4) {
+    return `${betweenTimeDayWeek}주 전`;
+  }
+
+  const betweenTimeDayMonth = Math.floor(betweenTime / 60 / 24 / 30);
+  if (betweenTimeDayMonth < 12) {
+    return `${betweenTimeDayMonth}개월 전`;
   }
 
   return `${Math.floor(betweenTimeDay / 365)}년 전`;

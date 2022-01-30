@@ -1,18 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { themeState } from "@/recoil/theme";
+
 import { JobDetail, JobSideBar } from "@/containers";
 import { daysFromToday } from "@/utils";
 
 const JobsDetailPage = ({ match }) => {
+  const theme = useRecoilValue(themeState);
   return (
     <Layout>
       <JobDetail
         titleData={titleData}
         cardData={cardData}
         commentData={commentData}
+        theme={theme}
       ></JobDetail>
-      <FixedSidebar {...sidbarargs} />
+      {/* <FixedSidebar {...sidbarargs} theme={theme} /> */}
     </Layout>
   );
 };
@@ -112,6 +117,9 @@ const Layout = styled.div`
   display: flex;
   justify-content: center;
   gap: 50px;
+  max-width: 1280px;
+
+  margin: auto;
 `;
 
 const FixedSidebar = styled(JobSideBar)`

@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-
 import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";

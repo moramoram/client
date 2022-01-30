@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Icon } from "@/foundations";
-import { colors, shadows } from "@/_shared";
+import { colors, fontSize, shadows } from "@/_shared";
 
 const THEME = {
   DARK: "dark",
@@ -41,7 +41,7 @@ const CommentInput = ({ theme, ...props }) => {
         ref={textareaRef}
         onChange={onChange}
         value={comment.value}
-        placeholder="댓글로 의견을 나눠보세요 :)"
+        placeholder="댓글을 입력하세요"
         maxLength="500"
       />
       <Footer>
@@ -49,7 +49,7 @@ const CommentInput = ({ theme, ...props }) => {
         <ButtonBox>
           <Icon icon="smile" aria-hidden />
           <Button
-            disabled={!comment.value ? "true" : ""}
+            disabled={!comment.value ? true : false}
             theme={theme}
             {...props}
           >
@@ -92,7 +92,6 @@ const Layout = styled.label`
   justify-content: space-between;
   gap: 1rem;
 
-  width: 100%;
   padding: 16px;
   border-radius: 0.5rem;
   box-shadow: ${shadows.base};
@@ -122,6 +121,7 @@ const Textarea = styled.textarea`
   border: none;
   background-color: transparent;
 
+  font-size: ${fontSize.sm};
   color: ${(props) => textColor[props.theme]};
 
   ::placeholder {
@@ -167,6 +167,7 @@ const Button = styled.button`
 
   background-color: ${colors.blue100};
   color: ${colors.white};
+  font-size: ${fontSize.sm};
 
   cursor: pointer;
   transition: 0.3s;

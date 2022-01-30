@@ -22,7 +22,7 @@ const CardSmall = ({ isLoading, contents, ...props }) => {
   const { title, highlight, src } = contents;
   return (
     <Layout isLoading={isLoading} {...props}>
-      <ThumbnailBox
+      <Thumbnail
         className="thumbnail"
         src={src}
         size="small"
@@ -61,6 +61,7 @@ const titleColor = {
 
 const Layout = styled.div`
   width: 220px;
+
   .thumbnail {
     margin-bottom: 16px;
   }
@@ -79,8 +80,8 @@ const TextBox = styled.div`
   }
 `;
 
-const ThumbnailBox = styled(ImageBox)`
-  filter: ${(props) => props.isDisabled && `blur(2px) grayscale(50%)`};
+const Thumbnail = styled(ImageBox)`
+  width: 100%;
 `;
 
 const Highlight = styled.div`

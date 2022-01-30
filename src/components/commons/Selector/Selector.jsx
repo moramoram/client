@@ -77,13 +77,24 @@ const textColor = {
 };
 
 const bgColor = {
-  light: colors.white,
+  light: colors.gray50,
   dark: colors.gray900,
 };
 
+const focusBgColor = {
+  light: colors.white,
+  dark: colors.black,
+};
+
 const borderColor = {
-  light: colors.gray300,
-  dark: colors.gray700,
+  light: {
+    default: colors.gray50,
+    error: colors.errorOpacity200,
+  },
+  dark: {
+    default: colors.gray900,
+    error: colors.errorOpacity200,
+  },
 };
 
 const optionBgColor = {
@@ -107,43 +118,40 @@ const msgColor = {
 };
 
 const hoverColor = {
-  default: "#4A83EF77",
-  error: "#f04438cf",
+  default: colors.blueOpacity200,
+  error: colors.errorOpacity200,
 };
 
 const insetColor = {
   default: colors.blue100,
-  error: "#f04438cf",
+  error: colors.errorOpacity200,
 };
 
 const focusColor = {
-  default: "#4A83EF33",
-  error: "#f8736a33",
+  default: colors.blueOpacity100,
+  error: colors.errorOpacity100,
 };
 
 const activeColor = {
-  default: "#4A83EF77",
-  error: "#f8736a77",
+  default: colors.blueOpacity200,
+  error: colors.errorOpacity200,
 };
 
 const customStyles = (props) => ({
   control: (provided) => ({
     ...provided,
     padding: "2px 16px",
-    border: `1px solid ${borderColor[props.theme]}`,
+    border: `1px solid ${borderColor[props.theme][props.status]}`,
     borderRadius: "8px",
-    boxShadow: [
-      props.status === STATUS.ERROR
-        ? `0 0 0 3px ${focusColor[props.status]}, inset 0 0 0 1px ${
-            insetColor[props.status]
-          }`
-        : shadows.button,
-    ],
+    boxShadow: shadows.button,
+
     backgroundColor: bgColor[props.theme],
+    transition: "0.3s",
 
     ":hover": {
       border: `1px solid ${hoverColor[props.status]}`,
       boxShadow: `inset 0 0 0 1px ${hoverColor[props.status]}`,
+      backgroundColor: focusBgColor[props.theme],
     },
 
     ":focus-within:hover": {
@@ -219,6 +227,7 @@ const customStyles = (props) => ({
 
     ":active": {
       background: activeColor.default,
+      color: textColor[props.theme],
     },
     ":first-of-type": {
       borderRadius: "3px 3px 0 0",

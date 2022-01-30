@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import { Outlet } from "react-router-dom";
@@ -19,6 +19,11 @@ const Layout = () => {
   const isLogined = useRecoilValue(isLoginState);
   const isloginModal = useRecoilValue(loginModalState);
   const isModal = useRecoilValue(modalState);
+
+  useEffect(() => {
+    (isModal || isloginModal) && (document.body.style.overflow = "hidden");
+    return () => (document.body.style.overflow = "unset");
+  }, [isModal, isloginModal]);
 
   return (
     <LayoutBox theme={theme}>

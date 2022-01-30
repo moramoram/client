@@ -8,10 +8,8 @@ import { isLoginState } from "@/recoil/auth";
 import { modalState, loginModalState } from "@/recoil/modal";
 
 import { Modal } from "@/components";
-import { Navbar } from "@/containers/commons";
+import { Navbar, SignUpModal } from "@/containers";
 import { colors } from "@/_shared";
-
-import { SignUpModal } from "@/containers";
 
 const Layout = () => {
   const theme = useRecoilValue(themeState);

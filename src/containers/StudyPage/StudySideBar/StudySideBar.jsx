@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { ImageBox, Badge, Button, SideBarItem } from "@/components";
+import { ImageBox, Badge, Button, BookMark, SideBarItem } from "@/components";
 import { Icon } from "@/foundations";
 
 const THEME = {
@@ -11,51 +11,27 @@ const THEME = {
 };
 
 const StudySideBar = ({ data, badges, isLoading, ...props }) => {
+  const [isMarked, setIsMarked] = useState(false);
+
   if (isLoading) {
     data = new Array(4);
     badges = ["", "", ""];
   }
 
-  const handleonClick = () => {
-    console.log("hello");
-  };
-
   return (
     <Layout isLoading={isLoading} {...props}>
       <ImageBox className="thumbnail" isLoading={isLoading} {...props} />
       <SideBarBox>
-        <SideBarItem
-          className="contents-item"
-          title="종류"
-          icon="target"
-          description={data.type}
-          isLoading={isLoading}
-          {...props}
-        />
-        <SideBarItem
-          className="contents-item"
-          title="목표 기업"
-          icon="building"
-          description={data.target}
-          isLoading={isLoading}
-          {...props}
-        />
-        <SideBarItem
-          className="contents-item"
-          title="모집 인원"
-          icon="users"
-          description={data.people}
-          isLoading={isLoading}
-          {...props}
-        />
-        <SideBarItem
-          className="contents-item"
-          title="스터디 지역"
-          icon="mapPin"
-          description={data.location}
-          isLoading={isLoading}
-          {...props}
-        />
+        {summaryData.map(({ title, icon, id }) => (
+          <SideBarItem
+            className="contents-item"
+            title={title}
+            icon={icon}
+            description={data[id]}
+            isLoading={isLoading}
+            {...props}
+          />
+        ))}
       </SideBarBox>
       <BadgeBox>
         {badges.map((children, idx) => {
@@ -75,13 +51,21 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
         })}
       </BadgeBox>
       <Button
-        onClick={() => handleonClick()}
-        sLoading={isLoading}
-        mode="secondary"
-        width="100%"
+        isLoading={isLoading}
+        mode={isMarked ? "active" : "secondary"}
+        minWidth="380px"
+        onClick={() => setIsMarked(!isMarked)}
+        {...props}
       >
-        <Icon icon="bookmark" />
-        북마크 하기
+        {isMarked ? (
+          <>
+            <BookMark mode="primary" /> 북마크 완료
+          </>
+        ) : (
+          <>
+            <Icon icon="bookmark" /> 북마크 하기
+          </>
+        )}
       </Button>
     </Layout>
   );
@@ -101,11 +85,36 @@ StudySideBar.defaultProps = {
 
 export default StudySideBar;
 
+const summaryData = [
+  {
+    title: "종류",
+    icon: "target",
+    id: "type",
+  },
+  {
+    title: "목표 기업",
+    icon: "building",
+    id: "target",
+  },
+  {
+    title: "모집 인원",
+    icon: "users",
+    id: "people",
+  },
+  {
+    title: "스터디 지역",
+    icon: "mapPin",
+    id: "location",
+  },
+];
+
 const SideBarBox = styled.div`
   margin: 10px 0px;
 `;
 
 const BadgeBox = styled.div`
+  display: flex;
+  gap: 5px;
   margin: 20px 10px;
   div {
     margin-left: 4px;
@@ -119,12 +128,10 @@ const Layout = styled.div`
   height: 540px;
 
   button {
-    margin: 4px 10px;
+    margin: 6px 10px;
+    width: calc(100% - 20px);
   }
   .thumbnail {
     margin-bottom: 12px;
-  }
-  .badge-item {
-    margin-right: 5px;
   }
 `;

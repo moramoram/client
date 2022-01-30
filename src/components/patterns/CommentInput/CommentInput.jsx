@@ -76,6 +76,11 @@ const bgColor = {
   light: colors.gray25,
 };
 
+const focusBgColor = {
+  dark: colors.black,
+  light: colors.white,
+};
+
 const textColor = {
   dark: colors.gray25,
   light: colors.gray900,
@@ -87,12 +92,27 @@ const Layout = styled.label`
   justify-content: space-between;
   gap: 1rem;
 
-  width: 620px;
-  padding: 9px 13px;
+  width: 100%;
+  padding: 16px;
   border-radius: 0.5rem;
   box-shadow: ${shadows.base};
 
   background-color: ${(props) => bgColor[props.theme]};
+  transition: 0.3s;
+
+  :hover {
+    background-color: ${(props) => focusBgColor[props.theme]};
+    box-shadow: 0 0 0 3px ${colors.blueOpacity100};
+  }
+
+  :focus-within {
+    ${(props) => `
+      background-color: ${(props) => focusBgColor[props.theme]};
+      box-shadow: 0 0 0 3px ${colors.blueOpacity100},
+        inset 0 0 0 2px ${colors.blueOpacity300}
+    }
+    `};
+  }
 `;
 
 const Textarea = styled.textarea`
@@ -100,12 +120,16 @@ const Textarea = styled.textarea`
   resize: none;
   overflow: hidden;
   border: none;
-  background-color: ${(props) => bgColor[props.theme]};
+  background-color: transparent;
 
   color: ${(props) => textColor[props.theme]};
 
   ::placeholder {
     color: ${colors.gray500};
+  }
+
+  :focus {
+    outline: none;
   }
 `;
 
@@ -138,16 +162,27 @@ const ButtonBox = styled.div`
 const Button = styled.button`
   width: 72px;
   height: 28px;
-  border: 1px solid ${colors.blue100};
+  border: none;
   border-radius: 4px;
 
   background-color: ${colors.blue100};
   color: ${colors.white};
 
   cursor: pointer;
+  transition: 0.3s;
 
-  :disabled {
+  :disabled,
+  :disabled:hover {
     opacity: 0.5;
     cursor: default;
+    background-color: ${colors.blue100};
+  }
+
+  :hover {
+    background-color: ${colors.blue200};
+  }
+
+  :active {
+    background-color: ${colors.blue150};
   }
 `;

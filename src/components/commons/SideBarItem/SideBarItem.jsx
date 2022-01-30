@@ -50,16 +50,19 @@ export default SideBarItem;
 const Title = styled.div`
   display: inline-block;
   overflow: hidden;
+
   width: 124px;
   height: 20px;
+  margin-right: 10px;
   border-radius: 4px;
 
   font-size: ${fontSize.p};
   font-weight: ${fontWeight.bold};
   text-overflow: ellipsis;
   white-space: nowrap;
+
   animation: ${(props) => props.isLoading && loadings[props.theme]};
-  margin-right: 10px;
+
   svg {
     height: ${fontSize.lg};
     width: ${fontSize.h4};
@@ -71,6 +74,7 @@ const Title = styled.div`
 const Content = styled.div`
   display: inline-block;
   overflow: hidden;
+
   width: 244px;
   height: 20px;
   border-radius: 4px;
@@ -79,16 +83,19 @@ const Content = styled.div`
   font-weight: ${fontWeight.regular};
   text-overflow: ellipsis;
   white-space: nowrap;
+
   animation: ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const SideBarItemWrapper = styled.div`
   display: flex;
+  align-items: center;
+
   border-radius: 4px;
 
   width: 400px;
   height: 36px;
-  padding: 8px 10px;
+  padding: 0 10px;
 
   color: ${(props) => textColor[props.theme]};
 `;

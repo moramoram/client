@@ -9,7 +9,6 @@ import { themeState, navTypeState } from "@/recoil/theme";
 import { SubNavbar, Input, Selector } from "@/components";
 import { CardGrid, StudyIntro } from "@/containers";
 
-
 const StudyPage = () => {
   const theme = useRecoilValue(themeState);
   const setNavType = useSetRecoilState(navTypeState);
@@ -112,10 +111,6 @@ const categoryData = [
   },
 ];
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 2f684a82cab623afb59f2808a6fbf289c74c2f00
 const cardData = new Array(20).fill({
   contents: {
     title: "알고리즘 스터디 모집",
@@ -126,10 +121,6 @@ const cardData = new Array(20).fill({
   badges: ["JavaScript", "React", "Vue.js"],
   id: "/study/1",
 });
-<<<<<<< HEAD
-=======
-
->>>>>>> 2f684a82cab623afb59f2808a6fbf289c74c2f00
 
 const ContentBox = styled.div`
   display: flex;
@@ -150,10 +141,6 @@ const StickyNav = styled(SubNavbar)`
   top: 150px;
 `;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 2f684a82cab623afb59f2808a6fbf289c74c2f00
 const SubNavMobile = styled(SubNavbar)`
   padding: 20px 20px 0 20px;
 `;

@@ -9,7 +9,6 @@ import { useMediaQuery } from "react-responsive";
 import { SubNavbar, Input, Selector } from "@/components";
 import { CardGrid, JobIntro } from "@/containers";
 
-
 const JobsPage = () => {
   const theme = useRecoilValue(themeState);
   const setNavType = useSetRecoilState(navTypeState);
@@ -87,10 +86,7 @@ const JobsPage = () => {
             <CardGrid data={cardData} theme={theme} />
           </ContentBox>
         </>
-<<<<<<< HEAD
       )}
-=======
->>>>>>> 2f684a82cab623afb59f2808a6fbf289c74c2f00
     </>
   );
 };
@@ -150,19 +146,11 @@ const StickyNav = styled(SubNavbar)`
   top: 150px;
 `;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 2f684a82cab623afb59f2808a6fbf289c74c2f00
 const SubNavMobile = styled(SubNavbar)`
   padding: 20px 20px 0 20px;
 `;
 
 const CardGridBox = styled.div`
-<<<<<<< HEAD
-=======
-
->>>>>>> 2f684a82cab623afb59f2808a6fbf289c74c2f00
   width: calc(100% - 320px);
   padding-top: 80px;
 `;

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { colors, fontSize, fontWeight, shadows, loadings } from "@/_shared";
+import { colors, fontSize, fontWeight, loadings } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -41,17 +41,6 @@ Button.defaultProps = {
 };
 
 export default Button;
-
-const borderColor = {
-  light: {
-    primary: colors.blue100,
-    secondary: colors.gray200,
-  },
-  dark: {
-    primary: colors.blue100,
-    secondary: colors.gray600,
-  },
-};
 
 const textColor = {
   light: {

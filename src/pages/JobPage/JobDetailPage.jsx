@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
-import { JobDetail, JobSideBar } from "@/containers";
+import { JobDetail } from "@/containers";
 import { daysFromToday } from "@/utils";
 
 const JobsDetailPage = ({ match }) => {
@@ -102,16 +102,16 @@ const commentData = [
   },
 ];
 
-const sidbarargs = {
-  data: {
-    task: "프론트엔드",
-    type: "정규직",
-    career: "신입",
-    location: "서울 강남구",
-  },
+// const sidbarargs = {
+//   data: {
+//     task: "프론트엔드",
+//     type: "정규직",
+//     career: "신입",
+//     location: "서울 강남구",
+//   },
 
-  badges: ["JavaScript", "TypeScript", "Vue.js", "React", "Redux", "Svelte"],
-};
+//   badges: ["JavaScript", "TypeScript", "Vue.js", "React", "Redux", "Svelte"],
+// };
 
 const Layout = styled.div`
   display: flex;
@@ -122,7 +122,7 @@ const Layout = styled.div`
   margin: auto;
 `;
 
-const FixedSidebar = styled(JobSideBar)`
-  position: sticky;
-  top: 222px;
-`;
+// const FixedSidebar = styled(JobSideBar)`
+//   position: sticky;
+//   top: 222px;
+// `;

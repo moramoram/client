@@ -29,6 +29,7 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
             icon={icon}
             description={data[id]}
             isLoading={isLoading}
+            key={id}
             {...props}
           />
         ))}

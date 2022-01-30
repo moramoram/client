@@ -4,12 +4,10 @@ import styled from "styled-components";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { themeState, navTypeState } from "@/recoil/theme";
 
-
 import { useMediaQuery } from "react-responsive";
 
 import { SubNavbar, Input, Selector } from "@/components";
 import { CardGrid, JobIntro } from "@/containers";
-
 
 const JobsPage = () => {
   const theme = useRecoilValue(themeState);
@@ -69,7 +67,7 @@ const JobsPage = () => {
                 ]}
               />
             </InputBox>
-            <CardResponsiveGrid data={cardData} theme={theme} />
+            <CardGrid data={cardData} theme={theme} />
           </CardGridBox>
         </ContentBox>
       )}
@@ -88,6 +86,7 @@ const JobsPage = () => {
             <CardGrid data={cardData} theme={theme} />
           </ContentBox>
         </>
+      )}
     </>
   );
 };
@@ -125,7 +124,7 @@ const cardData = new Array(24).fill({
     src: "",
   },
   badges: ["JavaScript", "React", "Vue.js"],
-  url: "/job/1",
+  id: "/job/1",
 });
 
 const ContentBox = styled.div`
@@ -147,13 +146,11 @@ const StickyNav = styled(SubNavbar)`
   top: 150px;
 `;
 
-
 const SubNavMobile = styled(SubNavbar)`
   padding: 20px 20px 0 20px;
 `;
 
 const CardGridBox = styled.div`
-
   width: calc(100% - 320px);
   padding-top: 80px;
 `;

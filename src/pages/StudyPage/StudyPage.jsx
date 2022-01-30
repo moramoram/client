@@ -9,7 +9,6 @@ import { themeState, navTypeState } from "@/recoil/theme";
 import { SubNavbar, Input, Selector } from "@/components";
 import { CardGrid, StudyIntro } from "@/containers";
 
-
 const StudyPage = () => {
   const theme = useRecoilValue(themeState);
   const setNavType = useSetRecoilState(navTypeState);
@@ -71,7 +70,7 @@ const StudyPage = () => {
               />
               {/* <Selector placeholder="기술 스택" isMulti /> */}
             </InputBox>
-            <CardResponsiveGrid data={cardData} theme={theme} />
+            <CardGrid data={cardData} theme={theme} />
           </CardGridBox>
         </ContentBox>
       )}
@@ -112,7 +111,6 @@ const categoryData = [
   },
 ];
 
-
 const cardData = new Array(20).fill({
   contents: {
     title: "알고리즘 스터디 모집",
@@ -121,9 +119,8 @@ const cardData = new Array(20).fill({
     src: "",
   },
   badges: ["JavaScript", "React", "Vue.js"],
-  url: "/study/1",
+  id: "/study/1",
 });
-
 
 const ContentBox = styled.div`
   display: flex;
@@ -143,7 +140,6 @@ const StickyNav = styled(SubNavbar)`
   position: sticky;
   top: 150px;
 `;
-
 
 const SubNavMobile = styled(SubNavbar)`
   padding: 20px 20px 0 20px;

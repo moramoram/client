@@ -1,14 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-
-import { Link } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { themeState } from "@/recoil/theme";
-import { loginModalState } from "@/recoil/modal";
-
 import { useMediaQuery } from "react-responsive";
-
 
 import { NavDefault } from "./NavDefault";
 import { NavMobile } from "./NavMobile";
@@ -54,4 +47,3 @@ Navbar.defaultProps = {
 };
 
 export default Navbar;
-

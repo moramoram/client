@@ -4,6 +4,7 @@ const colors = {
   blue100: "#4A83EF",
   blue200: "#3669CD",
 
+  blueOpacity50: "#4A83EF22",
   blueOpacity100: "#4A83EF33",
   blueOpacity200: "#4A83EF77",
   blueOpacity300: "#4A83EF9e",

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { colors, fontSize, fontWeight, shadows, loadings } from "@/_shared";
 
@@ -30,7 +30,6 @@ Button.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   mode: PropTypes.oneOf(Object.values(MODE)),
   isLoading: PropTypes.bool,
-  isDisabled: PropTypes.bool,
   isUnclickable: PropTypes.bool,
 };
 
@@ -38,7 +37,6 @@ Button.defaultProps = {
   theme: THEME.LIGHT,
   mode: MODE.PRIMARY,
   isLoading: false,
-  isDisabled: false,
   isUnclickable: false,
 };
 
@@ -72,12 +70,12 @@ const bgColor = {
   light: {
     primary: colors.blue100,
     secondary: colors.gray50,
-    active: "#4A83EF22",
+    active: colors.blueOpacity50,
   },
   dark: {
     primary: colors.blue100,
     secondary: colors.gray700,
-    active: "#4A83EF33",
+    active: colors.blueOpacity100,
   },
 };
 
@@ -85,12 +83,12 @@ const hoverBgColor = {
   light: {
     primary: colors.blue200,
     secondary: colors.gray200,
-    active: "#4A83EF22",
+    active: colors.blueOpacity50,
   },
   dark: {
     primary: colors.blue200,
     secondary: colors.gray600,
-    active: "#4A83EF33",
+    active: colors.blueOpacity100,
   },
 };
 
@@ -105,10 +103,8 @@ const Layout = styled.button`
 
   border-radius: 8px;
   border: none;
-  /* border: 1px solid ${(props) => borderColor[props.theme][props.mode]}; */
 
   background: ${(props) => bgColor[props.theme][props.mode]};
-  /* box-shadow: ${shadows.button}; */
 
   color: ${(props) => textColor[props.theme][props.mode]};
   font-weight: ${fontWeight.bold};
@@ -129,31 +125,26 @@ const Layout = styled.button`
   }
 
   ${(props) =>
-    props.isDisabled &&
-    `
-      opacity: 0.5;
-      cursor: not-allowed !important;
+    css`
+      :disabled,
+      :disabled:hover {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background: ${bgColor[props.theme][props.mode]};
+      }
+
+      :hover {
+        background: ${hoverBgColor[props.theme][props.mode]};
+      }
+
+      :active {
+        background: ${bgColor[props.theme][props.mode]};
+      }
     `}
 
   ${(props) =>
     props.isLoading &&
-    `
-      cursor: progress !important;
-
-      &:hover {
-        transform: none;
-      }
+    css`
+      cursor: progress;
     `}
-
-    ${(props) =>
-    !props.isLoading &&
-    !props.isDisabled &&
-    `
-        &:hover {
-          background: ${hoverBgColor[props.theme][props.mode]};   
-        }
-        &:active {
-          box-shadow: ${shadows.base};
-        }
-      `}
 `;

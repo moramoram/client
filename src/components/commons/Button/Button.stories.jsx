@@ -21,7 +21,7 @@ export const AllTypes = () => (
     <Background theme="light">
       <Button width="200px">Primary</Button>
       <br />
-      <Button width="200px" isDisabled>
+      <Button width="200px" disabled>
         Disabled
       </Button>
       <br />
@@ -40,7 +40,7 @@ export const AllTypes = () => (
         Secondary
       </Button>
       <br />
-      <Button mode="secondary" width="200px" isDisabled>
+      <Button mode="secondary" width="200px" disabled>
         Disabled
       </Button>
       <br />
@@ -59,7 +59,7 @@ export const AllTypes = () => (
         Active
       </Button>
       <br />
-      <Button mode="active" width="200px" isDisabled>
+      <Button mode="active" width="200px" disabled>
         Disabled
       </Button>
       <br />
@@ -77,7 +77,7 @@ export const AllTypes = () => (
         Primary
       </Button>
       <br />
-      <Button width="200px" theme="dark" isDisabled>
+      <Button width="200px" theme="dark" disabled>
         Disabled
       </Button>
       <br />
@@ -96,7 +96,7 @@ export const AllTypes = () => (
         Secondary
       </Button>
       <br />
-      <Button mode="secondary" width="200px" isDisabled theme="dark">
+      <Button mode="secondary" width="200px" disabled theme="dark">
         Disabled
       </Button>
       <br />
@@ -115,7 +115,7 @@ export const AllTypes = () => (
         Active
       </Button>
       <br />
-      <Button mode="active" width="200px" theme="dark" isDisabled>
+      <Button mode="active" width="200px" theme="dark" disabled>
         Disabled
       </Button>
       <br />

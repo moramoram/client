@@ -65,26 +65,28 @@ const Layout = styled.div`
 const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 `;
 
 const InfoBox = styled.div`
   display: flex;
+  align-items: baseline;
   gap: 0.5rem;
 `;
 
 const User = styled.div`
   font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.p};
+  font-size: ${fontSize.sm};
   color: ${(props) => usernameColor[props.theme]};
 `;
 
 const CreatedAt = styled.div`
   color: ${colors.gray500};
+  font-size: ${fontSize.xs};
 `;
 
 const Content = styled.div`
   font-weight: ${fontWeight.regular};
-  font-size: ${fontSize.p};
+  font-size: ${fontSize.sm};
   color: ${(props) => contentColor[props.theme]};
 `;

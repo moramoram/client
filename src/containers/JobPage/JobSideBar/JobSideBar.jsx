@@ -10,7 +10,6 @@ const THEME = {
   DARK: "dark",
 };
 
-
 const JobSideBar = ({ data, badges, isLoading, ...props }) => {
   const [isMarked, setIsMarked] = useState(false);
 
@@ -40,7 +39,6 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
             <Badge
               className="badge-item"
               key={idx}
-              theme={theme}
               isLoading={isLoading}
               mode="secondary"
               color="gray100"

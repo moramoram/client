@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 
 import { CardSmall } from "@/components";
 
-
-
 const CardSmallGrid = ({ data, isLoading, ...props }) => {
   return (
     <Layout {...props}>

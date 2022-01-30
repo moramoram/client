@@ -50,13 +50,24 @@ const textColor = {
 };
 
 const bgColor = {
-  light: colors.white,
+  light: colors.gray50,
   dark: colors.gray900,
 };
 
+const focusBgColor = {
+  light: colors.white,
+  dark: colors.black,
+};
+
 const borderColor = {
-  light: colors.gray300,
-  dark: colors.gray700,
+  light: {
+    default: colors.gray50,
+    error: colors.errorOpacity200,
+  },
+  dark: {
+    default: colors.gray900,
+    error: colors.errorOpacity200,
+  },
 };
 
 const labelColor = {
@@ -69,14 +80,19 @@ const msgColor = {
   error: colors.error,
 };
 
+const hoverColor = {
+  default: colors.blueOpacity200,
+  error: colors.errorOpacity200,
+};
+
 const insetColor = {
   default: colors.blue100,
-  error: "#f04438cf",
+  error: colors.errorOpacity200,
 };
 
 const focusColor = {
-  default: "#4A83EF33",
-  error: "#f8736a33",
+  default: colors.blueOpacity100,
+  error: colors.errorOpacity100,
 };
 
 const Layout = styled.div`
@@ -92,7 +108,7 @@ const InputBox = styled.div`
 
   height: 42px;
   padding: 0 16px;
-  border: 1px solid ${(props) => borderColor[props.theme]};
+  border: 1px solid ${(props) => borderColor[props.theme][props.status]};
   border-radius: 8px;
 
   background-color: ${(props) => bgColor[props.theme]};
@@ -101,35 +117,30 @@ const InputBox = styled.div`
   color: ${colors.gray500};
   box-shadow: ${shadows.button};
 
+  transition: 0.3s;
+
   svg {
     height: 18px;
     width: 18px;
   }
 
-  ${(props) =>
-    props.status === STATUS.ERROR &&
-    css`
+  ${(props) => css`
+    :hover {
+      border: 1px solid ${hoverColor[props.status]};
+      box-shadow: inset 0 0 0 1px ${hoverColor[props.status]};
+      background-color: ${focusBgColor[props.theme]};
+    }
+
+    :focus-within {
       box-shadow: 0 0 0 3px ${focusColor[props.status]},
         inset 0 0 0 1px ${insetColor[props.status]};
-    `}
-
-  :hover {
-    border: 1px solid ${colors.gray500};
-  }
-
-  :focus-within {
-    transition: 0.3s;
-
-    ${(props) => `
-      box-shadow: 0 0 0 3px ${focusColor[props.status]}, inset 0 0 0 1px ${
-      insetColor[props.status]
+      background-color: ${focusBgColor[props.theme]};
     }
-    `};
-  }
 
-  :focus-within:hover {
-    border: 1px solid ${(props) => insetColor[props.status]};
-  }
+    :focus-within:hover {
+      border: 1px solid ${insetColor[props.status]};
+    }
+  `}
 `;
 
 const InputText = styled.input`
@@ -141,6 +152,8 @@ const InputText = styled.input`
   font-size: ${fontSize.p};
   font-weight: ${fontWeight.regular};
   color: ${(props) => textColor[props.theme]};
+
+  transition: 0.3s;
 
   ::placeholder {
     color: ${colors.gray500};

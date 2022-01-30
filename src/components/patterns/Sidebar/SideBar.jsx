@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { ImageBox, Badge, Button, SideBarItem } from "@/components";
+import { ImageBox, Badge, Button, BookMark, SideBarItem } from "@/components";
 import { Icon } from "@/foundations";
 
 const THEME = {
@@ -11,6 +11,8 @@ const THEME = {
 };
 
 const SideBar = ({ theme, isLoading, contents, badges, src, ...props }) => {
+  const [isMarked, setIsMarked] = useState(false);
+
   if (isLoading) {
     contents = [{}, {}, {}, {}];
     badges = ["", "", ""];
@@ -58,11 +60,19 @@ const SideBar = ({ theme, isLoading, contents, badges, src, ...props }) => {
       <Button
         theme={theme}
         isLoading={isLoading}
-        mode="secondary"
+        mode={isMarked ? "active" : "secondary"}
         minWidth="380px"
+        onClick={() => setIsMarked(!isMarked)}
       >
-        <Icon icon="bookmark" />
-        북마크 하기
+        {isMarked ? (
+          <>
+            <BookMark mode="primary" /> 북마크 완료
+          </>
+        ) : (
+          <>
+            <Icon icon="bookmark" /> 북마크 하기
+          </>
+        )}
       </Button>
     </SideBarWrapper>
   );
@@ -112,6 +122,8 @@ const SideBarBox = styled.div`
 `;
 
 const BadgeBox = styled.div`
+  display: flex;
+  gap: 5px;
   margin: 20px 10px;
 `;
 
@@ -122,13 +134,10 @@ const SideBarWrapper = styled.div`
   height: 540px;
 
   button {
-    margin: 4px 10px;
+    margin: 6px 10px;
     width: calc(100% - 20px);
   }
   .thumbnail {
     margin-bottom: 12px;
-  }
-  .badge-item {
-    margin-right: 5px;
   }
 `;

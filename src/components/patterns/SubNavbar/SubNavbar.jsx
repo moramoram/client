@@ -2,6 +2,8 @@ import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { useSlider } from "@/hooks";
+
 import { SubNavbarItem } from "./SubNavbarItem";
 
 const THEME = {
@@ -21,12 +23,10 @@ const TYPE = {
 
 const SubNavbar = ({ data, theme, onClick, ...props }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const scrollRef = useRef(null);
+  const sliderRef = useRef(null);
 
   const handleNavItemClick = (idx) => {
-    setSelectedIndex(idx);
-    onClick(idx);
-    const current = scrollRef.current;
+    const current = sliderRef.current;
     const currentChildren = current.children[idx];
 
     const move =
@@ -34,10 +34,15 @@ const SubNavbar = ({ data, theme, onClick, ...props }) => {
       current.clientWidth / 2 +
       currentChildren.clientWidth / 2;
     current.scrollLeft = move;
+
+    setSelectedIndex(idx);
+    onClick(idx);
   };
 
+  useSlider(sliderRef);
+
   return (
-    <Layout theme={theme} ref={scrollRef} {...props}>
+    <Layout theme={theme} ref={sliderRef} {...props}>
       {data.map(({ id, title }, idx) => {
         return (
           <SubNavbarItem
@@ -86,6 +91,7 @@ const Layout = styled.div`
   > div {
     flex-shrink: 0;
   }
+
   scroll-behavior: smooth;
   ::-webkit-scrollbar {
     display: none;

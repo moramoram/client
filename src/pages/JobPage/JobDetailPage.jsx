@@ -1,18 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 
-import { JobDetail, JobSideBar } from "@/containers";
+import { useRecoilValue } from "recoil";
+import { themeState } from "@/recoil/theme";
+
+import { JobDetail } from "@/containers";
 import { daysFromToday } from "@/utils";
 
 const JobsDetailPage = ({ match }) => {
+  const theme = useRecoilValue(themeState);
   return (
     <Layout>
       <JobDetail
         titleData={titleData}
         cardData={cardData}
         commentData={commentData}
+        theme={theme}
       ></JobDetail>
-      <FixedSidebar {...sidbarargs} />
+      {/* <FixedSidebar {...sidbarargs} theme={theme} /> */}
     </Layout>
   );
 };
@@ -97,24 +102,27 @@ const commentData = [
   },
 ];
 
-const sidbarargs = {
-  data: {
-    task: "프론트엔드",
-    type: "정규직",
-    career: "신입",
-    location: "서울 강남구",
-  },
+// const sidbarargs = {
+//   data: {
+//     task: "프론트엔드",
+//     type: "정규직",
+//     career: "신입",
+//     location: "서울 강남구",
+//   },
 
-  badges: ["JavaScript", "TypeScript", "Vue.js", "React", "Redux", "Svelte"],
-};
+//   badges: ["JavaScript", "TypeScript", "Vue.js", "React", "Redux", "Svelte"],
+// };
 
 const Layout = styled.div`
   display: flex;
   justify-content: center;
   gap: 50px;
+  max-width: 1280px;
+
+  margin: auto;
 `;
 
-const FixedSidebar = styled(JobSideBar)`
-  position: sticky;
-  top: 222px;
-`;
+// const FixedSidebar = styled(JobSideBar)`
+//   position: sticky;
+//   top: 222px;
+// `;

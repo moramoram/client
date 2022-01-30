@@ -34,71 +34,68 @@ const JobDetailMobile = ({
   const [isMarked, setIsMarked] = useState(false);
 
   return (
-    <Layout>
-      <ImageBoxResponsive
-        className="thumbnail"
-        isLoading={isLoading}
-        {...props}
-      />
+    <>
+      <Layout>
+        <ImageBoxResponsive
+          className="thumbnail"
+          isLoading={isLoading}
+          {...props}
+        />
 
-      <TitleBox {...props}>
-        <Highlight {...props}>{titleData.highlight}</Highlight>
-        <Title {...props}>{titleData.title}</Title>
-        <SubTitle {...props}>{titleData.subtitle}</SubTitle>
-        <SideBarBox>
-          {summaryData.map(({ title, icon, id }) => (
-            <SideBarItem
-              className="contents-item"
-              title={title}
-              icon={icon}
-              isLoading={isLoading}
-              description={data[id]}
-              key={id}
-              {...props}
-            />
-          ))}
-        </SideBarBox>
-        <BadgeBox>
-          {badges.map((children, idx) => {
-            return (
-              <Badge
-                className="badge-item"
-                key={idx}
+        <TitleBox {...props}>
+          <Highlight {...props}>{titleData.highlight}</Highlight>
+          <Title {...props}>{titleData.title}</Title>
+          <SubTitle {...props}>{titleData.subtitle}</SubTitle>
+          <SideBarBox>
+            {summaryData.map(({ title, icon, id }) => (
+              <SideBarItem
+                className="contents-item"
+                title={title}
+                icon={icon}
                 isLoading={isLoading}
-                mode="secondary"
-                color="gray100"
-                isBold
+                description={data[id]}
+                key={id}
                 {...props}
-              >
-                {children}
-              </Badge>
-            );
-          })}
-        </BadgeBox>
-      </TitleBox>
-
-      <Toc {...props} />
-
-      <Content {...props}>{contentData}</Content>
-
-      <CardBox>
-        <BoxTitle {...props}>스터디</BoxTitle>
-        <BoxDescription {...props}>같이 준비해요</BoxDescription>
-        <CardSmallGrid data={cardData} {...props} />
-      </CardBox>
-
-      <CommentBox>
-        <BoxTitle {...props}>댓글</BoxTitle>
-        <BoxDescription {...props}>
-          이 기업에 대한 의견을 나눠보세요
-        </BoxDescription>
-        <CommentInput {...props} />
-        <CommentList data={commentData} {...props} />
-      </CommentBox>
-
+              />
+            ))}
+          </SideBarBox>
+          <BadgeBox>
+            {badges.map((children, idx) => {
+              return (
+                <Badge
+                  className="badge-item"
+                  key={idx}
+                  isLoading={isLoading}
+                  mode="secondary"
+                  color="gray100"
+                  isBold
+                  {...props}
+                >
+                  {children}
+                </Badge>
+              );
+            })}
+          </BadgeBox>
+        </TitleBox>
+        <Toc {...props} />
+        <Content {...props}>{contentData}</Content>
+        <CardBox>
+          <BoxTitle {...props}>스터디</BoxTitle>
+          <BoxDescription {...props}>같이 준비해요</BoxDescription>
+          <CardSmallGrid data={cardData} {...props} />
+        </CardBox>
+        <CommentBox>
+          <BoxTitle {...props}>댓글</BoxTitle>
+          <BoxDescription {...props}>
+            이 기업에 대한 의견을 나눠보세요
+          </BoxDescription>
+          <CommentInput {...props} />
+          <CommentList data={commentData} {...props} />
+        </CommentBox>
+      </Layout>
       <FixedBox>
-        <ButtonBg />
-        <ButtonBox>
+        <ButtonBg {...props} />
+        <ButtonBox {...props}>
           <Button isLoading={isLoading} minWidth="380px">
             <Icon icon="edit" />
             지원하기
@@ -122,7 +119,7 @@ const JobDetailMobile = ({
           </Button>
         </ButtonBox>
       </FixedBox>
-    </Layout>
+    </>
   );
 };
 
@@ -159,6 +156,11 @@ const summaryData = [
     id: "location",
   },
 ];
+
+const bgColor = {
+  light: colors.white,
+  dark: colors.black,
+};
 
 const titleColor = {
   light: colors.gray900,
@@ -286,11 +288,12 @@ const ButtonBox = styled.div`
   display: flex;
   gap: 1rem;
 
-  padding: 0px 20px 20px 20px;
-  background: rgb(255, 255, 255);
+  padding: 0px 12px 20px 12px;
+  background: ${(props) => bgColor[props.theme]};
 
   > button {
     flex-grow: 1;
+    padding: 0;
   }
 `;
 
@@ -299,7 +302,7 @@ const ButtonBg = styled.div`
   height: 2rem;
   background-image: linear-gradient(
     to top,
-    rgb(255, 255, 255),
-    rgba(255, 255, 255, 0)
+    ${(props) => bgColor[props.theme]},
+    ${colors.transparent}
   );
 `;

@@ -4,22 +4,27 @@ import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { themeState, navTypeState } from "@/recoil/theme";
-import { isLogined } from "@/recoil/auth";
+import { isLoginState } from "@/recoil/auth";
+import { modalState, loginModalState } from "@/recoil/modal";
 
+import { Modal } from "@/components";
 import { Navbar } from "@/containers/commons";
 import { colors } from "@/_shared";
 
-import { SignUpModal } from "./components";
+import { SignUpModal } from "@/containers";
 
 const Layout = () => {
   const theme = useRecoilValue(themeState);
   const navType = useRecoilValue(navTypeState);
-  const LoginState = useRecoilValue(isLogined);
+  const isLogined = useRecoilValue(isLoginState);
+  const isloginModal = useRecoilValue(loginModalState);
+  const isModal = useRecoilValue(modalState);
 
   return (
     <LayoutBox theme={theme}>
-      <SignUpModal />
-      <Nav theme={theme} type={navType} isLogin={LoginState} />
+      {isModal && <Modal />}
+      {isloginModal && <SignUpModal />}
+      <Nav theme={theme} type={navType} isLogin={isLogined} />
       <Outlet />
     </LayoutBox>
   );

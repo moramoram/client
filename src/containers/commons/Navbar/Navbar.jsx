@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { themeState } from "@/recoil/theme";
+import { loginModalState } from "@/recoil/modal";
 
 import { NavItem } from "./NavItem";
 import { Avatar, Button, Dropdown, Switch } from "@/components";
@@ -25,6 +26,7 @@ const Navbar = ({ isLogin, ...props }) => {
   const [current, setCurrent] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [theme, setTheme] = useRecoilState(themeState);
+  const setIsModalOpenned = useSetRecoilState(loginModalState);
   const navbarRight = useRef();
 
   const handleTheme = () => {
@@ -34,9 +36,14 @@ const Navbar = ({ isLogin, ...props }) => {
       : localStorage.setItem("theme", "light");
   };
 
-  const handleClick = (name) => {
+  const handleNavItem = (name) => {
     name === current && window.scrollTo({ top: 0, behavior: "smooth" });
     setCurrent(name);
+  };
+
+  const handleLoginButton = () => {
+    setIsModalOpenned(true);
+    console.log("hello");
   };
 
   useEffect(() => {
@@ -63,7 +70,7 @@ const Navbar = ({ isLogin, ...props }) => {
               <NavItemLink to={url} key={idx}>
                 <NavItem
                   {...props}
-                  onClick={() => handleClick(name)}
+                  onClick={() => handleNavItem(name)}
                   status={current === name ? "active" : "default"}
                 >
                   {title}
@@ -88,10 +95,10 @@ const Navbar = ({ isLogin, ...props }) => {
           </>
         ) : (
           <ButtonBox>
-            <Button mode="secondary" {...props}>
+            <Button mode="secondary" onClick={handleLoginButton} {...props}>
               로그인
             </Button>
-            <Button mode="primary" {...props}>
+            <Button mode="primary" onClick={handleLoginButton} {...props}>
               회원가입
             </Button>
           </ButtonBox>

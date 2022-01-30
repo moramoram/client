@@ -2,17 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { useSetRecoilState } from "recoil";
+import { loginModalState } from "@/recoil/modal";
+
 import { Icon, IconSocial, Typography } from "@/foundations";
 import { colors, fontWeight, shadows } from "@/_shared";
 
 const SignUpModal = ({ children, ...props }) => {
+  const setIsModalOpened = useSetRecoilState(loginModalState);
+
   return (
     <>
       <Overlay />
       <ModalBox>
         <Layout {...props}>
           <CloseIconBox>
-            <Icon icon="x" />
+            <Icon icon="x" onClick={() => setIsModalOpened(false)} />
           </CloseIconBox>
           <ContentBox>
             <Title type="h2" {...props}>

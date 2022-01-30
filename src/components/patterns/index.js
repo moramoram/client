@@ -11,7 +11,6 @@ export { default as ImageUploader } from "./ImageUploader";
 export { default as Modal } from "./Modal";
 export { default as Progress } from "./Progress";
 export { default as Sidebar } from "./Sidebar";
-export { default as SignUpModal } from "./SignUpModal";
 export { default as SubNavbar } from "./SubNavbar";
 export { default as Navbar } from "./SubNavbar";
 export { default as Toc } from "./Toc";

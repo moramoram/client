@@ -20,8 +20,8 @@ export const auth = atom({
   },
 });
 
-export const isLogined = selector({
-  key: "isLogined",
+export const isLoginState = selector({
+  key: "isLoginState",
   get: ({ get }) => {
     return !!get(token).accessToken;
   },

@@ -1,16 +1,16 @@
 import React from "react";
 
-import { NavItem } from "./";
+import { NavDefaultItem } from ".";
 import { Background } from "@/foundations";
 
 export default {
-  title: "Containers/Navbar/NavItem",
-  component: NavItem,
+  title: "Containers/Navbar/NavDefault/NavDefaultItem",
+  component: NavDefaultItem,
 };
 
 export const Default = (args) => (
   <Background {...args}>
-    <NavItem {...args} />
+    <NavDefaultItem {...args} />
   </Background>
 );
 
@@ -23,23 +23,23 @@ export const AllTypes = () => (
     <h1>Light theme</h1>
     <hr />
     <Background theme="light" style={{ display: "flex" }}>
-      <NavItem theme="light" status="active">
+      <NavDefaultItem theme="light" status="active">
         Active
-      </NavItem>
-      <NavItem theme="light" status="default">
+      </NavDefaultItem>
+      <NavDefaultItem theme="light" status="default">
         Default
-      </NavItem>
+      </NavDefaultItem>
     </Background>
     <br />
     <h1>Dark theme</h1>
     <hr />
     <Background theme="dark" style={{ display: "flex" }}>
-      <NavItem theme="dark" status="active">
+      <NavDefaultItem theme="dark" status="active">
         Active
-      </NavItem>
-      <NavItem theme="dark" status="default">
+      </NavDefaultItem>
+      <NavDefaultItem theme="dark" status="default">
         Default
-      </NavItem>
+      </NavDefaultItem>
     </Background>
   </>
 );

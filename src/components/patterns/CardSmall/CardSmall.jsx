@@ -64,6 +64,11 @@ const Layout = styled.div`
   .thumbnail {
     margin-bottom: 16px;
   }
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 const TextBox = styled.div`

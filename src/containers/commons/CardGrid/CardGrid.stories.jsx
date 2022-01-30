@@ -19,7 +19,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -29,7 +29,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -39,7 +39,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -49,7 +49,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -59,7 +59,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -69,7 +69,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -79,7 +79,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -89,7 +89,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -99,7 +99,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -109,7 +109,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -119,7 +119,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -129,7 +129,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -139,7 +139,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -149,7 +149,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -159,7 +159,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -169,7 +169,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -179,7 +179,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
     {
       contents: {
@@ -189,7 +189,7 @@ Default.args = {
         src: "",
       },
       badges: ["JavaScript", "React", "Vue.js"],
-      url: "",
+      id: "/",
     },
   ],
 };

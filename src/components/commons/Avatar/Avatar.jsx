@@ -77,6 +77,7 @@ const Image = styled.div`
 
   height: ${(props) => sizeNum[props.size]}px;
   width: ${(props) => sizeNum[props.size]}px;
+  min-width: ${(props) => sizeNum[props.size]}px;
   border-radius: 50%;
 
   background-color: ${colors.gray100};

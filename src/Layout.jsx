@@ -36,7 +36,7 @@ const bgColor = {
 };
 
 const LayoutBox = styled.div`
-  width: 100vw;
+  width: 100%;
   background: ${(props) => bgColor[props.theme]};
 `;
 

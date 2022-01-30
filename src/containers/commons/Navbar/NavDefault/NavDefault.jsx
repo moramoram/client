@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { themeState } from "@/recoil/theme";
+import { loginModalState } from "@/recoil/modal";
 
 import { NavDefaultItem } from "./NavDefaultItem";
 import { Avatar, Button, Dropdown, Switch } from "@/components";
@@ -25,6 +26,7 @@ const NavDefault = ({ isLogin, navData, ...props }) => {
   const [current, setCurrent] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [theme, setTheme] = useRecoilState(themeState);
+  const setLoginModalOpen = useSetRecoilState(loginModalState);
   const navbarRight = useRef();
 
   const handleTheme = () => {
@@ -85,10 +87,20 @@ const NavDefault = ({ isLogin, navData, ...props }) => {
           </>
         ) : (
           <ButtonBox>
-            <Button mode="secondary" width="150px" {...props}>
+            <Button
+              mode="secondary"
+              width="150px"
+              onClick={() => setLoginModalOpen(true)}
+              {...props}
+            >
               로그인
             </Button>
-            <Button mode="primary" width="150px" {...props}>
+            <Button
+              mode="primary"
+              width="150px"
+              onClick={() => setLoginModalOpen(true)}
+              {...props}
+            >
               회원가입
             </Button>
           </ButtonBox>

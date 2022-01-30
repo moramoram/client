@@ -1,22 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 
+// import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
 import { JobDetail } from "@/containers";
 import { daysFromToday } from "@/utils";
 
-const JobsDetailPage = ({ match }) => {
+const JobsDetailPage = () => {
   const theme = useRecoilValue(themeState);
+  // const itemId = useParams().jobId;
+
   return (
     <Layout>
       <JobDetail
+        theme={theme}
         titleData={titleData}
         cardData={cardData}
         commentData={commentData}
-        theme={theme}
-      ></JobDetail>
+      />
       {/* <FixedSidebar {...sidbarargs} theme={theme} /> */}
     </Layout>
   );

@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { themeState } from "@/recoil/theme";
+import { loginModalState } from "@/recoil/modal";
 
 import { NavMobileItem } from "./NavMobileItem";
 import { Avatar, Button, Switch } from "@/components";
@@ -25,6 +26,7 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
   const [current, setCurrent] = useState(null);
   const [navbarOpen, setnavbarOpen] = useState(false);
   const [theme, setTheme] = useRecoilState(themeState);
+  const setLoginModalOpen = useSetRecoilState(loginModalState);
   const navbar = useRef();
 
   const handleTheme = () => {
@@ -118,10 +120,20 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
             </>
           ) : (
             <ButtonBox>
-              <Button mode="primary" width="100%" {...props}>
+              <Button
+                mode="primary"
+                width="100%"
+                onClick={() => setLoginModalOpen(true)}
+                {...props}
+              >
                 회원가입
               </Button>
-              <Button mode="secondary" width="100%" {...props}>
+              <Button
+                mode="secondary"
+                width="100%"
+                onClick={() => setLoginModalOpen(true)}
+                {...props}
+              >
                 로그인
               </Button>
             </ButtonBox>

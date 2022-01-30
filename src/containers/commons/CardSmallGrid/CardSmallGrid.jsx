@@ -11,7 +11,7 @@ const CardSmallGrid = ({ data, isLoading, ...props }) => {
     <Layout {...props}>
       {data.map(({ url, ...props }, idx) => {
         return (
-          <CardItemLink to="{url}" key={idx}>
+          <CardItemLink to={url} key={idx}>
             <CardSmall isLoading={isLoading} {...props} />
           </CardItemLink>
         );

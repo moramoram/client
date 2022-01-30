@@ -11,13 +11,13 @@ const THEME = {
   DARK: "dark",
 };
 
-const JobDetail = ({ titleData, cardData, commentData, ...props }) => {
+const JobDetail = ({ theme, titleData, cardData, commentData, ...props }) => {
   return (
     <Layout>
-      <TitleBox {...props}>
-        <Highlight {...props}>{titleData.highlight}</Highlight>
-        <Title {...props}>{titleData.title}</Title>
-        <SubTitle {...props}>{titleData.subtitle}</SubTitle>
+      <TitleBox theme={theme}>
+        <Highlight theme={theme}>{titleData.highlight}</Highlight>
+        <Title theme={theme}>{titleData.title}</Title>
+        <SubTitle theme={theme}>{titleData.subtitle}</SubTitle>
       </TitleBox>
       <Toc {...props} />
       <Content {...props}>{contentData}</Content>

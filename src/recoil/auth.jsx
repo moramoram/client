@@ -1,4 +1,4 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 
 export const token = atom({
   key: "token",
@@ -16,5 +16,13 @@ export const auth = atom({
     name: undefined,
     nickname: undefined,
     googleEmail: undefined,
+    githubEmail: undefined,
+  },
+});
+
+export const isLoginState = selector({
+  key: "isLoginState",
+  get: ({ get }) => {
+    return !!get(token).accessToken;
   },
 });

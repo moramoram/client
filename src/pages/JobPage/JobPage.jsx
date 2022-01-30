@@ -7,7 +7,7 @@ import { themeState, navTypeState } from "@/recoil/theme";
 import { useMediaQuery } from "react-responsive";
 
 import { SubNavbar, Input, Selector } from "@/components";
-import { CardResponsiveGrid, JobIntro } from "@/containers";
+import { CardGrid, JobIntro } from "@/containers";
 
 const JobsPage = () => {
   const theme = useRecoilValue(themeState);
@@ -67,7 +67,7 @@ const JobsPage = () => {
                 ]}
               />
             </InputBox>
-            <CardResponsiveGrid data={cardData} theme={theme} />
+            <CardGrid data={cardData} theme={theme} />
           </CardGridBox>
         </ContentBox>
       )}
@@ -83,7 +83,7 @@ const JobsPage = () => {
             <Input icon="search" placeholder="직무 검색하기" />
           </SearchBox>
           <ContentBox>
-            <CardResponsiveGrid data={cardData} theme={theme} />
+            <CardGrid data={cardData} theme={theme} />
           </ContentBox>
         </>
       )}
@@ -124,7 +124,7 @@ const cardData = new Array(24).fill({
     src: "",
   },
   badges: ["JavaScript", "React", "Vue.js"],
-  url: "/job/1",
+  id: "/job/1",
 });
 
 const ContentBox = styled.div`

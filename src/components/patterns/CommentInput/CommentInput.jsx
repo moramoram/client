@@ -49,7 +49,7 @@ const CommentInput = ({ theme, ...props }) => {
         <ButtonBox>
           <Icon icon="smile" aria-hidden />
           <Button
-            disabled={!comment.value ? "true" : ""}
+            disabled={!comment.value ? true : false}
             theme={theme}
             {...props}
           >

@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+
 import PropTypes from "prop-types";
 import styled from "styled-components";
+
+import { useRecoilState } from "recoil";
+import { modalState } from "@/recoil/modal";
 
 import { Button } from "@/components";
 import { Icon, Typography } from "@/foundations";
@@ -12,11 +16,26 @@ const THEME = {
 };
 
 const Modal = ({ title, description, secondary, primary, ...props }) => {
+  const [isModalOpened, setIsModalOpened] = useRecoilState(modalState);
+  const modal = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isModalOpened && !modal?.current.contains(event.target)) {
+        setIsModalOpened(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, [isModalOpened, setIsModalOpened]);
+
   return (
     <>
       <Overlay />
       <ModalBox>
-        <Layout {...props}>
+        <Layout ref={modal} {...props}>
           <CloseIconBox>
             <Icon icon="x" />
           </CloseIconBox>

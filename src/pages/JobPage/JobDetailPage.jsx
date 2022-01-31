@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
@@ -12,6 +12,9 @@ import { daysFromToday } from "@/utils";
 
 const JobsDetailPage = () => {
   const theme = useRecoilValue(themeState);
+
+  const itemId = useParams().jobId;
+  console.log(itemId);
 
   const isPc = useMediaQuery({
     query: "(min-width:980px)",

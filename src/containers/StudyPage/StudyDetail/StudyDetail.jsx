@@ -143,8 +143,6 @@ const Content = styled.div`
   }
 `;
 
-const CardBox = styled.div``;
-
 const BoxTitle = styled.div`
   padding: 4rem 0 0.2rem 0;
   min-height: ${lineHeight.h3};

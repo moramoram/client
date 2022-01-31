@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { CardSmallGrid, CommentList } from "@/containers";
 import {
   Toc,
   CommentInput,
@@ -11,8 +12,6 @@ import {
   BookMark,
   SideBarItem,
 } from "@/components";
-
-import { CardSmallGrid, CommentList } from "@/containers";
 import { Icon } from "@/foundations";
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 
@@ -23,6 +22,7 @@ const THEME = {
 
 const JobDetailMobile = ({
   titleData,
+  tocItem,
   contentData,
   cardData,
   commentData,
@@ -77,7 +77,7 @@ const JobDetailMobile = ({
             })}
           </BadgeBox>
         </TitleBox>
-        <Toc {...props} />
+        <Toc items={tocItem} {...props} />
         <Content {...props}>{contentData}</Content>
         <CardBox>
           <BoxTitle {...props}>스터디</BoxTitle>

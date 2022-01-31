@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { Toc, CommentInput } from "@/components";
 import { CardSmallGrid, CommentList } from "@/containers";
+import { Toc, CommentInput } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 
 const THEME = {
@@ -13,11 +13,16 @@ const THEME = {
 
 const JobDetail = ({
   titleData,
+  tocItem,
   contentData,
   cardData,
   commentData,
   ...props
 }) => {
+  const countAvailableStudy = cardData.filter(
+    (data) => !data.isDisabled
+  ).length;
+
   return (
     <Layout>
       <TitleBox {...props}>
@@ -25,17 +30,20 @@ const JobDetail = ({
         <Title {...props}>{titleData.title}</Title>
         <SubTitle {...props}>{titleData.subtitle}</SubTitle>
       </TitleBox>
-      <Toc {...props} />
+      <Toc items={tocItem} {...props} />
       <Content {...props}>{contentData}</Content>
       <CardBox>
         <BoxTitle {...props}>스터디</BoxTitle>
-        <BoxDescription {...props}>같이 준비해요</BoxDescription>
+        <BoxDescription {...props}>
+          이 기업을 준비하는 {countAvailableStudy}
+          개의 스터디가 열려있어요
+        </BoxDescription>
         <CardSmallGrid data={cardData} {...props} />
       </CardBox>
       <CommentBox>
         <BoxTitle {...props}>댓글</BoxTitle>
         <BoxDescription {...props}>
-          이 기업에 대한 의견을 나눠보세요
+          이 기업에 대해 의견을 나눠보세요
         </BoxDescription>
         <CommentInput {...props} />
         <CommentList data={commentData} {...props} />
@@ -82,7 +90,7 @@ const Layout = styled.div`
 
   flex-shrink: 0;
 
-  margin-top: 180px;
+  margin-top: 160px;
   width: calc(100% - 500px);
   max-width: 940px;
 `;

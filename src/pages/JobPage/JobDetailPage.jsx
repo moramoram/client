@@ -26,6 +26,7 @@ const JobsDetailPage = () => {
         <Layout>
           <JobDetail
             titleData={titleData}
+            tocItem={tocItem}
             contentData={contentData}
             cardData={cardData}
             commentData={commentData}
@@ -38,6 +39,7 @@ const JobsDetailPage = () => {
         <Layout>
           <JobDetailMobile
             titleData={titleData}
+            tocItem={tocItem}
             contentData={contentData}
             cardData={cardData}
             commentData={commentData}
@@ -129,6 +131,26 @@ const cardData = [
     isDisabled: true,
     isLiked: false,
   },
+  {
+    contents: {
+      title: "싸피이이티 2차 면접",
+      highlight: "모집완료",
+      src: "",
+    },
+    url: "",
+    isDisabled: true,
+    isLiked: false,
+  },
+  {
+    contents: {
+      title: "싸피이이티 2차 면접",
+      highlight: "모집완료",
+      src: "",
+    },
+    url: "",
+    isDisabled: true,
+    isLiked: false,
+  },
 ];
 
 const commentData = [
@@ -193,6 +215,24 @@ const sidbarargs = {
 
   badges: ["JavaScript", "TypeScript", "Vue.js", "React", "Redux", "Svelte"],
 };
+
+const tocItem = [
+  {
+    name: "info",
+    title: "공고",
+    number: null,
+  },
+  {
+    name: "study",
+    title: "스터디",
+    number: cardData.length,
+  },
+  {
+    name: "comments",
+    title: "댓글",
+    number: commentData.length,
+  },
+];
 
 const Layout = styled.div`
   display: flex;

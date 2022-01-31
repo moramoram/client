@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -12,17 +12,21 @@ const SignUpModal = ({ children, ...props }) => {
   const [isModalOpened, setIsModalOpened] = useRecoilState(loginModalState);
   const modal = useRef();
 
+  const handleClose = useCallback(() => {
+    setIsModalOpened(false);
+  }, [setIsModalOpened]);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isModalOpened && !modal?.current.contains(event.target)) {
-        setIsModalOpened(false);
+        handleClose();
       }
     };
     document.addEventListener("click", handleClickOutside, true);
     return () => {
       document.removeEventListener("click", handleClickOutside, true);
     };
-  }, [isModalOpened, setIsModalOpened]);
+  }, [isModalOpened, handleClose]);
 
   return (
     <>
@@ -36,6 +40,12 @@ const SignUpModal = ({ children, ...props }) => {
             <Title type="h2" {...props}>
               {children}
             </Title>
+            <a
+              href="https://accounts.google.com/o/oauth2/v2/auth?
+scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email&client_id=742761573080-75bp78am2curcuidmc8e3fq0ser61lim.apps.googleusercontent.com&response_type=code&redirect_uri=http://localhost:3000/auth/login/google&access_type=offline"
+            >
+              Google Login
+            </a>
             <ButtonBox>
               <Button className="google">
                 <IconSocial icon="google" />

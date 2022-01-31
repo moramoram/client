@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { Link } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -88,7 +88,9 @@ const NavDefault = ({ isLogin, navData, ...props }) => {
         ) : (
           <ButtonBox>
             <Button
-              mode="secondary"
+              mode={
+                props.type === TYPE.TRANSPARENT ? "transparent" : "secondary"
+              }
               width="150px"
               onClick={() => setLoginModalOpen(true)}
               {...props}
@@ -141,11 +143,11 @@ const bgColor = {
 const borderColor = {
   dark: {
     default: colors.gray700,
-    transparent: colors.gray700,
+    transparent: colors.gray800,
   },
   light: {
     default: colors.gray200,
-    transparent: colors.gray700,
+    transparent: colors.gray800,
   },
 };
 
@@ -201,8 +203,8 @@ const SwitchBox = styled.div`
 
 const UserDropdown = styled(Dropdown)`
   z-index: 9999;
-  top: 36px;
-  right: 20px;
+  top: 40px;
+  right: 40%;
   animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
 `;
 

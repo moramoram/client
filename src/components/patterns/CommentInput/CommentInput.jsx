@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Icon } from "@/foundations";
-import { colors, fontSize, shadows } from "@/_shared";
+import { colors, fontSize } from "@/_shared";
 
 const THEME = {
   DARK: "dark",
@@ -73,7 +73,7 @@ CommentInput.defaultProps = {
 
 const bgColor = {
   dark: colors.gray900,
-  light: colors.gray25,
+  light: colors.gray50,
 };
 
 const focusBgColor = {
@@ -94,7 +94,6 @@ const Layout = styled.label`
 
   padding: 16px;
   border-radius: 0.5rem;
-  box-shadow: ${shadows.base};
 
   background-color: ${(props) => bgColor[props.theme]};
   transition: 0.3s;

@@ -212,10 +212,9 @@ const BadgeBox = styled.div`
 
 const Highlight = styled.div`
   min-width: 70px;
-  min-height: ${lineHeight.h3};
-  margin: 8px 0px;
+  min-height: ${lineHeight.h4};
 
-  font-size: ${fontSize.h3};
+  font-size: ${fontSize.h4};
   font-weight: ${fontWeight.bold};
   color: ${colors.blue100};
 `;

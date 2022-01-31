@@ -90,21 +90,20 @@ const Layout = styled.div`
 const TitleBox = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 10px;
 
   > div {
     display: block;
     border-radius: 4px;
-    margin: 10px;
     animation: ${(props) => props.isLoading && loadings[props.theme]};
   }
 `;
 
 const Highlight = styled.div`
   min-width: 70px;
-  min-height: ${lineHeight.h3};
-  margin: 8px 0px;
+  min-height: ${lineHeight.h4};
 
-  font-size: ${fontSize.h3};
+  font-size: ${fontSize.h4};
   font-weight: ${fontWeight.bold};
   color: ${colors.blue100};
 `;

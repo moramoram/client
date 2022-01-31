@@ -54,11 +54,13 @@ const titleColor = {
 
 const Layout = styled.div`
   display: flex;
-  padding: 24px;
-  background: rgba(239, 241, 251, 1);
   justify-content: space-between;
-  border-radius: 12px;
+
   height: 150px;
+  padding: 24px;
+  border-radius: 12px;
+
+  background: rgba(239, 241, 251, 1);
 `;
 
 const FlexBox = styled.div`
@@ -83,14 +85,14 @@ const Category = styled.div`
 `;
 
 const Title = styled.div`
-  display: -webkit-box;
+  /* display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
-  overflow: hidden;
+  overflow: hidden; */
 
   max-height: 3rem;
   line-height: 1.5rem;
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis; */
 
   color: ${(props) => titleColor[props.theme]};
   font-size: ${fontSize.lg};

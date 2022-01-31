@@ -12,12 +12,9 @@ const THEME = {
 const CommunityIntro = ({ ...props }) => {
   return (
     <>
-      <EmptyBox />
       <Layout>
-        <TextBox>
-          <Title {...props}>커뮤니티</Title>
-          <SubTitle {...props}>싸피인들끼리 자유롭게 소통하세요</SubTitle>
-        </TextBox>
+        <Title {...props}>커뮤니티</Title>
+        <SubTitle {...props}>싸피인들끼리 자유롭게 소통하세요</SubTitle>
       </Layout>
     </>
   );
@@ -46,29 +43,20 @@ const subtitleColor = {
 
 const Layout = styled.div`
   display: flex;
-
-  width: 100vw;
-  height: 200px;
-  background: ${colors.gray200};
-
   flex-direction: column;
-  flex-wrap: wrap;
   justify-content: flex-end;
-  align-items: center;
+  /* align-items: center; */
+
+  width: 100%;
+  height: 300px;
+  /* background: ${colors.gray200}; */
+
+  flex-wrap: wrap;
   overflow: hidden;
 `;
 
-const EmptyBox = styled.div`
-  width: 100vw;
-  height: 82px;
-  background: ${colors.gray200};
-`;
-
-const TextBox = styled.div`
-  width: 33vw;
-`;
-
 const Title = styled.div`
+  padding-top: 68px;
   line-height: ${lineHeight.h2};
   margin-bottom: 15px;
 

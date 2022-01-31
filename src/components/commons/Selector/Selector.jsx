@@ -178,6 +178,8 @@ const customStyles = (props) => ({
   placeholder: (provided) => ({
     ...provided,
     color: colors.gray500,
+    whiteSpace: "nowrap",
+    minWidth: "40px",
   }),
 
   dropdownIndicator: (provided) => ({

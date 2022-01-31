@@ -15,6 +15,7 @@
     "highlight.js": "^11.4.0",
     "node-fetch": "^3.2.0",
     "normalize.css": "^8.0.1",
+    "query-string": "^7.1.0",
     "quill-markdown-shortcuts": "^0.0.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

@@ -1,5 +1,12 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+
+import { Route, Routes, useLocation } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { token, accessToken } from "@/recoil/auth";
+
+import queryString from "query-string";
+
+import { axiosInstance } from "@/utils";
 import Layout from "@/Layout";
 
 import {
@@ -15,6 +22,38 @@ import {
 } from "@/pages";
 
 const Router = () => {
+  const location = useLocation();
+  const parsed = queryString.parse(location.search);
+  const jwtToken = useRecoilValue(accessToken);
+  const setToken = useSetRecoilState(token);
+
+  const getToken = async () => {
+    const { data } = await axiosInstance({
+      url: "users/auth/google",
+      method: "post",
+      params: {
+        code: parsed.code,
+      },
+    });
+    const { accessToken } = data;
+    setToken({
+      accessToken: accessToken,
+    });
+    localStorage.setItem("ssafe_token", JSON.parse(data));
+  };
+
+  useEffect(() => {
+    if (parsed.code) {
+      getToken();
+    }
+  }, [parsed]);
+
+  useEffect(() => {
+    if (jwtToken) {
+      //유저 데이터 받아오기
+    }
+  });
+
   return (
     <Routes>
       <Route element={<Layout />}>

@@ -26,3 +26,17 @@ export const isLoginState = selector({
     return !!get(token).accessToken;
   },
 });
+
+export const accessToken = selector({
+  key: "accessToken",
+  get: ({ get }) => {
+    return get(token).accessToken;
+  },
+});
+
+export const refreshToken = selector({
+  key: "refreshToken",
+  get: ({ get }) => {
+    return get(token).refreshToken;
+  },
+});

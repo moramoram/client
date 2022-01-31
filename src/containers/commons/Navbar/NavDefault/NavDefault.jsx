@@ -33,7 +33,7 @@ const NavDefault = ({ isLogin, navData, ...props }) => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
 
-  const handleClick = (name) => {
+  const onClickNavItem = (name) => {
     name === current
       ? window.scrollTo({ top: 0, behavior: "smooth" })
       : window.scrollTo({ top: 0 });
@@ -63,7 +63,7 @@ const NavDefault = ({ isLogin, navData, ...props }) => {
             <NavItemLink to={url} key={idx}>
               <NavDefaultItem
                 {...props}
-                onClick={() => handleClick(name)}
+                onClick={() => onClickNavItem(name)}
                 status={current === name ? "active" : "default"}
               >
                 {title}

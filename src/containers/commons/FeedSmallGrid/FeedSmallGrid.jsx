@@ -31,10 +31,10 @@ export default FeedSmallGrid;
 const Layout = styled.div`
   display: flex;
   gap: 20px;
-  margin: auto;
   align-items: center;
 `;
 
 const FeedItemLink = styled(Link)`
   text-decoration: none;
+  width: 100%;
 `;

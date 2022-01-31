@@ -50,7 +50,6 @@ const Router = () => {
 
   useEffect(() => {
     if (jwtToken) {
-      //유저 데이터 받아오기
     }
   });
 

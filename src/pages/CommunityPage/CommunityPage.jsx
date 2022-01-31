@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
+// import { useMediaQuery } from "react-responsive";
+
 import { SubNavbar, Editor } from "@/components";
 import { CommunityIntro, FeedGrid, FeedSmallGrid } from "@/containers";
 
@@ -16,20 +18,35 @@ const CommunityPage = () => {
     console.log(e);
   };
 
+  // const isPc = useMediaQuery({
+  //   query: "(min-width:980px)",
+  // });
+  // const isMobile = useMediaQuery({
+  //   query: "(max-width:979px)",
+  // });
+
   return (
-    <Layout>
-      <CommunityIntro />
-      <MainBox>
-        <StickyNav data={categoryData} theme={theme} onClick={handleCategory} />
-        <ContentBox>
-          <FeedSmallGrid data={feedSmallData} />
-          <EditorBox>
-            <Editor theme={theme} />
-          </EditorBox>
-          <FeedGrid data={feedData} theme={theme} />
-        </ContentBox>
-      </MainBox>
-    </Layout>
+    <>
+      <Layout>
+        <MainBox>
+          <StickyNavBox>
+            <StickyNav
+              data={categoryData}
+              theme={theme}
+              onClick={handleCategory}
+            />
+          </StickyNavBox>
+          <ContentBox>
+            <CommunityIntro />
+            <FeedSmallGrid data={feedSmallData} />
+            <EditorBox>
+              <Editor theme={theme} />
+            </EditorBox>
+            <FeedGrid data={feedData} theme={theme} />
+          </ContentBox>
+        </MainBox>
+      </Layout>
+    </>
   );
 };
 
@@ -59,7 +76,7 @@ const feedSmallData = [
     username: "아이유",
     avatar:
       "https://image.bada.io/files//crawling/2021/04/05/bobaedream/1612930_i14788674553.jpg",
-    title: "더 좋은 커뮤니티를 만들기 위한 약속 🤙",
+    title: "더 좋은 커뮤니티를 위한 약속 🤙",
     category: "공지",
     id: "1",
   },
@@ -67,7 +84,7 @@ const feedSmallData = [
     username: "아이유",
     avatar:
       "https://image.bada.io/files//crawling/2021/04/05/bobaedream/1612930_i14788674553.jpg",
-    title: "더 좋은 커뮤니티를 만들기 위한 약속 🤙",
+    title: "더 좋은 커뮤니티를 위한 약속 🤙",
     category: "공지",
     id: "1",
   },
@@ -75,7 +92,7 @@ const feedSmallData = [
     username: "아이유",
     avatar:
       "https://image.bada.io/files//crawling/2021/04/05/bobaedream/1612930_i14788674553.jpg",
-    title: "더 좋은 커뮤니티를 만들기 위한 약속 🤙",
+    title: "더 좋은 커뮤니티를 위한 약속 🤙",
     category: "공지",
     id: "1",
   },
@@ -142,14 +159,23 @@ const Layout = styled.div`
 
 const MainBox = styled.div`
   display: flex;
-  margin: 90px;
+  justify-content: center;
   gap: 100px;
+  max-width: 1280px;
+
+  padding: 20px;
+  margin: auto;
 `;
 
 const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
+  width: calc(100% - 320px);
   gap: 40px;
+`;
+
+const StickyNavBox = styled.div`
+  padding-top: 340px;
 `;
 
 const StickyNav = styled(SubNavbar)`

@@ -46,7 +46,7 @@ const Router = () => {
     if (parsed.code) {
       getToken();
     }
-  }, [parsed]);
+  });
 
   useEffect(() => {
     if (jwtToken) {

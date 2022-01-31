@@ -129,7 +129,9 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
                 회원가입
               </Button>
               <Button
-                mode="secondary"
+                mode={
+                  props.type === TYPE.TRANSPARENT ? "transparent" : "secondary"
+                }
                 width="100%"
                 onClick={() => setLoginModalOpen(true)}
                 {...props}

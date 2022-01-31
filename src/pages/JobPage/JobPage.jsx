@@ -53,7 +53,7 @@ const JobsPage = () => {
           </StickyNavBox>
           <CardGridBox>
             <InputBox>
-              <Input theme={theme} icon="search" placeholder="직무 검색하기" />
+              <Input theme={theme} icon="search" placeholder="공고 검색하기" />
               <Selector theme={theme} placeholder="기술 스택" isMulti />
               <Selector
                 theme={theme}
@@ -80,7 +80,7 @@ const JobsPage = () => {
             view="mobile"
           />
           <SearchBox>
-            <Input icon="search" placeholder="직무 검색하기" theme={theme} />
+            <Input icon="search" placeholder="공고 검색하기" theme={theme} />
           </SearchBox>
           <ContentBox>
             <CardGrid data={cardData} theme={theme} />
@@ -159,7 +159,8 @@ const InputBox = styled.div`
   display: flex;
   gap: 0.5rem;
 
-  padding-bottom: 1rem;
+  max-width: 940px;
+  padding-bottom: 2rem;
 
   > div {
     flex-grow: 1;

@@ -2,33 +2,43 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
-
-import { Avatar, Toc, CommentInput } from "@/components";
 import { CommentList } from "@/containers";
+import { Avatar, Toc, CommentInput } from "@/components";
+import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
   DARK: "dark",
 };
 
-const StudyDetail = ({ theme, titleData, commentData, ...props }) => {
+const StudyDetail = ({
+  titleData,
+  tocItem,
+  contentData,
+  commentData,
+  ...props
+}) => {
   return (
     <Layout>
-      <TitleBox theme={theme}>
-        <Highlight theme={theme}>{titleData.highlight}</Highlight>
-        <Title theme={theme}>{titleData.title}</Title>
-        <SubTitle theme={theme}>
-          <Avatar size="medium" src={titleData.src} theme={theme} />
-          {titleData.subtitle}
-        </SubTitle>
+      <TitleBox {...props}>
+        <Highlight {...props}>{titleData.highlight}</Highlight>
+        <Title {...props}>{titleData.title}</Title>
+        <div>
+          <SubTitle {...props}>
+            <Avatar size="medium" src={titleData.src} {...props} />
+            {titleData.subtitle}
+          </SubTitle>
+        </div>
       </TitleBox>
-      <Toc items={tocItem} theme={theme} />
-      <Content />
+      <Toc items={tocItem} {...props} />
+      <Content {...props}>{contentData}</Content>
       <CommentBox>
-        <BoxTitle theme={theme}>댓글</BoxTitle>
-        <CommentInput theme={theme} />
-        <CommentList data={commentData} theme={theme} />
+        <BoxTitle {...props}>댓글</BoxTitle>
+        <BoxDescription {...props}>
+          총 {commentData.length}개의 댓글이 달렸습니다.
+        </BoxDescription>
+        <CommentInput {...props} />
+        <CommentList data={commentData} {...props} />
       </CommentBox>
     </Layout>
   );
@@ -45,23 +55,14 @@ StudyDetail.defaultProps = {
 
 export default StudyDetail;
 
-const tocItem = [
-  {
-    name: "info",
-    title: "공고",
-    number: null,
-  },
-
-  {
-    name: "comments",
-    title: "댓글",
-    number: 20,
-  },
-];
-
 const titleColor = {
   light: colors.gray900,
   dark: colors.gray25,
+};
+
+const textColor = {
+  light: colors.gray700,
+  dark: colors.gray300,
 };
 
 const subtitleColor = {
@@ -69,22 +70,27 @@ const subtitleColor = {
   dark: colors.gray500,
 };
 
+const borderColor = {
+  dark: colors.gray700,
+  light: colors.gray200,
+};
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  overflow: hidden;
+  gap: 2rem;
 
-  width: 740px;
+  flex-shrink: 0;
 
-  > div {
-    margin: 30px;
-  }
+  margin-top: 160px;
+  width: calc(100% - 500px);
+  max-width: 940px;
 `;
 
 const TitleBox = styled.div`
   display: flex;
   flex-direction: column;
+
   > div {
     display: block;
     border-radius: 4px;
@@ -113,29 +119,47 @@ const Title = styled.div`
 `;
 
 const SubTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   min-width: 160px;
-  min-height: ${lineHeight.h3};
+  min-height: ${lineHeight.h4};
+
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h4};
   color: ${(props) => subtitleColor[props.theme]};
-  div {
-    display: inline-block;
-    margin-right: 10px;
-  }
 `;
 
 const Content = styled.div`
-  min-height: 600px;
+  padding: 0 0 2rem 0;
+  color: ${(props) => textColor[props.theme]};
+
+  h3 {
+    margin-bottom: 0;
+  }
+
+  ul {
+    padding-left: 32px;
+  }
 `;
 
+const CardBox = styled.div``;
+
 const BoxTitle = styled.div`
+  padding: 4rem 0 0.2rem 0;
   min-height: ${lineHeight.h3};
+
+  border-top: 1px solid ${(props) => borderColor[props.theme]};
+  color: ${(props) => titleColor[props.theme]};
+
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h3};
 `;
 
-const CommentBox = styled.div`
-  > div {
-    margin: 30px 0px;
-  }
+const BoxDescription = styled.div`
+  padding-bottom: 2rem;
+  color: ${(props) => subtitleColor[props.theme]};
+  font-size: ${fontSize.p};
 `;
+
+const CommentBox = styled.div``;

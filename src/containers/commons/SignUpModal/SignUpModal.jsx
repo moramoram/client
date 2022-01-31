@@ -40,12 +40,6 @@ const SignUpModal = ({ children, ...props }) => {
             <Title type="h2" {...props}>
               {children}
             </Title>
-            <a
-              href="https://accounts.google.com/o/oauth2/v2/auth?
-scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email&client_id=742761573080-75bp78am2curcuidmc8e3fq0ser61lim.apps.googleusercontent.com&response_type=code&redirect_uri=http://localhost:3000/auth/login/google&access_type=offline"
-            >
-              Google Login
-            </a>
             <ButtonBox>
               <Button className="google">
                 <IconSocial icon="google" />

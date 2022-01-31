@@ -43,7 +43,7 @@ Dropdown.defaultProps = {
 export default Dropdown;
 
 const borderColor = {
-  dark: colors.gray600,
+  dark: colors.gray800,
   light: colors.gray100,
 };
 

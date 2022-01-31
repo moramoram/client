@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { Link } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -54,7 +54,7 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
   }, [navbarOpen]);
 
   return (
-    <Layout ref={navbar} {...props}>
+    <Layout blur={navbarOpen} ref={navbar} {...props}>
       <Navbar {...props}>
         <Link to=".">
           <Logo width="80" height="20" {...props} />
@@ -163,11 +163,11 @@ export default NavMobile;
 const borderColor = {
   dark: {
     default: colors.gray700,
-    transparent: colors.gray700,
+    transparent: colors.gray800,
   },
   light: {
     default: colors.gray200,
-    transparent: colors.gray700,
+    transparent: colors.gray800,
   },
 };
 
@@ -213,6 +213,22 @@ const Layout = styled.div`
   position: ${(props) => (props.isStatic ? "static" : "fixed")};
   width: 100%;
   z-index: 9999;
+
+  ${(props) =>
+    props.type === TYPE.TRANSPARENT &&
+    `
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(196, 196, 196, 0) 100%
+      );
+    `}
+
+  ${(props) =>
+    props.blur &&
+    css`
+      backdrop-filter: blur(10px);
+    `}
 `;
 
 const Navbar = styled.div`
@@ -232,22 +248,10 @@ const Navbar = styled.div`
 const NavDropdown = styled.div`
   padding-bottom: 1rem;
   box-shadow: ${(props) => boxShadow[props.theme]};
-
-  ${(props) =>
-    props.type === TYPE.TRANSPARENT &&
-    `
-      background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0.5) 0%,
-        rgba(196, 196, 196, 0) 100%
-      );
-    `}
-
   background-color: ${(props) => dropdownBgColor[props.theme][props.type]};
-  backdrop-filter: blur(10px);
 
   animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
-  transition: 0.3s;
+  transition: background-color 0.3s;
 `;
 
 const LinkBox = styled.div`
@@ -268,7 +272,7 @@ const UserInfoBox = styled.div`
   align-items: center;
 
   padding: 18px 10% 15px 8%;
-  border-top: 1px solid ${(props) => borderColor[props.theme][props.type]};
+  border-top: 1px solid rgba(134, 142, 150, 0.2);
 `;
 
 const UserInfo = styled.div`

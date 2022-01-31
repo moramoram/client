@@ -39,23 +39,6 @@ Toc.propTypes = {
 
 Toc.defaultProps = {
   theme: THEME.LIGHT,
-  items: [
-    {
-      name: "info",
-      title: "공고",
-      number: null,
-    },
-    {
-      name: "study",
-      title: "스터디",
-      number: 5,
-    },
-    {
-      name: "comments",
-      title: "댓글",
-      number: 20,
-    },
-  ],
 };
 
 export default Toc;

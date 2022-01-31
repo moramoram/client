@@ -83,37 +83,14 @@ SideBar.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   isLoading: PropTypes.bool,
   src: PropTypes.string,
-  contents: PropTypes.arrayOf(Object),
-  badges: PropTypes.arrayOf(String),
+  contents: PropTypes.arrayOf(Object).isRequired,
+  badges: PropTypes.arrayOf(String).isRequired,
 };
 
 SideBar.defaultProps = {
   theme: THEME.LIGHT,
   isLoading: false,
   src: null,
-  name: "logo",
-  contents: [
-    {
-      title: "직무",
-      description: "프론트엔드",
-      icon: "briefcase",
-    },
-    {
-      title: "고용형태",
-      description: "정규직",
-      icon: "briefcase",
-    },
-    {
-      title: "경력",
-      description: "신입",
-      icon: "briefcase",
-    },
-    {
-      title: "근무위치",
-      description: "서울 강남구",
-      icon: "briefcase",
-    },
-  ],
 };
 
 export default SideBar;

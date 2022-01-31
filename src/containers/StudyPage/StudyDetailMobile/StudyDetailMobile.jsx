@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { CardSmallGrid, CommentList } from "@/containers";
+import { CommentList } from "@/containers";
 import {
+  Avatar,
   Toc,
   CommentInput,
   ImageBoxResponsive,
@@ -20,11 +21,10 @@ const THEME = {
   DARK: "dark",
 };
 
-const JobDetailMobile = ({
+const StudyDetailMobile = ({
   titleData,
   tocItem,
   contentData,
-  cardData,
   commentData,
   isLoading,
   data,
@@ -45,7 +45,10 @@ const JobDetailMobile = ({
         <TitleBox {...props}>
           <Highlight {...props}>{titleData.highlight}</Highlight>
           <Title {...props}>{titleData.title}</Title>
-          <SubTitle {...props}>{titleData.subtitle}</SubTitle>
+          <SubTitle {...props}>
+            <Avatar size="medium" src={titleData.src} {...props} />
+            {titleData.subtitle}
+          </SubTitle>
           <SideBarBox>
             {summaryData.map(({ title, icon, id }) => (
               <SideBarItem
@@ -79,15 +82,10 @@ const JobDetailMobile = ({
         </TitleBox>
         <Toc items={tocItem} {...props} />
         <Content {...props}>{contentData}</Content>
-        <CardBox>
-          <BoxTitle {...props}>스터디</BoxTitle>
-          <BoxDescription {...props}>같이 준비해요</BoxDescription>
-          <CardSmallGrid data={cardData} {...props} />
-        </CardBox>
         <CommentBox>
           <BoxTitle {...props}>댓글</BoxTitle>
           <BoxDescription {...props}>
-            이 기업에 대한 의견을 나눠보세요
+            총 {commentData.length}개의 댓글이 달렸습니다.
           </BoxDescription>
           <CommentInput {...props} />
           <CommentList data={commentData} {...props} />
@@ -96,10 +94,6 @@ const JobDetailMobile = ({
       <FixedBox>
         <ButtonBg {...props} />
         <ButtonBox {...props}>
-          <Button isLoading={isLoading} minWidth="380px">
-            <Icon icon="edit" />
-            지원하기
-          </Button>
           <Button
             isLoading={isLoading}
             mode={isMarked ? "active" : "secondary"}
@@ -123,35 +117,35 @@ const JobDetailMobile = ({
   );
 };
 
-JobDetailMobile.propTypes = {
+StudyDetailMobile.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   data: PropTypes.object,
 };
 
-JobDetailMobile.defaultProps = {
+StudyDetailMobile.defaultProps = {
   theme: THEME.LIGHT,
 };
 
-export default JobDetailMobile;
+export default StudyDetailMobile;
 
 const summaryData = [
   {
-    title: "직무",
-    icon: "briefcase",
-    id: "task",
-  },
-  {
-    title: "고용 형태",
-    icon: "building",
+    title: "종류",
+    icon: "target",
     id: "type",
   },
   {
-    title: "경력",
-    icon: "monitor",
-    id: "career",
+    title: "목표 기업",
+    icon: "building",
+    id: "target",
   },
   {
-    title: "근무 위치",
+    title: "모집 인원",
+    icon: "users",
+    id: "people",
+  },
+  {
+    title: "스터디 지역",
     icon: "mapPin",
     id: "location",
   },
@@ -236,6 +230,9 @@ const Title = styled.div`
 `;
 
 const SubTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   min-width: 160px;
   min-height: ${lineHeight.h4};
 
@@ -256,8 +253,6 @@ const Content = styled.div`
     padding-left: 32px;
   }
 `;
-
-const CardBox = styled.div``;
 
 const BoxTitle = styled.div`
   padding: 4rem 0 0.2rem 0;

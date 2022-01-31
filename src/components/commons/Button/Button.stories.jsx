@@ -55,6 +55,25 @@ export const AllTypes = () => (
       <br />
       <br />
       <br />
+      <Button mode="transparent" width="200px">
+        Transparent
+      </Button>
+      <br />
+      <Button mode="transparent" width="200px" disabled>
+        Disabled
+      </Button>
+      <br />
+      <Button mode="transparent" width="200px" isLoading>
+        Loading...
+      </Button>
+      <br />
+      <Button mode="transparent" width="200px">
+        <Icon icon="info" aria-label="Link" />
+        Secondary
+      </Button>
+      <br />
+      <br />
+      <br />
       <Button mode="active" width="200px">
         Active
       </Button>
@@ -105,6 +124,25 @@ export const AllTypes = () => (
       </Button>
       <br />
       <Button mode="secondary" width="200px" theme="dark">
+        <Icon icon="info" aria-label="Link" />
+        Secondary
+      </Button>
+      <br />
+      <br />
+      <br />
+      <Button mode="transparent" width="200px" theme="dark">
+        Transparent
+      </Button>
+      <br />
+      <Button mode="transparent" width="200px" theme="dark" disabled>
+        Disabled
+      </Button>
+      <br />
+      <Button mode="transparent" width="200px" theme="dark" isLoading>
+        Loading...
+      </Button>
+      <br />
+      <Button mode="transparent" width="200px" theme="dark">
         <Icon icon="info" aria-label="Link" />
         Secondary
       </Button>

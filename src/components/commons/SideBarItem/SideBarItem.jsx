@@ -20,15 +20,15 @@ const SideBarItem = ({ title, description, icon, isLoading, ...props }) => {
   const desc = isLoading ? "" : description;
   const iconname = isLoading ? "" : icon;
   return (
-    <SideBarItemWrapper {...props}>
-      <Title isLoading={isLoading} {...props}>
-        <Icon icon={iconname} />
-        {text}
-      </Title>
+    <Layout {...props}>
+      <TitleBox isLoading={isLoading} {...props}>
+        <Icon icon={iconname} width="18" height="18" />
+        <Title>{text}</Title>
+      </TitleBox>
       <Content isLoading={isLoading} {...props}>
         {desc}
       </Content>
-    </SideBarItemWrapper>
+    </Layout>
   );
 };
 
@@ -47,9 +47,23 @@ SideBarItem.defaultProps = {
 
 export default SideBarItem;
 
-const Title = styled.div`
-  display: inline-block;
-  overflow: hidden;
+const Layout = styled.div`
+  display: flex;
+  align-items: center;
+
+  border-radius: 4px;
+
+  width: 400px;
+  height: 36px;
+  padding: 0 10px;
+
+  color: ${(props) => textColor[props.theme]};
+`;
+
+const TitleBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
   width: 124px;
   height: 20px;
@@ -58,18 +72,12 @@ const Title = styled.div`
 
   font-size: ${fontSize.p};
   font-weight: ${fontWeight.bold};
-  text-overflow: ellipsis;
   white-space: nowrap;
 
   animation: ${(props) => props.isLoading && loadings[props.theme]};
-
-  svg {
-    height: ${fontSize.lg};
-    width: ${fontSize.h4};
-    margin-right: 10px;
-    margin-top: -2px;
-  }
 `;
+
+const Title = styled.div``;
 
 const Content = styled.div`
   display: inline-block;
@@ -85,17 +93,4 @@ const Content = styled.div`
   white-space: nowrap;
 
   animation: ${(props) => props.isLoading && loadings[props.theme]};
-`;
-
-const SideBarItemWrapper = styled.div`
-  display: flex;
-  align-items: center;
-
-  border-radius: 4px;
-
-  width: 400px;
-  height: 36px;
-  padding: 0 10px;
-
-  color: ${(props) => textColor[props.theme]};
 `;

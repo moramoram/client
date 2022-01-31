@@ -12,11 +12,12 @@ const THEME = {
 const MODE = {
   PRIMARY: "primary",
   SECONDARY: "secondary",
+  TRANSPARENT: "transparent",
   ACTIVE: "active",
 };
 
 const Button = ({ isLoading, loadingText, isLink, children, ...props }) => {
-  const buttonInner = isLoading ? "" : children;
+  const buttonInner = isLoading || children;
 
   return (
     <Layout isLoading={isLoading} {...props}>
@@ -46,11 +47,13 @@ const textColor = {
   light: {
     primary: colors.white,
     secondary: colors.gray600,
+    transparent: colors.white,
     active: colors.blue200,
   },
   dark: {
     primary: colors.white,
     secondary: colors.white,
+    transparent: colors.white,
     active: colors.white,
   },
 };
@@ -59,11 +62,13 @@ const bgColor = {
   light: {
     primary: colors.blue100,
     secondary: colors.gray50,
+    transparent: "rgba(134, 142, 150, 0.3)",
     active: colors.blueOpacity50,
   },
   dark: {
     primary: colors.blue100,
     secondary: colors.gray700,
+    transparent: "rgba(134, 142, 150, 0.3)",
     active: colors.blueOpacity100,
   },
 };
@@ -72,11 +77,13 @@ const hoverBgColor = {
   light: {
     primary: colors.blue200,
     secondary: colors.gray200,
+    transparent: "rgba(134, 142, 150, 0.4)",
     active: colors.blueOpacity50,
   },
   dark: {
     primary: colors.blue200,
     secondary: colors.gray600,
+    transparent: "rgba(134, 142, 150, 0.4)",
     active: colors.blueOpacity100,
   },
 };
@@ -135,5 +142,11 @@ const Layout = styled.button`
     props.isLoading &&
     css`
       cursor: progress;
+    `}
+
+  ${(props) =>
+    props.mode === MODE.TRANSPARENT &&
+    css`
+      backdrop-filter: blur(4px);
     `}
 `;

@@ -31,11 +31,15 @@ export default FeedGrid;
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  margin: auto;
   align-items: center;
+  gap: 32px;
+
+  margin: auto;
+  padding-top: 32px;
 `;
 
 const FeedItemLink = styled(Link)`
   text-decoration: none;
+  border-bottom: 1px solid #e7e7e7;
+  padding-bottom: 32px;
 `;

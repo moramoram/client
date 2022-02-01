@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { useMediaQuery } from "react-responsive";
+
 import { Avatar } from "@/components";
 import { Icon } from "@/foundations";
 import { colors, fontSize, fontWeight } from "@/_shared";
@@ -29,6 +31,13 @@ const FeedItem = ({
 }) => {
   const usernameRender = username || "User";
 
+  const isDefault = useMediaQuery({
+    query: "(min-width:530px)",
+  });
+  const isSmall = useMediaQuery({
+    query: "(max-width:529px)",
+  });
+
   return (
     <Layout>
       <FlexBox>
@@ -48,6 +57,11 @@ const FeedItem = ({
           <ContentBox>
             <Title {...props}>{title}</Title>
             <Content {...props}>{content}</Content>
+            {isSmall && thumbnail && (
+              <ThumbnailBoxMobile>
+                <img src={thumbnail} alt="" width="100%" />
+              </ThumbnailBoxMobile>
+            )}
           </ContentBox>
         </div>
         <Footer>
@@ -65,7 +79,11 @@ const FeedItem = ({
           </IconBox>
         </Footer>
       </FlexBox>
-      {thumbnail && <img src={thumbnail} alt="" width="200px" />}
+      {isDefault && thumbnail && (
+        <ThumbnailBox>
+          <img src={thumbnail} alt="" width="200px" />
+        </ThumbnailBox>
+      )}
     </Layout>
   );
 };
@@ -116,13 +134,14 @@ const Layout = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 2rem;
-  height: 200px;
+  /* height: 200px; */
 `;
 
 const FlexBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 2rem;
 `;
 
 const Header = styled.div`
@@ -147,16 +166,28 @@ const User = styled.div`
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.p};
   color: ${(props) => titleColor[props.theme]};
+
+  @media screen and (max-width: 530px) {
+    font-size: ${fontSize.sm};
+  }
 `;
 
 const UserDetail = styled.div`
   color: ${colors.gray500};
   font-size: ${fontSize.sm};
+
+  @media screen and (max-width: 530px) {
+    font-size: ${fontSize.xs};
+  }
 `;
 
 const CreatedAt = styled.div`
   color: ${colors.gray500};
   font-size: ${fontSize.sm};
+
+  @media screen and (max-width: 530px) {
+    font-size: ${fontSize.xs};
+  }
 `;
 
 const ContentBox = styled.div`
@@ -170,7 +201,11 @@ const ContentBox = styled.div`
 const Title = styled.div`
   color: ${(props) => titleColor[props.theme]};
   font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h4};
+  font-size: ${fontSize.lg};
+
+  @media screen and (max-width: 530px) {
+    font-size: ${fontSize.p};
+  }
 `;
 
 const Content = styled.div`
@@ -187,6 +222,10 @@ const Content = styled.div`
   line-height: 1.5rem;
 
   text-overflow: ellipsis;
+
+  @media screen and (max-width: 530px) {
+    font-size: ${fontSize.sm};
+  }
 `;
 
 const Footer = styled.div`
@@ -208,4 +247,20 @@ const IconBox = styled.div`
 
 const CountNums = styled.div`
   font-size: ${fontSize.sm};
+`;
+
+const ThumbnailBox = styled.div`
+  img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+  }
+`;
+
+const ThumbnailBoxMobile = styled.div`
+  margin-top: 1rem;
+
+  img {
+    /* border-radius: 16px; */
+  }
 `;

@@ -226,6 +226,7 @@ const customStyles = (props) => ({
   option: (provided, state) => ({
     ...provided,
     background: state.isFocused ? focusColor.default : bgColor[props.theme],
+    color: textColor[props.theme],
 
     ":active": {
       background: activeColor.default,

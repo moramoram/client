@@ -6,11 +6,11 @@ import { useRecoilValue } from "recoil";
 import { themeState, navTypeState } from "@/recoil/theme";
 
 import { isLoginState } from "@/recoil/auth";
-import { modalState, loginModalState } from "@/recoil/modal";
+import { modalState, createModalState, loginModalState } from "@/recoil/modal";
 import { navMenuData, navUserData } from "@/recoil/menu";
 
 import { Modal } from "@/components";
-import { Navbar, SignUpModal } from "@/containers";
+import { Navbar, SignUpModal, CommunityCreate } from "@/containers";
 import { colors } from "@/_shared";
 
 const Layout = () => {
@@ -21,6 +21,7 @@ const Layout = () => {
 
   const isLogined = useRecoilValue(isLoginState);
   const isloginModal = useRecoilValue(loginModalState);
+  const isCreateModal = useRecoilValue(createModalState);
   const isModal = useRecoilValue(modalState);
 
   useEffect(() => {
@@ -28,10 +29,16 @@ const Layout = () => {
     return () => (document.body.style.overflow = "unset");
   }, [isModal, isloginModal]);
 
+  useEffect(() => {
+    (isModal || isCreateModal) && (document.body.style.overflow = "hidden");
+    return () => (document.body.style.overflow = "unset");
+  }, [isModal, isCreateModal]);
+
   return (
     <LayoutBox theme={theme}>
       {isModal && <Modal theme={theme} />}
       {isloginModal && <SignUpModal theme={theme} />}
+      {isCreateModal && <CommunityCreate theme={theme} />}
       <Nav
         theme={theme}
         type={navType}

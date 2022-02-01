@@ -1,23 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { themeState } from "@/recoil/theme";
+import { createModalState } from "@/recoil/modal";
 
 import { useMediaQuery } from "react-responsive";
 
-import { SubNavbar, Editor } from "@/components";
-import {
-  CommunityIntro,
-  CommunityCreateButton,
-  FeedGrid,
-  FeedSmallGrid,
-} from "@/containers";
+import { SubNavbar } from "@/components";
+import { CommunityIntro, CommunityCreateButton, FeedGrid } from "@/containers";
 
 import { daysFromToday, numToMillion } from "@/utils";
 
 const CommunityPage = () => {
   const theme = useRecoilValue(themeState);
+  const setLoginModalOpen = useSetRecoilState(createModalState);
 
   const handleCategory = (e) => {
     console.log(e);
@@ -32,7 +29,7 @@ const CommunityPage = () => {
 
   return (
     <>
-      <CommunityIntro />
+      <CommunityIntro theme={theme} />
       {isPc && (
         <MainBox>
           <StickyNavBox>
@@ -43,20 +40,20 @@ const CommunityPage = () => {
             />
           </StickyNavBox>
           <ContentBox>
-            <CommunityCreateButton />
             {/* <NoticeBox>
               <FeedSmallGrid data={feedSmallData} />
             </NoticeBox> */}
-            {/* <EditorBox>
-              <Editor theme={theme} />
-            </EditorBox> */}
+            <CommunityCreateButton
+              onClick={() => setLoginModalOpen(true)}
+              theme={theme}
+            />
             <FeedGrid data={feedData} theme={theme} />
           </ContentBox>
         </MainBox>
       )}
       {isMobile && (
         <MobileBox>
-          <SubNavMobile
+          <SubNavbar
             data={categoryData}
             theme={theme}
             onClick={handleCategory}
@@ -65,9 +62,10 @@ const CommunityPage = () => {
           {/* <NoticeBox>
             <FeedSmallGrid data={feedSmallData} />
           </NoticeBox> */}
-          {/* <EditorBox>
-            <Editor theme={theme} />
-          </EditorBox> */}
+          <CommunityCreateButton
+            onClick={() => setLoginModalOpen(true)}
+            theme={theme}
+          />
           <FeedGrid data={feedData} theme={theme} />
         </MobileBox>
       )}
@@ -96,32 +94,32 @@ const categoryData = [
   },
 ];
 
-const feedSmallData = [
-  {
-    username: "관리자",
-    avatar:
-      "https://image.bada.io/files//crawling/2021/04/05/bobaedream/1612930_i14788674553.jpg",
-    title: "더 좋은 커뮤니티를 위한 약속 🤙",
-    category: "공지",
-    id: "1",
-  },
-  {
-    username: "관리자",
-    avatar:
-      "https://image.bada.io/files//crawling/2021/04/05/bobaedream/1612930_i14788674553.jpg",
-    title: "ssafé는 삼성청년SW아카데미의 보안서약을 준수합니다",
-    category: "공지",
-    id: "1",
-  },
-  {
-    username: "관리자",
-    avatar:
-      "https://image.bada.io/files//crawling/2021/04/05/bobaedream/1612930_i14788674553.jpg",
-    title: "ssafé 버전 업데이트 안내 (2022.02.28)",
-    category: "공지",
-    id: "1",
-  },
-];
+// const feedSmallData = [
+//   {
+//     username: "관리자",
+//     avatar:
+//       "https://image.bada.io/files//crawling/2021/04/05/bobaedream/1612930_i14788674553.jpg",
+//     title: "더 좋은 커뮤니티를 위한 약속 🤙",
+//     category: "공지",
+//     id: "1",
+//   },
+//   {
+//     username: "관리자",
+//     avatar:
+//       "https://image.bada.io/files//crawling/2021/04/05/bobaedream/1612930_i14788674553.jpg",
+//     title: "ssafé는 삼성청년SW아카데미의 보안서약을 준수합니다",
+//     category: "공지",
+//     id: "1",
+//   },
+//   {
+//     username: "관리자",
+//     avatar:
+//       "https://image.bada.io/files//crawling/2021/04/05/bobaedream/1612930_i14788674553.jpg",
+//     title: "ssafé 버전 업데이트 안내 (2022.02.28)",
+//     category: "공지",
+//     id: "1",
+//   },
+// ];
 
 const feedData = [
   {
@@ -323,11 +321,6 @@ const feedData = [
   },
 ];
 
-const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 const MainBox = styled.div`
   display: flex;
   justify-content: center;
@@ -363,14 +356,6 @@ const StickyNav = styled(SubNavbar)`
   align-self: flex-start;
 `;
 
-const NoticeBox = styled.div`
-  /* overflow-x: scroll; */
-`;
-
-const SubNavMobile = styled(SubNavbar)`
-  /* padding: 20px 20px 0 20px; */
-`;
-
-const EditorBox = styled.div`
-  height: 300px;
-`;
+// const NoticeBox = styled.div`
+//   overflow-x: scroll;
+// `;

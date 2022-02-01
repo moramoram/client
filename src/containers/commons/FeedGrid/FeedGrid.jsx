@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { FeedItem } from "@/components";
+import { colors } from "@/_shared";
 
 const FeedGrid = ({ data, isLoading, theme, ...props }) => {
   const feeds = isLoading ? (
@@ -12,7 +13,7 @@ const FeedGrid = ({ data, isLoading, theme, ...props }) => {
   ) : (
     data.map(({ id, ...props }, idx) => {
       return (
-        <FeedItemLink to={id} key={idx}>
+        <FeedItemLink to={id} key={idx} theme={theme}>
           <FeedItem theme={theme} {...props} />
         </FeedItemLink>
       );
@@ -28,6 +29,11 @@ FeedGrid.propTypes = {
 
 export default FeedGrid;
 
+const borderColor = {
+  light: colors.gray100,
+  dark: colors.gray900,
+};
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
@@ -40,6 +46,6 @@ const Layout = styled.div`
 
 const FeedItemLink = styled(Link)`
   text-decoration: none;
-  border-bottom: 1px solid #e7e7e7;
+  border-bottom: 1px solid ${(props) => borderColor[props.theme]};
   padding-bottom: 32px;
 `;

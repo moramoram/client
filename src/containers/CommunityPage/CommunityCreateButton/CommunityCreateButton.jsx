@@ -47,7 +47,6 @@ const borderColor = {
 const Layout = styled.div`
   display: flex;
   align-items: center;
-  box-sizing: border-box;
 
   height: 42px;
   margin: 6px 0;
@@ -56,10 +55,10 @@ const Layout = styled.div`
   border-radius: 8px;
 
   background-color: ${(props) => bgColor[props.theme]};
+  box-shadow: ${shadows.button};
 
   font-size: ${fontSize.sm};
   color: ${colors.gray500};
-  box-shadow: ${shadows.button};
 
   transition: 0.3s;
   cursor: text;

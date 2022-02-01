@@ -56,18 +56,22 @@ const Layout = styled.div`
   display: flex;
   justify-content: space-between;
 
-  height: 150px;
+  height: 120px;
   padding: 24px;
   border-radius: 12px;
 
   background: rgba(239, 241, 251, 1);
+
+  @media screen and (max-width: 530px) {
+    height: 80px;
+    padding: 16px;
+  }
 `;
 
 const FlexBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 35px;
 `;
 
 const ContentBox = styled.div`
@@ -77,18 +81,22 @@ const ContentBox = styled.div`
 `;
 
 const Category = styled.div`
-  margin-bottom: 11px;
+  margin-bottom: 8px;
 
   color: ${colors.gray500};
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.p};
+
+  @media screen and (max-width: 530px) {
+    font-size: ${fontSize.sm};
+  }
 `;
 
 const Title = styled.div`
-  /* display: -webkit-box;
+  display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  overflow: hidden; */
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 
   max-height: 3rem;
   line-height: 1.5rem;
@@ -97,6 +105,10 @@ const Title = styled.div`
   color: ${(props) => titleColor[props.theme]};
   font-size: ${fontSize.lg};
   font-weight: ${fontWeight.bold};
+
+  @media screen and (max-width: 530px) {
+    font-size: ${fontSize.p};
+  }
 `;
 
 const Footer = styled.div`
@@ -114,4 +126,8 @@ const User = styled.div`
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.sm};
   color: ${(props) => titleColor[props.theme]};
+
+  @media screen and (max-width: 530px) {
+    font-size: ${fontSize.xs};
+  }
 `;

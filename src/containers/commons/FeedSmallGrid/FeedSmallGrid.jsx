@@ -32,6 +32,11 @@ const Layout = styled.div`
   display: flex;
   gap: 20px;
   align-items: center;
+
+  @media screen and (max-width: 530px) {
+    flex-direction: column;
+    gap: 12px;
+  }
 `;
 
 const FeedItemLink = styled(Link)`

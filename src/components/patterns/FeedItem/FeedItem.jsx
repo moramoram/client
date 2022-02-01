@@ -98,9 +98,9 @@ FeedItem.propTypes = {
   title: PropTypes.string,
   content: PropTypes.string,
   thumbnail: PropTypes.string,
-  likecount: PropTypes.string,
-  commentcount: PropTypes.string,
-  viewcount: PropTypes.string,
+  likecount: PropTypes.node,
+  commentcount: PropTypes.node,
+  viewcount: PropTypes.node,
 };
 
 FeedItem.defaultProps = {

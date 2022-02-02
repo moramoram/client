@@ -172,11 +172,11 @@ const FlexBox = styled.div`
   position: relative;
 
   :first-child {
-    padding-left: 8%;
+    margin-left: 8%;
   }
 
   :last-child {
-    padding-right: 10%;
+    margin-right: 10%;
   }
 
   svg,
@@ -204,7 +204,7 @@ const SwitchBox = styled.div`
 const UserDropdown = styled(Dropdown)`
   z-index: 9999;
   top: 40px;
-  right: 40%;
+  right: 8%;
   animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
 `;
 

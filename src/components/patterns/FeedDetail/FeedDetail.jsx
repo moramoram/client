@@ -27,7 +27,7 @@ const FeedDetail = ({
   viewcount,
   ...props
 }) => {
-  const usernameRender = username || "User";
+  const usernameRender = username ?? "User";
 
   return (
     <Layout>

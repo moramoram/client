@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { useMediaQuery } from "react-responsive";
-
 import { Avatar } from "@/components";
 import { Icon } from "@/foundations";
 import { colors, fontSize, fontWeight } from "@/_shared";
@@ -15,7 +13,7 @@ const THEME = {
   LIGHT: "light",
 };
 
-const FeedItem = ({
+const FeedDetail = ({
   username,
   avatar,
   campus,
@@ -29,42 +27,25 @@ const FeedItem = ({
   viewcount,
   ...props
 }) => {
-  const usernameRender = username || "User";
-
-  const isDefault = useMediaQuery({
-    query: "(min-width:530px)",
-  });
-  const isSmall = useMediaQuery({
-    query: "(max-width:529px)",
-  });
+  const usernameRender = username ?? "User";
 
   return (
     <Layout>
-      <FlexBox>
-        <div>
-          <Header>
-            <Avatar size="large" username={username} src={avatar} {...props} />
-            <InfoBox>
-              <UserBox>
-                <User {...props}>{usernameRender}</User>
-                <UserDetail>
-                  ({ordinal}/{campus})
-                </UserDetail>
-              </UserBox>
-              <CreatedAt>{created}</CreatedAt>
-            </InfoBox>
-          </Header>
-          <ContentBox>
-            <Title {...props}>{title}</Title>
-            <Content {...props}>{content}</Content>
-            {isSmall && thumbnail && (
-              <ThumbnailBoxMobile>
-                <img src={thumbnail} alt="" width="100%" />
-              </ThumbnailBoxMobile>
-            )}
-          </ContentBox>
-        </div>
-        <Footer>
+      <Title {...props}>{title}</Title>
+      <Header {...props}>
+        <FlexBox>
+          <Avatar size="large" username={username} src={avatar} {...props} />
+          <InfoBox>
+            <UserBox>
+              <User {...props}>{usernameRender}</User>
+              <UserDetail>
+                ({ordinal}/{campus})
+              </UserDetail>
+            </UserBox>
+            <CreatedAt>{created}</CreatedAt>
+          </InfoBox>
+        </FlexBox>
+        <FlexBox>
           <IconBox>
             <Icon icon="thumbsUp" />
             <CountNums>{likecount}</CountNums>
@@ -77,18 +58,14 @@ const FeedItem = ({
             <Icon icon="eye" />
             <CountNums>{viewcount}</CountNums>
           </IconBox>
-        </Footer>
-      </FlexBox>
-      {isDefault && thumbnail && (
-        <ThumbnailBox>
-          <img src={thumbnail} alt="" width="200px" />
-        </ThumbnailBox>
-      )}
+        </FlexBox>
+      </Header>
+      <Content {...props}>{content}</Content>
     </Layout>
   );
 };
 
-FeedItem.propTypes = {
+FeedDetail.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   username: PropTypes.string,
   avatar: PropTypes.string,
@@ -96,14 +73,13 @@ FeedItem.propTypes = {
   ordinal: PropTypes.string,
   created: PropTypes.string,
   title: PropTypes.string,
-  content: PropTypes.string,
-  thumbnail: PropTypes.string,
+  content: PropTypes.any,
   likecount: PropTypes.node,
   commentcount: PropTypes.node,
   viewcount: PropTypes.node,
 };
 
-FeedItem.defaultProps = {
+FeedDetail.defaultProps = {
   theme: THEME.LIGHT,
   username: null,
   avatar: null,
@@ -112,13 +88,12 @@ FeedItem.defaultProps = {
   created: daysFromToday("2022-01-24"),
   title: "Lorem ipsum",
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  thumbnail: null,
   likecount: numToMillion(0),
   commentcount: numToMillion(0),
   viewcount: numToMillion(0),
 };
 
-export default FeedItem;
+export default FeedDetail;
 
 const titleColor = {
   dark: colors.gray25,
@@ -130,24 +105,30 @@ const contentColor = {
   light: colors.gray700,
 };
 
+const borderColor = {
+  light: colors.gray300,
+  dark: colors.gray800,
+};
+
 const Layout = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 2rem;
-  /* height: 200px; */
+  width: 100%;
+  padding-top: 80px;
 `;
 
 const FlexBox = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   gap: 2rem;
 `;
 
 const Header = styled.div`
   display: flex;
+  justify-content: space-between;
   gap: 1rem;
   padding-bottom: 1.5rem;
+  border-bottom: 1px solid ${(props) => borderColor[props.theme]};
 `;
 
 const InfoBox = styled.div`
@@ -190,51 +171,19 @@ const CreatedAt = styled.div`
   }
 `;
 
-const ContentBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
-  width: 100%;
-`;
-
 const Title = styled.div`
   color: ${(props) => titleColor[props.theme]};
   font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.lg};
-
-  @media screen and (max-width: 530px) {
-    font-size: ${fontSize.p};
-  }
+  font-size: ${fontSize.h2};
 `;
 
 const Content = styled.div`
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-
-  max-height: 3rem;
+  padding: 1rem 0 3rem 0;
 
   color: ${(props) => contentColor[props.theme]};
   font-weight: ${fontWeight.regular};
   font-size: ${fontSize.p};
   line-height: 1.5rem;
-
-  text-overflow: ellipsis;
-
-  @media screen and (max-width: 530px) {
-    font-size: ${fontSize.sm};
-  }
-`;
-
-const Footer = styled.div`
-  display: flex;
-  gap: 1.5rem;
-
-  svg {
-    width: 18px;
-  }
 `;
 
 const IconBox = styled.div`
@@ -247,20 +196,4 @@ const IconBox = styled.div`
 
 const CountNums = styled.div`
   font-size: ${fontSize.sm};
-`;
-
-const ThumbnailBox = styled.div`
-  img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-  }
-`;
-
-const ThumbnailBoxMobile = styled.div`
-  margin-top: 1rem;
-
-  img {
-    /* border-radius: 16px; */
-  }
 `;

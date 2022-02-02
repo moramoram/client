@@ -66,7 +66,7 @@ const FeedItem = ({
         </div>
         <Footer>
           <IconBox>
-            <Icon icon="heart" />
+            <Icon icon="thumbsUp" />
             <CountNums>{likecount}</CountNums>
           </IconBox>
           <IconBox>

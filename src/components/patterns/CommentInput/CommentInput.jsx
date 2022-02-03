@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Icon } from "@/foundations";
-import { colors, shadows } from "@/_shared";
+import { colors, fontSize } from "@/_shared";
 
 const THEME = {
   DARK: "dark",
@@ -41,7 +41,7 @@ const CommentInput = ({ theme, ...props }) => {
         ref={textareaRef}
         onChange={onChange}
         value={comment.value}
-        placeholder="댓글로 의견을 나눠보세요 :)"
+        placeholder="댓글을 입력하세요"
         maxLength="500"
       />
       <Footer>
@@ -49,7 +49,7 @@ const CommentInput = ({ theme, ...props }) => {
         <ButtonBox>
           <Icon icon="smile" aria-hidden />
           <Button
-            disabled={!comment.value ? "true" : ""}
+            disabled={!comment.value ? true : false}
             theme={theme}
             {...props}
           >
@@ -73,7 +73,12 @@ CommentInput.defaultProps = {
 
 const bgColor = {
   dark: colors.gray900,
-  light: colors.gray25,
+  light: colors.gray50,
+};
+
+const focusBgColor = {
+  dark: colors.black,
+  light: colors.white,
 };
 
 const textColor = {
@@ -87,12 +92,25 @@ const Layout = styled.label`
   justify-content: space-between;
   gap: 1rem;
 
-  width: 620px;
-  padding: 9px 13px;
+  padding: 16px;
   border-radius: 0.5rem;
-  box-shadow: ${shadows.base};
 
   background-color: ${(props) => bgColor[props.theme]};
+  transition: 0.3s;
+
+  :hover {
+    background-color: ${(props) => focusBgColor[props.theme]};
+    box-shadow: 0 0 0 3px ${colors.blueOpacity100};
+  }
+
+  :focus-within {
+    ${(props) => `
+      background-color: ${(props) => focusBgColor[props.theme]};
+      box-shadow: 0 0 0 3px ${colors.blueOpacity100},
+        inset 0 0 0 2px ${colors.blueOpacity300}
+    }
+    `};
+  }
 `;
 
 const Textarea = styled.textarea`
@@ -100,12 +118,17 @@ const Textarea = styled.textarea`
   resize: none;
   overflow: hidden;
   border: none;
-  background-color: ${(props) => bgColor[props.theme]};
+  background-color: transparent;
 
+  font-size: ${fontSize.sm};
   color: ${(props) => textColor[props.theme]};
 
   ::placeholder {
     color: ${colors.gray500};
+  }
+
+  :focus {
+    outline: none;
   }
 `;
 
@@ -138,16 +161,28 @@ const ButtonBox = styled.div`
 const Button = styled.button`
   width: 72px;
   height: 28px;
-  border: 1px solid ${colors.blue100};
+  border: none;
   border-radius: 4px;
 
   background-color: ${colors.blue100};
   color: ${colors.white};
+  font-size: ${fontSize.sm};
 
   cursor: pointer;
+  transition: 0.3s;
 
-  :disabled {
+  :disabled,
+  :disabled:hover {
     opacity: 0.5;
     cursor: default;
+    background-color: ${colors.blue100};
+  }
+
+  :hover {
+    background-color: ${colors.blue200};
+  }
+
+  :active {
+    background-color: ${colors.blue150};
   }
 `;

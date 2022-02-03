@@ -2,17 +2,27 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
-
-import { Toc, CommentInput } from "@/components";
 import { CardSmallGrid, CommentList } from "@/containers";
+import { Toc, CommentInput } from "@/components";
+import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
   DARK: "dark",
 };
 
-const JobDetail = ({ titleData, cardData, commentData, ...props }) => {
+const JobDetail = ({
+  titleData,
+  tocItem,
+  contentData,
+  cardData,
+  commentData,
+  ...props
+}) => {
+  const countAvailableStudy = cardData.filter(
+    (data) => !data.isDisabled
+  ).length;
+
   return (
     <Layout>
       <TitleBox {...props}>
@@ -20,16 +30,23 @@ const JobDetail = ({ titleData, cardData, commentData, ...props }) => {
         <Title {...props}>{titleData.title}</Title>
         <SubTitle {...props}>{titleData.subtitle}</SubTitle>
       </TitleBox>
-      <Toc />
-      <Content />
+      <Toc items={tocItem} {...props} />
+      <Content {...props}>{contentData}</Content>
       <CardBox>
-        <BoxTitle>스터디</BoxTitle>
-        <CardSmallGrid data={cardData} />
+        <BoxTitle {...props}>스터디</BoxTitle>
+        <BoxDescription {...props}>
+          이 기업을 준비하는 {countAvailableStudy}
+          개의 스터디가 열려있어요
+        </BoxDescription>
+        <CardSmallGrid data={cardData} {...props} />
       </CardBox>
       <CommentBox>
-        <BoxTitle>이 기업에 대한 의견을 나누세요</BoxTitle>
-        <CommentInput />
-        <CommentList data={commentData} />
+        <BoxTitle {...props}>댓글</BoxTitle>
+        <BoxDescription {...props}>
+          이 기업에 대해 의견을 나눠보세요
+        </BoxDescription>
+        <CommentInput {...props} />
+        <CommentList data={commentData} {...props} />
       </CommentBox>
     </Layout>
   );
@@ -51,41 +68,50 @@ const titleColor = {
   dark: colors.gray25,
 };
 
+const textColor = {
+  light: colors.gray700,
+  dark: colors.gray300,
+};
+
 const subtitleColor = {
   light: colors.gray400,
   dark: colors.gray500,
 };
 
+const borderColor = {
+  dark: colors.gray700,
+  light: colors.gray200,
+};
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  overflow: hidden;
+  gap: 2rem;
 
-  width: 740px;
+  flex-shrink: 0;
 
-  > div {
-    margin: 30px;
-  }
+  margin-top: 160px;
+  width: calc(100% - 500px);
+  max-width: 940px;
 `;
 
 const TitleBox = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 10px;
+
   div {
     display: block;
     border-radius: 4px;
-    margin: 10px;
     animation: ${(props) => props.isLoading && loadings[props.theme]};
   }
 `;
 
 const Highlight = styled.div`
   min-width: 70px;
-  min-height: ${lineHeight.h3};
-  margin: 8px 0px;
+  min-height: ${lineHeight.h4};
 
-  font-size: ${fontSize.h3};
+  font-size: ${fontSize.h4};
   font-weight: ${fontWeight.bold};
   color: ${colors.blue100};
 `;
@@ -109,18 +135,35 @@ const SubTitle = styled.div`
 `;
 
 const Content = styled.div`
-  min-height: 600px;
+  padding: 0 0 2rem 0;
+  color: ${(props) => textColor[props.theme]};
+
+  h3 {
+    margin-bottom: 0;
+  }
+
+  ul {
+    padding-left: 32px;
+  }
 `;
 
 const CardBox = styled.div``;
+
 const BoxTitle = styled.div`
+  padding: 4rem 0 0.2rem 0;
   min-height: ${lineHeight.h3};
+
+  border-top: 1px solid ${(props) => borderColor[props.theme]};
+  color: ${(props) => titleColor[props.theme]};
+
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h3};
 `;
 
-const CommentBox = styled.div`
-  > div {
-    margin: 30px 0px;
-  }
+const BoxDescription = styled.div`
+  padding-bottom: 2rem;
+  color: ${(props) => subtitleColor[props.theme]};
+  font-size: ${fontSize.p};
 `;
+
+const CommentBox = styled.div``;

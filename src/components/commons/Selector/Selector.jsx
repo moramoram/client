@@ -24,7 +24,6 @@ const Selector = ({ title, options, placeholder, message, ...props }) => {
         styles={customStyles(props)}
         options={options}
         placeholder={placeholder}
-        isMulti
         {...props}
       />
       <Message {...props}>{message}</Message>
@@ -37,6 +36,7 @@ Selector.propTypes = {
   status: PropTypes.oneOf(Object.values(STATUS)),
   options: PropTypes.array,
   placeholder: PropTypes.string,
+  isMulti: PropTypes.bool,
 };
 
 Selector.defaultProps = {
@@ -66,6 +66,7 @@ Selector.defaultProps = {
     { value: "Vue.js", label: "Vue.js" },
   ],
   placeholder: "Placeholder",
+  isMulti: false,
 };
 
 export default Selector;
@@ -76,13 +77,24 @@ const textColor = {
 };
 
 const bgColor = {
-  light: colors.white,
+  light: colors.gray50,
   dark: colors.gray900,
 };
 
+const focusBgColor = {
+  light: colors.white,
+  dark: colors.black,
+};
+
 const borderColor = {
-  light: colors.gray300,
-  dark: colors.gray700,
+  light: {
+    default: colors.gray50,
+    error: colors.errorOpacity200,
+  },
+  dark: {
+    default: colors.gray900,
+    error: colors.errorOpacity200,
+  },
 };
 
 const optionBgColor = {
@@ -105,38 +117,41 @@ const msgColor = {
   error: colors.error,
 };
 
+const hoverColor = {
+  default: colors.blueOpacity200,
+  error: colors.errorOpacity200,
+};
+
 const insetColor = {
   default: colors.blue100,
-  error: "#f04438cf",
+  error: colors.errorOpacity200,
 };
 
 const focusColor = {
-  default: "#4A83EF33",
-  error: "#f8736a33",
+  default: colors.blueOpacity100,
+  error: colors.errorOpacity100,
 };
 
 const activeColor = {
-  default: "#4A83EF77",
-  error: "#f8736a77",
+  default: colors.blueOpacity200,
+  error: colors.errorOpacity200,
 };
 
 const customStyles = (props) => ({
   control: (provided) => ({
     ...provided,
-    padding: "2px 6px",
-    border: `1px solid ${borderColor[props.theme]}`,
+    padding: "2px 16px",
+    border: `1px solid ${borderColor[props.theme][props.status]}`,
     borderRadius: "8px",
-    boxShadow: [
-      props.status === STATUS.ERROR
-        ? `0 0 0 3px ${focusColor[props.status]}, inset 0 0 0 1px ${
-            insetColor[props.status]
-          }`
-        : shadows.button,
-    ],
+    boxShadow: shadows.button,
+
     backgroundColor: bgColor[props.theme],
+    transition: "0.3s",
 
     ":hover": {
-      border: `1px solid ${colors.gray500}`,
+      border: `1px solid ${hoverColor[props.status]}`,
+      boxShadow: `inset 0 0 0 1px ${hoverColor[props.status]}`,
+      backgroundColor: focusBgColor[props.theme],
     },
 
     ":focus-within:hover": {
@@ -155,9 +170,16 @@ const customStyles = (props) => ({
     color: textColor[props.theme],
   }),
 
+  singleValue: (provided) => ({
+    ...provided,
+    color: textColor[props.theme],
+  }),
+
   placeholder: (provided) => ({
     ...provided,
     color: colors.gray500,
+    whiteSpace: "nowrap",
+    minWidth: "40px",
   }),
 
   dropdownIndicator: (provided) => ({
@@ -204,9 +226,11 @@ const customStyles = (props) => ({
   option: (provided, state) => ({
     ...provided,
     background: state.isFocused ? focusColor.default : bgColor[props.theme],
+    color: textColor[props.theme],
 
     ":active": {
       background: activeColor.default,
+      color: textColor[props.theme],
     },
     ":first-of-type": {
       borderRadius: "3px 3px 0 0",

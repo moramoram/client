@@ -75,11 +75,17 @@ const imageHeight = {
   small: "110px",
 };
 
+const borderRadius = {
+  large: "16px",
+  medium: "12px",
+  small: "8px",
+};
+
 const ImageBoxWrapper = styled.div`
   display: flex;
   width: ${(props) => imageWidth[props.size]};
   height: ${(props) => imageHeight[props.size]};
-  border-radius: 16px;
+  border-radius: ${(props) => borderRadius[props.size]};
 
   background: ${(props) => imageBgColor[props.theme]};
 
@@ -87,14 +93,17 @@ const ImageBoxWrapper = styled.div`
   justify-content: center;
   animation: ${(props) => props.isLoading && loadings[props.theme]};
 
+  overflow: hidden;
+
   svg {
     width: 33%;
     height: 33%;
+    filter: ${(props) => props.isDisabled && `blur(5px)`};
   }
 
   img {
-    width: 100%;
-    height: 100%;
+    width: 105%;
     object-fit: cover;
+    filter: ${(props) => props.isDisabled && `blur(5px)`};
   }
 `;

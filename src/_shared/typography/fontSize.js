@@ -1,6 +1,6 @@
 const fontSize = {
   h1: "3rem",
-  h2: "2.25rem",
+  h2: "2rem",
   h3: "1.5rem",
   h4: "1.25rem",
   lg: "1.125rem",

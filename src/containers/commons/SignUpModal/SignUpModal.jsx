@@ -1,18 +1,40 @@
-import React from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+
+import { useRecoilState } from "recoil";
+import { loginModalState } from "@/recoil/modal";
 
 import { Icon, IconSocial, Typography } from "@/foundations";
 import { colors, fontWeight, shadows } from "@/_shared";
 
 const SignUpModal = ({ children, ...props }) => {
+  const [isModalOpened, setIsModalOpened] = useRecoilState(loginModalState);
+  const modal = useRef();
+
+  const handleClose = useCallback(() => {
+    setIsModalOpened(false);
+  }, [setIsModalOpened]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isModalOpened && !modal?.current.contains(event.target)) {
+        handleClose();
+      }
+    };
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, [isModalOpened, handleClose]);
+
   return (
     <>
       <Overlay />
       <ModalBox>
-        <Layout {...props}>
+        <Layout ref={modal} {...props}>
           <CloseIconBox>
-            <Icon icon="x" />
+            <Icon icon="x" onClick={() => setIsModalOpened(false)} />
           </CloseIconBox>
           <ContentBox>
             <Title type="h2" {...props}>
@@ -52,7 +74,7 @@ const Overlay = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 999;
+  z-index: 9999;
 
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(15px);
@@ -64,7 +86,7 @@ const ModalBox = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 10000;
 `;
 
 const Layout = styled.div`

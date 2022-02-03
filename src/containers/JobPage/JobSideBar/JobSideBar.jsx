@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { ImageBox, Badge, Button, SideBarItem } from "@/components";
+import { ImageBox, Badge, Button, BookMark, SideBarItem } from "@/components";
 import { Icon } from "@/foundations";
 
 const THEME = {
@@ -11,50 +11,28 @@ const THEME = {
 };
 
 const JobSideBar = ({ data, badges, isLoading, ...props }) => {
+  const [isMarked, setIsMarked] = useState(false);
+
   if (isLoading) {
     data = new Array(4);
     badges = ["", "", ""];
   }
 
-  const handClickPriamry = () => {
-    console.log("hello");
-  };
-  const handClickSecondary = () => {
-    console.log("hello");
-  };
-
   return (
     <SideBarWrapper isLoading={isLoading} {...props}>
-      <ImageBox className="thumbnail" isLoading={isLoading} />
-      <SideBarBox>
-        <SideBarItem
-          className="contents-item"
-          title="직무"
-          icon="briefcase"
-          description={data.task}
-          isLoading={isLoading}
-        />
-        <SideBarItem
-          className="contents-item"
-          title="고용 형태"
-          icon="building"
-          description={data.type}
-          isLoading={isLoading}
-        />
-        <SideBarItem
-          className="contents-item"
-          title="경력"
-          icon="monitor"
-          description={data.career}
-          isLoading={isLoading}
-        />
-        <SideBarItem
-          className="contents-item"
-          title="근무 위치"
-          icon="mapPin"
-          description={data.location}
-          isLoading={isLoading}
-        />
+      <ImageBox className="thumbnail" isLoading={isLoading} {...props} />
+      <SideBarBox {...props}>
+        {summaryData.map(({ title, icon, id }) => (
+          <SideBarItem
+            className="contents-item"
+            title={title}
+            icon={icon}
+            description={data[id]}
+            isLoading={isLoading}
+            key={id}
+            {...props}
+          />
+        ))}
       </SideBarBox>
       <BadgeBox>
         {badges.map((children, idx) => {
@@ -66,6 +44,7 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
               mode="secondary"
               color="gray100"
               isBold
+              {...props}
             >
               {children}
             </Badge>
@@ -73,22 +52,26 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
         })}
       </BadgeBox>
 
-      <Button
-        onClick={() => handClickPriamry()}
-        isLoading={isLoading}
-        width="100%"
-      >
+      <Button isLoading={isLoading} minWidth="380px">
         <Icon icon="edit" />
         지원하기
       </Button>
       <Button
-        onClick={() => handClickSecondary()}
-        sLoading={isLoading}
-        mode="secondary"
-        width="100%"
+        isLoading={isLoading}
+        mode={isMarked ? "active" : "secondary"}
+        minWidth="380px"
+        onClick={() => setIsMarked(!isMarked)}
+        {...props}
       >
-        <Icon icon="bookmark" />
-        북마크 하기
+        {isMarked ? (
+          <>
+            <BookMark mode="primary" /> 북마크 완료
+          </>
+        ) : (
+          <>
+            <Icon icon="bookmark" /> 북마크 하기
+          </>
+        )}
       </Button>
     </SideBarWrapper>
   );
@@ -108,11 +91,36 @@ JobSideBar.defaultProps = {
 
 export default JobSideBar;
 
+const summaryData = [
+  {
+    title: "직무",
+    icon: "briefcase",
+    id: "task",
+  },
+  {
+    title: "고용 형태",
+    icon: "building",
+    id: "type",
+  },
+  {
+    title: "경력",
+    icon: "monitor",
+    id: "career",
+  },
+  {
+    title: "근무 위치",
+    icon: "mapPin",
+    id: "location",
+  },
+];
+
 const SideBarBox = styled.div`
   margin: 10px 0px;
 `;
 
 const BadgeBox = styled.div`
+  display: flex;
+  gap: 5px;
   margin: 20px 10px;
 `;
 
@@ -123,12 +131,10 @@ const SideBarWrapper = styled.div`
   height: 540px;
 
   button {
-    margin: 4px 10px;
+    margin: 6px 10px;
+    width: calc(100% - 20px);
   }
   .thumbnail {
     margin-bottom: 12px;
-  }
-  .badge-item {
-    margin-right: 5px;
   }
 `;

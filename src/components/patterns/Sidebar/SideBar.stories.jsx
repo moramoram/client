@@ -6,63 +6,41 @@ export default {
   component: Sidebar,
 };
 
+const sampleData = {
+  contents: [
+    {
+      title: "직무",
+      description: "프론트엔드",
+      icon: "briefcase",
+    },
+    {
+      title: "고용형태",
+      description: "정규직",
+      icon: "building",
+    },
+    {
+      title: "경력",
+      description: "신입",
+      icon: "monitor",
+    },
+    {
+      title: "근무위치",
+      description: "서울 강남구",
+      icon: "mapPin",
+    },
+  ],
+  badges: ["JavaScript", "TypeScript", "Vue.js", "React", "Redux", "Svelte"],
+};
+
 export const Default = (args) => <Sidebar {...args} />;
 
 Default.args = {
-  contents: [
-    {
-      title: "직무",
-      description: "프론트엔드",
-      icon: "briefcase",
-    },
-    {
-      title: "고용형태",
-      description: "정규직",
-      icon: "briefcase",
-    },
-    {
-      title: "경력",
-      description: "신입",
-      icon: "briefcase",
-    },
-    {
-      title: "근무위치",
-      description: "서울 강남구",
-      icon: "briefcase",
-    },
-  ],
-  badges: ["JavaScript", "TypeScript", "Vue.js", "React", "Redux", "Svelte"],
+  ...sampleData,
 };
 
-export const AllTypes = (args) => (
+export const AllTypes = () => (
   <>
-    <Sidebar {...args} />
-    <Sidebar theme="dark" {...args} />
+    <Sidebar {...sampleData} />
+    <Sidebar theme="dark" {...sampleData} />
   </>
 );
-
-AllTypes.args = {
-  contents: [
-    {
-      title: "직무",
-      description: "프론트엔드",
-      icon: "briefcase",
-    },
-    {
-      title: "고용형태",
-      description: "정규직",
-      icon: "briefcase",
-    },
-    {
-      title: "경력",
-      description: "신입",
-      icon: "briefcase",
-    },
-    {
-      title: "근무위치",
-      description: "서울 강남구",
-      icon: "briefcase",
-    },
-  ],
-  badges: ["JavaScript", "TypeScript", "Vue.js", "React", "Redux", "Svelte"],
-};

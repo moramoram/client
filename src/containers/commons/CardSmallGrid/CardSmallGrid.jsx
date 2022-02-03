@@ -6,20 +6,18 @@ import { Link } from "react-router-dom";
 
 import { CardSmall } from "@/components";
 
-const CardSmallGrid = ({ data, isLoading, ...props }) => {
-  const cards = isLoading ? (
-    <CardSmall isLoading {...props} />
-  ) : (
-    data.map(({ url, ...props }, idx) => {
-      return (
-        <CardItemLink to={url} key={idx}>
-          <CardSmall {...props} />
-        </CardItemLink>
-      );
-    })
+const CardSmallGrid = ({ data, theme, isLoading, ...props }) => {
+  return (
+    <Layout {...props}>
+      {data.map(({ url, ...props }, idx) => {
+        return (
+          <CardItemLink to={url} key={idx}>
+            <CardSmall theme={theme} isLoading={isLoading} {...props} />
+          </CardItemLink>
+        );
+      })}
+    </Layout>
   );
-
-  return <Layout {...props}>{cards}</Layout>;
 };
 
 CardSmallGrid.propTypes = {
@@ -31,6 +29,9 @@ export default CardSmallGrid;
 const Layout = styled.div`
   display: flex;
   gap: 20px;
+
+  width: 100%;
+  overflow-x: scroll;
   margin: auto;
   align-items: center;
 `;

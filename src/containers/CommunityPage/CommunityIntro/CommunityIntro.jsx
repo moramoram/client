@@ -12,12 +12,9 @@ const THEME = {
 const CommunityIntro = ({ ...props }) => {
   return (
     <>
-      <EmptyBox />
-      <Layout>
-        <TextBox>
-          <Title {...props}>커뮤니티</Title>
-          <SubTitle {...props}>싸피인들끼리 자유롭게 소통하세요</SubTitle>
-        </TextBox>
+      <Layout {...props}>
+        <Title {...props}>커뮤니티</Title>
+        <SubTitle {...props}>싸피인들끼리 자유롭게 소통하세요</SubTitle>
       </Layout>
     </>
   );
@@ -34,6 +31,11 @@ CommunityIntro.defaultProps = {
 
 export default CommunityIntro;
 
+const bgColor = {
+  light: colors.gray25,
+  dark: colors.gray900,
+};
+
 const titleColor = {
   light: colors.gray900,
   dark: colors.gray25,
@@ -46,29 +48,26 @@ const subtitleColor = {
 
 const Layout = styled.div`
   display: flex;
-
-  width: 100vw;
-  height: 200px;
-  background: ${colors.gray200};
-
   flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
+
+  width: 100%;
+  height: 400px;
+  background: ${(props) => bgColor[props.theme]};
+
+  flex-wrap: wrap;
   overflow: hidden;
-`;
 
-const EmptyBox = styled.div`
-  width: 100vw;
-  height: 82px;
-  background: ${colors.gray200};
-`;
-
-const TextBox = styled.div`
-  width: 33vw;
+  @media screen and (max-width: 979px) {
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+  }
 `;
 
 const Title = styled.div`
+  padding-top: 68px;
   line-height: ${lineHeight.h2};
   margin-bottom: 15px;
 

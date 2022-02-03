@@ -10,9 +10,9 @@ const FeedSmallGrid = ({ data, isLoading, ...props }) => {
   const feeds = isLoading ? (
     <FeedItemSmall isLoading {...props} />
   ) : (
-    data.map(({ url, ...props }, idx) => {
+    data.map(({ id, ...props }, idx) => {
       return (
-        <FeedItemLink to={url} key={idx}>
+        <FeedItemLink to={id} key={idx}>
           <FeedItemSmall {...props} />
         </FeedItemLink>
       );
@@ -31,10 +31,15 @@ export default FeedSmallGrid;
 const Layout = styled.div`
   display: flex;
   gap: 20px;
-  margin: auto;
   align-items: center;
+
+  @media screen and (max-width: 530px) {
+    flex-direction: column;
+    gap: 12px;
+  }
 `;
 
 const FeedItemLink = styled(Link)`
   text-decoration: none;
+  width: 100%;
 `;

@@ -18,6 +18,12 @@ const animations = {
   dropdown: keyframes`
     0% { opacity: 0; transform: translateY(-2px); }
   `,
+  modal: keyframes`
+    0% { opacity: 0; transform: translateY(10px); }
+  `,
+  appear: keyframes`
+    0% { opacity: 0;}
+  `,
 };
 
 export default animations;

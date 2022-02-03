@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import { Outlet } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { themeState, navTypeState } from "@/recoil/theme";
+
+import { isLoginState } from "@/recoil/auth";
+import { modalState, createModalState, loginModalState } from "@/recoil/modal";
 import { navMenuData, navUserData } from "@/recoil/menu";
 
-import { Navbar } from "@/containers/commons";
+import { Modal } from "@/components";
+import { Navbar, SignUpModal, CommunityCreate } from "@/containers";
 import { colors } from "@/_shared";
 
 const Layout = () => {
@@ -15,13 +19,32 @@ const Layout = () => {
   const navData = useRecoilValue(navMenuData);
   const userMenuData = useRecoilValue(navUserData);
 
+  const isLogined = useRecoilValue(isLoginState);
+  const isloginModal = useRecoilValue(loginModalState);
+  const isCreateModal = useRecoilValue(createModalState);
+  const isModal = useRecoilValue(modalState);
+
+  useEffect(() => {
+    (isModal || isloginModal) && (document.body.style.overflow = "hidden");
+    return () => (document.body.style.overflow = "unset");
+  }, [isModal, isloginModal]);
+
+  useEffect(() => {
+    (isModal || isCreateModal) && (document.body.style.overflow = "hidden");
+    return () => (document.body.style.overflow = "unset");
+  }, [isModal, isCreateModal]);
+
   return (
     <LayoutBox theme={theme}>
+      {isModal && <Modal theme={theme} />}
+      {isloginModal && <SignUpModal theme={theme} />}
+      {isCreateModal && <CommunityCreate theme={theme} />}
       <Nav
         theme={theme}
         type={navType}
         navData={navData}
         userMenuData={userMenuData}
+        isLogin={isLogined}
       />
       <Outlet />
     </LayoutBox>
@@ -36,10 +59,10 @@ const bgColor = {
 };
 
 const LayoutBox = styled.div`
-  width: 100vw;
+  width: 100%;
   background: ${(props) => bgColor[props.theme]};
 `;
 
 const Nav = styled(Navbar)`
-  z-index: 9999;
+  z-index: 999;
 `;

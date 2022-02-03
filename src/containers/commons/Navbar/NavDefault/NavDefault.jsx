@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { themeState } from "@/recoil/theme";
+import { loginModalState } from "@/recoil/modal";
 
 import { NavDefaultItem } from "./NavDefaultItem";
 import { Avatar, Button, Dropdown, Switch } from "@/components";
@@ -25,13 +26,14 @@ const NavDefault = ({ isLogin, navData, ...props }) => {
   const [current, setCurrent] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [theme, setTheme] = useRecoilState(themeState);
+  const setLoginModalOpen = useSetRecoilState(loginModalState);
   const navbarRight = useRef();
 
   const handleTheme = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
 
-  const handleClick = (name) => {
+  const onClickNavItem = (name) => {
     name === current
       ? window.scrollTo({ top: 0, behavior: "smooth" })
       : window.scrollTo({ top: 0 });
@@ -61,7 +63,7 @@ const NavDefault = ({ isLogin, navData, ...props }) => {
             <NavItemLink to={url} key={idx}>
               <NavDefaultItem
                 {...props}
-                onClick={() => handleClick(name)}
+                onClick={() => onClickNavItem(name)}
                 status={current === name ? "active" : "default"}
               >
                 {title}
@@ -74,7 +76,11 @@ const NavDefault = ({ isLogin, navData, ...props }) => {
         {isLogin ? (
           <>
             <SwitchBox>
-              <Switch isSelected={theme !== "light"} onToggle={handleTheme} />
+              <Switch
+                isSelected={theme !== "light"}
+                onToggle={handleTheme}
+                size="small"
+              />
             </SwitchBox>
             <Icon icon="bell" stroke={colors.gray400} width="20" aria-hidden />
             <Avatar
@@ -85,10 +91,22 @@ const NavDefault = ({ isLogin, navData, ...props }) => {
           </>
         ) : (
           <ButtonBox>
-            <Button mode="secondary" width="150px" {...props}>
+            <Button
+              mode={
+                props.type === TYPE.TRANSPARENT ? "transparent" : "secondary"
+              }
+              width="150px"
+              onClick={() => setLoginModalOpen(true)}
+              {...props}
+            >
               로그인
             </Button>
-            <Button mode="primary" width="150px" {...props}>
+            <Button
+              mode="primary"
+              width="150px"
+              onClick={() => setLoginModalOpen(true)}
+              {...props}
+            >
               회원가입
             </Button>
           </ButtonBox>
@@ -129,11 +147,11 @@ const bgColor = {
 const borderColor = {
   dark: {
     default: colors.gray700,
-    transparent: colors.gray700,
+    transparent: colors.gray800,
   },
   light: {
     default: colors.gray200,
-    transparent: colors.gray700,
+    transparent: colors.gray800,
   },
 };
 
@@ -158,11 +176,11 @@ const FlexBox = styled.div`
   position: relative;
 
   :first-child {
-    padding-left: 8%;
+    margin-left: 8%;
   }
 
   :last-child {
-    padding-right: 10%;
+    margin-right: 10%;
   }
 
   svg,
@@ -184,13 +202,13 @@ const NavItemLink = styled(Link)`
 const SwitchBox = styled.div`
   display: flex;
   align-items: center;
-  width: 44px;
+  width: 36px;
 `;
 
 const UserDropdown = styled(Dropdown)`
   z-index: 9999;
-  top: 36px;
-  right: 20px;
+  top: 40px;
+  right: 8%;
   animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
 `;
 

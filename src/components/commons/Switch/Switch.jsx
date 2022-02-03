@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { colors } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
   DARK: "dark",
+};
+
+const SIZE = {
+  DEFAULT: "default",
+  SMALL: "small",
 };
 
 const Switch = ({ theme, isSelected, onToggle, ...props }) => {
@@ -17,14 +22,15 @@ const Switch = ({ theme, isSelected, onToggle, ...props }) => {
   };
 
   return (
-    <Layout checked={isChecked}>
+    <Layout checked={isChecked} {...props}>
       <CheckBox
         type="checkbox"
         checked={isChecked}
         onChange={handleToggle}
         theme={theme}
+        {...props}
       />
-      <SwitchButton className="switch" />
+      <SwitchButton className="switch" {...props} />
     </Layout>
   );
 };
@@ -33,11 +39,13 @@ Switch.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   isSelected: PropTypes.bool,
   onToggle: PropTypes.func,
+  size: PropTypes.oneOf(Object.values(SIZE)),
 };
 
 Switch.defaultProps = {
   theme: THEME.LIGHT,
   isSelected: false,
+  size: SIZE.DEFAULT,
 };
 
 export default Switch;
@@ -51,6 +59,12 @@ const Layout = styled.label`
   display: inline-block;
   height: 24px;
   position: relative;
+
+  ${(props) =>
+    props.size === SIZE.SMALL &&
+    css`
+      height: 20px;
+    `}
 `;
 
 const CheckBox = styled.input`
@@ -92,6 +106,24 @@ const CheckBox = styled.input`
   :checked:active + div {
     left: -2px;
   }
+
+  ${(props) =>
+    props.size === SIZE.SMALL &&
+    css`
+      ::before {
+        width: 36px;
+        height: 20px;
+      }
+
+      :checked + div {
+        transform: translateX(16px);
+      }
+
+      :active + div {
+        width: 20px;
+        border-radius: 20px;
+      }
+    `}
 `;
 
 const SwitchButton = styled.div`
@@ -110,4 +142,17 @@ const SwitchButton = styled.div`
     width: 24px;
     border-radius: 24px;
   }
+
+  ${(props) =>
+    props.size === SIZE.SMALL &&
+    css`
+      width: 16px;
+      height: 16px;
+      border-radius: 16px;
+
+      :active {
+        width: 20px;
+        border-radius: 20px;
+      }
+    `}
 `;

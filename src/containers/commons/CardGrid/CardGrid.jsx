@@ -4,39 +4,40 @@ import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
-import { Card } from "@/components";
+import { CardResponsive } from "@/components";
 
-const CardGrid = ({ data, isLoading, theme, ...props }) => {
-  const cards = isLoading ? (
-    <Card isLoading {...props} />
-  ) : (
-    data.map(({ url, ...props }, idx) => {
-      return (
-        <CardItemLink to={url} key={idx}>
-          <Card {...props} theme={theme} />
-        </CardItemLink>
-      );
-    })
-  );
-
-  return <Layout {...props}>{cards}</Layout>;
+const THEME = {
+  LIGHT: "light",
+  DARK: "dark",
 };
 
+const CardGrid = ({ data, theme, isLoading, ...props }) => (
+  <Layout {...props}>
+    {data.map(({ id, ...props }, idx) => (
+      <CardItemLink to={id} key={idx}>
+        <CardResponsive theme={theme} isLoading={isLoading} {...props} />
+      </CardItemLink>
+    ))}
+  </Layout>
+);
+
 CardGrid.propTypes = {
+  theme: PropTypes.oneOf(Object.values(THEME)),
   data: PropTypes.arrayOf(Object),
+};
+
+CardResponsive.defaultProps = {
+  theme: THEME.LIGHT,
 };
 
 export default CardGrid;
 
 const Layout = styled.div`
-  display: flex;
+  display: grid;
+  width: 100%;
   max-width: 940px;
-
+  grid-template-columns: repeat(auto-fill, minmax(300px, auto));
   gap: 20px;
-  margin: auto;
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 0 90px;
 `;
 
 const CardItemLink = styled(Link)`

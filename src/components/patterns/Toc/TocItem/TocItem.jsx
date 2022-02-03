@@ -94,7 +94,7 @@ const Layout = styled.div`
   align-items: baseline;
   gap: 0.25rem;
 
-  height: 40px;
+  height: 32px;
   width: 100px;
   border-bottom: 3px solid ${(props) => borderColor[props.theme][props.status]};
 

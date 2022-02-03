@@ -6,8 +6,8 @@ import { useMediaQuery } from "react-responsive";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { themeState, navTypeState } from "@/recoil/theme";
 
-import { SubNavbar } from "@/components";
-import { CardResponsiveGrid, StudyIntro } from "@/containers";
+import { SubNavbar, Input, Selector } from "@/components";
+import { CardGrid, StudyIntro } from "@/containers";
 
 const StudyPage = () => {
   const theme = useRecoilValue(themeState);
@@ -42,21 +42,54 @@ const StudyPage = () => {
   return (
     <>
       <StudyIntro />
-      <ContentBox>
-        {isPc && (
-          <>
-            <StickyNavBox>
-              <StickyNav
-                data={categoryData}
+      {isPc && (
+        <ContentBox>
+          <StickyNavBox>
+            <StickyNav
+              data={categoryData}
+              theme={theme}
+              onClick={handleCategory}
+            />
+          </StickyNavBox>
+          <CardGridBox>
+            <InputBox>
+              <Input
                 theme={theme}
-                onClick={handleCategory}
+                icon="search"
+                placeholder="스터디 검색하기"
               />
-            </StickyNavBox>
+              <Selector
+                theme={theme}
+                placeholder="종류"
+                options={[
+                  { value: "recruit", label: "채용" },
+                  { value: "Algorithm", label: "알고리즘" },
+                  { value: "CS", label: "CS" },
+                  { value: "Project", label: "프로젝트" },
+                ]}
+              />
+              {/* <Selector placeholder="기술 스택" isMulti /> */}
+            </InputBox>
             <CardGrid data={cardData} theme={theme} />
-          </>
-        )}
-        {isMobile && <CardResponsiveGrid data={cardData} theme={theme} />}
-      </ContentBox>
+          </CardGridBox>
+        </ContentBox>
+      )}
+      {isMobile && (
+        <>
+          <SubNavMobile
+            data={categoryData}
+            theme={theme}
+            onClick={handleCategory}
+            view="mobile"
+          />
+          <SearchBox>
+            <Input icon="search" placeholder="스터디 검색하기" theme={theme} />
+          </SearchBox>
+          <ContentBox>
+            <CardGrid data={cardData} theme={theme} />
+          </ContentBox>
+        </>
+      )}
     </>
   );
 };
@@ -78,138 +111,16 @@ const categoryData = [
   },
 ];
 
-const cardData = [
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
+const cardData = new Array(20).fill({
+  contents: {
+    title: "알고리즘 스터디 모집",
+    subtitle: "김싸피(6기 / 서울)",
+    highlight: "모집중",
+    src: "",
   },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-  {
-    contents: {
-      title: "알고리즘 스터디 모집",
-      subtitle: "김싸피(6기 / 서울)",
-      highlight: "모집중",
-      src: "",
-    },
-    badges: ["JavaScript", "React", "Vue.js"],
-    url: "",
-  },
-];
+  badges: ["JavaScript", "React", "Vue.js"],
+  id: "/study/1",
+});
 
 const ContentBox = styled.div`
   display: flex;
@@ -217,17 +128,40 @@ const ContentBox = styled.div`
   gap: 100px;
   max-width: 1280px;
 
-  padding: 80px 20px 20px 20px;
+  padding: 20px;
   margin: auto;
 `;
 
-const StickyNavBox = styled.div``;
+const StickyNavBox = styled.div`
+  padding-top: 86px;
+`;
 
 const StickyNav = styled(SubNavbar)`
   position: sticky;
   top: 150px;
 `;
 
-const CardGrid = styled(CardResponsiveGrid)`
+const SubNavMobile = styled(SubNavbar)`
+  padding: 20px 20px 0 20px;
+`;
+
+const CardGridBox = styled.div`
   width: calc(100% - 320px);
+  padding-top: 80px;
+`;
+
+const InputBox = styled.div`
+  display: flex;
+  gap: 0.5rem;
+
+  max-width: 940px;
+  padding-bottom: 2rem;
+
+  > div {
+    flex-grow: 1;
+  }
+`;
+
+const SearchBox = styled.div`
+  padding: 20px;
 `;

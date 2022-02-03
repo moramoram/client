@@ -15,7 +15,9 @@ const AuthHeader = ({ logo, ...props }) => {
   return (
     <>
       <Layout>
-        <LogoSection {...props}>{<Logo logo={logo} />}</LogoSection>
+        <LogoSection {...props}>
+          <Logo logo={logo} />
+        </LogoSection>
         <TextSection>
           <Text1Box>
             추가 정보를 입력하면 <br />
@@ -44,15 +46,11 @@ export default AuthHeader;
 
 const Layout = styled.div`
   display: flex;
-
-  width: 45.6vw;
-
   flex-direction: column;
   align-items: flex-start;
   flex-wrap: wrap;
   justify-content: flex-end;
-
-  padding-left: 23.75vw;
+  padding-top: 150px;
 `;
 
 const LogoSection = styled.div`
@@ -70,9 +68,9 @@ const Text1Box = styled.div`
   font-size: ${fontSize.h3};
   font-weight: ${fontWeight.bold};
   line-height: ${lineHeight.h3};
-  letter-spacing: -0.02em;
+
   color: ${colors.gray900};
-  span: contains("모든 서비스") .css({color: ${colors.blue100}});
+  /* span: contains("모든 서비스") .css({color: ${colors.blue100}}); */
   padding: 28px 0px;
 `;
 
@@ -80,6 +78,6 @@ const Text2Box = styled.div`
   font-size: ${fontSize.sm};
   font-weight: ${fontWeight.regular};
   line-height: ${lineHeight.sm};
-  letter-spacing: -0.02em;
+
   color: ${colors.gray400};
 `;

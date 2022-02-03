@@ -120,9 +120,8 @@ const InputBox = styled.div`
     transition: 0.3s;
 
     ${(props) => `
-      box-shadow: 0 0 0 3px ${focusColor[props.status]}, inset 0 0 0 1px ${
-      insetColor[props.status]
-    }
+      box-shadow: 0 0 0 3px ${focusColor[props.status]},
+        inset 0 0 0 1px ${insetColor[props.status]}
     `};
   }
 

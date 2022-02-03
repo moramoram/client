@@ -13,7 +13,7 @@ const FeedGrid = ({ data, isLoading, theme, ...props }) => {
   ) : (
     data.map(({ id, ...props }, idx) => {
       return (
-        <FeedItemLink to={id} key={idx} theme={theme}>
+        <FeedItemLink to={`/community/${id}`} key={idx} theme={theme}>
           <FeedItem theme={theme} {...props} />
         </FeedItemLink>
       );

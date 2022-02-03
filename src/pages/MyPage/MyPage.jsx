@@ -3,14 +3,22 @@ import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
+import { auth } from "@/recoil/auth";
 
 import { SubNavbar } from "@/components";
-import { Authorization, MyInfo, MyFeed, MyComment } from "@/containers";
+import {
+  Authorization,
+  MyInfo,
+  MyFeed,
+  MyComment,
+  MyPageIntro,
+} from "@/containers";
 
-const StudyPage = () => {
+const MyPage = () => {
   const theme = useRecoilValue(themeState);
   const [selectedCategory, setSelectedCategory] = useState(0);
   const [contents, setContents] = useState(null);
+  const authState = useRecoilValue(auth);
 
   const handleCategory = (idx) => {
     setSelectedCategory(idx);
@@ -35,21 +43,27 @@ const StudyPage = () => {
 
   return (
     <Layout>
-      <EmptyBox />
-      <ContentBox>
-        <StickyNav data={categoryData} theme={theme} onClick={handleCategory} />
-        {contents}
-      </ContentBox>
+      <MyPageIntro theme={theme} authState={authState} />
+      <MainBox>
+        <StickyNavBox>
+          <StickyNav
+            data={categoryData}
+            theme={theme}
+            onClick={handleCategory}
+          />
+        </StickyNavBox>
+        <ContentBox>{contents}</ContentBox>
+      </MainBox>
     </Layout>
   );
 };
 
-export default StudyPage;
+export default MyPage;
 
 const categoryData = [
   {
     id: 0,
-    title: "내 정보",
+    title: "내 프로필",
   },
   {
     id: 1,
@@ -68,20 +82,30 @@ const categoryData = [
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
 `;
 
-const EmptyBox = styled.div`
-  width: 100vw;
-  height: 82px;
+const MainBox = styled.div`
+  display: flex;
+  /* justify-content: center; */
+  gap: 100px;
+  max-width: 1280px;
+
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+  margin: auto;
 `;
 
 const ContentBox = styled.div`
-  display: flex;
-  margin: 90px;
+  width: 100%;
+  margin-right: 20px;
 `;
+
+const StickyNavBox = styled.div`
+  padding-top: 86px;
+`;
+
 const StickyNav = styled(SubNavbar)`
   position: sticky;
   top: 150px;
-  align-self: flex-start;
 `;

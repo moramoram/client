@@ -13,7 +13,7 @@ const THEME = {
 };
 
 const ImageUploader = ({ aspect, ...props }) => {
-  const [imageSrc, setImageSrc] = React.useState(null);
+  const [imageSrc, setImageSrc] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
@@ -45,7 +45,7 @@ const ImageUploader = ({ aspect, ...props }) => {
   }, []);
 
   const onFileChange = async (files) => {
-    if (files && files.length > 0) {
+    if (files?.length > 0) {
       const file = files[0];
       let imageDataUrl = await readFile(file);
 

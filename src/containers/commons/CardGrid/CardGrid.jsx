@@ -11,19 +11,17 @@ const THEME = {
   DARK: "dark",
 };
 
-const CardGrid = ({ data, theme, isLoading, ...props }) => (
-  <Layout {...props}>
-    {data.map(({ id, ...props }, idx) => (
-      <CardItemLink to={id} key={idx}>
-        <CardResponsive theme={theme} isLoading={isLoading} {...props} />
-      </CardItemLink>
-    ))}
-  </Layout>
-);
-
-CardGrid.propTypes = {
-  theme: PropTypes.oneOf(Object.values(THEME)),
-  data: PropTypes.arrayOf(Object),
+const CardGrid = ({ data, theme, isLoading, ...props }) => {
+  const items = isLoading ? cardData : data;
+  return (
+    <Layout {...props}>
+      {items.map(({ id, ...props }, idx) => (
+        <CardItemLink to={id} key={idx}>
+          <CardResponsive theme={theme} isLoading={isLoading} {...props} />
+        </CardItemLink>
+      ))}
+    </Layout>
+  );
 };
 
 CardResponsive.defaultProps = {
@@ -43,3 +41,14 @@ const Layout = styled.div`
 const CardItemLink = styled(Link)`
   text-decoration: none;
 `;
+
+const cardData = new Array(6).fill({
+  contents: {
+    title: "",
+    subtitle: "",
+    highlight: "",
+    src: "",
+  },
+  badges: ["", "", ""],
+  id: "",
+});

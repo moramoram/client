@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import styled from "styled-components";
 
 import { useMediaQuery } from "react-responsive";
@@ -7,7 +7,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { themeState, navTypeState } from "@/recoil/theme";
 
 import { SubNavbar, Input, Selector } from "@/components";
-import { CardGrid, StudyIntro } from "@/containers";
+import { CardGrid, StudyIntro, StudyCardGrid } from "@/containers";
 
 const StudyPage = () => {
   const theme = useRecoilValue(themeState);
@@ -70,7 +70,9 @@ const StudyPage = () => {
               />
               {/* <Selector placeholder="기술 스택" isMulti /> */}
             </InputBox>
-            <CardGrid data={cardData} theme={theme} />
+            <Suspense fallback={<CardGrid theme={theme} isLoading />}>
+              <StudyCardGrid theme={theme} />
+            </Suspense>
           </CardGridBox>
         </ContentBox>
       )}
@@ -86,7 +88,9 @@ const StudyPage = () => {
             <Input icon="search" placeholder="스터디 검색하기" theme={theme} />
           </SearchBox>
           <ContentBox>
-            <CardGrid data={cardData} theme={theme} />
+            <Suspense fallback={<CardGrid theme={theme} isLoading />}>
+              <StudyCardGrid theme={theme} />
+            </Suspense>
           </ContentBox>
         </>
       )}
@@ -110,17 +114,6 @@ const categoryData = [
     title: "나의 스터디",
   },
 ];
-
-const cardData = new Array(20).fill({
-  contents: {
-    title: "알고리즘 스터디 모집",
-    subtitle: "김싸피(6기 / 서울)",
-    highlight: "모집중",
-    src: "",
-  },
-  badges: ["JavaScript", "React", "Vue.js"],
-  id: "/study/1",
-});
 
 const ContentBox = styled.div`
   display: flex;

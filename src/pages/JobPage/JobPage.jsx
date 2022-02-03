@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -7,7 +7,7 @@ import { themeState, navTypeState } from "@/recoil/theme";
 import { useMediaQuery } from "react-responsive";
 
 import { SubNavbar, Input, Selector } from "@/components";
-import { CardGrid, JobIntro } from "@/containers";
+import { CardGrid, JobIntro, JobCardGrid } from "@/containers";
 
 const JobsPage = () => {
   const theme = useRecoilValue(themeState);
@@ -67,7 +67,9 @@ const JobsPage = () => {
                 ]}
               />
             </InputBox>
-            <CardGrid data={cardData} theme={theme} />
+            <Suspense fallback={<CardGrid theme={theme} isLoading />}>
+              <JobCardGrid theme={theme} />
+            </Suspense>
           </CardGridBox>
         </ContentBox>
       )}
@@ -83,7 +85,9 @@ const JobsPage = () => {
             <Input icon="search" placeholder="공고 검색하기" theme={theme} />
           </SearchBox>
           <ContentBox>
-            <CardGrid data={cardData} theme={theme} />
+            <Suspense fallback={<CardGrid theme={theme} isLoading />}>
+              <JobCardGrid theme={theme} />
+            </Suspense>
           </ContentBox>
         </>
       )}

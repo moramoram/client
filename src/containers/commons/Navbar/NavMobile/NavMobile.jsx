@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import { Link } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
+import { auth } from "@/recoil/auth";
 import { themeState } from "@/recoil/theme";
 import { loginModalState } from "@/recoil/modal";
 
@@ -27,6 +28,7 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
   const [navbarOpen, setnavbarOpen] = useState(false);
   const [theme, setTheme] = useRecoilState(themeState);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
+  const authState = useRecoilValue(auth);
   const navbar = useRef();
 
   const handleTheme = () => {
@@ -87,7 +89,8 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
                 <UserInfo {...props}>
                   <Avatar size="medium" />
                   <div>
-                    <UserName>김싸피</UserName> (6기/서울)
+                    <UserName>{authState.nickname ?? "User"}</UserName>님
+                    안녕하세요!
                   </div>
                 </UserInfo>
                 <IconBox {...props}>
@@ -108,14 +111,16 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
               </UserInfoBox>
               <LinkBox>
                 {userMenuData.map(({ name, title, url }, idx) => (
-                  <UserMobileItem
-                    {...props}
-                    onClick={() => handleClickItem(name)}
-                    status={current === name ? "active" : "default"}
-                    key={idx}
-                  >
-                    {title}
-                  </UserMobileItem>
+                  <UserMobileItemLink to={url}>
+                    <UserMobileItem
+                      {...props}
+                      onClick={() => handleClickItem(name)}
+                      status={current === name ? "active" : "default"}
+                      key={idx}
+                    >
+                      {title}
+                    </UserMobileItem>
+                  </UserMobileItemLink>
                 ))}
               </LinkBox>
             </>
@@ -301,6 +306,10 @@ const SwitchBox = styled.div`
   display: flex;
   align-items: center;
   width: 36px;
+`;
+
+const UserMobileItemLink = styled(Link)`
+  text-decoration: none;
 `;
 
 const UserMobileItem = styled(NavMobileItem)`

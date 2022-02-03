@@ -21,13 +21,13 @@ export const navMenuData = atom({
   ],
 });
 
-export const navUserData = atom({
+export const navUserDataState = atom({
   key: "navUserData",
   default: [
     {
-      name: "profile",
+      name: "mypage",
       title: "내 프로필",
-      url: "profile",
+      url: "mypage",
     },
     {
       name: "logout",

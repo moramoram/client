@@ -2,6 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { Link } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { auth } from "@/recoil/auth";
+
 import { DropdownItem } from "./DropdownItem";
 import { colors, fontSize, fontWeight, shadows } from "@/_shared";
 
@@ -11,19 +15,20 @@ const THEME = {
 };
 
 const Dropdown = ({ user, items, ...props }) => {
+  const authState = useRecoilValue(auth);
+
   return (
     <Layout {...props}>
       <UserInfo {...props}>
-        <UserName>{user}</UserName>님 안녕하세요!
+        <UserName>{authState.nickname ?? "User"}</UserName>님 안녕하세요!
       </UserInfo>
-      <MenuBox {...props}>
-        {items.map((item) => (
-          <DropdownItem children={item} key={item} {...props} />
-        ))}
-      </MenuBox>
-      <MenuBox {...props}>
-        <DropdownItem children="로그아웃" {...props} />
-      </MenuBox>
+      {items.map((item) => (
+        <MenuBox {...props}>
+          <DropdownItemLink to={item.url} {...props}>
+            <DropdownItem children={item.title} key={item.name} {...props} />
+          </DropdownItemLink>
+        </MenuBox>
+      ))}
     </Layout>
   );
 };
@@ -36,7 +41,23 @@ Dropdown.propTypes = {
 
 Dropdown.defaultProps = {
   theme: THEME.LIGHT,
-  items: ["내 프로필", "정보 수정"],
+  items: [
+    {
+      name: "mypage",
+      title: "내 프로필",
+      url: "mypage",
+    },
+    {
+      name: "settings",
+      title: "정보수정",
+      url: "settings",
+    },
+    {
+      name: "logout",
+      title: "로그아웃",
+      url: "logout",
+    },
+  ],
   user: "User",
 };
 
@@ -83,10 +104,15 @@ const UserName = styled.span`
 `;
 
 const MenuBox = styled.div`
-  padding: 4px 0;
-  border-bottom: 1px solid ${(props) => borderColor[props.theme]};
-
-  :last-child {
-    border: none;
+  :nth-child(2) {
+    padding-top: 4px;
   }
+
+  :nth-child(3) {
+    padding-bottom: 4px;
+  }
+`;
+
+const DropdownItemLink = styled(Link)`
+  text-decoration: none;
 `;

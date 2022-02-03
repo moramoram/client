@@ -24,7 +24,7 @@ const Dropdown = ({ user, items, ...props }) => {
       </UserInfo>
       {items.map((item) => (
         <MenuBox {...props}>
-          <DropdownItemLink to={item.url} {...props}>
+          <DropdownItemLink to={item?.url} {...props}>
             <DropdownItem children={item.title} key={item.name} {...props} />
           </DropdownItemLink>
         </MenuBox>
@@ -46,11 +46,6 @@ Dropdown.defaultProps = {
       name: "mypage",
       title: "내 프로필",
       url: "mypage",
-    },
-    {
-      name: "settings",
-      title: "정보수정",
-      url: "settings",
     },
     {
       name: "logout",

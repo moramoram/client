@@ -54,7 +54,7 @@ const textColor = {
     primary: colors.white,
     secondary: colors.white,
     transparent: colors.white,
-    active: colors.white,
+    active: colors.blue50,
   },
 };
 

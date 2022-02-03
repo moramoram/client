@@ -6,6 +6,7 @@ import AvatarBase from "./AvatarBase";
 import { animations, colors } from "@/_shared";
 
 const SIZE = {
+  EXTRALARGE: "extraLarge",
   LARGE: "large",
   MEDIUM: "medium",
   SMALL: "small",
@@ -59,6 +60,7 @@ Avatar.defaultProps = {
 export default Avatar;
 
 const sizeNum = {
+  extraLarge: 150,
   large: 40,
   medium: 28,
   small: 20,
@@ -72,8 +74,9 @@ const fontSize = {
 
 const Image = styled.div`
   display: inline-block;
-  vertical-align: top;
+  /* vertical-align: top; */
   overflow: hidden;
+  object-fit: cover;
 
   height: ${(props) => sizeNum[props.size]}px;
   width: ${(props) => sizeNum[props.size]}px;

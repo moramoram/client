@@ -1,3 +1,4 @@
+export { default as AvatarUploader } from "./AvatarUploader";
 export { default as Card } from "./Card";
 export { default as CardResponsive } from "./CardResponsive";
 export { default as CardSmall } from "./CardSmall";

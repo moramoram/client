@@ -22,7 +22,7 @@ const TYPE = {
   TRANSPARENT: "transparent",
 };
 
-const NavDefault = ({ isLogin, navData, ...props }) => {
+const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
   const [current, setCurrent] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [theme, setTheme] = useRecoilState(themeState);
@@ -87,7 +87,7 @@ const NavDefault = ({ isLogin, navData, ...props }) => {
               size="medium"
               onClick={() => setDropdownOpen(!dropdownOpen)}
             />
-            {dropdownOpen && <UserDropdown {...props} />}
+            {dropdownOpen && <UserDropdown items={userMenuData} {...props} />}
           </>
         ) : (
           <ButtonBox>

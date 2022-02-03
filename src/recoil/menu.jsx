@@ -25,9 +25,9 @@ export const navUserData = atom({
   key: "navUserData",
   default: [
     {
-      name: "profile",
+      name: "mypage",
       title: "내 프로필",
-      url: "profile",
+      url: "mypage",
     },
     {
       name: "logout",

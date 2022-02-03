@@ -1,14 +1,39 @@
-import { useQuery } from "react-query";
-import { axios } from "axios";
+import axios from "axios";
+import { daysFromToday } from "@/utils";
 
-const getStudyPostById = async (postId) => {
-  const { data } = await axios.get(
-    `https://jsonplaceholder.typicode.com/posts/${postId}`
-  );
-  return data;
+export const fetchData = async () => {
+  console.log("API");
+  const res = await axios.get("http://swapi.dev/api/people/1/");
+  return res.data;
 };
 
-export default function usePost(postId) {
-  const res = useQuery(["post", postId], () => getStudyPostById(postId));
-  const res = 
-}
+export const convertToStudyDetail = (data) => {
+  const titleData = {
+    title: data.title,
+    subtitle: `${data.writerInfo.nickname} (${data.writerInfo.ordinal}/${data.writerInfo.campus})`,
+    src: null,
+    highlight: data.on_off === 1 ? "모집중" : "모집완료",
+  };
+  const contentData = data.content;
+  const commentData = data.comments.map((commment) => {
+    return {
+      username: commment.writerInfo.nickname,
+      src: null,
+      created: daysFromToday(commment.createdDate),
+      content: commment.content,
+    };
+  });
+  const tocItem = [
+    {
+      name: "info",
+      title: "공고",
+      number: null,
+    },
+    {
+      name: "comments",
+      title: "댓글",
+      number: data.comments.length,
+    },
+  ];
+  return { commentData, contentData, titleData, tocItem };
+};

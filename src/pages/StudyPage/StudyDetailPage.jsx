@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import styled from "styled-components";
 
 import { useParams } from "react-router-dom";
@@ -26,16 +26,12 @@ const StudyDetailPage = () => {
   return (
     <>
       {isPc && (
-        <Layout>
-          <StudyDetail
-            theme={theme}
-            titleData={titleData}
-            tocItem={tocItem}
-            contentData={contentData}
-            commentData={commentData}
-          ></StudyDetail>
-          <FixedSidebar theme={theme} {...sidbarargs} />
-        </Layout>
+        <Suspense fallback={"hello"}>
+          <Layout>
+            <StudyDetail theme={theme} contentData={contentData} />
+            <FixedSidebar theme={theme} {...sidbarargs} />
+          </Layout>
+        </Suspense>
       )}
       {isMobile && (
         <Layout>

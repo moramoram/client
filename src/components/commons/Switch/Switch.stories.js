@@ -8,6 +8,10 @@ export default {
   component: Switch,
 };
 
+const onToggle = () => {
+  console.log("toggle");
+};
+
 export const Default = (args) => (
   <Background {...args}>
     <Switch {...args} />
@@ -17,11 +21,15 @@ export const Default = (args) => (
 export const AllTypes = () => (
   <>
     <Background theme="light">
-      <Switch theme="light" />
+      <Switch theme="light" onToggle={onToggle} />
+      <br />
+      <Switch theme="light" size="small" onToggle={onToggle} />
     </Background>
     <br />
     <Background theme="dark">
-      <Switch theme="dark" />
+      <Switch theme="dark" onToggle={onToggle} />
+      <br />
+      <Switch theme="dark" size="small" onToggle={onToggle} />
     </Background>
   </>
 );

@@ -76,7 +76,11 @@ const NavDefault = ({ isLogin, navData, ...props }) => {
         {isLogin ? (
           <>
             <SwitchBox>
-              <Switch isSelected={theme !== "light"} onToggle={handleTheme} />
+              <Switch
+                isSelected={theme !== "light"}
+                onToggle={handleTheme}
+                size="small"
+              />
             </SwitchBox>
             <Icon icon="bell" stroke={colors.gray400} width="20" aria-hidden />
             <Avatar
@@ -198,7 +202,7 @@ const NavItemLink = styled(Link)`
 const SwitchBox = styled.div`
   display: flex;
   align-items: center;
-  width: 44px;
+  width: 36px;
 `;
 
 const UserDropdown = styled(Dropdown)`

@@ -95,6 +95,7 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
                     <Switch
                       isSelected={theme !== "light"}
                       onToggle={handleTheme}
+                      size="small"
                     />
                   </SwitchBox>
                   <Icon
@@ -299,7 +300,7 @@ const IconBox = styled.div`
 const SwitchBox = styled.div`
   display: flex;
   align-items: center;
-  width: 44px;
+  width: 36px;
 `;
 
 const UserMobileItem = styled(NavMobileItem)`

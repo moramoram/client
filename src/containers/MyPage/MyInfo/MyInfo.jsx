@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
-import { Input, Button, AvatarUploader, Avatar } from "@/components";
+import { Input, Button, AvatarUploader } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const THEME = {
@@ -109,8 +109,7 @@ const Title = styled.div`
 `;
 
 const SubTitle = styled.div`
-  height: ${lineHeight.h4};
-  margin-bottom: 27px;
+  margin-bottom: 3rem;
 
   font-size: ${fontSize.p};
   color: ${(props) => subtitleColor[props.theme]};

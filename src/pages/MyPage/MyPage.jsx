@@ -12,6 +12,7 @@ import {
   MyFeed,
   MyComment,
   MyPageIntro,
+  MyStudy,
 } from "@/containers";
 
 const MyPage = () => {
@@ -34,6 +35,8 @@ const MyPage = () => {
         case 2:
           return <MyFeed />;
         case 3:
+          return <MyStudy />;
+        case 4:
           return <MyComment />;
         default:
           return <MyInfo />;
@@ -75,6 +78,10 @@ const categoryData = [
   },
   {
     id: 3,
+    title: "나의 스터디",
+  },
+  {
+    id: 4,
     title: "내가 쓴 댓글",
   },
 ];

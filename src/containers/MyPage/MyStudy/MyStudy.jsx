@@ -18,8 +18,10 @@ const MyStudy = () => {
 
   return (
     <Layout>
-      <Title theme={theme}>내가 쓴 글</Title>
-      <SubTitle theme={theme}>지금까지 무슨 이야기를 나눴을까요?</SubTitle>
+      <Title theme={theme}>나의 스터디</Title>
+      <SubTitle theme={theme}>
+        지금까지 {cardData.length}개의 스터디를 개설했어요
+      </SubTitle>
       <CardGrid data={cardData} theme={theme} />
     </Layout>
   );

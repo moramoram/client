@@ -21,7 +21,9 @@ const MyFeed = () => {
   return (
     <Layout>
       <Title theme={theme}>내가 쓴 글</Title>
-      <SubTitle theme={theme}>지금까지 무슨 이야기를 나눴을까요?</SubTitle>
+      <SubTitle theme={theme}>
+        커뮤니티에 총 {feedData.length}개의 글을 남겼어요
+      </SubTitle>
       <FeedGrid data={feedData} theme={theme} />
     </Layout>
   );

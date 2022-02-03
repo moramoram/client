@@ -5,8 +5,8 @@ import { CommentList } from "@/containers";
 import { Avatar, Toc, CommentInput } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 
-import { useQuery } from "react-query";
-import { fetchData, convertToStudyDetail } from "@/hooks";
+import { useQuery, useMutation } from "react-query";
+import { fetchData, convertToStudyDetail, postComment } from "@/hooks";
 
 const THEME = {
   LIGHT: "light",
@@ -15,8 +15,14 @@ const THEME = {
 
 const StudyDetail = ({ ...props }) => {
   const { data } = useQuery("fetchData", fetchData);
+  const mutation = useMutation("postComment", postComment);
   const { titleData, commentData, contentData, tocItem } =
     convertToStudyDetail(mockdata);
+
+  const onPostComment = (comment) => {
+    console.log(comment.value);
+    mutation.mutate(comment.value);
+  };
 
   return (
     <>
@@ -38,7 +44,10 @@ const StudyDetail = ({ ...props }) => {
           <BoxDescription {...props}>
             총 {commentData.length}개의 댓글이 달렸습니다.
           </BoxDescription>
-          <CommentInput {...props} />
+          <CommentInput
+            {...props}
+            onClick={(comment) => onPostComment(comment)}
+          />
           <CommentList data={commentData} {...props} />
         </CommentBox>
       </Layout>

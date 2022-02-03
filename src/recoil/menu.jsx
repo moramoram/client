@@ -21,7 +21,7 @@ export const navMenuData = atom({
   ],
 });
 
-export const navUserDataState = atom({
+export const navUserData = atom({
   key: "navUserData",
   default: [
     {

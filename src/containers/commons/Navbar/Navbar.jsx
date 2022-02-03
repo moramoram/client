@@ -36,14 +36,12 @@ Navbar.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   type: PropTypes.oneOf(Object.values(TYPE)),
   isLogin: PropTypes.bool,
-  isStatic: PropTypes.bool,
 };
 
 Navbar.defaultProps = {
   theme: THEME.LIGHT,
   type: TYPE.DEFAULT,
   isLogin: true,
-  isStatic: false,
 };
 
 export default Navbar;

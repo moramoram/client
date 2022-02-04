@@ -87,11 +87,11 @@ const StudyPage = () => {
           <SearchBox>
             <Input icon="search" placeholder="스터디 검색하기" theme={theme} />
           </SearchBox>
-          <ContentBox>
+          <MobileCardBox>
             <Suspense fallback={<CardGrid theme={theme} isLoading />}>
               <StudyCardGrid theme={theme} />
             </Suspense>
-          </ContentBox>
+          </MobileCardBox>
         </>
       )}
     </>
@@ -118,6 +118,7 @@ const categoryData = [
 const ContentBox = styled.div`
   display: flex;
   justify-content: center;
+
   gap: 100px;
   max-width: 1280px;
 
@@ -141,6 +142,17 @@ const SubNavMobile = styled(SubNavbar)`
 const CardGridBox = styled.div`
   width: calc(100% - 320px);
   padding-top: 80px;
+`;
+
+const MobileCardBox = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 100px;
+  max-width: 1280px;
+
+  padding: 20px;
+  margin: auto;
 `;
 
 const InputBox = styled.div`

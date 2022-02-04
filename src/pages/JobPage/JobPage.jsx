@@ -84,11 +84,11 @@ const JobsPage = () => {
           <SearchBox>
             <Input icon="search" placeholder="공고 검색하기" theme={theme} />
           </SearchBox>
-          <ContentBox>
+          <MobileCardBox>
             <Suspense fallback={<CardGrid theme={theme} isLoading />}>
               <JobCardGrid theme={theme} />
             </Suspense>
-          </ContentBox>
+          </MobileCardBox>
         </>
       )}
     </>
@@ -157,6 +157,17 @@ const SubNavMobile = styled(SubNavbar)`
 const CardGridBox = styled.div`
   width: calc(100% - 320px);
   padding-top: 80px;
+`;
+
+const MobileCardBox = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 100px;
+  max-width: 1280px;
+
+  padding: 20px;
+  margin: auto;
 `;
 
 const InputBox = styled.div`

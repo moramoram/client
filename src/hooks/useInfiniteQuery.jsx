@@ -46,12 +46,13 @@ export const convertToStudyCard = (data) => {
     return {
       contents: {
         title: card.title,
-        subtitle: `${card.writerInfo.nickname} (${card.writerInfo.ordinal} /${card.writerInfo.campus} )`,
-        highlight: "D-day",
+        subtitle: `${card.writerInfo.nickname} (${card.writerInfo.ordinal}/${card.writerInfo.campus} )`,
+        highlight: !!card.recruitment ? "모집중" : "모집완료",
         src: "",
       },
       badges: card.tech_stack.split(),
       id: `/study/${card.studyId}`,
+      isDisabled: !card.recruitment,
     };
   });
 

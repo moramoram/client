@@ -6,6 +6,7 @@ import {
   useDummyApi,
   GetInfiniteQuery,
   useIntersectionObserver,
+  convertToStudyCard,
 } from "@/hooks";
 
 import { CardGrid } from "@/containers";
@@ -18,11 +19,15 @@ const StudyCardGrid = () => {
   const { data } = useDummyApi();
 
   const onFetchNewData = () => {
+    console.log("fetchNewData");
+
     const token = localStorage.getItem("token");
     if (token) {
       console.log("fetchNewData");
     }
   };
+
+  const { cardData } = convertToStudyCard(mockdata);
 
   useIntersectionObserver({
     target: loader,
@@ -38,17 +43,6 @@ const StudyCardGrid = () => {
 };
 
 export default StudyCardGrid;
-
-const cardData = new Array(24).fill({
-  contents: {
-    title: "주니어 프론트엔드 채용",
-    subtitle: "싸페 디자인 시스템",
-    highlight: "D-day",
-    src: "",
-  },
-  badges: ["JavaScript", "React", "Vue.js"],
-  id: "/study/1",
-});
 
 const mockdata = [
   {

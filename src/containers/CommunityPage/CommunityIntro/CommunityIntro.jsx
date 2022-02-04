@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
+import { colors, fontSize, fontWeight } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -51,35 +51,21 @@ const Layout = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 
   width: 100%;
   height: 400px;
   background: ${(props) => bgColor[props.theme]};
-
-  flex-wrap: wrap;
-  overflow: hidden;
-
-  @media screen and (max-width: 979px) {
-    justify-content: center;
-    align-items: center;
-    height: 400px;
-  }
 `;
 
 const Title = styled.div`
   padding-top: 68px;
-  line-height: ${lineHeight.h2};
-  margin-bottom: 15px;
-
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h2};
   color: ${(props) => titleColor[props.theme]};
 `;
 
 const SubTitle = styled.div`
-  height: ${lineHeight.h4};
-  margin-bottom: 27px;
-
   font-size: ${fontSize.p};
   color: ${(props) => subtitleColor[props.theme]};
 `;

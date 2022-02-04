@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 import {
   useDummyApi,
-  GetInfiniteQuery,
+  // GetInfiniteQuery,
   useIntersectionObserver,
   convertToStudyCard,
 } from "@/hooks";
@@ -19,11 +19,11 @@ const StudyCardGrid = () => {
   const { data } = useDummyApi();
 
   const onFetchNewData = () => {
-    console.log("fetchNewData");
+    console.log(data.name);
 
     const token = localStorage.getItem("token");
     if (token) {
-      console.log("fetchNewData");
+      console.log(data.name);
     }
   };
 

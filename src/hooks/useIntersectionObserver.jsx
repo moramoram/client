@@ -4,8 +4,6 @@ export const useIntersectionObserver = ({
   root,
   target,
   onIntersect,
-  threshold = 1.0,
-  rootMargin = "0px",
   enabled = true,
 }) => {
   React.useEffect(() => {
@@ -18,8 +16,8 @@ export const useIntersectionObserver = ({
         entries.forEach((entry) => entry.isIntersecting && onIntersect()),
       {
         root: root && root.current,
-        rootMargin,
-        threshold,
+        rootMargin: "0px",
+        threshold: 1.0,
       }
     );
 
@@ -34,5 +32,6 @@ export const useIntersectionObserver = ({
     return () => {
       observer.unobserve(el);
     };
-  }, [target.current, enabled]);
+  });
+  // [target.current, enabled]
 };

@@ -120,17 +120,6 @@ const categoryData = [
   },
 ];
 
-const cardData = new Array(24).fill({
-  contents: {
-    title: "주니어 프론트엔드 채용",
-    subtitle: "싸페 디자인 시스템",
-    highlight: "D-day",
-    src: "",
-  },
-  badges: ["JavaScript", "React", "Vue.js"],
-  id: "/job/1",
-});
-
 const ContentBox = styled.div`
   display: flex;
   justify-content: center;

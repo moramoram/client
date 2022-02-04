@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 import {
   useDummyApi,
-  GetInfiniteQuery,
+  // GetInfiniteQuery,
   useIntersectionObserver,
 } from "@/hooks";
 
@@ -20,7 +20,7 @@ const JobCardGrid = () => {
   const onFetchNewData = () => {
     const token = localStorage.getItem("token");
     if (token) {
-      console.log("fetchNewData");
+      console.log(data.name);
     }
   };
 

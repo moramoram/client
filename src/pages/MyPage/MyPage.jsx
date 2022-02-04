@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+import { useMediaQuery } from "react-responsive";
+
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 import { auth } from "@/recoil/auth";
+import { colors } from "@/_shared";
 
-import { SubNavbar } from "@/components";
 import {
   Authorization,
   MyInfo,
@@ -14,6 +16,7 @@ import {
   MyPageIntro,
   MyStudy,
 } from "@/containers";
+import { SubNavbar } from "@/components";
 
 const MyPage = () => {
   const theme = useRecoilValue(themeState);
@@ -24,6 +27,13 @@ const MyPage = () => {
   const handleCategory = (idx) => {
     setSelectedCategory(idx);
   };
+
+  const isPc = useMediaQuery({
+    query: "(min-width:980px)",
+  });
+  const isMobile = useMediaQuery({
+    query: "(max-width:979px)",
+  });
 
   useEffect(() => {
     setContents(() => {
@@ -45,19 +55,34 @@ const MyPage = () => {
   }, [selectedCategory]);
 
   return (
-    <Layout>
+    <>
       <MyPageIntro theme={theme} authState={authState} />
-      <MainBox>
-        <StickyNavBox>
-          <StickyNav
-            data={categoryData}
-            theme={theme}
-            onClick={handleCategory}
-          />
-        </StickyNavBox>
-        <ContentBox>{contents}</ContentBox>
-      </MainBox>
-    </Layout>
+      <Layout>
+        {isPc && (
+          <MainBox>
+            <StickyNavBox>
+              <StickyNav
+                data={categoryData}
+                theme={theme}
+                onClick={handleCategory}
+              />
+            </StickyNavBox>
+            <ContentBox>{contents}</ContentBox>
+          </MainBox>
+        )}
+        {isMobile && (
+          <MobileBox>
+            <SubNavbar
+              data={categoryData}
+              theme={theme}
+              onClick={handleCategory}
+              view="mobile"
+            />
+            <ContentBox>{contents}</ContentBox>
+          </MobileBox>
+        )}
+      </Layout>
+    </>
   );
 };
 
@@ -87,20 +112,23 @@ const categoryData = [
 ];
 
 const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
+  padding: 20px;
 `;
 
 const MainBox = styled.div`
   display: flex;
-  /* justify-content: center; */
   gap: 100px;
-  max-width: 1280px;
 
+  max-width: 1280px;
   width: 100%;
-  height: 100vh;
-  padding: 20px;
   margin: auto;
+  padding: 0 0 4rem 0;
+`;
+
+const MobileBox = styled.div`
+  max-width: 1280px;
+  width: 100%;
+  padding: 0 0 4rem 0;
 `;
 
 const ContentBox = styled.div`

@@ -56,17 +56,15 @@ const borderColor = {
 };
 
 const Layout = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 400px;
-  padding: 0 0 0 300px;
   border-bottom: 1px solid ${(props) => borderColor[props.theme]};
 `;
 
 const ContentBox = styled.div`
   display: flex;
-  /* justify-content: center; */
-  max-width: 1280px;
-  padding: 200px 0 0 0;
+  justify-content: center;
+  padding: 200px 0 0 0px;
   margin: auto;
   gap: 3rem;
 `;

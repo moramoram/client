@@ -119,8 +119,6 @@ const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-
-  margin-right: 20px;
 `;
 
 const InputBox = styled.div`

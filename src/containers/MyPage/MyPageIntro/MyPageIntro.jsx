@@ -22,7 +22,7 @@ const MyPageIntro = ({ authState, ...props }) => {
     <>
       <Layout {...props}>
         <ContentBox>
-          <Avatar size={isPc ? "xxLarge" : "xLarge"} src={authState.src} />
+          <Avatar size="extraLarge" src={authState.src} />
           <TitleBox>
             <Title {...props}>{authState.nickname ?? "Anonymous"}</Title>
             <SubTitle {...props}>
@@ -70,48 +70,32 @@ const Layout = styled.div`
 const ContentBox = styled.div`
   display: flex;
   justify-content: center;
-  padding: 200px 0 0 0px;
-  margin: auto;
-  gap: 3rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 
-  @media screen and (max-width: 979px) {
-    flex-direction: column;
-    align-items: center;
-    padding: 150px 0 0 0px;
-    gap: 1rem;
-  }
+  padding: 150px 0 0 0px;
+  margin: auto;
 `;
 
 const TitleBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1.5rem;
-
-  @media screen and (max-width: 979px) {
-    align-items: center;
-    gap: 0.5rem;
-  }
+  align-items: center;
+  gap: 0.5rem;
 `;
 
 const Title = styled.div`
   line-height: ${lineHeight.h2};
   font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h2};
+  font-size: ${fontSize.h3};
   color: ${(props) => titleColor[props.theme]};
-
-  @media screen and (max-width: 979px) {
-    font-size: ${fontSize.h3};
-  }
 `;
 
 const SubTitle = styled.div`
   height: ${lineHeight.h4};
 
-  font-size: ${fontSize.p};
+  font-size: ${fontSize.sm};
   color: ${(props) => subtitleColor[props.theme]};
-
-  @media screen and (max-width: 979px) {
-    font-size: ${fontSize.sm};
-  }
 `;

@@ -16,7 +16,7 @@ const MyPageIntro = ({ authState, ...props }) => {
     <>
       <Layout {...props}>
         <ContentBox>
-          <Avatar size="extraLarge" src={authState.src ?? null} />
+          <Avatar size="extraLarge" src={authState.src} />
           <TitleBox>
             <Title {...props}>{authState.nickname ?? "Anonymous"}</Title>
             <SubTitle {...props}>
@@ -56,40 +56,40 @@ const borderColor = {
 };
 
 const Layout = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 400px;
-  padding: 0 0 0 300px;
   border-bottom: 1px solid ${(props) => borderColor[props.theme]};
 `;
 
 const ContentBox = styled.div`
   display: flex;
-  /* justify-content: center; */
-  max-width: 1280px;
-  padding: 200px 0 0 0;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 150px 0 0 0px;
   margin: auto;
-  gap: 3rem;
 `;
 
 const TitleBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
-
-  height: 150px;
+  align-items: center;
+  gap: 0.5rem;
 `;
 
 const Title = styled.div`
   line-height: ${lineHeight.h2};
   font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h2};
+  font-size: ${fontSize.h3};
   color: ${(props) => titleColor[props.theme]};
 `;
 
 const SubTitle = styled.div`
   height: ${lineHeight.h4};
 
-  font-size: ${fontSize.p};
+  font-size: ${fontSize.sm};
   color: ${(props) => subtitleColor[props.theme]};
 `;

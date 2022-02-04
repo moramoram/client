@@ -101,10 +101,10 @@ const Layout = styled.div`
 
 const Title = styled.div`
   line-height: ${lineHeight.h2};
-  margin-bottom: 15px;
+  margin-bottom: 0.5rem;
 
   font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h2};
+  font-size: ${fontSize.h3};
   color: ${(props) => titleColor[props.theme]};
 `;
 
@@ -119,8 +119,6 @@ const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-
-  margin-right: 20px;
 `;
 
 const InputBox = styled.div`
@@ -129,6 +127,7 @@ const InputBox = styled.div`
 
   button {
     margin: 6px 0;
+    flex-shrink: 0;
   }
 
   div {

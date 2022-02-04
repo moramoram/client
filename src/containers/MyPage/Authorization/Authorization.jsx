@@ -39,8 +39,8 @@ const Authorization = () => {
       <Layout>
         <Title theme={theme}>추가 정보 입력</Title>
         <SubTitle theme={theme}>
-          SSAFY만의 커뮤니티를 만들기 위해서예요. <br />
-          다른 용도로 사용하지 않으니 안심하세요.
+          SSAFY만의 커뮤니티를 만들기 위해서예요 <br />
+          다른 용도로 사용하지 않으니 안심하세요
         </SubTitle>
         <FormSection>
           <div>
@@ -57,7 +57,6 @@ const Authorization = () => {
                 }
                 theme={theme}
               />
-
               <Button
                 mode="active"
                 onClick={() => setConfirmUsername(!confirmUsername)}
@@ -168,10 +167,10 @@ const Layout = styled.div`
 
 const Title = styled.div`
   line-height: ${lineHeight.h2};
-  margin-bottom: 15px;
+  margin-bottom: 0.5rem;
 
   font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h2};
+  font-size: ${fontSize.h3};
   color: ${(props) => titleColor[props.theme]};
 `;
 
@@ -196,6 +195,7 @@ const InputBox = styled.div`
 
   button {
     margin: 6px 0;
+    flex-shrink: 0;
   }
 
   div {

@@ -60,13 +60,15 @@ Avatar.defaultProps = {
 export default Avatar;
 
 const sizeNum = {
-  extraLarge: 150,
+  extraLarge: 100,
   large: 40,
   medium: 28,
   small: 20,
 };
 
 const fontSize = {
+  xxLarge: "4.5rem",
+  xLarge: "3rem",
   large: "1.25rem",
   medium: "0.875rem",
   small: "0.625rem",
@@ -74,7 +76,6 @@ const fontSize = {
 
 const Image = styled.div`
   display: inline-block;
-  /* vertical-align: top; */
   overflow: hidden;
   object-fit: cover;
 

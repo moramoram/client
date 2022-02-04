@@ -23,3 +23,37 @@ export const GetInfiniteQuery = () =>
       retry: 1,
     }
   );
+
+export const convertToJobCard = (data) => {
+  const cardData = data.map((card) => {
+    return {
+      contents: {
+        title: card.title,
+        subtitle: "싸페 디자인 시스템",
+        highlight: "D-day",
+        src: "",
+      },
+      badges: ["JavaScript", "React", "Vue.js"],
+      id: "/study/1",
+    };
+  });
+
+  return { cardData };
+};
+
+export const convertToStudyCard = (data) => {
+  const cardData = data.map((card) => {
+    return {
+      contents: {
+        title: card.title,
+        subtitle: `${card.writerInfo.nickname} (${card.writerInfo.ordinal} /${card.writerInfo.campus} )`,
+        highlight: "D-day",
+        src: "",
+      },
+      badges: card.tech_stack.split(),
+      id: `/study/${card.studyId}`,
+    };
+  });
+
+  return { cardData };
+};

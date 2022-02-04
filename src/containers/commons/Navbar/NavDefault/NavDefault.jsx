@@ -87,7 +87,10 @@ const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
               size="medium"
               onClick={() => setDropdownOpen(!dropdownOpen)}
             />
-            {dropdownOpen && <UserDropdown items={userMenuData} {...props} />}
+            {dropdownOpen && (
+              // TODO : 프로필에서 Username 가져오기
+              <UserDropdown items={userMenuData} user="User" {...props} />
+            )}
           </>
         ) : (
           <ButtonBox>

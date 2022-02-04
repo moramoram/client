@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { useMediaQuery } from "react-responsive";
+
 import { Avatar } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
@@ -12,11 +14,15 @@ const THEME = {
 
 // TODO : 프로필 정보 상태관리
 const MyPageIntro = ({ authState, ...props }) => {
+  const isPc = useMediaQuery({
+    query: "(min-width:980px)",
+  });
+
   return (
     <>
       <Layout {...props}>
         <ContentBox>
-          <Avatar size="extraLarge" src={authState.src ?? null} />
+          <Avatar size={isPc ? "xxLarge" : "xLarge"} src={authState.src} />
           <TitleBox>
             <Title {...props}>{authState.nickname ?? "Anonymous"}</Title>
             <SubTitle {...props}>
@@ -67,15 +73,25 @@ const ContentBox = styled.div`
   padding: 200px 0 0 0px;
   margin: auto;
   gap: 3rem;
+
+  @media screen and (max-width: 979px) {
+    flex-direction: column;
+    align-items: center;
+    padding: 150px 0 0 0px;
+    gap: 1rem;
+  }
 `;
 
 const TitleBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
 
-  height: 150px;
+  @media screen and (max-width: 979px) {
+    align-items: center;
+    gap: 0.5rem;
+  }
 `;
 
 const Title = styled.div`
@@ -83,6 +99,10 @@ const Title = styled.div`
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h2};
   color: ${(props) => titleColor[props.theme]};
+
+  @media screen and (max-width: 979px) {
+    font-size: ${fontSize.h3};
+  }
 `;
 
 const SubTitle = styled.div`
@@ -90,4 +110,8 @@ const SubTitle = styled.div`
 
   font-size: ${fontSize.p};
   color: ${(props) => subtitleColor[props.theme]};
+
+  @media screen and (max-width: 979px) {
+    font-size: ${fontSize.sm};
+  }
 `;

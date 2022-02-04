@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { CommentList } from "@/containers";
 
 import {
-  Avatar,
   Toc,
   CommentInput,
   ImageBoxResponsive,
@@ -29,9 +28,7 @@ const LoadingDetailMobile = ({ ...props }) => {
         <TitleBox isLoading {...props}>
           <Highlight isLoading {...props}></Highlight>
           <Title isLoading {...props}></Title>
-          <SubTitle isLoading {...props}>
-            <Avatar isLoading size="medium" {...props} />
-          </SubTitle>
+          <SubTitle isLoading {...props} />
           <SideBarBox>
             {summaryData.map(({ title, icon, description }, idx) => (
               <SideBarItem
@@ -144,6 +141,10 @@ const TitleBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  > div {
+    border-radius: 4px;
+  }
 `;
 
 const SideBarBox = styled.div`
@@ -157,9 +158,8 @@ const BadgeBox = styled.div`
 `;
 
 const Highlight = styled.div`
-  max-width: 240px;
+  max-width: 100px;
   min-height: ${lineHeight.h4};
-  border-radius: 4px;
 
   font-size: ${fontSize.h4};
   font-weight: ${fontWeight.bold};
@@ -169,9 +169,8 @@ const Highlight = styled.div`
 `;
 
 const Title = styled.div`
-  max-width: 400px;
+  max-width: 600px;
   min-height: ${lineHeight.h2};
-  border-radius: 4px;
 
   font-weight: ${fontWeight.bold};
   font-size: calc(${fontSize.h2} - 2px);
@@ -184,12 +183,14 @@ const SubTitle = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  min-width: 160px;
+  max-width: 200px;
   min-height: ${lineHeight.h4};
 
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h4};
   color: ${(props) => subtitleColor[props.theme]};
+
+  animation: ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const Content = styled.div`

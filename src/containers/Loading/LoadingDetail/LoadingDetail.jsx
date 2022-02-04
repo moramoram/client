@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { CommentList, StudySideBar } from "@/containers";
-import { Avatar, Toc, CommentInput } from "@/components";
+import { Toc, CommentInput } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 
 const THEME = {
@@ -17,11 +17,7 @@ const LoadingDetail = ({ ...props }) => {
         <TitleBox {...props} isLoading>
           <Highlight {...props} isLoading></Highlight>
           <Title {...props} isLoading></Title>
-          <div>
-            <SubTitle {...props} isLoading>
-              <Avatar size="medium" {...props} isLoading />
-            </SubTitle>
-          </div>
+          <SubTitle {...props} isLoading></SubTitle>
         </TitleBox>
         <Toc items={tocItem} {...props} isLoading />
         <Content {...props} isLoading></Content>
@@ -89,6 +85,7 @@ const TitleBox = styled.div`
   > div {
     display: block;
     border-radius: 4px;
+    animation: ${(props) => props.isLoading && loadings[props.theme]};
   }
 `;
 
@@ -99,7 +96,6 @@ const Highlight = styled.div`
   font-size: ${fontSize.h4};
   font-weight: ${fontWeight.bold};
   color: ${colors.blue100};
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const Title = styled.div`
@@ -109,14 +105,14 @@ const Title = styled.div`
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h2};
   color: ${(props) => titleColor[props.theme]};
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const SubTitle = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  min-width: 160px;
+
+  max-width: 100px;
   min-height: ${lineHeight.h4};
 
   font-weight: ${fontWeight.bold};

@@ -1,24 +1,38 @@
-import React, { useRef, useEffect, useState, useCallback } from "react";
+import React, { useRef } from "react";
 
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
-import { useQuery } from "react-query";
-import axios from "axios";
+import {
+  useDummyApi,
+  GetInfiniteQuery,
+  useIntersectionObserver,
+} from "@/hooks";
 
 import { CardGrid } from "@/containers";
 
 const StudyCardGrid = () => {
   const theme = useRecoilValue(themeState);
+  const loader = useRef(null);
+  // const { data, fetchNextPage } = GetInfiniteQuery();
 
-  const { items } = useQuery(
-    "studyItems",
-    () => axios("http://swapi.dev/api/people/1/"),
-    { suspense: true }
-  );
+  const { data } = useDummyApi();
+
+  const onFetchNewData = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      console.log("fetchNewData");
+    }
+  };
+
+  useIntersectionObserver({
+    target: loader,
+    onIntersect: onFetchNewData,
+  });
 
   return (
     <>
       <CardGrid data={cardData} theme={theme} />
+      <div ref={loader} />
     </>
   );
 };

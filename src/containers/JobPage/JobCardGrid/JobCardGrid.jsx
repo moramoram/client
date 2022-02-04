@@ -1,20 +1,41 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
-import { useQuery, useInfiniteQuery } from "react-query";
-import axios from "axios";
+import {
+  useDummyApi,
+  GetInfiniteQuery,
+  useIntersectionObserver,
+} from "@/hooks";
 
 import { CardGrid } from "@/containers";
 
 const JobCardGrid = () => {
   const theme = useRecoilValue(themeState);
+  const loader = useRef(null);
+  // const { data, fetchNextPage } = GetInfiniteQuery();
 
-  const { items } = useQuery("fetchLuke", () =>
-    axios("http://swapi.dev/api/people/1/")
+  const { data } = useDummyApi();
+
+  const onFetchNewData = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      console.log("fetchNewData");
+    }
+  };
+
+  useIntersectionObserver({
+    target: loader,
+    onIntersect: onFetchNewData,
+    enabled: false,
+  });
+
+  return (
+    <>
+      <CardGrid data={cardData} theme={theme} />
+      <div ref={loader} />
+    </>
   );
-
-  return <CardGrid data={cardData} theme={theme} />;
 };
 
 export default JobCardGrid;

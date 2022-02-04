@@ -124,9 +124,12 @@ const BadgeBox = styled.div`
 
 const Layout = styled.div`
   display: block;
-  border-radius: 16px;
+  position: sticky;
+  top: 180px;
+
   width: 400px;
   height: 540px;
+  border-radius: 16px;
 
   button {
     margin: 6px 10px;

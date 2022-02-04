@@ -1,5 +1,9 @@
 import axios from "axios";
+import { useQuery } from "react-query";
+
 import { daysFromToday } from "@/utils";
+
+export const useGetStudyDetail = () => useQuery(["getStudyDetail"], fetchData);
 
 export const fetchData = async () => {
   console.log("API");

@@ -10,33 +10,8 @@ import { CardGrid } from "@/containers";
 const JobCardGrid = () => {
   const theme = useRecoilValue(themeState);
 
-  const { items } = useQuery(
-    "fetchLuke",
-    () => axios("http://swapi.dev/api/people/1/"),
-    { suspense: true }
-  );
-
-  const {
-    status,
-    data,
-    error,
-    isFetching,
-    isFetchingNextPage,
-    isFetchingPreviousPage,
-    fetchNextPage,
-    fetchPreviousPage,
-    hasNextPage,
-    hasPreviousPage,
-  } = useInfiniteQuery(
-    "projects",
-    async ({ pageParam = 0 }) => {
-      const res = await axios.get("/api/projects?cursor=" + pageParam);
-      return res.data;
-    },
-    {
-      getPreviousPageParam: (firstPage) => firstPage.previousId ?? false,
-      getNextPageParam: (lastPage) => lastPage.nextId ?? false,
-    }
+  const { items } = useQuery("fetchLuke", () =>
+    axios("http://swapi.dev/api/people/1/")
   );
 
   return <CardGrid data={cardData} theme={theme} />;

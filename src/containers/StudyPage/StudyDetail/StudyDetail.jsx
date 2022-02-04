@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import { CommentList } from "@/containers";
+import { CommentList, StudySideBar } from "@/containers";
 import { Avatar, Toc, CommentInput } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 
-import { useQuery, useMutation } from "react-query";
-import { fetchData, convertToStudyDetail, postComment } from "@/hooks";
+import { useMutation, useQueryClient } from "react-query";
+import { useGetStudyDetail, convertToStudyDetail, postComment } from "@/hooks";
 
 const THEME = {
   LIGHT: "light",
@@ -14,14 +14,19 @@ const THEME = {
 };
 
 const StudyDetail = ({ ...props }) => {
-  const { data } = useQuery("fetchData", fetchData);
-  const mutation = useMutation("postComment", postComment);
+  const queryClient = useQueryClient();
+  const { data } = useGetStudyDetail();
   const { titleData, commentData, contentData, tocItem } =
     convertToStudyDetail(mockdata);
 
+  const mutation = useMutation("postStudyDetailComment", postComment);
+
   const onPostComment = (comment) => {
-    console.log(comment.value);
-    mutation.mutate(comment.value);
+    mutation.mutate(comment.value, {
+      onSuccess: () => {
+        queryClient.invalidateQueries("getStudyDetail");
+      },
+    });
   };
 
   return (
@@ -39,7 +44,7 @@ const StudyDetail = ({ ...props }) => {
         </TitleBox>
         <Toc items={tocItem} {...props} />
         <Content {...props}>{contentData}</Content>
-        <CommentBox>
+        <div>
           <BoxTitle {...props}>댓글</BoxTitle>
           <BoxDescription {...props}>
             총 {commentData.length}개의 댓글이 달렸습니다.
@@ -49,8 +54,10 @@ const StudyDetail = ({ ...props }) => {
             onClick={(comment) => onPostComment(comment)}
           />
           <CommentList data={commentData} {...props} />
-        </CommentBox>
+        </div>
       </Layout>
+
+      <StudySideBar {...props} {...sidbarargs} />
     </>
   );
 };
@@ -60,6 +67,17 @@ StudyDetail.defaultProps = {
 };
 
 export default StudyDetail;
+
+const sidbarargs = {
+  data: {
+    type: "알고리즘",
+    target: "-",
+    people: "4",
+    location: "온라인",
+  },
+
+  badges: ["JavaScript", "TypeScript", "Vue.js", "React", "Redux", "Svelte"],
+};
 
 const mockdata = {
   studyId: 2,
@@ -275,5 +293,3 @@ const BoxDescription = styled.div`
   color: ${(props) => subtitleColor[props.theme]};
   font-size: ${fontSize.p};
 `;
-
-const CommentBox = styled.div``;

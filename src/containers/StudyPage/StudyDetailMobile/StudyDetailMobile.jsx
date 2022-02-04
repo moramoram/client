@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { CommentList } from "@/containers";
+
 import {
   Avatar,
   Toc,
@@ -16,23 +17,29 @@ import {
 import { Icon } from "@/foundations";
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 
+import { useQuery, useMutation, useQueryClient } from "react-query";
+import { fetchData, convertToStudyDetail, postComment } from "@/hooks";
+
 const THEME = {
   LIGHT: "light",
   DARK: "dark",
 };
 
-const StudyDetailMobile = ({
-  titleData,
-  tocItem,
-  contentData,
-  commentData,
-  isLoading,
-  data,
-  badges,
-  ...props
-}) => {
+const StudyDetailMobile = ({ isLoading, data, badges, ...props }) => {
   const [isMarked, setIsMarked] = useState(false);
+  const queryClient = useQueryClient();
+  const { aaa } = useQuery("fetchData", fetchData);
+  const mutation = useMutation("postComment", postComment);
+  const { titleData, commentData, contentData, tocItem } =
+    convertToStudyDetail(mockdata);
 
+  const onPostComment = (comment) => {
+    mutation.mutate(comment.value, {
+      onSuccess: () => {
+        queryClient.invalidateQueries("fetchData");
+      },
+    });
+  };
   return (
     <>
       <Layout>
@@ -127,6 +134,117 @@ StudyDetailMobile.defaultProps = {
 };
 
 export default StudyDetailMobile;
+
+const mockdata = {
+  studyId: 2,
+  writerInfo: {
+    nickname: "su",
+    ordinal: 0,
+    campus: null,
+    authCheck: 0,
+  },
+  comments: [
+    {
+      commentId: 1,
+      content: "온라인으로는 진행을 안 하시는 건가요?",
+      writerInfo: {
+        nickname: "su",
+        ordinal: 0,
+        campus: null,
+        authCheck: 0,
+      },
+      createdDate: "2022-01-30T21:22:30",
+      modifiedDate: "2022-01-30T21:25:56",
+    },
+    {
+      commentId: 2,
+      content: "너무 참여하고 싶어요!",
+      writerInfo: {
+        nickname: "su",
+        ordinal: 0,
+        campus: null,
+        authCheck: 0,
+      },
+      createdDate: "2022-01-30T21:23:14",
+      modifiedDate: "2022-01-30T21:23:14",
+    },
+    {
+      commentId: 4,
+      content: "너무 참여하고 싶어요!",
+      writerInfo: {
+        nickname: "su",
+        ordinal: 0,
+        campus: null,
+        authCheck: 0,
+      },
+      createdDate: "2022-01-30T21:23:15",
+      modifiedDate: "2022-01-30T21:23:15",
+    },
+    {
+      commentId: 5,
+      content: "너무 참여하고 싶어요!",
+      writerInfo: {
+        nickname: "su",
+        ordinal: 0,
+        campus: null,
+        authCheck: 0,
+      },
+      createdDate: "2022-01-30T21:23:16",
+      modifiedDate: "2022-01-30T21:23:16",
+    },
+  ],
+  company_name: "삼성전자",
+  title: "삼전 코테 대비 알고리즘 스터디 구합니다.",
+  study_type: "취업 스터디",
+  tech_stack: "java",
+  recruitment: 0,
+  location: "강남 역삼",
+  on_off: 1,
+  content: (
+    <>
+      <h3>1️⃣ 일 1️⃣ 커밋 알고리즘 스터디원을 모집합니다.</h3>
+      <ul>
+        <li>
+          스터디 기간 : 2022년 2월 7일 (설날 연휴 지나고 시작) ~ 2022년 2월 28일
+          (1달)
+        </li>
+        <li>스터디 목표 : 매일 알고리즘 문제를 풀어 코딩 테스트 뽀개기</li>
+        <li>예상 모집 인원 : 4명</li>
+      </ul>
+      <p>
+        <br />
+      </p>
+      <p>
+        <br />
+      </p>
+      <h3>📚 스터디는 이렇게 진행돼요</h3>
+      <ul>
+        <li>
+          깃허브 주소를 공유하고 매일 알고리즘을 풀고 커밋 내역을 인증합니다.
+        </li>
+        <li>알고리즘 문제는 자유롭게 풀고싶은 문제로 풉니다.</li>
+        <li>알고리즘과 무관한 커밋은 인정되지 않습니다.</li>
+        <li>
+          24시간 내에 인증을 하지 않으시면 1회 경고, 2회 경고 시 강퇴입니다.
+        </li>
+      </ul>
+      <p>
+        <br />
+      </p>
+      <h3>🙇‍♂️ 이런 분이면 좋겠어요</h3>
+      <ul>
+        <li>매일 잔디를 심으며 꾸준함과 성실함을 키우고 싶으신 분</li>
+        <li>알고리즘 문제 해결 능력을 키우고 싶으신 분</li>
+        <li>코딩 테스트를 준비 중 이신 분</li>
+      </ul>
+    </>
+  ),
+  views: 2,
+  totalScrap: 0,
+  scrapStatus: false,
+  createdDate: "2022-01-30T21:03:37",
+  modifiedDate: "2022-02-01T13:19:47.775",
+};
 
 const summaryData = [
   {

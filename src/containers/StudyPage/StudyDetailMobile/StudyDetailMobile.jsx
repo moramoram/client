@@ -18,7 +18,7 @@ import { Icon } from "@/foundations";
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 
 import { useMutation, useQueryClient } from "react-query";
-import { useGetStudyDetail, convertToStudyDetail, postComment } from "@/hooks";
+import { GetStudyDetail, convertToStudyDetail, postComment } from "@/queries";
 
 const THEME = {
   LIGHT: "light",
@@ -28,7 +28,7 @@ const THEME = {
 const StudyDetailMobile = ({ data, badges, ...props }) => {
   const [isMarked, setIsMarked] = useState(false);
   const queryClient = useQueryClient();
-  const { dd } = useGetStudyDetail();
+  const { dd } = GetStudyDetail();
   const { titleData, commentData, contentData, tocItem } =
     convertToStudyDetail(mockdata);
 

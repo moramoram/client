@@ -2,12 +2,12 @@ import React, { useRef } from "react";
 
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
+import { useIntersectionObserver } from "@/hooks";
 import {
-  useDummyApi,
+  GetDummyApi,
   // GetInfiniteQuery,
-  useIntersectionObserver,
   convertToStudyCard,
-} from "@/hooks";
+} from "@/queries";
 
 import { CardGrid } from "@/containers";
 
@@ -16,7 +16,7 @@ const StudyCardGrid = () => {
   const loader = useRef(null);
   // const { data, fetchNextPage } = GetInfiniteQuery();
 
-  const { data } = useDummyApi();
+  const { data } = GetDummyApi();
 
   const onFetchNewData = () => {
     console.log(data.name);

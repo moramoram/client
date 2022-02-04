@@ -6,7 +6,7 @@ import { Avatar, Toc, CommentInput } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 
 import { useMutation, useQueryClient } from "react-query";
-import { useGetStudyDetail, convertToStudyDetail, postComment } from "@/hooks";
+import { GetStudyDetail, convertToStudyDetail, postComment } from "@/queries";
 
 const THEME = {
   LIGHT: "light",
@@ -15,7 +15,7 @@ const THEME = {
 
 const StudyDetail = ({ ...props }) => {
   const queryClient = useQueryClient();
-  const { data } = useGetStudyDetail();
+  const { data } = GetStudyDetail();
   const { titleData, commentData, contentData, tocItem } =
     convertToStudyDetail(mockdata);
 

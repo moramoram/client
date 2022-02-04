@@ -1,13 +1,12 @@
 import React, { useRef } from "react";
 
 import { useRecoilValue } from "recoil";
-import { themeState } from "@/recoil/theme";
+import { themeState } from "@/recoil";
+import { useIntersectionObserver } from "@/hooks";
 import {
-  useDummyApi,
+  GetDummyApi,
   // GetInfiniteQuery,
-  useIntersectionObserver,
-} from "@/hooks";
-
+} from "@/queries";
 import { CardGrid } from "@/containers";
 
 const JobCardGrid = () => {
@@ -15,7 +14,7 @@ const JobCardGrid = () => {
   const loader = useRef(null);
   // const { data, fetchNextPage } = GetInfiniteQuery();
 
-  const { data } = useDummyApi();
+  const { data } = GetDummyApi();
 
   const onFetchNewData = () => {
     const token = localStorage.getItem("token");

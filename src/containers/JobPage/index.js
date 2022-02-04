@@ -1,3 +1,4 @@
+export { default as JobCardGrid } from "./JobCardGrid";
 export { default as JobDetail } from "./JobDetail";
 export { default as JobDetailMobile } from "./JobDetailMobile";
 export { default as JobIntro } from "./JobIntro";

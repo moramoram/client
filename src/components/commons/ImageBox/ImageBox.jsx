@@ -44,6 +44,7 @@ ImageBox.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   size: PropTypes.oneOf(Object.values(SIZE)),
   isLoading: PropTypes.bool,
+  isDisabled: PropTypes.bool,
   src: PropTypes.string,
   name: PropTypes.string,
 };
@@ -52,6 +53,7 @@ ImageBox.defaultProps = {
   theme: THEME.LIGHT,
   size: SIZE.LARGE,
   isLoading: false,
+  isDisabled: false,
   src: null,
   name: "thumbnail",
 };

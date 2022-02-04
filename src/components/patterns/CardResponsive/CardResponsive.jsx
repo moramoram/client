@@ -39,10 +39,11 @@ const CardResponsive = ({
         src={src}
         theme={theme}
         isLoading={isLoading}
+        {...props}
       />
       <ContentBox>
         <TextBox theme={theme} isLoading={isLoading}>
-          <Highlight>{highlight}</Highlight>
+          <Highlight {...props}>{highlight}</Highlight>
           <Title theme={theme}>{title}</Title>
           <Subtitle theme={theme}>{subtitle}</Subtitle>
         </TextBox>
@@ -70,6 +71,7 @@ CardResponsive.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   isLoading: PropTypes.bool,
   isLiked: PropTypes.bool,
+  isDisabled: PropTypes.bool,
   contents: PropTypes.objectOf(String).isRequired,
 };
 
@@ -77,6 +79,7 @@ CardResponsive.defaultProps = {
   theme: THEME.LIGHT,
   isLoading: false,
   isLiked: false,
+  isDisabled: false,
   contents: {
     title: "",
     subtitle: "",
@@ -141,7 +144,7 @@ const Highlight = styled.div`
   font-size: ${fontSize.sm};
   font-weight: ${fontWeight.bold};
   line-height: ${lineHeight.sm};
-  color: ${colors.blue100};
+  color: ${(props) => (props.isDisabled ? colors.gray400 : colors.blue100)};
 `;
 
 const Title = styled.div`

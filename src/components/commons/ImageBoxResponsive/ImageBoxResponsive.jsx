@@ -39,6 +39,7 @@ const ImageBoxResponsive = ({ theme, isLoading, src, name, ...props }) => {
 ImageBoxResponsive.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   isLoading: PropTypes.bool,
+  isDisabled: PropTypes.bool,
   src: PropTypes.string,
   name: PropTypes.string,
 };
@@ -46,6 +47,7 @@ ImageBoxResponsive.propTypes = {
 ImageBoxResponsive.defaultProps = {
   theme: THEME.LIGHT,
   isLoading: false,
+  isDisabled: false,
   src: null,
   name: "thumbnail",
 };
@@ -87,6 +89,7 @@ const ImageBoxWrapper = styled.div`
 
     width: 33%;
     height: 33%;
+    filter: ${(props) => props.isDisabled && `blur(5px)`};
   }
 
   img {
@@ -99,5 +102,6 @@ const ImageBoxWrapper = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: ${(props) => props.isDisabled && `blur(5px)`};
   }
 `;

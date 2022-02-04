@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { Comment } from "@/components";
 
-const CommentList = ({ data, isLoading, theme, ...props }) => {
+const CommentList = ({ data, theme, isLoading, ...props }) => {
   return (
     <Layout>
       {data.map((props, idx) => {

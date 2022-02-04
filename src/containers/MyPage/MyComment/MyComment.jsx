@@ -111,16 +111,14 @@ const Layout = styled.div`
 
 const Title = styled.div`
   line-height: ${lineHeight.h2};
-  margin-bottom: 15px;
+  margin-bottom: 0.5rem;
 
   font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h2};
+  font-size: ${fontSize.h3};
   color: ${(props) => titleColor[props.theme]};
 `;
 
 const SubTitle = styled.div`
-  /* margin-bottom: 3rem; */
-
   font-size: ${fontSize.p};
   color: ${(props) => subtitleColor[props.theme]};
 `;

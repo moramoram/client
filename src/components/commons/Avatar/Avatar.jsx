@@ -6,8 +6,7 @@ import AvatarBase from "./AvatarBase";
 import { animations, colors } from "@/_shared";
 
 const SIZE = {
-  XXLARGE: "xxLarge",
-  XLARGE: "xLarge",
+  EXTRALARGE: "extraLarge",
   LARGE: "large",
   MEDIUM: "medium",
   SMALL: "small",
@@ -61,8 +60,7 @@ Avatar.defaultProps = {
 export default Avatar;
 
 const sizeNum = {
-  xxLarge: 150,
-  xLarge: 100,
+  extraLarge: 100,
   large: 40,
   medium: 28,
   small: 20,

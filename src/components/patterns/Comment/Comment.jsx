@@ -17,7 +17,7 @@ const Comment = ({ username, src, created, content, ...props }) => {
 
   return (
     <Layout>
-      <Avatar size="large" username={username} src={src} {...props} />
+      <Avatar size="medium" username={username} src={src} {...props} />
       <ContentBox>
         <InfoBox>
           <User {...props}>{usernameRender}</User>
@@ -59,7 +59,7 @@ const contentColor = {
 
 const Layout = styled.div`
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
 `;
 
 const ContentBox = styled.div`

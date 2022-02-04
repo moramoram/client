@@ -31,7 +31,7 @@ const CommunityPage = () => {
     <>
       <CommunityIntro
         theme={theme}
-        onButtonClick={() => setLoginModalOpen(true)}
+        handleButtonClick={() => setLoginModalOpen(true)}
       />
       {isPc && (
         <MainBox>

@@ -19,16 +19,18 @@ const Dropdown = ({ user, items, ...props }) => {
 
   return (
     <Layout {...props}>
-      <UserInfo {...props}>
-        <UserName>{authState.nickname ?? "User"}</UserName>님 안녕하세요!
-      </UserInfo>
-      {items.map((item) => (
-        <MenuBox key={item.name} {...props}>
-          <DropdownItemLink to={item?.url} {...props}>
+      {user && (
+        <UserInfo {...props}>
+          <UserName>{authState.nickname ?? "User"}</UserName>님 안녕하세요!
+        </UserInfo>
+      )}
+      <MenuBox {...props}>
+        {items.map((item) => (
+          <DropdownItemLink to={item?.url} key={item.name} {...props}>
             <DropdownItem children={item.title} {...props} />
           </DropdownItemLink>
-        </MenuBox>
-      ))}
+        ))}
+      </MenuBox>
     </Layout>
   );
 };
@@ -36,7 +38,7 @@ const Dropdown = ({ user, items, ...props }) => {
 Dropdown.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   items: PropTypes.array.isRequired,
-  user: PropTypes.node.isRequired,
+  user: PropTypes.node,
 };
 
 Dropdown.defaultProps = {
@@ -53,7 +55,7 @@ Dropdown.defaultProps = {
       url: "logout",
     },
   ],
-  user: "User",
+  user: "",
 };
 
 export default Dropdown;
@@ -64,7 +66,7 @@ const borderColor = {
 };
 
 const bgColor = {
-  dark: colors.black,
+  dark: colors.gray900,
   light: colors.white,
 };
 
@@ -84,6 +86,13 @@ const Layout = styled.div`
 
   background-color: ${(props) => bgColor[props.theme]};
   box-shadow: ${shadows.base};
+
+  ${(props) =>
+    props.size === "small" &&
+    `
+      width: 100px;
+      align-items: stretch;
+    `}
 `;
 
 const UserInfo = styled.div`
@@ -92,6 +101,11 @@ const UserInfo = styled.div`
 
   font-size: ${fontSize.sm};
   color: ${(props) => textColor[props.theme]};
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 const UserName = styled.span`
@@ -99,15 +113,17 @@ const UserName = styled.span`
 `;
 
 const MenuBox = styled.div`
-  :nth-child(2) {
-    padding-top: 4px;
-  }
-
-  :nth-child(3) {
-    padding-bottom: 4px;
-  }
+  padding: 4px 0;
 `;
 
 const DropdownItemLink = styled(Link)`
   text-decoration: none;
+
+  ${(props) =>
+    props.size === "small" &&
+    `
+      div {
+        justify-content: center;
+      };
+    `}
 `;

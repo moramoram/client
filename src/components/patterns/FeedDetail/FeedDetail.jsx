@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { Avatar } from "@/components";
+import { useMediaQuery } from "react-responsive";
+import { Avatar, Dropdown } from "@/components";
 import { Icon } from "@/foundations";
-import { colors, fontSize, fontWeight } from "@/_shared";
+import {
+  colors,
+  fontSize,
+  fontWeight,
+  animations,
+  lineHeight,
+} from "@/_shared";
 
 import { daysFromToday, numToMillion } from "@/utils";
 
@@ -28,38 +35,62 @@ const FeedDetail = ({
   ...props
 }) => {
   const usernameRender = username ?? "User";
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const isDefault = useMediaQuery({
+    query: "(min-width:530px)",
+  });
 
   return (
     <Layout>
-      <Title {...props}>{title}</Title>
-      <Header {...props}>
-        <FlexBox>
-          <Avatar size="large" username={username} src={avatar} {...props} />
-          <InfoBox>
-            <UserBox>
-              <User {...props}>{usernameRender}</User>
-              <UserDetail>
-                ({ordinal}/{campus})
-              </UserDetail>
-            </UserBox>
-            <CreatedAt>{created}</CreatedAt>
-          </InfoBox>
-        </FlexBox>
-        <FlexBox>
-          <IconBox>
-            <Icon icon="thumbsUp" />
-            <CountNums>{likecount}</CountNums>
-          </IconBox>
-          <IconBox>
-            <Icon icon="messageCircle" />
-            <CountNums>{commentcount}</CountNums>
-          </IconBox>
-          <IconBox>
-            <Icon icon="eye" />
-            <CountNums>{viewcount}</CountNums>
-          </IconBox>
-        </FlexBox>
+      <Header>
+        <TitleBox>
+          <Category>자유게시판</Category>
+          <Title {...props}>{title}</Title>
+        </TitleBox>
+        <DropdownBox>
+          <Icon
+            icon="moreVertical"
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          />
+          {isDropdownOpen && (
+            <Dropdown
+              // TODO : 게시글 수정 및 삭제 로직
+              items={[
+                {
+                  name: "edit",
+                  title: "수정",
+                  url: "#",
+                },
+                {
+                  name: "delete",
+                  title: "삭제",
+                  url: "#",
+                },
+              ]}
+              size="small"
+              {...props}
+            />
+          )}
+        </DropdownBox>
       </Header>
+      <AvatarBox {...props}>
+        <Avatar
+          size={isDefault ? "large" : "medium"}
+          username={username}
+          src={avatar}
+          {...props}
+        />
+        <InfoBox>
+          <UserBox>
+            <User {...props}>{usernameRender}</User>
+            <UserDetail>
+              ({ordinal}/{campus})
+            </UserDetail>
+          </UserBox>
+          <CreatedAt>{created}</CreatedAt>
+        </InfoBox>
+      </AvatarBox>
       <Content {...props}>{content}</Content>
     </Layout>
   );
@@ -115,17 +146,60 @@ const Layout = styled.div`
   flex-direction: column;
   gap: 2rem;
   width: 100%;
-  padding-top: 80px;
-`;
-
-const FlexBox = styled.div`
-  display: flex;
-  gap: 2rem;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
+
+  svg {
+    cursor: pointer;
+  }
+`;
+
+const TitleBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  @media screen and (max-width: 530px) {
+    gap: 0.5rem;
+  }
+`;
+
+const Category = styled.div`
+  color: ${colors.blue100};
+  font-weight: ${fontWeight.bold};
+`;
+
+const Title = styled.div`
+  color: ${(props) => titleColor[props.theme]};
+  font-weight: ${fontWeight.bold};
+  font-size: ${fontSize.h2};
+  line-height: ${lineHeight.h2};
+
+  @media screen and (max-width: 530px) {
+    font-size: ${fontSize.h3};
+  }
+`;
+
+const DropdownBox = styled.div`
+  position: relative;
+
+  svg {
+    stroke: ${colors.gray500};
+  }
+
+  > div {
+    z-index: 9999;
+    right: 0px;
+    animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
+  }
+`;
+
+const AvatarBox = styled.div`
+  display: flex;
   gap: 1rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid ${(props) => borderColor[props.theme]};
@@ -171,29 +245,15 @@ const CreatedAt = styled.div`
   }
 `;
 
-const Title = styled.div`
-  color: ${(props) => titleColor[props.theme]};
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h2};
-`;
-
 const Content = styled.div`
-  padding: 1rem 0 3rem 0;
+  padding: 1rem 0 1rem 0;
 
   color: ${(props) => contentColor[props.theme]};
   font-weight: ${fontWeight.regular};
   font-size: ${fontSize.p};
   line-height: 1.5rem;
-`;
 
-const IconBox = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-
-  color: ${colors.gray500};
-`;
-
-const CountNums = styled.div`
-  font-size: ${fontSize.sm};
+  @media screen and (max-width: 530px) {
+    font-size: ${fontSize.sm};
+  }
 `;

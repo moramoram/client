@@ -9,27 +9,29 @@ const THEME = {
   DARK: "dark",
 };
 
-const CommunityIntro = ({ ...props }) => {
+const StudyCreateIntro = ({ ...props }) => {
   return (
     <>
       <Layout {...props}>
-        <Title {...props}>커뮤니티</Title>
-        <SubTitle {...props}>싸피인들끼리 자유롭게 소통하세요</SubTitle>
+        <Title {...props}>스터디 모집</Title>
+        <SubTitle {...props}>
+          스터디를 직접 개설하고 동료들을 모아보세요
+        </SubTitle>
       </Layout>
     </>
   );
 };
 
-CommunityIntro.propTypes = {
+StudyCreateIntro.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   data: PropTypes.arrayOf(Object),
 };
 
-CommunityIntro.defaultProps = {
+StudyCreateIntro.defaultProps = {
   theme: THEME.LIGHT,
 };
 
-export default CommunityIntro;
+export default StudyCreateIntro;
 
 const bgColor = {
   light: colors.gray25,
@@ -37,7 +39,7 @@ const bgColor = {
 };
 
 const titleColor = {
-  light: colors.gray900,
+  light: colors.gray800,
   dark: colors.gray25,
 };
 

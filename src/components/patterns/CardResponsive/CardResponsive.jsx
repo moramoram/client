@@ -148,13 +148,18 @@ const Highlight = styled.div`
 `;
 
 const Title = styled.div`
+  width: 100%;
   min-width: 240px;
   min-height: ${lineHeight.h4};
+  overflow: hidden;
 
   font-size: ${fontSize.h4};
   font-weight: ${fontWeight.bold};
   line-height: ${lineHeight.h4};
   color: ${(props) => titleColor[props.theme]};
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const Subtitle = styled.div`

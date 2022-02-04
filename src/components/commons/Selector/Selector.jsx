@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import Select from "react-select";
+import Creatable from "react-select/creatable";
 
 import { colors, fontSize, fontWeight, shadows } from "@/_shared";
 
@@ -20,12 +21,22 @@ const Selector = ({ title, options, placeholder, message, ...props }) => {
   return (
     <Layout>
       <Label {...props}>{title}</Label>
-      <Select
-        styles={customStyles(props)}
-        options={options}
-        placeholder={placeholder}
-        {...props}
-      />
+      {props.creatable ? (
+        <Creatable
+          styles={customStyles(props)}
+          options={options}
+          placeholder={placeholder}
+          {...props}
+        />
+      ) : (
+        <Select
+          styles={customStyles(props)}
+          options={options}
+          placeholder={placeholder}
+          {...props}
+        />
+      )}
+
       <Message {...props}>{message}</Message>
     </Layout>
   );

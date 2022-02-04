@@ -23,9 +23,9 @@ const Dropdown = ({ user, items, ...props }) => {
         <UserName>{authState.nickname ?? "User"}</UserName>님 안녕하세요!
       </UserInfo>
       {items.map((item) => (
-        <MenuBox {...props}>
+        <MenuBox key={item.name} {...props}>
           <DropdownItemLink to={item?.url} {...props}>
-            <DropdownItem children={item.title} key={item.name} {...props} />
+            <DropdownItem children={item.title} {...props} />
           </DropdownItemLink>
         </MenuBox>
       ))}

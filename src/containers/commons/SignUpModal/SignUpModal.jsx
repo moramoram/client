@@ -28,6 +28,10 @@ const SignUpModal = ({ children, ...props }) => {
     };
   }, [isModalOpened, handleClose]);
 
+  const OnLogin = (type) => {
+    console.log(type);
+  };
+
   return (
     <>
       <Overlay />
@@ -41,12 +45,12 @@ const SignUpModal = ({ children, ...props }) => {
               {children}
             </Title>
             <ButtonBox>
-              <Button className="google">
+              <Button className="google" onClick={OnLogin("google")}>
                 <IconSocial icon="google" />
                 <Typography type="button">Google 계정으로 로그인</Typography>
               </Button>
               <Button className="github">
-                <IconSocial icon="github" />
+                <IconSocial icon="github" onClick={OnLogin("github")} />
                 <Typography type="button">Github 계정으로 로그인</Typography>
               </Button>
             </ButtonBox>

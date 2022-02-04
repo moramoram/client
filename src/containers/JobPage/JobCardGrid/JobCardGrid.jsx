@@ -6,6 +6,7 @@ import { useIntersectionObserver } from "@/hooks";
 import {
   GetDummyApi,
   // GetInfiniteQuery,
+  JobCardSelector,
 } from "@/queries";
 import { CardGrid } from "@/containers";
 
@@ -22,6 +23,7 @@ const JobCardGrid = () => {
       console.log(data.name);
     }
   };
+  const { cardData } = JobCardSelector(mockdata);
 
   useIntersectionObserver({
     target: loader,
@@ -39,13 +41,18 @@ const JobCardGrid = () => {
 
 export default JobCardGrid;
 
-const cardData = new Array(24).fill({
-  contents: {
-    title: "주니어 프론트엔드 채용",
-    subtitle: "싸페 디자인 시스템",
-    highlight: "D-day",
-    src: "",
+const mockdata = new Array(24).fill({
+  recruitId: 1,
+  company: {
+    companyId: 1,
+    companyName: "네이버",
+    logoImg: "naver.png",
   },
-  badges: ["JavaScript", "React", "Vue.js"],
-  id: "/job/1",
+  title: "카카오 모집",
+  job: "프론트엔드개발",
+  techStack: "React.js,Vue.js,Angular.js",
+  openDate: "2022-01-23T05:00:00",
+  closeDate: "2022-02-04T22:00:00",
+  scrapStatus: false,
+  sbenefit: false,
 });

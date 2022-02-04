@@ -6,7 +6,7 @@ import { useIntersectionObserver } from "@/hooks";
 import {
   GetDummyApi,
   // GetInfiniteQuery,
-  convertToStudyCard,
+  StudyCardSelector,
 } from "@/queries";
 
 import { CardGrid } from "@/containers";
@@ -27,7 +27,7 @@ const StudyCardGrid = () => {
     }
   };
 
-  const { cardData } = convertToStudyCard(mockdata);
+  const { cardData } = StudyCardSelector(mockdata);
 
   useIntersectionObserver({
     target: loader,

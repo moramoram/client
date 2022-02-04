@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/utils";
+import { axiosInstance, daysLeftFromToday } from "@/utils";
 import { useInfiniteQuery } from "react-query";
 
 const fetchPage = async (type, pageParam) => {
@@ -24,24 +24,26 @@ export const GetInfiniteQuery = () =>
     }
   );
 
-export const convertToJobCard = (data) => {
+export const JobCardSelector = (data) => {
   const cardData = data.map((card) => {
+    const dday = daysLeftFromToday(card.closeDate);
     return {
       contents: {
         title: card.title,
-        subtitle: "싸페 디자인 시스템",
-        highlight: "D-day",
-        src: "",
+        subtitle: card.company.companyName,
+        highlight: dday ? dday : "모집마감",
+        src: card.company.logoImg,
       },
-      badges: ["JavaScript", "React", "Vue.js"],
-      id: "/study/1",
+      badges: card.techStack.split(","),
+      id: `/job/${card.studyId}`,
+      isDisabled: false,
     };
   });
 
   return { cardData };
 };
 
-export const convertToStudyCard = (data) => {
+export const StudyCardSelector = (data) => {
   const cardData = data.map((card) => {
     return {
       contents: {

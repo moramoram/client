@@ -5,7 +5,13 @@ import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import { Avatar, Dropdown } from "@/components";
 import { Icon } from "@/foundations";
-import { colors, fontSize, fontWeight, animations } from "@/_shared";
+import {
+  colors,
+  fontSize,
+  fontWeight,
+  animations,
+  lineHeight,
+} from "@/_shared";
 
 import { daysFromToday, numToMillion } from "@/utils";
 
@@ -37,11 +43,11 @@ const FeedDetail = ({
 
   return (
     <Layout>
-      <TitleBox>
-        <InfoBox>
+      <Header>
+        <TitleBox>
           <Category>자유게시판</Category>
           <Title {...props}>{title}</Title>
-        </InfoBox>
+        </TitleBox>
         <DropdownBox>
           <Icon
             icon="moreVertical"
@@ -67,8 +73,8 @@ const FeedDetail = ({
             />
           )}
         </DropdownBox>
-      </TitleBox>
-      <Header {...props}>
+      </Header>
+      <AvatarBox {...props}>
         <Avatar
           size={isDefault ? "large" : "medium"}
           username={username}
@@ -84,7 +90,7 @@ const FeedDetail = ({
           </UserBox>
           <CreatedAt>{created}</CreatedAt>
         </InfoBox>
-      </Header>
+      </AvatarBox>
       <Content {...props}>{content}</Content>
     </Layout>
   );
@@ -142,7 +148,7 @@ const Layout = styled.div`
   width: 100%;
 `;
 
-const TitleBox = styled.div`
+const Header = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -152,10 +158,10 @@ const TitleBox = styled.div`
   }
 `;
 
-const InfoBox = styled.div`
+const TitleBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.8rem;
 
   @media screen and (max-width: 530px) {
     gap: 0.5rem;
@@ -171,6 +177,7 @@ const Title = styled.div`
   color: ${(props) => titleColor[props.theme]};
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h2};
+  line-height: ${lineHeight.h2};
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.h3};
@@ -191,11 +198,17 @@ const DropdownBox = styled.div`
   }
 `;
 
-const Header = styled.div`
+const AvatarBox = styled.div`
   display: flex;
   gap: 1rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid ${(props) => borderColor[props.theme]};
+`;
+
+const InfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 `;
 
 const UserBox = styled.div`

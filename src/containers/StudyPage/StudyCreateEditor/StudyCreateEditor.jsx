@@ -9,7 +9,7 @@ import "highlight.js/styles/base16/decaf.css";
 
 import { useMediaQuery } from "react-responsive";
 
-import { colors, fontSize } from "@/_shared";
+import { colors } from "@/_shared";
 
 const StudyCreateEditor = (props) => {
   Quill.register("modules/markdownShortcuts", MarkdownShortcuts);
@@ -98,11 +98,6 @@ const textColor = {
   dark: colors.gray200,
 };
 
-const hoverColor = {
-  default: colors.blueOpacity200,
-  error: colors.errorOpacity200,
-};
-
 const Layout = styled.div`
   border-radius: 8px;
 
@@ -162,10 +157,8 @@ const Layout = styled.div`
 
     width: 100%;
     padding: 1rem 1rem 1rem 1.5rem;
-
     border: none;
     border-radius: 12px 12px 0 0;
-    /* border-bottom: 1px solid ${(props) => borderColor[props.theme]}; */
 
     font-family: Pretendard;
 
@@ -308,23 +301,5 @@ const Layout = styled.div`
   .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
   .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
     stroke: ${colors.blue100} !important;
-  }
-`;
-
-const Title = styled.input`
-  padding: 1rem;
-  border: none;
-  border-bottom: 1px solid ${(props) => borderColor[props.theme]};
-  background-color: ${(props) => bgColor[props.theme]};
-
-  color: ${(props) => textColor[props.theme]};
-  font-size: ${fontSize.h2};
-
-  :focus {
-    outline: none;
-  }
-
-  ::placeholder {
-    color: ${colors.gray500};
   }
 `;

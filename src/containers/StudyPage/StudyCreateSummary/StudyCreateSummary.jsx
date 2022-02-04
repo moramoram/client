@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { Input, Selector, Button, ImageUploader } from "@/components";
+import { Input, Selector, ImageUploader } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const THEME = {

@@ -63,6 +63,7 @@ const FeedDetail = ({
                 },
               ]}
               size="small"
+              {...props}
             />
           )}
         </DropdownBox>
@@ -154,7 +155,11 @@ const TitleBox = styled.div`
 const InfoBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 1rem;
+
+  @media screen and (max-width: 530px) {
+    gap: 0.5rem;
+  }
 `;
 
 const Category = styled.div`

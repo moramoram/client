@@ -1,4 +1,7 @@
 import axios from "axios";
+import { useMutation } from "react-query";
+
+export const PostComment = () => useMutation("postComment", postComment);
 
 export const postComment = async () => {
   console.log("post comment");

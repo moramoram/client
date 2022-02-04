@@ -17,44 +17,41 @@ import {
 import { Icon } from "@/foundations";
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 
-import { useQuery, useMutation, useQueryClient } from "react-query";
-import { fetchData, convertToStudyDetail, postComment } from "@/hooks";
+import { useMutation, useQueryClient } from "react-query";
+import { useGetStudyDetail, convertToStudyDetail, postComment } from "@/hooks";
 
 const THEME = {
   LIGHT: "light",
   DARK: "dark",
 };
 
-const StudyDetailMobile = ({ isLoading, data, badges, ...props }) => {
+const StudyDetailMobile = ({ data, badges, ...props }) => {
   const [isMarked, setIsMarked] = useState(false);
   const queryClient = useQueryClient();
-  const { aaa } = useQuery("fetchData", fetchData);
-  const mutation = useMutation("postComment", postComment);
+  const { dd } = useGetStudyDetail();
   const { titleData, commentData, contentData, tocItem } =
     convertToStudyDetail(mockdata);
 
+  const mutation = useMutation("postComment", postComment);
   const onPostComment = (comment) => {
     mutation.mutate(comment.value, {
       onSuccess: () => {
-        queryClient.invalidateQueries("fetchData");
+        queryClient.invalidateQueries("getStudyDetail");
       },
     });
   };
+
   return (
     <>
       <Layout>
-        <ImageBoxResponsive
-          className="thumbnail"
-          isLoading={isLoading}
-          {...props}
-        />
+        <ImageBoxResponsive className="thumbnail" {...props} />
 
         <TitleBox {...props}>
-          <Highlight {...props}>{titleData.highlight}</Highlight>
-          <Title {...props}>{titleData.title}</Title>
+          <Highlight {...props}>{titleData?.highlight}</Highlight>
+          <Title {...props}>{titleData?.title}</Title>
           <SubTitle {...props}>
-            <Avatar size="medium" src={titleData.src} {...props} />
-            {titleData.subtitle}
+            <Avatar size="medium" src={titleData?.src} {...props} />
+            {titleData?.subtitle}
           </SubTitle>
           <SideBarBox>
             {summaryData.map(({ title, icon, id }) => (
@@ -62,7 +59,6 @@ const StudyDetailMobile = ({ isLoading, data, badges, ...props }) => {
                 className="contents-item"
                 title={title}
                 icon={icon}
-                isLoading={isLoading}
                 description={data[id]}
                 key={id}
                 {...props}
@@ -75,7 +71,6 @@ const StudyDetailMobile = ({ isLoading, data, badges, ...props }) => {
                 <Badge
                   className="badge-item"
                   key={idx}
-                  isLoading={isLoading}
                   mode="secondary"
                   color="gray100"
                   isBold
@@ -102,7 +97,6 @@ const StudyDetailMobile = ({ isLoading, data, badges, ...props }) => {
         <ButtonBg {...props} />
         <ButtonBox {...props}>
           <Button
-            isLoading={isLoading}
             mode={isMarked ? "active" : "secondary"}
             minWidth="380px"
             onClick={() => setIsMarked(!isMarked)}

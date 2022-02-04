@@ -1,4 +1,10 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useCallback,
+  Suspense,
+} from "react";
 import styled from "styled-components";
 
 import { useMediaQuery } from "react-responsive";
@@ -8,6 +14,9 @@ import { themeState, navTypeState } from "@/recoil/theme";
 
 import { SubNavbar, Input, Selector } from "@/components";
 import { CardGrid, StudyIntro, StudyCardGrid } from "@/containers";
+
+import { useQuery } from "react-query";
+import axios from "axios";
 
 const StudyPage = () => {
   const theme = useRecoilValue(themeState);

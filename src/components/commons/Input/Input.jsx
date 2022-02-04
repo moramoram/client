@@ -21,7 +21,11 @@ const Input = ({ title, placeholder, message, status, icon, ...props }) => {
       <Label {...props}>{title}</Label>
       <InputBox status={status} {...props}>
         {icon && <Icon icon={icon} />}
-        <InputText placeholder={placeholder} {...props} />
+        <InputText
+          placeholder={placeholder}
+          type={props.number ? "number" : "text"}
+          {...props}
+        />
       </InputBox>
       <Message status={status}>{message}</Message>
     </Layout>

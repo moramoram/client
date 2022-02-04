@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { useMediaQuery } from "react-responsive";
-
 import { Avatar } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
@@ -14,10 +12,6 @@ const THEME = {
 
 // TODO : 프로필 정보 상태관리
 const MyPageIntro = ({ authState, ...props }) => {
-  const isPc = useMediaQuery({
-    query: "(min-width:980px)",
-  });
-
   return (
     <>
       <Layout {...props}>

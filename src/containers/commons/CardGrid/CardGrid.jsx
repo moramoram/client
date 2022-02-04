@@ -24,7 +24,7 @@ const CardGrid = ({ data, theme, isLoading, ...props }) => {
   );
 };
 
-CardResponsive.defaultProps = {
+CardGrid.defaultProps = {
   theme: THEME.LIGHT,
 };
 

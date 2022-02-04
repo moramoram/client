@@ -33,10 +33,13 @@ const StudyDetailMobile = ({ data, badges, ...props }) => {
     convertToStudyDetail(mockdata);
 
   const mutation = useMutation("postComment", postComment);
+
   const onPostComment = (comment) => {
+    setIsMarked(!isMarked);
     mutation.mutate(comment.value, {
       onSuccess: () => {
         queryClient.invalidateQueries("getStudyDetail");
+        console.log(dd);
       },
     });
   };
@@ -99,7 +102,7 @@ const StudyDetailMobile = ({ data, badges, ...props }) => {
           <Button
             mode={isMarked ? "active" : "secondary"}
             minWidth="380px"
-            onClick={() => setIsMarked(!isMarked)}
+            onClick={onPostComment}
             {...props}
           >
             {isMarked ? (

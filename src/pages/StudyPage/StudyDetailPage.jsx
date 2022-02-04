@@ -7,8 +7,7 @@ import { themeState } from "@/recoil/theme";
 
 import { useMediaQuery } from "react-responsive";
 
-import { StudyDetail, StudyDetailMobile, StudySideBar } from "@/containers";
-import { daysFromToday } from "@/utils";
+import { StudyDetail, StudyDetailMobile } from "@/containers";
 
 const StudyDetailPage = () => {
   const theme = useRecoilValue(themeState);

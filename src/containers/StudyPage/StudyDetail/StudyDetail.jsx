@@ -24,6 +24,7 @@ const StudyDetail = ({ ...props }) => {
     mutation.mutate(comment.value, {
       onSuccess: () => {
         queryClient.invalidateQueries("getStudyDetail");
+        console.log(data.name);
       },
     });
   };

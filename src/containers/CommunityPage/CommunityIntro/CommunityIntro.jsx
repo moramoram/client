@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { Button } from "@/components";
 import { colors, fontSize, fontWeight } from "@/_shared";
 
 const THEME = {
@@ -15,6 +16,7 @@ const CommunityIntro = ({ ...props }) => {
       <Layout {...props}>
         <Title {...props}>커뮤니티</Title>
         <SubTitle {...props}>싸피인들끼리 자유롭게 소통하세요</SubTitle>
+        <Button onClick={props.onButtonClick}>게시글 작성하기</Button>
       </Layout>
     </>
   );
@@ -51,7 +53,6 @@ const Layout = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
 
   width: 100%;
   height: 400px;
@@ -68,4 +69,5 @@ const Title = styled.div`
 const SubTitle = styled.div`
   font-size: ${fontSize.p};
   color: ${(props) => subtitleColor[props.theme]};
+  padding: 1rem 0 2rem 0;
 `;

@@ -9,7 +9,7 @@ import { isLoginState } from "@/recoil/auth";
 import { modalState, createModalState, loginModalState } from "@/recoil/modal";
 import { navMenuData, navUserData } from "@/recoil/menu";
 
-import { Modal } from "@/components";
+import { Modal, ScrollTopButton } from "@/components";
 import { Navbar, SignUpModal, CommunityCreate } from "@/containers";
 import { colors } from "@/_shared";
 
@@ -47,6 +47,12 @@ const Layout = () => {
         isLogin={isLogined}
       />
       <Outlet />
+      <ScrollTopBox>
+        <ScrollTopButton
+          theme={theme}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        />
+      </ScrollTopBox>
     </LayoutBox>
   );
 };
@@ -65,4 +71,10 @@ const LayoutBox = styled.div`
 
 const Nav = styled(Navbar)`
   z-index: 999;
+`;
+
+const ScrollTopBox = styled.div`
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
 `;

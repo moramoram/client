@@ -10,7 +10,7 @@ const THEME = {
   LIGHT: "light",
 };
 
-const CommentInput = ({ theme, ...props }) => {
+const CommentInput = ({ theme, onClick, ...props }) => {
   // 텍스트 입력 시 글자수 카운트 및 버튼 활성화
   const [comment, setComment] = useState({
     value: "",
@@ -21,6 +21,13 @@ const CommentInput = ({ theme, ...props }) => {
     setComment({
       value: e.target.value,
       count: e.target.value.length,
+    });
+  };
+  const handleClick = () => {
+    onClick(comment);
+    setComment({
+      value: "",
+      count: 0,
     });
   };
 
@@ -51,6 +58,7 @@ const CommentInput = ({ theme, ...props }) => {
           <Button
             disabled={!comment.value ? true : false}
             theme={theme}
+            onClick={handleClick}
             {...props}
           >
             등록
@@ -65,6 +73,7 @@ export default CommentInput;
 
 CommentInput.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
+  onClick: PropTypes.func,
 };
 
 CommentInput.defaultProps = {

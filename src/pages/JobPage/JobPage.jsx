@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -7,7 +7,7 @@ import { themeState, navTypeState } from "@/recoil/theme";
 import { useMediaQuery } from "react-responsive";
 
 import { SubNavbar, Input, Selector } from "@/components";
-import { CardGrid, JobIntro } from "@/containers";
+import { CardGrid, JobIntro, JobCardGrid } from "@/containers";
 
 const JobsPage = () => {
   const theme = useRecoilValue(themeState);
@@ -67,7 +67,9 @@ const JobsPage = () => {
                 ]}
               />
             </InputBox>
-            <CardGrid data={cardData} theme={theme} />
+            <Suspense fallback={<CardGrid theme={theme} isLoading />}>
+              <JobCardGrid theme={theme} />
+            </Suspense>
           </CardGridBox>
         </ContentBox>
       )}
@@ -82,9 +84,11 @@ const JobsPage = () => {
           <SearchBox>
             <Input icon="search" placeholder="공고 검색하기" theme={theme} />
           </SearchBox>
-          <ContentBox>
-            <CardGrid data={cardData} theme={theme} />
-          </ContentBox>
+          <MobileCardBox>
+            <Suspense fallback={<CardGrid theme={theme} isLoading />}>
+              <JobCardGrid theme={theme} />
+            </Suspense>
+          </MobileCardBox>
         </>
       )}
     </>
@@ -116,17 +120,6 @@ const categoryData = [
   },
 ];
 
-const cardData = new Array(24).fill({
-  contents: {
-    title: "주니어 프론트엔드 채용",
-    subtitle: "싸페 디자인 시스템",
-    highlight: "D-day",
-    src: "",
-  },
-  badges: ["JavaScript", "React", "Vue.js"],
-  id: "/job/1",
-});
-
 const ContentBox = styled.div`
   display: flex;
   justify-content: center;
@@ -153,6 +146,17 @@ const SubNavMobile = styled(SubNavbar)`
 const CardGridBox = styled.div`
   width: calc(100% - 320px);
   padding-top: 80px;
+`;
+
+const MobileCardBox = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 100px;
+  max-width: 1280px;
+
+  padding: 20px;
+  margin: auto;
 `;
 
 const InputBox = styled.div`

@@ -12,7 +12,6 @@ const TYPE = {
 
 export const getTheme = () => {
   const theme = localStorage.getItem("theme");
-
   if (theme === THEME.DARK) {
     return THEME.DARK;
   }

@@ -127,6 +127,7 @@ const InputBox = styled.div`
 
   button {
     margin: 6px 0;
+    flex-shrink: 0;
   }
 
   div {

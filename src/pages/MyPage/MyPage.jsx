@@ -6,7 +6,6 @@ import { useMediaQuery } from "react-responsive";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 import { auth } from "@/recoil/auth";
-import { colors } from "@/_shared";
 
 import {
   Authorization,
@@ -31,6 +30,7 @@ const MyPage = () => {
   const isPc = useMediaQuery({
     query: "(min-width:980px)",
   });
+
   const isMobile = useMediaQuery({
     query: "(max-width:979px)",
   });

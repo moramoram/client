@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { CardSlider } from "@/containers";
 
-const JobSlider = ({ ...props }) => {
+const MainJobSlider = ({ ...props }) => {
   return (
     <Layout>
       <CardSlider data={cardData} {...props} />
@@ -11,7 +11,7 @@ const JobSlider = ({ ...props }) => {
   );
 };
 
-export default JobSlider;
+export default MainJobSlider;
 
 const cardData = new Array(20).fill({
   contents: {

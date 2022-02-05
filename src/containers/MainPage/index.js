@@ -1,2 +1,2 @@
-export { default as JobSlider } from "./JobSlider";
-export { default as StudySlider } from "./StudySlider";
+export { default as MainJobSlider } from "./MainJobSlider";
+export { default as MainStudySilder } from "./MainStudySilder";

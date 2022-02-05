@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
-import { JobSlider, StudySlider } from "@/containers";
+import { MainJobSlider, MainStudySilder } from "@/containers";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const MainPage = () => {
@@ -17,14 +17,14 @@ const MainPage = () => {
           <Title theme={theme}>새로 올라온 공고</Title>
           {/* <SubTitle theme={theme}>채용 공고를 빠르게 만나보세요</SubTitle> */}
         </TitleBox>
-        <JobSlider theme={theme} />
+        <MainJobSlider theme={theme} />
       </ContentBox>
       <ContentBox>
         <TitleBox>
           <Title theme={theme}>새로 올라온 스터디</Title>
           {/* <SubTitle theme={theme}>채용 공고를 빠르게 만나보세요</SubTitle> */}
         </TitleBox>
-        <StudySlider theme={theme} />
+        <MainStudySilder theme={theme} />
       </ContentBox>
     </Layout>
   );

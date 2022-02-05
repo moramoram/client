@@ -1,12 +1,12 @@
 import React from "react";
-import FeedSmallGrid from ".";
+import FeedSmallSlider from ".";
 
 export default {
-  title: "containers/FeedSmallGrid",
-  component: FeedSmallGrid,
+  title: "containers/FeedSmallSlider",
+  component: FeedSmallSlider,
 };
 
-export const Default = (args) => <FeedSmallGrid {...args} />;
+export const Default = (args) => <FeedSmallSlider {...args} />;
 
 Default.args = {
   data: [

@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import "swiper/css";
 
-import { CardResponsive } from "@/components";
+import { FeedItemSmall } from "@/components";
 import { Icon } from "@/foundations";
 import { colors } from "@/_shared";
 
@@ -17,8 +17,12 @@ const THEME = {
   DARK: "dark",
 };
 
-const CardSlider = ({ data, isLoading, theme, ...props }) => {
-  const items = isLoading ? cardData : data;
+const FeedSmallSlider = ({ data, isLoading, theme, ...props }) => {
+  const feedData = isLoading
+    ? new Array(3).fill({
+        boardId: 1,
+      })
+    : data;
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
@@ -40,7 +44,7 @@ const CardSlider = ({ data, isLoading, theme, ...props }) => {
   };
 
   return (
-    <Layout>
+    <Layout {...props}>
       <Button ref={prevRef} theme={theme}>
         <Icon icon="chevronLeft" />
       </Button>
@@ -48,43 +52,39 @@ const CardSlider = ({ data, isLoading, theme, ...props }) => {
         <Icon icon="chevronRight" />
       </Button>
       <Swiper {...swiperParams}>
-        {items.map(({ id, ...props }) => (
-          <SwiperSlide key={id}>
-            <CardItemLink to={id}>
-              <CardResponsive
-                {...cardData}
-                isLoading={isLoading}
-                theme={theme}
-                {...props}
-              />
-            </CardItemLink>
-          </SwiperSlide>
-        ))}
+        {feedData.map(({ boardId, ...data }) => {
+          const colorIdx = boardId % 17;
+
+          return (
+            <SwiperSlide key={boardId}>
+              <FeedItemLink to={boardId} key={boardId}>
+                <FeedItemSmall
+                  isLoading={isLoading}
+                  colorIdx={colorIdx}
+                  theme={theme}
+                  {...data}
+                  {...props}
+                />
+              </FeedItemLink>
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </Layout>
   );
 };
 
-CardSlider.propTypes = {
+FeedSmallSlider.propTypes = {
+  data: PropTypes.arrayOf(Object),
   theme: PropTypes.oneOf(Object.values(THEME)),
+  isLoading: PropTypes.bool,
 };
 
-CardSlider.defaultProps = {
+FeedSmallSlider.defaultProps = {
   theme: THEME.LIGHT,
 };
 
-export default CardSlider;
-
-const cardData = new Array(6).fill({
-  contents: {
-    title: "",
-    subtitle: "",
-    highlight: "",
-    src: "",
-  },
-  badges: ["", "", ""],
-  id: "",
-});
+export default FeedSmallSlider;
 
 const buttonHoverColor = {
   light: colors.gray25,
@@ -99,6 +99,7 @@ const buttonIconColor = {
 const Layout = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
 
   .swiper {
     max-width: 960px;
@@ -114,13 +115,13 @@ const Layout = styled.div`
   }
 `;
 
-const CardItemLink = styled(Link)`
+const FeedItemLink = styled(Link)`
   text-decoration: none;
+  width: 100%;
 `;
 
 const Button = styled.button`
   height: 36px;
-  margin-top: 57px;
   border: none;
   border-radius: 4px;
 

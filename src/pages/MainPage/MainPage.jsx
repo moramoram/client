@@ -4,7 +4,12 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
-import { MainJobSlider, MainStudySilder, MainIntroSlider } from "@/containers";
+import {
+  MainIntroSlider,
+  MainJobSlider,
+  MainStudySilder,
+  MainCommunitySlider,
+} from "@/containers";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const MainPage = () => {
@@ -25,6 +30,12 @@ const MainPage = () => {
         </TitleBox>
         <MainStudySilder theme={theme} />
       </ContentBox>
+      <ContentBox>
+        <TitleBox>
+          <Title theme={theme}>커뮤니티 인기글</Title>
+        </TitleBox>
+        <MainCommunitySlider theme={theme} />
+      </ContentBox>
     </Layout>
   );
 };
@@ -40,6 +51,8 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5rem;
+
+  padding-bottom: 10rem;
 `;
 
 const ContentBox = styled.div``;
@@ -47,7 +60,7 @@ const ContentBox = styled.div``;
 const TitleBox = styled.div`
   max-width: 940px;
   margin: auto;
-  padding: 20px;
+  padding: 20px 0;
 `;
 
 const Title = styled.div`

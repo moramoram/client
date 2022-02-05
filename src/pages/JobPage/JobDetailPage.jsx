@@ -7,7 +7,7 @@ import { themeState } from "@/recoil/theme";
 
 import { useMediaQuery } from "react-responsive";
 
-import { JobDetail, JobDetailMobile, JobSideBar } from "@/containers";
+import { JobDetail, JobDetailMobile } from "@/containers";
 import { daysFromToday } from "@/utils";
 
 const JobsDetailPage = () => {
@@ -35,7 +35,6 @@ const JobsDetailPage = () => {
             commentData={commentData}
             theme={theme}
           ></JobDetail>
-          <FixedSidebar {...sidbarargs} theme={theme} />
         </Layout>
       )}
       {isMobile && (
@@ -244,9 +243,4 @@ const Layout = styled.div`
   max-width: 1280px;
 
   margin: auto;
-`;
-
-const FixedSidebar = styled(JobSideBar)`
-  position: sticky;
-  top: 180px;
 `;

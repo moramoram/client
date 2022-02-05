@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { CardSmallGrid, CommentList } from "@/containers";
+import { CardSmallGrid, CommentList, JobSideBar } from "@/containers";
 import { Toc, CommentInput } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 
@@ -24,31 +24,34 @@ const JobDetail = ({
   ).length;
 
   return (
-    <Layout>
-      <TitleBox {...props}>
-        <Highlight {...props}>{titleData.highlight}</Highlight>
-        <Title {...props}>{titleData.title}</Title>
-        <SubTitle {...props}>{titleData.subtitle}</SubTitle>
-      </TitleBox>
-      <Toc items={tocItem} {...props} />
-      <Content {...props}>{contentData}</Content>
-      <CardBox>
-        <BoxTitle {...props}>스터디</BoxTitle>
-        <BoxDescription {...props}>
-          이 기업을 준비하는 {countAvailableStudy}
-          개의 스터디가 열려있어요
-        </BoxDescription>
-        <CardSmallGrid data={cardData} {...props} />
-      </CardBox>
-      <CommentBox>
-        <BoxTitle {...props}>댓글</BoxTitle>
-        <BoxDescription {...props}>
-          이 기업에 대해 의견을 나눠보세요
-        </BoxDescription>
-        <CommentInput {...props} />
-        <CommentList data={commentData} {...props} />
-      </CommentBox>
-    </Layout>
+    <>
+      <Layout>
+        <TitleBox {...props}>
+          <Highlight {...props}>{titleData.highlight}</Highlight>
+          <Title {...props}>{titleData.title}</Title>
+          <SubTitle {...props}>{titleData.subtitle}</SubTitle>
+        </TitleBox>
+        <Toc items={tocItem} {...props} />
+        <Content {...props}>{contentData}</Content>
+        <CardBox>
+          <BoxTitle {...props}>스터디</BoxTitle>
+          <BoxDescription {...props}>
+            이 기업을 준비하는 {countAvailableStudy}
+            개의 스터디가 열려있어요
+          </BoxDescription>
+          <CardSmallGrid data={cardData} {...props} />
+        </CardBox>
+        <div>
+          <BoxTitle {...props}>댓글</BoxTitle>
+          <BoxDescription {...props}>
+            이 기업에 대해 의견을 나눠보세요
+          </BoxDescription>
+          <CommentInput {...props} />
+          <CommentList data={commentData} {...props} />
+        </div>
+      </Layout>
+      <JobSideBar {...props} {...sidbarargs} />
+    </>
   );
 };
 
@@ -62,6 +65,17 @@ JobDetail.defaultProps = {
 };
 
 export default JobDetail;
+
+const sidbarargs = {
+  data: {
+    task: "프론트엔드",
+    type: "정규직",
+    career: "신입",
+    location: "서울 강남구",
+  },
+
+  badges: ["JavaScript", "TypeScript", "Vue.js", "React", "Redux", "Svelte"],
+};
 
 const titleColor = {
   light: colors.gray900,
@@ -165,5 +179,3 @@ const BoxDescription = styled.div`
   color: ${(props) => subtitleColor[props.theme]};
   font-size: ${fontSize.p};
 `;
-
-const CommentBox = styled.div``;

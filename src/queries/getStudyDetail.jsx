@@ -5,7 +5,7 @@ import { daysFromToday } from "@/utils";
 
 export const GetStudyDetail = () => useQuery(["getStudyDetail"], fetchData);
 
-export const fetchData = async () => {
+const fetchData = async () => {
   console.log("API");
   const res = await axios.get("http://swapi.dev/api/people/1/");
   return res.data;
@@ -33,6 +33,7 @@ export const convertToStudyDetail = (data) => {
       title: "공고",
       number: null,
     },
+
     {
       name: "comments",
       title: "댓글",

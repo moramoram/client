@@ -26,7 +26,7 @@ const Dropdown = ({ user, items, ...props }) => {
       )}
       <MenuBox {...props}>
         {items.map((item) => (
-          <DropdownItemLink to={item?.url} key={item.name} {...props}>
+          <DropdownItemLink to={item.url} key={item.name} {...props}>
             <DropdownItem children={item.title} {...props} />
           </DropdownItemLink>
         ))}

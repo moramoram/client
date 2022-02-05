@@ -21,7 +21,7 @@ const Avatar = ({ isLoading, username, src, size, ...props }) => {
     a11yProps["aria-label"] = "Loading avatar ...";
   } else if (src) {
     avatarFigure = <img src={src} alt={username} />;
-  } else if (username) {
+  } else if (username && username !== "익명") {
     a11yProps["aria-label"] = username;
     avatarFigure = (
       <Initial size={size} aria-hidden="true">

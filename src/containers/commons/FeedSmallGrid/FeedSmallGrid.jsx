@@ -21,7 +21,6 @@ const FeedSmallGrid = ({ data, isLoading, ...props }) => {
         return (
           <FeedItemLink to={boardId} key={boardId}>
             <FeedItemSmall
-              theme="light"
               isLoading={isLoading}
               colorIdx={colorIdx}
               {...data}

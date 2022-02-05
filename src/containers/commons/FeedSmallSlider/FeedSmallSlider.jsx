@@ -59,7 +59,6 @@ const FeedSmallSlider = ({ data, isLoading, theme, ...props }) => {
             <SwiperSlide key={boardId}>
               <FeedItemLink to={boardId} key={boardId}>
                 <FeedItemSmall
-                  theme="light"
                   isLoading={isLoading}
                   colorIdx={colorIdx}
                   theme={theme}
@@ -78,6 +77,7 @@ const FeedSmallSlider = ({ data, isLoading, theme, ...props }) => {
 FeedSmallSlider.propTypes = {
   data: PropTypes.arrayOf(Object),
   theme: PropTypes.oneOf(Object.values(THEME)),
+  isLoading: PropTypes.bool,
 };
 
 FeedSmallSlider.defaultProps = {

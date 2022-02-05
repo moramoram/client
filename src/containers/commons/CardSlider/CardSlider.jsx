@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -19,23 +19,35 @@ const THEME = {
 
 const CardSlider = ({ data, isLoading, theme, ...props }) => {
   const items = isLoading ? cardData : data;
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+
+  const swiperParams = {
+    onBeforeInit: (swiper) => {
+      swiper.params.navigation.prevEl = prevRef.current;
+      swiper.params.navigation.nextEl = nextRef.current;
+    },
+    spaceBetween: 20,
+    slidesPerView: "auto",
+    centeredSlides: true,
+    loop: true,
+    navigation: {
+      prevEl: prevRef.current,
+      nextEl: nextRef.current,
+    },
+
+    modules: [Navigation],
+  };
+
   return (
     <Layout>
-      <Button className="swiper-button-prev" theme={theme}>
+      <Button ref={prevRef} theme={theme}>
         <Icon icon="chevronLeft" />
       </Button>
-
-      <Swiper
-        spaceBetween={20}
-        slidesPerView={"auto"}
-        centeredSlides={true}
-        loop={true}
-        navigation={{
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        }}
-        modules={[Navigation]}
-      >
+      <Button ref={nextRef} theme={theme}>
+        <Icon icon="chevronRight" />
+      </Button>
+      <Swiper {...swiperParams}>
         {items.map(({ id, ...props }, idx) => (
           <SwiperSlide key={idx}>
             <CardItemLink to={id}>
@@ -49,9 +61,6 @@ const CardSlider = ({ data, isLoading, theme, ...props }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <Button className="swiper-button-next" theme={theme}>
-        <Icon icon="chevronRight" />
-      </Button>
     </Layout>
   );
 };
@@ -120,6 +129,10 @@ const Button = styled.button`
 
   :hover {
     background-color: ${(props) => buttonHoverColor[props.theme]};
+  }
+
+  :nth-child(2) {
+    order: 1;
   }
 
   svg {

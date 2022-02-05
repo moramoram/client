@@ -1,29 +1,56 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { Avatar } from "@/components";
-import { colors, fontSize, fontWeight } from "@/_shared";
+import { colors, fontSize, fontWeight, loadings } from "@/_shared";
 
 const THEME = {
   DARK: "dark",
   LIGHT: "light",
 };
 
-const FeedItemSmall = ({ username, avatar, title, category, ...props }) => {
-  const usernameRender = username || "User";
+const FeedItemSmall = ({
+  boardId,
+  writerInfo,
+  title,
+  category,
+  isLoading,
+  ...props
+}) => {
+  if (isLoading) {
+    boardId = 1;
+    writerInfo = {
+      nickname: "",
+      ordinal: "",
+      campus: "",
+      authCheck: 0,
+      avatar: "",
+    };
+    title = "";
+    category = "";
+  }
 
   return (
-    <Layout>
+    <Layout isLoading={isLoading} {...props}>
       <FlexBox>
         <ContentBox>
           <Category {...props}>{category}</Category>
           <Title {...props}>{title}</Title>
         </ContentBox>
         <Footer>
-          <Avatar size="small" username={username} src={avatar} {...props} />
+          <Avatar
+            size="small"
+            username={writerInfo.nickname}
+            src={writerInfo.avatar}
+          />
           <UserBox>
-            <User {...props}>{usernameRender}</User>
+            <User {...props}>{writerInfo.nickname}</User>
+            {writerInfo.ordinal && writerInfo.campus && (
+              <UserDetail>
+                ({writerInfo.ordinal}/{writerInfo.campus})
+              </UserDetail>
+            )}
           </UserBox>
         </Footer>
       </FlexBox>
@@ -33,19 +60,40 @@ const FeedItemSmall = ({ username, avatar, title, category, ...props }) => {
 
 FeedItemSmall.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
-  username: PropTypes.string,
-  avatar: PropTypes.string,
+  writerInfo: PropTypes.object,
   title: PropTypes.string,
   category: PropTypes.string,
+  isLoading: PropTypes.bool,
 };
 
 FeedItemSmall.defaultProps = {
   theme: THEME.LIGHT,
-  username: null,
-  avatar: null,
+  writerInfo: null,
+  title: "",
+  category: "",
 };
 
 export default FeedItemSmall;
+
+const bgColors = [
+  { dark: "#2B421288", light: "#E6F4D7" },
+  { dark: "#2B531488", light: "#E4FBCC" },
+  { dark: "#084C2E88", light: "#D3F8DF" },
+  { dark: "#134E4888", light: "#CCFBEF" },
+  { dark: "#164C6388", light: "#CFF9FE" },
+  { dark: "#0B4A6F88", light: "#E0F2FE" },
+  { dark: "#19418588", light: "#D1E9FF" },
+  { dark: "#00359E88", light: "#D1E0FF" },
+  { dark: "#2D328288", light: "#E0EAFF" },
+  { dark: "#491C9688", light: "#ECE9FE" },
+  { dark: "#3E1C9688", light: "#EBE9FE" },
+  { dark: "#6F187788", light: "#FBE8FF" },
+  { dark: "#85165188", light: "#FCE7F6" },
+  { dark: "#89123E88", light: "#FFE4E8" },
+  { dark: "#771A0D88", light: "#FFE6D5" },
+  { dark: "#77291788", light: "#FDEAD7" },
+  { dark: "#713B1288", light: "#FEF7C3" },
+];
 
 const titleColor = {
   dark: colors.gray25,
@@ -57,15 +105,12 @@ const Layout = styled.div`
   justify-content: space-between;
 
   height: 150px;
+  width: 300px;
   padding: 24px;
   border-radius: 12px;
 
-  background: rgba(239, 241, 251, 1);
-
-  @media screen and (max-width: 530px) {
-    height: 120px;
-    padding: 16px;
-  }
+  background: ${(props) => bgColors[props.colorIdx][props.theme]};
+  animation: ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const FlexBox = styled.div`
@@ -85,11 +130,7 @@ const Category = styled.div`
 
   color: ${colors.gray500};
   font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.p};
-
-  @media screen and (max-width: 530px) {
-    font-size: ${fontSize.sm};
-  }
+  font-size: ${fontSize.sm};
 `;
 
 const Title = styled.div`
@@ -103,12 +144,8 @@ const Title = styled.div`
   text-overflow: ellipsis;
 
   color: ${(props) => titleColor[props.theme]};
-  font-size: ${fontSize.lg};
+  font-size: ${fontSize.p};
   font-weight: ${fontWeight.bold};
-
-  @media screen and (max-width: 530px) {
-    font-size: ${fontSize.p};
-  }
 `;
 
 const Footer = styled.div`
@@ -126,8 +163,9 @@ const User = styled.div`
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.sm};
   color: ${(props) => titleColor[props.theme]};
+`;
 
-  @media screen and (max-width: 530px) {
-    font-size: ${fontSize.xs};
-  }
+const UserDetail = styled.div`
+  color: ${colors.gray500};
+  font-size: ${fontSize.sm};
 `;

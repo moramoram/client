@@ -15,26 +15,23 @@ const CommunityFeedGrid = () => {
   const theme = useRecoilValue(themeState);
   const loader = useRef(null);
   // const { data, fetchNextPage } = GetInfiniteQuery();
-
   const { data } = GetDummyApi();
+  const { feedData } = CommunityFeedSelector(mockdata);
 
   const onFetchNewData = () => {
     const token = localStorage.getItem("token");
-    if (token) {
-      console.log(data.name);
-    }
+    token ? console.log(data.name) : console.log("requirelogin");
   };
-  const { feedData } = CommunityFeedSelector(mockdata);
 
   useIntersectionObserver({
     target: loader,
     onIntersect: onFetchNewData,
-    enabled: false,
+    enabled: true,
   });
 
   return (
     <>
-      <FeedGrid data={feedData} theme={theme} />
+      <CommentFeedGrid data={feedData} theme={theme} />
       <div ref={loader} />
     </>
   );
@@ -113,3 +110,9 @@ const mockdata = [
     modifiedDate: "2022-01-27T21:50:27",
   },
 ];
+
+const CommentFeedGrid = styled(FeedGrid)`
+  > a {
+    min-width: 100%;
+  }
+`;

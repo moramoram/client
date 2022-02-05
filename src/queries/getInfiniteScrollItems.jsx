@@ -76,8 +76,7 @@ export const CommunityFeedSelector = (data) => {
       created: daysFromToday(card.createdDate),
       title: card.title,
       content: card.content,
-      thumbnail:
-        "https://w.namu.la/s/e8a1981b6f848717dc05daeff3db84ad42bf24bcd02671d9e743d22b4d1fd28ebf66def6a7c341e158e961c4b826db435d30d994056f5a4095b789d168f8254bc908459c951c9fc48b94b21f5588baed",
+      thumbnail: null,
       likecount: numToMillion(card.totalLike),
       commentcount: numToMillion(card.totalComment),
       viewcount: numToMillion(card.views),

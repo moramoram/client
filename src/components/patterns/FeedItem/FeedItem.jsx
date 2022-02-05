@@ -30,7 +30,7 @@ const FeedItem = ({
   ...props
 }) => {
   const usernameRender = username || "User";
-
+  const userDetail = ordinal && campus ? { ordinal } / { campus } : null;
   const isDefault = useMediaQuery({
     query: "(min-width:530px)",
   });
@@ -47,9 +47,7 @@ const FeedItem = ({
             <InfoBox>
               <UserBox>
                 <User {...props}>{usernameRender}</User>
-                <UserDetail>
-                  ({ordinal}/{campus})
-                </UserDetail>
+                <UserDetail>{userDetail}</UserDetail>
               </UserBox>
               <CreatedAt>{created}</CreatedAt>
             </InfoBox>

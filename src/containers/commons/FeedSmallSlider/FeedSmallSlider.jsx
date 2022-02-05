@@ -99,6 +99,7 @@ const buttonIconColor = {
 const Layout = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
 
   .swiper {
     max-width: 960px;
@@ -121,7 +122,6 @@ const FeedItemLink = styled(Link)`
 
 const Button = styled.button`
   height: 36px;
-  margin-top: 57px;
   border: none;
   border-radius: 4px;
 

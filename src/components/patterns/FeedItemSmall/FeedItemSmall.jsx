@@ -33,27 +33,25 @@ const FeedItemSmall = ({
 
   return (
     <Layout isLoading={isLoading} {...props}>
-      <FlexBox>
-        <ContentBox>
-          <Category {...props}>{category}</Category>
-          <Title {...props}>{title}</Title>
-        </ContentBox>
-        <Footer>
-          <Avatar
-            size="small"
-            username={writerInfo.nickname}
-            src={writerInfo.avatar}
-          />
-          <UserBox>
-            <User {...props}>{writerInfo.nickname}</User>
-            {writerInfo.ordinal && writerInfo.campus && (
-              <UserDetail>
-                ({writerInfo.ordinal}/{writerInfo.campus})
-              </UserDetail>
-            )}
-          </UserBox>
-        </Footer>
-      </FlexBox>
+      <ContentBox>
+        <Category {...props}>{category}</Category>
+        <Title {...props}>{title}</Title>
+      </ContentBox>
+      <Footer>
+        <Avatar
+          size="small"
+          username={writerInfo.nickname}
+          src={writerInfo.avatar}
+        />
+        <UserBox>
+          <User {...props}>{writerInfo.nickname}</User>
+          {writerInfo.ordinal && writerInfo.campus && (
+            <UserDetail>
+              ({writerInfo.ordinal}/{writerInfo.campus})
+            </UserDetail>
+          )}
+        </UserBox>
+      </Footer>
     </Layout>
   );
 };
@@ -76,23 +74,23 @@ FeedItemSmall.defaultProps = {
 export default FeedItemSmall;
 
 const bgColors = [
-  { dark: "#2B421288", light: "#E6F4D7" },
-  { dark: "#2B531488", light: "#E4FBCC" },
-  { dark: "#084C2E88", light: "#D3F8DF" },
-  { dark: "#134E4888", light: "#CCFBEF" },
-  { dark: "#164C6388", light: "#CFF9FE" },
-  { dark: "#0B4A6F88", light: "#E0F2FE" },
-  { dark: "#19418588", light: "#D1E9FF" },
-  { dark: "#00359E88", light: "#D1E0FF" },
-  { dark: "#2D328288", light: "#E0EAFF" },
-  { dark: "#491C9688", light: "#ECE9FE" },
-  { dark: "#3E1C9688", light: "#EBE9FE" },
-  { dark: "#6F187788", light: "#FBE8FF" },
-  { dark: "#85165188", light: "#FCE7F6" },
-  { dark: "#89123E88", light: "#FFE4E8" },
-  { dark: "#771A0D88", light: "#FFE6D5" },
-  { dark: "#77291788", light: "#FDEAD7" },
-  { dark: "#713B1288", light: "#FEF7C3" },
+  { dark: "#2B421255", light: "#E6F4D7" },
+  { dark: "#2B531455", light: "#E4FBCC" },
+  { dark: "#084C2E55", light: "#D3F8DF" },
+  { dark: "#134E4855", light: "#CCFBEF" },
+  { dark: "#164C6355", light: "#CFF9FE" },
+  { dark: "#0B4A6F55", light: "#E0F2FE" },
+  { dark: "#19418555", light: "#D1E9FF" },
+  { dark: "#00359E55", light: "#D1E0FF" },
+  { dark: "#2D328255", light: "#E0EAFF" },
+  { dark: "#491C9655", light: "#ECE9FE" },
+  { dark: "#3E1C9655", light: "#EBE9FE" },
+  { dark: "#6F187755", light: "#FBE8FF" },
+  { dark: "#85165155", light: "#FCE7F6" },
+  { dark: "#89123E55", light: "#FFE4E8" },
+  { dark: "#771A0D55", light: "#FFE6D5" },
+  { dark: "#77291755", light: "#FDEAD7" },
+  { dark: "#713B1255", light: "#FEF7C3" },
 ];
 
 const titleColor = {
@@ -102,10 +100,11 @@ const titleColor = {
 
 const Layout = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-
+  box-sizing: border-box;
   height: 150px;
-  width: 300px;
+  /* width: 300px; */
   padding: 24px;
   border-radius: 12px;
 
@@ -113,16 +112,9 @@ const Layout = styled.div`
   animation: ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
-const FlexBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
 const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
 `;
 
 const Category = styled.div`

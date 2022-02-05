@@ -48,8 +48,8 @@ const CardSlider = ({ data, isLoading, theme, ...props }) => {
         <Icon icon="chevronRight" />
       </Button>
       <Swiper {...swiperParams}>
-        {items.map(({ id, ...props }, idx) => (
-          <SwiperSlide key={idx}>
+        {items.map(({ id, ...props }) => (
+          <SwiperSlide key={id}>
             <CardItemLink to={id}>
               <CardResponsive
                 {...cardData}
@@ -65,12 +65,12 @@ const CardSlider = ({ data, isLoading, theme, ...props }) => {
   );
 };
 
-CardSlider.defaultProps = {
-  theme: THEME.LIGHT,
-};
-
 CardSlider.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
+};
+
+CardSlider.defaultProps = {
+  theme: THEME.LIGHT,
 };
 
 export default CardSlider;
@@ -99,7 +99,6 @@ const buttonIconColor = {
 const Layout = styled.div`
   display: flex;
   justify-content: center;
-  /* align-items: center; */
 
   .swiper {
     max-width: 960px;

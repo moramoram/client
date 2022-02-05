@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
-import { MainJobSlider, MainStudySilder } from "@/containers";
+import { MainJobSlider, MainStudySilder, MainIntroSlider } from "@/containers";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const MainPage = () => {
@@ -12,17 +12,16 @@ const MainPage = () => {
 
   return (
     <Layout>
+      <MainIntroSlider theme={theme} />
       <ContentBox>
         <TitleBox>
           <Title theme={theme}>새로 올라온 공고</Title>
-          {/* <SubTitle theme={theme}>채용 공고를 빠르게 만나보세요</SubTitle> */}
         </TitleBox>
         <MainJobSlider theme={theme} />
       </ContentBox>
       <ContentBox>
         <TitleBox>
           <Title theme={theme}>새로 올라온 스터디</Title>
-          {/* <SubTitle theme={theme}>채용 공고를 빠르게 만나보세요</SubTitle> */}
         </TitleBox>
         <MainStudySilder theme={theme} />
       </ContentBox>
@@ -37,16 +36,10 @@ const titleColor = {
   dark: colors.gray25,
 };
 
-const subtitleColor = {
-  light: colors.gray400,
-  dark: colors.gray500,
-};
-
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5rem;
-  padding: 20rem 0;
 `;
 
 const ContentBox = styled.div``;
@@ -64,9 +57,4 @@ const Title = styled.div`
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h3};
   color: ${(props) => titleColor[props.theme]};
-`;
-
-const SubTitle = styled.div`
-  font-size: ${fontSize.p};
-  color: ${(props) => subtitleColor[props.theme]};
 `;

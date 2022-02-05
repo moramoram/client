@@ -10,6 +10,7 @@ import { axiosInstance } from "@/utils";
 import Layout from "@/Layout";
 
 import {
+  MainPage,
   JobPage,
   JobCreatePage,
   JobDetailPage,
@@ -57,7 +58,7 @@ const Router = () => {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<div>Landing Page</div>} />
-        <Route path="main" element={<div>Main Page</div>} />
+        <Route path="main" element={<MainPage />} />
         <Route path="job" element={<JobPage />} />
         <Route path="job/create" element={<JobCreatePage />} />
         <Route path="job/:jobId" element={<JobDetailPage />} />

@@ -48,6 +48,10 @@ const Layout = styled.div`
 
   cursor: pointer;
   transition: 0.2s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   :hover {
     background-color: ${(props) => hoverColor[props.theme]};

@@ -18,7 +18,7 @@ const StudyIntro = ({ ...props }) => {
       <Layout>
         <Title {...props}>스터디 모집</Title>
         <SubTitle {...props}>함께 성장할 동료들을 찾아보세요.</SubTitle>
-        <ButtonLink to="/job/create">
+        <ButtonLink to="/study/create">
           <Button mode="primary">스터디 개설하기</Button>
         </ButtonLink>
       </Layout>

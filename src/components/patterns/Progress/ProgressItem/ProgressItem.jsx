@@ -157,6 +157,7 @@ const StepCircle = styled.div`
   border: ${(props) => circleBorder[props.status]} solid
     ${(props) => circleColor[props.theme][props.status]};
   border-radius: 50%;
+  box-sizing: border-box;
 
   background-color: ${(props) => bgColor[props.theme]};
   color: ${colors.gray500};
@@ -208,7 +209,7 @@ const ArrowBox = styled.div`
   overflow: hidden;
   left: 14rem;
 
-  width: 2rem;
+  width: 2.2rem;
   min-width: 2rem;
   height: 5rem;
 `;

@@ -29,7 +29,10 @@ const CommunityPage = () => {
 
   return (
     <>
-      <CommunityIntro theme={theme} />
+      <CommunityIntro
+        theme={theme}
+        handleButtonClick={() => setLoginModalOpen(true)}
+      />
       {isPc && (
         <MainBox>
           <StickyNavBox>

@@ -56,14 +56,14 @@ const Layout = styled.div`
   display: flex;
   justify-content: space-between;
 
-  height: 120px;
+  height: 150px;
   padding: 24px;
   border-radius: 12px;
 
   background: rgba(239, 241, 251, 1);
 
   @media screen and (max-width: 530px) {
-    height: 80px;
+    height: 120px;
     padding: 16px;
   }
 `;
@@ -95,12 +95,12 @@ const Category = styled.div`
 const Title = styled.div`
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   overflow: hidden;
 
   max-height: 3rem;
   line-height: 1.5rem;
-  /* text-overflow: ellipsis; */
+  text-overflow: ellipsis;
 
   color: ${(props) => titleColor[props.theme]};
   font-size: ${fontSize.lg};

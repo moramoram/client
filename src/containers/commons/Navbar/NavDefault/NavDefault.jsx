@@ -55,12 +55,12 @@ const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
   return (
     <Layout {...props}>
       <FlexBox>
-        <Link to=".">
+        <Link to="main">
           <Logo width="80" height="20" {...props} />
         </Link>
         <NavbarItemBox>
-          {navData.map(({ name, title, url }, idx) => (
-            <NavItemLink to={url} key={idx}>
+          {navData.map(({ name, title, url }) => (
+            <NavItemLink to={url} key={name}>
               <NavDefaultItem
                 {...props}
                 onClick={() => onClickNavItem(name)}

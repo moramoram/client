@@ -7,23 +7,36 @@ import { Link } from "react-router-dom";
 import { FeedItemSmall } from "@/components";
 
 const FeedSmallGrid = ({ data, isLoading, ...props }) => {
-  const feeds = isLoading ? (
-    <FeedItemSmall isLoading {...props} />
-  ) : (
-    data.map(({ id, ...props }, idx) => {
-      return (
-        <FeedItemLink to={id} key={idx}>
-          <FeedItemSmall {...props} />
-        </FeedItemLink>
-      );
-    })
-  );
+  const feedData = isLoading
+    ? new Array(3).fill({
+        boardId: 1,
+      })
+    : data;
 
-  return <Layout {...props}>{feeds}</Layout>;
+  return (
+    <Layout {...props}>
+      {feedData.map(({ boardId, ...data }) => {
+        const colorIdx = boardId % 17;
+
+        return (
+          <FeedItemLink to={boardId} key={boardId}>
+            <FeedItemSmall
+              theme="light"
+              isLoading={isLoading}
+              colorIdx={colorIdx}
+              {...data}
+              {...props}
+            />
+          </FeedItemLink>
+        );
+      })}
+    </Layout>
+  );
 };
 
 FeedSmallGrid.propTypes = {
   data: PropTypes.arrayOf(Object),
+  isLoading: PropTypes.bool,
 };
 
 export default FeedSmallGrid;
@@ -31,7 +44,8 @@ export default FeedSmallGrid;
 const Layout = styled.div`
   display: flex;
   gap: 20px;
-  align-items: center;
+  max-width: 940px;
+  overflow-x: auto;
 
   @media screen and (max-width: 530px) {
     flex-direction: column;

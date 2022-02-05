@@ -90,8 +90,6 @@ FeedItem.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   username: PropTypes.string,
   avatar: PropTypes.string,
-  campus: PropTypes.string,
-  ordinal: PropTypes.string,
   created: PropTypes.string,
   title: PropTypes.string,
   content: PropTypes.string,

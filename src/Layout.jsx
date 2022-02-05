@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { themeState, navTypeState } from "@/recoil/theme";
 

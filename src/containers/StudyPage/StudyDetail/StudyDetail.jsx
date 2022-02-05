@@ -20,6 +20,7 @@ const StudyDetail = ({ ...props }) => {
     convertToStudyDetail(mockdata);
 
   const mutation = useMutation("postStudyDetailComment", postComment);
+
   const onPostComment = (comment) => {
     mutation.mutate(comment.value, {
       onSuccess: () => {

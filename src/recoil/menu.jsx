@@ -14,7 +14,7 @@ export const navMenuData = atom({
       url: "study",
     },
     {
-      name: "jobs",
+      name: "job",
       title: "취업정보",
       url: "job",
     },

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { themeState } from "@/recoil/theme";
 import { loginModalState } from "@/recoil/modal";
@@ -23,11 +23,12 @@ const TYPE = {
 };
 
 const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
-  const [current, setCurrent] = useState(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [theme, setTheme] = useRecoilState(themeState);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const navbarRight = useRef();
+  const path = useLocation();
+  const [current, setCurrent] = useState(path.pathname.split("/")[1]);
 
   const handleTheme = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");

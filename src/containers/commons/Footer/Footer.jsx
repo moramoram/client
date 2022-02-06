@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 import { Logo } from "@/foundations";
 import { colors, fontSize, lineHeight } from "@/_shared";
 
-const Footer = () => {
+const Footer = ({ ...props }) => {
   return (
     <>
-      <Box>
+      <Layout {...props}>
         <Container>
           <LogoBox>
             <ItemLink to=".">
-              <Logo width="100px" height="50px" />
+              <Logo width="100px" height="50px" {...props} />
             </ItemLink>
           </LogoBox>
           <Row>
@@ -55,8 +55,8 @@ const Footer = () => {
             </Column>
           </Row>
         </Container>
-      </Box>
-      <CopyrightBox>
+      </Layout>
+      <CopyrightBox {...props}>
         <Item>© 2022 ssafé. All rights reserved.</Item>
       </CopyrightBox>
     </>
@@ -65,23 +65,45 @@ const Footer = () => {
 
 export default Footer;
 
-const Box = styled.div`
-  width: 100%;
+const bgColor = {
+  light: colors.gray25,
+  dark: colors.gray900,
+};
+
+const borderColor = {
+  light: colors.gray100,
+  dark: colors.gray700,
+};
+
+const Layout = styled.div`
   padding: 80px 60px;
   margin-top: 80px;
-  background: ${colors.gray25};
+  background: ${(props) => bgColor[props.theme]};
+
+  @media screen and (max-width: 530px) {
+    padding: 60px;
+  }
 `;
 
 const Container = styled.div`
-  max-width: 940px;
+  display: flex;
+  gap: 60px;
+  max-width: 1280px;
   width: 100%;
   margin: auto;
+
+  @media screen and (max-width: 530px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const Row = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 60px;
+  width: 100%;
 `;
 
 const Heading = styled.p`
@@ -99,7 +121,13 @@ const LogoBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 0 50px 0;
+  width: 300px;
+  padding: 0 0 0 50px;
+
+  @media screen and (max-width: 530px) {
+    width: 100%;
+    padding: 0;
+  }
 `;
 
 const ItemLink = styled(Link)`
@@ -116,7 +144,7 @@ const CopyrightBox = styled.div`
   display: flex;
   justify-content: center;
   padding: 20px;
-  background: ${colors.gray25};
+  background: ${(props) => bgColor[props.theme]};
   width: 100%;
-  border-top: 1px solid ${colors.gray100};
+  border-top: 1px solid ${(props) => borderColor[props.theme]};
 `;

@@ -7,7 +7,7 @@ import { themeState } from "@/recoil/theme";
 import { SubNavbar, Input, Selector } from "@/components";
 import { CardGrid, StudyCardGrid } from "@/containers";
 
-const StudyPage = ({ categoryData }) => {
+const StudyMain = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);
 
   const handleCategory = (e) => {
@@ -42,7 +42,7 @@ const StudyPage = ({ categoryData }) => {
   );
 };
 
-export default StudyPage;
+export default StudyMain;
 
 const Layout = styled.div`
   display: flex;

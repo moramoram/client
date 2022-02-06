@@ -7,7 +7,7 @@ import { themeState } from "@/recoil/theme";
 import { SubNavbar, Input, Selector } from "@/components";
 import { CardGrid, JobCardGrid } from "@/containers";
 
-const JobMain = () => {
+const JobMain = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);
 
   const handleCategory = (e) => {
@@ -44,29 +44,6 @@ const JobMain = () => {
 };
 
 export default JobMain;
-
-const categoryData = [
-  {
-    id: 0,
-    title: "마감 임박",
-  },
-  {
-    id: 1,
-    title: "최신순",
-  },
-  {
-    id: 2,
-    title: "인기순",
-  },
-  {
-    id: 3,
-    title: "싸피 채용관",
-  },
-  {
-    id: 4,
-    title: "내 관심 공고",
-  },
-];
 
 const Layout = styled.div`
   display: flex;

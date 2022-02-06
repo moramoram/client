@@ -7,7 +7,7 @@ import { themeState } from "@/recoil/theme";
 import { SubNavbar, Input } from "@/components";
 import { CardGrid, StudyCardGrid } from "@/containers";
 
-const StudyPage = ({ categoryData }) => {
+const StudyMainMobile = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);
 
   const handleCategory = (e) => {
@@ -34,7 +34,7 @@ const StudyPage = ({ categoryData }) => {
   );
 };
 
-export default StudyPage;
+export default StudyMainMobile;
 
 const SubNavMobile = styled(SubNavbar)`
   padding: 20px 20px 0 20px;

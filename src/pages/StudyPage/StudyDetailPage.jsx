@@ -7,7 +7,12 @@ import { themeState } from "@/recoil/theme";
 
 import { useMediaQuery } from "react-responsive";
 
-import { StudyDetail, StudyDetailMobile } from "@/containers";
+import {
+  LoadingDetail,
+  LoadingDetailMobile,
+  StudyDetail,
+  StudyDetailMobile,
+} from "@/containers";
 
 const StudyDetailPage = () => {
   const theme = useRecoilValue(themeState);
@@ -25,13 +30,13 @@ const StudyDetailPage = () => {
   return (
     <Layout>
       {isPc && (
-        <Suspense fallback={"hello"}>
+        <Suspense fallback={<LoadingDetail theme={theme} />}>
           <StudyDetail theme={theme} />
         </Suspense>
       )}
       {isMobile && (
-        <Suspense fallback={"mobile"}>
-          <StudyDetailMobile theme={theme} {...sidbarargs} />
+        <Suspense fallback={<LoadingDetailMobile theme={theme} />}>
+          <StudyDetailMobile theme={theme} />
         </Suspense>
       )}
     </Layout>
@@ -39,17 +44,6 @@ const StudyDetailPage = () => {
 };
 
 export default StudyDetailPage;
-
-const sidbarargs = {
-  data: {
-    type: "알고리즘",
-    target: "-",
-    people: "4",
-    location: "온라인",
-  },
-
-  badges: ["JavaScript", "TypeScript", "Vue.js", "React", "Redux", "Svelte"],
-};
 
 const Layout = styled.div`
   display: flex;

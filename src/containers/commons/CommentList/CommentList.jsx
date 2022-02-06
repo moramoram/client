@@ -5,9 +5,10 @@ import styled from "styled-components";
 import { Comment } from "@/components";
 
 const CommentList = ({ data, theme, isLoading, ...props }) => {
+  const items = isLoading ? dummy : data;
   return (
     <Layout>
-      {data.map((props, idx) => {
+      {items.map((props, idx) => {
         return (
           <CommentBox key={idx}>
             <Comment theme={theme} {...props}></Comment>
@@ -23,6 +24,13 @@ CommentList.propTypes = {
 };
 
 export default CommentList;
+
+const dummy = new Array(6).fill({
+  username: "",
+  src: null,
+  created: null,
+  content: null,
+});
 
 const Layout = styled.div`
   padding: 2rem 0;

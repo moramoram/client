@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import styled from "styled-components";
 
 import { useParams } from "react-router-dom";
@@ -7,7 +7,12 @@ import { themeState } from "@/recoil/theme";
 
 import { useMediaQuery } from "react-responsive";
 
-import { JobDetail, JobDetailMobile, JobSideBar } from "@/containers";
+import {
+  LoadingDetail,
+  LoadingDetailMobile,
+  JobDetail,
+  JobDetailMobile,
+} from "@/containers";
 import { daysFromToday } from "@/utils";
 
 const JobsDetailPage = () => {
@@ -20,35 +25,31 @@ const JobsDetailPage = () => {
     query: "(min-width:980px)",
   });
   const isMobile = useMediaQuery({
-    query: "(max-width:979px)",
+    query: "(max-width:980px)",
   });
 
   return (
     <>
       {isPc && (
         <Layout>
-          <JobDetail
-            titleData={titleData}
-            tocItem={tocItem}
-            contentData={contentData}
-            cardData={cardData}
-            commentData={commentData}
-            theme={theme}
-          ></JobDetail>
-          <FixedSidebar {...sidbarargs} theme={theme} />
+          <Suspense fallback={<LoadingDetail theme={theme} />}>
+            <JobDetail
+              cardData={cardData}
+              commentData={commentData}
+              theme={theme}
+            ></JobDetail>
+          </Suspense>
         </Layout>
       )}
       {isMobile && (
         <Layout>
-          <JobDetailMobile
-            titleData={titleData}
-            tocItem={tocItem}
-            contentData={contentData}
-            cardData={cardData}
-            commentData={commentData}
-            theme={theme}
-            {...sidbarargs}
-          />
+          <Suspense fallback={<LoadingDetailMobile theme={theme} />}>
+            <JobDetailMobile
+              cardData={cardData}
+              commentData={commentData}
+              theme={theme}
+            />
+          </Suspense>
         </Layout>
       )}
     </>
@@ -56,52 +57,6 @@ const JobsDetailPage = () => {
 };
 
 export default JobsDetailPage;
-
-const titleData = {
-  title: "프론트엔드 엔지니어 채용",
-  subtitle: "싸피아이티시스템",
-  highlight: "모집중",
-};
-
-const contentData = (
-  <>
-    <h3>주요업무</h3>
-    <ul>
-      <li>React를 활용한 서비스 개발</li>
-    </ul>
-    <p>
-      <br />
-    </p>
-    <h3>자격요건</h3>
-    <ul>
-      <li>학력: 초대졸 이상</li>
-      <li>경력: 3년 이상</li>
-      <li>React 등을 활용한 3년 이상 혹은 그에 준하는 개발 능력을 보유한 분</li>
-    </ul>
-    <p>
-      <br />
-    </p>
-    <h3>우대사항</h3>
-    <ul>
-      <li>React 등을 활용한 서비스 개발 및 배포 경험 보유한 분</li>
-      <li>HTML, CSS, JavaScript에 대한 이해도 보유한 분</li>
-      <li>다양한 문제에 대해 체계적인 원인 분석 및 해결 능력을 보유</li>
-    </ul>
-    <p>
-      <br />
-    </p>
-    <h3>혜택 및 복지</h3>
-    <ul>
-      <li>수평적인 사내문화와 자유로운 분위기</li>
-      <li>자율 복장, 유연근무제</li>
-      <li>
-        경조금(휴가) 및 연차, 코로나 백신휴가, 건강검진/예비군 훈련 시 공가휴가
-        제공(연차에서 차감 안됨), 조식제공
-      </li>
-      <li>워크샵, 책모임, 스터디</li>
-    </ul>
-  </>
-);
 
 const cardData = [
   {
@@ -208,35 +163,6 @@ const commentData = [
   },
 ];
 
-const sidbarargs = {
-  data: {
-    task: "프론트엔드",
-    type: "정규직",
-    career: "신입",
-    location: "서울 강남구",
-  },
-
-  badges: ["JavaScript", "TypeScript", "Vue.js", "React", "Redux", "Svelte"],
-};
-
-const tocItem = [
-  {
-    name: "info",
-    title: "공고",
-    number: null,
-  },
-  {
-    name: "study",
-    title: "스터디",
-    number: cardData.length,
-  },
-  {
-    name: "comments",
-    title: "댓글",
-    number: commentData.length,
-  },
-];
-
 const Layout = styled.div`
   display: flex;
   justify-content: center;
@@ -244,9 +170,4 @@ const Layout = styled.div`
   max-width: 1280px;
 
   margin: auto;
-`;
-
-const FixedSidebar = styled(JobSideBar)`
-  position: sticky;
-  top: 180px;
 `;

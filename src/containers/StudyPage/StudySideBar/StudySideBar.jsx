@@ -10,12 +10,11 @@ const THEME = {
   DARK: "dark",
 };
 
-const StudySideBar = ({ data, badges, isLoading, ...props }) => {
-  const [isMarked, setIsMarked] = useState(false);
+const StudySideBar = ({ data, isLoading, ...props }) => {
+  const [isMarked, setIsMarked] = useState(data?.scrap);
 
   if (isLoading) {
-    data = new Array(4);
-    badges = ["", "", ""];
+    data = { badges: ["", "", ""] };
   }
 
   return (
@@ -35,7 +34,7 @@ const StudySideBar = ({ data, badges, isLoading, ...props }) => {
         ))}
       </SideBarBox>
       <BadgeBox>
-        {badges.map((children, idx) => {
+        {data.badges.map((children, idx) => {
           return (
             <Badge
               className="badge-item"
@@ -76,7 +75,6 @@ StudySideBar.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   isLoading: PropTypes.bool,
   data: PropTypes.objectOf(String),
-  badges: PropTypes.arrayOf(String),
 };
 
 StudySideBar.defaultProps = {

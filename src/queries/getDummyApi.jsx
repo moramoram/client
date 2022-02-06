@@ -7,4 +7,4 @@ const fetchData = async () => {
   return res.data;
 };
 
-export const useDummyApi = () => useQuery(["dummy"], fetchData);
+export const GetDummyApi = () => useQuery(["dummy"], fetchData);

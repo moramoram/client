@@ -1,16 +1,13 @@
-import React, { useState, useEffect, Suspense } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from "react";
 
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { themeState, navTypeState } from "@/recoil/theme";
+import { useSetRecoilState } from "recoil";
+import { navTypeState } from "@/recoil/theme";
 
 import { useMediaQuery } from "react-responsive";
 
-import { SubNavbar, Input, Selector } from "@/components";
-import { CardGrid, JobIntro, JobCardGrid } from "@/containers";
+import { JobIntro, JobMain, JobMainMobile } from "@/containers";
 
 const JobsPage = () => {
-  const theme = useRecoilValue(themeState);
   const setNavType = useSetRecoilState(navTypeState);
   const [offset, setOffset] = useState(0);
 
@@ -35,62 +32,11 @@ const JobsPage = () => {
     query: "(max-width:979px)",
   });
 
-  const handleCategory = (e) => {
-    console.log(e);
-  };
-
   return (
     <>
       <JobIntro />
-      {isPc && (
-        <ContentBox>
-          <StickyNavBox>
-            <StickyNav
-              data={categoryData}
-              theme={theme}
-              onClick={handleCategory}
-            />
-          </StickyNavBox>
-          <CardGridBox>
-            <InputBox>
-              <Input theme={theme} icon="search" placeholder="공고 검색하기" />
-              <Selector theme={theme} placeholder="기술 스택" isMulti />
-              <Selector
-                theme={theme}
-                placeholder="직무"
-                options={[
-                  { value: "Frontend", label: "프론트엔드" },
-                  { value: "Backend", label: "백엔드" },
-                  { value: "Android", label: "안드로이드" },
-                  { value: "iOS", label: "iOS" },
-                  { value: "임베디드", label: "임베디드" },
-                ]}
-              />
-            </InputBox>
-            <Suspense fallback={<CardGrid theme={theme} isLoading />}>
-              <JobCardGrid theme={theme} />
-            </Suspense>
-          </CardGridBox>
-        </ContentBox>
-      )}
-      {isMobile && (
-        <>
-          <SubNavMobile
-            data={categoryData}
-            theme={theme}
-            onClick={handleCategory}
-            view="mobile"
-          />
-          <SearchBox>
-            <Input icon="search" placeholder="공고 검색하기" theme={theme} />
-          </SearchBox>
-          <MobileCardBox>
-            <Suspense fallback={<CardGrid theme={theme} isLoading />}>
-              <JobCardGrid theme={theme} />
-            </Suspense>
-          </MobileCardBox>
-        </>
-      )}
+      {isPc && <JobMain categoryData={categoryData} />}
+      {isMobile && <JobMainMobile categoryData={categoryData} />}
     </>
   );
 };
@@ -119,58 +65,3 @@ const categoryData = [
     title: "내 관심 공고",
   },
 ];
-
-const ContentBox = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 100px;
-  max-width: 1280px;
-
-  padding: 20px;
-  margin: auto;
-`;
-
-const StickyNavBox = styled.div`
-  padding-top: 86px;
-`;
-
-const StickyNav = styled(SubNavbar)`
-  position: sticky;
-  top: 150px;
-`;
-
-const SubNavMobile = styled(SubNavbar)`
-  padding: 20px 20px 0 20px;
-`;
-
-const CardGridBox = styled.div`
-  width: calc(100% - 320px);
-  padding-top: 80px;
-`;
-
-const MobileCardBox = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 100px;
-  max-width: 1280px;
-
-  padding: 20px;
-  margin: auto;
-`;
-
-const InputBox = styled.div`
-  display: flex;
-  gap: 0.5rem;
-
-  max-width: 940px;
-  padding-bottom: 2rem;
-
-  > div {
-    flex-grow: 1;
-  }
-`;
-
-const SearchBox = styled.div`
-  padding: 20px;
-`;

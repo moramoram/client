@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { localStorageEffect } from "@/utils";
 
 const THEME = {
   DARK: "dark",
@@ -10,17 +11,10 @@ const TYPE = {
   TRANSPARENT: "transparent",
 };
 
-export const getTheme = () => {
-  const theme = localStorage.getItem("theme");
-  if (theme === THEME.DARK) {
-    return THEME.DARK;
-  }
-  return THEME.LIGHT;
-};
-
 export const themeState = atom({
   key: "themeState",
-  default: getTheme(),
+  default: THEME.LIGHT,
+  effects_UNSTABLE: [localStorageEffect("theme")],
 });
 
 export const navTypeState = atom({

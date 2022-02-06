@@ -1,5 +1,4 @@
-import React, { useEffect, useState, Suspense } from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
 
 import { useMediaQuery } from "react-responsive";
 

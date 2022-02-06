@@ -3,7 +3,7 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
-import { LandingHero, Footer } from "@/containers";
+import { LandingHero } from "@/containers";
 import { Three } from "@/components";
 
 const LandingPage = () => {
@@ -13,7 +13,6 @@ const LandingPage = () => {
     <>
       <LandingHero theme={theme} />
       <Three theme={theme} />
-      <Footer />
     </>
   );
 };

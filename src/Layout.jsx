@@ -10,7 +10,7 @@ import { modalState, createModalState, loginModalState } from "@/recoil/modal";
 import { navMenuData, navUserData } from "@/recoil/menu";
 
 import { Modal, ScrollTopButton } from "@/components";
-import { Navbar, SignUpModal, CommunityCreate } from "@/containers";
+import { Navbar, SignUpModal, CommunityCreate, Footer } from "@/containers";
 import { colors } from "@/_shared";
 
 const Layout = () => {
@@ -53,6 +53,7 @@ const Layout = () => {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         />
       </ScrollTopBox>
+      <Footer />
     </LayoutBox>
   );
 };

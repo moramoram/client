@@ -12,8 +12,9 @@ import {
 } from "@react-three/drei";
 
 import { Logo } from "@/foundations";
+import { colors } from "@/_shared";
 
-const Model = (props) => {
+const Model = ({ theme, ...props }) => {
   const group = useRef();
   const { nodes, materials } = useGLTF("/mac-draco.glb");
 
@@ -58,12 +59,13 @@ const Model = (props) => {
               className="content"
               rotation-x={-Math.PI / 2}
               position={[0, 0.05, -0.09]}
+              theme={theme}
               transform
               occlude
             >
-              <div className="wrapper">
-                <Logo />
-              </div>
+              <Wrapper theme={theme}>
+                <Logo theme={theme} />
+              </Wrapper>
             </Html>
           </mesh>
         </group>
@@ -92,13 +94,13 @@ const Model = (props) => {
   );
 };
 
-const Three = () => (
-  <Layout>
+const Three = ({ ...props }) => (
+  <Layout {...props}>
     <Canvas dpr={[1, 2]} camera={{ position: [-10, 0, -25], fov: 35 }}>
       <pointLight position={[10, 10, 10]} intensity={1.5} />
       <Suspense fallback={null}>
         <group rotation={[0, Math.PI, 0]}>
-          <Model />
+          <Model {...props} />
         </group>
         <Environment preset="city" />
       </Suspense>
@@ -123,26 +125,38 @@ const Three = () => (
 
 export default Three;
 
+const bgColor = {
+  light: colors.gray25,
+  dark: colors.black,
+};
+
 const Layout = styled.div`
   canvas {
     height: 700px;
+    width: 700px;
+
+    ${(props) => props.isSmall && `height: 400px;`}
   }
 
   .content {
     width: 334px;
     height: 216px;
-    background: #f0f0f0;
     border-radius: 3px;
     overflow: hidden;
     padding: 0;
   }
+  }
+`;
 
-  .wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 334px;
-    height: 216px;
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 334px;
+  height: 216px;
+  background-color: ${(props) => bgColor[props.theme]};
+
+  svg {
     transform: scale(0.5);
   }
 `;

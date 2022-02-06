@@ -102,7 +102,7 @@ const StudyDetailMobile = ({ data, badges, ...props }) => {
           <Button
             mode={isMarked ? "active" : "secondary"}
             minWidth="380px"
-            onClick={onPostComment}
+            onClick={(comment) => onPostComment(comment)}
             {...props}
           >
             {isMarked ? (

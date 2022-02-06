@@ -10,12 +10,11 @@ const THEME = {
   DARK: "dark",
 };
 
-const JobSideBar = ({ data, badges, isLoading, ...props }) => {
-  const [isMarked, setIsMarked] = useState(false);
+const JobSideBar = ({ data, isLoading, ...props }) => {
+  const [isMarked, setIsMarked] = useState(data?.scrap);
 
   if (isLoading) {
-    data = new Array(4);
-    badges = ["", "", ""];
+    data = new Array(4).fill({ badges: ["", "", ""] });
   }
 
   return (
@@ -35,7 +34,7 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
         ))}
       </SideBarBox>
       <BadgeBox>
-        {badges.map((children, idx) => {
+        {data.badges.map((children, idx) => {
           return (
             <Badge
               className="badge-item"

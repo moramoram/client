@@ -36,7 +36,7 @@ const StudyDetailPage = () => {
       )}
       {isMobile && (
         <Suspense fallback={<LoadingDetailMobile theme={theme} />}>
-          <StudyDetailMobile theme={theme} {...sidbarargs} />
+          <StudyDetailMobile theme={theme} />
         </Suspense>
       )}
     </Layout>
@@ -44,17 +44,6 @@ const StudyDetailPage = () => {
 };
 
 export default StudyDetailPage;
-
-const sidbarargs = {
-  data: {
-    type: "알고리즘",
-    target: "-",
-    people: "4",
-    location: "온라인",
-  },
-
-  badges: ["JavaScript", "TypeScript", "Vue.js", "React", "Redux", "Svelte"],
-};
 
 const Layout = styled.div`
   display: flex;

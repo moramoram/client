@@ -45,7 +45,7 @@ export const convertToStudyDetail = (data) => {
     target: data.company_name,
     people: `${data.recruitment}명`,
     location: data.location,
-    badges: [data.tech_stack.split()],
+    badges: [data.tech_stack.split(",")],
     scrap: data.scrapStatus,
   };
   return { commentData, contentData, titleData, tocItem, sidebarData };

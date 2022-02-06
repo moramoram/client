@@ -18,22 +18,15 @@ export const JobDetailSelector = (data) => {
     highlight: daysLeftFromToday(data.closeData) ? "모집중" : "모집완료",
   };
   const contentData = data.content;
-  const tocItem = [
-    {
-      name: "info",
-      title: "공고",
-      number: null,
-    },
-    {
-      name: "study",
-      title: "스터디",
-      number: null,
-    },
-    {
-      name: "comments",
-      title: "댓글",
-      number: null,
-    },
-  ];
-  return { contentData, titleData, tocItem };
+
+  const sidebarData = {
+    type: data.job,
+    target: data.empType,
+    people: data.career,
+    location: data.location,
+    badges: [data.techStack.split(",")],
+    scrap: data.scrapStatus,
+  };
+  const companyData = data.company;
+  return { contentData, titleData, sidebarData, companyData };
 };

@@ -14,7 +14,7 @@ const fetchData = async () => {
 export const convertToStudyDetail = (data) => {
   const titleData = {
     title: data.title,
-    subtitle: `${data.writerInfo.nickname} (${data.writerInfo.ordinal}/${data.writerInfo.campus})`,
+    subtitle: `${data.writerInfo.nickname} (${data.writerInfo.ordinal}기/${data.writerInfo.campus})`,
     src: null,
     highlight: data.on_off === 1 ? "모집중" : "모집완료",
   };
@@ -40,5 +40,13 @@ export const convertToStudyDetail = (data) => {
       number: data.comments.length,
     },
   ];
-  return { commentData, contentData, titleData, tocItem };
+  const sidebarData = {
+    type: data.study_type,
+    target: data.company_name,
+    people: `${data.recruitment}명`,
+    location: data.location,
+    badges: [data.tech_stack.split()],
+    scrap: data.scrapStatus,
+  };
+  return { commentData, contentData, titleData, tocItem, sidebarData };
 };

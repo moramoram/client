@@ -5,8 +5,8 @@ export const PostScrap = () => useMutation("postScrap", postScrap);
 
 export const postScrap = async (type, status, studyId) => {
   const res = await axiosInstance({
-    url: `/study-scraps/studies/${studyId}`,
-    method: "post",
+    url: `/${type}-scraps/${studyId}`,
+    method: status ? "delete" : "post",
   });
   return res.data;
 };

@@ -1,48 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 
-import { useMediaQuery } from "react-responsive";
-
-import { AutoTyping, BlinkCursor, Three } from "@/components";
+import { AutoTyping, BlinkCursor } from "@/components";
 import { colors, fontSize, fontWeight } from "@/_shared";
 
 const LandingHero = ({ ...props }) => {
-  const isWide = useMediaQuery({
-    query: "(min-width:1280px)",
-  });
-
-  const isDefault = useMediaQuery({
-    query: "(max-width:1280px) and (min-width:530px)",
-  });
-
-  const isSmall = useMediaQuery({
-    query: "(max-width:530px)",
-  });
-
   return (
     <>
       <Layout>
-        {isWide && (
-          <ThreeBox>
-            <Three {...props} />
-          </ThreeBox>
-        )}
         <ContentBox>
           <Title {...props}>
             당신이 찾던 <br />
             싸피만의{" "}
             <AutoTyping
               active
-              arrayRef={["커뮤니티", "스터디", "채용정보"]}
-              delayToWrite={2000}
+              arrayRef={["커뮤니티", "스터디", "취업정보"]}
+              delayToWrite={1000}
               delayToDelete={3000}
+              writeInterval={40}
+              deleteInterval={40}
             />
             <Cursor active blinkSpeed={500} />
           </Title>
           <GetStartedBtn>시작하기</GetStartedBtn>
         </ContentBox>
-        {isDefault && <Three {...props} />}
-        {isSmall && <Three isSmall {...props} />}
       </Layout>
     </>
   );
@@ -58,24 +39,15 @@ const titleColor = {
 const Layout = styled.div`
   position: relative;
   max-width: 1280px;
-  height: 100vh;
   margin: auto;
-
-  @media screen and (max-width: 1280px) {
-    height: 100%;
-  }
 `;
 
 const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   padding: 240px 0 0 20px;
   z-index: 2;
-
-  @media screen and (max-width: 1280px) {
-    align-items: center;
-  }
 
   @media screen and (max-width: 530px) {
     padding: 180px 0 0 20px;
@@ -88,13 +60,10 @@ const Title = styled.h1`
   font-size: calc(62rem / 16);
   font-weight: ${fontWeight.bold};
   color: ${(props) => titleColor[props.theme]};
+  text-align: center;
   line-height: calc(80 / 62);
 
   transition: 0.3s;
-
-  @media screen and (max-width: 1280px) {
-    text-align: center;
-  }
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.h2};
@@ -144,12 +113,4 @@ const GetStartedBtn = styled.button`
     padding: 16px 40px;
     font-size: ${fontSize.p};
   }
-`;
-
-const ThreeBox = styled.div`
-  position: absolute;
-  right: 0;
-  padding: 100px 0 0 0;
-  z-index: 1;
-  transition: 0.2s;
 `;

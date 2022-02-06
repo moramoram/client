@@ -26,11 +26,11 @@ const THEME = {
 };
 
 const StudyDetailMobile = ({ data, badges, ...props }) => {
-  const [isMarked, setIsMarked] = useState(false);
   const queryClient = useQueryClient();
   const { dd } = GetStudyDetail();
-  const { titleData, commentData, contentData, tocItem } =
+  const { titleData, commentData, contentData, tocItem, sidebarData } =
     convertToStudyDetail(mockdata);
+  const [isMarked, setIsMarked] = useState(sidebarData.scrap);
 
   const mutation = useMutation("postComment", postComment);
 
@@ -62,14 +62,14 @@ const StudyDetailMobile = ({ data, badges, ...props }) => {
                 className="contents-item"
                 title={title}
                 icon={icon}
-                description={data[id]}
+                description={sidebarData[id]}
                 key={id}
                 {...props}
               />
             ))}
           </SideBarBox>
           <BadgeBox>
-            {badges.map((children, idx) => {
+            {sidebarData.badges.map((children, idx) => {
               return (
                 <Badge
                   className="badge-item"

@@ -142,6 +142,7 @@ const GetStartedBtn = styled.button`
 
   @media screen and (max-width: 530px) {
     padding: 16px 40px;
+    font-size: ${fontSize.p};
   }
 `;
 

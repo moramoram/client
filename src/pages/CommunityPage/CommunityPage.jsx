@@ -308,9 +308,8 @@ const MainBox = styled.div`
   display: flex;
   justify-content: center;
   gap: 100px;
-  max-width: 1280px;
 
-  padding: 20px;
+  max-width: 1280px;
   margin: auto;
 `;
 

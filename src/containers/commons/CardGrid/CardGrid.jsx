@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Link } from "react-router-dom";
@@ -25,6 +26,10 @@ const CardGrid = ({ data, theme, isLoading, ...props }) => {
 
 CardGrid.defaultProps = {
   theme: THEME.LIGHT,
+};
+
+CardGrid.propTypes = {
+  theme: PropTypes.oneOf(Object.values(THEME)),
 };
 
 export default CardGrid;

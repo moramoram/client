@@ -3,4 +3,5 @@ export { default as daysLeftFromToday } from "./daysLeftFromToday";
 export { default as numToMillion } from "./numToMillion";
 export { default as getCroppedImg } from "./getCroppedImg";
 export * from "./localStorageEffect";
+export { default as getEndDate } from "./getEndDate";
 export { default as axiosInstance } from "./axiosConfig";

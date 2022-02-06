@@ -59,7 +59,7 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
   return (
     <Layout blur={navbarOpen} ref={navbar} {...props}>
       <Navbar {...props}>
-        <Link to=".">
+        <Link to="main">
           <Logo width="80" height="20" {...props} />
         </Link>
         <Icon
@@ -71,8 +71,8 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
       {navbarOpen && (
         <NavDropdown {...props}>
           <LinkBox>
-            {navData.map(({ name, title, url }, idx) => (
-              <NavItemLink to={url} key={idx}>
+            {navData.map(({ name, title, url }) => (
+              <NavItemLink to={url} key={name}>
                 <NavMobileItem
                   {...props}
                   onClick={() => handleClickItem(name)}
@@ -117,7 +117,6 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
                       {...props}
                       onClick={() => handleClickItem(name)}
                       status={current === name ? "active" : "default"}
-                      key={idx}
                     >
                       {title}
                     </UserMobileItem>

@@ -66,15 +66,13 @@ const Footer = () => {
 export default Footer;
 
 const Box = styled.div`
-  padding: 80px 60px;
-  background: ${colors.gray25};
   width: 100%;
+  padding: 80px 60px;
+  margin-top: 80px;
+  background: ${colors.gray25};
 `;
 
 const Container = styled.div`
-  /* display: flex;
-  justify-content: space-between; */
-  /* flex-wrap: wrap; */
   max-width: 940px;
   width: 100%;
   margin: auto;
@@ -83,8 +81,6 @@ const Container = styled.div`
 const Row = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  /* justify-content: center;
-  flex-wrap: wrap; */
   gap: 60px;
 `;
 
@@ -97,11 +93,6 @@ const Heading = styled.p`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
-  /* width: 160px; */
-
-  /* @media screen and (max-width: 1280px) {
-    width: 100px;
-  } */
 `;
 
 const LogoBox = styled.div`

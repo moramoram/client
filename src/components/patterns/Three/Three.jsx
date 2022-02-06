@@ -95,7 +95,7 @@ const Model = ({ theme, ...props }) => {
 };
 
 const Three = ({ ...props }) => (
-  <Layout>
+  <Layout {...props}>
     <Canvas dpr={[1, 2]} camera={{ position: [-10, 0, -25], fov: 35 }}>
       <pointLight position={[10, 10, 10]} intensity={1.5} />
       <Suspense fallback={null}>
@@ -134,6 +134,8 @@ const Layout = styled.div`
   canvas {
     height: 700px;
     width: 700px;
+
+    ${(props) => props.isSmall && `height: 400px;`}
   }
 
   .content {

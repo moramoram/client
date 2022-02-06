@@ -1,16 +1,32 @@
 import React from "react";
 import styled from "styled-components";
 
+import { useMediaQuery } from "react-responsive";
+
 import { AutoTyping, BlinkCursor, Three } from "@/components";
 import { colors, fontSize, fontWeight } from "@/_shared";
 
 const LandingHero = ({ ...props }) => {
+  const isWide = useMediaQuery({
+    query: "(min-width:1280px)",
+  });
+
+  const isDefault = useMediaQuery({
+    query: "(max-width:1280px) and (min-width:530px)",
+  });
+
+  const isSmall = useMediaQuery({
+    query: "(max-width:530px)",
+  });
+
   return (
     <>
       <Layout>
-        <ThreeBox>
-          <Three {...props} />
-        </ThreeBox>
+        {isWide && (
+          <ThreeBox>
+            <Three {...props} />
+          </ThreeBox>
+        )}
         <ContentBox>
           <Title {...props}>
             당신이 찾던 <br />
@@ -25,6 +41,8 @@ const LandingHero = ({ ...props }) => {
           </Title>
           <GetStartedBtn>시작하기</GetStartedBtn>
         </ContentBox>
+        {isDefault && <Three {...props} />}
+        {isSmall && <Three isSmall {...props} />}
       </Layout>
     </>
   );
@@ -42,27 +60,55 @@ const Layout = styled.div`
   max-width: 1280px;
   height: 100vh;
   margin: auto;
+
+  @media screen and (max-width: 1280px) {
+    height: 100%;
+  }
 `;
 
 const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 240px 0 0 0;
+  padding: 240px 0 0 20px;
   z-index: 2;
+
+  @media screen and (max-width: 1280px) {
+    align-items: center;
+  }
+
+  @media screen and (max-width: 530px) {
+    padding: 180px 0 0 20px;
+  }
 `;
 
 const Title = styled.h1`
   margin-bottom: 6rem;
+
   font-size: calc(62rem / 16);
   font-weight: ${fontWeight.bold};
   color: ${(props) => titleColor[props.theme]};
   line-height: calc(80 / 62);
+
+  transition: 0.3s;
+
+  @media screen and (max-width: 1280px) {
+    text-align: center;
+  }
+
+  @media screen and (max-width: 530px) {
+    font-size: ${fontSize.h2};
+    line-height: calc(72 / 62);
+  }
 `;
 
 const Cursor = styled(BlinkCursor)`
   color: ${colors.blueOpacity300};
   font-size: calc(68rem / 16);
+
+  @media screen and (max-width: 530px) {
+    font-size: calc(40rem / 16);
+  }
 `;
 
 const GetStartedBtn = styled.button`
@@ -93,6 +139,10 @@ const GetStartedBtn = styled.button`
   :active {
     background: ${colors.blue100};
   }
+
+  @media screen and (max-width: 530px) {
+    padding: 16px 40px;
+  }
 `;
 
 const ThreeBox = styled.div`
@@ -100,4 +150,5 @@ const ThreeBox = styled.div`
   right: 0;
   padding: 100px 0 0 0;
   z-index: 1;
+  transition: 0.2s;
 `;

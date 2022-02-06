@@ -7,7 +7,7 @@ import { themeState } from "@/recoil/theme";
 import { SubNavbar, Input } from "@/components";
 import { CardGrid, StudyCardGrid } from "@/containers";
 
-const StudyPage = (categoryData) => {
+const StudyPage = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);
 
   const handleCategory = (e) => {

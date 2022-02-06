@@ -6,7 +6,7 @@ import { Avatar, Toc, CommentInput } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 
 import { useMutation, useQueryClient } from "react-query";
-import { useGetStudyDetail, convertToStudyDetail, postComment } from "@/hooks";
+import { GetStudyDetail, convertToStudyDetail, postComment } from "@/queries";
 
 const THEME = {
   LIGHT: "light",
@@ -15,11 +15,12 @@ const THEME = {
 
 const StudyDetail = ({ ...props }) => {
   const queryClient = useQueryClient();
-  const { data } = useGetStudyDetail();
-  const { titleData, commentData, contentData, tocItem } =
+  const { data } = GetStudyDetail();
+  const { titleData, commentData, contentData, tocItem, sidebarData } =
     convertToStudyDetail(mockdata);
 
   const mutation = useMutation("postStudyDetailComment", postComment);
+
   const onPostComment = (comment) => {
     mutation.mutate(comment.value, {
       onSuccess: () => {
@@ -56,8 +57,7 @@ const StudyDetail = ({ ...props }) => {
           <CommentList data={commentData} {...props} />
         </div>
       </Layout>
-
-      <StudySideBar {...props} {...sidbarargs} />
+      <StudySideBar {...props} data={sidebarData} />
     </>
   );
 };
@@ -68,23 +68,12 @@ StudyDetail.defaultProps = {
 
 export default StudyDetail;
 
-const sidbarargs = {
-  data: {
-    type: "알고리즘",
-    target: "-",
-    people: "4",
-    location: "온라인",
-  },
-
-  badges: ["JavaScript", "TypeScript", "Vue.js", "React", "Redux", "Svelte"],
-};
-
 const mockdata = {
   studyId: 2,
   writerInfo: {
     nickname: "su",
-    ordinal: 0,
-    campus: null,
+    ordinal: 1,
+    campus: "서울",
     authCheck: 0,
   },
   comments: [
@@ -93,8 +82,8 @@ const mockdata = {
       content: "온라인으로는 진행을 안 하시는 건가요?",
       writerInfo: {
         nickname: "su",
-        ordinal: 0,
-        campus: null,
+        ordinal: 1,
+        campus: "서울",
         authCheck: 0,
       },
       createdDate: "2022-01-30T21:22:30",
@@ -105,8 +94,8 @@ const mockdata = {
       content: "너무 참여하고 싶어요!",
       writerInfo: {
         nickname: "su",
-        ordinal: 0,
-        campus: null,
+        ordinal: 1,
+        campus: "서울",
         authCheck: 0,
       },
       createdDate: "2022-01-30T21:23:14",
@@ -117,8 +106,8 @@ const mockdata = {
       content: "너무 참여하고 싶어요!",
       writerInfo: {
         nickname: "su",
-        ordinal: 0,
-        campus: null,
+        ordinal: 1,
+        campus: "서울",
         authCheck: 0,
       },
       createdDate: "2022-01-30T21:23:15",
@@ -129,8 +118,8 @@ const mockdata = {
       content: "너무 참여하고 싶어요!",
       writerInfo: {
         nickname: "su",
-        ordinal: 0,
-        campus: null,
+        ordinal: 1,
+        campus: "서울",
         authCheck: 0,
       },
       createdDate: "2022-01-30T21:23:16",

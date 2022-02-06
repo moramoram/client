@@ -5,3 +5,4 @@ export * from "./JobPage";
 export * from "./LandingPage";
 export * from "./StudyPage";
 export * from "./MyPage";
+export * from "./Loading";

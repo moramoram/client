@@ -7,7 +7,9 @@ export const useIntersectionObserver = ({
   enabled = true,
 }) => {
   React.useEffect(() => {
-    if (!enabled) {
+    const el = target?.current;
+
+    if (!enabled || !el) {
       return;
     }
 
@@ -15,17 +17,11 @@ export const useIntersectionObserver = ({
       (entries) =>
         entries.forEach((entry) => entry.isIntersecting && onIntersect()),
       {
-        root: root && root.current,
+        root: root?.current,
         rootMargin: "0px",
         threshold: 1.0,
       }
     );
-
-    const el = target && target.current;
-
-    if (!el) {
-      return;
-    }
 
     observer.observe(el);
 

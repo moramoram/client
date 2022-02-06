@@ -10,16 +10,15 @@ const THEME = {
   DARK: "dark",
 };
 
-const JobSideBar = ({ data, badges, isLoading, ...props }) => {
-  const [isMarked, setIsMarked] = useState(false);
+const JobSideBar = ({ data, isLoading, ...props }) => {
+  const [isMarked, setIsMarked] = useState(data?.scrap);
 
   if (isLoading) {
-    data = new Array(4);
-    badges = ["", "", ""];
+    data = new Array(4).fill({ badges: ["", "", ""] });
   }
 
   return (
-    <SideBarWrapper isLoading={isLoading} {...props}>
+    <Layout isLoading={isLoading} {...props}>
       <ImageBox className="thumbnail" isLoading={isLoading} {...props} />
       <SideBarBox {...props}>
         {summaryData.map(({ title, icon, id }) => (
@@ -35,7 +34,7 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
         ))}
       </SideBarBox>
       <BadgeBox>
-        {badges.map((children, idx) => {
+        {data.badges.map((children, idx) => {
           return (
             <Badge
               className="badge-item"
@@ -73,7 +72,7 @@ const JobSideBar = ({ data, badges, isLoading, ...props }) => {
           </>
         )}
       </Button>
-    </SideBarWrapper>
+    </Layout>
   );
 };
 
@@ -124,7 +123,10 @@ const BadgeBox = styled.div`
   margin: 20px 10px;
 `;
 
-const SideBarWrapper = styled.div`
+const Layout = styled.div`
+  position: sticky;
+  top: 180px;
+
   display: block;
   border-radius: 16px;
   width: 400px;

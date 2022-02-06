@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
 import { auth } from "@/recoil/auth";
 import { themeState } from "@/recoil/theme";
@@ -24,12 +24,13 @@ const TYPE = {
 };
 
 const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
-  const [current, setCurrent] = useState(null);
   const [navbarOpen, setnavbarOpen] = useState(false);
   const [theme, setTheme] = useRecoilState(themeState);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const authState = useRecoilValue(auth);
   const navbar = useRef();
+  const path = useLocation();
+  const [current, setCurrent] = useState(path.pathname.split("/")[1]);
 
   const handleTheme = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
@@ -110,8 +111,8 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
                 </IconBox>
               </UserInfoBox>
               <LinkBox>
-                {userMenuData.map(({ name, title, url }) => (
-                  <UserMobileItemLink to={url} key={name}>
+                {userMenuData.map(({ name, title, url }, idx) => (
+                  <UserMobileItemLink to={url} key={idx}>
                     <UserMobileItem
                       {...props}
                       onClick={() => handleClickItem(name)}

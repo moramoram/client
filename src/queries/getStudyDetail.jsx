@@ -3,9 +3,9 @@ import { useQuery } from "react-query";
 
 import { daysFromToday } from "@/utils";
 
-export const useGetStudyDetail = () => useQuery(["getStudyDetail"], fetchData);
+export const GetStudyDetail = () => useQuery(["getStudyDetail"], fetchData);
 
-export const fetchData = async () => {
+const fetchData = async () => {
   console.log("API");
   const res = await axios.get("http://swapi.dev/api/people/1/");
   return res.data;
@@ -14,7 +14,7 @@ export const fetchData = async () => {
 export const convertToStudyDetail = (data) => {
   const titleData = {
     title: data.title,
-    subtitle: `${data.writerInfo.nickname} (${data.writerInfo.ordinal}/${data.writerInfo.campus})`,
+    subtitle: `${data.writerInfo.nickname} (${data.writerInfo.ordinal}기/${data.writerInfo.campus})`,
     src: null,
     highlight: data.on_off === 1 ? "모집중" : "모집완료",
   };
@@ -33,11 +33,20 @@ export const convertToStudyDetail = (data) => {
       title: "공고",
       number: null,
     },
+
     {
       name: "comments",
       title: "댓글",
       number: data.comments.length,
     },
   ];
-  return { commentData, contentData, titleData, tocItem };
+  const sidebarData = {
+    type: data.study_type,
+    target: data.company_name,
+    people: `${data.recruitment}명`,
+    location: data.location,
+    badges: [data.tech_stack.split(",")],
+    scrap: data.scrapStatus,
+  };
+  return { commentData, contentData, titleData, tocItem, sidebarData };
 };

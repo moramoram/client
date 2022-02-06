@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import { Link } from "react-router-dom";
+
 import { Logo } from "@/foundations";
 import { colors, fontSize, lineHeight } from "@/_shared";
 
@@ -10,26 +12,46 @@ const Footer = () => {
       <Box>
         <Container>
           <LogoBox>
-            <Logo width="100px" height="50px" />
+            <ItemLink to=".">
+              <Logo width="100px" height="50px" />
+            </ItemLink>
           </LogoBox>
           <Row>
             <Column>
               <Heading>소개</Heading>
-              <Item>서비스 소개</Item>
-              <Item>만든 사람</Item>
-              <Item>이용약관</Item>
-              <Item>개인정보처리방침</Item>
+              <ItemLink to=".">
+                <Item>서비스 소개</Item>
+              </ItemLink>
+              <ItemLink to="#">
+                <Item>만든 사람</Item>
+              </ItemLink>
+              <ItemLink to="#">
+                <Item>이용약관</Item>
+              </ItemLink>
+              <ItemLink to="#">
+                <Item>개인정보처리방침</Item>
+              </ItemLink>
             </Column>
             <Column>
               <Heading>서비스</Heading>
-              <Item>커뮤니티</Item>
-              <Item>스터디</Item>
-              <Item>취업정보</Item>
+              <ItemLink to="/community">
+                <Item>커뮤니티</Item>
+              </ItemLink>
+              <ItemLink to="/study">
+                <Item>스터디</Item>
+              </ItemLink>
+              <ItemLink to="/job">
+                <Item>취업정보</Item>
+              </ItemLink>
             </Column>
             <Column>
               <Heading>문의</Heading>
-              <Item>FAQ</Item>
-              <Item>1:1문의</Item>
+              <ItemLink to="#">
+                <Item>FAQ</Item>
+              </ItemLink>
+              <ItemLink to="#">
+                <Item>1:1문의</Item>
+              </ItemLink>
             </Column>
           </Row>
         </Container>
@@ -89,11 +111,14 @@ const LogoBox = styled.div`
   padding: 0 0 50px 0;
 `;
 
+const ItemLink = styled(Link)`
+  text-decoration: none;
+`;
+
 const Item = styled.span`
   color: ${colors.gray500};
   font-size: ${fontSize.sm};
   line-height: ${lineHeight.h3};
-  text-decoration: none;
 `;
 
 const CopyrightBox = styled.div`

@@ -132,10 +132,10 @@ const bgColor = {
 
 const Layout = styled.div`
   canvas {
-    height: 700px;
-    width: 700px;
+    height: 50vw;
+    width: 50vw;
 
-    ${(props) => props.isSmall && `height: 400px;`}
+    ${(props) => props.isSmall && `width: 400px;`}
   }
 
   .content {

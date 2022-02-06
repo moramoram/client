@@ -42,7 +42,7 @@ const AutoTyping = ({
 
   const remover = useCallback(() => {
     setTimeout(() => {
-      if (autoTyper.length === 0) {
+      if (!autoTyper) {
         setTimeout(() => {
           setWhichFuncStart(false);
           dispatchCount();
@@ -56,12 +56,8 @@ const AutoTyping = ({
 
   useEffect(() => {
     if (active) {
-      if (!whichFuncStart) {
-        writer();
-      }
-      if (whichFuncStart) {
-        remover();
-      }
+      if (!whichFuncStart) writer();
+      if (whichFuncStart) remover();
     }
   }, [active, whichFuncStart, writer, remover]);
 

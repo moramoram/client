@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -12,16 +12,17 @@ const THEME = {
   DARK: "dark",
 };
 
-const InputImage = (props) => {
+const InputImage = forwardRef(({ ...props }, imgRef) => {
   return (
     <Dropzone
       onDrop={(acceptedFiles) => {
         props.onChange(acceptedFiles);
       }}
+      ref={imgRef}
     >
       {({ getRootProps, getInputProps }) => (
         <Layout {...getRootProps()} {...props}>
-          <input {...getInputProps()} accept="image/*" />
+          <input {...getInputProps()} type="file" accept="image/*" />
           <Icon icon="image" />
           <Title>이미지를 업로드하세요</Title>
           <Description>
@@ -31,7 +32,7 @@ const InputImage = (props) => {
       )}
     </Dropzone>
   );
-};
+});
 
 InputImage.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),

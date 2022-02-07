@@ -80,7 +80,7 @@ const AvatarUploader = ({ aspect, ...props }) => {
       <Layout>
         <ImgBox>
           {/* TODO : 프로필 state 있을 경우 아바타 띄워주기 */}
-          <Avatar src={croppedImage} alt="Cropped" />
+          <Avatar size="extraLarge" src={croppedImage} alt="Cropped" />
         </ImgBox>
         <InputImage onChange={onFileChange} accept="image/*" {...props} />
       </Layout>
@@ -103,6 +103,10 @@ export default AvatarUploader;
 const Layout = styled.div`
   display: flex;
   gap: 1rem;
+
+  @media screen and (max-width: 530px) {
+    flex-direction: column;
+  }
 `;
 
 const CropperBox = styled.div`

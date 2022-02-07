@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { token, accessToken } from "@/recoil/auth";
+import { auth, accessToken } from "@/recoil/auth";
 
 import queryString from "query-string";
 
@@ -27,7 +27,7 @@ const Router = () => {
   const location = useLocation();
   const parsed = queryString.parse(location.search);
   const jwtToken = useRecoilValue(accessToken);
-  const setToken = useSetRecoilState(token);
+  const setAuth = useSetRecoilState(auth);
 
   const getToken = async () => {
     const { data } = await axiosInstance({
@@ -37,18 +37,15 @@ const Router = () => {
         code: parsed.code,
       },
     });
-    const { accessToken } = data;
-    setToken({
-      accessToken: accessToken,
-    });
-    localStorage.setItem("ssafe_token", JSON.parse(data));
+    console.log(data);
+    setAuth(data);
   };
 
   useEffect(() => {
     if (parsed.code) {
       getToken();
     }
-  });
+  }, []);
 
   useEffect(() => {
     if (jwtToken) {

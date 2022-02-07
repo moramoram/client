@@ -50,12 +50,14 @@ const mockdata = [
       authCheck: 0,
     },
     title: "this is test",
-    content: "lalalall",
+    content:
+      "오 라일락 꽃이 지는 날 goodbye 이런 결말이 어울려 안녕 꽃잎 같은 안녕 하이얀 우리 봄날의 climax 아 얼마나 기쁜 일이야 Ooh ooh Love me only till this spring 봄바람처럼 Ooh ooh Love me only till this spring 봄바람처럼 기분이 달아 콧노래 부르네 (랄라)",
     views: 3,
     totalComment: 1,
     totalLike: 1,
     createdDate: "2022-01-27T21:34:05",
     modifiedDate: "2022-02-03T21:55:29",
+    thumbnail: "https://image.bugsm.co.kr/album/images/500/40271/4027185.jpg",
   },
   {
     boardId: 5,
@@ -101,8 +103,7 @@ const mockdata = [
       authCheck: 0,
     },
     title: "출출하당",
-    content:
-      "I’m such a good surfer 가라앉지 않기 비틀 비 비틀 거리다가 풍덩 uh 빠지더라도 구명복 따윈 졸업 I’m such a good surfer 휩쓸리지 않기 울렁 우 울렁 거리다가 throw up 게워내더라도 지는 건 난 못 참아 제일 높은 파도 올라타타 라차차우아 해일과 함께 사라질 타이밍 그건 내가 골라 무슨 소리 겁이 나기는, 재밌지 뭐 어어어 푸푸푸 또 허허허 우우우적",
+    content: "I’m such a good surfer 가라앉지 않기 비틀 비 비틀 거리다가 ",
     views: 1,
     totalComment: 0,
     totalLike: 0,
@@ -112,7 +113,11 @@ const mockdata = [
 ];
 
 const CommentFeedGrid = styled(FeedGrid)`
+  width: 100%;
   > a {
-    min-width: 100%;
+    width: 90vw;
+    @media screen and (min-width: 980px) {
+      max-width: calc(100%);
+    }
   }
 `;

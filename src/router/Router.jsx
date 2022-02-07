@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 
 import { Route, Routes, useLocation } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { token, accessToken } from "@/recoil/auth";
+import { useSetRecoilState } from "recoil";
+import { auth } from "@/recoil/auth";
 
 import queryString from "query-string";
 
@@ -26,34 +26,25 @@ import {
 const Router = () => {
   const location = useLocation();
   const parsed = queryString.parse(location.search);
-  const jwtToken = useRecoilValue(accessToken);
-  const setToken = useSetRecoilState(token);
+  const setAuth = useSetRecoilState(auth);
 
-  const getToken = async () => {
+  const getToken = useCallback(async () => {
     const { data } = await axiosInstance({
-      url: "users/auth/google",
+      url: "/auth/login/google",
       method: "post",
       params: {
         code: parsed.code,
       },
     });
-    const { accessToken } = data;
-    setToken({
-      accessToken: accessToken,
-    });
-    localStorage.setItem("ssafe_token", JSON.parse(data));
-  };
+    console.log(data);
+    setAuth(data);
+  }, [parsed.code, setAuth]);
 
   useEffect(() => {
     if (parsed.code) {
       getToken();
     }
-  });
-
-  useEffect(() => {
-    if (jwtToken) {
-    }
-  });
+  }, [parsed, getToken]);
 
   return (
     <Routes>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
@@ -17,30 +17,33 @@ const STATUS = {
   ERROR: "error",
 };
 
-const Selector = ({ title, options, placeholder, message, ...props }) => {
-  return (
-    <Layout>
-      <Label {...props}>{title}</Label>
-      {props.creatable ? (
-        <Creatable
-          styles={customStyles(props)}
-          options={options}
-          placeholder={placeholder}
-          {...props}
-        />
-      ) : (
-        <Select
-          styles={customStyles(props)}
-          options={options}
-          placeholder={placeholder}
-          {...props}
-        />
-      )}
+const Selector = forwardRef(
+  ({ title, options, placeholder, message, ...props }, selectRef) => {
+    return (
+      <Layout>
+        <Label {...props}>{title}</Label>
+        {props.creatable ? (
+          <Creatable
+            styles={customStyles(props)}
+            options={options}
+            placeholder={placeholder}
+            {...props}
+          />
+        ) : (
+          <Select
+            styles={customStyles(props)}
+            options={options}
+            placeholder={placeholder}
+            ref={selectRef}
+            {...props}
+          />
+        )}
 
-      <Message {...props}>{message}</Message>
-    </Layout>
-  );
-};
+        <Message {...props}>{message}</Message>
+      </Layout>
+    );
+  }
+);
 
 Selector.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),

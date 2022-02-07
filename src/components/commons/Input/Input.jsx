@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
@@ -15,22 +15,25 @@ const STATUS = {
   ERROR: "error",
 };
 
-const Input = ({ title, placeholder, message, status, icon, ...props }) => {
-  return (
-    <Layout>
-      <Label {...props}>{title}</Label>
-      <InputBox status={status} {...props}>
-        {icon && <Icon icon={icon} />}
-        <InputText
-          placeholder={placeholder}
-          type={props.number ? "number" : "text"}
-          {...props}
-        />
-      </InputBox>
-      <Message status={status}>{message}</Message>
-    </Layout>
-  );
-};
+const Input = forwardRef(
+  ({ title, placeholder, message, status, icon, ...props }, inputRef) => {
+    return (
+      <Layout>
+        <Label {...props}>{title}</Label>
+        <InputBox status={status} {...props}>
+          {icon && <Icon icon={icon} />}
+          <InputText
+            placeholder={placeholder}
+            type={props.number ? "number" : "text"}
+            ref={inputRef}
+            {...props}
+          />
+        </InputBox>
+        <Message status={status}>{message}</Message>
+      </Layout>
+    );
+  }
+);
 
 Input.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),

@@ -35,7 +35,7 @@ const Authorization = () => {
       };
       files[0] instanceof File && reader.readAsDataURL(files[0]);
     });
-  });
+  }, []);
 
   useEffect(() => {
     if (watch("authImg")) {

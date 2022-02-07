@@ -62,7 +62,10 @@ const MyInfo = ({ ...props }) => {
       });
       console.log(res);
     } else {
-      nickStatus({ status: "default", message: null });
+      setNickStatus({
+        status: "success",
+        message: null,
+      });
     }
   }, []);
 
@@ -95,11 +98,7 @@ const MyInfo = ({ ...props }) => {
             />
             <Button
               mode="active"
-              disabled={
-                nickStatus.status === "error" || nickValue === nickname
-                  ? true
-                  : false
-              }
+              disabled={nickStatus.status === "success" ? false : true}
               theme={theme}
             >
               변경하기

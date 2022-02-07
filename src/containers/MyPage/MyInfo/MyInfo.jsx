@@ -49,7 +49,7 @@ const MyInfo = ({ ...props }) => {
         message: "한글, 영문, 혹은 숫자를 올바르게 입력해주세요",
       });
     } else setNickStatus({ status: "default", message: null });
-  });
+  }, []);
 
   const getNicknameCheck = useCallback(async () => {
     const res = await axios.get(
@@ -76,7 +76,7 @@ const MyInfo = ({ ...props }) => {
       }, 500);
       return () => clearTimeout(timeoutId);
     }
-  }, [nickValue]);
+  }, [nickValue, getNicknameCheck, nickStatus]);
 
   return (
     <Layout>

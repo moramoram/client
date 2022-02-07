@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
@@ -28,7 +28,7 @@ const Router = () => {
   const parsed = queryString.parse(location.search);
   const setAuth = useSetRecoilState(auth);
 
-  const getToken = async () => {
+  const getToken = useCallback(async () => {
     const { data } = await axiosInstance({
       url: "/auth/login/google",
       method: "post",
@@ -38,13 +38,13 @@ const Router = () => {
     });
     console.log(data);
     setAuth(data);
-  };
+  }, [parsed.code, setAuth]);
 
   useEffect(() => {
     if (parsed.code) {
       getToken();
     }
-  }, []);
+  }, [parsed, getToken]);
 
   return (
     <Routes>

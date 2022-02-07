@@ -16,17 +16,19 @@ const queryClient = new QueryClient({
 
 const App = () => {
   return (
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={true} />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/*" element={<Router />} />
-          </Routes>
-        </BrowserRouter>
-      </QueryClientProvider>
-    </RecoilRoot>
+    <StrictMode>
+      <RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={true} />
+          <BrowserRouter>
+            <ScrollToTop />
+            <Routes>
+              <Route path="/*" element={<Router />} />
+            </Routes>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </RecoilRoot>
+    </StrictMode>
   );
 };
 

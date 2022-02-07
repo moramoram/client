@@ -23,7 +23,7 @@ export const auth = atom({
 export const isLoginState = selector({
   key: "isLoginState",
   get: ({ get }) => {
-    return !get(token).accessToken;
+    return !!get(token).accessToken;
   },
 });
 

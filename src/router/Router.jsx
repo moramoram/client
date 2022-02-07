@@ -31,7 +31,7 @@ const Router = () => {
 
   const getToken = async () => {
     const { data } = await axiosInstance({
-      url: "users/auth/google",
+      url: "/auth/login/google",
       method: "post",
       params: {
         code: parsed.code,

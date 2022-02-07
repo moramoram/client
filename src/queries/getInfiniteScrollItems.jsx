@@ -76,7 +76,7 @@ export const CommunityFeedSelector = (data) => {
       created: daysFromToday(card.createdDate),
       title: card.title,
       content: card.content,
-      thumbnail: null,
+      thumbnail: card.thumbnail,
       likecount: numToMillion(card.totalLike),
       commentcount: numToMillion(card.totalComment),
       viewcount: numToMillion(card.views),

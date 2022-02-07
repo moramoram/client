@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { useForm, Controller } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
@@ -15,24 +16,66 @@ const THEME = {
 
 const Authorization = () => {
   const theme = useRecoilValue(themeState);
-  const [confirmUsername, setConfirmUsername] = useState(false);
   const [imageSrc, setImageSrc] = React.useState(null);
+  const {
+    register,
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
 
-  const readFile = (file) => {
+  const readFile = useCallback((files) => {
+    const reader = new FileReader();
     return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.addEventListener("load", () => resolve(reader.result), false);
-      reader.readAsDataURL(file);
+      reader.onload = () => {
+        resolve(reader.result);
+        setImageSrc(reader.result);
+      };
+      files[0] instanceof File && reader.readAsDataURL(files[0]);
     });
+  });
+
+  useEffect(() => {
+    if (watch("authImg")) {
+      readFile(watch("authImg"));
+    }
+  });
+
+  const nicknameValidation = {
+    required: true,
+    minLength: 2,
+    maxLength: 8,
+    pattern: /^[가-힣a-zA-Z0-9]+$/i,
   };
 
-  const onFileChange = async (files) => {
-    if (files && files.length > 0) {
-      const file = files[0];
-      let imageDataUrl = await readFile(file);
-      setImageSrc(imageDataUrl);
-    }
+  const nicknameErrors = {
+    required: "필수 항목입니다",
+    minLength: "별명을 2글자 이상 8글자 이하로 입력해주세요",
+    maxLength: "별명을 2글자 이상 8글자 이하로 입력해주세요",
+    pattern: "한글, 영문, 혹은 숫자를 올바르게 입력해주세요",
   };
+
+  const nameValidation = {
+    required: true,
+    minLength: 2,
+    maxLength: 8,
+    pattern: /^[가-힣]+$/i,
+  };
+
+  const nameErrors = {
+    required: "필수 항목입니다",
+    minLength: "실명을 2글자 이상 8글자 이하로 입력해주세요",
+    maxLength: "실명을 2글자 이상 8글자 이하로 입력해주세요",
+    pattern: "한글로 올바르게 입력해주세요",
+  };
+
+  const required = {
+    required: true,
+  };
+
+  const requiredError = "필수 항목입니다";
 
   return (
     <>
@@ -42,57 +85,76 @@ const Authorization = () => {
           SSAFY만의 커뮤니티를 만들기 위해서예요 <br />
           다른 용도로 사용하지 않으니 안심하세요
         </SubTitle>
-        <FormSection>
+        <FormSection onSubmit={handleSubmit(onSubmit)}>
           <div>
             <Label theme={theme}>별명</Label>
             <InputBox>
               <Input
                 placeholder="별명을 입력하세요"
-                status={!confirmUsername ? "default" : "error"}
-                // TODO: Form Validation
-                message={
-                  confirmUsername
-                    ? "이미 사용중인 별명이에요. 다른 별명으로 지어주세요."
-                    : null
-                }
+                status={!errors?.nickname ? "default" : "error"}
+                message={nicknameErrors[errors?.nickname?.type]}
                 theme={theme}
+                {...register("nickname", { ...nicknameValidation })}
               />
-              <Button
-                mode="active"
-                onClick={() => setConfirmUsername(!confirmUsername)}
-                theme={theme}
-              >
-                중복 확인
-              </Button>
             </InputBox>
           </div>
           <Input
             title="이름"
             placeholder="실명 입력"
-            message="SSAFY임이 확인되도록 실명으로 입력해주세요"
+            status={!errors?.name ? "default" : "error"}
+            message={
+              nameErrors[errors?.name?.type] ??
+              "SSAFY임이 확인되도록 실명으로 입력해주세요"
+            }
             theme={theme}
+            {...register("name", { ...nameValidation })}
           />
           <div>
             <Label theme={theme}>SSAFY 정보</Label>
             <InformBox>
-              <Selector
-                options={numberOption}
-                placeholder="기수"
-                theme={theme}
+              <Controller
+                name="ordinal"
+                control={control}
+                rules={{ ...required }}
+                render={({ field }) => (
+                  <Selector
+                    options={numberOption}
+                    placeholder="기수"
+                    theme={theme}
+                    status={!errors?.ordinal ? "default" : "error"}
+                    message={
+                      errors?.ordinal?.type === "required" && requiredError
+                    }
+                    {...field}
+                  />
+                )}
               />
-              <Selector
-                options={regionOption}
-                placeholder="캠퍼스"
-                theme={theme}
+              <Controller
+                name="campus"
+                control={control}
+                rules={{ ...required }}
+                render={({ field }) => (
+                  <Selector
+                    options={regionOption}
+                    placeholder="캠퍼스"
+                    theme={theme}
+                    status={!errors?.campus ? "default" : "error"}
+                    message={
+                      errors?.campus?.type === "required" && requiredError
+                    }
+                    {...field}
+                  />
+                )}
               />
             </InformBox>
           </div>
           <div>
             <Label theme={theme}>이미지로 인증하기</Label>
-            <ImageUploader
-              theme={theme}
-              onChange={onFileChange}
-              accept="image/*"
+            <Controller
+              name="authImg"
+              control={control}
+              rules={{ ...required }}
+              render={({ field }) => <ImageUploader theme={theme} {...field} />}
             />
             {imageSrc && <img src={imageSrc} alt="auth" />}
             <Message>
@@ -182,7 +244,7 @@ const SubTitle = styled.div`
   line-height: ${lineHeight.p};
 `;
 
-const FormSection = styled.div`
+const FormSection = styled.form`
   display: flex;
   flex-direction: column;
   gap: 2rem;

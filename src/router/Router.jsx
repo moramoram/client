@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 
 import { Route, Routes, useLocation } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { auth, accessToken } from "@/recoil/auth";
+import { useSetRecoilState } from "recoil";
+import { auth } from "@/recoil/auth";
 
 import queryString from "query-string";
 
@@ -26,7 +26,6 @@ import {
 const Router = () => {
   const location = useLocation();
   const parsed = queryString.parse(location.search);
-  const jwtToken = useRecoilValue(accessToken);
   const setAuth = useSetRecoilState(auth);
 
   const getToken = async () => {
@@ -46,11 +45,6 @@ const Router = () => {
       getToken();
     }
   }, []);
-
-  useEffect(() => {
-    if (jwtToken) {
-    }
-  });
 
   return (
     <Routes>

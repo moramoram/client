@@ -1,8 +1,8 @@
-import React, { Suspense } from "react";
+import React, { useState, Suspense } from "react";
 import styled from "styled-components";
 
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { themeState } from "@/recoil/theme";
+import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
+import { themeState, communityCategory } from "@/recoil";
 import { createModalState } from "@/recoil/modal";
 
 import { useMediaQuery } from "react-responsive";
@@ -18,10 +18,12 @@ import {
 const CommunityPage = () => {
   const theme = useRecoilValue(themeState);
   const setLoginModalOpen = useSetRecoilState(createModalState);
+  const [category, setCategory] = useRecoilState(communityCategory);
 
-  const handleCategory = (e) => {
-    console.log(e);
+  const handleCategory = (idx) => {
+    setCategory(idx);
   };
+  console.log(category);
 
   const isPc = useMediaQuery({
     query: "(min-width:980px)",
@@ -41,6 +43,7 @@ const CommunityPage = () => {
           <StickyNavBox>
             <StickyNav
               data={categoryData}
+              selected={category}
               theme={theme}
               onClick={handleCategory}
             />
@@ -64,6 +67,7 @@ const CommunityPage = () => {
           <SubNavbar
             data={categoryData}
             theme={theme}
+            selected={category}
             onClick={handleCategory}
             view="mobile"
           />
@@ -87,19 +91,19 @@ export default CommunityPage;
 
 const categoryData = [
   {
-    id: 0,
+    id: 1,
     title: "자유게시판",
   },
   {
-    id: 1,
+    id: 2,
     title: "익명게시판",
   },
   {
-    id: 2,
+    id: 3,
     title: "취업 정보 게시판",
   },
   {
-    id: 3,
+    id: 4,
     title: "질문 게시판",
   },
 ];

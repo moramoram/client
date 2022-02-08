@@ -14,24 +14,24 @@ import { FeedGrid } from "@/containers";
 const CommunityFeedGrid = () => {
   const theme = useRecoilValue(themeState);
   const loader = useRef(null);
-  const { data, fetchNextPage } = GetCommunityList(1);
+  // const { data, fetchNextPage, hasNextPage } = GetCommunityList(1);
   // const { data } = GetDummyApi();
   const { feedData } = CommunityFeedSelector(mockdata);
 
-  const onFetchNewData = () => {
-    fetchNextPage();
-  };
-
-  useIntersectionObserver({
-    target: loader,
-    onIntersect: fetchNextPage,
-    enabled: true,
-  });
+  // const onFetchNewData = () => {
+  //   fetchNextPage();
+  // };
+  // console.log(data);
+  // useIntersectionObserver({
+  //   target: loader,
+  //   onIntersect: onFetchNewData,
+  //   enabled: hasNextPage,
+  // });
 
   return (
     <>
       <CommentFeedGrid data={feedData} theme={theme} />
-      <div ref={loader} />
+      <FetchBox ref={loader} />
     </>
   );
 };
@@ -122,4 +122,8 @@ const CommentFeedGrid = styled(FeedGrid)`
       max-width: calc(100%);
     }
   }
+`;
+
+const FetchBox = styled.div`
+  height: 30px;
 `;

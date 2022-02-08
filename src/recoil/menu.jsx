@@ -29,10 +29,5 @@ export const navUserData = atom({
       title: "내 프로필",
       url: "mypage",
     },
-    {
-      name: "logout",
-      title: "로그아웃",
-      url: "logout",
-    },
   ],
 });

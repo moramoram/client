@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, ErrorBoundary } from "react";
 import styled from "styled-components";
 
 import { Outlet } from "react-router-dom";
@@ -53,7 +53,7 @@ const Layout = () => {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         />
       </ScrollTopBox>
-      {/* <Footer theme={theme} /> */}
+      <Footer theme={theme} />
     </LayoutBox>
   );
 };

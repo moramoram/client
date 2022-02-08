@@ -1,9 +1,4 @@
-import {
-  axiosInstance,
-  daysFromToday,
-  daysLeftFromToday,
-  numToMillion,
-} from "@/utils";
+import { axiosInstance, daysLeftFromToday } from "@/utils";
 import { useInfiniteQuery } from "react-query";
 
 const fetchPage = async (type, pageParam) => {

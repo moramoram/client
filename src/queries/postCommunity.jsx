@@ -1,9 +1,6 @@
 import { axiosInstance } from "@/utils";
-import { useMutation } from "react-query";
 
-export const PostBoards = () => useMutation("postComment", postBoards);
-
-export const postBoards = async (data) => {
+export const postCommunity = async (data) => {
   const res = await axiosInstance({
     url: `/boards`,
     method: "post",

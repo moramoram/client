@@ -10,7 +10,7 @@ const THEME = {
   LIGHT: "light",
 };
 
-const Dropdown = ({ items, ...props }) => {
+const DropdownSmall = ({ items, ...props }) => {
   return (
     <Layout {...props}>
       <MenuBox {...props}>
@@ -27,12 +27,12 @@ const Dropdown = ({ items, ...props }) => {
   );
 };
 
-Dropdown.propTypes = {
+DropdownSmall.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   items: PropTypes.array.isRequired,
 };
 
-Dropdown.defaultProps = {
+DropdownSmall.defaultProps = {
   theme: THEME.LIGHT,
   items: [
     {
@@ -48,7 +48,7 @@ Dropdown.defaultProps = {
   ],
 };
 
-export default Dropdown;
+export default DropdownSmall;
 
 const borderColor = {
   dark: colors.gray800,

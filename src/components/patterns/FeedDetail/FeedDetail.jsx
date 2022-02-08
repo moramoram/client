@@ -32,6 +32,7 @@ const FeedDetail = ({
   likecount,
   commentcount,
   viewcount,
+  dropdownItems,
   ...props
 }) => {
   const usernameRender = username ?? "User";
@@ -54,23 +55,7 @@ const FeedDetail = ({
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           />
           {isDropdownOpen && (
-            <DropdownSmall
-              // TODO : 게시글 수정 및 삭제 로직
-              items={[
-                {
-                  name: "edit",
-                  title: "수정",
-                  onClick: () => console.log("수정"),
-                },
-                {
-                  name: "delete",
-                  title: "삭제",
-                  onClick: () => console.log("삭제"),
-                },
-              ]}
-              size="small"
-              {...props}
-            />
+            <DropdownSmall items={dropdownItems} size="small" {...props} />
           )}
         </DropdownBox>
       </Header>

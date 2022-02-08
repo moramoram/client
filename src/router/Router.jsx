@@ -3,11 +3,15 @@ import React, { useEffect, useCallback } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import {
   useRecoilState,
-  useRecoilValue,
-  useSetRecoilState,
-  useResetRecoilState,
+  // useRecoilValue,
+  // useSetRecoilState,
+  // useResetRecoilState,
 } from "recoil";
-import { auth, token, refreshToken } from "@/recoil";
+import {
+  // auth,
+  token,
+  // refreshToken
+} from "@/recoil";
 
 import queryString from "query-string";
 
@@ -35,7 +39,7 @@ const Router = () => {
 
   const [jwtToken, setToken] = useRecoilState(token);
   // const refresh = useRecoilValue(refreshToken);
-  const setAuth = useSetRecoilState(auth);
+  // const setAuth = useSetRecoilState(auth);
   // const resetToken = useResetRecoilState(token);
   // const resetAuth = useResetRecoilState(auth);
 
@@ -56,16 +60,17 @@ const Router = () => {
   }, [parsed.code, setToken, navigate]);
 
   const getMyPageInfo = async () => {
-    await axiosInstance({
-      url: "users/me",
-      headers: {
-        Authorization: `Bearer ${jwtToken}`,
-      },
-    })
-      .then(({ data }) => {
-        setAuth({ data });
-      })
-      .catch((err) => console.log(err));
+    console.log("get user info");
+    // await axiosInstance({
+    //   url: "users/me",
+    //   headers: {
+    //     Authorization: `Bearer ${jwtToken}`,
+    //   },
+    // })
+    //   .then(({ data }) => {
+    //     setAuth({ data });
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -74,11 +79,11 @@ const Router = () => {
     }
   });
 
-  // useEffect(() => {
-  //   if (jwtToken) {
-  //     getMyPageInfo();
-  //   }
-  // });
+  useEffect(() => {
+    if (jwtToken) {
+      getMyPageInfo();
+    }
+  });
 
   return (
     <Routes>

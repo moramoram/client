@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { CommentList } from "@/containers";
+import { CommunityDetailComment } from "@/containers";
 import { Button, CommentInput, FeedDetail } from "@/components";
 import { Icon } from "@/foundations";
 import { colors, fontSize, fontWeight } from "@/_shared";
@@ -10,8 +10,8 @@ import { daysFromToday } from "@/utils";
 import { GetCommunityDetail, CommunityDetailSelector } from "@/queries";
 
 const CommunityDetail = ({ ...props }) => {
-  const [isLike, setIsLiked] = useState(0);
   const { contentData } = CommunityDetailSelector(feedData);
+  const [isLike, setIsLiked] = useState(contentData.likeStatus);
 
   return (
     <Layout>
@@ -41,9 +41,7 @@ const CommunityDetail = ({ ...props }) => {
         </CountBox>
       </Footer>
       <CommentBox {...props}>
-        <Title {...props}>댓글</Title>
-        <CommentInput {...props} />
-        <CommentList data={commentData} {...props} />
+        <CommunityDetailComment {...props} />
       </CommentBox>
     </Layout>
   );

@@ -19,10 +19,10 @@ export const CommunityDetailSelector = (data) => {
     created: daysFromToday(data.createdDate),
     title: "커뮤니티 상세 페이지 제목",
     content: parseHtml(data.content),
-    thumbnail: "",
     likecount: numToMillion(data.totalLike),
     commentcount: numToMillion(data.comments.length),
     viewcount: numToMillion(data.views),
+    likeStatus: data.likeStatus,
   };
   return { contentData };
 };

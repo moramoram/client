@@ -14,16 +14,14 @@ const THEME = {
   LIGHT: "light",
 };
 
-const Dropdown = ({ user, items, onClick, ...props }) => {
+const Dropdown = ({ items, onClick, ...props }) => {
   const authState = useRecoilValue(auth);
 
   return (
     <Layout {...props}>
-      {user && (
-        <UserInfo {...props}>
-          <UserName>{authState.nickname ?? "User"}</UserName>님 안녕하세요!
-        </UserInfo>
-      )}
+      <UserInfo {...props}>
+        <UserName>{authState.nickname ?? "User"}</UserName>님 안녕하세요!
+      </UserInfo>
       <MenuBox {...props}>
         <DropdownItemLink to="mypage" {...props}>
           <DropdownItem children="내 프로필" {...props} />
@@ -37,7 +35,6 @@ const Dropdown = ({ user, items, onClick, ...props }) => {
 Dropdown.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   items: PropTypes.array.isRequired,
-  user: PropTypes.node,
 };
 
 Dropdown.defaultProps = {
@@ -54,7 +51,6 @@ Dropdown.defaultProps = {
       url: "logout",
     },
   ],
-  user: "",
 };
 
 export default Dropdown;
@@ -85,13 +81,6 @@ const Layout = styled.div`
 
   background-color: ${(props) => bgColor[props.theme]};
   box-shadow: ${shadows.base};
-
-  ${(props) =>
-    props.size === "small" &&
-    `
-      width: 100px;
-      align-items: stretch;
-    `}
 `;
 
 const UserInfo = styled.div`
@@ -117,12 +106,4 @@ const MenuBox = styled.div`
 
 const DropdownItemLink = styled(Link)`
   text-decoration: none;
-
-  ${(props) =>
-    props.size === "small" &&
-    `
-      div {
-        justify-content: center;
-      };
-    `}
 `;

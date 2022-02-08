@@ -14,3 +14,8 @@ export const createModalState = atom({
   key: "createModalState",
   default: false,
 });
+
+export const updateModalState = atom({
+  key: "updateModalState",
+  default: null,
+});

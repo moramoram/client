@@ -6,11 +6,22 @@ import { useRecoilValue } from "recoil";
 import { themeState, navTypeState } from "@/recoil/theme";
 
 import { isLoginState } from "@/recoil/auth";
-import { modalState, createModalState, loginModalState } from "@/recoil/modal";
+import {
+  modalState,
+  loginModalState,
+  createModalState,
+  updateModalState,
+} from "@/recoil/modal";
 import { navMenuData, navUserData } from "@/recoil/menu";
 
 import { Modal, ScrollTopButton } from "@/components";
-import { Navbar, SignUpModal, CommunityCreate, Footer } from "@/containers";
+import {
+  Navbar,
+  SignUpModal,
+  CommunityCreate,
+  CommunityUpdate,
+  Footer,
+} from "@/containers";
 import { colors } from "@/_shared";
 
 const Layout = () => {
@@ -22,23 +33,21 @@ const Layout = () => {
   const isLogined = useRecoilValue(isLoginState);
   const isloginModal = useRecoilValue(loginModalState);
   const isCreateModal = useRecoilValue(createModalState);
+  const isUpdateModal = useRecoilValue(updateModalState);
   const isModal = useRecoilValue(modalState);
 
   useEffect(() => {
-    (isModal || isloginModal) && (document.body.style.overflow = "hidden");
+    (isModal || isloginModal || isCreateModal || isUpdateModal) &&
+      (document.body.style.overflow = "hidden");
     return () => (document.body.style.overflow = "unset");
-  }, [isModal, isloginModal]);
-
-  useEffect(() => {
-    (isModal || isCreateModal) && (document.body.style.overflow = "hidden");
-    return () => (document.body.style.overflow = "unset");
-  }, [isModal, isCreateModal]);
+  }, [isModal, isloginModal, isCreateModal, isUpdateModal]);
 
   return (
     <LayoutBox theme={theme}>
       {isModal && <Modal theme={theme} />}
       {isloginModal && <SignUpModal theme={theme} />}
       {isCreateModal && <CommunityCreate theme={theme} />}
+      {isUpdateModal && <CommunityUpdate theme={theme} />}
       <Nav
         theme={theme}
         type={navType}

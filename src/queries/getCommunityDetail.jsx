@@ -1,16 +1,18 @@
-import axios from "axios";
 import { useQuery } from "react-query";
-import { daysFromToday, numToMillion, parseHtml } from "@/utils";
+import { axiosInstance, daysFromToday, numToMillion, parseHtml } from "@/utils";
 
-export const GetCommunityDetail = () =>
-  useQuery(["getCommunityDetail"], fetchData);
+export const GetCommunityDetail = (id) =>
+  useQuery(["getCommunityDetail", id], () => fetchData(id));
 
-const fetchData = async () => {
-  const res = await axios.get("http://swapi.dev/api/people/1/");
+const fetchData = async (id) => {
+  const res = await axiosInstance({
+    url: `/boards/${id} `,
+  });
   return res.data;
 };
 
 export const CommunityDetailSelector = (data) => {
+  const { parsedhtml } = parseHtml(data.content);
   const contentData = {
     username: data.writerInfo.nickname,
     avatar: null,
@@ -18,9 +20,9 @@ export const CommunityDetailSelector = (data) => {
     ordinal: data.writerInfo.campus,
     created: daysFromToday(data.createdDate),
     title: "커뮤니티 상세 페이지 제목",
-    content: parseHtml(data.content),
+    content: parsedhtml,
     likecount: numToMillion(data.totalLike),
-    commentcount: numToMillion(data.comments.length),
+    commentcount: numToMillion(0),
     viewcount: numToMillion(data.views),
     likeStatus: data.likeStatus,
   };

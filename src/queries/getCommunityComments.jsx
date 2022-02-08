@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { axiosInstance, daysFromToday, numToMillion, parseHtml } from "@/utils";
+import { axiosInstance, daysFromToday } from "@/utils";
 
 export const GetCommunityComments = (id) =>
   useQuery(["getCommunityComments", id], () => fetchData(id));

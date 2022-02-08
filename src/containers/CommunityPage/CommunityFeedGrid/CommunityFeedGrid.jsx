@@ -5,8 +5,8 @@ import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil";
 import { useIntersectionObserver } from "@/hooks";
 import {
-  GetDummyApi,
-  // GetInfiniteQuery,
+  // GetDummyApi,
+  GetCommunityList,
   CommunityFeedSelector,
 } from "@/queries";
 import { FeedGrid } from "@/containers";
@@ -14,18 +14,17 @@ import { FeedGrid } from "@/containers";
 const CommunityFeedGrid = () => {
   const theme = useRecoilValue(themeState);
   const loader = useRef(null);
-  // const { data, fetchNextPage } = GetInfiniteQuery();
-  const { data } = GetDummyApi();
+  const { data, fetchNextPage } = GetCommunityList(1);
+  // const { data } = GetDummyApi();
   const { feedData } = CommunityFeedSelector(mockdata);
 
   const onFetchNewData = () => {
-    const token = localStorage.getItem("token");
-    token ? console.log(data.name) : console.log("requirelogin");
+    fetchNextPage();
   };
 
   useIntersectionObserver({
     target: loader,
-    onIntersect: onFetchNewData,
+    onIntersect: fetchNextPage,
     enabled: true,
   });
 
@@ -75,6 +74,7 @@ const mockdata = [
     totalLike: 0,
     createdDate: "2022-01-27T21:33:53",
     modifiedDate: "2022-01-27T21:33:53",
+    thumbnail: "https://image.bugsm.co.kr/album/images/500/40271/4027185.jpg",
   },
   {
     boardId: 3,
@@ -92,6 +92,7 @@ const mockdata = [
     totalLike: 0,
     createdDate: "2022-01-27T18:39:04",
     modifiedDate: "2022-02-01T13:16:57",
+    thumbnail: "https://image.bugsm.co.kr/album/images/500/40271/4027185.jpg",
   },
   {
     boardId: 2,
@@ -109,6 +110,7 @@ const mockdata = [
     totalLike: 0,
     createdDate: "2022-01-27T18:38:57",
     modifiedDate: "2022-01-27T21:50:27",
+    thumbnail: "https://image.bugsm.co.kr/album/images/500/40271/4027185.jpg",
   },
 ];
 

@@ -19,7 +19,7 @@ export const useIntersectionObserver = ({
       {
         root: root?.current,
         rootMargin: "0px",
-        threshold: 1.0,
+        threshold: 1,
       }
     );
 

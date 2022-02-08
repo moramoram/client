@@ -53,7 +53,7 @@ const Layout = () => {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         />
       </ScrollTopBox>
-      <Footer theme={theme} />
+      {/* <Footer theme={theme} /> */}
     </LayoutBox>
   );
 };

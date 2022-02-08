@@ -65,24 +65,3 @@ export const StudyCardSelector = (data) => {
 
   return { cardData };
 };
-
-export const CommunityFeedSelector = (data) => {
-  const feedData = data.map((card) => {
-    return {
-      username: card.writerInfo.nickname,
-      avatar: null,
-      campus: card.writerInfo.campus,
-      ordinal: card.writerInfo.ordinal,
-      created: daysFromToday(card.createdDate),
-      title: card.title,
-      content: card.content,
-      thumbnail: card.thumbnail,
-      likecount: numToMillion(card.totalLike),
-      commentcount: numToMillion(card.totalComment),
-      viewcount: numToMillion(card.views),
-      id: card.boardId,
-    };
-  });
-
-  return { feedData };
-};

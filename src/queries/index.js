@@ -5,6 +5,7 @@ export * from "./getInfiniteScrollItems";
 export * from "./getDummyApi";
 export * from "./getCommunityItems";
 export * from "./getCommunityDetail";
+export * from "./getCommunityComments";
 export * from "./postCommunity";
 export * from "./putCommunity";
 export * from "./deleteCommunity";

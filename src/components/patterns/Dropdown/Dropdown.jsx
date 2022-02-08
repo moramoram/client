@@ -14,7 +14,7 @@ const THEME = {
   LIGHT: "light",
 };
 
-const Dropdown = ({ user, items, ...props }) => {
+const Dropdown = ({ user, items, onClick, ...props }) => {
   const authState = useRecoilValue(auth);
 
   return (
@@ -25,11 +25,10 @@ const Dropdown = ({ user, items, ...props }) => {
         </UserInfo>
       )}
       <MenuBox {...props}>
-        {items.map((item) => (
-          <DropdownItemLink to={item.url} key={item.name} {...props}>
-            <DropdownItem children={item.title} {...props} />
-          </DropdownItemLink>
-        ))}
+        <DropdownItemLink to="mypage" {...props}>
+          <DropdownItem children="내 프로필" {...props} />
+        </DropdownItemLink>
+        <DropdownItem children="로그아웃" onClick={onClick} {...props} />
       </MenuBox>
     </Layout>
   );

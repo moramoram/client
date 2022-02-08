@@ -3,10 +3,13 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import { Link, useLocation } from "react-router-dom";
-import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
-import { auth } from "@/recoil/auth";
-import { themeState } from "@/recoil/theme";
-import { loginModalState } from "@/recoil/modal";
+import {
+  useRecoilValue,
+  useRecoilState,
+  useSetRecoilState,
+  useResetRecoilState,
+} from "recoil";
+import { auth, token, themeState, loginModalState } from "@/recoil";
 
 import { NavMobileItem } from "./NavMobileItem";
 import { Avatar, Button, Switch } from "@/components";
@@ -28,15 +31,18 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
   const [theme, setTheme] = useRecoilState(themeState);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const authState = useRecoilValue(auth);
+  const resetToken = useResetRecoilState(token);
+  const resetAuth = useResetRecoilState(auth);
+
   const navbar = useRef();
   const path = useLocation();
   const [current, setCurrent] = useState(path.pathname.split("/")[1]);
 
-  const handleTheme = () => {
+  const onToggle = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
 
-  const handleClickItem = (name) => {
+  const onNavItem = (name) => {
     name === current
       ? window.scrollTo({ top: 0, behavior: "smooth" })
       : window.scrollTo({ top: 0 });
@@ -55,6 +61,11 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
       document.removeEventListener("click", handleClickOutside, true);
     };
   }, [navbarOpen]);
+
+  const onLogout = () => {
+    resetToken();
+    resetAuth();
+  };
 
   return (
     <Layout blur={navbarOpen} ref={navbar} {...props}>
@@ -75,7 +86,7 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
               <NavItemLink to={url} key={name}>
                 <NavMobileItem
                   {...props}
-                  onClick={() => handleClickItem(name)}
+                  onClick={() => onNavItem(name)}
                   status={current === name ? "active" : "default"}
                 >
                   {title}
@@ -98,7 +109,7 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
                   <SwitchBox>
                     <Switch
                       isSelected={theme !== "light"}
-                      onToggle={handleTheme}
+                      onToggle={onToggle}
                       size="small"
                     />
                   </SwitchBox>
@@ -115,13 +126,16 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
                   <UserMobileItemLink to={url} key={idx}>
                     <UserMobileItem
                       {...props}
-                      onClick={() => handleClickItem(name)}
+                      onClick={() => onNavItem(name)}
                       status={current === name ? "active" : "default"}
                     >
                       {title}
                     </UserMobileItem>
                   </UserMobileItemLink>
                 ))}
+                <UserMobileItem {...props} onClick={onLogout}>
+                  "로그아웃"
+                </UserMobileItem>
               </LinkBox>
             </>
           ) : (

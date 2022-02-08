@@ -1,8 +1,13 @@
 import React, { useEffect, useCallback } from "react";
 
 import { Route, Routes, useLocation } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import { auth } from "@/recoil/auth";
+import {
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+  useResetRecoilState,
+} from "recoil";
+import { auth, token, refreshToken } from "@/recoil";
 
 import queryString from "query-string";
 
@@ -26,7 +31,12 @@ import {
 const Router = () => {
   const location = useLocation();
   const parsed = queryString.parse(location.search);
-  const setAuth = useSetRecoilState(auth);
+
+  const [jwtToken, setToken] = useRecoilState(token);
+  // const refresh = useRecoilValue(refreshToken);
+  // const setAuth = useSetRecoilState(auth);
+  // const resetToken = useResetRecoilState(token);
+  // const resetAuth = useResetRecoilState(auth);
 
   const getToken = useCallback(async () => {
     const { data } = await axiosInstance({
@@ -36,15 +46,53 @@ const Router = () => {
         code: parsed.code,
       },
     });
-    console.log(data);
-    setAuth(data);
-  }, [parsed.code, setAuth]);
+    setToken({
+      accessToken: data.accessToken,
+      refreshToken: data.refreshToken,
+    });
+  }, [parsed.code, setToken]);
+
+  // const getMyPageInfo = async () => {
+  //   await axiosInstance({
+  //     url: "users/me",
+  //     headers: {
+  //       Authorization: `Bearer ${jwtToken}`,
+  //     },
+  //   })
+  //     .then(({ data }) => {
+  //       setAuth({ data });
+  //     })
+  //     .catch(async (err) => {
+  //       if (err?.response?.status === 401) {
+  //         await axiosInstance({
+  //           url: "user/auth",
+  //           method: "put",
+  //           data: {
+  //             refresh_token: refresh,
+  //           },
+  //         })
+  //           .then(({ data }) => {
+  //             setToken(data);
+  //           })
+  //           .catch(() => {
+  //             resetToken();
+  //             resetAuth();
+  //           });
+  //       }
+  //     });
+  // };
 
   useEffect(() => {
     if (parsed.code) {
       getToken();
     }
-  }, [parsed, getToken]);
+  });
+
+  // useEffect(() => {
+  //   if (jwtToken) {
+  //     getMyPageInfo();
+  //   }
+  // });
 
   return (
     <Routes>

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import axios from "axios";
 
 import { CommentList } from "@/containers";
 
@@ -78,15 +77,6 @@ const titleColor = {
   light: colors.gray900,
   dark: colors.gray25,
 };
-
-const borderColor = {
-  light: colors.gray300,
-  dark: colors.gray800,
-};
-
-const CommentBox = styled.div`
-  border-top: 1px solid ${(props) => borderColor[props.theme]};
-`;
 
 const Title = styled.div`
   margin: 2rem 0;

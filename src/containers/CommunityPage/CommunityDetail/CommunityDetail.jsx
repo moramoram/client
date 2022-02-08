@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { useSetRecoilState } from "recoil";
 import { updateModalState } from "@/recoil/modal";
-import { CommunityDetailSelector } from "@/queries";
+import { CommunityDetailSelector, deleteCommunity } from "@/queries";
 
 import { CommunityDetailComment } from "@/containers";
 import { Button, FeedDetail } from "@/components";
@@ -24,7 +24,11 @@ const CommunityDetail = ({ ...props }) => {
     {
       name: "delete",
       title: "삭제",
-      onClick: () => console.log("삭제"),
+      onClick: () => {
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+          deleteCommunity(16);
+        }
+      },
     },
   ];
 

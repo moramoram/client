@@ -27,6 +27,7 @@ const Selector = forwardRef(
             styles={customStyles(props)}
             options={options}
             placeholder={placeholder}
+            ref={selectRef}
             {...props}
           />
         ) : (

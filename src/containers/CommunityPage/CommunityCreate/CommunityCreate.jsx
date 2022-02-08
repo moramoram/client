@@ -4,16 +4,34 @@ import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { createModalState } from "@/recoil/modal";
 
+import { useForm } from "react-hook-form";
+
 import { CommunityEditor } from "@/containers/";
 import { Button } from "@/components";
 import { Icon } from "@/foundations";
 import { colors, animations } from "@/_shared";
 
-const CommunityCreate = ({ children, ...props }) => {
+import { postBoards } from "@/queries";
+
+const CommunityCreate = ({ ...props }) => {
   const [isCreateOpened, setIsCreateOpened] = useRecoilState(createModalState);
   const modal = useRef();
 
-  console.log(isCreateOpened);
+  if (isCreateOpened) {
+    // pass
+  }
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    postBoards(data);
+    setIsCreateOpened(false);
+  };
 
   const handleClose = useCallback(() => {
     if (window.confirm("지금 나가시면 저장되지 않아요!")) {
@@ -24,24 +42,35 @@ const CommunityCreate = ({ children, ...props }) => {
   return (
     <>
       <Overlay />
-      <ModalBox>
-        <IconBox>
-          <Icon icon="x" onClick={() => handleClose()} />
-        </IconBox>
-        <Layout ref={modal} {...props}>
-          <ContentBox>
-            <CommunityEditor {...props} />
-          </ContentBox>
-        </Layout>
-      </ModalBox>
-      <ButtonBox {...props}>
-        <Button mode="secondary" onClick={() => handleClose()} {...props}>
-          취소
-        </Button>
-        <Button mode="primary" {...props}>
-          완료
-        </Button>
-      </ButtonBox>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <ModalBox>
+          <IconBox>
+            <Icon icon="x" onClick={() => handleClose()} />
+          </IconBox>
+          <Layout ref={modal} {...props}>
+            <ContentBox>
+              <CommunityEditor
+                register={register}
+                control={control}
+                errors={errors}
+                {...props}
+              />
+            </ContentBox>
+          </Layout>
+        </ModalBox>
+        <ButtonBox {...props}>
+          <Button mode="secondary" onClick={() => handleClose()} {...props}>
+            취소
+          </Button>
+          <Button
+            mode="primary"
+            onClick={() => handleSubmit(onSubmit)}
+            {...props}
+          >
+            완료
+          </Button>
+        </ButtonBox>
+      </form>
     </>
   );
 };
@@ -112,7 +141,7 @@ const ButtonBox = styled.div`
   z-index: 10001;
 
   width: 100%;
-  padding: 1rem;
+  padding: 2rem;
   background-color: ${(props) => bgColor[props.theme]};
 `;
 

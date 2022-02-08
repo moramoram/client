@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import ReactQuill, { Quill } from "react-quill";
@@ -7,12 +7,13 @@ import hljs from "highlight.js";
 import "react-quill/dist/quill.snow.css";
 import "highlight.js/styles/base16/decaf.css";
 
+import { Controller } from "react-hook-form";
 import { useMediaQuery } from "react-responsive";
 
 import { Selector } from "@/components";
 import { colors, fontSize } from "@/_shared";
 
-const CommunityEditor = (props) => {
+const CommunityEditor = ({ register, control, errors, ...props }) => {
   Quill.register("modules/markdownShortcuts", MarkdownShortcuts);
   Quill.debug("error");
   window.hljs = hljs;
@@ -61,28 +62,71 @@ const CommunityEditor = (props) => {
     query: "(min-width:560px)",
   });
 
+  const options = [
+    { value: "1", label: "자유게시판" },
+    { value: "2", label: "익명게시판" },
+    { value: "3", label: "취업 정보 게시판" },
+    { value: "4", label: "질문 게시판" },
+  ];
+
+  useEffect(() => {
+    if (errors.title?.type === "maxLength") {
+      window.alert("제목은 45자 이내로 입력해주세요");
+    }
+  });
+
   return (
     <>
       <InputBox {...props}>
-        <Selector
-          placeholder="카테고리"
-          options={[
-            { value: "1", label: "자유게시판" },
-            { value: "2", label: "익명게시판" },
-            { value: "3", label: "취업 정보 게시판" },
-            { value: "4", label: "질문 게시판" },
-          ]}
-          {...props}
+        <Controller
+          name="boardType"
+          control={control}
+          rules={{ required: true }}
+          render={({ field: { onChange, value, ref } }) => (
+            <Selector
+              placeholder="카테고리"
+              inputRef={ref}
+              options={options}
+              value={options.find((c) => c.value === value)}
+              onChange={(val) => onChange(val.value)}
+              status={!errors?.boardType ? "default" : "error"}
+              {...props}
+            />
+          )}
         />
       </InputBox>
-      <Title placeholder="제목" className="title" {...props} />
-      <Layout {...props}>
-        <ReactQuill
-          modules={isDefaultView ? modules : mobileModules}
-          formats={formats}
-          placeholder="내용을 입력하세요"
-        />
-      </Layout>
+      <Title
+        placeholder="제목"
+        className="title"
+        status={
+          errors.title?.type === "required" ||
+          errors.title?.type === "maxLength"
+            ? "error"
+            : "default"
+        }
+        {...register("title", { required: true, maxLength: 45 })}
+        {...props}
+      />
+
+      <Controller
+        name="content"
+        control={control}
+        rules={{
+          validate: {
+            required: (v) => v !== "<p><br></p>",
+          },
+        }}
+        render={({ field }) => (
+          <Layout status={!errors?.content ? "default" : "error"} {...props}>
+            <ReactQuill
+              modules={isDefaultView ? modules : mobileModules}
+              formats={formats}
+              placeholder="내용을 입력하세요"
+              {...field}
+            />
+          </Layout>
+        )}
+      />
     </>
   );
 };
@@ -136,11 +180,13 @@ const Layout = styled.div`
     letter-spacing: -0.02rem;
 
     transition: 0.3s;
+    ${(props) => props.status === "error" && `color: ${colors.error};`}
   }
 
   .ql-editor.ql-blank::before {
     left: 0;
     color: ${colors.gray500};
+    ${(props) => props.status === "error" && `color: ${colors.error};`}
   }
 
   .ql-toolbar.ql-snow {
@@ -306,6 +352,7 @@ const Layout = styled.div`
 `;
 
 const Title = styled.input`
+  width: 100%;
   padding: 1rem 0;
   border: none;
   border-bottom: 1px solid ${(props) => borderColor[props.theme]};
@@ -321,4 +368,14 @@ const Title = styled.input`
   ::placeholder {
     color: ${colors.gray500};
   }
+
+  ${(props) =>
+    props.status === "error" &&
+    `
+    color: ${colors.error};
+
+    ::placeholder {
+      color: ${colors.error};
+    }
+  `}
 `;

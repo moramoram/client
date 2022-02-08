@@ -13,13 +13,16 @@ const THEME = {
 const ImageBoxResponsive = ({ theme, isLoading, src, name, ...props }) => {
   let imageContent = <Logo theme={theme} />;
   const a11yProps = {};
+  const onErrorImg = (e) => {
+    e.target.src = "/images/Icon.svg";
+  };
 
   if (isLoading) {
     imageContent = null;
     a11yProps["aria-busy"] = true;
     a11yProps["aria-label"] = "Loading";
   } else if (src) {
-    imageContent = <img src={src} alt={name} />;
+    imageContent = <img src={src} alt={name} onError={onErrorImg} />;
   }
 
   return (

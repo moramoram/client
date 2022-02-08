@@ -13,7 +13,6 @@ const CommunityDetail = ({ ...props }) => {
   const id = useParams().contentId;
 
   const { data } = GetCommunityDetail(id);
-  console.log(data);
   const { contentData } = CommunityDetailSelector(data);
   const [isLike, setIsLiked] = useState(contentData.likeStatus);
 

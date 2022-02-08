@@ -1,7 +1,4 @@
 import { axiosInstance } from "@/utils";
-import { useMutation } from "react-query";
-
-export const PostCommunity = () => useMutation("postCommunity", postCommunity);
 
 export const postCommunity = async (data) => {
   const res = await axiosInstance({

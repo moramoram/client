@@ -1,11 +1,8 @@
 import { axiosInstance } from "@/utils";
-import { useMutation } from "react-query";
 
-export const PutCommunity = () => useMutation("putCommunity", putCommunity);
-
-export const putCommunity = async (boardId, data) => {
+export const putCommunity = async (contentId, data) => {
   const res = await axiosInstance({
-    url: `/boards/${boardId}`,
+    url: `/boards/${contentId}`,
     method: "put",
     data,
   });

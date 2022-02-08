@@ -11,6 +11,8 @@ import { Button } from "@/components";
 import { Icon } from "@/foundations";
 import { colors, animations } from "@/_shared";
 
+import { postBoards } from "@/queries";
+
 const CommunityCreate = ({ ...props }) => {
   const [isCreateOpened, setIsCreateOpened] = useRecoilState(createModalState);
   const modal = useRef();
@@ -27,7 +29,7 @@ const CommunityCreate = ({ ...props }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(JSON.stringify(data));
+    postBoards(data);
     setIsCreateOpened(false);
   };
 

@@ -8,3 +8,4 @@ export * from "./getCommunityItems";
 export * from "./getCommunityDetail";
 export * from "./postCommunity";
 export * from "./putCommunity";
+export * from "./deleteCommunity";

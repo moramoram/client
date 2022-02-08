@@ -97,7 +97,7 @@ const Router = () => {
         <Route path="study/create" element={<StudyCreatePage />} />
         <Route path="study/:studyId" element={<StudyDetailPage />} />
         <Route path="community" element={<CommunityPage />} />
-        <Route path="community/:contentsId" element={<CommunityDetailPage />} />
+        <Route path="community/:contentId" element={<CommunityDetailPage />} />
         <Route path="mypage" element={<MyPage />} />
         <Route path="*" element={<div>page not found</div>} />
       </Route>

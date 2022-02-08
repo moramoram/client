@@ -1,40 +1,25 @@
 import React from "react";
 import styled from "styled-components";
-import axios from "axios";
 
 import { CommentList } from "@/containers";
 
-import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
+import { colors, fontSize, fontWeight } from "@/_shared";
 
-import { useRecoilValue } from "recoil";
-import { themeState } from "@/recoil/theme";
-import { useQuery, useInfiniteQuery } from "react-query";
 import { CommentInput } from "@/components";
 
 import { daysFromToday } from "@/utils";
 
-const StudyDetailComment = () => {
-  const theme = useRecoilValue(themeState);
-
-  const { items } = useQuery(
-    "fetchLuke",
-    () => axios("http://swapi.dev/api/people/1/"),
-    { suspense: true }
-  );
-
+const CommunityDetailComment = (props) => {
   return (
-    <CommentBox>
-      <BoxTitle theme={theme}>댓글</BoxTitle>
-      <BoxDescription theme={theme}>
-        총 {commentData.length}개의 댓글이 달렸습니다.
-      </BoxDescription>
-      <CommentInput theme={theme} />
-      <CommentList data={commentData} theme={theme} />
-    </CommentBox>
+    <>
+      <Title {...props}>댓글</Title>
+      <CommentInput {...props} />
+      <CommentList data={commentData} {...props} />
+    </>
   );
 };
 
-export default StudyDetailComment;
+export default CommunityDetailComment;
 
 const commentData = [
   {
@@ -93,31 +78,10 @@ const titleColor = {
   dark: colors.gray25,
 };
 
-const subtitleColor = {
-  light: colors.gray400,
-  dark: colors.gray500,
-};
-
-const borderColor = {
-  dark: colors.gray700,
-  light: colors.gray200,
-};
-
-const BoxTitle = styled.div`
-  padding: 4rem 0 0.2rem 0;
-  min-height: ${lineHeight.h3};
-
-  border-top: 1px solid ${(props) => borderColor[props.theme]};
-  color: ${(props) => titleColor[props.theme]};
+const Title = styled.div`
+  margin: 2rem 0;
 
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h3};
+  color: ${(props) => titleColor[props.theme]};
 `;
-
-const BoxDescription = styled.div`
-  padding-bottom: 2rem;
-  color: ${(props) => subtitleColor[props.theme]};
-  font-size: ${fontSize.p};
-`;
-
-const CommentBox = styled.div``;

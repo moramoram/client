@@ -1,5 +1,5 @@
-import { axiosInstance, daysFromToday, numToMillion } from "@/utils";
 import { useInfiniteQuery } from "react-query";
+import { axiosInstance, daysFromToday, numToMillion, parseHtml } from "@/utils";
 
 const fetchPage = async (type, pageParam) => {
   const res = await axiosInstance({
@@ -18,8 +18,9 @@ export const GetCommunityList = (type) =>
     }
   );
 
-export const CommunityFeedSelector = (data) => {
+export const CommunityFeedSelector = (data = []) => {
   const feedData = data.map((card) => {
+    const { thumbnail, tagDeletedHtml } = parseHtml(card.content);
     return {
       username: card.writerInfo.nickname,
       avatar: null,
@@ -27,8 +28,8 @@ export const CommunityFeedSelector = (data) => {
       ordinal: card.writerInfo.ordinal,
       created: daysFromToday(card.createdDate),
       title: card.title,
-      content: card.content.replace(/(<([^>]+)>)/gi, ""),
-      thumbnail: card.thumbnail,
+      content: tagDeletedHtml,
+      thumbnail: thumbnail?.[1],
       likecount: numToMillion(card.totalLike),
       commentcount: numToMillion(card.totalComment),
       viewcount: numToMillion(card.views),

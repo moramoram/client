@@ -46,7 +46,7 @@ const mockdata = [
       authCheck: 0,
     },
     title: "this is test",
-    content: (
+    content: `
       <>
         <p>
           <img
@@ -81,7 +81,7 @@ const mockdata = [
         </p>
         <p>그럼 다음에 만나요!</p>
       </>
-    ),
+    `,
     views: 3,
     totalComment: 1,
     totalLike: 1,

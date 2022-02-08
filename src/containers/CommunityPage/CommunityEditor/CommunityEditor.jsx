@@ -106,7 +106,7 @@ const CommunityEditor = ({
                   options.find((c) => c.value === value)
                 }
                 onChange={(val) => onChange(val.value)}
-                status={!errors?.boardType ? "default" : "error"}
+                status={errors?.boardType ? "error" : "default"}
                 {...props}
               />
             )}
@@ -288,7 +288,7 @@ const Layout = styled.div`
   }
 
   .ql-snow .ql-editor pre.ql-syntax {
-    background-color: #1c2023;
+    background-color: ${colors.gray900};
   }
 
   .ql-video {
@@ -371,6 +371,13 @@ const Layout = styled.div`
   .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
   .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
     stroke: ${colors.blue100} !important;
+  }
+
+  .ql-clipboard {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    display: none;
   }
 `;
 

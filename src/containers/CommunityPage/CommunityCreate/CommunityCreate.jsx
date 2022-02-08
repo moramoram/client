@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import { useRecoilState } from "recoil";
 import { createModalState } from "@/recoil/modal";
+import { useMutation, useQueryClient } from "react-query";
+import { postCommunity } from "@/queries";
 
 import { useForm } from "react-hook-form";
 
@@ -11,11 +13,24 @@ import { Button } from "@/components";
 import { Icon } from "@/foundations";
 import { colors, animations } from "@/_shared";
 
-import { postCommunity } from "@/queries";
-
 const CommunityCreate = ({ ...props }) => {
   const [isCreateOpened, setIsCreateOpened] = useRecoilState(createModalState);
   const modal = useRef();
+
+  const queryClient = useQueryClient();
+  const mutation = useMutation(postCommunity, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("getCommunityList");
+    },
+  });
+
+  const onSubmit = useCallback(
+    (data) => {
+      mutation.mutate(data);
+      setIsCreateOpened(false);
+    },
+    [mutation]
+  );
 
   if (isCreateOpened) {
     // pass
@@ -27,11 +42,6 @@ const CommunityCreate = ({ ...props }) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const onSubmit = (data) => {
-    postCommunity(data);
-    setIsCreateOpened(false);
-  };
 
   const handleClose = useCallback(() => {
     if (window.confirm("지금 나가시면 저장되지 않아요!")) {

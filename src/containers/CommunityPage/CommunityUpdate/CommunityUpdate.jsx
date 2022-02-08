@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import { useRecoilState } from "recoil";
 import { updateModalState } from "@/recoil/modal";
+import { useMutation, useQueryClient } from "react-query";
+import { GetCommunityDetail, putCommunity } from "@/queries";
 
 import { useForm } from "react-hook-form";
 
@@ -11,24 +13,26 @@ import { Button } from "@/components";
 import { Icon } from "@/foundations";
 import { colors, animations } from "@/_shared";
 
-import { getCommunity, putCommunity } from "@/queries";
-
 const CommunityUpdate = ({ ...props }) => {
-  const [detailId, setDetailId] = useRecoilState(updateModalState);
+  const [contentId, setContentId] = useRecoilState(updateModalState);
+  const originalData = GetCommunityDetail(contentId).data;
   const modal = useRef();
 
-  console.log(detailId);
+  const queryClient = useQueryClient();
+  const mutation = useMutation(({ id, data }) => putCommunity(id, data), {
+    onSuccess: () => {
+      queryClient.invalidateQueries("getCommunityDetail", contentId);
+    },
+  });
 
-  const [originalData, setOriginalData] = useState(null);
-
-  useEffect(() => {
-    const getData = async () => {
-      const jsonData = await getCommunity(16);
-      setOriginalData(jsonData);
-      console.log(jsonData);
+  const onSubmit = useCallback((data) => {
+    const putData = {
+      title: data.title || originalData.title,
+      content: data.content || originalData.content,
     };
-    getData();
-  }, []);
+    mutation.mutate({ id: contentId, data: putData });
+    setContentId(null);
+  });
 
   const {
     register,
@@ -37,22 +41,11 @@ const CommunityUpdate = ({ ...props }) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    const putData = {
-      title: data.title || originalData.title,
-      content: data.content || originalData.content,
-    };
-
-    console.log(putData);
-    putCommunity(16, putData);
-    setDetailId(null);
-  };
-
   const handleClose = useCallback(() => {
     if (window.confirm("지금 나가시면 저장되지 않아요!")) {
-      setDetailId(null);
+      setContentId(null);
     }
-  }, [setDetailId]);
+  }, [setContentId]);
 
   return (
     <>

@@ -16,7 +16,7 @@ export const token = atom({
     accessToken: undefined,
     refreshToken: undefined,
   },
-  effects_UNSTABLE: [localStorageEffect("token")],
+  effects_UNSTABLE: [localStorageEffect("ssafe_token")],
 });
 
 export const isLoginState = selector({

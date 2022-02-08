@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from "react";
+import React, { Suspense } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
@@ -56,7 +56,7 @@ const CommunityPage = () => {
               onClick={() => setLoginModalOpen(true)}
               theme={theme}
             />
-            <Suspense fallback={<FeedGrid isLoading />}>
+            <Suspense fallback={<LoadingFeed isLoading />}>
               <CommunityFeedGrid theme={theme} />
             </Suspense>
           </ContentBox>
@@ -345,3 +345,13 @@ const StickyNav = styled(SubNavbar)`
 // const NoticeBox = styled.div`
 //   overflow-x: scroll;
 // `;
+
+const LoadingFeed = styled(FeedGrid)`
+  width: 100%;
+  > a {
+    width: 90vw;
+    @media screen and (min-width: 980px) {
+      max-width: calc(100%);
+    }
+  }
+`;

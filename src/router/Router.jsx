@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from "react";
 
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import {
   useRecoilState,
   useRecoilValue,
@@ -30,11 +30,12 @@ import {
 
 const Router = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const parsed = queryString.parse(location.search);
 
   const [jwtToken, setToken] = useRecoilState(token);
   // const refresh = useRecoilValue(refreshToken);
-  // const setAuth = useSetRecoilState(auth);
+  const setAuth = useSetRecoilState(auth);
   // const resetToken = useResetRecoilState(token);
   // const resetAuth = useResetRecoilState(auth);
 
@@ -46,41 +47,26 @@ const Router = () => {
         code: parsed.code,
       },
     });
+
     setToken({
       accessToken: data.accessToken,
       refreshToken: data.refreshToken,
     });
-  }, [parsed.code, setToken]);
+    navigate("/main");
+  }, [parsed.code, setToken, navigate]);
 
-  // const getMyPageInfo = async () => {
-  //   await axiosInstance({
-  //     url: "users/me",
-  //     headers: {
-  //       Authorization: `Bearer ${jwtToken}`,
-  //     },
-  //   })
-  //     .then(({ data }) => {
-  //       setAuth({ data });
-  //     })
-  //     .catch(async (err) => {
-  //       if (err?.response?.status === 401) {
-  //         await axiosInstance({
-  //           url: "user/auth",
-  //           method: "put",
-  //           data: {
-  //             refresh_token: refresh,
-  //           },
-  //         })
-  //           .then(({ data }) => {
-  //             setToken(data);
-  //           })
-  //           .catch(() => {
-  //             resetToken();
-  //             resetAuth();
-  //           });
-  //       }
-  //     });
-  // };
+  const getMyPageInfo = async () => {
+    await axiosInstance({
+      url: "users/me",
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    })
+      .then(({ data }) => {
+        setAuth({ data });
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     if (parsed.code) {

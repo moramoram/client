@@ -10,7 +10,7 @@ const fetchPage = async (type, pageParam) => {
 
 export const GetCommunityList = (type) =>
   useInfiniteQuery(
-    "getCommunityList",
+    ["getCommunityList", type],
     ({ pageParam = 1 }) => fetchPage(type, pageParam),
     {
       getNextPageParam: (prevPage) =>

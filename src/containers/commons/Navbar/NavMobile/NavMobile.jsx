@@ -134,7 +134,7 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
                   </UserMobileItemLink>
                 ))}
                 <UserMobileItem {...props} onClick={onLogout}>
-                  "로그아웃"
+                  로그아웃
                 </UserMobileItem>
               </LinkBox>
             </>

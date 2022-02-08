@@ -21,8 +21,8 @@ const VIEW = {
   MOBILE: "mobile",
 };
 
-const SubNavbar = ({ data, theme, onClick, ...props }) => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+const SubNavbar = ({ data, theme, onClick, selected = 1, ...props }) => {
+  const [selectedIndex, setSelectedIndex] = useState(selected);
   const sliderRef = useRef(null);
 
   const handleNavItemClick = (idx) => {
@@ -35,8 +35,8 @@ const SubNavbar = ({ data, theme, onClick, ...props }) => {
       currentChildren.clientWidth / 2;
     current.scrollLeft = move;
 
-    setSelectedIndex(idx);
-    onClick(idx);
+    setSelectedIndex(idx + 1);
+    onClick(idx + 1);
   };
 
   useSlider(sliderRef);
@@ -49,7 +49,7 @@ const SubNavbar = ({ data, theme, onClick, ...props }) => {
             theme={theme}
             onClick={() => handleNavItemClick(idx)}
             key={idx}
-            status={selectedIndex === id ? "active" : "default"}
+            status={selectedIndex === idx + 1 ? "active" : "default"}
           >
             {title}
           </SubNavbarItem>

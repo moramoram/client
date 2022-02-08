@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Link, useLocation } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { themeState } from "@/recoil/theme";
-import { loginModalState } from "@/recoil/modal";
+import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
+import { auth, token, themeState, loginModalState } from "@/recoil";
 
 import { NavDefaultItem } from "./NavDefaultItem";
 import { Avatar, Button, Dropdown, Switch } from "@/components";
@@ -26,19 +25,27 @@ const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
   const [theme, setTheme] = useRecoilState(themeState);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
+  const resetToken = useResetRecoilState(token);
+  const resetAuth = useResetRecoilState(auth);
+
   const navbarRight = useRef();
   const path = useLocation();
   const [current, setCurrent] = useState(path.pathname.split("/")[1]);
 
-  const handleTheme = () => {
+  const onToggle = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
 
-  const onClickNavItem = (name) => {
+  const onNavItem = (name) => {
     name === current
       ? window.scrollTo({ top: 0, behavior: "smooth" })
       : window.scrollTo({ top: 0 });
     setCurrent(name);
+  };
+
+  const onLogout = () => {
+    resetToken();
+    resetAuth();
   };
 
   useEffect(() => {
@@ -64,7 +71,7 @@ const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
             <NavItemLink to={url} key={name}>
               <NavDefaultItem
                 {...props}
-                onClick={() => onClickNavItem(name)}
+                onClick={() => onNavItem(name)}
                 status={current === name ? "active" : "default"}
               >
                 {title}
@@ -79,7 +86,7 @@ const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
             <SwitchBox>
               <Switch
                 isSelected={theme !== "light"}
-                onToggle={handleTheme}
+                onToggle={onToggle}
                 size="small"
               />
             </SwitchBox>
@@ -90,7 +97,12 @@ const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
             />
             {dropdownOpen && (
               // TODO : 프로필에서 Username 가져오기
-              <UserDropdown items={userMenuData} user="User" {...props} />
+              <UserDropdown
+                items={userMenuData}
+                user="User"
+                onClick={onLogout}
+                {...props}
+              />
             )}
           </>
         ) : (

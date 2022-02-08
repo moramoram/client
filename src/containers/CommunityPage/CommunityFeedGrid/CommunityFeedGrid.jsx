@@ -2,37 +2,33 @@ import React, { useRef } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
-import { themeState } from "@/recoil";
+import { themeState, communityCategory } from "@/recoil";
 import { useIntersectionObserver } from "@/hooks";
-import {
-  GetDummyApi,
-  // GetInfiniteQuery,
-  CommunityFeedSelector,
-} from "@/queries";
+import { GetCommunityList, CommunityFeedSelector } from "@/queries";
 import { FeedGrid } from "@/containers";
 
 const CommunityFeedGrid = () => {
   const theme = useRecoilValue(themeState);
+  const category = useRecoilValue(communityCategory);
+
   const loader = useRef(null);
-  // const { data, fetchNextPage } = GetInfiniteQuery();
-  const { data } = GetDummyApi();
+  const { data, fetchNextPage, hasNextPage } = GetCommunityList(category);
   const { feedData } = CommunityFeedSelector(mockdata);
 
   const onFetchNewData = () => {
-    const token = localStorage.getItem("token");
-    token ? console.log(data.name) : console.log("requirelogin");
+    fetchNextPage();
   };
-
+  console.log(data);
   useIntersectionObserver({
     target: loader,
     onIntersect: onFetchNewData,
-    enabled: true,
+    enabled: hasNextPage,
   });
 
   return (
     <>
       <CommentFeedGrid data={feedData} theme={theme} />
-      <div ref={loader} />
+      <FetchBox ref={loader} />
     </>
   );
 };
@@ -50,8 +46,42 @@ const mockdata = [
       authCheck: 0,
     },
     title: "this is test",
-    content:
-      "오 라일락 꽃이 지는 날 goodbye 이런 결말이 어울려 안녕 꽃잎 같은 안녕 하이얀 우리 봄날의 climax 아 얼마나 기쁜 일이야 Ooh ooh Love me only till this spring 봄바람처럼 Ooh ooh Love me only till this spring 봄바람처럼 기분이 달아 콧노래 부르네 (랄라)",
+    content: `
+      <>
+        <p>
+          <img
+            src="https://file.mk.co.kr/meet/neds/2015/09/image_readtop_2015_891935_14423221542127136.jpg"
+            alt="img"
+          />
+        </p>
+        <h1>안녕하세요~~</h1>
+        <p>오늘도 어김없이 여러분에게 꿀팁과 알뜰정보를 알려주러 왔어요!!</p>
+        <p>
+          <br />
+        </p>
+        <p>
+          <img
+            src="http://123emoji.com/wp-content/uploads/2017/08/sticker-8-45.png"
+            alt="img"
+          />
+        </p>
+        <p>
+          <br />
+        </p>
+        <p>요즘은 바람도 쌀쌀하게 불고~~</p>
+        <p>횐님들 모두 감기 조심하세요~~^^</p>
+        <p>
+          <br />
+        </p>
+        <p>
+          <img
+            src="http://123emoji.com/wp-content/uploads/2017/08/sticker-2-45.png"
+            alt="img"
+          />
+        </p>
+        <p>그럼 다음에 만나요!</p>
+      </>
+    `,
     views: 3,
     totalComment: 1,
     totalLike: 1,
@@ -75,6 +105,7 @@ const mockdata = [
     totalLike: 0,
     createdDate: "2022-01-27T21:33:53",
     modifiedDate: "2022-01-27T21:33:53",
+    thumbnail: "https://image.bugsm.co.kr/album/images/500/40271/4027185.jpg",
   },
   {
     boardId: 3,
@@ -92,6 +123,7 @@ const mockdata = [
     totalLike: 0,
     createdDate: "2022-01-27T18:39:04",
     modifiedDate: "2022-02-01T13:16:57",
+    thumbnail: "https://image.bugsm.co.kr/album/images/500/40271/4027185.jpg",
   },
   {
     boardId: 2,
@@ -109,6 +141,7 @@ const mockdata = [
     totalLike: 0,
     createdDate: "2022-01-27T18:38:57",
     modifiedDate: "2022-01-27T21:50:27",
+    thumbnail: "https://image.bugsm.co.kr/album/images/500/40271/4027185.jpg",
   },
 ];
 
@@ -120,4 +153,8 @@ const CommentFeedGrid = styled(FeedGrid)`
       max-width: calc(100%);
     }
   }
+`;
+
+const FetchBox = styled.div`
+  height: 30px;
 `;

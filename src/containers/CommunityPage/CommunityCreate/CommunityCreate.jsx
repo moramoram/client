@@ -29,7 +29,7 @@ const CommunityCreate = ({ ...props }) => {
       mutation.mutate(data);
       setIsCreateOpened(false);
     },
-    [mutation]
+    [mutation, setIsCreateOpened]
   );
 
   if (isCreateOpened) {

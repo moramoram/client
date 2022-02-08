@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback, useState } from "react";
+import React, { useRef, useCallback } from "react";
 import styled from "styled-components";
 
 import { useRecoilState } from "recoil";
@@ -25,14 +25,17 @@ const CommunityUpdate = ({ ...props }) => {
     },
   });
 
-  const onSubmit = useCallback((data) => {
-    const putData = {
-      title: data.title || originalData.title,
-      content: data.content || originalData.content,
-    };
-    mutation.mutate({ id: contentId, data: putData });
-    setContentId(null);
-  });
+  const onSubmit = useCallback(
+    (data) => {
+      const putData = {
+        title: data.title || originalData.title,
+        content: data.content || originalData.content,
+      };
+      mutation.mutate({ id: contentId, data: putData });
+      setContentId(null);
+    },
+    [contentId, mutation, originalData, setContentId]
+  );
 
   const {
     register,

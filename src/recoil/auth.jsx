@@ -7,29 +7,35 @@ export const auth = atom({
     email: undefined,
     nickname: undefined,
     authCheck: undefined,
+  },
+});
+
+export const token = atom({
+  key: "token",
+  default: {
     accessToken: undefined,
     refreshToken: undefined,
   },
+  effects_UNSTABLE: [localStorageEffect("ssafe_token")],
 });
 
 export const isLoginState = selector({
   key: "isLoginState",
   get: ({ get }) => {
-    return !!get(auth).accessToken;
+    return !!get(token).accessToken;
   },
 });
 
 export const accessToken = selector({
   key: "accessToken",
   get: ({ get }) => {
-    return get(auth).accessToken;
+    return get(token).accessToken;
   },
-  effects_UNSTABLE: [localStorageEffect("token")],
 });
 
 export const refreshToken = selector({
   key: "refreshToken",
   get: ({ get }) => {
-    return get(auth).refreshToken;
+    return get(token).refreshToken;
   },
 });

@@ -19,7 +19,7 @@ export const CommunityDetailSelector = (data) => {
     campus: data.writerInfo.ordinal,
     ordinal: data.writerInfo.campus,
     created: daysFromToday(data.createdDate),
-    title: "커뮤니티 상세 페이지 제목",
+    title: data.title,
     content: parsedhtml,
     likecount: numToMillion(data.totalLike),
     commentcount: numToMillion(0),

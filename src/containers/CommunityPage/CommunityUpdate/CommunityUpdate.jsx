@@ -2,9 +2,9 @@ import React, { useRef, useCallback } from "react";
 import styled from "styled-components";
 
 import { useRecoilState } from "recoil";
-import { createModalState } from "@/recoil/modal";
+import { updateModalState } from "@/recoil/modal";
 import { useMutation, useQueryClient } from "react-query";
-import { postCommunity } from "@/queries";
+import { GetCommunityDetail, putCommunity } from "@/queries";
 
 import { useForm } from "react-hook-form";
 
@@ -13,28 +13,29 @@ import { Button } from "@/components";
 import { Icon } from "@/foundations";
 import { colors, animations } from "@/_shared";
 
-const CommunityCreate = ({ ...props }) => {
-  const [isCreateOpened, setIsCreateOpened] = useRecoilState(createModalState);
+const CommunityUpdate = ({ ...props }) => {
+  const [contentId, setContentId] = useRecoilState(updateModalState);
+  const originalData = GetCommunityDetail(contentId).data;
   const modal = useRef();
 
   const queryClient = useQueryClient();
-  const mutation = useMutation(postCommunity, {
+  const mutation = useMutation(({ id, data }) => putCommunity(id, data), {
     onSuccess: () => {
-      queryClient.invalidateQueries("getCommunityList");
+      queryClient.invalidateQueries("getCommunityDetail", contentId);
     },
   });
 
   const onSubmit = useCallback(
     (data) => {
-      mutation.mutate(data);
-      setIsCreateOpened(false);
+      const putData = {
+        title: data.title || originalData.title,
+        content: data.content || originalData.content,
+      };
+      mutation.mutate({ id: contentId, data: putData });
+      setContentId(null);
     },
-    [mutation, setIsCreateOpened]
+    [contentId, mutation, originalData, setContentId]
   );
-
-  if (isCreateOpened) {
-    // pass
-  }
 
   const {
     register,
@@ -45,9 +46,9 @@ const CommunityCreate = ({ ...props }) => {
 
   const handleClose = useCallback(() => {
     if (window.confirm("지금 나가시면 저장되지 않아요!")) {
-      setIsCreateOpened(false);
+      setContentId(null);
     }
-  }, [setIsCreateOpened]);
+  }, [setContentId]);
 
   return (
     <>
@@ -63,6 +64,7 @@ const CommunityCreate = ({ ...props }) => {
                 register={register}
                 control={control}
                 errors={errors}
+                originalData={originalData}
                 {...props}
               />
             </ContentBox>
@@ -85,7 +87,7 @@ const CommunityCreate = ({ ...props }) => {
   );
 };
 
-export default CommunityCreate;
+export default CommunityUpdate;
 
 const bgColor = {
   light: colors.white,

@@ -31,7 +31,7 @@ const textColor = {
 };
 
 const hoverColor = {
-  dark: colors.gray900,
+  dark: colors.gray700,
   light: colors.gray100,
 };
 

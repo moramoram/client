@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { useMediaQuery } from "react-responsive";
-import { Avatar, Dropdown } from "@/components";
+import { Avatar, DropdownSmall } from "@/components";
 import { Icon } from "@/foundations";
 import {
   colors,
@@ -32,6 +32,7 @@ const FeedDetail = ({
   likecount,
   commentcount,
   viewcount,
+  dropdownItems,
   ...props
 }) => {
   const usernameRender = username ?? "User";
@@ -54,23 +55,7 @@ const FeedDetail = ({
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           />
           {isDropdownOpen && (
-            <Dropdown
-              // TODO : 게시글 수정 및 삭제 로직
-              items={[
-                {
-                  name: "edit",
-                  title: "수정",
-                  url: "#",
-                },
-                {
-                  name: "delete",
-                  title: "삭제",
-                  url: "#",
-                },
-              ]}
-              size="small"
-              {...props}
-            />
+            <DropdownSmall items={dropdownItems} size="small" {...props} />
           )}
         </DropdownBox>
       </Header>

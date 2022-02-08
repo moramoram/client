@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
+import { updateModalState } from "@/recoil/modal";
+
 import { CommentList } from "@/containers";
 import { Button, CommentInput, FeedDetail } from "@/components";
 import { Icon } from "@/foundations";
@@ -10,10 +13,27 @@ import { daysFromToday, numToMillion } from "@/utils";
 
 const CommunityDetail = ({ ...props }) => {
   const [isLike, setIsLiked] = useState(0);
+  const setUpdateModalOpen = useSetRecoilState(updateModalState);
+  // 게시글 id
+  const detailId = 10;
+  const handleEditClick = () => setUpdateModalOpen(detailId);
+
+  const dropdownItems = [
+    {
+      name: "edit",
+      title: "수정",
+      onClick: handleEditClick,
+    },
+    {
+      name: "delete",
+      title: "삭제",
+      onClick: () => console.log("삭제"),
+    },
+  ];
 
   return (
     <Layout>
-      <FeedDetail {...feedData} {...props} />
+      <FeedDetail {...feedData} dropdownItems={dropdownItems} {...props} />
       <Footer>
         <Button
           mode={isLike ? "primary" : "secondary"}

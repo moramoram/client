@@ -17,7 +17,7 @@ import {
 
 const CommunityPage = () => {
   const theme = useRecoilValue(themeState);
-  const setLoginModalOpen = useSetRecoilState(createModalState);
+  const setCreateModalOpen = useSetRecoilState(createModalState);
   const [category, setCategory] = useRecoilState(communityCategory);
 
   const handleCategory = (idx) => {
@@ -36,7 +36,7 @@ const CommunityPage = () => {
     <>
       <CommunityIntro
         theme={theme}
-        handleButtonClick={() => setLoginModalOpen(true)}
+        handleButtonClick={() => setCreateModalOpen(true)}
       />
       {isPc && (
         <MainBox>
@@ -53,7 +53,7 @@ const CommunityPage = () => {
               <FeedSmallGrid data={feedSmallData} />
             </NoticeBox> */}
             <CommunityCreateButton
-              onClick={() => setLoginModalOpen(true)}
+              onClick={() => setCreateModalOpen(true)}
               theme={theme}
             />
             <Suspense fallback={<LoadingFeed isLoading />}>
@@ -75,7 +75,7 @@ const CommunityPage = () => {
             <FeedSmallGrid data={feedSmallData} />
           </NoticeBox> */}
           <CommunityCreateButton
-            onClick={() => setLoginModalOpen(true)}
+            onClick={() => setCreateModalOpen(true)}
             theme={theme}
           />
           <Suspense fallback={<FeedGrid isLoading />}>

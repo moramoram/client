@@ -13,7 +13,13 @@ import { useMediaQuery } from "react-responsive";
 import { Selector } from "@/components";
 import { colors, fontSize } from "@/_shared";
 
-const CommunityEditor = ({ register, control, errors, ...props }) => {
+const CommunityEditor = ({
+  register,
+  control,
+  errors,
+  originalData,
+  ...props
+}) => {
   Quill.register("modules/markdownShortcuts", MarkdownShortcuts);
   Quill.debug("error");
   window.hljs = hljs;
@@ -78,22 +84,34 @@ const CommunityEditor = ({ register, control, errors, ...props }) => {
   return (
     <>
       <InputBox {...props}>
-        <Controller
-          name="boardType"
-          control={control}
-          rules={{ required: true }}
-          render={({ field: { onChange, value, ref } }) => (
-            <Selector
-              placeholder="카테고리"
-              inputRef={ref}
-              options={options}
-              value={options.find((c) => c.value === value)}
-              onChange={(val) => onChange(val.value)}
-              status={!errors?.boardType ? "default" : "error"}
-              {...props}
-            />
-          )}
-        />
+        {originalData ? (
+          <Selector
+            placeholder="카테고리"
+            value={options[originalData?.boardType - 1]}
+            isDisabled
+            {...props}
+          />
+        ) : (
+          <Controller
+            name="boardType"
+            control={control}
+            rules={{ required: true }}
+            render={({ field: { onChange, value, ref } }) => (
+              <Selector
+                placeholder="카테고리"
+                inputRef={ref}
+                options={options}
+                value={
+                  options[originalData?.boardType - 1] ??
+                  options.find((c) => c.value === value)
+                }
+                onChange={(val) => onChange(val.value)}
+                status={!errors?.boardType ? "default" : "error"}
+                {...props}
+              />
+            )}
+          />
+        )}
       </InputBox>
       <Title
         placeholder="제목"
@@ -104,10 +122,13 @@ const CommunityEditor = ({ register, control, errors, ...props }) => {
             ? "error"
             : "default"
         }
-        {...register("title", { required: true, maxLength: 45 })}
+        defaultValue={originalData?.title}
+        {...register("title", {
+          required: !originalData,
+          maxLength: 45,
+        })}
         {...props}
       />
-
       <Controller
         name="content"
         control={control}
@@ -116,13 +137,15 @@ const CommunityEditor = ({ register, control, errors, ...props }) => {
             required: (v) => v !== "<p><br></p>",
           },
         }}
-        render={({ field }) => (
+        render={({ field: { onChange, value, ref } }) => (
           <Layout status={!errors?.content ? "default" : "error"} {...props}>
             <ReactQuill
               modules={isDefaultView ? modules : mobileModules}
               formats={formats}
               placeholder="내용을 입력하세요"
-              {...field}
+              value={!value ? originalData?.content : value}
+              onChange={onChange}
+              ref={ref}
             />
           </Layout>
         )}

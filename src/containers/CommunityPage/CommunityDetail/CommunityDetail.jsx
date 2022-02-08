@@ -3,28 +3,23 @@ import styled from "styled-components";
 
 import { useSetRecoilState } from "recoil";
 import { updateModalState } from "@/recoil/modal";
+import { CommunityDetailSelector } from "@/queries";
 
 import { CommunityDetailComment } from "@/containers";
 import { Button, FeedDetail } from "@/components";
 import { Icon } from "@/foundations";
 import { colors, fontSize } from "@/_shared";
 
-import { CommunityDetailSelector } from "@/queries";
-
 const CommunityDetail = ({ ...props }) => {
   const { contentData } = CommunityDetailSelector(feedData);
   const [isLike, setIsLiked] = useState(contentData.likeStatus);
-
   const setUpdateModalOpen = useSetRecoilState(updateModalState);
-  // 게시글 id
-  const detailId = 10;
-  const handleEditClick = () => setUpdateModalOpen(detailId);
 
   const dropdownItems = [
     {
       name: "edit",
       title: "수정",
-      onClick: handleEditClick,
+      onClick: () => setUpdateModalOpen(16), // TODO: detailId
     },
     {
       name: "delete",

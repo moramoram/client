@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useEffect, useCallback, useState } from "react";
 import styled from "styled-components";
 
 import { useRecoilState } from "recoil";
@@ -11,15 +11,24 @@ import { Button } from "@/components";
 import { Icon } from "@/foundations";
 import { colors, animations } from "@/_shared";
 
-import { postBoards } from "@/queries";
+import { getCommunity, putCommunity } from "@/queries";
 
 const CommunityUpdate = ({ ...props }) => {
-  const [isUpdateOpened, setIsUpdateOpened] = useRecoilState(updateModalState);
+  const [detailId, setDetailId] = useRecoilState(updateModalState);
   const modal = useRef();
 
-  if (isUpdateOpened) {
-    // pass
-  }
+  console.log(detailId);
+
+  const [originalData, setOriginalData] = useState(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      const jsonData = await getCommunity(16);
+      setOriginalData(jsonData);
+      console.log(jsonData);
+    };
+    getData();
+  }, []);
 
   const {
     register,
@@ -29,15 +38,21 @@ const CommunityUpdate = ({ ...props }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    postBoards(data);
-    setIsUpdateOpened(null);
+    const putData = {
+      title: data.title || originalData.title,
+      content: data.content || originalData.content,
+    };
+
+    console.log(putData);
+    putCommunity(16, putData);
+    setDetailId(null);
   };
 
   const handleClose = useCallback(() => {
     if (window.confirm("지금 나가시면 저장되지 않아요!")) {
-      setIsUpdateOpened(null);
+      setDetailId(null);
     }
-  }, [setIsUpdateOpened]);
+  }, [setDetailId]);
 
   return (
     <>
@@ -53,6 +68,7 @@ const CommunityUpdate = ({ ...props }) => {
                 register={register}
                 control={control}
                 errors={errors}
+                originalData={originalData}
                 {...props}
               />
             </ContentBox>

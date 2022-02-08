@@ -18,8 +18,9 @@ export const GetCommunityList = (type) =>
     }
   );
 
-export const CommunityFeedSelector = (data) => {
+export const CommunityFeedSelector = (data = []) => {
   const feedData = data.map((card) => {
+    const { thumbnail, tagDeletedHtml } = parseHtml(card.content);
     return {
       username: card.writerInfo.nickname,
       avatar: null,
@@ -27,9 +28,8 @@ export const CommunityFeedSelector = (data) => {
       ordinal: card.writerInfo.ordinal,
       created: daysFromToday(card.createdDate),
       title: card.title,
-      // content: card.content.replace(/(<([^>]+)>)/gi, ""),
-      content: parseHtml(card.content),
-      thumbnail: card.thumbnail,
+      content: tagDeletedHtml,
+      thumbnail: thumbnail?.[1],
       likecount: numToMillion(card.totalLike),
       commentcount: numToMillion(card.totalComment),
       viewcount: numToMillion(card.views),

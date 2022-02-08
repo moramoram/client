@@ -1,16 +1,18 @@
-import React from "react";
+import React, { Suspense } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
-import { CommunityDetail } from "@/containers";
+import { CommunityDetail, LoadingCommunityDetail } from "@/containers";
 
 const CommunityDetailPage = ({ match }) => {
   const theme = useRecoilValue(themeState);
   return (
     <Layout>
-      <CommunityDetail theme={theme} />
+      <Suspense fallback={<LoadingCommunityDetail />}>
+        <CommunityDetail theme={theme} />
+      </Suspense>
     </Layout>
   );
 };

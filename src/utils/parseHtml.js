@@ -3,8 +3,10 @@ import DOMPurify from "dompurify";
 
 const parseHtml = (htmlString) => {
   const cleanHtmlString = DOMPurify.sanitize(htmlString);
-  const html = parse(cleanHtmlString);
-  return html;
+  const tagDeletedHtml = cleanHtmlString.replace(/(<([^>]+)>)/gi, "");
+  const thumbnail = cleanHtmlString.match(/<img.*?src=['"](.*?)['"]/);
+  const parsedhtml = parse(cleanHtmlString);
+  return { tagDeletedHtml, parsedhtml, thumbnail };
 };
 
 export default parseHtml;

@@ -13,12 +13,13 @@ const CommunityFeedGrid = () => {
 
   const loader = useRef(null);
   const { data, fetchNextPage, hasNextPage } = GetCommunityList(category);
-  const { feedData } = CommunityFeedSelector(mockdata);
+
+  const { feedData } = CommunityFeedSelector(data.pages[0].res);
 
   const onFetchNewData = () => {
     fetchNextPage();
   };
-  console.log(data);
+
   useIntersectionObserver({
     target: loader,
     onIntersect: onFetchNewData,
@@ -47,7 +48,6 @@ const mockdata = [
     },
     title: "this is test",
     content: `
-      <>
         <p>
           <img
             src="https://file.mk.co.kr/meet/neds/2015/09/image_readtop_2015_891935_14423221542127136.jpg"
@@ -80,7 +80,6 @@ const mockdata = [
           />
         </p>
         <p>그럼 다음에 만나요!</p>
-      </>
     `,
     views: 3,
     totalComment: 1,

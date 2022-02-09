@@ -6,16 +6,24 @@ import { CommentList } from "@/containers";
 
 import {
   Avatar,
-  Toc,
-  CommentInput,
-  ImageBoxResponsive,
   Badge,
-  Button,
   BookMark,
+  Button,
+  CommentInput,
+  DropdownSmall,
+  ImageBoxResponsive,
   SideBarItem,
+  Toc,
 } from "@/components";
 import { Icon } from "@/foundations";
-import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
+import {
+  animations,
+  colors,
+  fontSize,
+  fontWeight,
+  lineHeight,
+  loadings,
+} from "@/_shared";
 
 import { useMutation, useQueryClient } from "react-query";
 import { GetStudyDetail, convertToStudyDetail, postComment } from "@/queries";
@@ -26,6 +34,8 @@ const THEME = {
 };
 
 const StudyDetailMobile = ({ data, badges, ...props }) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const queryClient = useQueryClient();
   const { dd } = GetStudyDetail();
   const { titleData, commentData, contentData, tocItem, sidebarData } =
@@ -44,47 +54,74 @@ const StudyDetailMobile = ({ data, badges, ...props }) => {
     });
   };
 
+  const dropdownItems = [
+    {
+      name: "edit",
+      title: "수정",
+      onClick: () => console.log("수정"),
+    },
+    {
+      name: "delete",
+      title: "삭제",
+      onClick: () => {
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+          console.log("삭제");
+        }
+      },
+    },
+  ];
+
   return (
     <>
       <Layout>
         <ImageBoxResponsive className="thumbnail" {...props} />
-
-        <TitleBox {...props}>
-          <Highlight {...props}>{titleData?.highlight}</Highlight>
-          <Title {...props}>{titleData?.title}</Title>
-          <SubTitle {...props}>
-            <Avatar size="medium" src={titleData?.src} {...props} />
-            {titleData?.subtitle}
-          </SubTitle>
-          <SideBarBox>
-            {summaryData.map(({ title, icon, id }) => (
-              <SideBarItem
-                className="contents-item"
-                title={title}
-                icon={icon}
-                description={sidebarData[id]}
-                key={id}
-                {...props}
-              />
-            ))}
-          </SideBarBox>
-          <BadgeBox>
-            {sidebarData.badges.map((children, idx) => {
-              return (
-                <Badge
-                  className="badge-item"
-                  key={idx}
-                  mode="secondary"
-                  color="gray100"
-                  isBold
+        <Header>
+          <TitleBox {...props}>
+            <Highlight {...props}>{titleData?.highlight}</Highlight>
+            <Title {...props}>{titleData?.title}</Title>
+            <SubTitle {...props}>
+              <Avatar size="medium" src={titleData?.src} {...props} />
+              {titleData?.subtitle}
+            </SubTitle>
+            <SideBarBox>
+              {summaryData.map(({ title, icon, id }) => (
+                <SideBarItem
+                  className="contents-item"
+                  title={title}
+                  icon={icon}
+                  description={sidebarData[id]}
+                  key={id}
                   {...props}
-                >
-                  {children}
-                </Badge>
-              );
-            })}
-          </BadgeBox>
-        </TitleBox>
+                />
+              ))}
+            </SideBarBox>
+            <BadgeBox>
+              {sidebarData.badges.map((children, idx) => {
+                return (
+                  <Badge
+                    className="badge-item"
+                    key={idx}
+                    mode="secondary"
+                    color="gray100"
+                    isBold
+                    {...props}
+                  >
+                    {children}
+                  </Badge>
+                );
+              })}
+            </BadgeBox>
+          </TitleBox>
+          <DropdownBox>
+            <Icon
+              icon="moreVertical"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            />
+            {isDropdownOpen && (
+              <DropdownSmall items={dropdownItems} size="small" {...props} />
+            )}
+          </DropdownBox>
+        </Header>
         <Toc items={tocItem} {...props} />
         <Content {...props}>{contentData}</Content>
         <CommentBox>
@@ -304,6 +341,11 @@ const Layout = styled.div`
   max-width: 940px;
 `;
 
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const TitleBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -327,9 +369,10 @@ const BadgeBox = styled.div`
 
 const Highlight = styled.div`
   min-width: 70px;
-  min-height: ${lineHeight.h4};
+  min-height: ${lineHeight.lg};
 
-  font-size: ${fontSize.h4};
+  font-size: ${fontSize.lg};
+  line-height: ${lineHeight.lg};
   font-weight: ${fontWeight.bold};
   color: ${colors.blue100};
 `;
@@ -338,8 +381,9 @@ const Title = styled.div`
   min-width: 160px;
   min-height: ${lineHeight.h2};
 
-  font-weight: ${fontWeight.bold};
   font-size: calc(${fontSize.h2} - 2px);
+  line-height: ${lineHeight.h2};
+  font-weight: ${fontWeight.bold};
   color: ${(props) => titleColor[props.theme]};
 `;
 
@@ -348,11 +392,28 @@ const SubTitle = styled.div`
   align-items: center;
   gap: 1rem;
   min-width: 160px;
-  min-height: ${lineHeight.h4};
+  min-height: ${lineHeight.lg};
 
   font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h4};
+  font-size: ${fontSize.lg};
+  line-height: ${lineHeight.lg};
   color: ${(props) => subtitleColor[props.theme]};
+`;
+
+const DropdownBox = styled.div`
+  position: relative;
+  padding-top: 1rem;
+
+  svg {
+    stroke: ${colors.gray500};
+    cursor: pointer;
+  }
+
+  > div {
+    z-index: 9999;
+    right: 0px;
+    animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
+  }
 `;
 
 const Content = styled.div`
@@ -375,14 +436,16 @@ const BoxTitle = styled.div`
   border-top: 1px solid ${(props) => borderColor[props.theme]};
   color: ${(props) => titleColor[props.theme]};
 
-  font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h3};
+  line-height: ${lineHeight.h3};
+  font-weight: ${fontWeight.bold};
 `;
 
 const BoxDescription = styled.div`
   padding-bottom: 2rem;
   color: ${(props) => subtitleColor[props.theme]};
   font-size: ${fontSize.p};
+  line-height: ${lineHeight.p};
 `;
 
 const CommentBox = styled.div``;

@@ -1,17 +1,17 @@
 import React from "react";
 
-import CheckBox from "./";
+import Checkbox from ".";
 import { Background } from "@/foundations";
 
 export default {
-  title: "Components/CheckBox",
-  component: CheckBox,
+  title: "Components/Checkbox",
+  component: Checkbox,
 };
 
 export const Default = (args) => (
   <>
     <Background {...args}>
-      <CheckBox {...args} />
+      <Checkbox {...args} />
     </Background>
   </>
 );
@@ -19,10 +19,10 @@ export const Default = (args) => (
 export const All = () => (
   <>
     <Background theme="light">
-      <CheckBox theme="light" />
+      <Checkbox theme="light" />
     </Background>
     <Background theme="dark">
-      <CheckBox theme="dark" />
+      <Checkbox theme="dark" />
     </Background>
   </>
 );

@@ -9,7 +9,7 @@ const THEME = {
   DARK: "dark",
 };
 
-const CheckBox = ({ theme, label, ...props }) => {
+const Checkbox = ({ theme, label, ...props }) => {
   return (
     <Layout>
       <input type="checkbox" />
@@ -19,17 +19,17 @@ const CheckBox = ({ theme, label, ...props }) => {
   );
 };
 
-CheckBox.propTypes = {
+Checkbox.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   label: PropTypes.string,
 };
 
-CheckBox.defaultProps = {
+Checkbox.defaultProps = {
   theme: THEME.LIGHT,
   label: "Label",
 };
 
-export default CheckBox;
+export default Checkbox;
 
 const borderColor = {
   light: colors.gray300,
@@ -107,4 +107,5 @@ const Icon = styled.div`
 
 const Label = styled.span`
   color: ${(props) => labelColor[props.theme]};
+  user-select: none;
 `;

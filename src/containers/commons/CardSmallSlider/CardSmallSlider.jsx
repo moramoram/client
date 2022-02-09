@@ -20,7 +20,7 @@ const CardSmallSlider = ({ data, theme, isLoading, ...props }) => {
       <Swiper {...swiperParams}>
         {data.map(({ id, url, ...props }) => (
           <SwiperSlide key={id}>
-            <CardItemLink to={id} to={url}>
+            <CardItemLink to={url}>
               <CardSmall theme={theme} isLoading={isLoading} {...props} />
             </CardItemLink>
           </SwiperSlide>

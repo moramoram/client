@@ -60,6 +60,11 @@ const bgColor = {
   light: colors.white,
 };
 
+const boxShadow = {
+  dark: "2px 2px 4px rgba(0, 0, 0, 0.185)",
+  light: shadows.base,
+};
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
@@ -71,7 +76,7 @@ const Layout = styled.div`
   border: 1px solid ${(props) => borderColor[props.theme]};
 
   background-color: ${(props) => bgColor[props.theme]};
-  box-shadow: ${shadows.base};
+  box-shadow: ${(props) => boxShadow[props.theme]};
 `;
 
 const MenuBox = styled.div`

@@ -46,22 +46,18 @@ export default JobsPage;
 const categoryData = [
   {
     id: 0,
-    title: "마감 임박",
+    title: "전체",
   },
   {
     id: 1,
-    title: "최신순",
+    title: "마감 임박",
   },
   {
     id: 2,
-    title: "인기순",
-  },
-  {
-    id: 3,
     title: "싸피 채용관",
   },
   {
-    id: 4,
+    id: 2,
     title: "내 관심 공고",
   },
 ];

@@ -137,10 +137,6 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-
-  svg {
-    cursor: pointer;
-  }
 `;
 
 const TitleBox = styled.div`
@@ -174,6 +170,7 @@ const DropdownBox = styled.div`
 
   svg {
     stroke: ${colors.gray500};
+    cursor: pointer;
   }
 
   > div {

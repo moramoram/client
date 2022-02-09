@@ -17,6 +17,7 @@ export { default as Modal } from "./Modal";
 export { default as Progress } from "./Progress";
 export { default as ScrollTopButton } from "./ScrollTopButton";
 export { default as Sidebar } from "./Sidebar";
+export { default as Sort } from "./Sort";
 export { default as SubNavbar } from "./SubNavbar";
 export { default as Navbar } from "./SubNavbar";
 export { default as Three } from "./Three";

@@ -96,6 +96,7 @@ const ImageBoxWrapper = styled.div`
   animation: ${(props) => props.isLoading && loadings[props.theme]};
 
   overflow: hidden;
+  transition: 0.3s;
 
   svg {
     width: 33%;

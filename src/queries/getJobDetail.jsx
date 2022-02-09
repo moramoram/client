@@ -13,7 +13,7 @@ const fetchData = async () => {
 export const JobDetailSelector = (data) => {
   const titleData = {
     title: data.title,
-    subtitle: data.companyName,
+    subtitle: data.company.companyName,
     src: data.logoImg,
     highlight: daysLeftFromToday(data.closeData) ? "모집중" : "모집완료",
   };

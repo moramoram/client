@@ -8,8 +8,8 @@ import { colors, fontSize, lineHeight } from "@/_shared";
 
 const Footer = ({ ...props }) => {
   return (
-    <>
-      <Layout {...props}>
+    <Layout>
+      <MenuBox {...props}>
         <Container>
           <LogoBox>
             <ItemLink to=".">
@@ -55,11 +55,11 @@ const Footer = ({ ...props }) => {
             </Column>
           </Row>
         </Container>
-      </Layout>
+      </MenuBox>
       <CopyrightBox {...props}>
         <Item>© 2022 ssafé. All rights reserved.</Item>
       </CopyrightBox>
-    </>
+    </Layout>
   );
 };
 
@@ -76,8 +76,14 @@ const borderColor = {
 };
 
 const Layout = styled.div`
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+`;
+
+const MenuBox = styled.div`
   padding: 80px 60px;
-  margin-top: 80px;
   background: ${(props) => bgColor[props.theme]};
 
   @media screen and (max-width: 530px) {

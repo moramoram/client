@@ -32,7 +32,7 @@ const MyPage = () => {
   });
 
   const isMobile = useMediaQuery({
-    query: "(max-width:979px)",
+    query: "(max-width:980px)",
   });
 
   useEffect(() => {

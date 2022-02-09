@@ -75,7 +75,10 @@ const bgColor = {
 };
 
 const LayoutBox = styled.div`
+  position: relative;
   width: 100%;
+  min-height: 100vh;
+  padding-bottom: 500px;
   background: ${(props) => bgColor[props.theme]};
 `;
 

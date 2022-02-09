@@ -77,13 +77,15 @@ const Icon = styled.div`
 
   ::before,
   ::after {
-    content: "";
+    position: absolute;
     display: inline-block;
+
+    content: "";
     width: 2px;
     height: 0;
-    background-color: ${colors.white};
     border-radius: 2px;
-    position: absolute;
+
+    background-color: ${colors.white};
     transform-origin: left top;
   }
 

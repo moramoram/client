@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { Link } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
@@ -25,6 +26,15 @@ const IntroSlider = ({ data, ...props }) => {
     },
     modules: [Autoplay],
   };
+
+  const isDefault = useMediaQuery({
+    query: "(max-width:980px) and (min-width:530px)",
+  });
+
+  const isSmall = useMediaQuery({
+    query: "(max-width:530px)",
+  });
+
   return (
     <Layout>
       <Swiper {...swiperParams}>
@@ -32,7 +42,13 @@ const IntroSlider = ({ data, ...props }) => {
           <SwiperSlide key={recruitId}>
             <Item>
               <Content>
-                <ImageBox src={company.logoImg} />
+                {!isSmall && (
+                  <ImageBox
+                    size={isDefault ? "medium" : "large"}
+                    src={company.logoImg}
+                  />
+                )}
+
                 <TitleBox>
                   <SubTitle {...props}>{company.companyName}</SubTitle>
                   <Title {...props}>{title}</Title>
@@ -100,6 +116,12 @@ const Background = styled.div`
 const TitleBox = styled.div`
   padding: 4rem;
   border-radius: 8px;
+  flex-shrink: 0;
+  word-break: keep-all;
+
+  @media screen and (max-width: 530px) {
+    flex-shrink: 1;
+  }
 `;
 
 const SubTitle = styled.div`
@@ -109,6 +131,12 @@ const SubTitle = styled.div`
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h3};
   color: ${(props) => subtitleColor[props.theme]};
+
+  @media screen and (max-width: 980px) {
+    font-size: ${fontSize.lg};
+    line-height: ${lineHeight.lg};
+    padding-bottom: 0;
+  }
 `;
 
 const Title = styled.div`
@@ -118,6 +146,10 @@ const Title = styled.div`
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h2};
   color: ${(props) => titleColor[props.theme]};
+
+  @media screen and (max-width: 980px) {
+    font-size: ${fontSize.h3};
+  }
 `;
 
 const Description = styled.div`
@@ -125,6 +157,10 @@ const Description = styled.div`
 
   font-size: ${fontSize.p};
   color: ${(props) => subtitleColor[props.theme]};
+
+  @media screen and (max-width: 980px) {
+    font-size: ${fontSize.sm};
+  }
 `;
 
 const JobLink = styled(Link)`

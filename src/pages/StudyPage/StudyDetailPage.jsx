@@ -24,7 +24,7 @@ const StudyDetailPage = () => {
     query: "(min-width:980px)",
   });
   const isMobile = useMediaQuery({
-    query: "(max-width:979px)",
+    query: "(max-width:980px)",
   });
 
   return (

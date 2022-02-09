@@ -1,6 +1,6 @@
 import React from "react";
 
-import Checkbox from ".";
+import Checkbox from "./";
 import { Background } from "@/foundations";
 
 export default {

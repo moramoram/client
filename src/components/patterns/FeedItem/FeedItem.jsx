@@ -30,7 +30,7 @@ const FeedItem = ({
   ...props
 }) => {
   const usernameRender = username || "User";
-  const userDetail = ordinal && campus ? { ordinal } / { campus } : null;
+  const userDetail = ordinal && campus ? `${ordinal} / ${campus}` : "";
   const isDefault = useMediaQuery({
     query: "(min-width:530px)",
   });

@@ -16,6 +16,7 @@ export { default as ImageUploader } from "./ImageUploader";
 export { default as Modal } from "./Modal";
 export { default as Progress } from "./Progress";
 export { default as ScrollTopButton } from "./ScrollTopButton";
+export { default as Search } from "./Search";
 export { default as Sidebar } from "./Sidebar";
 export { default as Sort } from "./Sort";
 export { default as SubNavbar } from "./SubNavbar";

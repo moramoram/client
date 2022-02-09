@@ -156,9 +156,9 @@ const Category = styled.div`
 
 const Title = styled.div`
   color: ${(props) => titleColor[props.theme]};
-  font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h2};
   line-height: ${lineHeight.h2};
+  font-weight: ${fontWeight.bold};
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.h3};
@@ -200,9 +200,9 @@ const UserBox = styled.div`
 `;
 
 const User = styled.div`
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.p};
   color: ${(props) => titleColor[props.theme]};
+  font-size: ${fontSize.p};
+  font-weight: ${fontWeight.bold};
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.sm};
@@ -231,9 +231,9 @@ const Content = styled.div`
   padding: 1rem 0 1rem 0;
 
   color: ${(props) => contentColor[props.theme]};
-  font-weight: ${fontWeight.regular};
   font-size: ${fontSize.p};
   line-height: 1.5rem;
+  font-weight: ${fontWeight.regular};
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.sm};

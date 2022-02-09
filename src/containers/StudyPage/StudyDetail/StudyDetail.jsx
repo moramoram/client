@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import { CommentList, StudySideBar } from "@/containers";
-import { Avatar, Toc, CommentInput } from "@/components";
-import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
-
 import { useMutation, useQueryClient } from "react-query";
 import { GetStudyDetail, convertToStudyDetail, postComment } from "@/queries";
+
+import { CommentList, StudySideBar } from "@/containers";
+import { Avatar, CommentInput, Toc } from "@/components";
+import { colors, fontSize, fontWeight, lineHeight, loadings } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -202,11 +202,11 @@ const borderColor = {
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 4rem;
 
   flex-shrink: 0;
 
-  margin-top: 160px;
+  margin-top: 170px;
   width: calc(100% - 500px);
   max-width: 940px;
 `;
@@ -225,9 +225,10 @@ const TitleBox = styled.div`
 
 const Highlight = styled.div`
   min-width: 70px;
-  min-height: ${lineHeight.h4};
+  min-height: ${lineHeight.lg};
 
-  font-size: ${fontSize.h4};
+  font-size: ${fontSize.lg};
+  line-height: ${lineHeight.lg};
   font-weight: ${fontWeight.bold};
   color: ${colors.blue100};
 `;
@@ -236,8 +237,9 @@ const Title = styled.div`
   min-width: 160px;
   min-height: ${lineHeight.h2};
 
-  font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h2};
+  line-height: ${lineHeight.h2};
+  font-weight: ${fontWeight.bold};
   color: ${(props) => titleColor[props.theme]};
 `;
 
@@ -246,10 +248,11 @@ const SubTitle = styled.div`
   align-items: center;
   gap: 1rem;
   min-width: 160px;
-  min-height: ${lineHeight.h4};
+  min-height: ${lineHeight.lg};
 
   font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h4};
+  font-size: ${fontSize.lg};
+  line-height: ${lineHeight.lg};
   color: ${(props) => subtitleColor[props.theme]};
 `;
 
@@ -273,12 +276,14 @@ const BoxTitle = styled.div`
   border-top: 1px solid ${(props) => borderColor[props.theme]};
   color: ${(props) => titleColor[props.theme]};
 
-  font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h3};
+  line-height: ${lineHeight.h3};
+  font-weight: ${fontWeight.bold};
 `;
 
 const BoxDescription = styled.div`
   padding-bottom: 2rem;
   color: ${(props) => subtitleColor[props.theme]};
   font-size: ${fontSize.p};
+  line-height: ${lineHeight.p};
 `;

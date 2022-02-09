@@ -111,7 +111,7 @@ const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
                 props.type === TYPE.TRANSPARENT ? "transparent" : "secondary"
               }
               width="150px"
-              onClick={() => setLoginModalOpen(true)}
+              onClick={() => setLoginModalOpen("login")}
               {...props}
             >
               로그인
@@ -119,7 +119,7 @@ const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
             <Button
               mode="primary"
               width="150px"
-              onClick={() => setLoginModalOpen(true)}
+              onClick={() => setLoginModalOpen("signup")}
               {...props}
             >
               회원가입

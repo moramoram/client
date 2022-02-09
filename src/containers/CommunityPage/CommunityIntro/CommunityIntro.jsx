@@ -33,11 +33,6 @@ CommunityIntro.defaultProps = {
 
 export default CommunityIntro;
 
-const bgColor = {
-  light: colors.gray25,
-  dark: colors.gray900,
-};
-
 const titleColor = {
   light: colors.gray900,
   dark: colors.gray25,
@@ -56,7 +51,7 @@ const Layout = styled.div`
 
   width: 100%;
   height: 400px;
-  background: ${(props) => bgColor[props.theme]};
+  background: ${colors.blueOpacity50};
 `;
 
 const Title = styled.div`

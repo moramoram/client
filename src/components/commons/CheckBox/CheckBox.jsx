@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { colors } from "@/_shared";
+import { colors, fontSize } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -36,11 +36,6 @@ const borderColor = {
   dark: colors.gray600,
 };
 
-const labelColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
-};
-
 const Layout = styled.label`
   display: flex;
   align-content: center;
@@ -61,7 +56,7 @@ const Layout = styled.label`
   }
 
   input:checked + .icon::after {
-    height: 10px;
+    height: 11px;
     transition: all 0.1s ease 0.1s;
   }
 `;
@@ -106,6 +101,8 @@ const Icon = styled.div`
 `;
 
 const Label = styled.span`
-  color: ${(props) => labelColor[props.theme]};
+  color: ${colors.gray500};
+  font-size: ${fontSize.sm};
+  line-height: 18px;
   user-select: none;
 `;

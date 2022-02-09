@@ -93,23 +93,30 @@ const MenuBox = styled.div`
 
 const Container = styled.div`
   display: flex;
-  gap: 60px;
+  justify-content: center;
+  gap: 100px;
+
   max-width: 1280px;
   width: 100%;
   margin: auto;
 
-  @media screen and (max-width: 530px) {
+  @media screen and (max-width: 980px) {
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    gap: 20px;
   }
 `;
 
 const Row = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  display: flex;
   gap: 60px;
+
+  max-width: 940px;
   width: 100%;
+
+  @media screen and (max-width: 540px) {
+    flex-direction: column;
+  }
 `;
 
 const Heading = styled.p`
@@ -121,18 +128,17 @@ const Heading = styled.p`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
+  width: 180px;
 `;
 
 const LogoBox = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 300px;
-  padding: 0 0 0 50px;
+  justify-content: center;
+  width: 200px;
 
-  @media screen and (max-width: 530px) {
+  @media screen and (max-width: 980px) {
     width: 100%;
-    padding: 0;
+    justify-content: flex-start;
   }
 `;
 

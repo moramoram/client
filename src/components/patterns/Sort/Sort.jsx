@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { DropdownSmall } from "@/components";
 import { Icon } from "@/foundations";
-import { colors, fontSize, fontWeight, animations } from "@/_shared";
+import { colors, fontSize, animations } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",

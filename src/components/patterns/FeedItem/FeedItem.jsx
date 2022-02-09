@@ -35,7 +35,7 @@ const FeedItem = ({
     query: "(min-width:530px)",
   });
   const isSmall = useMediaQuery({
-    query: "(max-width:529px)",
+    query: "(max-width:530px)",
   });
 
   return (

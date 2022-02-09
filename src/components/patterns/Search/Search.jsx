@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Icon } from "@/foundations";
-import { colors, fontSize, animations } from "@/_shared";
+import { colors, fontSize } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",

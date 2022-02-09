@@ -26,6 +26,7 @@ const Input = forwardRef(
             placeholder={placeholder}
             type={props.number ? "number" : "text"}
             ref={inputRef}
+            autocomplete="off"
             {...props}
           />
         </InputBox>
@@ -154,7 +155,7 @@ const InputText = styled.input`
   width: 100%;
   margin-left: 8px;
   border: none;
-  background: none;
+  background: transparent;
 
   font-size: ${fontSize.p};
   font-weight: ${fontWeight.regular};
@@ -169,6 +170,14 @@ const InputText = styled.input`
 
   :focus {
     outline: none;
+  }
+
+  :-webkit-autofill,
+  :-webkit-autofill:hover,
+  :-webkit-autofill:focus,
+  :-webkit-autofill:active {
+    transition: background-color 5000s;
+    -webkit-text-fill-color: ${(props) => textColor[props.theme]} !important;
   }
 `;
 

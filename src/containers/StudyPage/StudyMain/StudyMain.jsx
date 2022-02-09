@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
-import { SubNavbar, Input, Selector } from "@/components";
+import { SubNavbar, Input, Selector, Checkbox } from "@/components";
 import { CardGrid, StudyCardGrid } from "@/containers";
 
 const StudyMain = ({ categoryData }) => {
@@ -33,6 +33,9 @@ const StudyMain = ({ categoryData }) => {
             ]}
           />
           {/* <Selector placeholder="기술 스택" isMulti /> */}
+        </InputBox>
+        <InputBox>
+          <Checkbox label="완료된 공고만 보기" theme={theme} />
         </InputBox>
         <Suspense fallback={<CardGrid theme={theme} isLoading />}>
           <StudyCardGrid theme={theme} />

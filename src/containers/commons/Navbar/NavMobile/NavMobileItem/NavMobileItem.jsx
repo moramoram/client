@@ -103,9 +103,6 @@ const Text = styled.span`
   font-weight: ${(props) => textWeight[props.status]};
   text-decoration: none;
 
-  transition: 0.5s;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
+  transition: 0.5s;
 `;

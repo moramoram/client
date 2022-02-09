@@ -47,11 +47,8 @@ const Layout = styled.div`
   font-weight: ${fontWeight.regular};
 
   cursor: pointer;
-  transition: 0.2s;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
+  transition: 0.2s;
 
   :hover {
     background-color: ${(props) => hoverColor[props.theme]};

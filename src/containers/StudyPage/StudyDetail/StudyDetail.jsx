@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { useMutation, useQueryClient } from "react-query";
 import { GetStudyDetail, convertToStudyDetail, postComment } from "@/queries";
 
 import { CommentList, StudySideBar } from "@/containers";
-import { Avatar, CommentInput, Toc } from "@/components";
-import { colors, fontSize, fontWeight, lineHeight, loadings } from "@/_shared";
+import { Avatar, CommentInput, DropdownSmall, Toc } from "@/components";
+import { Icon } from "@/foundations";
+import {
+  animations,
+  colors,
+  fontSize,
+  fontWeight,
+  lineHeight,
+  loadings,
+} from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -14,6 +22,8 @@ const THEME = {
 };
 
 const StudyDetail = ({ ...props }) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const queryClient = useQueryClient();
   const { data } = GetStudyDetail();
   const { titleData, commentData, contentData, tocItem, sidebarData } =
@@ -30,19 +40,47 @@ const StudyDetail = ({ ...props }) => {
     });
   };
 
+  const dropdownItems = [
+    {
+      name: "edit",
+      title: "수정",
+      onClick: () => console.log("수정"),
+    },
+    {
+      name: "delete",
+      title: "삭제",
+      onClick: () => {
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+          console.log("삭제");
+        }
+      },
+    },
+  ];
+
   return (
     <>
       <Layout>
-        <TitleBox {...props}>
-          <Highlight {...props}>{titleData.highlight}</Highlight>
-          <Title {...props}>{titleData.title}</Title>
-          <div>
-            <SubTitle {...props}>
-              <Avatar size="medium" src={titleData.src} {...props} />
-              {titleData.subtitle}
-            </SubTitle>
-          </div>
-        </TitleBox>
+        <Header>
+          <TitleBox {...props}>
+            <Highlight {...props}>{titleData.highlight}</Highlight>
+            <Title {...props}>{titleData.title}</Title>
+            <div>
+              <SubTitle {...props}>
+                <Avatar size="medium" src={titleData.src} {...props} />
+                {titleData.subtitle}
+              </SubTitle>
+            </div>
+          </TitleBox>
+          <DropdownBox>
+            <Icon
+              icon="moreVertical"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            />
+            {isDropdownOpen && (
+              <DropdownSmall items={dropdownItems} size="small" {...props} />
+            )}
+          </DropdownBox>
+        </Header>
         <Toc items={tocItem} {...props} />
         <Content {...props}>{contentData}</Content>
         <div>
@@ -211,6 +249,11 @@ const Layout = styled.div`
   max-width: 940px;
 `;
 
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const TitleBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -254,6 +297,22 @@ const SubTitle = styled.div`
   font-size: ${fontSize.lg};
   line-height: ${lineHeight.lg};
   color: ${(props) => subtitleColor[props.theme]};
+`;
+
+const DropdownBox = styled.div`
+  position: relative;
+  padding-top: 1rem;
+
+  svg {
+    stroke: ${colors.gray500};
+    cursor: pointer;
+  }
+
+  > div {
+    z-index: 9999;
+    right: 0px;
+    animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
+  }
 `;
 
 const Content = styled.div`

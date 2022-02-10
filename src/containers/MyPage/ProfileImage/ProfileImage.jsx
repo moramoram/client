@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { useMutation, useQueryClient } from "react-query";
-import { PutProfileImage, DeleteProfileImage } from "@/queries";
+import { PutProfileImage, DeleteProfileImage } from "@/api";
 
 import Cropper from "react-easy-crop";
 

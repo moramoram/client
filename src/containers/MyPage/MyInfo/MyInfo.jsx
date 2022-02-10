@@ -6,7 +6,7 @@ import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
 import { useMutation, useQueryClient } from "react-query";
-import { PostNicknameCheck, PutNickname } from "@/queries";
+import { PostNicknameCheck, PutNickname } from "@/api";
 
 import { ProfileImage } from "@/containers";
 import { Input, Button } from "@/components";

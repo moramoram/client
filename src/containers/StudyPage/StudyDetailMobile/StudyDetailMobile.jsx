@@ -26,7 +26,7 @@ import {
 } from "@/_shared";
 
 import { useMutation, useQueryClient } from "react-query";
-import { GetStudyDetail, convertToStudyDetail, postComment } from "@/queries";
+import { GetStudyDetail, convertToStudyDetail, postComment } from "@/api";
 
 const THEME = {
   LIGHT: "light",

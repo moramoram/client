@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 import { useMediaQuery } from "react-responsive";
-import { GetUserProfile, UserProfileSelector } from "@/queries";
+import { GetUserProfile, UserProfileSelector } from "@/api";
 
 import {
   Authorization,

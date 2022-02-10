@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { getRefreshToken } from "@/queries";
+import { getRefreshToken } from "@/api";
 
 const axiosInstance = Axios.create({
   baseURL: process.env.REACT_APP_API_URL,

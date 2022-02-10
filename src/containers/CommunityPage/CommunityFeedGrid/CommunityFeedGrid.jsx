@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { themeState, communityCategory } from "@/recoil";
 import { useIntersectionObserver } from "@/hooks";
-import { GetCommunityList, CommunityFeedSelector } from "@/queries";
+import { GetCommunityList, CommunityFeedSelector } from "@/api";
 import { FeedGrid } from "@/containers";
 
 const CommunityFeedGrid = () => {

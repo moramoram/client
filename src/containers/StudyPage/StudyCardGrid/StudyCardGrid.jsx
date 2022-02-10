@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 import { useIntersectionObserver } from "@/hooks";
-import { StudyCardSelector } from "@/queries";
+import { StudyCardSelector } from "@/api";
 
 import { CardGrid } from "@/containers";
 

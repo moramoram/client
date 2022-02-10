@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { useMutation, useQueryClient } from "react-query";
-import { GetStudyDetail, convertToStudyDetail, postComment } from "@/queries";
+import { GetStudyDetail, convertToStudyDetail, postComment } from "@/api";
 
 import { CommentList, StudySideBar } from "@/containers";
 import { Avatar, CommentInput, DropdownSmall, Toc } from "@/components";

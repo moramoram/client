@@ -9,7 +9,7 @@ import {
   CommunityDetailSelector,
   GetCommunityDetail,
   deleteCommunity,
-} from "@/queries";
+} from "@/api";
 
 import { CommunityDetailComment } from "@/containers";
 import { Button, FeedDetail } from "@/components";

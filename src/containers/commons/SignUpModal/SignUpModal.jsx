@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import { loginModalState } from "@/recoil";
 
 import { Icon, IconSocial, Typography } from "@/foundations";
-import { colors, fontWeight, shadows } from "@/_shared";
+import { animations, colors, fontWeight, shadows } from "@/_shared";
 
 const SignUpModal = ({ ...props }) => {
   const [isModalOpened, setIsModalOpened] = useRecoilState(loginModalState);
@@ -84,6 +84,8 @@ const Overlay = styled.div`
 
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(15px);
+
+  animation: ${animations.appear} 0.3s cubic-bezier(0.3, 0, 0, 1);
 `;
 
 const ModalBox = styled.div`
@@ -112,6 +114,7 @@ const Layout = styled.div`
 
   background-color: ${colors.white};
   transform: translateY(-50%);
+  animation: ${animations.modal} 0.4s cubic-bezier(0.3, 0, 0, 1);
 
   @media screen and (max-width: 500px) {
     width: 100%;

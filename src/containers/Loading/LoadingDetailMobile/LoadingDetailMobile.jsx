@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { CommentList } from "@/containers";
+import { CommentList } from "@/layouts";
 
 import {
   Badge,

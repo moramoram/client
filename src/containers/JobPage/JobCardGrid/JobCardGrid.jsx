@@ -8,7 +8,7 @@ import {
   // GetInfiniteQuery,
   JobCardSelector,
 } from "@/api";
-import { CardGrid } from "@/containers";
+import { CardGrid } from "@/layouts";
 
 const JobCardGrid = () => {
   const theme = useRecoilValue(themeState);

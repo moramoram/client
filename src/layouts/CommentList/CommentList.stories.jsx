@@ -4,7 +4,7 @@ import CommentList from ".";
 import { daysFromToday } from "@/utils";
 
 export default {
-  title: "containers/CommentList",
+  title: "layouts/CommentList",
   component: CommentList,
 };
 

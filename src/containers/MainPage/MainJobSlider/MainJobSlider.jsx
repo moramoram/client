@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { CardSlider } from "@/containers";
+import { CardSlider } from "@/layouts";
 
 const MainJobSlider = ({ ...props }) => {
   return (

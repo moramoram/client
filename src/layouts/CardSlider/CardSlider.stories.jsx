@@ -2,7 +2,7 @@ import React from "react";
 import CardSlider from ".";
 
 export default {
-  title: "containers/CardSlider",
+  title: "layouts/CardSlider",
   component: CardSlider,
 };
 

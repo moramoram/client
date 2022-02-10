@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
-import { CardGrid } from "@/containers";
+import { CardGrid } from "@/layouts";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const THEME = {

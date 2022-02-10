@@ -4,8 +4,9 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
+import { JobCardGrid } from "@/containers";
+import { CardGrid } from "@/layouts";
 import { SubNavbar, Input, Selector, Checkbox, Sort } from "@/components";
-import { CardGrid, JobCardGrid } from "@/containers";
 
 const JobMain = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);

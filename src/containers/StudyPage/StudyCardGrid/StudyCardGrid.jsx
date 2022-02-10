@@ -5,7 +5,7 @@ import { themeState } from "@/recoil/theme";
 import { useIntersectionObserver } from "@/hooks";
 import { StudyCardSelector } from "@/api";
 
-import { CardGrid } from "@/containers";
+import { CardGrid } from "@/layouts";
 
 const StudyCardGrid = () => {
   const theme = useRecoilValue(themeState);

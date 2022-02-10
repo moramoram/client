@@ -5,7 +5,8 @@ import { useRecoilValue } from "recoil";
 import { themeState, communityCategory } from "@/recoil";
 import { useIntersectionObserver } from "@/hooks";
 import { GetCommunityList, CommunityFeedSelector } from "@/api";
-import { FeedGrid } from "@/containers";
+
+import { FeedGrid } from "@/layouts";
 
 const CommunityFeedGrid = () => {
   const theme = useRecoilValue(themeState);

@@ -10,7 +10,7 @@ import {
 } from "@/api";
 
 import { CommentInput } from "@/components";
-import { CommentList } from "@/containers";
+import { CommentList } from "@/layouts";
 import { colors, fontSize, fontWeight } from "@/_shared";
 
 const CommunityDetailComment = (props) => {

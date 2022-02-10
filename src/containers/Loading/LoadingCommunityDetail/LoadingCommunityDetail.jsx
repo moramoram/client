@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { CommentList, StudySideBar } from "@/containers";
+import { StudySideBar } from "@/containers";
+import { CommentList } from "@/layouts";
 import { Toc, CommentInput } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 

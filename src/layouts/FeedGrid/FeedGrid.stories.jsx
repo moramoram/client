@@ -3,7 +3,7 @@ import FeedGrid from ".";
 import { daysFromToday, numToMillion } from "@/utils";
 
 export default {
-  title: "containers/FeedGrid",
+  title: "layouts/FeedGrid",
   component: FeedGrid,
 };
 

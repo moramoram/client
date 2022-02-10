@@ -2,7 +2,7 @@ import React from "react";
 import CardSmallSlider from ".";
 
 export default {
-  title: "containers/CardSmallSlider",
+  title: "layouts/CardSmallSlider",
   component: CardSmallSlider,
 };
 

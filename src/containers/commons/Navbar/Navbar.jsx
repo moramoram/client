@@ -17,12 +17,8 @@ const TYPE = {
 };
 
 const Navbar = ({ ...props }) => {
-  const isPc = useMediaQuery({
-    query: "(min-width:980px)",
-  });
-  const isMobile = useMediaQuery({
-    query: "(max-width:980px)",
-  });
+  const isPc = useMediaQuery({ query: "(min-width:980px)" });
+  const isMobile = useMediaQuery({ query: "(max-width:980px)" });
 
   return (
     <>

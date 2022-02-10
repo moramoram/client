@@ -64,9 +64,7 @@ const CommunityEditor = ({
     "code",
   ];
 
-  const isDefaultView = useMediaQuery({
-    query: "(min-width:560px)",
-  });
+  const isDefaultView = useMediaQuery({ query: "(min-width:560px)" });
 
   const options = [
     { value: "1", label: "자유게시판" },

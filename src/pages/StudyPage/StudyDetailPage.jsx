@@ -21,12 +21,8 @@ const StudyDetailPage = () => {
   const itemId = useParams().studyId;
   console.log(itemId);
 
-  const isPc = useMediaQuery({
-    query: "(min-width:980px)",
-  });
-  const isMobile = useMediaQuery({
-    query: "(max-width:980px)",
-  });
+  const isPc = useMediaQuery({ query: "(min-width:980px)" });
+  const isMobile = useMediaQuery({ query: "(max-width:980px)" });
 
   return (
     <ErrorBoundary fallback={<div />}>

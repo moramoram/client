@@ -29,12 +29,8 @@ const StudyPage = () => {
     return () => window.removeEventListener("scroll", onScroll);
   });
 
-  const isPc = useMediaQuery({
-    query: "(min-width:980px)",
-  });
-  const isMobile = useMediaQuery({
-    query: "(max-width:980px)",
-  });
+  const isPc = useMediaQuery({ query: "(min-width:980px)" });
+  const isMobile = useMediaQuery({ query: "(max-width:980px)" });
 
   return (
     <ErrorBoundary fallback={<div />}>

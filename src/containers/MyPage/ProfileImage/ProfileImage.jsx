@@ -20,16 +20,19 @@ const ProfileImage = ({ profileImg, aspect, ...props }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [preview, setPreview] = useState(profileImg);
 
   const queryClient = useQueryClient();
   const putProfileImage = useMutation(PutProfileImage, {
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries("getUserProfile");
+      setPreview(data.profileImg);
     },
   });
   const deleteProfileImage = useMutation(DeleteProfileImage, {
     onSuccess: () => {
       queryClient.invalidateQueries("getUserProfile");
+      setPreview(null);
     },
   });
 
@@ -55,7 +58,7 @@ const ProfileImage = ({ profileImg, aspect, ...props }) => {
     }
   };
 
-  const onCropComplete = useCallback((croppedAreaPixels) => {
+  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
@@ -68,8 +71,7 @@ const ProfileImage = ({ profileImg, aspect, ...props }) => {
   }, [imageSrc, croppedAreaPixels, putProfileImage]);
 
   const initProfileImage = useCallback(() => {
-    // deleteProfileImage.mutate();
-    console.log(deleteProfileImage);
+    deleteProfileImage.mutate();
   }, [deleteProfileImage]);
 
   const onClose = useCallback(() => {
@@ -107,7 +109,7 @@ const ProfileImage = ({ profileImg, aspect, ...props }) => {
       )}
       <Layout>
         <ImgBox>
-          <Avatar size="extraLarge" src={profileImg} alt="Cropped" />
+          <Avatar size="extraLarge" src={preview} alt="Cropped" />
           <Button mode="secondary" onClick={initProfileImage} {...props}>
             초기화
           </Button>

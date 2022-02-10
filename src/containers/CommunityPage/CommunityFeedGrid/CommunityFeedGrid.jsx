@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { themeState, communityCategory } from "@/recoil";
 import { useIntersectionObserver } from "@/hooks";
 import { GetCommunityList, CommunityFeedSelector } from "@/queries";
@@ -14,7 +14,6 @@ const CommunityFeedGrid = () => {
   const loader = useRef(null);
   const { data, fetchNextPage, hasNextPage } = GetCommunityList(category);
   const { feedData } = CommunityFeedSelector(data);
-
   const onFetchNewData = () => {
     fetchNextPage();
   };

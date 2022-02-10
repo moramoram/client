@@ -7,14 +7,11 @@ export const auth = atom({
     userId: null,
     email: null,
     nickname: null,
-    realName: null,
     authCheck: null,
     campus: null,
     ordinal: null,
     likeJob: null,
-    modifiedDate: null,
     profileImg: null,
-    createdDate: null,
   },
 });
 

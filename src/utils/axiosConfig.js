@@ -27,11 +27,14 @@ axiosInstance.interceptors.response.use(
     return config.data;
   },
   (err) => {
-    if (err.response.status === "401") {
+    if (
+      err.response.status === "401" &&
+      err.response.message === "Expired access token."
+    ) {
       return getRefreshToken()
         .then((token) => {
-          err.config.headers.Authorization = `Bearer ${token.accessToken}`;
           localStorage.setItem("ssafe_token", JSON.stringify(token));
+          err.config.headers.Authorization = `Bearer ${token.accessToken}`;
           return axiosInstance.request(err.config);
         })
         .catch((err) => {

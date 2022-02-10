@@ -60,7 +60,7 @@ const Router = () => {
     if (!!jwtToken.accessToken) {
       getMyPageInfo();
     }
-  });
+  }, [jwtToken]);
 
   return (
     <Routes>
@@ -69,9 +69,21 @@ const Router = () => {
         <Route path="main" element={<MainPage />} />
         <Route path="job" element={<JobPage />} />
         <Route path="job/create" element={<JobCreatePage />} />
-        <Route path="job/:jobId" element={<JobDetailPage />} />
+        <Route
+          path="job/create"
+          element={<PrivateRoute component={JobCreatePage} fallback="job" />}
+        />
+        <Route
+          path="job/:jobId"
+          element={<PrivateRoute component={JobDetailPage} fallback="job" />}
+        />
         <Route path="study" element={<StudyPage />} />
-        <Route path="study/create" element={<StudyCreatePage />} />
+        <Route
+          path="study/create"
+          element={
+            <PrivateRoute component={StudyCreatePage} fallback="study" />
+          }
+        />
         <Route
           path="study/:studyId"
           element={
@@ -88,7 +100,15 @@ const Router = () => {
             />
           }
         />
-        <Route path="mypage" element={<MyPage />} />
+        <Route
+          path="community/:contentId"
+          element={
+            <PrivateRoute
+              component={CommunityDetailPage}
+              fallback="community"
+            />
+          }
+        />
         <Route path="auth/login/*" element={<LoginPage />} />
         <Route path="*" element={<div>page not found</div>} />
       </Route>

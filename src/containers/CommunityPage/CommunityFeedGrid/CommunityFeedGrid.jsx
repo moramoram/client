@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { themeState, communityCategory } from "@/recoil";
 import { useIntersectionObserver } from "@/hooks";
 import { GetCommunityList, CommunityFeedSelector } from "@/queries";

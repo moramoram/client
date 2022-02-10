@@ -49,7 +49,6 @@ const Router = () => {
 
   const getMyPageInfo = async () => {
     const { data } = await axiosInstance({ url: "users/me" });
-    console.log(data);
     setAuth(data);
   };
 
@@ -60,7 +59,7 @@ const Router = () => {
     if (!!jwtToken.accessToken) {
       getMyPageInfo();
     }
-  }, [jwtToken]);
+  });
 
   return (
     <Routes>
@@ -71,23 +70,43 @@ const Router = () => {
         <Route path="job/create" element={<JobCreatePage />} />
         <Route
           path="job/create"
-          element={<PrivateRoute component={JobCreatePage} fallback="job" />}
+          element={
+            <PrivateRoute
+              component={JobCreatePage}
+              fallback="job"
+              checkAuthorized
+            />
+          }
         />
         <Route
           path="job/:jobId"
-          element={<PrivateRoute component={JobDetailPage} fallback="job" />}
+          element={
+            <PrivateRoute
+              component={JobDetailPage}
+              fallback="job"
+              checkAuthorized
+            />
+          }
         />
         <Route path="study" element={<StudyPage />} />
         <Route
           path="study/create"
           element={
-            <PrivateRoute component={StudyCreatePage} fallback="study" />
+            <PrivateRoute
+              component={StudyCreatePage}
+              fallback="study"
+              checkAuthorized
+            />
           }
         />
         <Route
           path="study/:studyId"
           element={
-            <PrivateRoute component={StudyDetailPage} fallback="study" />
+            <PrivateRoute
+              component={StudyDetailPage}
+              fallback="study"
+              checkAuthorized
+            />
           }
         />
         <Route path="community" element={<CommunityPage />} />
@@ -97,6 +116,7 @@ const Router = () => {
             <PrivateRoute
               component={CommunityDetailPage}
               fallback="community"
+              checkAuthorized
             />
           }
         />
@@ -106,8 +126,13 @@ const Router = () => {
             <PrivateRoute
               component={CommunityDetailPage}
               fallback="community"
+              checkAuthorized
             />
           }
+        />
+        <Route
+          path="mypage"
+          element={<PrivateRoute component={MyPage} fallback="" />}
         />
         <Route path="auth/login/*" element={<LoginPage />} />
         <Route path="*" element={<div>page not found</div>} />

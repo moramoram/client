@@ -1,5 +1,10 @@
 import Axios from "axios";
 
+const getRefreshToken = () => {
+  console.log("refresh");
+  return null;
+};
+
 const axiosInstance = Axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   timeout: 30000,
@@ -22,6 +27,16 @@ axiosInstance.interceptors.response.use(
     return config.data;
   },
   (err) => {
+    // if (err.response.status === "401") {
+    //   return getRefreshToken()
+    //     .then((token) => {
+    //       err.config.headers.Authorization = `Bearer ${token.accessToken}`;
+    //       return axiosInstance.request(err.config);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // }
     return Promise.reject(err);
   }
 );

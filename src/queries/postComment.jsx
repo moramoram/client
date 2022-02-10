@@ -24,10 +24,7 @@ export const postComment = async (data) => {
   const res = await axiosInstance({
     url: `/${commentType[data.type]}`,
     method: "post",
-    data: {
-      boardId: data.boardId,
-      content: data.content,
-    },
+    data,
   });
   return res.data;
 };

@@ -4,7 +4,12 @@ import { useMediaQuery } from "react-responsive";
 
 import { useSetRecoilState } from "recoil";
 import { navTypeState } from "@/recoil/theme";
-import { StudyIntro, StudyMain, StudyMainMobile } from "@/containers";
+import {
+  StudyIntro,
+  StudyMain,
+  StudyMainMobile,
+  ErrorBoundary,
+} from "@/containers";
 
 const StudyPage = () => {
   const setNavType = useSetRecoilState(navTypeState);
@@ -32,11 +37,11 @@ const StudyPage = () => {
   });
 
   return (
-    <>
+    <ErrorBoundary fallback={<div>heelo</div>}>
       <StudyIntro />
       {isPc && <StudyMain categoryData={categoryData} />}
       {isMobile && <StudyMainMobile categoryData={categoryData} />}
-    </>
+    </ErrorBoundary>
   );
 };
 

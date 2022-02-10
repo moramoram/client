@@ -3,29 +3,24 @@ import React, { useRef } from "react";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 import { useIntersectionObserver } from "@/hooks";
-import {
-  GetDummyApi,
-  // GetInfiniteQuery,
-  StudyCardSelector,
-} from "@/queries";
+import { GetStudyitems, StudyCardSelector } from "@/queries";
 
 import { CardGrid } from "@/containers";
 
 const StudyCardGrid = () => {
   const theme = useRecoilValue(themeState);
   const loader = useRef(null);
-  // const { data, fetchNextPage } = GetInfiniteQuery();
-
-  const { data } = GetDummyApi();
+  const { data, fetchNextPage, hasNextPage } = GetStudyitems();
 
   const onFetchNewData = () => {
-    console.log(data.name);
-
-    const token = localStorage.getItem("token");
-    if (token) {
-      console.log(data.name);
-    }
+    fetchNextPage();
   };
+
+  useIntersectionObserver({
+    target: loader,
+    onIntersect: onFetchNewData,
+    enabled: hasNextPage,
+  });
 
   const { cardData } = StudyCardSelector(mockdata);
 

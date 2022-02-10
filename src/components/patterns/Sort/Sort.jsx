@@ -11,12 +11,13 @@ const THEME = {
   DARK: "dark",
 };
 
-const Sort = ({ items, ...props }) => {
+const Sort = ({ items, onClick, ...props }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [current, setCurrent] = useState(items[0]);
 
   const dropdownItems = items.map((item, idx) => ({
     onClick: () => {
+      onClick(item.name);
       setCurrent(items[idx]);
       setDropdownOpen(!dropdownOpen);
     },

@@ -1,9 +1,5 @@
 import Axios from "axios";
-
-const getRefreshToken = () => {
-  console.log("refresh");
-  return null;
-};
+import { getRefreshToken } from "@/queries";
 
 const axiosInstance = Axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -15,7 +11,6 @@ const axiosInstance = Axios.create({
 
 axiosInstance.interceptors.request.use((config) => {
   const token = JSON.parse(localStorage.getItem("ssafe_token"));
-
   if (token) {
     config.headers.Authorization = `Bearer ${token.accessToken}`;
   }
@@ -33,11 +28,13 @@ axiosInstance.interceptors.response.use(
     ) {
       return getRefreshToken()
         .then((token) => {
+          console.log("토근 재발급 성공");
           localStorage.setItem("ssafe_token", JSON.stringify(token));
           err.config.headers.Authorization = `Bearer ${token.accessToken}`;
           return axiosInstance.request(err.config);
         })
         .catch((err) => {
+          console.log("토근 재발급 실패");
           console.log(err);
         });
     }

@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
-import { themeState, communityCategory } from "@/recoil";
+import { themeState, communitySearch } from "@/recoil";
 import { createModalState } from "@/recoil/modal";
 
 import { useMediaQuery } from "react-responsive";
@@ -19,12 +19,20 @@ import { SubNavbar, Sort, Search } from "@/components";
 const CommunityPage = () => {
   const theme = useRecoilValue(themeState);
   const setCreateModalOpen = useSetRecoilState(createModalState);
-  const [category, setCategory] = useRecoilState(communityCategory);
+  const [search, setSearch] = useRecoilState(communitySearch);
 
   const handleCategory = (idx) => {
-    setCategory(idx);
+    setSearch({ ...search, boardType: idx });
   };
-  console.log(category);
+
+  const handleSort = (criteria) => {
+    setSearch({ ...search, criteria: criteria });
+  };
+
+  const handleKeyword = (keyword) => {
+    console.log(keyword);
+    setSearch({ ...search, title: keyword });
+  };
 
   const isPc = useMediaQuery({
     query: "(min-width:980px)",
@@ -44,7 +52,7 @@ const CommunityPage = () => {
           <StickyNavBox>
             <StickyNav
               data={categoryData}
-              selected={category}
+              selected={search.boardType}
               theme={theme}
               onClick={handleCategory}
             />
@@ -55,20 +63,12 @@ const CommunityPage = () => {
               theme={theme}
             />
             <SortBox>
-              <Sort
-                items={[
-                  {
-                    name: "date",
-                    title: "최신순",
-                  },
-                  {
-                    name: "scrap",
-                    title: "인기순",
-                  },
-                ]}
+              <Sort items={criteriaData} theme={theme} />
+              <Search
                 theme={theme}
+                onChange={handleKeyword}
+                placeholder="게시글 검색"
               />
-              <Search theme={theme} placeholder="게시글 검색" />
             </SortBox>
             <Suspense fallback={<LoadingFeed isLoading />}>
               <CommunityFeedGrid theme={theme} />
@@ -81,7 +81,7 @@ const CommunityPage = () => {
           <SubNavbar
             data={categoryData}
             theme={theme}
-            selected={category}
+            selected={search.boardType}
             onClick={handleCategory}
             view="mobile"
           />
@@ -91,19 +91,7 @@ const CommunityPage = () => {
               theme={theme}
             />
             <SortBox>
-              <Sort
-                items={[
-                  {
-                    name: "date",
-                    title: "최신순",
-                  },
-                  {
-                    name: "scrap",
-                    title: "인기순",
-                  },
-                ]}
-                theme={theme}
-              />
+              <Sort items={criteriaData} onClick={handleSort} theme={theme} />
               <Search theme={theme} placeholder="게시글 검색" />
             </SortBox>
           </div>
@@ -134,6 +122,21 @@ const categoryData = [
   {
     id: 4,
     title: "질문 게시판",
+  },
+];
+
+const criteriaData = [
+  {
+    name: "date",
+    title: "최신순",
+  },
+  {
+    name: "scrap",
+    title: "인기순",
+  },
+  {
+    name: "view",
+    title: "조회순",
   },
 ];
 

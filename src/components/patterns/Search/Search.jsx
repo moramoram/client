@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
@@ -100,7 +101,7 @@ const Input = styled.input`
 
   ::placeholder {
     color: ${(props) =>
-      props.inputOpen ? colors.gray500 : colors.transparent};
+    props.inputOpen ? colors.gray500 : colors.transparent};
     font-size: ${fontSize.p};
   }
 

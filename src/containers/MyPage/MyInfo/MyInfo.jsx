@@ -19,8 +19,9 @@ const THEME = {
 
 const MyInfo = ({ userProfile, ...props }) => {
   const theme = useRecoilValue(themeState);
-  const { nickname, profileImg } = userProfile;
+  const { profileImg } = userProfile;
 
+  const [nickname, setNickname] = useState(userProfile.nickname);
   const [nickValue, setNickValue] = useState(nickname);
   const [nickStatus, setNickStatus] = useState({
     status: "default",
@@ -93,8 +94,13 @@ const MyInfo = ({ userProfile, ...props }) => {
 
   const queryClient = useQueryClient();
   const putNickname = useMutation(PutNickname, {
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries("getUserProfile");
+      setNickStatus({
+        status: "default",
+        message: null,
+      });
+      setNickname(data);
     },
   });
 
@@ -103,10 +109,6 @@ const MyInfo = ({ userProfile, ...props }) => {
       nickname: nickValue,
     };
     putNickname.mutate(data);
-    setNickStatus({
-      status: "default",
-      message: null,
-    });
   }, [nickValue, putNickname]);
 
   return (

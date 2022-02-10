@@ -20,19 +20,19 @@ const ProfileImage = ({ profileImg, aspect, ...props }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-  const [preview, setPrevew] = useState(profileImg);
+  const [preview, setPreview] = useState(profileImg);
 
   const queryClient = useQueryClient();
   const putProfileImage = useMutation(PutProfileImage, {
     onSuccess: (data) => {
       queryClient.invalidateQueries("getUserProfile");
-      setPrevew(data.profileImg);
+      setPreview(data.profileImg);
     },
   });
   const deleteProfileImage = useMutation(DeleteProfileImage, {
     onSuccess: () => {
       queryClient.invalidateQueries("getUserProfile");
-      setPrevew(null);
+      setPreview(null);
     },
   });
 

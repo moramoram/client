@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { useSlider } from "@/hooks";
 
 import { SubNavbarItem } from "./SubNavbarItem";
-import { loadings } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -49,8 +48,8 @@ const SubNavbar = ({ data, theme, onClick, selected = 1, ...props }) => {
           <SubNavbarItem
             theme={theme}
             onClick={() => handleNavItemClick(idx)}
-            key={idx}
-            status={selectedIndex === idx + 1 ? "active" : "default"}
+            key={id}
+            status={selectedIndex === id ? "active" : "default"}
           >
             {title}
           </SubNavbarItem>
@@ -80,14 +79,6 @@ export default SubNavbar;
 const Layout = styled.div`
   display: flex;
   overflow-x: scroll;
-  border-radius: 8px;
-
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
-  scroll-behavior: smooth;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
 
   ${(props) =>
     props.view === VIEW.DEFAULT &&
@@ -99,5 +90,10 @@ const Layout = styled.div`
 
   > div {
     flex-shrink: 0;
+  }
+
+  scroll-behavior: smooth;
+  ::-webkit-scrollbar {
+    display: none;
   }
 `;

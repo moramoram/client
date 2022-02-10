@@ -37,10 +37,7 @@ const FeedDetail = ({
 }) => {
   const usernameRender = username ?? "User";
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const isDefault = useMediaQuery({
-    query: "(min-width:530px)",
-  });
+  const isDefault = useMediaQuery({ query: "(min-width:530px)" });
 
   return (
     <Layout>

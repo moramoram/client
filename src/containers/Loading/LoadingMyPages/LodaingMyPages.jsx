@@ -10,14 +10,8 @@ import { colors, lineHeight, loadings } from "@/_shared";
 
 const MyPage = () => {
   const theme = useRecoilValue(themeState);
-
-  const isPc = useMediaQuery({
-    query: "(min-width:980px)",
-  });
-
-  const isMobile = useMediaQuery({
-    query: "(max-width:980px)",
-  });
+  const isPc = useMediaQuery({ query: "(min-width:980px)" });
+  const isMobile = useMediaQuery({ query: "(max-width:980px)" });
 
   const contents = (
     <Content theme={theme}>

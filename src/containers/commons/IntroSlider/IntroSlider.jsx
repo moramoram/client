@@ -30,10 +30,7 @@ const IntroSlider = ({ data, ...props }) => {
   const isDefault = useMediaQuery({
     query: "(max-width:980px) and (min-width:530px)",
   });
-
-  const isSmall = useMediaQuery({
-    query: "(max-width:530px)",
-  });
+  const isSmall = useMediaQuery({ query: "(max-width:530px)" });
 
   return (
     <Layout>

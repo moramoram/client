@@ -56,9 +56,7 @@ const StudyCreateEditor = (props) => {
     "code",
   ];
 
-  const isDefaultView = useMediaQuery({
-    query: "(min-width:560px)",
-  });
+  const isDefaultView = useMediaQuery({ query: "(min-width:560px)" });
 
   return (
     <Layout {...props}>

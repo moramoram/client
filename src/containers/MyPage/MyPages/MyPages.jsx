@@ -30,7 +30,7 @@ const MyPage = () => {
   };
 
   const contentsReducer = (state, action) => contentsData[action];
-  const handleCategory = (idx) => dispatchContents(idx);
+  const handleCategory = (id) => dispatchContents(id);
   const [contents, dispatchContents] = useReducer(
     contentsReducer,
     contentsData[1]
@@ -74,26 +74,11 @@ const MyPage = () => {
 export default MyPage;
 
 const categoryData = [
-  {
-    id: 1,
-    title: "내 프로필",
-  },
-  {
-    id: 2,
-    title: "내 인증 현황",
-  },
-  {
-    id: 3,
-    title: "내가 쓴 글",
-  },
-  {
-    id: 4,
-    title: "나의 스터디",
-  },
-  {
-    id: 5,
-    title: "내가 쓴 댓글",
-  },
+  { id: 1, title: "내 프로필" },
+  { id: 2, title: "내 인증 현황" },
+  { id: 3, title: "내가 쓴 글" },
+  { id: 4, title: "나의 스터디" },
+  { id: 5, title: "내가 쓴 댓글" },
 ];
 
 const Layout = styled.div`

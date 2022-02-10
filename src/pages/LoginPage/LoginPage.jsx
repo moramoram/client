@@ -13,20 +13,23 @@ const LoginPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const parsed = queryString.parse(location.search);
-
   const setToken = useSetRecoilState(token);
+  const request = location.pathname.split("/")[3];
 
   const getToken = useCallback(async () => {
     const { data } = await axiosInstance({
-      url: "/auth/login/google",
+      url: `/auth/login/${request}`,
       method: "post",
       params: {
         code: parsed.code,
       },
     });
-    setToken(data);
-    navigate(-2);
-  }, [parsed.code, setToken, navigate]);
+    await setToken({
+      accessToken: data.accessToken,
+      refreshToken: data.refreshToken,
+    });
+    navigate("/");
+  }, [parsed.code, setToken]);
 
   useEffect(() => {
     if (parsed.code) {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useReducer } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
@@ -18,42 +18,26 @@ import { SubNavbar } from "@/components";
 
 const MyPage = () => {
   const theme = useRecoilValue(themeState);
-  const [selectedCategory, setSelectedCategory] = useState(0);
-  const [contents, setContents] = useState(null);
-
   const { data } = GetUserProfile();
   const userProfile = UserProfileSelector(data);
 
-  const handleCategory = (idx) => {
-    setSelectedCategory(idx);
+  const contentsData = {
+    1: <MyInfo userProfile={userProfile} />,
+    2: <Authorization userProfile={userProfile} />,
+    3: <MyFeed />,
+    4: <MyStudy />,
+    5: <MyComment />,
   };
 
-  useEffect(() => {
-    setContents(() => {
-      switch (selectedCategory) {
-        case 1:
-          return <MyInfo userProfile={userProfile} />;
-        case 2:
-          return <Authorization userProfile={userProfile} />;
-        case 3:
-          return <MyFeed />;
-        case 4:
-          return <MyStudy />;
-        case 5:
-          return <MyComment />;
-        default:
-          return <MyInfo userProfile={userProfile} />;
-      }
-    });
-  }, [setContents]);
+  const contentsReducer = (state, action) => contentsData[action];
+  const handleCategory = (idx) => dispatchContents(idx);
+  const [contents, dispatchContents] = useReducer(
+    contentsReducer,
+    contentsData[1]
+  );
 
-  const isPc = useMediaQuery({
-    query: "(min-width:980px)",
-  });
-
-  const isMobile = useMediaQuery({
-    query: "(max-width:980px)",
-  });
+  const isPc = useMediaQuery({ query: "(min-width:980px)" });
+  const isMobile = useMediaQuery({ query: "(max-width:980px)" });
 
   return (
     <>

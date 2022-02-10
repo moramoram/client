@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { useMediaQuery } from "react-responsive";
 
 import { Avatar } from "@/components";
 import { Icon } from "@/foundations";
-import { colors, fontSize, fontWeight } from "@/_shared";
+import { colors, fontSize, fontWeight, lineHeight, loadings } from "@/_shared";
 
 import { daysFromToday, numToMillion } from "@/utils";
 
@@ -27,42 +27,70 @@ const FeedItem = ({
   likecount,
   commentcount,
   viewcount,
+  isLoading,
   ...props
 }) => {
-  const usernameRender = username || "User";
-  const userDetail = ordinal && campus ? `${ordinal} / ${campus}` : "";
-  const isDefault = useMediaQuery({
-    query: "(min-width:530px)",
-  });
-  const isSmall = useMediaQuery({
-    query: "(max-width:530px)",
-  });
+  let usernameRender = username || "User";
+  let userDetail = ordinal && campus ? `(${ordinal} / ${campus})` : "";
+
+  const isDefault = useMediaQuery({ query: "(min-width:530px)" });
+  const isSmall = useMediaQuery({ query: "(max-width:530px)" });
+
+  if (isLoading) {
+    usernameRender = "";
+    avatar = "";
+    userDetail = "";
+    created = "";
+    title = "";
+    content = "";
+    thumbnail = "";
+    likecount = "";
+    commentcount = "";
+    viewcount = "";
+  }
 
   return (
     <Layout>
       <FlexBox>
         <div>
           <Header>
-            <Avatar size="large" username={username} src={avatar} {...props} />
+            <Avatar
+              size="large"
+              isLoading={isLoading}
+              username={username}
+              src={avatar}
+              {...props}
+            />
             <InfoBox>
               <UserBox>
-                <User {...props}>{usernameRender}</User>
+                <User isLoading={isLoading} {...props}>
+                  {usernameRender}
+                </User>
                 <UserDetail>{userDetail}</UserDetail>
               </UserBox>
-              <CreatedAt>{created}</CreatedAt>
+              <CreatedAt isLoading={isLoading} {...props}>
+                {created}
+              </CreatedAt>
             </InfoBox>
           </Header>
           <ContentBox>
-            <Title {...props}>{title}</Title>
-            <Content {...props}>{content}</Content>
+            <Title isLoading={isLoading} {...props}>
+              {title}
+            </Title>
+            <Content isLoading={isLoading} {...props}>
+              {content}
+            </Content>
             {isSmall && thumbnail && (
               <ThumbnailBoxMobile>
                 <img src={thumbnail} alt="" width="100%" />
               </ThumbnailBoxMobile>
             )}
+            {isSmall && isLoading && (
+              <ThumbnailBoxMobile isLoading={isLoading} {...props} />
+            )}
           </ContentBox>
         </div>
-        <Footer>
+        <Footer isLoading={isLoading} {...props}>
           <IconBox>
             <Icon icon="thumbsUp" />
             <CountNums>{likecount}</CountNums>
@@ -82,6 +110,9 @@ const FeedItem = ({
           <img src={thumbnail} alt="" width="200px" />
         </ThumbnailBox>
       )}
+      {isDefault && isLoading && (
+        <ThumbnailBox isLoading={isLoading} {...props} />
+      )}
     </Layout>
   );
 };
@@ -97,6 +128,7 @@ FeedItem.propTypes = {
   likecount: PropTypes.node,
   commentcount: PropTypes.node,
   viewcount: PropTypes.node,
+  isLoading: PropTypes.bool,
 };
 
 FeedItem.defaultProps = {
@@ -130,7 +162,7 @@ const Layout = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 2rem;
-  /* height: 200px; */
+  width: 100%;
 `;
 
 const FlexBox = styled.div`
@@ -138,6 +170,8 @@ const FlexBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 2rem;
+
+  flex-grow: 1;
 `;
 
 const Header = styled.div`
@@ -159,18 +193,29 @@ const UserBox = styled.div`
 `;
 
 const User = styled.div`
-  font-weight: ${fontWeight.bold};
   font-size: ${fontSize.p};
+  line-height: ${lineHeight.p};
+  font-weight: ${fontWeight.bold};
   color: ${(props) => titleColor[props.theme]};
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.sm};
   }
+
+  ${(props) =>
+    props.isLoading &&
+    css`
+      width: 120px;
+      height: ${lineHeight.p};
+      border-radius: 4px;
+      animation: ${loadings[props.theme]};
+    `}
 `;
 
 const UserDetail = styled.div`
-  color: ${colors.gray500};
   font-size: ${fontSize.sm};
+  line-height: ${fontSize.p};
+  color: ${colors.gray500};
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.xs};
@@ -178,59 +223,95 @@ const UserDetail = styled.div`
 `;
 
 const CreatedAt = styled.div`
-  color: ${colors.gray500};
   font-size: ${fontSize.sm};
+  line-height: ${fontSize.sm};
+  color: ${colors.gray500};
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.xs};
   }
+
+  ${(props) =>
+    props.isLoading &&
+    css`
+      width: 60px;
+      height: ${fontSize.sm};
+      border-radius: 4px;
+      animation: ${loadings[props.theme]};
+    `}
 `;
 
 const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  align-items: stretch;
+  gap: 4px;
 
   width: 100%;
 `;
 
 const Title = styled.div`
-  color: ${(props) => titleColor[props.theme]};
-  font-weight: ${fontWeight.bold};
   font-size: ${fontSize.lg};
+  line-height: ${lineHeight.lg};
+  font-weight: ${fontWeight.bold};
+  color: ${(props) => titleColor[props.theme]};
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.p};
   }
+
+  ${(props) =>
+    props.isLoading &&
+    css`
+      max-width: 200px;
+      height: ${lineHeight.lg};
+      border-radius: 4px;
+      animation: ${loadings[props.theme]};
+    `}
 `;
 
 const Content = styled.div`
   display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
   overflow: hidden;
-
   max-height: 3rem;
 
   color: ${(props) => contentColor[props.theme]};
   font-weight: ${fontWeight.regular};
   font-size: ${fontSize.p};
-  line-height: 1.5rem;
-
+  line-height: ${lineHeight.p};
   text-overflow: ellipsis;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.sm};
   }
+
+  ${(props) =>
+    props.isLoading &&
+    css`
+      width: 100%;
+      height: calc(2 * ${lineHeight.p});
+      border-radius: 4px;
+      animation: ${loadings[props.theme]};
+    `}
 `;
 
 const Footer = styled.div`
   display: flex;
   gap: 1.5rem;
+  color: ${colors.gray500};
 
-  svg {
-    width: 18px;
-  }
+  ${(props) =>
+    props.isLoading &&
+    css`
+      max-width: 200px;
+      height: 24px;
+      border-radius: 4px;
+      animation: ${loadings[props.theme]};
+      color: ${colors.transparent};
+    `}
 `;
 
 const IconBox = styled.div`
@@ -238,7 +319,9 @@ const IconBox = styled.div`
   align-items: center;
   gap: 4px;
 
-  color: ${colors.gray500};
+  svg {
+    width: 18px;
+  }
 `;
 
 const CountNums = styled.div`
@@ -251,12 +334,25 @@ const ThumbnailBox = styled.div`
     height: 200px;
     object-fit: cover;
   }
+
+  ${(props) =>
+    props.isLoading &&
+    css`
+      width: 200px;
+      height: 200px;
+      animation: ${loadings[props.theme]};
+    `}
 `;
 
 const ThumbnailBoxMobile = styled.div`
   margin-top: 1rem;
 
-  img {
-    /* border-radius: 16px; */
-  }
+  ${(props) =>
+    props.isLoading &&
+    css`
+      width: 100%;
+      height: 200px;
+      background-color: gray;
+      animation: ${loadings[props.theme]};
+    `}
 `;

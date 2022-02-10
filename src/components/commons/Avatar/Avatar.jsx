@@ -104,6 +104,12 @@ const Image = styled.div`
   }
 
   ${(props) =>
+    props.src &&
+    css`
+      background: none;
+    `}
+
+  ${(props) =>
     props.isLoading &&
     css`
       path {

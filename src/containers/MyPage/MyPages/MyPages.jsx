@@ -29,8 +29,8 @@ const MyPage = () => {
     5: <MyComment />,
   };
 
-  const contentsReducer = (state, action) => contentsData[action];
   const handleCategory = (id) => dispatchContents(id);
+  const contentsReducer = (state, action) => contentsData[action];
   const [contents, dispatchContents] = useReducer(
     contentsReducer,
     contentsData[1]

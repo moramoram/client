@@ -15,6 +15,7 @@ import {
   ErrorBoundary,
 } from "@/containers";
 import { SubNavbar, Sort, Search } from "@/components";
+import { debounce } from "@/utils";
 
 const CommunityPage = () => {
   const theme = useRecoilValue(themeState);
@@ -29,10 +30,9 @@ const CommunityPage = () => {
     setSearch({ ...search, criteria: criteria });
   };
 
-  const handleKeyword = (keyword) => {
-    console.log(keyword);
+  const handleKeyword = debounce((keyword) => {
     setSearch({ ...search, title: keyword });
-  };
+  });
 
   const isPc = useMediaQuery({
     query: "(min-width:980px)",
@@ -63,7 +63,7 @@ const CommunityPage = () => {
               theme={theme}
             />
             <SortBox>
-              <Sort items={criteriaData} theme={theme} />
+              <Sort items={criteriaData} onClick={handleSort} theme={theme} />
               <Search
                 theme={theme}
                 onChange={handleKeyword}
@@ -92,7 +92,11 @@ const CommunityPage = () => {
             />
             <SortBox>
               <Sort items={criteriaData} onClick={handleSort} theme={theme} />
-              <Search theme={theme} placeholder="게시글 검색" />
+              <Search
+                theme={theme}
+                onChange={handleKeyword}
+                placeholder="게시글 검색"
+              />
             </SortBox>
           </div>
           <Suspense fallback={<FeedGrid isLoading />}>

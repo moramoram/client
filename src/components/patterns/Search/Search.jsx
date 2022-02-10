@@ -11,13 +11,16 @@ const THEME = {
   DARK: "dark",
 };
 
-const Search = ({ items, placeholder, ...props }) => {
+const Search = ({ items, placeholder, onChange, ...props }) => {
   const [inputOpen, setInputOpen] = useState(false);
 
+  const handleChange = (e) => {
+    onChange(e.target.value)
+  }
   return (
     <Layout>
       <InputBox inputOpen={inputOpen} {...props}>
-        <Input placeholder={placeholder} inputOpen={inputOpen} {...props} />
+        <Input placeholder={placeholder} inputOpen={inputOpen} onChange={handleChange} {...props} />
       </InputBox>
       <Button onClick={() => setInputOpen(!inputOpen)} {...props}>
         <Icon icon="search" {...props} />

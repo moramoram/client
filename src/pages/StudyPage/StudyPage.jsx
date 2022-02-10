@@ -37,7 +37,7 @@ const StudyPage = () => {
   });
 
   return (
-    <ErrorBoundary fallback={<div>heelo</div>}>
+    <ErrorBoundary fallback={<div />}>
       <StudyIntro />
       {isPc && <StudyMain categoryData={categoryData} />}
       {isMobile && <StudyMainMobile categoryData={categoryData} />}

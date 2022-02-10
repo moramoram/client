@@ -14,6 +14,7 @@ import {
   MyComment,
   MyPageIntro,
   MyStudy,
+  ErrorBoundary,
 } from "@/containers";
 import { SubNavbar } from "@/components";
 
@@ -55,7 +56,7 @@ const MyPage = () => {
   }, [selectedCategory]);
 
   return (
-    <>
+    <ErrorBoundary fallback={<div />}>
       <MyPageIntro theme={theme} authState={authState} />
       <Layout>
         {isPc && (
@@ -82,7 +83,7 @@ const MyPage = () => {
           </MobileBox>
         )}
       </Layout>
-    </>
+    </ErrorBoundary>
   );
 };
 

@@ -7,6 +7,8 @@ import { token } from "@/recoil";
 import queryString from "query-string";
 import { axiosInstance } from "@/utils";
 
+import { ErrorBoundary } from "@/containers";
+
 const LoginPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -32,7 +34,7 @@ const LoginPage = () => {
     }
   });
 
-  return <></>;
+  return <ErrorBoundary fallback={<div />}> </ErrorBoundary>;
 };
 
 export default LoginPage;

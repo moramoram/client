@@ -27,16 +27,17 @@ axiosInstance.interceptors.response.use(
     return config.data;
   },
   (err) => {
-    // if (err.response.status === "401") {
-    //   return getRefreshToken()
-    //     .then((token) => {
-    //       err.config.headers.Authorization = `Bearer ${token.accessToken}`;
-    //       return axiosInstance.request(err.config);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // }
+    if (err.response.status === "401") {
+      return getRefreshToken()
+        .then((token) => {
+          err.config.headers.Authorization = `Bearer ${token.accessToken}`;
+          localStorage.setItem("ssafe_token", JSON.stringify(token));
+          return axiosInstance.request(err.config);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
     return Promise.reject(err);
   }
 );

@@ -1,3 +1,5 @@
+FROM node as builder
+
 
 FROM nginx
 

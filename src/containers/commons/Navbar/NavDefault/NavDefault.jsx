@@ -22,15 +22,16 @@ const TYPE = {
 };
 
 const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
+  const [current, setCurrent] = useState();
+
   const [theme, setTheme] = useRecoilState(themeState);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const resetToken = useResetRecoilState(token);
   const resetAuth = useResetRecoilState(auth);
 
+  const { pathname } = useLocation();
   const navbarRight = useRef();
-  const path = useLocation();
-  const [current, setCurrent] = useState(path.pathname.split("/")[1]);
 
   const onToggle = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
@@ -49,6 +50,7 @@ const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
   };
 
   useEffect(() => {
+    setCurrent(pathname.split("/")[1]);
     const handleClickOutside = (event) => {
       if (dropdownOpen && !navbarRight?.current.contains(event.target)) {
         setDropdownOpen(false);
@@ -58,7 +60,7 @@ const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
     return () => {
       document.removeEventListener("click", handleClickOutside, true);
     };
-  }, [dropdownOpen]);
+  }, [pathname, dropdownOpen]);
 
   return (
     <Layout {...props}>

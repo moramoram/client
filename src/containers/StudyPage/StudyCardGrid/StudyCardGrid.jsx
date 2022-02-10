@@ -10,23 +10,22 @@ import { CardGrid } from "@/containers";
 const StudyCardGrid = () => {
   const theme = useRecoilValue(themeState);
   const loader = useRef(null);
-  const { data, fetchNextPage, hasNextPage } = GetStudyitems();
+  // const { data, fetchNextPage, hasNextPage } = GetStudyitems();
 
-  const onFetchNewData = () => {
-    fetchNextPage();
-  };
+  // const onFetchNewData = () => {
+  //   fetchNextPage();
+  // };
 
-  useIntersectionObserver({
-    target: loader,
-    onIntersect: onFetchNewData,
-    enabled: hasNextPage,
-  });
+  // useIntersectionObserver({
+  //   target: loader,
+  //   onIntersect: onFetchNewData,
+  //   enabled: hasNextPage,
+  // });
 
   const { cardData } = StudyCardSelector(mockdata);
 
   useIntersectionObserver({
     target: loader,
-    onIntersect: onFetchNewData,
   });
 
   return (

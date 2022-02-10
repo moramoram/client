@@ -45,7 +45,7 @@ const MyPage = () => {
           return <MyInfo userProfile={userProfile} />;
       }
     });
-  }, [selectedCategory, userProfile]);
+  }, [setContents]);
 
   const isPc = useMediaQuery({
     query: "(min-width:980px)",

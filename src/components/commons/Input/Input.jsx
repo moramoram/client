@@ -13,6 +13,7 @@ const THEME = {
 const STATUS = {
   DEFAULT: "default",
   ERROR: "error",
+  SUCCESS: "success",
 };
 
 const Input = forwardRef(
@@ -71,10 +72,12 @@ const borderColor = {
   light: {
     default: colors.gray50,
     error: colors.errorOpacity200,
+    success: colors.gray50,
   },
   dark: {
     default: colors.gray900,
     error: colors.errorOpacity200,
+    success: colors.gray900,
   },
 };
 
@@ -86,21 +89,25 @@ const labelColor = {
 const msgColor = {
   default: colors.gray400,
   error: colors.error,
+  success: colors.blue100,
 };
 
 const hoverColor = {
   default: colors.blueOpacity200,
   error: colors.errorOpacity200,
+  success: colors.blueOpacity200,
 };
 
 const insetColor = {
   default: colors.blue100,
   error: colors.errorOpacity200,
+  success: colors.blue100,
 };
 
 const focusColor = {
   default: colors.blueOpacity100,
   error: colors.errorOpacity100,
+  success: colors.blueOpacity100,
 };
 
 const Layout = styled.div`

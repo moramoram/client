@@ -1,12 +1,15 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, Suspense } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
-import axios from "axios";
-import { Input, Button, AvatarUploader } from "@/components";
+import { useMutation, useQueryClient } from "react-query";
+import { PostNicknameCheck, PutNickname } from "@/queries";
+
+import { ProfileImage } from "@/containers";
+import { Input, Button } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const THEME = {
@@ -14,10 +17,9 @@ const THEME = {
   DARK: "dark",
 };
 
-const MyInfo = ({ ...props }) => {
+const MyInfo = ({ userProfile, ...props }) => {
   const theme = useRecoilValue(themeState);
-  // TODO : 프로필 State에서 별명 가져오기
-  const nickname = "별명";
+  const { nickname, profileImg } = userProfile;
 
   const [nickValue, setNickValue] = useState(nickname);
   const [nickStatus, setNickStatus] = useState({
@@ -27,7 +29,6 @@ const MyInfo = ({ ...props }) => {
 
   const handleChange = (e) => {
     const value = e.target.value;
-
     if (value.length > 8) {
       e.target.value = value.slice(0, 9);
     }
@@ -35,48 +36,78 @@ const MyInfo = ({ ...props }) => {
     validateNickname(value);
   };
 
-  const validateNickname = useCallback((value) => {
-    const pattern = /([^가-힣a-zA-Z0-9])/;
-
-    if (value.length < 2 || value.length > 8) {
+  const validateNickname = useCallback(
+    (value) => {
+      const pattern = /[^가-힣a-zA-Z0-9]/i;
       setNickStatus({
-        status: "error",
-        message: "별명을 2글자 이상 8글자 이하로 입력해주세요",
-      });
-    } else if (pattern.test(value)) {
-      setNickStatus({
-        status: "error",
-        message: "한글, 영문, 혹은 숫자를 올바르게 입력해주세요",
-      });
-    } else setNickStatus({ status: "default", message: null });
-  }, []);
-
-  const getNicknameCheck = useCallback(async () => {
-    const res = await axios.get(
-      "https://my-json-server.typicode.com/moramoram/mockup-api/nickname-check/"
-    );
-    if (res.data) {
-      setNickStatus({
-        status: "error",
-        message: "이미 사용중인 별명이에요. 다른 별명으로 지어주세요.",
-      });
-      console.log(res);
-    } else {
-      setNickStatus({
-        status: "success",
+        status: "default",
         message: null,
       });
-    }
-  }, []);
+
+      if (value.length < 2 || value.length > 8) {
+        setNickStatus({
+          status: "error",
+          message: "별명을 2글자 이상 8글자 이하로 입력해주세요",
+        });
+      } else if (pattern.test(value)) {
+        setNickStatus({
+          status: "error",
+          message: "한글, 영문, 혹은 숫자를 올바르게 입력해주세요",
+        });
+      }
+    },
+    [setNickStatus]
+  );
+
+  const checkNickname = useCallback(
+    async (body) => {
+      const data = await PostNicknameCheck(body);
+      if (data) {
+        setNickStatus({
+          status: "error",
+          message: "이미 사용중인 별명이에요. 다른 별명으로 지어주세요.",
+        });
+      } else {
+        setNickStatus({
+          status: "success",
+          message: "사용할 수 있는 별명입니다!",
+        });
+      }
+    },
+    [setNickStatus]
+  );
 
   useEffect(() => {
-    if (nickStatus.status === "default" && nickname !== nickValue) {
+    if (nickValue !== nickname && nickStatus.status === "default") {
+      const data = {
+        nickname: nickValue,
+      };
       const timeoutId = setTimeout(() => {
-        getNicknameCheck();
+        checkNickname(data);
       }, 500);
-      return () => clearTimeout(timeoutId);
+      return () => {
+        clearTimeout(timeoutId);
+      };
     }
-  }, [nickValue, getNicknameCheck, nickStatus]);
+  }, [checkNickname, nickValue, nickname, nickStatus]);
+
+  const queryClient = useQueryClient();
+  const putNickname = useMutation(PutNickname, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("getUserProfile");
+    },
+  });
+
+  const changeNickname = useCallback(() => {
+    const data = {
+      nickname: nickValue,
+    };
+    putNickname.mutate(data);
+    setNickStatus({
+      status: "default",
+      message: null,
+    });
+  }, [nickValue, putNickname]);
 
   return (
     <Layout>
@@ -97,9 +128,10 @@ const MyInfo = ({ ...props }) => {
               theme={theme}
             />
             <Button
-              mode="active"
+              mode="primary"
               disabled={nickStatus.status === "success" ? false : true}
               theme={theme}
+              onClick={changeNickname}
             >
               변경하기
             </Button>
@@ -108,17 +140,11 @@ const MyInfo = ({ ...props }) => {
         <LabelBox>
           <Label theme={theme}>프로필 사진</Label>
           <AvatarBox>
-            <AvatarUploader theme={theme} />
+            <Suspense fallback={<div></div>}>
+              <ProfileImage profileImg={profileImg} theme={theme} />
+            </Suspense>
           </AvatarBox>
         </LabelBox>
-        <ButtonBox>
-          <Button mode="secondary" theme={theme}>
-            취소
-          </Button>
-          <Button mode="primary" theme={theme}>
-            확인
-          </Button>
-        </ButtonBox>
       </Form>
     </Layout>
   );
@@ -206,11 +232,4 @@ const AvatarBox = styled.div`
   display: flex;
   gap: 1rem;
   padding-top: 12px;
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  padding-top: 2rem;
 `;

@@ -14,4 +14,10 @@ export * from "./postCommunity";
 export * from "./putCommunity";
 export * from "./deleteCommunity";
 
+export * from "./getUserProfile";
+export * from "./putProfileImage";
+export * from "./deleteProfileImage";
+export * from "./postNicknameCheck";
+export * from "./putNickname";
+
 export * from "./getRefreshToken";

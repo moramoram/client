@@ -10,18 +10,23 @@ const THEME = {
   DARK: "dark",
 };
 
-// TODO : 프로필 정보 상태관리
-const MyPageIntro = ({ authState, ...props }) => {
+const MyPageIntro = ({ userProfile, ...props }) => {
+  const { profileImg, nickname, authCheck } = userProfile;
+
+  const authState = {
+    1: "인증이 필요해요",
+    2: "아직 인증이 완료되지 않았어요",
+    3: `${nickname}님 안녕하세요!`,
+  };
+
   return (
     <>
       <Layout {...props}>
         <ContentBox>
-          <Avatar size="extraLarge" src={authState.src} />
+          <Avatar size="extraLarge" src={profileImg} />
           <TitleBox>
-            <Title {...props}>{authState.nickname ?? "Anonymous"}</Title>
-            <SubTitle {...props}>
-              {authState.name ?? "아직 인증이 완료되지 않았어요"}
-            </SubTitle>
+            <Title {...props}>{nickname}</Title>
+            <SubTitle {...props}>{authState[authCheck]}</SubTitle>
           </TitleBox>
         </ContentBox>
       </Layout>

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useCallback } from "react";
 import styled from "styled-components";
 
 import { useRecoilState } from "recoil";
-import { loginModalState } from "@/recoil/modal";
+import { loginModalState } from "@/recoil";
 
 import { Icon, IconSocial, Typography } from "@/foundations";
 import { colors, fontWeight, shadows } from "@/_shared";
@@ -34,6 +34,7 @@ const SignUpModal = ({ ...props }) => {
   const titleMessage = {
     login: "다시 오신 것을 \n환영해요!",
     signup: "개발자 계정으로 \n간편하게 시작하기",
+    require: "로그인이 필요한 서비스입니다.",
   };
 
   return (

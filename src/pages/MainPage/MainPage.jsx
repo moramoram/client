@@ -9,6 +9,7 @@ import {
   MainJobSlider,
   MainStudySilder,
   MainCommunitySlider,
+  ErrorBoundary,
 } from "@/containers";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
@@ -16,27 +17,29 @@ const MainPage = () => {
   const theme = useRecoilValue(themeState);
 
   return (
-    <Layout>
-      <MainIntroSlider theme={theme} />
-      <ContentBox>
-        <TitleBox>
-          <Title theme={theme}>새로 올라온 공고</Title>
-        </TitleBox>
-        <MainJobSlider theme={theme} />
-      </ContentBox>
-      <ContentBox>
-        <TitleBox>
-          <Title theme={theme}>새로 올라온 스터디</Title>
-        </TitleBox>
-        <MainStudySilder theme={theme} />
-      </ContentBox>
-      <ContentBox>
-        <TitleBox>
-          <Title theme={theme}>커뮤니티 인기글</Title>
-        </TitleBox>
-        <MainCommunitySlider theme={theme} />
-      </ContentBox>
-    </Layout>
+    <ErrorBoundary fallback={<div />}>
+      <Layout>
+        <MainIntroSlider theme={theme} />
+        <ContentBox>
+          <TitleBox>
+            <Title theme={theme}>새로 올라온 공고</Title>
+          </TitleBox>
+          <MainJobSlider theme={theme} />
+        </ContentBox>
+        <ContentBox>
+          <TitleBox>
+            <Title theme={theme}>새로 올라온 스터디</Title>
+          </TitleBox>
+          <MainStudySilder theme={theme} />
+        </ContentBox>
+        <ContentBox>
+          <TitleBox>
+            <Title theme={theme}>커뮤니티 인기글</Title>
+          </TitleBox>
+          <MainCommunitySlider theme={theme} />
+        </ContentBox>
+      </Layout>
+    </ErrorBoundary>
   );
 };
 

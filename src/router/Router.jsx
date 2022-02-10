@@ -1,25 +1,17 @@
 import React, { useEffect, useCallback } from "react";
 
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import {
-  useRecoilState,
-  // useRecoilValue,
-  // useSetRecoilState,
-  // useResetRecoilState,
-} from "recoil";
-import {
-  // auth,
-  token,
-  // refreshToken
-} from "@/recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { auth, token } from "@/recoil";
 
 import queryString from "query-string";
-
 import { axiosInstance } from "@/utils";
 import Layout from "@/Layout";
+import { PrivateRoute } from "@/router";
 
 import {
   LandingPage,
+  LoginPage,
   MainPage,
   JobPage,
   JobCreatePage,
@@ -38,10 +30,7 @@ const Router = () => {
   const parsed = queryString.parse(location.search);
 
   const [jwtToken, setToken] = useRecoilState(token);
-  // const refresh = useRecoilValue(refreshToken);
-  // const setAuth = useSetRecoilState(auth);
-  // const resetToken = useResetRecoilState(token);
-  // const resetAuth = useResetRecoilState(auth);
+  const setAuth = useSetRecoilState(auth);
 
   const getToken = useCallback(async () => {
     const { data } = await axiosInstance({
@@ -51,36 +40,23 @@ const Router = () => {
         code: parsed.code,
       },
     });
-
     setToken({
       accessToken: data.accessToken,
       refreshToken: data.refreshToken,
     });
-    navigate("/main");
+    navigate(-2);
   }, [parsed.code, setToken, navigate]);
 
   const getMyPageInfo = async () => {
-    console.log("get user info");
-    // await axiosInstance({
-    //   url: "users/me",
-    //   headers: {
-    //     Authorization: `Bearer ${jwtToken}`,
-    //   },
-    // })
-    //   .then(({ data }) => {
-    //     setAuth({ data });
-    //   })
-    //   .catch((err) => console.log(err));
+    const { data } = await axiosInstance({ url: "users/me" });
+    setAuth(data);
   };
 
   useEffect(() => {
     if (parsed.code) {
       getToken();
     }
-  });
-
-  useEffect(() => {
-    if (jwtToken) {
+    if (!!jwtToken.accessToken) {
       getMyPageInfo();
     }
   });
@@ -92,13 +68,73 @@ const Router = () => {
         <Route path="main" element={<MainPage />} />
         <Route path="job" element={<JobPage />} />
         <Route path="job/create" element={<JobCreatePage />} />
-        <Route path="job/:jobId" element={<JobDetailPage />} />
+        <Route
+          path="job/create"
+          element={
+            <PrivateRoute
+              component={JobCreatePage}
+              fallback="job"
+              checkAuthorized
+            />
+          }
+        />
+        <Route
+          path="job/:jobId"
+          element={
+            <PrivateRoute
+              component={JobDetailPage}
+              fallback="job"
+              checkAuthorized
+            />
+          }
+        />
         <Route path="study" element={<StudyPage />} />
-        <Route path="study/create" element={<StudyCreatePage />} />
-        <Route path="study/:studyId" element={<StudyDetailPage />} />
+        <Route
+          path="study/create"
+          element={
+            <PrivateRoute
+              component={StudyCreatePage}
+              fallback="study"
+              checkAuthorized
+            />
+          }
+        />
+        <Route
+          path="study/:studyId"
+          element={
+            <PrivateRoute
+              component={StudyDetailPage}
+              fallback="study"
+              checkAuthorized
+            />
+          }
+        />
         <Route path="community" element={<CommunityPage />} />
-        <Route path="community/:contentId" element={<CommunityDetailPage />} />
-        <Route path="mypage" element={<MyPage />} />
+        <Route
+          path="community/:contentId"
+          element={
+            <PrivateRoute
+              component={CommunityDetailPage}
+              fallback="community"
+              checkAuthorized
+            />
+          }
+        />
+        <Route
+          path="community/:contentId"
+          element={
+            <PrivateRoute
+              component={CommunityDetailPage}
+              fallback="community"
+              checkAuthorized
+            />
+          }
+        />
+        <Route
+          path="mypage"
+          element={<PrivateRoute component={MyPage} fallback="" />}
+        />
+        <Route path="auth/login/*" element={<LoginPage />} />
         <Route path="*" element={<div>page not found</div>} />
       </Route>
     </Routes>

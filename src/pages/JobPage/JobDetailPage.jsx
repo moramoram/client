@@ -12,6 +12,7 @@ import {
   LoadingDetailMobile,
   JobDetail,
   JobDetailMobile,
+  ErrorBoundary,
 } from "@/containers";
 import { daysFromToday } from "@/utils";
 
@@ -29,7 +30,7 @@ const JobsDetailPage = () => {
   });
 
   return (
-    <>
+    <ErrorBoundary fallback={<div />}>
       {isPc && (
         <Layout>
           <Suspense fallback={<LoadingDetail theme={theme} />}>
@@ -52,7 +53,7 @@ const JobsDetailPage = () => {
           </Suspense>
         </Layout>
       )}
-    </>
+    </ErrorBoundary>
   );
 };
 

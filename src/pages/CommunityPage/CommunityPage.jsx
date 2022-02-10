@@ -12,6 +12,7 @@ import {
   CommunityCreateButton,
   CommunityFeedGrid,
   FeedGrid,
+  ErrorBoundary,
 } from "@/containers";
 import { SubNavbar, Sort, Search } from "@/components";
 
@@ -33,7 +34,7 @@ const CommunityPage = () => {
   });
 
   return (
-    <>
+    <ErrorBoundary fallback={<div />}>
       <CommunityIntro
         theme={theme}
         handleButtonClick={() => setCreateModalOpen(true)}
@@ -111,7 +112,7 @@ const CommunityPage = () => {
           </Suspense>
         </MobileBox>
       )}
-    </>
+    </ErrorBoundary>
   );
 };
 

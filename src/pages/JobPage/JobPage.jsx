@@ -5,7 +5,7 @@ import { navTypeState } from "@/recoil/theme";
 
 import { useMediaQuery } from "react-responsive";
 
-import { JobIntro, JobMain, JobMainMobile } from "@/containers";
+import { JobIntro, JobMain, JobMainMobile, ErrorBoundary } from "@/containers";
 
 const JobsPage = () => {
   const setNavType = useSetRecoilState(navTypeState);
@@ -33,11 +33,11 @@ const JobsPage = () => {
   });
 
   return (
-    <>
+    <ErrorBoundary fallback={<div />}>
       <JobIntro />
       {isPc && <JobMain categoryData={categoryData} />}
       {isMobile && <JobMainMobile categoryData={categoryData} />}
-    </>
+    </ErrorBoundary>
   );
 };
 

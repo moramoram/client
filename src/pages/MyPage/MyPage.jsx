@@ -1,11 +1,13 @@
 import React, { Suspense } from "react";
-import { MyPages, LoadingMyPages } from "@/containers";
+import { MyPages, LoadingMyPages, ErrorBoundary } from "@/containers";
 
 const MyPage = () => {
   return (
-    <Suspense fallback={<LoadingMyPages />}>
-      <MyPages />
-    </Suspense>
+    <ErrorBoundary fallback={<div />}>
+      <Suspense fallback={<LoadingMyPages />}>
+        <MyPages />
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 

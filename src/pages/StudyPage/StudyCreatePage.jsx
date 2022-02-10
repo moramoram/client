@@ -8,6 +8,7 @@ import {
   StudyCreateIntro,
   StudyCreateSummary,
   StudyCreateDetail,
+  ErrorBoundary,
 } from "@/containers";
 import { Button } from "@/components";
 
@@ -15,7 +16,7 @@ const StudyCreatePage = () => {
   const theme = useRecoilValue(themeState);
 
   return (
-    <>
+    <ErrorBoundary fallback={<div />}>
       <StudyCreateIntro theme={theme} />
       <Layout>
         <ContentBox>
@@ -31,7 +32,7 @@ const StudyCreatePage = () => {
           </ButtonBox>
         </ContentBox>
       </Layout>
-    </>
+    </ErrorBoundary>
   );
 };
 

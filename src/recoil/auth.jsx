@@ -4,9 +4,14 @@ import { localStorageEffect } from "@/utils";
 export const auth = atom({
   key: "auth",
   default: {
-    email: undefined,
-    nickname: undefined,
-    authCheck: undefined,
+    userId: null,
+    email: null,
+    nickname: null,
+    authCheck: null,
+    campus: null,
+    ordinal: null,
+    likeJob: null,
+    profileImg: null,
   },
 });
 
@@ -23,6 +28,13 @@ export const isLoginState = selector({
   key: "isLoginState",
   get: ({ get }) => {
     return !!get(token).accessToken;
+  },
+});
+
+export const isAuthenticated = selector({
+  key: "isAuthenticated",
+  get: ({ get }) => {
+    return !!(get(auth)?.authCheck === 3);
   },
 });
 

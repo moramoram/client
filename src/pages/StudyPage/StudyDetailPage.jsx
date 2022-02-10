@@ -12,6 +12,7 @@ import {
   LoadingDetailMobile,
   StudyDetail,
   StudyDetailMobile,
+  ErrorBoundary,
 } from "@/containers";
 
 const StudyDetailPage = () => {
@@ -28,18 +29,20 @@ const StudyDetailPage = () => {
   });
 
   return (
-    <Layout>
-      {isPc && (
-        <Suspense fallback={<LoadingDetail theme={theme} />}>
-          <StudyDetail theme={theme} />
-        </Suspense>
-      )}
-      {isMobile && (
-        <Suspense fallback={<LoadingDetailMobile theme={theme} />}>
-          <StudyDetailMobile theme={theme} />
-        </Suspense>
-      )}
-    </Layout>
+    <ErrorBoundary fallback={<div />}>
+      <Layout>
+        {isPc && (
+          <Suspense fallback={<LoadingDetail theme={theme} />}>
+            <StudyDetail theme={theme} />
+          </Suspense>
+        )}
+        {isMobile && (
+          <Suspense fallback={<LoadingDetailMobile theme={theme} />}>
+            <StudyDetailMobile theme={theme} />
+          </Suspense>
+        )}
+      </Layout>
+    </ErrorBoundary>
   );
 };
 

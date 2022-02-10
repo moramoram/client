@@ -7,7 +7,7 @@ import {
   GetDummyApi,
   // GetInfiniteQuery,
   JobCardSelector,
-} from "@/queries";
+} from "@/api";
 import { CardGrid } from "@/containers";
 
 const JobCardGrid = () => {

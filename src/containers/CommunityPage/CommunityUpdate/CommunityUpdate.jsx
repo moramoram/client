@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { updateModalState } from "@/recoil/modal";
 import { useMutation, useQueryClient } from "react-query";
-import { GetCommunityDetail, putCommunity } from "@/queries";
+import { GetCommunityDetail, putCommunity } from "@/api";
 
 import { useForm } from "react-hook-form";
 

@@ -7,7 +7,7 @@ import {
   CommunityCommentSelector,
   GetCommunityComments,
   postComment,
-} from "@/queries";
+} from "@/api";
 
 import { CommentInput } from "@/components";
 import { CommentList } from "@/containers";

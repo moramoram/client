@@ -12,6 +12,7 @@ const param = {
 const fetchPage = async (type, pageParam) => {
   const res = await axiosInstance({
     url: `/boards/types/${type}?offset=${pageParam}`,
+    param,
   });
   return { res: res.data, nextPage: pageParam + 1 };
 };

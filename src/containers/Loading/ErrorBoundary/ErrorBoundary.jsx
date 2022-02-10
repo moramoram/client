@@ -1,6 +1,4 @@
 import React from "react";
-import styled from "styled-components";
-import { Button, Three } from "@/components";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {

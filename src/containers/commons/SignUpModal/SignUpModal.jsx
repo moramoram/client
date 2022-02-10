@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useCallback } from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { useRecoilState } from "recoil";
@@ -8,11 +7,11 @@ import { loginModalState } from "@/recoil/modal";
 import { Icon, IconSocial, Typography } from "@/foundations";
 import { colors, fontWeight, shadows } from "@/_shared";
 
-const SignUpModal = ({ children, ...props }) => {
+const SignUpModal = ({ ...props }) => {
   const [isModalOpened, setIsModalOpened] = useRecoilState(loginModalState);
   const modal = useRef();
   const handleClose = useCallback(() => {
-    setIsModalOpened(false);
+    setIsModalOpened(null);
   }, [setIsModalOpened]);
 
   const codeRequestURI = {
@@ -32,6 +31,11 @@ const SignUpModal = ({ children, ...props }) => {
     };
   }, [isModalOpened, handleClose]);
 
+  const titleMessage = {
+    login: "다시 오신 것을 \n환영해요!",
+    signup: "개발자 계정으로 \n간편하게 시작하기",
+  };
+
   return (
     <>
       <Overlay />
@@ -42,7 +46,8 @@ const SignUpModal = ({ children, ...props }) => {
           </CloseIconBox>
           <ContentBox>
             <Title type="h2" {...props}>
-              {children}
+              {titleMessage[isModalOpened] ??
+                "개발자 계정으로 \n간편하게 시작하기"}
             </Title>
             <ButtonBox>
               <ButtonLink href={codeRequestURI["google"]}>
@@ -64,14 +69,6 @@ const SignUpModal = ({ children, ...props }) => {
       </ModalBox>
     </>
   );
-};
-
-SignUpModal.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-SignUpModal.defaultProps = {
-  children: "개발자 계정으로 \n간편하게 시작하기",
 };
 
 export default SignUpModal;
@@ -100,6 +97,7 @@ const ModalBox = styled.div`
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 2rem;
   position: relative;
   top: 50%;
@@ -113,15 +111,23 @@ const Layout = styled.div`
 
   background-color: ${colors.white};
   transform: translateY(-50%);
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
 `;
 
 const CloseIconBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
 
   svg {
     width: 18px;
-    stroke: ${colors.gray400};
+    stroke: ${colors.gray500};
     cursor: pointer;
   }
 `;

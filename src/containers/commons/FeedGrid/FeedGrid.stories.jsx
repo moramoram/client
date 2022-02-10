@@ -44,7 +44,7 @@ Default.args = {
       likecount: numToMillion(1224),
       commentcount: numToMillion(2102),
       viewcount: numToMillion(2124128),
-      id: "1",
+      id: "2",
     },
     {
       username: "지은",
@@ -60,7 +60,7 @@ Default.args = {
       likecount: numToMillion(1224),
       commentcount: numToMillion(2102),
       viewcount: numToMillion(2124128),
-      id: "1",
+      id: "3",
     },
     {
       username: "아이유",
@@ -77,7 +77,7 @@ Default.args = {
       likecount: numToMillion(124),
       commentcount: numToMillion(102),
       viewcount: numToMillion(11328),
-      id: "1",
+      id: "4",
     },
     {
       username: "이지금",
@@ -93,7 +93,7 @@ Default.args = {
       likecount: numToMillion(1224),
       commentcount: numToMillion(2102),
       viewcount: numToMillion(2124128),
-      id: "1",
+      id: "5",
     },
     {
       username: "지은",
@@ -109,7 +109,7 @@ Default.args = {
       likecount: numToMillion(1224),
       commentcount: numToMillion(2102),
       viewcount: numToMillion(2124128),
-      id: "1",
+      id: "6",
     },
     {
       username: "아이유",
@@ -126,7 +126,7 @@ Default.args = {
       likecount: numToMillion(124),
       commentcount: numToMillion(102),
       viewcount: numToMillion(11328),
-      id: "1",
+      id: "7",
     },
     {
       username: "이지금",
@@ -142,7 +142,7 @@ Default.args = {
       likecount: numToMillion(1224),
       commentcount: numToMillion(2102),
       viewcount: numToMillion(2124128),
-      id: "1",
+      id: "8",
     },
     {
       username: "지은",
@@ -158,7 +158,7 @@ Default.args = {
       likecount: numToMillion(1224),
       commentcount: numToMillion(2102),
       viewcount: numToMillion(2124128),
-      id: "1",
+      id: "9",
     },
     {
       username: "아이유",
@@ -175,7 +175,7 @@ Default.args = {
       likecount: numToMillion(124),
       commentcount: numToMillion(102),
       viewcount: numToMillion(11328),
-      id: "1",
+      id: "10",
     },
     {
       username: "이지금",
@@ -191,7 +191,7 @@ Default.args = {
       likecount: numToMillion(1224),
       commentcount: numToMillion(2102),
       viewcount: numToMillion(2124128),
-      id: "1",
+      id: "11",
     },
     {
       username: "지은",
@@ -207,7 +207,7 @@ Default.args = {
       likecount: numToMillion(1224),
       commentcount: numToMillion(2102),
       viewcount: numToMillion(2124128),
-      id: "1",
+      id: "12",
     },
   ],
 };

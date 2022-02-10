@@ -52,10 +52,6 @@ const categoryData = [
   },
   {
     id: 1,
-    title: "인기순",
-  },
-  {
-    id: 2,
     title: "나의 스터디",
   },
 ];

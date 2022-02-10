@@ -75,8 +75,16 @@ const bgColor = {
 };
 
 const LayoutBox = styled.div`
+  position: relative;
   width: 100%;
+  min-height: 100vh;
+  padding-bottom: 500px;
+
   background: ${(props) => bgColor[props.theme]};
+
+  @media screen and (max-width: 540px) {
+    padding-bottom: 800px;
+  }
 `;
 
 const Nav = styled(Navbar)`

@@ -5,9 +5,9 @@ import styled from "styled-components";
 import { useMutation, useQueryClient } from "react-query";
 import { GetJobDetail, JobDetailSelector, postComment } from "@/queries";
 
-import { CardSmallGrid, CommentList, JobSideBar } from "@/containers";
-import { Toc, CommentInput } from "@/components";
-import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
+import { CardSmallSlider, CommentList, JobSideBar } from "@/containers";
+import { CommentInput, Toc } from "@/components";
+import { colors, fontSize, fontWeight, lineHeight, loadings } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -50,12 +50,12 @@ const JobDetail = ({ cardData, commentData, ...props }) => {
             이 기업을 준비하는 {countAvailableStudy}
             개의 스터디가 열려있어요
           </BoxDescription>
-          <CardSmallGrid data={cardData} {...props} />
+          <CardSmallSlider data={cardData} {...props} />
         </CardBox>
         <div>
           <BoxTitle {...props}>댓글</BoxTitle>
           <BoxDescription {...props}>
-            이 기업에 대해 의견을 나눠보세요
+            이 기업에 대한 의견을 나눠보세요
           </BoxDescription>
           <CommentInput
             {...props}
@@ -187,11 +187,11 @@ const borderColor = {
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 4rem;
 
   flex-shrink: 0;
 
-  margin-top: 160px;
+  margin-top: 170px;
   width: calc(100% - 500px);
   max-width: 940px;
 `;
@@ -210,9 +210,10 @@ const TitleBox = styled.div`
 
 const Highlight = styled.div`
   min-width: 70px;
-  min-height: ${lineHeight.h4};
+  min-height: ${lineHeight.lg};
 
-  font-size: ${fontSize.h4};
+  font-size: ${fontSize.lg};
+  line-height: ${lineHeight.lg};
   font-weight: ${fontWeight.bold};
   color: ${colors.blue100};
 `;
@@ -221,17 +222,19 @@ const Title = styled.div`
   min-width: 160px;
   min-height: ${lineHeight.h2};
 
-  font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h2};
+  line-height: ${lineHeight.h2};
+  font-weight: ${fontWeight.bold};
   color: ${(props) => titleColor[props.theme]};
 `;
 
 const SubTitle = styled.div`
   min-width: 160px;
-  min-height: ${lineHeight.h4};
+  min-height: ${lineHeight.lg};
 
   font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h4};
+  font-size: ${fontSize.lg};
+  line-height: ${lineHeight.lg};
   color: ${(props) => subtitleColor[props.theme]};
 `;
 
@@ -257,12 +260,14 @@ const BoxTitle = styled.div`
   border-top: 1px solid ${(props) => borderColor[props.theme]};
   color: ${(props) => titleColor[props.theme]};
 
-  font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h3};
+  line-height: ${lineHeight.h3};
+  font-weight: ${fontWeight.bold};
 `;
 
 const BoxDescription = styled.div`
   padding-bottom: 2rem;
   color: ${(props) => subtitleColor[props.theme]};
   font-size: ${fontSize.p};
+  line-height: ${lineHeight.p};
 `;

@@ -32,21 +32,21 @@ const MyPage = () => {
   });
 
   const isMobile = useMediaQuery({
-    query: "(max-width:979px)",
+    query: "(max-width:980px)",
   });
 
   useEffect(() => {
     setContents(() => {
       switch (selectedCategory) {
-        case 0:
-          return <MyInfo />;
         case 1:
-          return <Authorization />;
+          return <MyInfo />;
         case 2:
-          return <MyFeed />;
+          return <Authorization />;
         case 3:
-          return <MyStudy />;
+          return <MyFeed />;
         case 4:
+          return <MyStudy />;
+        case 5:
           return <MyComment />;
         default:
           return <MyInfo />;
@@ -90,23 +90,23 @@ export default MyPage;
 
 const categoryData = [
   {
-    id: 0,
+    id: 1,
     title: "내 프로필",
   },
   {
-    id: 1,
+    id: 2,
     title: "내 인증 현황",
   },
   {
-    id: 2,
+    id: 3,
     title: "내가 쓴 글",
   },
   {
-    id: 3,
+    id: 4,
     title: "나의 스터디",
   },
   {
-    id: 4,
+    id: 5,
     title: "내가 쓴 댓글",
   },
 ];

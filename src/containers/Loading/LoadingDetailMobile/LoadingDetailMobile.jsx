@@ -5,15 +5,15 @@ import styled from "styled-components";
 import { CommentList } from "@/containers";
 
 import {
-  Toc,
-  CommentInput,
-  ImageBoxResponsive,
   Badge,
   Button,
+  CommentInput,
+  ImageBoxResponsive,
   SideBarItem,
+  Toc,
 } from "@/components";
 
-import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
+import { colors, fontSize, fontWeight, lineHeight, loadings } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -144,6 +144,7 @@ const TitleBox = styled.div`
 
   > div {
     border-radius: 4px;
+    animation: ${(props) => props.isLoading && loadings[props.theme]};
   }
 `;
 
@@ -158,43 +159,39 @@ const BadgeBox = styled.div`
 `;
 
 const Highlight = styled.div`
-  max-width: 100px;
-  min-height: ${lineHeight.h4};
+  min-width: 70px;
+  min-height: ${lineHeight.lg};
 
-  font-size: ${fontSize.h4};
+  font-size: ${fontSize.lg};
+  line-height: ${lineHeight.lg};
   font-weight: ${fontWeight.bold};
   color: ${colors.blue100};
-
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const Title = styled.div`
-  max-width: 600px;
+  min-width: 160px;
   min-height: ${lineHeight.h2};
 
-  font-weight: ${fontWeight.bold};
   font-size: calc(${fontSize.h2} - 2px);
+  line-height: ${lineHeight.h2};
+  font-weight: ${fontWeight.bold};
   color: ${(props) => titleColor[props.theme]};
-
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const SubTitle = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  max-width: 200px;
-  min-height: ${lineHeight.h4};
+  min-width: 160px;
+  min-height: ${lineHeight.lg};
 
   font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h4};
+  font-size: ${fontSize.lg};
+  line-height: ${lineHeight.lg};
   color: ${(props) => subtitleColor[props.theme]};
-
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const Content = styled.div`
-  min-height: 300px;
   padding: 0 1rem 2rem 1rem;
   color: ${(props) => textColor[props.theme]};
 
@@ -214,14 +211,16 @@ const BoxTitle = styled.div`
   border-top: 1px solid ${(props) => borderColor[props.theme]};
   color: ${(props) => titleColor[props.theme]};
 
-  font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h3};
+  line-height: ${lineHeight.h3};
+  font-weight: ${fontWeight.bold};
 `;
 
 const BoxDescription = styled.div`
   padding-bottom: 2rem;
   color: ${(props) => subtitleColor[props.theme]};
   font-size: ${fontSize.p};
+  line-height: ${lineHeight.p};
 `;
 
 const CommentBox = styled.div``;

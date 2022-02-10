@@ -7,7 +7,7 @@ export const modalState = atom({
 
 export const loginModalState = atom({
   key: "loginModalState",
-  default: false,
+  default: null,
 });
 
 export const createModalState = atom({

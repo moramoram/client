@@ -61,6 +61,10 @@ const TitleBox = styled.div`
   max-width: 940px;
   margin: auto;
   padding: 20px 0;
+
+  @media screen and (max-width: 960px) {
+    padding: 20px;
+  }
 `;
 
 const Title = styled.div`

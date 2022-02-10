@@ -109,8 +109,5 @@ const Text = styled.span`
   text-decoration: none;
 
   transition: 0.5s;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 `;

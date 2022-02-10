@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
-import { SubNavbar, Input, Selector } from "@/components";
+import { SubNavbar, Input, Selector, Checkbox, Sort } from "@/components";
 import { CardGrid, StudyCardGrid } from "@/containers";
 
 const StudyMain = ({ categoryData }) => {
@@ -34,6 +34,22 @@ const StudyMain = ({ categoryData }) => {
           />
           {/* <Selector placeholder="기술 스택" isMulti /> */}
         </InputBox>
+        <SortBox>
+          <Sort
+            items={[
+              {
+                name: "date",
+                title: "최신순",
+              },
+              {
+                name: "scrap",
+                title: "인기순",
+              },
+            ]}
+            theme={theme}
+          />
+          <Checkbox label="마감된 스터디 숨기기" theme={theme} />
+        </SortBox>
         <Suspense fallback={<CardGrid theme={theme} isLoading />}>
           <StudyCardGrid theme={theme} />
         </Suspense>
@@ -72,9 +88,19 @@ const InputBox = styled.div`
   gap: 0.5rem;
 
   max-width: 940px;
-  padding-bottom: 2rem;
 
   > div {
     flex-grow: 1;
   }
+`;
+
+const SortBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: 940px;
+
+  padding: 20px 0px 20px 0;
+  margin-bottom: 20px;
 `;

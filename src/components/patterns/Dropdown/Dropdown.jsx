@@ -90,9 +90,6 @@ const UserInfo = styled.div`
   font-size: ${fontSize.sm};
   color: ${(props) => textColor[props.theme]};
 
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 `;
 

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { forwardRef } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
@@ -19,6 +20,7 @@ const STATUS = {
 
 const Selector = forwardRef(
   ({ title, options, placeholder, message, ...props }, selectRef) => {
+
     return (
       <Layout>
         <Label {...props}>{title}</Label>
@@ -174,9 +176,8 @@ const customStyles = (props) => ({
     },
 
     ":focus-within": {
-      boxShadow: `0 0 0 3px ${focusColor[props.status]}, inset 0 0 0 1px ${
-        insetColor[props.status]
-      }`,
+      boxShadow: `0 0 0 3px ${focusColor[props.status]}, inset 0 0 0 1px ${insetColor[props.status]
+        }`,
     },
   }),
 

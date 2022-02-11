@@ -1,24 +1,25 @@
 import { axiosInstance, daysLeftFromToday } from "@/utils";
 import { useInfiniteQuery } from "react-query";
 
-const fetchPage = async (type, pageParam) => {
+const fetchPage = async (data, pageParam) => {
+  const param = { ...data, offset: pageParam };
   const res = await axiosInstance({
-    url: `/boards/types/${type}?offset=${pageParam}`,
+    url: `	/recruits/search`,
+    params: param,
   });
   return res.data;
 };
 
-export const GetJobItems = () =>
-  useInfiniteQuery("getJobItems", ({ pageParam = 1 }) => fetchPage(pageParam), {
-    getNextPageParam: (lastPage, pages) => {
-      if (!lastPage.isLast) return lastPage.nextPage;
-      return undefined;
-    },
-    refetchOnWindowFocus: false,
-    refetchOnMount: true,
-    refetchOnReconnect: true,
-    retry: 1,
-  });
+export const GetJobItems = (data) =>
+  useInfiniteQuery(
+    ["getJobItems", data],
+    ({ pageParam = 1 }) => fetchPage(data, pageParam),
+    {
+      getNextPageParam: (prevPage, pages) => {
+        return !!prevPage.res.length ? prevPage.nextPage : undefined;
+      },
+    }
+  );
 
 export const JobCardSelector = (data) => {
   const cardData = data.map((card) => {

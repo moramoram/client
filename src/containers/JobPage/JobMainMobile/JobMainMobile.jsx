@@ -1,19 +1,26 @@
 import React, { Suspense } from "react";
 import styled from "styled-components";
 
-import { useRecoilValue } from "recoil";
-import { themeState } from "@/recoil/theme";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { themeState, jobSearch } from "@/recoil";
 
 import { SubNavbar, Input, Checkbox, Sort } from "@/components";
 import { CardGrid } from "@/layouts";
 import { JobCardGrid } from "@/containers";
 
+import { debounce } from "@/utils";
+
 const JobMainMobile = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);
+  const [search, setSearch] = useRecoilState(jobSearch);
 
   const handleCategory = (e) => {
     console.log(e);
   };
+
+  const handleKeyword = debounce((keyword) => {
+    setSearch({ ...search, title: keyword });
+  });
 
   return (
     <>
@@ -24,7 +31,12 @@ const JobMainMobile = ({ categoryData }) => {
         view="mobile"
       />
       <SearchBox>
-        <Input icon="search" placeholder="공고 검색하기" theme={theme} />
+        <Input
+          icon="search"
+          placeholder="공고 검색하기"
+          onChange={handleKeyword}
+          theme={theme}
+        />
       </SearchBox>
       <SortBox>
         <Sort

@@ -17,7 +17,13 @@ const STATUS = {
 };
 
 const Input = forwardRef(
-  ({ title, placeholder, message, status, icon, ...props }, inputRef) => {
+  (
+    { title, placeholder, message, status, icon, onChange, ...props },
+    inputRef
+  ) => {
+    const handleChange = (e) => {
+      onChange(e.target.value);
+    };
     return (
       <Layout>
         <Label {...props}>{title}</Label>
@@ -25,6 +31,7 @@ const Input = forwardRef(
           {icon && <Icon icon={icon} />}
           <InputText
             placeholder={placeholder}
+            onChange={handleChange}
             type={props.number ? "number" : "text"}
             ref={inputRef}
             autocomplete="off"

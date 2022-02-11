@@ -30,24 +30,10 @@ const FeedItem = ({
   isLoading,
   ...props
 }) => {
-  let usernameRender = username || "User";
   let userDetail = ordinal && campus ? `(${ordinal} / ${campus})` : "";
 
   const isDefault = useMediaQuery({ query: "(min-width:530px)" });
   const isSmall = useMediaQuery({ query: "(max-width:530px)" });
-
-  if (isLoading) {
-    usernameRender = "";
-    avatar = "";
-    userDetail = "";
-    created = "";
-    title = "";
-    content = "";
-    thumbnail = "";
-    likecount = "";
-    commentcount = "";
-    viewcount = "";
-  }
 
   return (
     <Layout>
@@ -64,7 +50,7 @@ const FeedItem = ({
             <InfoBox>
               <UserBox>
                 <User isLoading={isLoading} {...props}>
-                  {usernameRender}
+                  {username}
                 </User>
                 <UserDetail>{userDetail}</UserDetail>
               </UserBox>
@@ -170,7 +156,6 @@ const FlexBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 2rem;
-
   flex-grow: 1;
 `;
 
@@ -273,7 +258,7 @@ const Title = styled.div`
 const Content = styled.div`
   display: -webkit-box;
   overflow: hidden;
-  max-height: 3rem;
+  height: 3rem;
 
   color: ${(props) => contentColor[props.theme]};
   font-weight: ${fontWeight.regular};
@@ -292,7 +277,7 @@ const Content = styled.div`
     props.isLoading &&
     css`
       width: 100%;
-      height: calc(2 * ${lineHeight.p});
+      height: 3rem;
       border-radius: 4px;
       animation: ${loadings[props.theme]};
     `}

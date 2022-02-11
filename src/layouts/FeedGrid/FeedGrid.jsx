@@ -8,19 +8,17 @@ import { FeedItem } from "@/components";
 import { colors } from "@/_shared";
 
 const FeedGrid = ({ data, isLoading, theme, ...props }) => {
-  const feeds = isLoading ? (
-    <FeedItem isLoading theme={theme} {...props} />
-  ) : (
-    data.map(({ id, ...props }, idx) => {
-      return (
-        <FeedItemLink to={`/community/${id}`} key={idx} theme={theme}>
-          <FeedItem theme={theme} {...props} />
-        </FeedItemLink>
-      );
-    })
-  );
+  const feeds = isLoading ? loadingData : data;
 
-  return <Layout {...props}>{feeds}</Layout>;
+  return (
+    <Layout {...props}>
+      {feeds.map(({ id, ...feedData }, idx) => (
+        <FeedItemLink to={`/community/${id}`} key={idx} theme={theme}>
+          <FeedItem isLoading={isLoading} theme={theme} {...feedData} />
+        </FeedItemLink>
+      ))}
+    </Layout>
+  );
 };
 
 FeedGrid.propTypes = {
@@ -28,6 +26,21 @@ FeedGrid.propTypes = {
 };
 
 export default FeedGrid;
+
+const loadingData = new Array(6).fill({
+  username: "",
+  avatar: "",
+  campus: "",
+  ordinal: "",
+  userDetail: "",
+  created: "",
+  title: "",
+  content: "",
+  thumbnail: "",
+  likecount: "",
+  commentcount: "",
+  viewcount: "",
+});
 
 const borderColor = {
   light: colors.gray100,
@@ -40,12 +53,14 @@ const Layout = styled.div`
   align-items: center;
   gap: 32px;
 
+  width: 100%;
   margin: auto;
   padding-top: 32px;
 `;
 
 const FeedItemLink = styled(Link)`
-  text-decoration: none;
-  border-bottom: 1px solid ${(props) => borderColor[props.theme]};
+  width: 100%;
   padding-bottom: 32px;
+  border-bottom: 1px solid ${(props) => borderColor[props.theme]};
+  text-decoration: none;
 `;

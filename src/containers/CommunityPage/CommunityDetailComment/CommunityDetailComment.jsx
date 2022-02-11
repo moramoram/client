@@ -3,22 +3,16 @@ import styled from "styled-components";
 
 import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
-import {
-  CommunityCommentSelector,
-  GetCommunityComments,
-  postComment,
-} from "@/api";
+import { CommunityCommentSelector, postComment } from "@/api";
 
 import { CommentInput } from "@/components";
 import { CommentList } from "@/layouts";
 import { colors, fontSize, fontWeight } from "@/_shared";
 
-const CommunityDetailComment = (props) => {
+const CommunityDetailComment = ({ data, ...props }) => {
   const queryClient = useQueryClient();
   const id = useParams().contentId;
-  const { data } = GetCommunityComments(id);
   const { commentData } = CommunityCommentSelector(data);
-
   const CommentMutation = useMutation((data) => postComment(data), {
     onSuccess: () => {
       queryClient.invalidateQueries("getCommunityComments");

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
@@ -10,13 +11,16 @@ const THEME = {
   DARK: "dark",
 };
 
-const Search = ({ items, placeholder, ...props }) => {
+const Search = ({ items, placeholder, onChange, ...props }) => {
   const [inputOpen, setInputOpen] = useState(false);
 
+  const handleChange = (e) => {
+    onChange(e.target.value)
+  }
   return (
     <Layout>
       <InputBox inputOpen={inputOpen} {...props}>
-        <Input placeholder={placeholder} inputOpen={inputOpen} {...props} />
+        <Input placeholder={placeholder} inputOpen={inputOpen} onChange={handleChange} {...props} />
       </InputBox>
       <Button onClick={() => setInputOpen(!inputOpen)} {...props}>
         <Icon icon="search" {...props} />
@@ -100,7 +104,7 @@ const Input = styled.input`
 
   ::placeholder {
     color: ${(props) =>
-      props.inputOpen ? colors.gray500 : colors.transparent};
+    props.inputOpen ? colors.gray500 : colors.transparent};
     font-size: ${fontSize.p};
   }
 

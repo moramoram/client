@@ -2,6 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { useSetRecoilState } from "recoil";
+import { createModalState } from "@/recoil";
+
 import { Button } from "@/components";
 import { colors, fontSize, fontWeight } from "@/_shared";
 
@@ -11,6 +14,8 @@ const THEME = {
 };
 
 const CommunityIntro = ({ ...props }) => {
+  const setCreateModalOpen = useSetRecoilState(createModalState);
+
   return (
     <>
       <Layout {...props}>

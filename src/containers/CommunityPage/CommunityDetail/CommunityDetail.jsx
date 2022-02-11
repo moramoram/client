@@ -8,6 +8,7 @@ import { useMutation, useQueryClient } from "react-query";
 import {
   CommunityDetailSelector,
   GetCommunityDetail,
+  GetCommunityComments,
   deleteCommunity,
 } from "@/api";
 
@@ -22,7 +23,7 @@ const CommunityDetail = ({ ...props }) => {
 
   const { data } = GetCommunityDetail(id);
   const { contentData } = CommunityDetailSelector(data);
-
+  const commendData = GetCommunityComments(id);
   const [isLike, setIsLiked] = useState(contentData.likeStatus);
   const setUpdateModalOpen = useSetRecoilState(updateModalState);
 
@@ -72,7 +73,7 @@ const CommunityDetail = ({ ...props }) => {
           </IconBox>
           <IconBox>
             <Icon icon="messageCircle" width="18" />
-            <CountNums>{contentData.commentcount}</CountNums>
+            <CountNums>{commendData.data.length}</CountNums>
           </IconBox>
           <IconBox>
             <Icon icon="eye" width="18" />
@@ -81,7 +82,7 @@ const CommunityDetail = ({ ...props }) => {
         </CountBox>
       </Footer>
       <CommentBox {...props}>
-        <CommunityDetailComment {...props} />
+        <CommunityDetailComment data={commendData.data} {...props} />
       </CommentBox>
     </Layout>
   );

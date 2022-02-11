@@ -22,15 +22,12 @@ axiosInstance.interceptors.response.use(
     return config.data;
   },
   (err) => {
-    if (
-      err.response.status === "401" &&
-      err.response.message === "Expired access token."
-    ) {
+    if (err.response.data.message === "Expired access token.") {
       return getRefreshToken()
-        .then((token) => {
+        .then((data) => {
           console.log("토근 재발급 성공");
-          localStorage.setItem("ssafe_token", JSON.stringify(token));
-          err.config.headers.Authorization = `Bearer ${token.accessToken}`;
+          localStorage.setItem("ssafe_token", JSON.stringify(data));
+          err.config.headers.Authorization = `Bearer ${data.accessToken}`;
           return axiosInstance.request(err.config);
         })
         .catch((err) => {

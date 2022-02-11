@@ -1,6 +1,10 @@
 import { atom } from "recoil";
 
-export const communityCategory = atom({
-  key: "communityCategory",
-  default: 1,
+export const communitySearch = atom({
+  key: "communitySearch",
+  default: {
+    boardType: 1,
+    title: "",
+    criteria: "",
+  },
 });

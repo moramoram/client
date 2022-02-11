@@ -126,20 +126,25 @@ const AuthForm = ({ userProfile, ...props }) => {
 
   const requiredError = "필수 항목입니다";
 
-  const readFile = useCallback((files) => {
+  const readFile = useCallback((file) => {
     const reader = new FileReader();
     return new Promise((resolve) => {
       reader.onload = () => {
         resolve(reader.result);
         setImageSrc(reader.result);
       };
-      files[0] instanceof File && reader.readAsDataURL(files[0]);
+      file instanceof File && reader.readAsDataURL(file);
     });
   }, []);
 
   useEffect(() => {
     if (watch("authImg")) {
-      readFile(watch("authImg"));
+      const file = watch("authImg")[0];
+      if (file.size > 10485760) {
+        alert("10MB 이하로 업로드해주세요");
+      } else {
+        readFile(file);
+      }
     }
   });
 
@@ -260,7 +265,6 @@ const AuthForm = ({ userProfile, ...props }) => {
               mode="primary"
               theme={theme}
               onClick={() => handleSubmit(onSubmit)}
-              // disabled={errors}
             >
               확인
             </Button>

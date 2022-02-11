@@ -27,23 +27,13 @@ const CommunityFeedGrid = () => {
 
   return (
     <>
-      <CommentFeedGrid data={feedData} theme={theme} />
+      <FeedGrid data={feedData} theme={theme} />
       <FetchBox ref={loader} />
     </>
   );
 };
 
 export default CommunityFeedGrid;
-
-const CommentFeedGrid = styled(FeedGrid)`
-  width: 100%;
-  > a {
-    width: 90vw;
-    @media screen and (min-width: 980px) {
-      max-width: calc(100%);
-    }
-  }
-`;
 
 const FetchBox = styled.div`
   height: 30px;

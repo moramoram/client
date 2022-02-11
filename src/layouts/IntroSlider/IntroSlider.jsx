@@ -101,7 +101,7 @@ const Content = styled.div`
 const Background = styled.div`
   position: absolute;
   top: 0;
-  width: 100vw;
+  width: 100%;
   height: 400px;
   background: url(${(props) => props.image});
   background-repeat: no-repeat;

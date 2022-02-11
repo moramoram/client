@@ -23,6 +23,7 @@ const CommunityPage = () => {
   const [search, setSearch] = useRecoilState(communitySearch);
 
   const handleCategory = (idx) => {
+    window.scrollTo({ top: 0 });
     setSearch({ ...search, boardType: idx });
   };
 
@@ -66,7 +67,7 @@ const CommunityPage = () => {
                 placeholder="게시글 검색"
               />
             </SortBox>
-            <Suspense fallback={<LoadingFeed isLoading />}>
+            <Suspense fallback={<FeedGrid isLoading theme={theme} />}>
               <CommunityFeedGrid theme={theme} />
             </Suspense>
           </ContentBox>
@@ -95,7 +96,7 @@ const CommunityPage = () => {
               />
             </SortBox>
           </div>
-          <Suspense fallback={<FeedGrid isLoading />}>
+          <Suspense fallback={<FeedGrid isLoading theme={theme} />}>
             <CommunityFeedGrid theme={theme} />
           </Suspense>
         </MobileBox>
@@ -152,6 +153,7 @@ const MainBox = styled.div`
 const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   max-width: calc(100% - 320px);
   padding: 80px 20px 0 0;
 `;
@@ -179,14 +181,4 @@ const SortBox = styled.div`
   align-items: center;
   padding: 16px 0px 20px 0;
   margin-bottom: 20px;
-`;
-
-const LoadingFeed = styled(FeedGrid)`
-  width: 100%;
-  > a {
-    width: 90vw;
-    @media screen and (min-width: 980px) {
-      max-width: calc(100%);
-    }
-  }
 `;

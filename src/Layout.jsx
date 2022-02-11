@@ -95,6 +95,7 @@ const Nav = styled(Navbar)`
 
 const ScrollTopBox = styled.div`
   position: fixed;
-  right: 1rem;
-  bottom: 1rem;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 999;
 `;

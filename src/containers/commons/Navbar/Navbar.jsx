@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { useRecoilValue } from "recoil";
+import { auth } from "@/recoil";
+
 import { useMediaQuery } from "react-responsive";
 
 import { NavDefault } from "./NavDefault";
@@ -17,13 +20,15 @@ const TYPE = {
 };
 
 const Navbar = ({ ...props }) => {
+  const userData = useRecoilValue(auth);
+
   const isPc = useMediaQuery({ query: "(min-width:980px)" });
   const isMobile = useMediaQuery({ query: "(max-width:980px)" });
 
   return (
     <>
-      {isPc && <NavDefault {...props} />}
-      {isMobile && <NavMobile {...props} />}
+      {isPc && <NavDefault userData={userData} {...props} />}
+      {isMobile && <NavMobile userData={userData} {...props} />}
     </>
   );
 };

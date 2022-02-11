@@ -3,12 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Link, useLocation } from "react-router-dom";
-import {
-  useRecoilState,
-  useRecoilValue,
-  useSetRecoilState,
-  useResetRecoilState,
-} from "recoil";
+import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
 import { auth, token, themeState, loginModalState } from "@/recoil";
 
 import { NavDefaultItem } from "./NavDefaultItem";
@@ -26,16 +21,13 @@ const TYPE = {
   TRANSPARENT: "transparent",
 };
 
-const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
+const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
   const [current, setCurrent] = useState();
-
   const [theme, setTheme] = useRecoilState(themeState);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const userData = useRecoilValue(auth);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const resetToken = useResetRecoilState(token);
   const resetAuth = useResetRecoilState(auth);
-  console.log(userData);
   const { pathname } = useLocation();
   const navbarRight = useRef();
 

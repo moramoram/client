@@ -45,7 +45,7 @@ const Layout = styled.div`
   align-items: center;
   gap: 1rem;
 
-  width: 100vw;
+  width: 100%;
   height: 400px;
   background: url("https://i.imgur.com/3QTKlkH.jpg");
   background-repeat: no-repeat;

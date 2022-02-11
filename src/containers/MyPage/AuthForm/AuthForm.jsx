@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useForm, Controller } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
+import { useMutation, useQueryClient } from "react-query";
 import { PostNicknameCheck, PutAuthorization } from "@/api";
 
 import { Input, InputImage, Button, Selector } from "@/components";
@@ -15,7 +16,7 @@ const THEME = {
   DARK: "dark",
 };
 
-const Authorization = () => {
+const AuthForm = ({ userProfile, ...props }) => {
   const theme = useRecoilValue(themeState);
   const [imageSrc, setImageSrc] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
@@ -28,15 +29,28 @@ const Authorization = () => {
     clearErrors,
     formState: { errors },
   } = useForm({ mode: "onChange" });
-  const onSubmit = (data) => {
-    const authData = {
-      ...data,
-      authImg: data.authImg[0],
-    };
-    const formData = new FormData();
-    Object.keys(authData).forEach((key) => formData.append(key, authData[key]));
-    PutAuthorization(formData);
-  };
+
+  const queryClient = useQueryClient();
+  const mutateNickname = useMutation(PutAuthorization, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("getUserProfile");
+    },
+  });
+
+  const onSubmit = useCallback(
+    (data) => {
+      const authData = {
+        ...data,
+        authImg: data.authImg[0],
+      };
+      const formData = new FormData();
+      Object.keys(authData).forEach((key) =>
+        formData.append(key, authData[key])
+      );
+      mutateNickname.mutate(formData);
+    },
+    [mutateNickname]
+  );
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -63,7 +77,11 @@ const Authorization = () => {
   }, [clearErrors, setError, watch]);
 
   useEffect(() => {
-    if (watch("nickname") && !errors?.nickname) {
+    if (
+      watch("nickname") &&
+      !errors?.nickname &&
+      watch("nickname") !== userProfile.nickname
+    ) {
       const timeoutId = setTimeout(() => {
         checkNickname();
       }, 500);
@@ -71,7 +89,7 @@ const Authorization = () => {
         clearTimeout(timeoutId);
       };
     }
-  }, [watch, errors?.nickname, checkNickname]);
+  }, [watch, errors?.nickname, checkNickname, userProfile.nickname]);
 
   const nicknameValidation = {
     required: true,
@@ -146,6 +164,7 @@ const Authorization = () => {
                   ? "사용할 수 있는 별명입니다!"
                   : nicknameErrors[errors?.nickname?.type]
               }
+              defaultValue={userProfile.nickname}
               autocomplete="off"
               theme={theme}
               {...register("nickname", {
@@ -162,6 +181,7 @@ const Authorization = () => {
               nameErrors[errors?.realName?.type] ??
               "SSAFY임이 확인되도록 실명으로 입력해주세요"
             }
+            defaultValue={userProfile.realName}
             autocomplete="off"
             theme={theme}
             {...register("realName", { ...nameValidation })}
@@ -197,7 +217,7 @@ const Authorization = () => {
                     placeholder="캠퍼스"
                     inputRef={ref}
                     options={regionOption}
-                    value={numberOption.find((c) => c.value === value)}
+                    value={regionOption.find((c) => c.value === value)}
                     onChange={(val) => onChange(val.value)}
                     status={!errors?.campus ? "default" : "error"}
                     message={
@@ -251,16 +271,16 @@ const Authorization = () => {
   );
 };
 
-Authorization.propTypes = {
+AuthForm.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   data: PropTypes.arrayOf(Object),
 };
 
-Authorization.defaultProps = {
+AuthForm.defaultProps = {
   theme: THEME.LIGHT,
 };
 
-export default Authorization;
+export default AuthForm;
 
 const numberOption = [
   { value: "1", label: "1기" },

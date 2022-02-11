@@ -29,9 +29,9 @@ const CommunityPage = () => {
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const [search, setSearch] = useRecoilState(communitySearch);
 
-  const handleCategory = (idx) => {
+  const handleCategory = (id) => {
     window.scrollTo({ top: 0 });
-    setSearch({ ...search, boardType: idx });
+    setSearch({ ...search, boardType: id });
   };
 
   const handleSort = (criteria) => {

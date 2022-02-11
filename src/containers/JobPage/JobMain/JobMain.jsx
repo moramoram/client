@@ -14,8 +14,9 @@ const JobMain = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);
   const [search, setSearch] = useRecoilState(jobSearch);
 
-  const handleCategory = (e) => {
-    console.log(e);
+  const handleCategory = (id) => {
+    window.scrollTo({ top: 0 });
+    id !== 3 && setSearch({ ...search, category: id });
   };
 
   const handleSort = (criteria) => {
@@ -26,40 +27,58 @@ const JobMain = ({ categoryData }) => {
     setSearch({ ...search, title: keyword });
   });
 
-  const handleChange = (value) => {
-    console.log(value);
+  const handleTechStack = (value) => {
+    setSearch({
+      ...search,
+      techStack: value.map((tech) => {
+        return tech.value;
+      }),
+    });
+  };
+
+  const handleJob = (value) => {
+    setSearch({ ...search, job: value.label });
   };
 
   return (
     <Layout>
       <StickyNavBox>
-        <StickyNav data={categoryData} theme={theme} onClick={handleCategory} />
+        <StickyNav
+          data={categoryData}
+          theme={theme}
+          selected={search.category}
+          onClick={handleCategory}
+        />
       </StickyNavBox>
       <CardGridBox>
-        <InputBox>
-          <Input
-            theme={theme}
-            icon="search"
-            placeholder="공고 검색하기"
-            onChange={handleKeyword}
-          />
-          <Selector
-            theme={theme}
-            placeholder="기술 스택"
-            onChange={handleChange}
-            isMulti
-          />
-          <Selector
-            theme={theme}
-            placeholder="직무"
-            onChange={handleChange}
-            options={techStackOptions}
-          />
-        </InputBox>
-        <SortBox>
-          <Sort items={criteriaData} theme={theme} onClick={handleSort} />
-          <Checkbox label="마감된 스터디 숨기기" theme={theme} />
-        </SortBox>
+        {search.category === 1 && (
+          <>
+            <InputBox>
+              <Input
+                theme={theme}
+                icon="search"
+                placeholder="공고 검색하기"
+                onChange={handleKeyword}
+              />
+              <Selector
+                theme={theme}
+                placeholder="기술 스택"
+                onChange={handleTechStack}
+                isMulti
+              />
+              <Selector
+                theme={theme}
+                placeholder="직무"
+                onChange={handleJob}
+                options={techStackOptions}
+              />
+            </InputBox>
+            <SortBox>
+              <Sort items={criteriaData} theme={theme} onClick={handleSort} />
+              <Checkbox label="마감된 스터디 숨기기" theme={theme} />
+            </SortBox>
+          </>
+        )}
         <Suspense fallback={<CardGrid theme={theme} isLoading />}>
           <JobCardGrid theme={theme} />
         </Suspense>
@@ -82,13 +101,11 @@ const criteriaData = [
 ];
 
 const techStackOptions = [
-  [
-    { value: "Frontend", label: "프론트엔드" },
-    { value: "Backend", label: "백엔드" },
-    { value: "Android", label: "안드로이드" },
-    { value: "iOS", label: "iOS" },
-    { value: "임베디드", label: "임베디드" },
-  ],
+  { value: "Frontend", label: "프론트엔드" },
+  { value: "Backend", label: "백엔드" },
+  { value: "Android", label: "안드로이드" },
+  { value: "iOS", label: "iOS" },
+  { value: "임베디드", label: "임베디드" },
 ];
 
 const Layout = styled.div`

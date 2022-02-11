@@ -15,6 +15,7 @@ const CommunityFeedGrid = () => {
   const loader = useRef(null);
   const { data, fetchNextPage, hasNextPage } = GetCommunityList(search);
   const { feedData } = CommunityFeedSelector(data);
+
   const onFetchNewData = () => {
     fetchNextPage();
   };

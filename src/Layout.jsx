@@ -16,8 +16,9 @@ import { navMenuData, navUserData } from "@/recoil/menu";
 
 import {
   Navbar,
-  SignUpModal,
+  ScrollToTop,
   Footer,
+  SignUpModal,
   CommunityCreate,
   CommunityUpdate,
 } from "@/containers";
@@ -56,6 +57,7 @@ const Layout = () => {
         isLogin={isLogined}
       />
       <Outlet />
+      <ScrollToTop />
       <ScrollTopBox>
         <ScrollTopButton
           theme={theme}

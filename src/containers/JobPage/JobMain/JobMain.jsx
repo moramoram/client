@@ -22,6 +22,10 @@ const JobMain = ({ categoryData }) => {
     setSearch({ ...search, title: keyword });
   });
 
+  const handleChange = (value) => {
+    console.log(value);
+  };
+
   return (
     <Layout>
       <StickyNavBox>
@@ -35,10 +39,16 @@ const JobMain = ({ categoryData }) => {
             placeholder="공고 검색하기"
             onChange={handleKeyword}
           />
-          <Selector theme={theme} placeholder="기술 스택" isMulti />
+          <Selector
+            theme={theme}
+            placeholder="기술 스택"
+            onChange={handleChange}
+            isMulti
+          />
           <Selector
             theme={theme}
             placeholder="직무"
+            onChange={handleChange}
             options={[
               { value: "Frontend", label: "프론트엔드" },
               { value: "Backend", label: "백엔드" },

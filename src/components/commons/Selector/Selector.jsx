@@ -19,7 +19,11 @@ const STATUS = {
 };
 
 const Selector = forwardRef(
-  ({ title, options, placeholder, message, ...props }, selectRef) => {
+  ({ title, options, placeholder, message, onChange, ...props }, selectRef) => {
+
+    const handleChange = (value) => {
+      onChange(value)
+    }
 
     return (
       <Layout>
@@ -28,7 +32,9 @@ const Selector = forwardRef(
           <Creatable
             styles={customStyles(props)}
             options={options}
+            getValue={(v) => handleChange(v)}
             placeholder={placeholder}
+            onChange={handleChange}
             ref={selectRef}
             {...props}
           />
@@ -36,7 +42,9 @@ const Selector = forwardRef(
           <Select
             styles={customStyles(props)}
             options={options}
+            getValue={handleChange}
             placeholder={placeholder}
+            onChange={handleChange}
             ref={selectRef}
             {...props}
           />

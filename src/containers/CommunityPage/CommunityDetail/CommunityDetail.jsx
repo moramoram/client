@@ -9,6 +9,7 @@ import {
   CommunityDetailSelector,
   GetCommunityDetail,
   GetCommunityComments,
+  putCommunityLike,
   deleteCommunity,
 } from "@/api";
 
@@ -28,7 +29,14 @@ const CommunityDetail = ({ ...props }) => {
   const setUpdateModalOpen = useSetRecoilState(updateModalState);
 
   const queryClient = useQueryClient();
-  const mutation = useMutation(deleteCommunity, {
+
+  const putLikeMutation = useMutation(putCommunityLike, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("getCommunityDetail");
+    },
+  });
+
+  const deletePostMutation = useMutation(deleteCommunity, {
     onMutate: () => {
       navigate("/community");
     },
@@ -36,6 +44,11 @@ const CommunityDetail = ({ ...props }) => {
       queryClient.invalidateQueries("getCommunityList");
     },
   });
+
+  const onLike = () => {
+    setIsLiked(!isLike);
+    putLikeMutation.mutate(id);
+  };
 
   const dropdownItems = [
     {
@@ -48,7 +61,7 @@ const CommunityDetail = ({ ...props }) => {
       title: "삭제",
       onClick: () => {
         if (window.confirm("정말 삭제하시겠습니까?")) {
-          mutation.mutate(id);
+          deletePostMutation.mutate(id);
         }
       },
     },
@@ -60,7 +73,7 @@ const CommunityDetail = ({ ...props }) => {
       <Footer>
         <Button
           mode={isLike ? "primary" : "secondary"}
-          onClick={() => setIsLiked(!isLike)}
+          onClick={onLike}
           {...props}
         >
           <Icon icon="thumbsUp" />

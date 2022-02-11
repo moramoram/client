@@ -13,16 +13,17 @@ const fetchData = async (id) => {
 
 export const CommunityDetailSelector = (data) => {
   const { parsedhtml } = parseHtml(data.content);
+  console.log(data.totalLike);
   const contentData = {
     username: data.writerInfo.nickname,
-    avatar: null,
+    avatar: data.writerInfo.profileImg,
     campus: data.writerInfo.ordinal,
     ordinal: data.writerInfo.campus,
     created: daysFromToday(data.createdDate),
     title: data.title,
     content: parsedhtml,
     likecount: numToMillion(data.totalLike),
-    commentcount: numToMillion(0),
+    commentcount: numToMillion(data.totalComment),
     viewcount: numToMillion(data.views),
     likeStatus: data.likeStatus,
   };

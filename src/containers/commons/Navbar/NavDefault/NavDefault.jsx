@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Link, useLocation } from "react-router-dom";
-import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
+import {
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+  useResetRecoilState,
+} from "recoil";
 import { auth, token, themeState, loginModalState } from "@/recoil";
 
 import { NavDefaultItem } from "./NavDefaultItem";
@@ -26,10 +31,11 @@ const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
 
   const [theme, setTheme] = useRecoilState(themeState);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const userData = useRecoilValue(auth);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const resetToken = useResetRecoilState(token);
   const resetAuth = useResetRecoilState(auth);
-
+  console.log(userData);
   const { pathname } = useLocation();
   const navbarRight = useRef();
 
@@ -95,12 +101,14 @@ const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
             <Icon icon="bell" stroke={colors.gray400} width="20" aria-hidden />
             <Avatar
               size="medium"
+              username={userData.nickname}
+              src={userData.profileImg}
               onClick={() => setDropdownOpen(!dropdownOpen)}
             />
             {dropdownOpen && (
-              // TODO : 프로필에서 Username 가져오기
               <UserDropdown
                 items={userMenuData}
+                userData={userData}
                 onClick={onLogout}
                 {...props}
               />

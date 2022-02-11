@@ -12,6 +12,7 @@ export * from "./getCommunityDetail";
 export * from "./getCommunityComments";
 export * from "./postCommunity";
 export * from "./putCommunity";
+export * from "./putCommunityLike";
 export * from "./deleteCommunity";
 
 export * from "./getUserProfile";

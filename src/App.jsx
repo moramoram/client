@@ -1,7 +1,7 @@
 import React, { StrictMode } from "react";
 import { RecoilRoot } from "recoil";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { Router, ScrollToTop } from "@/router";
+import { Router } from "@/router";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
@@ -21,7 +21,6 @@ const App = () => {
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={true} />
           <BrowserRouter>
-            <ScrollToTop />
             <Routes>
               <Route path="/*" element={<Router />} />
             </Routes>

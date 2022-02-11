@@ -22,6 +22,10 @@ const JobMainMobile = ({ categoryData }) => {
     setSearch({ ...search, title: keyword });
   });
 
+  const handleSort = (criteria) => {
+    setSearch({ ...search, criteria: criteria });
+  };
+
   return (
     <>
       <SubNavMobile
@@ -39,19 +43,7 @@ const JobMainMobile = ({ categoryData }) => {
         />
       </SearchBox>
       <SortBox>
-        <Sort
-          items={[
-            {
-              name: "date",
-              title: "최신순",
-            },
-            {
-              name: "scrap",
-              title: "인기순",
-            },
-          ]}
-          theme={theme}
-        />
+        <Sort items={criteriaData} theme={theme} onClick={handleSort} />
         <Checkbox label="마감된 스터디 숨기기" theme={theme} />
       </SortBox>
       <MobileCardBox>
@@ -64,6 +56,17 @@ const JobMainMobile = ({ categoryData }) => {
 };
 
 export default JobMainMobile;
+
+const criteriaData = [
+  {
+    name: "date",
+    title: "최신순",
+  },
+  {
+    name: "scrap",
+    title: "인기순",
+  },
+];
 
 const SubNavMobile = styled(SubNavbar)`
   padding: 20px 20px 0 20px;

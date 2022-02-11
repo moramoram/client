@@ -18,6 +18,10 @@ const JobMain = ({ categoryData }) => {
     console.log(e);
   };
 
+  const handleSort = (criteria) => {
+    setSearch({ ...search, criteria: criteria });
+  };
+
   const handleKeyword = debounce((keyword) => {
     setSearch({ ...search, title: keyword });
   });
@@ -49,29 +53,11 @@ const JobMain = ({ categoryData }) => {
             theme={theme}
             placeholder="직무"
             onChange={handleChange}
-            options={[
-              { value: "Frontend", label: "프론트엔드" },
-              { value: "Backend", label: "백엔드" },
-              { value: "Android", label: "안드로이드" },
-              { value: "iOS", label: "iOS" },
-              { value: "임베디드", label: "임베디드" },
-            ]}
+            options={techStackOptions}
           />
         </InputBox>
         <SortBox>
-          <Sort
-            items={[
-              {
-                name: "date",
-                title: "최신순",
-              },
-              {
-                name: "scrap",
-                title: "인기순",
-              },
-            ]}
-            theme={theme}
-          />
+          <Sort items={criteriaData} theme={theme} onClick={handleSort} />
           <Checkbox label="마감된 스터디 숨기기" theme={theme} />
         </SortBox>
         <Suspense fallback={<CardGrid theme={theme} isLoading />}>
@@ -83,6 +69,27 @@ const JobMain = ({ categoryData }) => {
 };
 
 export default JobMain;
+
+const criteriaData = [
+  {
+    name: "date",
+    title: "최신순",
+  },
+  {
+    name: "scrap",
+    title: "인기순",
+  },
+];
+
+const techStackOptions = [
+  [
+    { value: "Frontend", label: "프론트엔드" },
+    { value: "Backend", label: "백엔드" },
+    { value: "Android", label: "안드로이드" },
+    { value: "iOS", label: "iOS" },
+    { value: "임베디드", label: "임베디드" },
+  ],
+];
 
 const Layout = styled.div`
   display: flex;

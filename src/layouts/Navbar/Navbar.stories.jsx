@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from ".";
 
 export default {
-  title: "Containers/Navbar",
+  title: "layouts/Navbar",
   component: Navbar,
 };
 

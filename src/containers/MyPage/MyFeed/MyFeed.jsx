@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
-import { FeedGrid } from "@/containers";
+import { FeedGrid } from "@/layouts";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 import { daysFromToday, numToMillion } from "@/utils";

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useMutation, useQueryClient } from "react-query";
 import { GetJobDetail, JobDetailSelector, postComment } from "@/api";
 
-import { CardSmallSlider, CommentList } from "@/containers";
+import { CardSmallSlider, CommentList } from "@/layouts";
 import {
   Badge,
   BookMark,

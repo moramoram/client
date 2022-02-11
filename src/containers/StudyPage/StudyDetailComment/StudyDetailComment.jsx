@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-import { CommentList } from "@/containers";
+import { CommentList } from "@/layouts";
 
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 

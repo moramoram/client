@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import { loginModalState } from "@/recoil";
 
 import { Icon, IconSocial, Typography } from "@/foundations";
-import { animations, colors, fontWeight, shadows } from "@/_shared";
+import { colors, fontWeight, shadows } from "@/_shared";
 
 const SignUpModal = ({ ...props }) => {
   const [isModalOpened, setIsModalOpened] = useRecoilState(loginModalState);
@@ -13,11 +13,6 @@ const SignUpModal = ({ ...props }) => {
   const handleClose = useCallback(() => {
     setIsModalOpened(null);
   }, [setIsModalOpened]);
-
-  const codeRequestURI = {
-    google: `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email&client_id=${process.env.REACT_APP_GOOGLE_CLIENT_ID}&response_type=code&redirect_uri=${process.env.REACT_APP_GOOGLE_LOGIN_REDIRECT_URI}&access_type=offline`,
-    github: `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_GITHUB_LOGIN_REDIRECT_URI}`,
-  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -31,12 +26,6 @@ const SignUpModal = ({ ...props }) => {
     };
   }, [isModalOpened, handleClose]);
 
-  const titleMessage = {
-    login: "다시 오신 것을 \n환영해요!",
-    signup: "개발자 계정으로 \n간편하게 시작하기",
-    require: "계속하려면 \n로그인이 필요해요",
-  };
-
   return (
     <>
       <Overlay />
@@ -47,22 +36,18 @@ const SignUpModal = ({ ...props }) => {
           </CloseIconBox>
           <ContentBox>
             <Title type="h2" {...props}>
-              {titleMessage[isModalOpened] ??
-                "개발자 계정으로 \n간편하게 시작하기"}
+              {"개발자 계정으로 \n간편하게 시작하기"}
             </Title>
             <ButtonBox>
-              <ButtonLink href={codeRequestURI["google"]}>
-                <Button className="google">
-                  <IconSocial icon="google" />
-                  <Typography type="button">Google 계정으로 로그인</Typography>
-                </Button>
-              </ButtonLink>
-              <ButtonLink href={codeRequestURI["github"]}>
-                <Button className="github">
-                  <IconSocial icon="github" />
-                  <Typography type="button">Github 계정으로 로그인</Typography>
-                </Button>
-              </ButtonLink>
+              <Button className="google">
+                <IconSocial icon="google" />
+                <Typography type="button">Google 계정으로 로그인</Typography>
+              </Button>
+
+              <Button className="github">
+                <IconSocial icon="github" />
+                <Typography type="button">Github 계정으로 로그인</Typography>
+              </Button>
             </ButtonBox>
             <AskingForHelp>도움이 필요하신가요?</AskingForHelp>
           </ContentBox>
@@ -84,8 +69,6 @@ const Overlay = styled.div`
 
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(15px);
-
-  animation: ${animations.appear} 0.3s cubic-bezier(0.3, 0, 0, 1);
 `;
 
 const ModalBox = styled.div`
@@ -114,7 +97,6 @@ const Layout = styled.div`
 
   background-color: ${colors.white};
   transform: translateY(-50%);
-  animation: ${animations.modal} 0.4s cubic-bezier(0.3, 0, 0, 1);
 
   @media screen and (max-width: 500px) {
     width: 100%;
@@ -182,9 +164,6 @@ const ButtonBox = styled.div`
   }
 `;
 
-const ButtonLink = styled.a`
-  text-decoration: none;
-`;
 const Button = styled.button`
   display: flex;
   justify-content: center;

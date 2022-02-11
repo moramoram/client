@@ -11,9 +11,9 @@ import {
   CommunityIntro,
   CommunityCreateButton,
   CommunityFeedGrid,
-  FeedGrid,
   ErrorBoundary,
 } from "@/containers";
+import { FeedGrid } from "@/layouts";
 import { SubNavbar, Sort, Search } from "@/components";
 
 const CommunityPage = () => {

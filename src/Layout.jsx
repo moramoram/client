@@ -14,14 +14,14 @@ import {
 } from "@/recoil/modal";
 import { navMenuData, navUserData } from "@/recoil/menu";
 
-import { Modal, ScrollTopButton } from "@/components";
 import {
   Navbar,
   SignUpModal,
+  Footer,
   CommunityCreate,
   CommunityUpdate,
-  Footer,
 } from "@/containers";
+import { Modal, ScrollTopButton } from "@/components";
 import { colors } from "@/_shared";
 
 const Layout = () => {

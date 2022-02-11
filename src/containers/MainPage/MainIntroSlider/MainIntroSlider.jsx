@@ -1,6 +1,5 @@
 import React from "react";
-
-import { IntroSlider } from "@/containers";
+import { IntroSlider } from "@/layouts";
 
 const MainIntroSlider = ({ ...props }) => {
   return <IntroSlider data={sliderData} {...props} />;

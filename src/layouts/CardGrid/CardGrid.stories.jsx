@@ -2,7 +2,7 @@ import React from "react";
 import CardGrid from ".";
 
 export default {
-  title: "containers/CardGrid",
+  title: "layouts/CardGrid",
   component: CardGrid,
 };
 

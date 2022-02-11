@@ -2,7 +2,7 @@ import React from "react";
 import IntroSlider from ".";
 
 export default {
-  title: "containers/IntroSlider",
+  title: "layouts/IntroSlider",
   component: IntroSlider,
 };
 

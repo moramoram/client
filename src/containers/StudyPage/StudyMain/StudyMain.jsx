@@ -4,8 +4,9 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
+import { StudyCardGrid } from "@/containers";
+import { CardGrid } from "@/layouts";
 import { SubNavbar, Input, Selector, Checkbox, Sort } from "@/components";
-import { CardGrid, StudyCardGrid } from "@/containers";
 
 const StudyMain = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);

@@ -4,7 +4,8 @@ import styled from "styled-components";
 import { useMutation, useQueryClient } from "react-query";
 import { GetStudyDetail, convertToStudyDetail, postComment } from "@/api";
 
-import { CommentList, StudySideBar } from "@/containers";
+import { StudySideBar } from "@/containers";
+import { CommentList } from "@/layouts";
 import { Avatar, CommentInput, DropdownSmall, Toc } from "@/components";
 import { Icon } from "@/foundations";
 import {

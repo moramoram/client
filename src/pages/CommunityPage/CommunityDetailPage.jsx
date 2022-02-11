@@ -10,7 +10,7 @@ const CommunityDetailPage = ({ match }) => {
   const theme = useRecoilValue(themeState);
   return (
     <Layout>
-      <Suspense fallback={<LoadingCommunityDetail />}>
+      <Suspense fallback={<LoadingCommunityDetail theme={theme} />}>
         <CommunityDetail theme={theme} />
       </Suspense>
     </Layout>

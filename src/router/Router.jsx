@@ -1,10 +1,9 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { Route, Routes } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { auth, token } from "@/recoil";
 
-import queryString from "query-string";
 import { axiosInstance } from "@/utils";
 import Layout from "@/Layout";
 import { PrivateRoute } from "@/router";
@@ -25,27 +24,8 @@ import {
 } from "@/pages";
 
 const Router = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const parsed = queryString.parse(location.search);
-
-  const [jwtToken, setToken] = useRecoilState(token);
+  const jwtToken = useRecoilValue(token);
   const setAuth = useSetRecoilState(auth);
-
-  const getToken = useCallback(async () => {
-    const { data } = await axiosInstance({
-      url: "/auth/login/google",
-      method: "post",
-      params: {
-        code: parsed.code,
-      },
-    });
-    setToken({
-      accessToken: data.accessToken,
-      refreshToken: data.refreshToken,
-    });
-    navigate(-2);
-  }, [parsed.code, setToken, navigate]);
 
   const getMyPageInfo = async () => {
     const { data } = await axiosInstance({ url: "users/me" });
@@ -53,9 +33,6 @@ const Router = () => {
   };
 
   useEffect(() => {
-    if (parsed.code) {
-      getToken();
-    }
     if (!!jwtToken.accessToken) {
       getMyPageInfo();
     }

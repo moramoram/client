@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
@@ -16,7 +16,7 @@ const LoginPage = () => {
   const setToken = useSetRecoilState(token);
   const request = location.pathname.split("/")[3];
 
-  const getToken = useCallback(async () => {
+  const getToken = async () => {
     const { data } = await axiosInstance({
       url: `/auth/login/${request}`,
       method: "post",
@@ -28,8 +28,8 @@ const LoginPage = () => {
       accessToken: data.accessToken,
       refreshToken: data.refreshToken,
     });
-    navigate("/");
-  }, [parsed.code, setToken]);
+    await navigate("/main");
+  };
 
   useEffect(() => {
     if (parsed.code) {

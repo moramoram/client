@@ -43,11 +43,11 @@ const StudyPage = () => {
 
 const categoryData = [
   {
-    id: 0,
+    id: 1,
     title: "전체",
   },
   {
-    id: 1,
+    id: 2,
     title: "나의 스터디",
   },
 ];

@@ -99,10 +99,7 @@ const CommunityEditor = ({
                 placeholder="카테고리"
                 inputRef={ref}
                 options={options}
-                value={
-                  options[originalData?.boardType - 1] ??
-                  options.find((c) => c.value === value)
-                }
+                value={options.find((c) => c.value === value)}
                 onChange={(val) => onChange(val.value)}
                 status={errors?.boardType ? "error" : "default"}
                 {...props}

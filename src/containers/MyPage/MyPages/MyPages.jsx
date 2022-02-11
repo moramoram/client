@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import { GetUserProfile, UserProfileSelector } from "@/api";
 
 import {
-  Authorization,
+  AuthForm,
   MyInfo,
   MyFeed,
   MyComment,
@@ -23,7 +23,7 @@ const MyPage = () => {
 
   const contentsData = {
     1: <MyInfo userProfile={userProfile} />,
-    2: <Authorization userProfile={userProfile} />,
+    2: <AuthForm userProfile={userProfile} />,
     3: <MyFeed />,
     4: <MyStudy />,
     5: <MyComment />,

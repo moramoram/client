@@ -1,10 +1,12 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { useForm, Controller } from "react-hook-form";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
+import { useMutation, useQueryClient } from "react-query";
+import { PostNicknameCheck, PutAuthorization } from "@/api";
 
 import { Input, InputImage, Button, Selector } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
@@ -14,34 +16,80 @@ const THEME = {
   DARK: "dark",
 };
 
-const Authorization = () => {
+const AuthForm = ({ userProfile, ...props }) => {
   const theme = useRecoilValue(themeState);
-  const [imageSrc, setImageSrc] = React.useState(null);
+  const [imageSrc, setImageSrc] = useState(null);
+  const [isChecked, setIsChecked] = useState(false);
   const {
     register,
     control,
     handleSubmit,
     watch,
+    setError,
+    clearErrors,
     formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => console.log(data);
+  } = useForm({ mode: "onChange" });
 
-  const readFile = useCallback((files) => {
-    const reader = new FileReader();
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        resolve(reader.result);
-        setImageSrc(reader.result);
+  const queryClient = useQueryClient();
+  const mutateNickname = useMutation(PutAuthorization, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("getUserProfile");
+    },
+  });
+
+  const onSubmit = useCallback(
+    (data) => {
+      const authData = {
+        ...data,
+        authImg: data.authImg[0],
       };
-      files[0] instanceof File && reader.readAsDataURL(files[0]);
-    });
-  }, []);
+      const formData = new FormData();
+      Object.keys(authData).forEach((key) =>
+        formData.append(key, authData[key])
+      );
+      mutateNickname.mutate(formData);
+    },
+    [mutateNickname]
+  );
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    if (value.length > 8) {
+      e.target.value = value.slice(0, 9);
+    }
+    setIsChecked(false);
+  };
+
+  const checkNickname = useCallback(async () => {
+    const body = {
+      nickname: watch("nickname"),
+    };
+    const data = await PostNicknameCheck(body);
+    console.log(data);
+    if (data) {
+      setError("nickname", {
+        type: "duplicate",
+      });
+    } else {
+      clearErrors("nickname");
+      setIsChecked(true);
+    }
+  }, [clearErrors, setError, watch]);
 
   useEffect(() => {
-    if (watch("authImg")) {
-      readFile(watch("authImg"));
+    if (
+      watch("nickname") &&
+      !errors?.nickname &&
+      watch("nickname") !== userProfile.nickname
+    ) {
+      const timeoutId = setTimeout(() => {
+        checkNickname();
+      }, 500);
+      return () => {
+        clearTimeout(timeoutId);
+      };
     }
-  });
+  }, [watch, errors?.nickname, checkNickname, userProfile.nickname]);
 
   const nicknameValidation = {
     required: true,
@@ -55,6 +103,7 @@ const Authorization = () => {
     minLength: "별명을 2글자 이상 8글자 이하로 입력해주세요",
     maxLength: "별명을 2글자 이상 8글자 이하로 입력해주세요",
     pattern: "한글, 영문, 혹은 숫자를 올바르게 입력해주세요",
+    duplicate: "이미 사용중인 별명이에요. 다른 별명으로 지어주세요.",
   };
 
   const nameValidation = {
@@ -77,6 +126,28 @@ const Authorization = () => {
 
   const requiredError = "필수 항목입니다";
 
+  const readFile = useCallback((file) => {
+    const reader = new FileReader();
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        resolve(reader.result);
+        setImageSrc(reader.result);
+      };
+      file instanceof File && reader.readAsDataURL(file);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (watch("authImg")) {
+      const file = watch("authImg")[0];
+      if (file.size > 10485760) {
+        alert("10MB 이하로 업로드해주세요");
+      } else {
+        readFile(file);
+      }
+    }
+  });
+
   return (
     <>
       <Layout>
@@ -88,26 +159,37 @@ const Authorization = () => {
         <FormSection onSubmit={handleSubmit(onSubmit)}>
           <div>
             <Label theme={theme}>별명</Label>
-            <InputBox>
-              <Input
-                placeholder="별명을 입력하세요"
-                status={!errors?.nickname ? "default" : "error"}
-                message={nicknameErrors[errors?.nickname?.type]}
-                theme={theme}
-                {...register("nickname", { ...nicknameValidation })}
-              />
-            </InputBox>
+            <Input
+              placeholder="별명을 입력하세요"
+              status={
+                isChecked ? "success" : errors?.nickname ? "error" : "default"
+              }
+              message={
+                isChecked
+                  ? "사용할 수 있는 별명입니다!"
+                  : nicknameErrors[errors?.nickname?.type]
+              }
+              defaultValue={userProfile.nickname}
+              autocomplete="off"
+              theme={theme}
+              {...register("nickname", {
+                onChange: handleChange,
+                ...nicknameValidation,
+              })}
+            />
           </div>
           <Input
             title="이름"
             placeholder="실명 입력"
-            status={!errors?.name ? "default" : "error"}
+            status={!errors?.realName ? "default" : "error"}
             message={
-              nameErrors[errors?.name?.type] ??
+              nameErrors[errors?.realName?.type] ??
               "SSAFY임이 확인되도록 실명으로 입력해주세요"
             }
+            defaultValue={userProfile.realName}
+            autocomplete="off"
             theme={theme}
-            {...register("name", { ...nameValidation })}
+            {...register("realName", { ...nameValidation })}
           />
           <div>
             <Label theme={theme}>SSAFY 정보</Label>
@@ -116,16 +198,18 @@ const Authorization = () => {
                 name="ordinal"
                 control={control}
                 rules={{ ...required }}
-                render={({ field }) => (
+                render={({ field: { onChange, value, ref } }) => (
                   <Selector
-                    options={numberOption}
                     placeholder="기수"
-                    theme={theme}
+                    inputRef={ref}
+                    options={numberOption}
+                    value={numberOption.find((c) => c.value === value)}
+                    onChange={(val) => onChange(val.value)}
                     status={!errors?.ordinal ? "default" : "error"}
                     message={
                       errors?.ordinal?.type === "required" && requiredError
                     }
-                    {...field}
+                    theme={theme}
                   />
                 )}
               />
@@ -133,16 +217,18 @@ const Authorization = () => {
                 name="campus"
                 control={control}
                 rules={{ ...required }}
-                render={({ field }) => (
+                render={({ field: { onChange, value, ref } }) => (
                   <Selector
-                    options={regionOption}
                     placeholder="캠퍼스"
-                    theme={theme}
+                    inputRef={ref}
+                    options={regionOption}
+                    value={regionOption.find((c) => c.value === value)}
+                    onChange={(val) => onChange(val.value)}
                     status={!errors?.campus ? "default" : "error"}
                     message={
                       errors?.campus?.type === "required" && requiredError
                     }
-                    {...field}
+                    theme={theme}
                   />
                 )}
               />
@@ -154,19 +240,32 @@ const Authorization = () => {
               name="authImg"
               control={control}
               rules={{ ...required }}
-              render={({ field }) => <ImageUploader theme={theme} {...field} />}
+              render={({ field: { onChange, value, ref } }) => (
+                <ImageUploader
+                  status={!errors?.authImg ? "default" : "error"}
+                  theme={theme}
+                  value={value && value[0]}
+                  onChange={onChange}
+                  inputRef={ref}
+                />
+              )}
             />
             {imageSrc && <img src={imageSrc} alt="auth" />}
-            <Message>
-              EDU SSAFY 캡쳐, 수료증 사진 등 SSAFY임을 증명할 수 있는 이미지가
-              필요해요.
+            <Message status={!errors?.authImg ? "default" : "error"}>
+              {errors?.authImg?.type === "required"
+                ? requiredError
+                : "EDU SSAFY 캡쳐, 수료증 사진 등 SSAFY임을 증명할 수 있는 이미지가 필요해요."}
             </Message>
           </div>
           <ButtonBox>
             <Button mode="secondary" theme={theme}>
               취소
             </Button>
-            <Button mode="primary" theme={theme}>
+            <Button
+              mode="primary"
+              theme={theme}
+              onClick={() => handleSubmit(onSubmit)}
+            >
               확인
             </Button>
           </ButtonBox>
@@ -176,16 +275,16 @@ const Authorization = () => {
   );
 };
 
-Authorization.propTypes = {
+AuthForm.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   data: PropTypes.arrayOf(Object),
 };
 
-Authorization.defaultProps = {
+AuthForm.defaultProps = {
   theme: THEME.LIGHT,
 };
 
-export default Authorization;
+export default AuthForm;
 
 const numberOption = [
   { value: "1", label: "1기" },
@@ -220,6 +319,12 @@ const labelColor = {
   dark: colors.gray25,
 };
 
+const msgColor = {
+  default: colors.gray400,
+  error: colors.error,
+  success: colors.blue100,
+};
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
@@ -251,20 +356,6 @@ const FormSection = styled.form`
   width: 100%;
 `;
 
-const InputBox = styled.div`
-  display: flex;
-  gap: 1rem;
-
-  button {
-    margin: 6px 0;
-    flex-shrink: 0;
-  }
-
-  div {
-    flex-grow: 1;
-  }
-`;
-
 const InformBox = styled.div`
   display: flex;
   gap: 1rem;
@@ -289,7 +380,7 @@ const Message = styled.div`
   font-size: ${fontSize.sm};
   font-weight: ${fontWeight.regular};
   line-height: ${lineHeight.sm};
-  color: ${colors.gray400};
+  color: ${(props) => msgColor[props.status]};
 `;
 
 const ButtonBox = styled.div`

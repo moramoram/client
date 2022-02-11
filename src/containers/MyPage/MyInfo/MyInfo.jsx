@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
-
 import { useMutation, useQueryClient } from "react-query";
 import { PostNicknameCheck, PutNickname } from "@/api";
 

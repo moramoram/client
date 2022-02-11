@@ -12,6 +12,11 @@ const THEME = {
   DARK: "dark",
 };
 
+const STATUS = {
+  DEFAULT: "default",
+  ERROR: "error",
+};
+
 const InputImage = forwardRef(({ ...props }, imgRef) => {
   return (
     <Dropzone
@@ -36,10 +41,12 @@ const InputImage = forwardRef(({ ...props }, imgRef) => {
 
 InputImage.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
+  status: PropTypes.oneOf(Object.values(STATUS)),
 };
 
 InputImage.defaultProps = {
   theme: THEME.LIGHT,
+  status: STATUS.DEFAULT,
 };
 
 export default InputImage;
@@ -49,9 +56,20 @@ const bgColor = {
   dark: colors.gray900,
 };
 
+// const borderColor = {
+//   light: colors.gray300,
+//   dark: colors.gray700,
+// };
+
 const borderColor = {
-  light: colors.gray300,
-  dark: colors.gray700,
+  light: {
+    default: colors.gray300,
+    error: colors.errorOpacity200,
+  },
+  dark: {
+    default: colors.gray700,
+    error: colors.errorOpacity200,
+  },
 };
 
 const iconColor = {
@@ -67,7 +85,7 @@ const Layout = styled.div`
 
   padding: 3rem;
   border-radius: 8px;
-  border: 2px dashed ${(props) => borderColor[props.theme]};
+  border: 2px dashed ${(props) => borderColor[props.theme][props.status]};
   box-shadow: ${shadows.button};
 
   background-color: ${(props) => bgColor[props.theme]};

@@ -5,7 +5,18 @@ import { StudyCreateEditor } from "@/containers";
 import { Input } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
-const StudyCreateDetail = ({ ...props }) => {
+const StudyCreateDetail = ({
+  register,
+  control,
+  errors,
+  originalData,
+  ...props
+}) => {
+  const titleErrors = {
+    required: "필수 항목입니다",
+    maxLength: "45자 이내로 입력해주세요",
+  };
+
   return (
     <Layout>
       <TitleBox>
@@ -15,11 +26,29 @@ const StudyCreateDetail = ({ ...props }) => {
         </SubTitle>
       </TitleBox>
       <Form>
-        <InputTitle placeholder="제목" title="제목" {...props} />
-        <LabelBox>
-          <Label {...props}>내용</Label>
-          <StudyCreateEditor {...props} />
-        </LabelBox>
+        <InputTitle
+          placeholder="제목"
+          status={
+            errors.title?.type === "required" ||
+            errors.title?.type === "maxLength"
+              ? "error"
+              : "default"
+          }
+          message={titleErrors[errors.title?.type]}
+          // defaultValue={originalData?.title}
+          {...register("title", {
+            required: !originalData,
+            maxLength: 45,
+          })}
+          {...props}
+        />
+        <StudyCreateEditor
+          register={register}
+          control={control}
+          errors={errors}
+          originalData={originalData}
+          {...props}
+        />
       </Form>
     </Layout>
   );
@@ -35,11 +64,6 @@ const titleColor = {
 const subtitleColor = {
   light: colors.gray400,
   dark: colors.gray500,
-};
-
-const labelColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
 };
 
 const Layout = styled.div`
@@ -91,16 +115,4 @@ const InputTitle = styled(Input)`
       font-size: ${fontSize.h3};
     }
   }
-`;
-
-const LabelBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-`;
-
-const Label = styled.div`
-  font-size: ${fontSize.sm};
-  font-weight: ${fontWeight.bold};
-  color: ${(props) => labelColor[props.theme]};
 `;

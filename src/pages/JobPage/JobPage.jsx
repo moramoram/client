@@ -6,7 +6,7 @@ import { navTypeState } from "@/recoil/theme";
 import { useMediaQuery } from "react-responsive";
 
 import { JobIntro, JobMain, JobMainMobile, ErrorBoundary } from "@/containers";
-
+import { throttle } from "@/utils";
 const JobsPage = () => {
   const setNavType = useSetRecoilState(navTypeState);
   const [offset, setOffset] = useState(0);
@@ -19,7 +19,7 @@ const JobsPage = () => {
   }, [offset, setNavType]);
 
   useEffect(() => {
-    const onScroll = () => setOffset(window.pageYOffset);
+    const onScroll = throttle(() => setOffset(window.pageYOffset));
     window.removeEventListener("scroll", onScroll);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);

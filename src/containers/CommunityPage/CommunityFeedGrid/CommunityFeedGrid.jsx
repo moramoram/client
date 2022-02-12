@@ -25,7 +25,7 @@ const CommunityFeedGrid = () => {
     onIntersect: onFetchNewData,
     enabled: hasNextPage,
   });
-
+  console.log("cate");
   return (
     <>
       <FeedGrid data={feedData} theme={theme} />

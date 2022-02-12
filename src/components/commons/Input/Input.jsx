@@ -17,7 +17,10 @@ const STATUS = {
 };
 
 const Input = forwardRef(
-  ({ title, placeholder, message, status, icon, ...props }, inputRef) => {
+  (
+    { title, placeholder, message, status, icon, required, ...props },
+    inputRef
+  ) => {
     return (
       <Layout>
         <Label {...props}>{title}</Label>
@@ -156,6 +159,15 @@ const InputBox = styled.div`
       border: 1px solid ${insetColor[props.status]};
     }
   `}
+
+  ${(props) =>
+    props.disabled &&
+    css`
+      pointer-events: none;
+      input {
+        color: transparent;
+      }
+    `}
 `;
 
 const InputText = styled.input`
@@ -192,6 +204,16 @@ const Label = styled.div`
   font-size: ${fontSize.sm};
   font-weight: ${fontWeight.bold};
   color: ${(props) => labelColor[props.theme]};
+
+  ${(props) =>
+    props.isRequired &&
+    css`
+      ::after {
+        content: "*";
+        color: ${colors.blue100};
+        padding-left: 0.2rem;
+      }
+    `}
 `;
 
 const Message = styled.div`

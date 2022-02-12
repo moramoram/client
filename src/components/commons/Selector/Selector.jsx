@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 
 import Select from "react-select";
@@ -290,6 +290,16 @@ const Label = styled.div`
   font-size: ${fontSize.sm};
   font-weight: ${fontWeight.bold};
   color: ${(props) => labelColor[props.theme]};
+
+  ${(props) =>
+    props.isRequired &&
+    css`
+      ::after {
+        content: "*";
+        color: ${colors.blue100};
+        padding-left: 0.2rem;
+      }
+    `}
 `;
 
 const Message = styled.div`

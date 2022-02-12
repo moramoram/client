@@ -3,3 +3,4 @@ export * from "./modal";
 export * from "./theme";
 export * from "./job";
 export * from "./community";
+export * from "./study";

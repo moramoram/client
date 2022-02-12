@@ -1,5 +1,6 @@
 export { default as StudyCreateDetail } from "./StudyCreateDetail";
 export { default as StudyCreateEditor } from "./StudyCreateEditor";
+export { default as StudyCreateForm } from "./StudyCreateForm";
 export { default as StudyCreateIntro } from "./StudyCreateIntro";
 export { default as StudyCreateSummary } from "./StudyCreateSummary";
 export { default as StudyCardGrid } from "./StudyCardGrid";

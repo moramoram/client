@@ -95,7 +95,7 @@ const CommunityDetail = ({ ...props }) => {
         </CountBox>
       </Footer>
       <CommentBox {...props}>
-        <CommunityDetailComment data={commendData.data} {...props} />
+        <CommunityDetailComment {...props} />
       </CommentBox>
     </Layout>
   );

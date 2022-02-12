@@ -43,7 +43,7 @@ export const JobCardSelector = (data) => {
           src: card.company.logoImg,
         },
         badges: card.techStack.split(","),
-        id: `/job/${card.studyId}`,
+        id: `/job/${card.recruitId}`,
         isDisabled: !dday,
       };
     });

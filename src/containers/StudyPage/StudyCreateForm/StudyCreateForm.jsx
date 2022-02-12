@@ -31,21 +31,19 @@ const StudyCreatePage = ({ ...props }) => {
     },
   });
 
-  const changeData = useCallback(
+  const transformData = useCallback(
     async (data) => {
       const formData = new FormData();
 
-      if (isChecked) {
-        data.memberNumber = "무관";
-      }
-      if (data.techStack) {
-        data.techStack = data.techStack.map((option) => option.value).join(",");
-      }
+      data.studyType = data.studyType.value;
+      data.companyName = data.companyName?.value;
+      data.techStack = data.techStack?.map((option) => option.value).join(",");
+      if (isChecked) data.memberNumber = "무관";
+
       Object.keys(data).forEach((key) => formData.append(key, data[key]));
 
-      let file = undefined;
       if (croppedImage) {
-        file = await fetch(croppedImage).then((r) => r.blob());
+        const file = await fetch(croppedImage).then((r) => r.blob());
         formData.append("thumbnailImg", file, "image.png");
       }
       return formData;
@@ -55,10 +53,10 @@ const StudyCreatePage = ({ ...props }) => {
 
   const onSubmit = useCallback(
     async (data) => {
-      const formData = await changeData(data);
+      const formData = await transformData(data);
       mutateStudy.mutate(formData);
     },
-    [changeData, mutateStudy]
+    [transformData, mutateStudy]
   );
 
   useEffect(() => {

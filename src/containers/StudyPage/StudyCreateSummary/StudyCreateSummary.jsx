@@ -85,37 +85,33 @@ const StudyCreateSummary = ({
               name="studyType"
               control={control}
               rules={{ ...required }}
-              render={({ field: { onChange, value, ref } }) => (
+              render={({ field }) => (
                 <Selector
                   title="종류"
                   placeholder="스터디 종류를 선택하세요"
-                  inputRef={ref}
                   options={typeOption}
-                  value={typeOption.find((c) => c.value === value)}
-                  onChange={(val) => onChange(val.value)}
                   status={!errors?.studyType ? "default" : "error"}
                   message={
                     errors?.studyType?.type === "required" ? requiredError : ""
                   }
                   isRequired
+                  {...field}
                   {...props}
                 />
               )}
             />
           </InputBox>
-          {watch("studyType") === "recruit" && (
+          {watch("studyType")?.value === "recruit" && (
             <InputBox>
               <Controller
                 name="companyName"
                 control={control}
-                render={({ field: { onChange, value, ref } }) => (
+                render={({ field }) => (
                   <Selector
                     title="목표 기업"
                     placeholder="목표 기업을 선택하세요"
                     options={companyOption}
-                    inputRef={ref}
-                    value={companyOption.find((c) => c.value === value)}
-                    onChange={(val) => onChange(val.value)}
+                    {...field}
                     {...props}
                   />
                 )}

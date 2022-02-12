@@ -27,6 +27,7 @@ const AuthForm = ({ userProfile, ...props }) => {
     watch,
     setError,
     clearErrors,
+    reset,
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
@@ -41,9 +42,13 @@ const AuthForm = ({ userProfile, ...props }) => {
     (data) => {
       const authData = {
         ...data,
+        ordinal: data.ordinal.value,
+        campus: data.campus.value,
         authImg: data.authImg[0],
       };
+
       const formData = new FormData();
+
       Object.keys(authData).forEach((key) =>
         formData.append(key, authData[key])
       );
@@ -198,17 +203,16 @@ const AuthForm = ({ userProfile, ...props }) => {
                 name="ordinal"
                 control={control}
                 rules={{ ...required }}
-                render={({ field: { onChange, value, ref } }) => (
+                render={({ field }) => (
                   <Selector
                     placeholder="기수"
-                    inputRef={ref}
                     options={numberOption}
-                    value={numberOption.find((c) => c.value === value)}
-                    onChange={(val) => onChange(val.value)}
                     status={!errors?.ordinal ? "default" : "error"}
+                    defaultValue={numberOption[userProfile?.ordinal - 1]}
                     message={
-                      errors?.ordinal?.type === "required" && requiredError
+                      errors?.ordinal?.type === "required" ? requiredError : ""
                     }
+                    {...field}
                     theme={theme}
                   />
                 )}
@@ -217,17 +221,18 @@ const AuthForm = ({ userProfile, ...props }) => {
                 name="campus"
                 control={control}
                 rules={{ ...required }}
-                render={({ field: { onChange, value, ref } }) => (
+                render={({ field }) => (
                   <Selector
                     placeholder="캠퍼스"
-                    inputRef={ref}
                     options={regionOption}
-                    value={regionOption.find((c) => c.value === value)}
-                    onChange={(val) => onChange(val.value)}
                     status={!errors?.campus ? "default" : "error"}
+                    defaultValue={regionOption.find(
+                      (option) => option.value === userProfile?.campus
+                    )}
                     message={
-                      errors?.campus?.type === "required" && requiredError
+                      errors?.campus?.type === "required" ? requiredError : ""
                     }
+                    {...field}
                     theme={theme}
                   />
                 )}
@@ -258,7 +263,21 @@ const AuthForm = ({ userProfile, ...props }) => {
             </Message>
           </div>
           <ButtonBox>
-            <Button mode="secondary" theme={theme}>
+            <Button
+              mode="secondary"
+              type="button"
+              onClick={() => {
+                reset({
+                  nickname: "",
+                  realName: "",
+                  ordinal: null,
+                  campus: null,
+                  authImg: null,
+                });
+                setImageSrc(null);
+              }}
+              theme={theme}
+            >
               취소
             </Button>
             <Button

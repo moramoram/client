@@ -11,3 +11,4 @@ export { default as StudyDetailComment } from "./StudyDetailMobile";
 export { default as StudySideBar } from "./StudySideBar";
 export { default as StudyMain } from "./StudyMain";
 export { default as StudyMainMobile } from "./StudyMainMobile";
+export { default as ThumbnailUploader } from "./ThumbnailUploader";

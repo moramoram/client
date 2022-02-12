@@ -51,6 +51,7 @@ Selector.propTypes = {
   status: PropTypes.oneOf(Object.values(STATUS)),
   options: PropTypes.array,
   placeholder: PropTypes.string,
+  message: PropTypes.string,
   isMulti: PropTypes.bool,
 };
 
@@ -150,6 +151,12 @@ const focusColor = {
 const activeColor = {
   default: colors.blueOpacity200,
   error: colors.errorOpacity200,
+};
+
+const requiredColor = {
+  default: colors.blue100,
+  error: colors.errorOpacity200,
+  success: colors.blue100,
 };
 
 const customStyles = (props) => ({
@@ -296,7 +303,7 @@ const Label = styled.div`
     css`
       ::after {
         content: "*";
-        color: ${colors.blue100};
+        color: ${requiredColor[props.status]};
         padding-left: 0.2rem;
       }
     `}

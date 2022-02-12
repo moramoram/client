@@ -23,7 +23,9 @@ const Input = forwardRef(
   ) => {
     return (
       <Layout>
-        <Label {...props}>{title}</Label>
+        <Label status={status} {...props}>
+          {title}
+        </Label>
         <InputBox status={status} {...props}>
           {icon && <Icon icon={icon} />}
           <InputText
@@ -111,6 +113,12 @@ const focusColor = {
   default: colors.blueOpacity100,
   error: colors.errorOpacity100,
   success: colors.blueOpacity100,
+};
+
+const requiredColor = {
+  default: colors.blue100,
+  error: colors.errorOpacity200,
+  success: colors.blue100,
 };
 
 const Layout = styled.div`
@@ -210,7 +218,7 @@ const Label = styled.div`
     css`
       ::after {
         content: "*";
-        color: ${colors.blue100};
+        color: ${requiredColor[props.status]};
         padding-left: 0.2rem;
       }
     `}

@@ -8,7 +8,7 @@ import { useMutation, useQueryClient } from "react-query";
 import {
   CommunityDetailSelector,
   GetCommunityDetail,
-  GetCommunityComments,
+  GetComments,
   putCommunityLike,
   deleteCommunity,
 } from "@/api";
@@ -24,7 +24,7 @@ const CommunityDetail = ({ ...props }) => {
 
   const { data } = GetCommunityDetail(id);
   const { contentData } = CommunityDetailSelector(data);
-  const commendData = GetCommunityComments(id);
+  const commendData = GetComments({ type: "board", id: id });
   const [isLike, setIsLiked] = useState(contentData.likeStatus);
   const setUpdateModalOpen = useSetRecoilState(updateModalState);
 

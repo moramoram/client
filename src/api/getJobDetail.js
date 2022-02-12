@@ -1,12 +1,13 @@
-import axios from "axios";
 import { useQuery } from "react-query";
-import { daysLeftFromToday } from "@/utils";
+import { axiosInstance, daysLeftFromToday } from "@/utils";
 
-export const GetJobDetail = () => useQuery(["getStudyDetail"], fetchData);
+export const GetJobDetail = (id) =>
+  useQuery(["getJobDetail", id], () => fetchData(id));
 
-const fetchData = async () => {
-  console.log("API");
-  const res = await axios.get("http://swapi.dev/api/people/1/");
+const fetchData = async (id) => {
+  const res = await axiosInstance({
+    url: `/recruits/${id} `,
+  });
   return res.data;
 };
 

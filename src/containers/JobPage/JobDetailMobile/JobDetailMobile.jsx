@@ -2,19 +2,20 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { useMutation, useQueryClient } from "react-query";
-import { GetJobDetail, JobDetailSelector, postComment } from "@/api";
+import { GetJobDetail, JobDetailSelector } from "@/api";
+import { useParams } from "react-router-dom";
 
-import { CardSmallSlider, CommentList } from "@/layouts";
+import { CardSmallSlider } from "@/layouts";
 import {
   Badge,
   BookMark,
   Button,
-  CommentInput,
   ImageBoxResponsive,
   SideBarItem,
   Toc,
 } from "@/components";
+import { JobDetailComment } from "@/containers";
+
 import { Icon } from "@/foundations";
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
 
@@ -24,21 +25,10 @@ const THEME = {
 };
 
 const JobDetailMobile = ({ cardData, commentData, ...props }) => {
-  const queryClient = useQueryClient();
-  const { data } = GetJobDetail();
-  const { contentData, titleData, sidebarData } = JobDetailSelector(mockdata);
+  const id = useParams().jobId;
+  const { data } = GetJobDetail(id);
+  const { contentData, titleData, sidebarData } = JobDetailSelector(data);
   const [isMarked, setIsMarked] = useState(sidebarData.scrap);
-
-  const mutation = useMutation("postStudyDetailComment", postComment);
-
-  const onPostComment = (comment) => {
-    mutation.mutate(comment.value, {
-      onSuccess: () => {
-        queryClient.invalidateQueries("getStudyDetail");
-        console.log(data.name);
-      },
-    });
-  };
 
   return (
     <>
@@ -84,17 +74,7 @@ const JobDetailMobile = ({ cardData, commentData, ...props }) => {
           <BoxDescription {...props}>같이 준비해요</BoxDescription>
           <CardSmallSlider data={cardData} {...props} />
         </CardBox>
-        <CommentBox>
-          <BoxTitle {...props}>댓글</BoxTitle>
-          <BoxDescription {...props}>
-            이 기업에 대한 의견을 나눠보세요
-          </BoxDescription>
-          <CommentInput
-            {...props}
-            onClick={(comment) => onPostComment(comment)}
-          />
-          <CommentList data={commentData} {...props} />
-        </CommentBox>
+        <JobDetailComment {...props} />
       </Layout>
       <FixedBox>
         <ButtonBg {...props} />

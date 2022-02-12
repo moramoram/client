@@ -1,4 +1,6 @@
 export * from "./getDummyApi";
+
+export * from "./getComments";
 export * from "./postComment";
 
 export * from "./getJobList";
@@ -9,7 +11,6 @@ export * from "./getStudyDetail";
 
 export * from "./getCommunityList";
 export * from "./getCommunityDetail";
-export * from "./getCommunityComments";
 export * from "./postCommunity";
 export * from "./putCommunity";
 export * from "./putCommunityLike";

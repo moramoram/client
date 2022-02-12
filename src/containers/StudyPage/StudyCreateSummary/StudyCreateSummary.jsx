@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-import { Input, Selector, ImageUploader } from "@/components";
+import { Controller } from "react-hook-form";
+
+import { Input, Selector, Checkbox, Radio, ImageUploader } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const THEME = {
@@ -10,7 +12,65 @@ const THEME = {
   DARK: "dark",
 };
 
-const StudyCreateSummary = ({ ...props }) => {
+const StudyCreateSummary = ({
+  register,
+  control,
+  errors,
+  watch,
+  setValue,
+  isChecked,
+  setIsChecked,
+  ...props
+}) => {
+  const required = {
+    required: true,
+  };
+  const requiredError = "필수 항목입니다";
+
+  const typeOption = [
+    { value: "recruit", label: "취업 스터디" },
+    { value: "Algorithm", label: "알고리즘" },
+    { value: "CS", label: "CS" },
+    { value: "Project", label: "프로젝트" },
+    { value: "etc", label: "기타" },
+  ];
+
+  const companyOption = [
+    { value: "naver", label: "네이버" },
+    { value: "kakao", label: "카카오" },
+    { value: "line", label: "라인" },
+    { value: "coupang", label: "쿠팡" },
+    { value: "woowahan", label: "우아한형제들" },
+    { value: "daangn", label: "당근마켓" },
+    { value: "toss", label: "토스" },
+    { value: "zigbang", label: "직방" },
+    { value: "yanolka", label: "야놀자" },
+  ];
+
+  const techStackOption = [
+    { value: "Android", label: "Android" },
+    { value: "C++", label: "C++" },
+    { value: "Django", label: "Django" },
+    { value: "Docker", label: "Docker" },
+    { value: "Flutter", label: "Flutter" },
+    { value: "Go", label: "Go" },
+    { value: "JPA", label: "JPA" },
+    { value: "Java", label: "Java" },
+    { value: "JavaScript", label: "JavaScript" },
+    { value: "Kotlin", label: "Kotlin" },
+    { value: "Linux", label: "Linux" },
+    { value: "Mybatis", label: "Mybatis" },
+    { value: "Node.js", label: "Node.js" },
+    { value: "Python", label: "Python" },
+    { value: "React", label: "React" },
+    { value: "Redis", label: "Redis" },
+    { value: "SQL", label: "SQL" },
+    { value: "Spring", label: "Spring" },
+    { value: "Swift", label: "Swift" },
+    { value: "TypeScript", label: "TypeScript" },
+    { value: "Vue.js", label: "Vue.js" },
+  ];
+
   return (
     <Layout>
       <TitleBox>
@@ -18,65 +78,131 @@ const StudyCreateSummary = ({ ...props }) => {
         <SubTitle {...props}>한 눈에 볼 수 있게 요약해주세요</SubTitle>
       </TitleBox>
       <Form>
-        <Selector
-          title="종류"
-          placeholder=""
-          options={[
-            { value: "recruit", label: "채용" },
-            { value: "Algorithm", label: "알고리즘" },
-            { value: "CS", label: "CS" },
-            { value: "Project", label: "프로젝트" },
-            { value: "etc", label: "기타" },
-          ]}
-          {...props}
+        <TypeBox>
+          <InputBox>
+            <Controller
+              name="studyType"
+              control={control}
+              rules={{ ...required }}
+              render={({ field: { onChange, value, ref } }) => (
+                <Selector
+                  title="종류"
+                  placeholder="스터디 종류를 선택하세요"
+                  inputRef={ref}
+                  options={typeOption}
+                  value={typeOption.find((c) => c.value === value)}
+                  onChange={(val) => onChange(val.value)}
+                  status={!errors?.studyType ? "default" : "error"}
+                  message={
+                    errors?.studyType?.type === "required" ? requiredError : ""
+                  }
+                  isRequired
+                  {...props}
+                />
+              )}
+            />
+          </InputBox>
+          {watch("studyType") === "recruit" && (
+            <InputBox>
+              <Controller
+                name="companyName"
+                control={control}
+                render={({ field: { onChange, value, ref } }) => (
+                  <Selector
+                    title="목표 기업"
+                    placeholder="목표 기업을 선택하세요"
+                    options={companyOption}
+                    inputRef={ref}
+                    value={companyOption.find((c) => c.value === value)}
+                    onChange={(val) => onChange(val.value)}
+                    {...props}
+                  />
+                )}
+              />
+            </InputBox>
+          )}
+        </TypeBox>
+        <InputBox>
+          <Input
+            title="모집 인원"
+            placeholder="모집 인원을 숫자로 입력하세요"
+            min="0"
+            max="100"
+            type="number"
+            isRequired
+            disabled={isChecked}
+            status={!errors?.memberNumber ? "default" : "error"}
+            {...register("memberNumber", {
+              validate: {
+                required: (v) => !!v || isChecked,
+              },
+            })}
+            {...props}
+          />
+          <CheckboxBox>
+            <Checkbox
+              label="무관"
+              onChange={() => setIsChecked(!isChecked)}
+              {...props}
+            />
+          </CheckboxBox>
+          <Message
+            status={!errors?.memberNumber ? "default" : "error"}
+            {...props}
+          >
+            {errors?.memberNumber?.type === "required" ? requiredError : ""}
+          </Message>
+        </InputBox>
+        <LabelBox>
+          <Label isRequired {...props}>
+            진행 방식
+          </Label>
+          <RadioBox>
+            <Radio
+              value="1"
+              label="온라인"
+              {...register("onOff", { ...required })}
+              {...props}
+            />
+            <Radio
+              value="2"
+              label="오프라인"
+              {...register("onOff", { ...required })}
+              {...props}
+            />
+            <Radio
+              value="3"
+              label="온/오프라인 병행"
+              {...register("onOff", { ...required })}
+              {...props}
+            />
+          </RadioBox>
+          <Message status={!errors?.onOff ? "default" : "error"} {...props}>
+            {errors?.onOff?.type === "required" ? requiredError : ""}
+          </Message>
+        </LabelBox>
+        <Controller
+          name="techStack"
+          control={control}
+          render={({ field }) => (
+            <Selector
+              title="기술 스택"
+              placeholder=""
+              options={techStackOption}
+              isMulti
+              message="여러 개의 기술 스택을 입력할 수 있어요"
+              {...field}
+              {...props}
+            />
+          )}
         />
-        <Selector
-          title="목표 기업"
-          placeholder=""
-          options={[
-            { value: "naver", label: "네이버" },
-            { value: "kakao", label: "카카오" },
-            { value: "line", label: "라인" },
-            { value: "coupang", label: "쿠팡" },
-            { value: "woowahan", label: "우아한형제들" },
-            { value: "daangn", label: "당근마켓" },
-            { value: "toss", label: "토스" },
-            { value: "zigbang", label: "직방" },
-            { value: "yanolka", label: "야놀자" },
-            { value: "none", label: "-" },
-          ]}
-          creatable
-          message="원하는 기업이 없다면 추가할 수 있어요"
-          {...props}
-        />
-        <Input
-          title="모집 인원"
-          placeholder=""
-          number
-          message="숫자로 입력하세요"
-          {...props}
-        />
-        <Selector
-          title="스터디 지역"
-          placeholder=""
-          options={[
-            { value: "online", label: "온라인" },
-            { value: "offline", label: "오프라인" },
-          ]}
-          creatable
-          message="원하는 지역이 없다면 추가할 수 있어요"
-          {...props}
-        />
-        <Selector
-          title="기술 스택"
-          placeholder=""
-          isMulti
-          message="여러 개의 기술 스택을 입력할 수 있어요"
-          {...props}
-        />
+
         <LabelBox>
           <Label {...props}>스터디 썸네일</Label>
           <ImageUploader aspect="2" {...props} />
+          <Message status="default" {...props}>
+            썸네일을 등록하지 않으면 기본 이미지로 설정돼요
+          </Message>
         </LabelBox>
       </Form>
     </Layout>
@@ -107,6 +233,12 @@ const subtitleColor = {
 const labelColor = {
   light: colors.gray900,
   dark: colors.gray25,
+};
+
+const msgColor = {
+  default: colors.gray400,
+  error: colors.error,
+  success: colors.blue100,
 };
 
 const Layout = styled.div`
@@ -141,6 +273,7 @@ const SubTitle = styled.div`
 const Form = styled.div`
   display: flex;
   flex-direction: column;
+  /* align-items: flex-start; */
   gap: 2rem;
 
   flex-grow: 1;
@@ -156,4 +289,51 @@ const Label = styled.div`
   font-size: ${fontSize.sm};
   font-weight: ${fontWeight.bold};
   color: ${(props) => labelColor[props.theme]};
+
+  ${(props) =>
+    props.isRequired &&
+    css`
+      ::after {
+        content: "*";
+        color: ${colors.blue100};
+        padding-left: 0.2rem;
+      }
+    `}
+`;
+
+const InputBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+`;
+
+const CheckboxBox = styled.div`
+  padding-bottom: 6px;
+`;
+
+const RadioBox = styled.div`
+  display: flex;
+  gap: 1rem;
+
+  padding: 1rem 0;
+`;
+
+const TypeBox = styled.div`
+  display: flex;
+  gap: 1rem;
+
+  > div {
+    flex: 1;
+  }
+
+  @media screen and (max-width: 450px) {
+    flex-direction: column;
+    gap: 2rem;
+  }
+`;
+
+const Message = styled.div`
+  font-size: ${fontSize.sm};
+  font-weight: ${fontWeight.regular};
+  color: ${(props) => msgColor[props.status]};
 `;

@@ -12,7 +12,7 @@ const THEME = {
 const Checkbox = ({ theme, label, ...props }) => {
   return (
     <Layout>
-      <input type="checkbox" />
+      <input type="checkbox" {...props} />
       <Icon className="icon" theme={theme} />
       <Label theme={theme}>{label}</Label>
     </Layout>

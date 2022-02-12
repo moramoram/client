@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -9,15 +9,15 @@ const THEME = {
   DARK: "dark",
 };
 
-const Radio = ({ theme, label, ...props }) => {
+const Radio = forwardRef(({ theme, label, ...props }, inputRef) => {
   return (
     <Layout>
-      <input type="radio" {...props} />
+      <input type="radio" ref={inputRef} {...props} />
       <Icon className="icon" theme={theme} />
       <Label theme={theme}>{label}</Label>
     </Layout>
   );
-};
+});
 
 Radio.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),

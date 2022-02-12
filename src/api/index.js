@@ -5,6 +5,7 @@ export * from "./postComment";
 
 export * from "./getJobList";
 export * from "./getJobDetail";
+export * from "./putJobScrap";
 
 export * from "./getStudyList";
 export * from "./getStudyDetail";

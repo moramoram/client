@@ -13,7 +13,6 @@ const fetchData = async (id) => {
 
 export const CommunityDetailSelector = (data) => {
   const { parsedhtml } = parseHtml(data.content);
-  console.log(data.totalLike);
   const contentData = {
     username: data.writerInfo.nickname,
     avatar: data.writerInfo.profileImg,

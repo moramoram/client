@@ -49,7 +49,6 @@ const StudyDetailMobile = ({ data, badges, ...props }) => {
     mutation.mutate(comment.value, {
       onSuccess: () => {
         queryClient.invalidateQueries("getStudyDetail");
-        console.log(dd);
       },
     });
   };

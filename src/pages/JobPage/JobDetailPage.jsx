@@ -19,9 +19,6 @@ import { daysFromToday } from "@/utils";
 const JobsDetailPage = () => {
   const theme = useRecoilValue(themeState);
 
-  const itemId = useParams().jobId;
-  console.log(itemId);
-
   const isPc = useMediaQuery({ query: "(min-width:980px)" });
   const isMobile = useMediaQuery({ query: "(max-width:980px)" });
 

@@ -25,8 +25,9 @@ export const JobDetailSelector = (data) => {
     target: data.empType,
     people: data.career,
     location: data.location,
-    badges: [data.techStack.split(",")],
+    badges: data.techStack.split(","),
     scrap: data.scrapStatus,
+    url: data.recruitUrl,
   };
   const companyData = data.company;
   return { contentData, titleData, sidebarData, companyData };

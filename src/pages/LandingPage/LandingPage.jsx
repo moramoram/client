@@ -65,7 +65,7 @@ const LandingPage = () => {
         src="https://i.imgur.com/se5qZo8.png"
         mode="background"
       />
-      <LandingCTASection text="지금 시작해보세요" theme={theme} getStarted />
+      <LandingCTASection text="지금 시작해보세요" theme={theme} />
     </ErrorBoundary>
   );
 };

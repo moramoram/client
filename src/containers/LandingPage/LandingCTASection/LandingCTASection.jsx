@@ -1,20 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Link } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { loginModalState } from "@/recoil";
 
 import { colors, fontSize, fontWeight, lineHeight } from "@/_shared";
 
-const LandingCTASection = ({ text, getStarted, ...props }) => {
+const LandingCTASection = ({ text, ...props }) => {
+  const setLoginModalOpen = useSetRecoilState(loginModalState);
+
   return (
     <Layout {...props}>
       <ContentBox>
         <Text {...props}>{text}</Text>
-        {getStarted && (
-          <ButtonLink to="/main">
-            <GetStartedBtn>시작하기</GetStartedBtn>
-          </ButtonLink>
-        )}
+        <GetStartedBtn onClick={() => setLoginModalOpen(true)}>
+          시작하기
+        </GetStartedBtn>
       </ContentBox>
     </Layout>
   );
@@ -46,10 +47,6 @@ const Text = styled.div`
   font-size: ${fontSize.h2};
   line-height: ${lineHeight.h2};
   font-weight: ${fontWeight.bold};
-`;
-
-const ButtonLink = styled(Link)`
-  text-decoration: none;
 `;
 
 const GetStartedBtn = styled.button`

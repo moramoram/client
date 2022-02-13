@@ -18,8 +18,8 @@ const THEME = {
 const JobDetail = ({ cardData, commentData, ...props }) => {
   const id = useParams().jobId;
   const { data } = GetJobDetail(id);
-  const { contentData, titleData, sidebarData } = JobDetailSelector(data);
-
+  const { contentData, titleData, sidebarData, companyData } =
+    JobDetailSelector(data);
   const countAvailableStudy = cardData.filter(
     (data) => !data.isDisabled
   ).length;

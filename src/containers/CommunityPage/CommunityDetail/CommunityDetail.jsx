@@ -28,6 +28,8 @@ const CommunityDetail = ({ ...props }) => {
   const [isLike, setIsLiked] = useState(contentData.likeStatus);
   const setUpdateModalOpen = useSetRecoilState(updateModalState);
 
+  console.log(data);
+
   const queryClient = useQueryClient();
 
   const putLikeMutation = useMutation(putCommunityLike, {

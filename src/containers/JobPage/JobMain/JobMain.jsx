@@ -16,7 +16,7 @@ const JobMain = ({ categoryData }) => {
 
   const handleCategory = (id) => {
     window.scrollTo({ top: 0 });
-    id !== 3 && setSearch({ ...search, category: id });
+    id === 3 ? alert("싸피") : setSearch({ ...search, category: id });
   };
 
   const handleSort = (criteria) => {

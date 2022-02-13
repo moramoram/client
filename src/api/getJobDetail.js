@@ -6,7 +6,7 @@ export const GetJobDetail = (id) =>
 
 const fetchData = async (id) => {
   const res = await axiosInstance({
-    url: `/recruits/${id} `,
+    url: `/recruits/${id}`,
   });
   return res.data;
 };

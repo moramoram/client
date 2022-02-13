@@ -6,7 +6,7 @@ export const GetCommunityDetail = (id) =>
 
 const fetchData = async (id) => {
   const res = await axiosInstance({
-    url: `/boards/${id} `,
+    url: `/boards/${id}`,
   });
   return res.data;
 };

@@ -255,7 +255,11 @@ const AuthForm = ({ userProfile, ...props }) => {
                 />
               )}
             />
-            {imageSrc && <img src={imageSrc} alt="auth" />}
+            {imageSrc && (
+              <ImgBox>
+                <img src={imageSrc} alt="auth" />
+              </ImgBox>
+            )}
             <Message status={!errors?.authImg ? "default" : "error"}>
               {errors?.authImg?.type === "required"
                 ? requiredError
@@ -407,4 +411,11 @@ const ButtonBox = styled.div`
   justify-content: flex-end;
   gap: 1rem;
   padding-top: 2rem;
+`;
+
+const ImgBox = styled.div`
+  img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
 `;

@@ -23,8 +23,8 @@ const StudyMainMobile = ({ categoryData }) => {
     setSearch({ ...search, criteria: criteria });
   };
 
-  const handleKeyword = debounce((keyword) => {
-    setSearch({ ...search, title: keyword });
+  const handleKeyword = debounce((e) => {
+    setSearch({ ...search, title: e.target.value });
   });
 
   return (

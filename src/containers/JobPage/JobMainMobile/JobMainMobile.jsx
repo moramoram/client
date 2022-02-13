@@ -18,8 +18,8 @@ const JobMainMobile = ({ categoryData }) => {
     id !== 3 && setSearch({ ...search, category: id });
   };
 
-  const handleKeyword = debounce((keyword) => {
-    setSearch({ ...search, title: keyword });
+  const handleKeyword = debounce((e) => {
+    setSearch({ ...search, title: e.target.value });
   });
 
   const handleSort = (criteria) => {

@@ -23,21 +23,21 @@ const JobMain = ({ categoryData }) => {
     setSearch({ ...search, criteria: criteria });
   };
 
-  const handleKeyword = debounce((keyword) => {
-    setSearch({ ...search, title: keyword });
+  const handleKeyword = debounce((e) => {
+    setSearch({ ...search, title: e.target.value });
   });
 
-  const handleTechStack = (value) => {
+  const handleTechStack = (e) => {
     setSearch({
       ...search,
-      techStack: value.map((tech) => {
+      techStack: e.map((tech) => {
         return tech.value;
       }),
     });
   };
 
-  const handleJob = (value) => {
-    setSearch({ ...search, job: value.label });
+  const handleJob = (e) => {
+    setSearch({ ...search, job: e.label });
   };
 
   return (

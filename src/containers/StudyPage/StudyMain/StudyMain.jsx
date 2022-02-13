@@ -23,12 +23,12 @@ const StudyMain = ({ categoryData }) => {
     setSearch({ ...search, criteria: criteria });
   };
 
-  const handleKeyword = debounce((keyword) => {
-    setSearch({ ...search, title: keyword });
+  const handleKeyword = debounce((e) => {
+    setSearch({ ...search, title: e.target.value });
   });
 
-  const handleType = (value) => {
-    setSearch({ ...search, studyType: value.label });
+  const handleType = (e) => {
+    setSearch({ ...search, studyType: e.label });
   };
 
   return (

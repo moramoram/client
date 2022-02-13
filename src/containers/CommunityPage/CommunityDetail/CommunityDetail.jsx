@@ -24,7 +24,6 @@ const CommunityDetail = ({ ...props }) => {
 
   const { data } = GetCommunityDetail(id);
   const { contentData } = CommunityDetailSelector(data);
-  const [likecount, setLikecount] = useState(contentData.likeStatus);
   const [isLike, setIsLiked] = useState(contentData.likeStatus);
 
   const commendData = GetComments({ type: "board", id: id });

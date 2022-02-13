@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Link } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { auth } from "@/recoil/auth";
 
 import { DropdownItem } from "./DropdownItem";
 import { colors, fontSize, fontWeight, shadows } from "@/_shared";

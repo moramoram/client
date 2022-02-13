@@ -33,6 +33,11 @@ export const AllTypes = () => (
       <Avatar size="small" src={defaultSrc} />
     </div>
     <div style={{ marginTop: "1rem" }}>
+      <Avatar size="large" src="/images/admin.svg" />
+      <Avatar size="medium" src="/images/admin.svg" />
+      <Avatar size="small" src="/images/admin.svg" />
+    </div>
+    <div style={{ marginTop: "1rem" }}>
       <h2 style={{ marginBottom: "0.5rem" }}>Initials</h2>
       <Avatar size="large" username="김싸피" />
       <Avatar size="medium" username="김싸피" />

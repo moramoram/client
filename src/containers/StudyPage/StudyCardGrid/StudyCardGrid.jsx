@@ -15,7 +15,7 @@ const StudyCardGrid = () => {
   const loader = useRef(null);
   const { data, fetchNextPage, hasNextPage } = GetStudyList(search);
   const { cardData } = StudyCardSelector(data);
-
+  console.log("cardgrid", data);
   const onFetchNewData = () => {
     fetchNextPage();
   };

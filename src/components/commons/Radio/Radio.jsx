@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -9,27 +9,27 @@ const THEME = {
   DARK: "dark",
 };
 
-const Checkbox = ({ theme, label, ...props }) => {
+const Radio = forwardRef(({ theme, label, ...props }, inputRef) => {
   return (
     <Layout>
-      <input type="checkbox" {...props} />
+      <input type="radio" ref={inputRef} {...props} />
       <Icon className="icon" theme={theme} />
       <Label theme={theme}>{label}</Label>
     </Layout>
   );
-};
+});
 
-Checkbox.propTypes = {
+Radio.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   label: PropTypes.string,
 };
 
-Checkbox.defaultProps = {
+Radio.defaultProps = {
   theme: THEME.LIGHT,
   label: "Label",
 };
 
-export default Checkbox;
+export default Radio;
 
 const borderColor = {
   light: colors.gray300,
@@ -46,18 +46,7 @@ const Layout = styled.label`
   }
 
   input:checked + .icon {
-    border-color: ${colors.blue100};
-    background-color: ${colors.blue100};
-  }
-
-  input:checked + .icon::before {
-    height: 7px;
-    transition: all 0.1s;
-  }
-
-  input:checked + .icon::after {
-    height: 11px;
-    transition: all 0.1s ease 0.1s;
+    border: 5px solid ${colors.blue100};
   }
 `;
 
@@ -68,38 +57,12 @@ const Icon = styled.div`
   width: 18px;
   height: 18px;
   border: 1px solid ${(props) => borderColor[props.theme]};
-  border-radius: 6px;
+  border-radius: 50%;
 
   background-color: transparent;
 
   cursor: pointer;
   transition: 0.2s;
-
-  ::before,
-  ::after {
-    position: absolute;
-    display: inline-block;
-
-    content: "";
-    width: 2px;
-    height: 0;
-    border-radius: 2px;
-
-    background-color: ${colors.white};
-    transform-origin: left top;
-  }
-
-  ::before {
-    top: 9px;
-    left: 2px;
-    transform: rotate(-55deg);
-  }
-
-  ::after {
-    top: 13px;
-    left: 8px;
-    transform: rotate(-145deg);
-  }
 `;
 
 const Label = styled.span`

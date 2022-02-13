@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { forwardRef } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
 
 import Select from "react-select";
@@ -61,6 +61,7 @@ Selector.propTypes = {
   status: PropTypes.oneOf(Object.values(STATUS)),
   options: PropTypes.array,
   placeholder: PropTypes.string,
+  message: PropTypes.string,
   isMulti: PropTypes.bool,
 };
 
@@ -160,6 +161,12 @@ const focusColor = {
 const activeColor = {
   default: colors.blueOpacity200,
   error: colors.errorOpacity200,
+};
+
+const requiredColor = {
+  default: colors.blue100,
+  error: colors.errorOpacity200,
+  success: colors.blue100,
 };
 
 const customStyles = (props) => ({
@@ -299,6 +306,16 @@ const Label = styled.div`
   font-size: ${fontSize.sm};
   font-weight: ${fontWeight.bold};
   color: ${(props) => labelColor[props.theme]};
+
+  ${(props) =>
+    props.isRequired &&
+    css`
+      ::after {
+        content: "*";
+        color: ${requiredColor[props.status]};
+        padding-left: 0.2rem;
+      }
+    `}
 `;
 
 const Message = styled.div`

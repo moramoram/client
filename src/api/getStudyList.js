@@ -30,6 +30,7 @@ export const GetStudyList = (data) =>
   );
 
 export const StudyCardSelector = (data) => {
+  console.log(data);
   const totalData = data.pages.map((page) => {
     const items = page.res.map((card) => {
       return {
@@ -39,7 +40,7 @@ export const StudyCardSelector = (data) => {
           highlight: !!card.recruitment ? "모집중" : "모집완료",
           src: "",
         },
-        badges: card.techStack.split(","),
+        badges: !!card.techStack ? card?.techStack?.split(",") : [],
         id: `/study/${card.studyId}`,
         isDisabled: !card.recruitment,
       };

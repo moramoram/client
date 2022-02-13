@@ -7,6 +7,7 @@ export { default as ImageBox } from "./ImageBox";
 export { default as ImageBoxResponsive } from "./ImageBoxResponsive";
 export { default as Input } from "./Input";
 export { default as InputImage } from "./InputImage";
+export { default as Radio } from "./Radio";
 export { default as Selector } from "./Selector";
 export { default as SideBarItem } from "./SideBarItem";
 export { default as Switch } from "./Switch";

@@ -9,6 +9,7 @@ export * from "./putJobScrap";
 
 export * from "./getStudyList";
 export * from "./getStudyDetail";
+export * from "./postStudy";
 
 export * from "./getCommunityList";
 export * from "./getCommunityDetail";
@@ -22,5 +23,6 @@ export * from "./putProfileImage";
 export * from "./deleteProfileImage";
 export * from "./postNicknameCheck";
 export * from "./putNickname";
+export * from "./putAuthorization";
 
 export * from "./getRefreshToken";

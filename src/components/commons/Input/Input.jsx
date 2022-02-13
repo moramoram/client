@@ -18,7 +18,7 @@ const STATUS = {
 
 const Input = forwardRef(
   (
-    { title, placeholder, message, status, icon, onChange, ...props },
+    { title, placeholder, message, status, icon, onChange, required, ...props },
     inputRef
   ) => {
     const handleChange = (e) => {
@@ -26,7 +26,9 @@ const Input = forwardRef(
     };
     return (
       <Layout>
-        <Label {...props}>{title}</Label>
+        <Label status={status} {...props}>
+          {title}
+        </Label>
         <InputBox status={status} {...props}>
           {icon && <Icon icon={icon} />}
           <InputText
@@ -117,6 +119,12 @@ const focusColor = {
   success: colors.blueOpacity100,
 };
 
+const requiredColor = {
+  default: colors.blue100,
+  error: colors.errorOpacity200,
+  success: colors.blue100,
+};
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
@@ -163,6 +171,15 @@ const InputBox = styled.div`
       border: 1px solid ${insetColor[props.status]};
     }
   `}
+
+  ${(props) =>
+    props.disabled &&
+    css`
+      pointer-events: none;
+      input {
+        color: transparent;
+      }
+    `}
 `;
 
 const InputText = styled.input`
@@ -199,6 +216,16 @@ const Label = styled.div`
   font-size: ${fontSize.sm};
   font-weight: ${fontWeight.bold};
   color: ${(props) => labelColor[props.theme]};
+
+  ${(props) =>
+    props.isRequired &&
+    css`
+      ::after {
+        content: "*";
+        color: ${requiredColor[props.status]};
+        padding-left: 0.2rem;
+      }
+    `}
 `;
 
 const Message = styled.div`

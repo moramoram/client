@@ -1,6 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
+import { Controller } from "react-hook-form";
+
 import ReactQuill, { Quill } from "react-quill";
 import MarkdownShortcuts from "quill-markdown-shortcuts";
 import hljs from "highlight.js";
@@ -11,7 +13,13 @@ import { useMediaQuery } from "react-responsive";
 
 import { colors } from "@/_shared";
 
-const StudyCreateEditor = (props) => {
+const StudyCreateEditor = ({
+  register,
+  control,
+  errors,
+  originalData,
+  ...props
+}) => {
   Quill.register("modules/markdownShortcuts", MarkdownShortcuts);
   Quill.debug("error");
   window.hljs = hljs;
@@ -36,7 +44,6 @@ const StudyCreateEditor = (props) => {
       ["bold", "italic", "underline", "code-block"],
       [{ list: "ordered" }, { list: "bullet" }],
       ["link", "image", "video"],
-      ["clean"],
     ],
   };
 
@@ -56,16 +63,28 @@ const StudyCreateEditor = (props) => {
     "code",
   ];
 
-  const isDefaultView = useMediaQuery({ query: "(min-width:560px)" });
+  const isDefaultView = useMediaQuery({ query: "(min-width:610px)" });
 
   return (
-    <Layout {...props}>
-      <ReactQuill
-        modules={isDefaultView ? modules : mobileModules}
-        formats={formats}
-        placeholder="내용을 입력하세요"
-      />
-    </Layout>
+    <Controller
+      name="content"
+      control={control}
+      rules={{
+        validate: {
+          required: (v) => v !== "<p><br></p>",
+        },
+      }}
+      render={({ field }) => (
+        <Layout status={!errors?.content ? "default" : "error"} {...props}>
+          <ReactQuill
+            modules={isDefaultView ? modules : mobileModules}
+            formats={formats}
+            placeholder="내용을 입력하세요"
+            {...field}
+          />
+        </Layout>
+      )}
+    />
   );
 };
 
@@ -82,6 +101,32 @@ const focusBgColor = {
 };
 
 const borderColor = {
+  light: {
+    default: colors.gray50,
+    error: colors.errorOpacity200,
+  },
+  dark: {
+    default: colors.gray900,
+    error: colors.errorOpacity200,
+  },
+};
+
+const hoverColor = {
+  default: colors.blueOpacity200,
+  error: colors.errorOpacity200,
+};
+
+const insetColor = {
+  default: colors.blue100,
+  error: colors.errorOpacity200,
+};
+
+const focusColor = {
+  default: colors.blueOpacity100,
+  error: colors.errorOpacity100,
+};
+
+const pickerBorderColor = {
   light: colors.gray300,
   dark: colors.gray800,
 };
@@ -113,7 +158,7 @@ const Layout = styled.div`
     overflow-y: auto;
 
     padding: 2rem;
-    border: 1px solid ${(props) => bgColor[props.theme]};
+    border: 1px solid ${(props) => borderColor[props.theme][props.status]};
     border-radius: 8px;
     background-color: ${(props) => bgColor[props.theme]};
 
@@ -125,19 +170,19 @@ const Layout = styled.div`
 
     ${(props) => css`
       :hover {
-        border: 1px solid ${colors.blueOpacity200};
-        box-shadow: inset 0 0 0 1px ${colors.blueOpacity200};
+        border: 1px solid ${hoverColor[props.status]};
+        box-shadow: inset 0 0 0 1px ${hoverColor[props.status]};
         background-color: ${focusBgColor[props.theme]};
       }
 
       :focus-within {
-        box-shadow: 0 0 0 3px ${colors.blueOpacity100},
-          inset 0 0 0 1px ${colors.blue100};
+        box-shadow: 0 0 0 3px ${focusColor[props.status]},
+          inset 0 0 0 1px ${insetColor[props.status]};
         background-color: ${focusBgColor[props.theme]};
       }
 
       :focus-within:hover {
-        border: 1px solid ${colors.blue100};
+        border: 1px solid ${insetColor[props.status]};
       }
     `}
   }
@@ -146,6 +191,7 @@ const Layout = styled.div`
     padding-left: 1rem;
     color: ${colors.gray500};
     line-height: 1.5rem;
+    ${(props) => props.status === "error" && `color: ${colors.error};`}
   }
 
   .ql-toolbar.ql-snow {
@@ -154,11 +200,15 @@ const Layout = styled.div`
     z-index: 9999;
 
     width: 100%;
-    padding: 1rem 1rem 1rem 1.5rem;
+    padding: 1rem;
     border: none;
     border-radius: 12px 12px 0 0;
 
     font-family: Pretendard;
+
+    @media screen and (max-width: 610px) {
+      padding: 1rem 0;
+    }
 
     .ql-stroke {
       stroke: ${(props) => toolsColor[props.theme]};
@@ -178,12 +228,12 @@ const Layout = styled.div`
   }
 
   .ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-options {
-    border: 1px solid ${(props) => borderColor[props.theme]};
+    border: 1px solid ${(props) => pickerBorderColor[props.theme]};
     border-radius: 4px;
   }
 
   .ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label {
-    border: 1px solid ${(props) => borderColor[props.theme]};
+    border: 1px solid ${(props) => pickerBorderColor[props.theme]};
   }
 
   .ql-snow .ql-editor h1 {

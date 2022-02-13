@@ -1,0 +1,94 @@
+import React from "react";
+import styled from "styled-components";
+
+import { Link } from "react-router-dom";
+
+import { colors, fontSize, fontWeight, lineHeight } from "@/_shared";
+
+const LandingCTASection = ({ text, getStarted, ...props }) => {
+  return (
+    <Layout {...props}>
+      <ContentBox>
+        <Text {...props}>{text}</Text>
+        {getStarted && (
+          <ButtonLink to="/main">
+            <GetStartedBtn>시작하기</GetStartedBtn>
+          </ButtonLink>
+        )}
+      </ContentBox>
+    </Layout>
+  );
+};
+
+export default LandingCTASection;
+
+const bgColor = {
+  light: colors.gray25,
+  dark: colors.gray900,
+};
+
+const titleColor = {
+  light: colors.gray900,
+  dark: colors.gray25,
+};
+
+const Layout = styled.div`
+  padding: 12rem 0;
+  /* background-color: ${(props) => bgColor[props.theme]}; */
+`;
+
+const ContentBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  position: relative;
+  max-width: 960px;
+  margin: auto;
+`;
+
+const Text = styled.div`
+  color: ${(props) => titleColor[props.theme]};
+  font-size: ${fontSize.h2};
+  line-height: ${lineHeight.h2};
+  font-weight: ${fontWeight.bold};
+`;
+
+const ButtonLink = styled(Link)`
+  text-decoration: none;
+`;
+
+const GetStartedBtn = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px 60px;
+  border-radius: 32px;
+  border: none;
+  box-shadow: 0px 8px 15px rgba(74, 131, 239, 0.3);
+  background: ${colors.blue100};
+
+  color: ${colors.white};
+  font-weight: ${fontWeight.bold};
+  font-size: ${fontSize.lg};
+  text-align: center;
+  text-decoration: none;
+
+  transition: 0.2s;
+  user-select: none;
+  cursor: pointer;
+
+  :hover {
+    background: ${colors.blue200};
+  }
+
+  :active {
+    background: ${colors.blue100};
+  }
+
+  @media screen and (max-width: 530px) {
+    padding: 16px 40px;
+    font-size: ${fontSize.p};
+  }
+`;

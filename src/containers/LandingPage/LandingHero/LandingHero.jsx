@@ -42,15 +42,17 @@ const titleColor = {
 
 const Layout = styled.div`
   position: relative;
-  max-width: 1280px;
+  /* max-width: 960px; */
+  height: 100vh;
   margin: auto;
+  background: url("/images/background.png");
 `;
 
 const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 240px 0 0 20px;
+  padding: 240px 0 240px 20px;
   z-index: 2;
 
   @media screen and (max-width: 530px) {

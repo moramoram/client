@@ -7,8 +7,8 @@ import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
 import { auth, token, themeState, loginModalState } from "@/recoil";
 
 import { NavDefaultItem } from "./NavDefaultItem";
-import { Avatar, Button, Dropdown, Switch } from "@/components";
-import { Logo, Icon } from "@/foundations";
+import { Avatar, Button, Dropdown, Switch, Notification } from "@/components";
+import { Logo } from "@/foundations";
 import { colors, animations } from "@/_shared";
 
 const THEME = {
@@ -25,6 +25,7 @@ const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
   const [current, setCurrent] = useState();
   const [theme, setTheme] = useRecoilState(themeState);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [notificationOpen, setNotificationOpen] = useState(false);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const resetToken = useResetRecoilState(token);
   const resetAuth = useResetRecoilState(auth);
@@ -60,6 +61,18 @@ const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
     };
   }, [pathname, dropdownOpen]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (notificationOpen && !navbarRight?.current.contains(event.target)) {
+        setNotificationOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, [notificationOpen]);
+
   return (
     <Layout {...props}>
       <FlexBox>
@@ -90,12 +103,20 @@ const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
                 size="small"
               />
             </SwitchBox>
-            <Icon icon="bell" stroke={colors.gray400} width="20" aria-hidden />
+            <Notification
+              notificationOpen={notificationOpen}
+              setNotificationOpen={setNotificationOpen}
+              setDropdownOpen={setDropdownOpen}
+              {...props}
+            />
             <Avatar
               size="medium"
               username={userData.nickname}
               src={userData.profileImg}
-              onClick={() => setDropdownOpen(!dropdownOpen)}
+              onClick={() => {
+                setDropdownOpen(!dropdownOpen);
+                setNotificationOpen(false);
+              }}
             />
             {dropdownOpen && (
               <UserDropdown

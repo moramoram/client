@@ -8,7 +8,8 @@ import { useMutation, useQueryClient } from "react-query";
 import {
   CommunityDetailSelector,
   GetCommunityDetail,
-  GetCommunityComments,
+  GetComments,
+  putCommunityLike,
   deleteCommunity,
 } from "@/api";
 
@@ -23,12 +24,16 @@ const CommunityDetail = ({ ...props }) => {
 
   const { data } = GetCommunityDetail(id);
   const { contentData } = CommunityDetailSelector(data);
-  const commendData = GetCommunityComments(id);
   const [isLike, setIsLiked] = useState(contentData.likeStatus);
+
+  const commendData = GetComments({ type: "board", id: id });
   const setUpdateModalOpen = useSetRecoilState(updateModalState);
 
   const queryClient = useQueryClient();
-  const mutation = useMutation(deleteCommunity, {
+
+  const putLikeMutation = useMutation(putCommunityLike);
+
+  const deletePostMutation = useMutation(deleteCommunity, {
     onMutate: () => {
       navigate("/community");
     },
@@ -36,6 +41,11 @@ const CommunityDetail = ({ ...props }) => {
       queryClient.invalidateQueries("getCommunityList");
     },
   });
+
+  const onLike = () => {
+    setIsLiked(!isLike);
+    putLikeMutation.mutate(id);
+  };
 
   const dropdownItems = [
     {
@@ -48,7 +58,7 @@ const CommunityDetail = ({ ...props }) => {
       title: "삭제",
       onClick: () => {
         if (window.confirm("정말 삭제하시겠습니까?")) {
-          mutation.mutate(id);
+          deletePostMutation.mutate(id);
         }
       },
     },
@@ -60,7 +70,7 @@ const CommunityDetail = ({ ...props }) => {
       <Footer>
         <Button
           mode={isLike ? "primary" : "secondary"}
-          onClick={() => setIsLiked(!isLike)}
+          onClick={onLike}
           {...props}
         >
           <Icon icon="thumbsUp" />
@@ -82,7 +92,7 @@ const CommunityDetail = ({ ...props }) => {
         </CountBox>
       </Footer>
       <CommentBox {...props}>
-        <CommunityDetailComment data={commendData.data} {...props} />
+        <CommunityDetailComment {...props} />
       </CommentBox>
     </Layout>
   );

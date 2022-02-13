@@ -3,12 +3,7 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import { Link, useLocation } from "react-router-dom";
-import {
-  useRecoilValue,
-  useRecoilState,
-  useSetRecoilState,
-  useResetRecoilState,
-} from "recoil";
+import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
 import { auth, token, themeState, loginModalState } from "@/recoil";
 
 import { NavMobileItem } from "./NavMobileItem";
@@ -26,11 +21,10 @@ const TYPE = {
   TRANSPARENT: "transparent",
 };
 
-const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
+const NavMobile = ({ isLogin, userData, navData, userMenuData, ...props }) => {
   const [navbarOpen, setnavbarOpen] = useState(false);
   const [theme, setTheme] = useRecoilState(themeState);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
-  const authState = useRecoilValue(auth);
   const resetToken = useResetRecoilState(token);
   const resetAuth = useResetRecoilState(auth);
 
@@ -99,9 +93,13 @@ const NavMobile = ({ isLogin, navData, userMenuData, ...props }) => {
             <>
               <UserInfoBox {...props}>
                 <UserInfo {...props}>
-                  <Avatar size="medium" />
+                  <Avatar
+                    username={userData.nickname}
+                    src={userData.profileImg}
+                    size="medium"
+                  />
                   <div>
-                    <UserName>{authState.nickname ?? "User"}</UserName>님
+                    <UserName>{userData?.nickname ?? "User"}</UserName>님
                     안녕하세요!
                   </div>
                 </UserInfo>

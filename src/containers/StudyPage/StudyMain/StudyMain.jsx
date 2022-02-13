@@ -1,18 +1,34 @@
 import React, { Suspense } from "react";
 import styled from "styled-components";
 
-import { useRecoilValue } from "recoil";
-import { themeState } from "@/recoil/theme";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { themeState, studySearch } from "@/recoil";
 
 import { StudyCardGrid } from "@/containers";
 import { CardGrid } from "@/layouts";
 import { SubNavbar, Input, Selector, Checkbox, Sort } from "@/components";
 
+import { debounce } from "@/utils";
+
 const StudyMain = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);
+  const [search, setSearch] = useRecoilState(studySearch);
 
-  const handleCategory = (e) => {
-    console.log(e);
+  const handleCategory = (id) => {
+    window.scrollTo({ top: 0 });
+    setSearch({ ...search, category: id });
+  };
+
+  const handleSort = (criteria) => {
+    setSearch({ ...search, criteria: criteria });
+  };
+
+  const handleKeyword = debounce((e) => {
+    setSearch({ ...search, title: e.target.value });
+  });
+
+  const handleType = (e) => {
+    setSearch({ ...search, studyType: e.title });
   };
 
   return (
@@ -22,33 +38,22 @@ const StudyMain = ({ categoryData }) => {
       </StickyNavBox>
       <CardGridBox>
         <InputBox>
-          <Input theme={theme} icon="search" placeholder="스터디 검색하기" />
+          <Input
+            theme={theme}
+            onChange={handleKeyword}
+            icon="search"
+            placeholder="스터디 검색하기"
+          />
           <Selector
             theme={theme}
+            onChange={handleType}
             placeholder="종류"
-            options={[
-              { value: "recruit", label: "채용" },
-              { value: "Algorithm", label: "알고리즘" },
-              { value: "CS", label: "CS" },
-              { value: "Project", label: "프로젝트" },
-            ]}
+            options={studyOptions}
           />
           {/* <Selector placeholder="기술 스택" isMulti /> */}
         </InputBox>
         <SortBox>
-          <Sort
-            items={[
-              {
-                name: "date",
-                title: "최신순",
-              },
-              {
-                name: "scrap",
-                title: "인기순",
-              },
-            ]}
-            theme={theme}
-          />
+          <Sort theme={theme} onClick={handleSort} items={criteriaData} />
           <Checkbox label="마감된 스터디 숨기기" theme={theme} />
         </SortBox>
         <Suspense fallback={<CardGrid theme={theme} isLoading />}>
@@ -60,6 +65,24 @@ const StudyMain = ({ categoryData }) => {
 };
 
 export default StudyMain;
+
+const criteriaData = [
+  {
+    name: "date",
+    title: "최신순",
+  },
+  {
+    name: "scrap",
+    title: "인기순",
+  },
+];
+
+const studyOptions = [
+  { value: "recruit", label: "채용" },
+  { value: "Algorithm", label: "알고리즘" },
+  { value: "CS", label: "CS" },
+  { value: "Project", label: "프로젝트" },
+];
 
 const Layout = styled.div`
   display: flex;

@@ -1,57 +1,84 @@
 import React, { Suspense } from "react";
 import styled from "styled-components";
 
-import { useRecoilValue } from "recoil";
-import { themeState } from "@/recoil/theme";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { themeState, jobSearch } from "@/recoil";
 
+import { SubNavbar, Input, Selector, Checkbox, Sort } from "@/components";
 import { JobCardGrid } from "@/containers";
 import { CardGrid } from "@/layouts";
-import { SubNavbar, Input, Selector, Checkbox, Sort } from "@/components";
+
+import { debounce } from "@/utils";
 
 const JobMain = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);
+  const [search, setSearch] = useRecoilState(jobSearch);
 
-  const handleCategory = (e) => {
-    console.log(e);
+  const handleCategory = (id) => {
+    window.scrollTo({ top: 0 });
+    id === 3 ? alert("싸피") : setSearch({ ...search, category: id });
+  };
+
+  const handleSort = (criteria) => {
+    setSearch({ ...search, criteria: criteria });
+  };
+
+  const handleKeyword = debounce((e) => {
+    setSearch({ ...search, title: e.target.value });
+  });
+
+  const handleTechStack = (e) => {
+    setSearch({
+      ...search,
+      techStack: e.map((tech) => {
+        return tech.value;
+      }),
+    });
+  };
+
+  const handleJob = (e) => {
+    setSearch({ ...search, job: e.label });
   };
 
   return (
     <Layout>
       <StickyNavBox>
-        <StickyNav data={categoryData} theme={theme} onClick={handleCategory} />
+        <StickyNav
+          data={categoryData}
+          theme={theme}
+          selected={search.category}
+          onClick={handleCategory}
+        />
       </StickyNavBox>
       <CardGridBox>
-        <InputBox>
-          <Input theme={theme} icon="search" placeholder="공고 검색하기" />
-          <Selector theme={theme} placeholder="기술 스택" isMulti />
-          <Selector
-            theme={theme}
-            placeholder="직무"
-            options={[
-              { value: "Frontend", label: "프론트엔드" },
-              { value: "Backend", label: "백엔드" },
-              { value: "Android", label: "안드로이드" },
-              { value: "iOS", label: "iOS" },
-              { value: "임베디드", label: "임베디드" },
-            ]}
-          />
-        </InputBox>
-        <SortBox>
-          <Sort
-            items={[
-              {
-                name: "date",
-                title: "최신순",
-              },
-              {
-                name: "scrap",
-                title: "인기순",
-              },
-            ]}
-            theme={theme}
-          />
-          <Checkbox label="마감된 스터디 숨기기" theme={theme} />
-        </SortBox>
+        {search.category === 1 && (
+          <>
+            <InputBox>
+              <Input
+                theme={theme}
+                icon="search"
+                placeholder="공고 검색하기"
+                onChange={handleKeyword}
+              />
+              <Selector
+                theme={theme}
+                placeholder="기술 스택"
+                onChange={handleTechStack}
+                isMulti
+              />
+              <Selector
+                theme={theme}
+                placeholder="직무"
+                onChange={handleJob}
+                options={techStackOptions}
+              />
+            </InputBox>
+            <SortBox>
+              <Sort items={criteriaData} theme={theme} onClick={handleSort} />
+              <Checkbox label="마감된 스터디 숨기기" theme={theme} />
+            </SortBox>
+          </>
+        )}
         <Suspense fallback={<CardGrid theme={theme} isLoading />}>
           <JobCardGrid theme={theme} />
         </Suspense>
@@ -61,6 +88,25 @@ const JobMain = ({ categoryData }) => {
 };
 
 export default JobMain;
+
+const criteriaData = [
+  {
+    name: "date",
+    title: "최신순",
+  },
+  {
+    name: "scrap",
+    title: "인기순",
+  },
+];
+
+const techStackOptions = [
+  { value: "Frontend", label: "프론트엔드" },
+  { value: "Backend", label: "백엔드" },
+  { value: "Android", label: "안드로이드" },
+  { value: "iOS", label: "iOS" },
+  { value: "임베디드", label: "임베디드" },
+];
 
 const Layout = styled.div`
   display: flex;

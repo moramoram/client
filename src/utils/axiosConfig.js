@@ -25,7 +25,7 @@ axiosInstance.interceptors.response.use(
     if (err.response.data.message === "Expired access token.") {
       return getRefreshToken()
         .then((data) => {
-          console.log("토근 재발급 성공");
+          console.log("토근 재발급 성공", data);
           localStorage.setItem("ssafe_token", JSON.stringify(data));
           err.config.headers.Authorization = `Bearer ${data.accessToken}`;
           return axiosInstance.request(err.config);

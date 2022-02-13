@@ -7,3 +7,4 @@ export { default as getEndDate } from "./getEndDate";
 export { default as axiosInstance } from "./axiosConfig";
 export { default as parseHtml } from "./parseHtml";
 export { default as debounce } from "./debounce";
+export { default as throttle } from "./throttle";

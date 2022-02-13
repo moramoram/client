@@ -27,7 +27,7 @@ export const CommunityFeedSelector = (data) => {
       const { thumbnail, tagDeletedHtml } = parseHtml(card.content);
       return {
         username: card.writerInfo.nickname,
-        avatar: null,
+        avatar: card.writerInfo.profileImg,
         campus: card.writerInfo.campus,
         ordinal: card.writerInfo.ordinal,
         created: daysFromToday(card.createdDate),

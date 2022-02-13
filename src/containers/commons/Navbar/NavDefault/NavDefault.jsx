@@ -21,15 +21,13 @@ const TYPE = {
   TRANSPARENT: "transparent",
 };
 
-const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
+const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
   const [current, setCurrent] = useState();
-
   const [theme, setTheme] = useRecoilState(themeState);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const resetToken = useResetRecoilState(token);
   const resetAuth = useResetRecoilState(auth);
-
   const { pathname } = useLocation();
   const navbarRight = useRef();
 
@@ -95,12 +93,14 @@ const NavDefault = ({ isLogin, navData, userMenuData, ...props }) => {
             <Icon icon="bell" stroke={colors.gray400} width="20" aria-hidden />
             <Avatar
               size="medium"
+              username={userData.nickname}
+              src={userData.profileImg}
               onClick={() => setDropdownOpen(!dropdownOpen)}
             />
             {dropdownOpen && (
-              // TODO : 프로필에서 Username 가져오기
               <UserDropdown
                 items={userMenuData}
+                userData={userData}
                 onClick={onLogout}
                 {...props}
               />

@@ -10,6 +10,7 @@ import {
   StudyMainMobile,
   ErrorBoundary,
 } from "@/containers";
+import { throttle } from "@/utils";
 
 const StudyPage = () => {
   const setNavType = useSetRecoilState(navTypeState);
@@ -23,7 +24,8 @@ const StudyPage = () => {
   }, [offset, setNavType]);
 
   useEffect(() => {
-    const onScroll = () => setOffset(window.pageYOffset);
+    const onScroll = throttle(() => setOffset(window.pageYOffset));
+
     window.removeEventListener("scroll", onScroll);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -43,11 +45,11 @@ const StudyPage = () => {
 
 const categoryData = [
   {
-    id: 0,
+    id: 1,
     title: "전체",
   },
   {
-    id: 1,
+    id: 2,
     title: "나의 스터디",
   },
 ];

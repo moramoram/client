@@ -2,8 +2,13 @@ import React, { Suspense } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
-import { themeState, communitySearch } from "@/recoil";
-import { createModalState } from "@/recoil/modal";
+import {
+  themeState,
+  communitySearch,
+  isAuthenticated,
+  createModalState,
+  loginModalState,
+} from "@/recoil";
 
 import { useMediaQuery } from "react-responsive";
 
@@ -19,12 +24,14 @@ import { debounce } from "@/utils";
 
 const CommunityPage = () => {
   const theme = useRecoilValue(themeState);
+  const isAuthorized = useRecoilValue(isAuthenticated);
   const setCreateModalOpen = useSetRecoilState(createModalState);
+  const setLoginModalOpen = useSetRecoilState(loginModalState);
   const [search, setSearch] = useRecoilState(communitySearch);
 
-  const handleCategory = (idx) => {
+  const handleCategory = (id) => {
     window.scrollTo({ top: 0 });
-    setSearch({ ...search, boardType: idx });
+    setSearch({ ...search, boardType: id });
   };
 
   const handleSort = (criteria) => {
@@ -35,15 +42,16 @@ const CommunityPage = () => {
     setSearch({ ...search, title: keyword });
   });
 
+  const handleCreation = () => {
+    isAuthorized ? setCreateModalOpen(true) : setLoginModalOpen("require");
+  };
+
   const isPc = useMediaQuery({ query: "(min-width:980px)" });
   const isMobile = useMediaQuery({ query: "(max-width:980px)" });
 
   return (
     <ErrorBoundary fallback={<div />}>
-      <CommunityIntro
-        theme={theme}
-        handleButtonClick={() => setCreateModalOpen(true)}
-      />
+      <CommunityIntro theme={theme} handleButtonClick={handleCreation} />
       {isPc && (
         <MainBox>
           <StickyNavBox>
@@ -55,10 +63,7 @@ const CommunityPage = () => {
             />
           </StickyNavBox>
           <ContentBox>
-            <CommunityCreateButton
-              onClick={() => setCreateModalOpen(true)}
-              theme={theme}
-            />
+            <CommunityCreateButton onClick={handleCreation} theme={theme} />
             <SortBox>
               <Sort items={criteriaData} onClick={handleSort} theme={theme} />
               <Search
@@ -83,10 +88,7 @@ const CommunityPage = () => {
             view="mobile"
           />
           <div>
-            <CommunityCreateButton
-              onClick={() => setCreateModalOpen(true)}
-              theme={theme}
-            />
+            <CommunityCreateButton onClick={handleCreation} theme={theme} />
             <SortBox>
               <Sort items={criteriaData} onClick={handleSort} theme={theme} />
               <Search

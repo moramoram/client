@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Link } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { auth } from "@/recoil/auth";
 
 import { DropdownItem } from "./DropdownItem";
 import { colors, fontSize, fontWeight, shadows } from "@/_shared";
@@ -14,13 +12,11 @@ const THEME = {
   LIGHT: "light",
 };
 
-const Dropdown = ({ items, onClick, ...props }) => {
-  const authState = useRecoilValue(auth);
-
+const Dropdown = ({ items, userData, onClick, ...props }) => {
   return (
     <Layout {...props}>
       <UserInfo {...props}>
-        <UserName>{authState.nickname ?? "User"}</UserName>님 안녕하세요!
+        <UserName>{userData?.nickname ?? "User"}</UserName>님 안녕하세요!
       </UserInfo>
       <MenuBox {...props}>
         <DropdownItemLink to="mypage" {...props}>

@@ -94,14 +94,12 @@ const CommunityEditor = ({
             name="boardType"
             control={control}
             rules={{ required: true }}
-            render={({ field: { onChange, value, ref } }) => (
+            render={({ field }) => (
               <Selector
                 placeholder="카테고리"
-                inputRef={ref}
                 options={options}
-                value={options.find((c) => c.value === value)}
-                onChange={(val) => onChange(val.value)}
                 status={errors?.boardType ? "error" : "default"}
+                {...field}
                 {...props}
               />
             )}
@@ -132,15 +130,14 @@ const CommunityEditor = ({
             required: (v) => v !== "<p><br></p>",
           },
         }}
-        render={({ field: { onChange, value, ref } }) => (
+        defaultValue={originalData?.content}
+        render={({ field }) => (
           <Layout status={!errors?.content ? "default" : "error"} {...props}>
             <ReactQuill
               modules={isDefaultView ? modules : mobileModules}
               formats={formats}
               placeholder="내용을 입력하세요"
-              value={!value ? originalData?.content : value}
-              onChange={onChange}
-              ref={ref}
+              {...field}
             />
           </Layout>
         )}

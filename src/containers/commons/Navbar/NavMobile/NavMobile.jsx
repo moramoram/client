@@ -3,12 +3,7 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
 import { Link, useLocation } from "react-router-dom";
-import {
-  useRecoilValue,
-  useRecoilState,
-  useSetRecoilState,
-  useResetRecoilState,
-} from "recoil";
+import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
 import { auth, token, themeState, loginModalState } from "@/recoil";
 
 import { NavMobileItem } from "./NavMobileItem";
@@ -30,7 +25,6 @@ const NavMobile = ({ isLogin, userData, navData, userMenuData, ...props }) => {
   const [navbarOpen, setnavbarOpen] = useState(false);
   const [theme, setTheme] = useRecoilState(themeState);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
-  const authState = useRecoilValue(auth);
   const resetToken = useResetRecoilState(token);
   const resetAuth = useResetRecoilState(auth);
 

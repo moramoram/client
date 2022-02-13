@@ -28,7 +28,7 @@ const StudyMain = ({ categoryData }) => {
   });
 
   const handleType = (e) => {
-    setSearch({ ...search, studyType: e.label });
+    setSearch({ ...search, studyType: e.title });
   };
 
   return (

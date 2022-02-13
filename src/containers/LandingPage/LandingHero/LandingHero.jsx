@@ -42,7 +42,6 @@ const titleColor = {
 
 const Layout = styled.div`
   position: relative;
-  /* max-width: 960px; */
   height: 100vh;
   margin: auto;
   background: url("/images/background.png");

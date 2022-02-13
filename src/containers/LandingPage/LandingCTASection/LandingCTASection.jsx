@@ -22,11 +22,6 @@ const LandingCTASection = ({ text, getStarted, ...props }) => {
 
 export default LandingCTASection;
 
-const bgColor = {
-  light: colors.gray25,
-  dark: colors.gray900,
-};
-
 const titleColor = {
   light: colors.gray900,
   dark: colors.gray25,
@@ -34,7 +29,6 @@ const titleColor = {
 
 const Layout = styled.div`
   padding: 12rem 0;
-  /* background-color: ${(props) => bgColor[props.theme]}; */
 `;
 
 const ContentBox = styled.div`
@@ -42,7 +36,7 @@ const ContentBox = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 3rem;
-  position: relative;
+
   max-width: 960px;
   margin: auto;
 `;

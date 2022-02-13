@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 import { useMutation, useQueryClient } from "react-query";
-import { GetStudyDetail, convertToStudyDetail, postComment } from "@/api";
+import { GetStudyDetail, StudyDetailSelector, postComment } from "@/api";
+import { useParams } from "react-router-dom";
 
 import { StudySideBar } from "@/containers";
 import { CommentList } from "@/layouts";
@@ -23,20 +24,20 @@ const THEME = {
 };
 
 const StudyDetail = ({ ...props }) => {
+  const id = useParams().studyId;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const { data } = GetStudyDetail(id);
+  const { titleData, contentData, tocItem, sidebarData } =
+    StudyDetailSelector(data);
   const queryClient = useQueryClient();
-  const { data } = GetStudyDetail();
-  const { titleData, commentData, contentData, tocItem, sidebarData } =
-    convertToStudyDetail(mockdata);
-
+  const commentData = [];
   const mutation = useMutation("postStudyDetailComment", postComment);
-
+  console.log(data);
   const onPostComment = (comment) => {
     mutation.mutate(comment.value, {
       onSuccess: () => {
         queryClient.invalidateQueries("getStudyDetail");
-        console.log(data.name);
       },
     });
   };

@@ -26,20 +26,25 @@ import {
 } from "@/_shared";
 
 import { useMutation, useQueryClient } from "react-query";
-import { GetStudyDetail, convertToStudyDetail, postComment } from "@/api";
+import { GetStudyDetail, StudyDetailSelector, postComment } from "@/api";
+import { useParams } from "react-router-dom";
 
 const THEME = {
   LIGHT: "light",
   DARK: "dark",
 };
 
-const StudyDetailMobile = ({ data, badges, ...props }) => {
+const StudyDetailMobile = ({ ...props }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const id = useParams().studyId;
 
   const queryClient = useQueryClient();
-  const { dd } = GetStudyDetail();
-  const { titleData, commentData, contentData, tocItem, sidebarData } =
-    convertToStudyDetail(mockdata);
+  const { data } = GetStudyDetail(id);
+
+  const commentData = [];
+
+  const { titleData, contentData, tocItem, sidebarData } =
+    StudyDetailSelector(data);
   const [isMarked, setIsMarked] = useState(sidebarData.scrap);
 
   const mutation = useMutation("postComment", postComment);

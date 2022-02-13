@@ -24,19 +24,15 @@ const CommunityDetail = ({ ...props }) => {
 
   const { data } = GetCommunityDetail(id);
   const { contentData } = CommunityDetailSelector(data);
-  const commendData = GetComments({ type: "board", id: id });
+  const [likecount, setLikecount] = useState(contentData.likeStatus);
   const [isLike, setIsLiked] = useState(contentData.likeStatus);
-  const setUpdateModalOpen = useSetRecoilState(updateModalState);
 
-  console.log(data);
+  const commendData = GetComments({ type: "board", id: id });
+  const setUpdateModalOpen = useSetRecoilState(updateModalState);
 
   const queryClient = useQueryClient();
 
-  const putLikeMutation = useMutation(putCommunityLike, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("getCommunityDetail");
-    },
-  });
+  const putLikeMutation = useMutation(putCommunityLike);
 
   const deletePostMutation = useMutation(deleteCommunity, {
     onMutate: () => {

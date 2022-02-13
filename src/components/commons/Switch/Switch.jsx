@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { colors } from "@/_shared";
+import { colors, shadows } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -134,6 +134,7 @@ const SwitchButton = styled.div`
   left: 2px;
   border-radius: 20px;
   background-color: ${colors.white};
+  box-shadow: ${shadows.button};
 
   cursor: pointer;
   transition: transform 0.4s, width 0.3s, left 0.3s;

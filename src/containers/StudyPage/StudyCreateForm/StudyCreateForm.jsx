@@ -36,8 +36,9 @@ const StudyCreatePage = ({ ...props }) => {
       const formData = new FormData();
 
       data.studyType = data.studyType.value;
-      data.companyName = data.companyName?.value;
-      data.techStack = data.techStack?.map((option) => option.value).join(",");
+      data.companyName = data.companyName?.value ?? "";
+      data.techStack =
+        data.techStack?.map((option) => option.value).join(",") ?? "";
       if (isChecked) data.memberNumber = "무관";
 
       Object.keys(data).forEach((key) => formData.append(key, data[key]));
@@ -45,6 +46,9 @@ const StudyCreatePage = ({ ...props }) => {
       if (croppedImage) {
         const file = await fetch(croppedImage).then((r) => r.blob());
         formData.append("thumbnailImg", file, "image.png");
+      } else {
+        const file = new Blob();
+        formData.append("thumbnailImg", file);
       }
       return formData;
     },

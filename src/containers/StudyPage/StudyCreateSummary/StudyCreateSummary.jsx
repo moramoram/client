@@ -4,7 +4,8 @@ import styled, { css } from "styled-components";
 
 import { Controller } from "react-hook-form";
 
-import { Input, Selector, Checkbox, Radio, ImageUploader } from "@/components";
+import { ThumbnailUploader } from "@/containers";
+import { Input, Selector, Checkbox, Radio } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const THEME = {
@@ -84,37 +85,33 @@ const StudyCreateSummary = ({
               name="studyType"
               control={control}
               rules={{ ...required }}
-              render={({ field: { onChange, value, ref } }) => (
+              render={({ field }) => (
                 <Selector
                   title="종류"
                   placeholder="스터디 종류를 선택하세요"
-                  inputRef={ref}
                   options={typeOption}
-                  value={typeOption.find((c) => c.value === value)}
-                  onChange={(val) => onChange(val.value)}
                   status={!errors?.studyType ? "default" : "error"}
                   message={
                     errors?.studyType?.type === "required" ? requiredError : ""
                   }
                   isRequired
+                  {...field}
                   {...props}
                 />
               )}
             />
           </InputBox>
-          {watch("studyType") === "recruit" && (
+          {watch("studyType")?.value === "recruit" && (
             <InputBox>
               <Controller
                 name="companyName"
                 control={control}
-                render={({ field: { onChange, value, ref } }) => (
+                render={({ field }) => (
                   <Selector
                     title="목표 기업"
                     placeholder="목표 기업을 선택하세요"
                     options={companyOption}
-                    inputRef={ref}
-                    value={companyOption.find((c) => c.value === value)}
-                    onChange={(val) => onChange(val.value)}
+                    {...field}
                     {...props}
                   />
                 )}
@@ -154,7 +151,11 @@ const StudyCreateSummary = ({
           </Message>
         </InputBox>
         <LabelBox>
-          <Label isRequired {...props}>
+          <Label
+            isRequired
+            status={!errors?.onOff ? "default" : "error"}
+            {...props}
+          >
             진행 방식
           </Label>
           <RadioBox>
@@ -199,7 +200,7 @@ const StudyCreateSummary = ({
 
         <LabelBox>
           <Label {...props}>스터디 썸네일</Label>
-          <ImageUploader aspect="2" {...props} />
+          <ThumbnailUploader aspect="2" {...props} />
           <Message status="default" {...props}>
             썸네일을 등록하지 않으면 기본 이미지로 설정돼요
           </Message>
@@ -238,7 +239,11 @@ const labelColor = {
 const msgColor = {
   default: colors.gray400,
   error: colors.error,
-  success: colors.blue100,
+};
+
+const requiredColor = {
+  default: colors.blue100,
+  error: colors.errorOpacity200,
 };
 
 const Layout = styled.div`
@@ -295,7 +300,7 @@ const Label = styled.div`
     css`
       ::after {
         content: "*";
-        color: ${colors.blue100};
+        color: ${requiredColor[props.status]};
         padding-left: 0.2rem;
       }
     `}

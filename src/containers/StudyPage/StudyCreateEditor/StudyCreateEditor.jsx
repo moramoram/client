@@ -74,15 +74,13 @@ const StudyCreateEditor = ({
           required: (v) => v !== "<p><br></p>",
         },
       }}
-      render={({ field: { onChange, value, ref } }) => (
+      render={({ field }) => (
         <Layout status={!errors?.content ? "default" : "error"} {...props}>
           <ReactQuill
             modules={isDefaultView ? modules : mobileModules}
             formats={formats}
             placeholder="내용을 입력하세요"
-            value={!value ? originalData?.content : value}
-            onChange={onChange}
-            ref={ref}
+            {...field}
           />
         </Layout>
       )}

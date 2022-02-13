@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import styled from "styled-components";
 
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "react-query";
+import { PostStudy } from "@/api";
 
 import { StudyCreateSummary, StudyCreateDetail } from "@/containers";
 import { Button } from "@/components";
 
 const StudyCreatePage = ({ ...props }) => {
+  const [isChecked, setIsChecked] = useState(false);
+  const [croppedImage, setCroppedImage] = useState(null);
   const {
     register,
     control,
@@ -17,15 +22,42 @@ const StudyCreatePage = ({ ...props }) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    if (isChecked) {
-      data.memberNumber = "무관";
-    }
-    data.techStack = data.techStack.map((option) => option.value).join(",");
-    console.log(data);
-  };
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const mutateStudy = useMutation(PostStudy, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("getStudyitems");
+      navigate("/study");
+    },
+  });
 
-  const [isChecked, setIsChecked] = useState(false);
+  const transformData = useCallback(
+    async (data) => {
+      const formData = new FormData();
+
+      data.studyType = data.studyType.value;
+      data.companyName = data.companyName?.value;
+      data.techStack = data.techStack?.map((option) => option.value).join(",");
+      if (isChecked) data.memberNumber = "무관";
+
+      Object.keys(data).forEach((key) => formData.append(key, data[key]));
+
+      if (croppedImage) {
+        const file = await fetch(croppedImage).then((r) => r.blob());
+        formData.append("thumbnailImg", file, "image.png");
+      }
+      return formData;
+    },
+    [croppedImage, isChecked]
+  );
+
+  const onSubmit = useCallback(
+    async (data) => {
+      const formData = await transformData(data);
+      mutateStudy.mutate(formData);
+    },
+    [transformData, mutateStudy]
+  );
 
   useEffect(() => {
     if (isChecked) {
@@ -52,10 +84,17 @@ const StudyCreatePage = ({ ...props }) => {
             setValue={setValue}
             isChecked={isChecked}
             setIsChecked={setIsChecked}
+            croppedImage={croppedImage}
+            setCroppedImage={setCroppedImage}
             {...props}
           />
           <ButtonBox>
-            <Button mode="secondary" type="button" {...props}>
+            <Button
+              mode="secondary"
+              type="button"
+              onClick={() => navigate("/study")}
+              {...props}
+            >
               취소
             </Button>
             <Button

@@ -6,6 +6,7 @@ export * from "./getJobDetail";
 
 export * from "./getStudyitems";
 export * from "./getStudyDetail";
+export * from "./postStudy";
 
 export * from "./getCommunityItems";
 export * from "./getCommunityDetail";

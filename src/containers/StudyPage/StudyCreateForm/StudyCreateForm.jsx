@@ -35,8 +35,8 @@ const StudyCreatePage = ({ ...props }) => {
     async (data) => {
       const formData = new FormData();
 
-      data.studyType = data.studyType.value;
-      data.companyName = data.companyName?.value ?? "";
+      data.studyType = data.studyType.label;
+      data.companyName = data.companyName?.label ?? "-";
       data.techStack =
         data.techStack?.map((option) => option.value).join(",") ?? "";
       if (isChecked) data.memberNumber = "무관";

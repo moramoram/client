@@ -31,16 +31,29 @@ export const GetStudyList = (data) =>
 
 export const StudyCardSelector = (data) => {
   console.log(data);
+
+  const onOff = {
+    1: "온라인",
+    2: "오프라인",
+    3: "온/오프라인",
+  };
+
   const totalData = data.pages.map((page) => {
     const items = page.res.map((card) => {
+      const badgeData = [
+        card.studyType,
+        onOff[card.onOff],
+        card?.techStack?.split(",")[0],
+      ].filter((data) => data);
+
       return {
         contents: {
           title: card.title,
-          subtitle: `${card.writerInfo.nickname} (${card.writerInfo.ordinal}/${card.writerInfo.campus} )`,
-          highlight: !!card.recruitment ? "모집중" : "모집완료",
-          src: "",
+          subtitle: `${card.writerInfo.nickname} (${card.writerInfo.ordinal}기 / ${card.writerInfo.campus})`,
+          highlight: card.recruitment ? "모집중" : "모집완료",
+          src: card?.thumbnailImg,
         },
-        badges: !!card.techStack ? card?.techStack?.split(",") : [],
+        badges: badgeData,
         id: `/study/${card.studyId}`,
         isDisabled: !card.recruitment,
       };

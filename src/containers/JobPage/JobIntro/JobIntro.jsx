@@ -56,15 +56,18 @@ const Layout = styled.div`
 
 const Title = styled.div`
   padding-top: 2rem;
+
   line-height: ${lineHeight.h2};
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h2};
   color: ${colors.gray25};
+
+  user-select: none;
 `;
 
 const SubTitle = styled.div`
   height: ${lineHeight.h4};
-
   font-size: ${fontSize.p};
   color: ${(props) => subtitleColor[props.theme]};
+  user-select: none;
 `;

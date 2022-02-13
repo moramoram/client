@@ -59,10 +59,12 @@ const Title = styled.div`
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h2};
   color: ${(props) => titleColor[props.theme]};
+  user-select: none;
 `;
 
 const SubTitle = styled.div`
   font-size: ${fontSize.p};
   color: ${(props) => subtitleColor[props.theme]};
   padding: 1rem 0 2rem 0;
+  user-select: none;
 `;

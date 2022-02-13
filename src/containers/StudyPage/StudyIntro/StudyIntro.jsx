@@ -64,13 +64,15 @@ const Title = styled.div`
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h2};
   color: ${colors.gray25};
+
+  user-select: none;
 `;
 
 const SubTitle = styled.div`
   padding: 1rem 0 2rem 0;
-
   font-size: ${fontSize.p};
   color: ${(props) => subtitleColor[props.theme]};
+  user-select: none;
 `;
 
 const ButtonLink = styled(Link)`

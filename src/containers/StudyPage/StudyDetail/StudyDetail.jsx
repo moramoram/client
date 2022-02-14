@@ -3,7 +3,12 @@ import styled from "styled-components";
 
 import { useParams, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
-import { GetStudyDetail, StudyDetailSelector, postComment } from "@/api";
+import {
+  GetStudyDetail,
+  StudyDetailSelector,
+  DeleteStudy,
+  postComment,
+} from "@/api";
 
 import { StudySideBar } from "@/containers";
 import { CommentList } from "@/layouts";
@@ -43,6 +48,15 @@ const StudyDetail = ({ ...props }) => {
     });
   };
 
+  const deleteStudyMutation = useMutation(DeleteStudy, {
+    onMutate: () => {
+      navigate("/study");
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("getStudyList");
+    },
+  });
+
   const dropdownItems = [
     {
       name: "edit",
@@ -54,7 +68,7 @@ const StudyDetail = ({ ...props }) => {
       title: "삭제",
       onClick: () => {
         if (window.confirm("정말 삭제하시겠습니까?")) {
-          console.log("삭제");
+          deleteStudyMutation.mutate(id);
         }
       },
     },

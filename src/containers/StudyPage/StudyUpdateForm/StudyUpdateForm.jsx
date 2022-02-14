@@ -64,7 +64,7 @@ const StudyUpdateForm = ({ ...props }) => {
       }
       return formData;
     },
-    [croppedImage, isChecked]
+    [croppedImage, isChecked, originalData]
   );
 
   const onSubmit = useCallback(
@@ -72,7 +72,7 @@ const StudyUpdateForm = ({ ...props }) => {
       const formData = await transformData(data);
       mutateStudy.mutate({ id: id, data: formData });
     },
-    [transformData, mutateStudy]
+    [transformData, mutateStudy, id]
   );
 
   useEffect(() => {

@@ -86,7 +86,7 @@ const StudyCreateSummary = ({
     if (originalData?.memberNumber === "무관") {
       setIsChecked(true);
     }
-  }, [setIsChecked]);
+  }, [setIsChecked, originalData]);
 
   return (
     <Layout>

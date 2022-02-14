@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
@@ -21,15 +21,21 @@ const StudyCreateSummary = ({
   setValue,
   isChecked,
   setIsChecked,
+  originalData,
   ...props
 }) => {
+  const [radioState, setRadioState] = useState({
+    0: originalData?.onOff === 0,
+    1: originalData?.onOff === 1,
+    2: originalData?.onOff === 2,
+  });
+
   const required = {
     required: true,
   };
   const requiredError = "필수 항목입니다";
-
   const typeOption = [
-    { value: "recruit", label: "채용 스터디" },
+    { value: "recruit", label: "채용" },
     { value: "Algorithm", label: "알고리즘" },
     { value: "CS", label: "CS" },
     { value: "Project", label: "프로젝트" },
@@ -72,6 +78,16 @@ const StudyCreateSummary = ({
     { value: "Vue.js", label: "Vue.js" },
   ];
 
+  const defaultTechStack = techStackOption.filter((option) =>
+    originalData?.techStack?.split(",").includes(option.value)
+  );
+
+  useEffect(() => {
+    if (originalData?.memberNumber === "무관") {
+      setIsChecked(true);
+    }
+  }, [setIsChecked, originalData]);
+
   return (
     <Layout>
       <TitleBox>
@@ -85,6 +101,9 @@ const StudyCreateSummary = ({
               name="studyType"
               control={control}
               rules={{ ...required }}
+              defaultValue={typeOption.filter(
+                (option) => option.label === originalData?.studyType
+              )}
               render={({ field }) => (
                 <Selector
                   title="종류"
@@ -94,6 +113,7 @@ const StudyCreateSummary = ({
                   message={
                     errors?.studyType?.type === "required" ? requiredError : ""
                   }
+                  isDisabled={originalData?.studyType}
                   isRequired
                   {...field}
                   {...props}
@@ -101,16 +121,21 @@ const StudyCreateSummary = ({
               )}
             />
           </InputBox>
-          {watch("studyType")?.value === "recruit" && (
+          {(watch("studyType")?.value === "recruit" ||
+            originalData?.company_name) && (
             <InputBox>
               <Controller
                 name="companyName"
                 control={control}
+                defaultValue={companyOption.filter(
+                  (option) => option.label === originalData?.company_name
+                )}
                 render={({ field }) => (
                   <Selector
                     title="목표 기업"
                     placeholder="목표 기업을 선택하세요"
                     options={companyOption}
+                    isDisabled={originalData?.company_name}
                     {...field}
                     {...props}
                   />
@@ -128,6 +153,7 @@ const StudyCreateSummary = ({
             type="number"
             isRequired
             disabled={isChecked}
+            defaultValue={Number(originalData?.memberNumber)}
             status={!errors?.memberNumber ? "default" : "error"}
             {...register("memberNumber", {
               validate: {
@@ -140,6 +166,7 @@ const StudyCreateSummary = ({
             <Checkbox
               label="무관"
               onChange={() => setIsChecked(!isChecked)}
+              checked={isChecked}
               {...props}
             />
           </CheckboxBox>
@@ -162,18 +189,42 @@ const StudyCreateSummary = ({
             <Radio
               value="1"
               label="온라인"
+              checked={radioState[0]}
+              onClick={() =>
+                setRadioState({
+                  0: true,
+                  1: false,
+                  2: false,
+                })
+              }
               {...register("onOff", { ...required })}
               {...props}
             />
             <Radio
               value="2"
               label="오프라인"
+              checked={radioState[1]}
+              onClick={() =>
+                setRadioState({
+                  0: false,
+                  1: true,
+                  2: false,
+                })
+              }
               {...register("onOff", { ...required })}
               {...props}
             />
             <Radio
               value="3"
               label="온/오프라인 병행"
+              checked={radioState[2]}
+              onClick={() =>
+                setRadioState({
+                  0: false,
+                  1: false,
+                  2: true,
+                })
+              }
               {...register("onOff", { ...required })}
               {...props}
             />
@@ -185,6 +236,7 @@ const StudyCreateSummary = ({
         <Controller
           name="techStack"
           control={control}
+          defaultValue={defaultTechStack}
           render={({ field }) => (
             <Selector
               title="기술 스택"
@@ -200,7 +252,11 @@ const StudyCreateSummary = ({
 
         <LabelBox>
           <Label {...props}>스터디 썸네일</Label>
-          <ThumbnailUploader aspect="2" {...props} />
+          <ThumbnailUploader
+            originalData={originalData}
+            aspect="2"
+            {...props}
+          />
           <Message status="default" {...props}>
             썸네일을 등록하지 않으면 기본 이미지로 설정돼요
           </Message>

@@ -39,7 +39,7 @@ const StudySideBar = ({ data, isLoading, ...props }) => {
         ))}
       </SideBarBox>
       <BadgeBox>
-        {data.badges.map((children, idx) => {
+        {data.badges?.map((children, idx) => {
           return (
             <Badge
               className="badge-item"

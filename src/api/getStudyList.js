@@ -33,9 +33,9 @@ export const StudyCardSelector = (data) => {
   console.log(data);
 
   const onOff = {
-    1: "온라인",
-    2: "오프라인",
-    3: "온/오프라인",
+    0: "온라인",
+    1: "오프라인",
+    2: "온/오프라인",
   };
 
   const totalData = data.pages.map((page) => {
@@ -51,7 +51,7 @@ export const StudyCardSelector = (data) => {
           title: card.title,
           subtitle: `${card.writerInfo.nickname} (${card.writerInfo.ordinal}기 / ${card.writerInfo.campus})`,
           highlight: card.recruitment ? "모집중" : "모집완료",
-          src: card?.thumbnailImg,
+          src: card.thumbnailImg,
         },
         badges: badgeData,
         id: `/study/${card.studyId}`,

@@ -37,21 +37,21 @@ export const StudyDetailSelector = (data) => {
   ];
 
   const onOff = {
-    1: "온라인",
-    2: "오프라인",
-    3: "온/오프라인",
+    0: "온라인",
+    1: "오프라인",
+    2: "온/오프라인",
   };
 
   const sidebarData = {
     type: data.studyType,
     target: data.company_name,
-    src: data?.thumbnailImg,
+    src: data.thumbnailImg,
     people:
       data.memberNumber === "무관"
         ? data.memberNumber
         : `${data.memberNumber}명`,
     onOff: onOff[data.onOff],
-    badges: data?.techStack?.split(","),
+    badges: data.techStack?.split(","),
     scrap: data.scrapStatus,
   };
   return { contentData, titleData, tocItem, sidebarData };

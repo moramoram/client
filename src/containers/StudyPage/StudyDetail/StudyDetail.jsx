@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import { useParams, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
-import { GetStudyDetail, StudyDetailSelector, postComment } from "@/api";
-import { useParams } from "react-router-dom";
+import {
+  GetStudyDetail,
+  StudyDetailSelector,
+  DeleteStudy,
+  postComment,
+} from "@/api";
 
 import { StudySideBar } from "@/containers";
 import { CommentList } from "@/layouts";
@@ -25,6 +30,7 @@ const THEME = {
 
 const StudyDetail = ({ ...props }) => {
   const id = useParams().studyId;
+  const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const { data } = GetStudyDetail(id);
@@ -42,18 +48,25 @@ const StudyDetail = ({ ...props }) => {
     });
   };
 
+  const deleteStudyMutation = useMutation(DeleteStudy, {
+    onSuccess: () => {
+      navigate("/study");
+      queryClient.invalidateQueries("getStudyList");
+    },
+  });
+
   const dropdownItems = [
     {
       name: "edit",
       title: "수정",
-      onClick: () => console.log("수정"),
+      onClick: () => navigate(`/study/${id}/update`),
     },
     {
       name: "delete",
       title: "삭제",
       onClick: () => {
         if (window.confirm("정말 삭제하시겠습니까?")) {
-          console.log("삭제");
+          deleteStudyMutation.mutate(id);
         }
       },
     },
@@ -68,7 +81,7 @@ const StudyDetail = ({ ...props }) => {
             <Title {...props}>{titleData.title}</Title>
             <div>
               <SubTitle {...props}>
-                <Avatar size="medium" src={titleData.src} {...props} />
+                <Avatar size="small" src={titleData.src} {...props} />
                 {titleData.subtitle}
               </SubTitle>
             </div>
@@ -184,8 +197,8 @@ const SubTitle = styled.div`
   min-width: 160px;
   min-height: ${lineHeight.lg};
 
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.lg};
+  font-weight: ${fontWeight.medium};
+  font-size: ${fontSize.p};
   line-height: ${lineHeight.lg};
   color: ${(props) => subtitleColor[props.theme]};
 `;

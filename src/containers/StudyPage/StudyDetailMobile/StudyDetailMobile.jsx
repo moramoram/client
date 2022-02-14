@@ -2,20 +2,19 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { CommentList } from "@/layouts";
-
+import { StudyDetailComment } from "@/containers";
 import {
   Avatar,
   Badge,
   BookMark,
   Button,
-  CommentInput,
   DropdownSmall,
   ImageBoxResponsive,
   SideBarItem,
   Toc,
 } from "@/components";
 import { Icon } from "@/foundations";
+
 import {
   animations,
   colors,
@@ -128,14 +127,7 @@ const StudyDetailMobile = ({ ...props }) => {
         </Header>
         <Toc items={tocItem} {...props} />
         <Content {...props}>{contentData}</Content>
-        <CommentBox>
-          <BoxTitle {...props}>댓글</BoxTitle>
-          <BoxDescription {...props}>
-            총 {commentData.length}개의 댓글이 달렸습니다.
-          </BoxDescription>
-          <CommentInput {...props} />
-          <CommentList data={commentData} {...props} />
-        </CommentBox>
+        <StudyDetailComment />
       </Layout>
       <FixedBox>
         <ButtonBg {...props} />

@@ -30,7 +30,6 @@ export const GetStudyList = (data) =>
   );
 
 export const StudyCardSelector = (data) => {
-  console.log(data);
   const totalData = data.pages.map((page) => {
     const items = page.res.map((card) => {
       return {

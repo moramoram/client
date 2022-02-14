@@ -7,7 +7,7 @@ export { default as StudyCardGrid } from "./StudyCardGrid";
 export { default as StudyIntro } from "./StudyIntro";
 export { default as StudyDetail } from "./StudyDetail";
 export { default as StudyDetailMobile } from "./StudyDetailMobile";
-export { default as StudyDetailComment } from "./StudyDetailMobile";
+export { default as StudyDetailComment } from "./StudyDetailComment";
 export { default as StudySideBar } from "./StudySideBar";
 export { default as StudyMain } from "./StudyMain";
 export { default as StudyMainMobile } from "./StudyMainMobile";

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { useMutation, useQueryClient } from "react-query";
-import { GetStudyDetail, StudyDetailSelector, postComment } from "@/api";
+import { GetStudyDetail, StudyDetailSelector } from "@/api";
 import { useParams } from "react-router-dom";
 
-import { StudySideBar } from "@/containers";
-import { CommentList } from "@/layouts";
-import { Avatar, CommentInput, DropdownSmall, Toc } from "@/components";
+import { StudySideBar, StudyDetailComment } from "@/containers";
+import { Avatar, DropdownSmall, Toc } from "@/components";
 import { Icon } from "@/foundations";
 import {
   animations,
@@ -30,17 +28,6 @@ const StudyDetail = ({ ...props }) => {
   const { data } = GetStudyDetail(id);
   const { titleData, contentData, tocItem, sidebarData } =
     StudyDetailSelector(data);
-  const queryClient = useQueryClient();
-  const commentData = [];
-  const mutation = useMutation("postStudyDetailComment", postComment);
-  console.log(data);
-  const onPostComment = (comment) => {
-    mutation.mutate(comment.value, {
-      onSuccess: () => {
-        queryClient.invalidateQueries("getStudyDetail");
-      },
-    });
-  };
 
   const dropdownItems = [
     {
@@ -85,17 +72,7 @@ const StudyDetail = ({ ...props }) => {
         </Header>
         <Toc items={tocItem} {...props} />
         <Content {...props}>{contentData}</Content>
-        <div>
-          <BoxTitle {...props}>댓글</BoxTitle>
-          <BoxDescription {...props}>
-            총 {commentData.length}개의 댓글이 달렸습니다.
-          </BoxDescription>
-          <CommentInput
-            {...props}
-            onClick={(comment) => onPostComment(comment)}
-          />
-          <CommentList data={commentData} {...props} />
-        </div>
+        <StudyDetailComment />
       </Layout>
       <StudySideBar {...props} data={sidebarData} />
     </>

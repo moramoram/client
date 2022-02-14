@@ -25,9 +25,9 @@ const StudyCreateSummary = ({
   ...props
 }) => {
   const [radioState, setRadioState] = useState({
+    0: originalData?.onOff === 0,
     1: originalData?.onOff === 1,
     2: originalData?.onOff === 2,
-    3: originalData?.onOff === 3,
   });
 
   const required = {
@@ -189,12 +189,12 @@ const StudyCreateSummary = ({
             <Radio
               value="1"
               label="온라인"
-              checked={radioState[1]}
+              checked={radioState[0]}
               onClick={() =>
                 setRadioState({
-                  1: true,
+                  0: true,
+                  1: false,
                   2: false,
-                  3: false,
                 })
               }
               {...register("onOff", { ...required })}
@@ -203,12 +203,12 @@ const StudyCreateSummary = ({
             <Radio
               value="2"
               label="오프라인"
-              checked={radioState[2]}
+              checked={radioState[1]}
               onClick={() =>
                 setRadioState({
-                  1: false,
-                  2: true,
-                  3: false,
+                  0: false,
+                  1: true,
+                  2: false,
                 })
               }
               {...register("onOff", { ...required })}
@@ -217,12 +217,12 @@ const StudyCreateSummary = ({
             <Radio
               value="3"
               label="온/오프라인 병행"
-              checked={radioState[3]}
+              checked={radioState[2]}
               onClick={() =>
                 setRadioState({
+                  0: false,
                   1: false,
-                  2: false,
-                  3: true,
+                  2: true,
                 })
               }
               {...register("onOff", { ...required })}

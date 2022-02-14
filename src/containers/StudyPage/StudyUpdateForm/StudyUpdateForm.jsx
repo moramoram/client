@@ -36,7 +36,7 @@ const StudyUpdateForm = ({ ...props }) => {
   });
 
   const convertURLtoFile = async (url) => {
-    const response = await axiosInstance(url);
+    const response = await fetch(url);
     const data = await response.blob();
     return new File([data], "image.png");
   };
@@ -46,7 +46,7 @@ const StudyUpdateForm = ({ ...props }) => {
       const formData = new FormData();
 
       data.studyType = originalData.studyType;
-      data.companyName = data.companyName?.label ?? "-";
+      data.companyName = originalData.company_name;
       data.techStack =
         data.techStack.map((option) => option.value).join(",") ?? "";
       if (isChecked) data.memberNumber = "무관";

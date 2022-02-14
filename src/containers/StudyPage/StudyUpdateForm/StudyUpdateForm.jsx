@@ -9,8 +9,6 @@ import { GetStudyDetail, PutStudy } from "@/api";
 import { StudyCreateSummary, StudyCreateDetail } from "@/containers";
 import { Button } from "@/components";
 
-import { axiosInstance } from "@/utils";
-
 const StudyUpdateForm = ({ ...props }) => {
   const id = useParams().studyId;
   const [isChecked, setIsChecked] = useState(false);

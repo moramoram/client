@@ -51,7 +51,7 @@ export const StudyCardSelector = (data) => {
           title: card.title,
           subtitle: `${card.writerInfo.nickname} (${card.writerInfo.ordinal}기 / ${card.writerInfo.campus})`,
           highlight: card.recruitment ? "모집중" : "모집완료",
-          src: card?.thumbnailImg,
+          src: card.thumbnailImg,
         },
         badges: badgeData,
         id: `/study/${card.studyId}`,

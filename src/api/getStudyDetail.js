@@ -45,13 +45,13 @@ export const StudyDetailSelector = (data) => {
   const sidebarData = {
     type: data.studyType,
     target: data.company_name,
-    src: data?.thumbnailImg,
+    src: data.thumbnailImg,
     people:
       data.memberNumber === "무관"
         ? data.memberNumber
         : `${data.memberNumber}명`,
     onOff: onOff[data.onOff],
-    badges: data?.techStack?.split(","),
+    badges: data.techStack?.split(","),
     scrap: data.scrapStatus,
   };
   return { contentData, titleData, tocItem, sidebarData };

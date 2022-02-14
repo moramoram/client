@@ -2,20 +2,19 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { CommentList } from "@/layouts";
-
+import { StudyDetailComment } from "@/containers";
 import {
   Avatar,
   Badge,
   BookMark,
   Button,
-  CommentInput,
   DropdownSmall,
   ImageBoxResponsive,
   SideBarItem,
   Toc,
 } from "@/components";
 import { Icon } from "@/foundations";
+
 import {
   animations,
   colors,
@@ -25,8 +24,8 @@ import {
   loadings,
 } from "@/_shared";
 
-import { useMutation, useQueryClient } from "react-query";
-import { GetStudyDetail, StudyDetailSelector, postComment } from "@/api";
+import { useMutation } from "react-query";
+import { GetStudyDetail, StudyDetailSelector, putStudyScrap } from "@/api";
 import { useParams } from "react-router-dom";
 
 const THEME = {
@@ -35,27 +34,21 @@ const THEME = {
 };
 
 const StudyDetailMobile = ({ ...props }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const id = useParams().studyId;
 
-  const queryClient = useQueryClient();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const { data } = GetStudyDetail(id);
-
-  const commentData = [];
-
   const { titleData, contentData, tocItem, sidebarData } =
     StudyDetailSelector(data);
+
   const [isMarked, setIsMarked] = useState(sidebarData.scrap);
 
-  const mutation = useMutation("postComment", postComment);
+  const putScrapMutation = useMutation(putStudyScrap);
 
-  const onPostComment = (comment) => {
+  const onScrap = () => {
     setIsMarked(!isMarked);
-    mutation.mutate(comment.value, {
-      onSuccess: () => {
-        queryClient.invalidateQueries("getStudyDetail");
-      },
-    });
+    putScrapMutation.mutate(id);
   };
 
   const dropdownItems = [
@@ -132,14 +125,7 @@ const StudyDetailMobile = ({ ...props }) => {
         </Header>
         <Toc items={tocItem} {...props} />
         <Content {...props}>{contentData}</Content>
-        <CommentBox>
-          <BoxTitle {...props}>댓글</BoxTitle>
-          <BoxDescription {...props}>
-            총 {commentData.length}개의 댓글이 달렸습니다.
-          </BoxDescription>
-          <CommentInput {...props} />
-          <CommentList data={commentData} {...props} />
-        </CommentBox>
+        <StudyDetailComment />
       </Layout>
       <FixedBox>
         <ButtonBg {...props} />
@@ -147,7 +133,7 @@ const StudyDetailMobile = ({ ...props }) => {
           <Button
             mode={isMarked ? "active" : "secondary"}
             minWidth="380px"
-            onClick={(comment) => onPostComment(comment)}
+            onClick={onScrap}
             {...props}
           >
             {isMarked ? (
@@ -218,11 +204,6 @@ const textColor = {
 const subtitleColor = {
   light: colors.gray400,
   dark: colors.gray500,
-};
-
-const borderColor = {
-  dark: colors.gray700,
-  light: colors.gray200,
 };
 
 const Layout = styled.div`
@@ -325,27 +306,6 @@ const Content = styled.div`
     padding-left: 32px;
   }
 `;
-
-const BoxTitle = styled.div`
-  padding: 4rem 0 0.2rem 0;
-  min-height: ${lineHeight.h3};
-
-  border-top: 1px solid ${(props) => borderColor[props.theme]};
-  color: ${(props) => titleColor[props.theme]};
-
-  font-size: ${fontSize.h3};
-  line-height: ${lineHeight.h3};
-  font-weight: ${fontWeight.bold};
-`;
-
-const BoxDescription = styled.div`
-  padding-bottom: 2rem;
-  color: ${(props) => subtitleColor[props.theme]};
-  font-size: ${fontSize.p};
-  line-height: ${lineHeight.p};
-`;
-
-const CommentBox = styled.div``;
 
 const FixedBox = styled.div`
   position: fixed;

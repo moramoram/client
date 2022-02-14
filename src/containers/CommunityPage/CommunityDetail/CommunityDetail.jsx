@@ -25,7 +25,7 @@ const CommunityDetail = ({ ...props }) => {
   const { data } = GetCommunityDetail(id);
   const { contentData } = CommunityDetailSelector(data);
   const [isLike, setIsLiked] = useState(contentData.likeStatus);
-
+  const [likeCount, setLikeCount] = useState(contentData.likecount);
   const commendData = GetComments({ type: "board", id: id });
   const setUpdateModalOpen = useSetRecoilState(updateModalState);
 
@@ -41,6 +41,7 @@ const CommunityDetail = ({ ...props }) => {
   });
 
   const onLike = () => {
+    isLike ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
     setIsLiked(!isLike);
     putLikeMutation.mutate(id);
   };
@@ -77,7 +78,7 @@ const CommunityDetail = ({ ...props }) => {
         <CountBox>
           <IconBox>
             <Icon icon="thumbsUp" width="18" />
-            <CountNums>{contentData.likecount}</CountNums>
+            <CountNums>{likeCount}</CountNums>
           </IconBox>
           <IconBox>
             <Icon icon="messageCircle" width="18" />

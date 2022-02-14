@@ -1,26 +1,39 @@
 import React from "react";
 import styled from "styled-components";
-import axios from "axios";
 
-import { CommentList } from "@/layouts";
-
-import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
+import { useParams } from "react-router-dom";
 
 import { useRecoilValue } from "recoil";
-import { themeState } from "@/recoil/theme";
-import { useQuery, useInfiniteQuery } from "react-query";
-import { CommentInput } from "@/components";
+import { themeState } from "@/recoil";
 
-import { daysFromToday } from "@/utils";
+import { useMutation, useQueryClient } from "react-query";
+import { GetComments, CommentSelector, postComment } from "@/api";
+
+import { CommentList } from "@/layouts";
+import { CommentInput } from "@/components";
+import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const StudyDetailComment = () => {
   const theme = useRecoilValue(themeState);
+  const id = useParams().studyId;
+  const queryClient = useQueryClient();
+  const { data } = GetComments({ type: "study", id: id });
 
-  const { items } = useQuery(
-    "fetchLuke",
-    () => axios("http://swapi.dev/api/people/1/"),
-    { suspense: true }
-  );
+  const { commentData } = CommentSelector(data);
+
+  const CommentMutation = useMutation((data) => postComment(data), {
+    onSuccess: () => {
+      queryClient.invalidateQueries("getComments");
+    },
+  });
+
+  const handleClick = (comment) => {
+    CommentMutation.mutate({
+      type: "study",
+      studyId: id,
+      content: comment.value,
+    });
+  };
 
   return (
     <CommentBox>
@@ -28,65 +41,13 @@ const StudyDetailComment = () => {
       <BoxDescription theme={theme}>
         총 {commentData.length}개의 댓글이 달렸습니다.
       </BoxDescription>
-      <CommentInput theme={theme} />
+      <CommentInput theme={theme} onClick={(comment) => handleClick(comment)} />
       <CommentList data={commentData} theme={theme} />
     </CommentBox>
   );
 };
 
 export default StudyDetailComment;
-
-const commentData = [
-  {
-    username: "Lorem",
-    src: null,
-    created: daysFromToday("2022-01-31"),
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in lorem ut sapien placerat vulputate.",
-  },
-  {
-    username: "홍길동",
-    src: null,
-    created: daysFromToday("2022-01-30"),
-    content:
-      "Nam tempus, est id rutrum suscipit, metus mi tincidunt nulla, ut rutrum magna tortor non velit. Suspendisse gravida pretium porta. Praesent eget vestibulum mauris. Nullam aliquet enim felis, in iaculis purus tempus pharetra.",
-  },
-  {
-    username: null,
-    src: null,
-    created: daysFromToday("2022-01-24"),
-    content:
-      "Aliquam et lectus ultricies, fringilla ipsum ac, vulputate sapien.",
-  },
-  {
-    username: "김싸페",
-    src: null,
-    created: daysFromToday("2022-01-12"),
-    content:
-      "Integer nulla sem, eleifend non ex id, aliquam tempor tellus. Sed vehicula justo ut diam semper mollis.",
-  },
-  {
-    username: null,
-    src: null,
-    created: daysFromToday("2021-12-10"),
-    content:
-      "Donec nec tristique arcu. Curabitur at facilisis nibh. Mauris vel nisi ipsum. Morbi vitae sapien metus. Ut et quam a erat rutrum maximus. Vestibulum non elementum enim. ",
-  },
-  {
-    username: "아이유",
-    src: null,
-    created: daysFromToday("2021-07-10"),
-    content:
-      "Ut in bibendum metus. Duis sed egestas ante. Etiam ex tortor, vehicula ac mollis sit amet, dapibus eget urna.",
-  },
-  {
-    username: "수지",
-    src: null,
-    created: daysFromToday("2020-07-10"),
-    content:
-      "Nam tempus, est id rutrum suscipit, metus mi tincidunt nulla, ut rutrum magna tortor non velit. Suspendisse gravida pretium porta. Praesent eget vestibulum mauris. Nullam aliquet enim felis, in iaculis purus tempus pharetra.",
-  },
-];
 
 const titleColor = {
   light: colors.gray900,

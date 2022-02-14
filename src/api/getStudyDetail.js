@@ -2,7 +2,6 @@ import { useQuery } from "react-query";
 import { axiosInstance, parseHtml } from "@/utils";
 
 const fetchData = async (id) => {
-  console.log(id);
   const res = await axiosInstance({
     url: `/studies/${id}`,
   });

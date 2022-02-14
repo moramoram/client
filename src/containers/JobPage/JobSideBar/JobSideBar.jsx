@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { useParams } from "react-router-dom";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation } from "react-query";
 import { putJobScrap } from "@/api";
 
 import { ImageBox, Badge, Button, BookMark, SideBarItem } from "@/components";
@@ -18,12 +18,7 @@ const JobSideBar = ({ data, isLoading, ...props }) => {
   const [isMarked, setIsMarked] = useState(data?.scrap);
   const id = useParams().jobId;
 
-  const queryClient = useQueryClient();
-  const putScrapMutation = useMutation(putJobScrap, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("getJobDetail");
-    },
-  });
+  const putScrapMutation = useMutation(putJobScrap);
 
   const onScrap = () => {
     setIsMarked(!isMarked);
@@ -67,11 +62,10 @@ const JobSideBar = ({ data, isLoading, ...props }) => {
           );
         })}
       </BadgeBox>
-
       <Button
         isLoading={isLoading}
         minWidth="380px"
-        onClick={() => window.open(data.url, "_blank")}
+        onClick={() => window.open(`https://${data.url}`, "_blank")}
       >
         <Icon icon="edit" />
         지원하기

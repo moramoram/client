@@ -3,16 +3,10 @@ import styled from "styled-components";
 
 import { useParams, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
-import {
-  GetStudyDetail,
-  StudyDetailSelector,
-  DeleteStudy,
-  postComment,
-} from "@/api";
+import { GetStudyDetail, StudyDetailSelector, DeleteStudy } from "@/api";
 
-import { StudySideBar } from "@/containers";
-import { CommentList } from "@/layouts";
-import { Avatar, CommentInput, DropdownSmall, Toc } from "@/components";
+import { StudySideBar, StudyDetailComment } from "@/containers";
+import { Avatar, DropdownSmall, Toc } from "@/components";
 import { Icon } from "@/foundations";
 import {
   animations,
@@ -31,22 +25,12 @@ const THEME = {
 const StudyDetail = ({ ...props }) => {
   const id = useParams().studyId;
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const { data } = GetStudyDetail(id);
   const { titleData, contentData, tocItem, sidebarData } =
     StudyDetailSelector(data);
-  const queryClient = useQueryClient();
-  const commentData = [];
-  const mutation = useMutation("postStudyDetailComment", postComment);
-  console.log(data);
-  const onPostComment = (comment) => {
-    mutation.mutate(comment.value, {
-      onSuccess: () => {
-        queryClient.invalidateQueries("getStudyDetail");
-      },
-    });
-  };
 
   const deleteStudyMutation = useMutation(DeleteStudy, {
     onSuccess: () => {
@@ -98,17 +82,7 @@ const StudyDetail = ({ ...props }) => {
         </Header>
         <Toc items={tocItem} {...props} />
         <Content {...props}>{contentData}</Content>
-        <div>
-          <BoxTitle {...props}>댓글</BoxTitle>
-          <BoxDescription {...props}>
-            총 {commentData.length}개의 댓글이 달렸습니다.
-          </BoxDescription>
-          <CommentInput
-            {...props}
-            onClick={(comment) => onPostComment(comment)}
-          />
-          <CommentList data={commentData} {...props} />
-        </div>
+        <StudyDetailComment />
       </Layout>
       <StudySideBar {...props} data={sidebarData} />
     </>
@@ -134,11 +108,6 @@ const textColor = {
 const subtitleColor = {
   light: colors.gray400,
   dark: colors.gray500,
-};
-
-const borderColor = {
-  dark: colors.gray700,
-  light: colors.gray200,
 };
 
 const Layout = styled.div`
@@ -230,23 +199,4 @@ const Content = styled.div`
   ul {
     padding-left: 32px;
   }
-`;
-
-const BoxTitle = styled.div`
-  padding: 4rem 0 0.2rem 0;
-  min-height: ${lineHeight.h3};
-
-  border-top: 1px solid ${(props) => borderColor[props.theme]};
-  color: ${(props) => titleColor[props.theme]};
-
-  font-size: ${fontSize.h3};
-  line-height: ${lineHeight.h3};
-  font-weight: ${fontWeight.bold};
-`;
-
-const BoxDescription = styled.div`
-  padding-bottom: 2rem;
-  color: ${(props) => subtitleColor[props.theme]};
-  font-size: ${fontSize.p};
-  line-height: ${lineHeight.p};
 `;

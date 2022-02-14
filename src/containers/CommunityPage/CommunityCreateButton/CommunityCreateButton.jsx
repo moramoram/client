@@ -86,4 +86,5 @@ const Text = styled.div`
   color: ${colors.gray500};
 
   transition: 0.3s;
+  user-select: none;
 `;

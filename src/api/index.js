@@ -10,6 +10,7 @@ export * from "./putJobScrap";
 export * from "./getStudyList";
 export * from "./getStudyDetail";
 export * from "./postStudy";
+export * from "./putStudy";
 
 export * from "./getCommunityList";
 export * from "./getCommunityDetail";

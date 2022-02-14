@@ -24,8 +24,8 @@ import {
   loadings,
 } from "@/_shared";
 
-import { useMutation, useQueryClient } from "react-query";
-import { GetStudyDetail, StudyDetailSelector, postComment } from "@/api";
+import { useMutation } from "react-query";
+import { GetStudyDetail, StudyDetailSelector, putStudyScrap } from "@/api";
 import { useParams } from "react-router-dom";
 
 const THEME = {
@@ -34,27 +34,21 @@ const THEME = {
 };
 
 const StudyDetailMobile = ({ ...props }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const id = useParams().studyId;
 
-  const queryClient = useQueryClient();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const { data } = GetStudyDetail(id);
-
-  const commentData = [];
-
   const { titleData, contentData, tocItem, sidebarData } =
     StudyDetailSelector(data);
+
   const [isMarked, setIsMarked] = useState(sidebarData.scrap);
 
-  const mutation = useMutation("postComment", postComment);
+  const putScrapMutation = useMutation(putStudyScrap);
 
-  const onPostComment = (comment) => {
+  const onScrap = () => {
     setIsMarked(!isMarked);
-    mutation.mutate(comment.value, {
-      onSuccess: () => {
-        queryClient.invalidateQueries("getStudyDetail");
-      },
-    });
+    putScrapMutation.mutate(id);
   };
 
   const dropdownItems = [
@@ -135,7 +129,7 @@ const StudyDetailMobile = ({ ...props }) => {
           <Button
             mode={isMarked ? "active" : "secondary"}
             minWidth="380px"
-            onClick={(comment) => onPostComment(comment)}
+            onClick={onScrap}
             {...props}
           >
             {isMarked ? (

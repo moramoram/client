@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { useParams } from "react-router-dom";
+import { useMutation } from "react-query";
+import { putStudyScrap } from "@/api";
+
 import { ImageBox, Badge, Button, BookMark, SideBarItem } from "@/components";
 import { Icon } from "@/foundations";
 
@@ -12,6 +16,14 @@ const THEME = {
 
 const StudySideBar = ({ data, isLoading, ...props }) => {
   const [isMarked, setIsMarked] = useState(data?.scrap);
+  const id = useParams().studyId;
+
+  const putScrapMutation = useMutation(putStudyScrap);
+
+  const onScrap = () => {
+    setIsMarked(!isMarked);
+    putScrapMutation.mutate(id);
+  };
 
   if (isLoading) {
     data = { badges: ["", "", ""] };
@@ -54,7 +66,7 @@ const StudySideBar = ({ data, isLoading, ...props }) => {
         isLoading={isLoading}
         mode={isMarked ? "active" : "secondary"}
         minWidth="380px"
-        onClick={() => setIsMarked(!isMarked)}
+        onClick={onScrap}
         {...props}
       >
         {isMarked ? (

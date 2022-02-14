@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation } from "react-query";
 import { GetJobDetail, putJobScrap, JobDetailSelector } from "@/api";
 import { useParams } from "react-router-dom";
 
@@ -32,12 +32,7 @@ const JobDetailMobile = ({ cardData, ...props }) => {
 
   const [isMarked, setIsMarked] = useState(sidebarData.scrap);
 
-  const queryClient = useQueryClient();
-  const putScrapMutation = useMutation(putJobScrap, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("getJobDetail");
-    },
-  });
+  const putScrapMutation = useMutation(putJobScrap);
 
   const onScrap = () => {
     setIsMarked(!isMarked);
@@ -93,7 +88,10 @@ const JobDetailMobile = ({ cardData, ...props }) => {
       <FixedBox>
         <ButtonBg {...props} />
         <ButtonBox {...props}>
-          <Button minWidth="380px">
+          <Button
+            minWidth="380px"
+            onClick={() => window.open(`https://${sidebarData.url}`, "_blank")}
+          >
             <Icon icon="edit" />
             지원하기
           </Button>

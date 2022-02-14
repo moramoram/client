@@ -74,6 +74,7 @@ const StudyCreateEditor = ({
           required: (v) => v !== "<p><br></p>",
         },
       }}
+      defaultValue={originalData?.content}
       render={({ field }) => (
         <Layout status={!errors?.content ? "default" : "error"} {...props}>
           <ReactQuill

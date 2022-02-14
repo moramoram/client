@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Link } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { loginModalState } from "@/recoil";
 
 import { AutoTyping, BlinkCursor } from "@/components";
 import { colors, fontSize, fontWeight } from "@/_shared";
 
 const LandingHero = ({ ...props }) => {
+  const setLoginModalOpen = useSetRecoilState(loginModalState);
+
   return (
     <>
       <Layout>
@@ -24,9 +27,9 @@ const LandingHero = ({ ...props }) => {
             />
             <Cursor active blinkSpeed={500} />
           </Title>
-          <ButtonLink to="/main">
-            <GetStartedBtn>시작하기</GetStartedBtn>
-          </ButtonLink>
+          <GetStartedBtn onClick={() => setLoginModalOpen(true)}>
+            시작하기
+          </GetStartedBtn>
         </ContentBox>
       </Layout>
     </>
@@ -42,15 +45,16 @@ const titleColor = {
 
 const Layout = styled.div`
   position: relative;
-  max-width: 1280px;
+  height: 100vh;
   margin: auto;
+  background: url("/images/background.png");
 `;
 
 const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 240px 0 0 20px;
+  padding: 240px 0 240px 20px;
   z-index: 2;
 
   @media screen and (max-width: 530px) {
@@ -82,10 +86,6 @@ const Cursor = styled(BlinkCursor)`
   @media screen and (max-width: 530px) {
     font-size: calc(40rem / 16);
   }
-`;
-
-const ButtonLink = styled(Link)`
-  text-decoration: none;
 `;
 
 const GetStartedBtn = styled.button`

@@ -49,10 +49,8 @@ const StudyDetail = ({ ...props }) => {
   };
 
   const deleteStudyMutation = useMutation(DeleteStudy, {
-    onMutate: () => {
-      navigate("/study");
-    },
     onSuccess: () => {
+      navigate("/study");
       queryClient.invalidateQueries("getStudyList");
     },
   });

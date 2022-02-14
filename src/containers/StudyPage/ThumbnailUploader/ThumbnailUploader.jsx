@@ -6,7 +6,12 @@ import Cropper from "react-easy-crop";
 import { Button, InputImage } from "@/components";
 import { getCroppedImg } from "@/utils";
 
-const ThumbnailUploader = ({ croppedImage, setCroppedImage, ...props }) => {
+const ThumbnailUploader = ({
+  croppedImage,
+  setCroppedImage,
+  originalData,
+  ...props
+}) => {
   const [imageSrc, setImageSrc] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -74,9 +79,12 @@ const ThumbnailUploader = ({ croppedImage, setCroppedImage, ...props }) => {
       )}
       <Layout>
         <InputImage onChange={onFileChange} accept="image/*" {...props} />
-        {croppedImage && (
+        {(originalData?.thumbnailImg || croppedImage) && (
           <ImgBox>
-            <img src={croppedImage} alt="Cropped" />
+            <img
+              src={croppedImage || originalData?.thumbnailImg}
+              alt="Cropped"
+            />
           </ImgBox>
         )}
       </Layout>

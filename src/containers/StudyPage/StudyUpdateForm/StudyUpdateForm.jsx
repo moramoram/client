@@ -1,15 +1,16 @@
 import React, { useEffect, useCallback, useState } from "react";
 import styled from "styled-components";
 
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
-import { PostStudy } from "@/api";
+import { GetStudyDetail, PutStudy } from "@/api";
 
 import { StudyCreateSummary, StudyCreateDetail } from "@/containers";
 import { Button } from "@/components";
 
-const StudyCreateForm = ({ ...props }) => {
+const StudyUpdateForm = ({ ...props }) => {
+  const id = useParams().studyId;
   const [isChecked, setIsChecked] = useState(false);
   const [croppedImage, setCroppedImage] = useState(null);
   const {
@@ -22,23 +23,30 @@ const StudyCreateForm = ({ ...props }) => {
     formState: { errors },
   } = useForm();
 
+  const originalData = GetStudyDetail(id).data;
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const mutateStudy = useMutation(PostStudy, {
+  const mutateStudy = useMutation(({ id, data }) => PutStudy(id, data), {
     onSuccess: () => {
-      queryClient.invalidateQueries("getStudyitems");
-      navigate("/study");
+      queryClient.invalidateQueries("getStudyDetail", id);
+      navigate(`/study/${id}`);
     },
   });
+
+  const convertURLtoFile = async (url) => {
+    const response = await fetch(url);
+    const data = await response.blob();
+    return new File([data], "image.png");
+  };
 
   const transformData = useCallback(
     async (data) => {
       const formData = new FormData();
 
-      data.studyType = data.studyType.label;
-      data.companyName = data.companyName?.label ?? "-";
+      data.studyType = originalData.studyType;
+      data.companyName = originalData.company_name;
       data.techStack =
-        data.techStack?.map((option) => option.value).join(",") ?? "";
+        data.techStack.map((option) => option.value).join(",") ?? "";
       if (isChecked) data.memberNumber = "무관";
 
       Object.keys(data).forEach((key) => formData.append(key, data[key]));
@@ -46,21 +54,25 @@ const StudyCreateForm = ({ ...props }) => {
       if (croppedImage) {
         const file = await fetch(croppedImage).then((r) => r.blob());
         formData.append("thumbnailImg", file, "image.png");
+      } else if (!croppedImage && originalData.thumbnailImg) {
+        const file = await convertURLtoFile(originalData.thumbnailImg);
+        console.log(file);
+        formData.append("thumbnailImg", file, "image.png");
       } else {
         const file = new Blob();
         formData.append("thumbnailImg", file);
       }
       return formData;
     },
-    [croppedImage, isChecked]
+    [croppedImage, isChecked, originalData]
   );
 
   const onSubmit = useCallback(
     async (data) => {
       const formData = await transformData(data);
-      mutateStudy.mutate(formData);
+      mutateStudy.mutate({ id: id, data: formData });
     },
-    [transformData, mutateStudy]
+    [transformData, mutateStudy, id]
   );
 
   useEffect(() => {
@@ -78,6 +90,7 @@ const StudyCreateForm = ({ ...props }) => {
             control={control}
             errors={errors}
             watch={watch}
+            originalData={originalData}
             {...props}
           />
           <StudyCreateSummary
@@ -90,6 +103,7 @@ const StudyCreateForm = ({ ...props }) => {
             setIsChecked={setIsChecked}
             croppedImage={croppedImage}
             setCroppedImage={setCroppedImage}
+            originalData={originalData}
             {...props}
           />
           <ButtonBox>
@@ -115,7 +129,7 @@ const StudyCreateForm = ({ ...props }) => {
   );
 };
 
-export default StudyCreateForm;
+export default StudyUpdateForm;
 
 const Layout = styled.div`
   width: 100%;

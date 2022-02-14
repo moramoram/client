@@ -71,13 +71,17 @@ const StudyDetailMobile = ({ ...props }) => {
   return (
     <>
       <Layout>
-        <ImageBoxResponsive className="thumbnail" {...props} />
+        <ImageBoxResponsive
+          className="thumbnail"
+          src={sidebarData.src}
+          {...props}
+        />
         <Header>
           <TitleBox {...props}>
-            <Highlight {...props}>{titleData?.highlight}</Highlight>
-            <Title {...props}>{titleData?.title}</Title>
+            <Highlight {...props}>{titleData.highlight}</Highlight>
+            <Title {...props}>{titleData.title}</Title>
             <SubTitle {...props}>
-              <Avatar size="medium" src={titleData?.src} {...props} />
+              <Avatar size="small" src={titleData.src} {...props} />
               {titleData?.subtitle}
             </SubTitle>
             <SideBarBox>
@@ -93,7 +97,7 @@ const StudyDetailMobile = ({ ...props }) => {
               ))}
             </SideBarBox>
             <BadgeBox>
-              {sidebarData.badges.map((children, idx) => {
+              {sidebarData.badges?.map((children, idx) => {
                 return (
                   <Badge
                     className="badge-item"
@@ -171,14 +175,14 @@ const summaryData = [
     id: "target",
   },
   {
+    title: "진행 방식",
+    icon: "tag",
+    id: "onOff",
+  },
+  {
     title: "모집 인원",
     icon: "users",
     id: "people",
-  },
-  {
-    title: "스터디 지역",
-    icon: "mapPin",
-    id: "location",
   },
 ];
 
@@ -237,7 +241,7 @@ const TitleBox = styled.div`
 `;
 
 const SideBarBox = styled.div`
-  margin: 10px 0px;
+  margin: 20px 0px;
 `;
 
 const BadgeBox = styled.div`
@@ -273,8 +277,8 @@ const SubTitle = styled.div`
   min-width: 160px;
   min-height: ${lineHeight.lg};
 
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.lg};
+  font-weight: ${fontWeight.medium};
+  font-size: ${fontSize.p};
   line-height: ${lineHeight.lg};
   color: ${(props) => subtitleColor[props.theme]};
 `;

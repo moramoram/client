@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { GetStudyDetail, StudyDetailSelector } from "@/api";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "react-query";
+import { GetStudyDetail, StudyDetailSelector, DeleteStudy } from "@/api";
 
 import { StudySideBar, StudyDetailComment } from "@/containers";
 import { Avatar, DropdownSmall, Toc } from "@/components";
@@ -23,24 +24,33 @@ const THEME = {
 
 const StudyDetail = ({ ...props }) => {
   const id = useParams().studyId;
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const { data } = GetStudyDetail(id);
   const { titleData, contentData, tocItem, sidebarData } =
     StudyDetailSelector(data);
 
+  const deleteStudyMutation = useMutation(DeleteStudy, {
+    onSuccess: () => {
+      navigate("/study");
+      queryClient.invalidateQueries("getStudyList");
+    },
+  });
+
   const dropdownItems = [
     {
       name: "edit",
       title: "수정",
-      onClick: () => console.log("수정"),
+      onClick: () => navigate(`/study/${id}/update`),
     },
     {
       name: "delete",
       title: "삭제",
       onClick: () => {
         if (window.confirm("정말 삭제하시겠습니까?")) {
-          console.log("삭제");
+          deleteStudyMutation.mutate(id);
         }
       },
     },
@@ -55,7 +65,7 @@ const StudyDetail = ({ ...props }) => {
             <Title {...props}>{titleData.title}</Title>
             <div>
               <SubTitle {...props}>
-                <Avatar size="medium" src={titleData.src} {...props} />
+                <Avatar size="small" src={titleData.src} {...props} />
                 {titleData.subtitle}
               </SubTitle>
             </div>
@@ -98,11 +108,6 @@ const textColor = {
 const subtitleColor = {
   light: colors.gray400,
   dark: colors.gray500,
-};
-
-const borderColor = {
-  dark: colors.gray700,
-  light: colors.gray200,
 };
 
 const Layout = styled.div`
@@ -161,8 +166,8 @@ const SubTitle = styled.div`
   min-width: 160px;
   min-height: ${lineHeight.lg};
 
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.lg};
+  font-weight: ${fontWeight.medium};
+  font-size: ${fontSize.p};
   line-height: ${lineHeight.lg};
   color: ${(props) => subtitleColor[props.theme]};
 `;
@@ -194,23 +199,4 @@ const Content = styled.div`
   ul {
     padding-left: 32px;
   }
-`;
-
-const BoxTitle = styled.div`
-  padding: 4rem 0 0.2rem 0;
-  min-height: ${lineHeight.h3};
-
-  border-top: 1px solid ${(props) => borderColor[props.theme]};
-  color: ${(props) => titleColor[props.theme]};
-
-  font-size: ${fontSize.h3};
-  line-height: ${lineHeight.h3};
-  font-weight: ${fontWeight.bold};
-`;
-
-const BoxDescription = styled.div`
-  padding-bottom: 2rem;
-  color: ${(props) => subtitleColor[props.theme]};
-  font-size: ${fontSize.p};
-  line-height: ${lineHeight.p};
 `;

@@ -18,6 +18,7 @@ import {
   StudyPage,
   StudyCreatePage,
   StudyDetailPage,
+  StudyUpdatePage,
   CommunityPage,
   CommunityDetailPage,
   MyPage,
@@ -86,17 +87,17 @@ const Router = () => {
             />
           }
         />
-        <Route path="community" element={<CommunityPage />} />
         <Route
-          path="community/:contentId"
+          path="study/:studyId/update"
           element={
             <PrivateRoute
-              component={CommunityDetailPage}
-              fallback="community"
+              component={StudyUpdatePage}
+              fallback="study"
               checkAuthorized
             />
           }
         />
+        <Route path="community" element={<CommunityPage />} />
         <Route
           path="community/:contentId"
           element={

@@ -19,8 +19,7 @@ const StudyDetailComment = () => {
   const queryClient = useQueryClient();
   const { data } = GetComments({ type: "study", id: id });
 
-  // const { commentData } = CommentSelector(data);
-  const commentData = [];
+  const { commentData } = CommentSelector(data);
 
   const CommentMutation = useMutation((data) => postComment(data), {
     onSuccess: () => {

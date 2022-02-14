@@ -33,9 +33,9 @@ export const StudyCardSelector = (data) => {
   console.log(data);
 
   const onOff = {
-    1: "온라인",
-    2: "오프라인",
-    3: "온/오프라인",
+    0: "온라인",
+    1: "오프라인",
+    2: "온/오프라인",
   };
 
   const totalData = data.pages.map((page) => {

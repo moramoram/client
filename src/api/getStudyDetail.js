@@ -13,10 +13,14 @@ export const GetStudyDetail = (id) =>
 
 export const StudyDetailSelector = (data) => {
   const { parsedhtml } = parseHtml(data.content);
+  const writerDetail =
+    data.writerInfo.ordinal && data.writerInfo.campus
+      ? ` (${data.writerInfo.ordinal}기 / ${data.writerInfo.campus})`
+      : null;
 
   const titleData = {
     title: data.title,
-    subtitle: `${data.writerInfo.nickname} (${data.writerInfo.ordinal}기 / ${data.writerInfo.campus})`,
+    subtitle: [data.writerInfo.nickname, writerDetail],
     src: data.writerInfo.profileImg,
     highlight: data.recruitment ? "모집중" : "모집완료",
   };

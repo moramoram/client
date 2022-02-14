@@ -66,9 +66,11 @@ const FeedDetail = ({
         <InfoBox>
           <UserBox>
             <User {...props}>{usernameRender}</User>
-            <UserDetail>
-              ({ordinal}/{campus})
-            </UserDetail>
+            {!!ordinal && campus && (
+              <UserDetail>
+                ({ordinal}기 / {campus})
+              </UserDetail>
+            )}
           </UserBox>
           <CreatedAt>{created}</CreatedAt>
         </InfoBox>
@@ -83,7 +85,7 @@ FeedDetail.propTypes = {
   username: PropTypes.string,
   avatar: PropTypes.string,
   campus: PropTypes.string,
-  ordinal: PropTypes.string,
+  ordinal: PropTypes.number,
   created: PropTypes.string,
   title: PropTypes.string,
   content: PropTypes.any,

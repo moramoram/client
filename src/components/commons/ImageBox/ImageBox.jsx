@@ -78,8 +78,8 @@ const imageHeight = {
 };
 
 const borderRadius = {
-  large: "16px",
-  medium: "12px",
+  large: "12px",
+  medium: "8px",
   small: "8px",
 };
 

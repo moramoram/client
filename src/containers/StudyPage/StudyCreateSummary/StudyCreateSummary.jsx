@@ -29,7 +29,7 @@ const StudyCreateSummary = ({
   const requiredError = "필수 항목입니다";
 
   const typeOption = [
-    { value: "recruit", label: "취업 스터디" },
+    { value: "recruit", label: "채용 스터디" },
     { value: "Algorithm", label: "알고리즘" },
     { value: "CS", label: "CS" },
     { value: "Project", label: "프로젝트" },

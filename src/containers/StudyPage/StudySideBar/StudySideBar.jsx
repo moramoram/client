@@ -19,7 +19,12 @@ const StudySideBar = ({ data, isLoading, ...props }) => {
 
   return (
     <Layout isLoading={isLoading} {...props}>
-      <ImageBox className="thumbnail" isLoading={isLoading} {...props} />
+      <ImageBox
+        className="thumbnail"
+        isLoading={isLoading}
+        src={data.src}
+        {...props}
+      />
       <SideBarBox>
         {summaryData.map(({ title, icon, id }) => (
           <SideBarItem
@@ -96,14 +101,14 @@ const summaryData = [
     id: "target",
   },
   {
+    title: "진행 방식",
+    icon: "tag",
+    id: "onOff",
+  },
+  {
     title: "모집 인원",
     icon: "users",
     id: "people",
-  },
-  {
-    title: "스터디 지역",
-    icon: "mapPin",
-    id: "location",
   },
 ];
 

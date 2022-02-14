@@ -112,6 +112,7 @@ const SubmitButton = styled(Button)`
 
 const ImgBox = styled.div`
   img {
+    max-width: 100%;
     border-radius: 8px;
   }
 `;

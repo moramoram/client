@@ -79,7 +79,7 @@ const ImageBoxWrapper = styled.div`
   left: 0;
   right: 0;
 
-  border-radius: 16px;
+  border-radius: 8px;
   overflow: hidden;
 
   background: ${(props) => imageBgColor[props.theme]};

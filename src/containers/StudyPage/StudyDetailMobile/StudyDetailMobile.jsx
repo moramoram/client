@@ -206,11 +206,6 @@ const subtitleColor = {
   dark: colors.gray500,
 };
 
-const borderColor = {
-  dark: colors.gray700,
-  light: colors.gray200,
-};
-
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
@@ -311,27 +306,6 @@ const Content = styled.div`
     padding-left: 32px;
   }
 `;
-
-const BoxTitle = styled.div`
-  padding: 4rem 0 0.2rem 0;
-  min-height: ${lineHeight.h3};
-
-  border-top: 1px solid ${(props) => borderColor[props.theme]};
-  color: ${(props) => titleColor[props.theme]};
-
-  font-size: ${fontSize.h3};
-  line-height: ${lineHeight.h3};
-  font-weight: ${fontWeight.bold};
-`;
-
-const BoxDescription = styled.div`
-  padding-bottom: 2rem;
-  color: ${(props) => subtitleColor[props.theme]};
-  font-size: ${fontSize.p};
-  line-height: ${lineHeight.p};
-`;
-
-const CommentBox = styled.div``;
 
 const FixedBox = styled.div`
   position: fixed;

@@ -21,8 +21,9 @@ import {
   SignUpModal,
   CommunityCreate,
   CommunityUpdate,
+  Modal,
 } from "@/containers";
-import { Modal, ScrollTopButton } from "@/components";
+import { ScrollTopButton } from "@/components";
 import { colors } from "@/_shared";
 
 const Layout = () => {

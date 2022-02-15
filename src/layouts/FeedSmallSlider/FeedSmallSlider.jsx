@@ -18,11 +18,7 @@ const THEME = {
 };
 
 const FeedSmallSlider = ({ data, isLoading, theme, ...props }) => {
-  const feedData = isLoading
-    ? new Array(3).fill({
-        boardId: 1,
-      })
-    : data;
+  const feedData = isLoading ? new Array(3).fill({ boardId: 1 }) : data;
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
@@ -54,10 +50,9 @@ const FeedSmallSlider = ({ data, isLoading, theme, ...props }) => {
       <Swiper {...swiperParams}>
         {feedData.map(({ boardId, ...data }) => {
           const colorIdx = boardId % 17;
-
           return (
             <SwiperSlide key={boardId}>
-              <FeedItemLink to={boardId} key={boardId}>
+              <FeedItemLink to={`/community/${boardId}`} key={boardId}>
                 <FeedItemSmall
                   isLoading={isLoading}
                   colorIdx={colorIdx}

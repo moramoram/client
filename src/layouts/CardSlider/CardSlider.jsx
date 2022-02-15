@@ -50,7 +50,7 @@ const CardSlider = ({ data, isLoading, theme, ...props }) => {
       <Swiper {...swiperParams}>
         {items.map(({ id, ...props }, idx) => (
           <SwiperSlide key={idx}>
-            <CardItemLink to="/main">
+            <CardItemLink to={id}>
               <CardResponsive
                 id={id}
                 isLoading={isLoading}

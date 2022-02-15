@@ -7,7 +7,6 @@ const commentType = {
 };
 
 export const postComment = async (data) => {
-  console.log("data", data);
   const res = await axiosInstance({
     url: `/${commentType[data.type]}`,
     method: "post",

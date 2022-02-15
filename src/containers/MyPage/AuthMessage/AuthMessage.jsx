@@ -7,7 +7,7 @@ import { colors, fontWeight } from "@/_shared";
 import { useSetRecoilState } from "recoil";
 import { modalState } from "@/recoil";
 
-const AuthCheck = ({ ...props }) => {
+const AuthMessage = ({ ...props }) => {
   const setIsModalOpened = useSetRecoilState(modalState);
 
   return (
@@ -35,7 +35,7 @@ const AuthCheck = ({ ...props }) => {
   );
 };
 
-export default AuthCheck;
+export default AuthMessage;
 
 const LogoBox = styled.div``;
 

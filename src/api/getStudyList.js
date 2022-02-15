@@ -30,8 +30,6 @@ export const GetStudyList = (data) =>
   );
 
 export const StudyCardSelector = (data) => {
-  console.log(data);
-
   const onOff = {
     0: "온라인",
     1: "오프라인",

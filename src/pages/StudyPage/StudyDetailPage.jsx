@@ -19,7 +19,6 @@ const StudyDetailPage = () => {
   const theme = useRecoilValue(themeState);
 
   const itemId = useParams().studyId;
-  console.log(itemId);
 
   const isPc = useMediaQuery({ query: "(min-width:980px)" });
   const isMobile = useMediaQuery({ query: "(max-width:980px)" });

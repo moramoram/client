@@ -9,6 +9,5 @@ export const deleteCommunity = async (boardId) => {
     url: `/boards/${boardId}`,
     method: "delete",
   });
-  console.log(res);
   return res.data;
 };

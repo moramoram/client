@@ -4,12 +4,12 @@ import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { modalState } from "@/recoil";
 
-import { Typography } from "@/foundations";
-import { animations, colors, fontWeight, shadows } from "@/_shared";
+import { animations, colors, shadows } from "@/_shared";
 
 const SignUpModal = ({ ...props }) => {
   const [isModalOpened, setIsModalOpened] = useRecoilState(modalState);
   const modal = useRef();
+
   const handleClose = useCallback(() => {
     setIsModalOpened(null);
   }, [setIsModalOpened]);

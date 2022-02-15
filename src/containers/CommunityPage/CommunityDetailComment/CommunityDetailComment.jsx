@@ -14,7 +14,6 @@ const CommunityDetailComment = (props) => {
   const id = useParams().contentId;
   const { data } = GetComments({ type: "board", id: id });
   const { commentData } = CommentSelector(data);
-  console.log(data, commentData);
   const CommentMutation = useMutation((data) => postComment(data), {
     onSuccess: () => {
       queryClient.invalidateQueries("getComments");

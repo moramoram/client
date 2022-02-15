@@ -8,7 +8,7 @@ import { auth, themeState } from "@/recoil";
 import { useMutation, useQueryClient } from "react-query";
 import { PostNicknameCheck, PutAuthorization } from "@/api";
 
-import { AuthCheck } from "@/containers";
+import { AuthMessage } from "@/containers";
 import { Input, InputImage, Button, Selector } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
@@ -72,7 +72,6 @@ const AuthForm = ({ userProfile, ...props }) => {
       nickname: watch("nickname"),
     };
     const data = await PostNicknameCheck(body);
-    console.log(data);
     if (data) {
       setError("nickname", {
         type: "duplicate",
@@ -154,10 +153,9 @@ const AuthForm = ({ userProfile, ...props }) => {
       }
     }
   });
-  console.log(authstate);
 
   if (authstate.authCheck === 2) {
-    return <AuthCheck />;
+    return <AuthMessage />;
   }
 
   return (

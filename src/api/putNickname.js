@@ -6,6 +6,5 @@ export const PutNickname = async (data) => {
     method: "put",
     data,
   });
-  console.log(res);
   return res.data;
 };

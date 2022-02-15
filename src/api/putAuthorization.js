@@ -6,6 +6,5 @@ export const PutAuthorization = async (data) => {
     method: "put",
     data,
   });
-  console.log(res);
   return res.data;
 };

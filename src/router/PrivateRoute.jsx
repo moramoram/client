@@ -1,13 +1,14 @@
 import { Navigate } from "react-router-dom";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import {
+  auth,
   modalState,
   loginModalState,
   isLoginState,
   isAuthenticated,
 } from "@/recoil";
 
-import { AuthCheck } from "@/containers";
+import { AuthMessage } from "@/containers";
 
 const PrivateRoute = ({
   component: RouteComponent,
@@ -16,6 +17,7 @@ const PrivateRoute = ({
 }) => {
   const isAuthorized = useRecoilValue(isAuthenticated);
   const isLogined = useRecoilValue(isLoginState);
+  const authState = useRecoilValue(auth);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const setModalOpen = useSetRecoilState(modalState);
 
@@ -25,7 +27,7 @@ const PrivateRoute = ({
   }
 
   if (checkAuthorized && !isAuthorized) {
-    setModalOpen(AuthCheck);
+    setModalOpen(AuthMessage);
     return <Navigate to={`/${fallbackUrl}`} />;
   }
 

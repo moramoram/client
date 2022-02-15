@@ -161,11 +161,10 @@ const Dropdown = styled.div`
 
 const CloseIconBox = styled.div`
   display: flex;
-  /* justify-content: flex-end; */
   padding: 1rem;
 
   svg {
-    width: 18px;
+    width: 24px;
     stroke: ${colors.gray500};
     cursor: pointer;
   }

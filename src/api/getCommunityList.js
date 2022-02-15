@@ -24,12 +24,13 @@ export const GetCommunityList = (data) =>
 export const CommunityFeedSelector = (data) => {
   const totalData = data.pages.map((page) => {
     const items = page.res.map((card) => {
+      console.log(card);
       const { thumbnail, tagDeletedHtml } = parseHtml(card.content);
       return {
         username: card.writerInfo.nickname,
         avatar: card.writerInfo.profileImg,
         campus: card.writerInfo.campus,
-        ordinal: card.writerInfo.ordinal,
+        ordinal: `${card.writerInfo.ordinal}기`,
         created: daysFromToday(card.createdDate),
         title: card.title,
         content: tagDeletedHtml,
@@ -39,17 +40,6 @@ export const CommunityFeedSelector = (data) => {
         viewcount: numToMillion(card.views),
         id: card.boardId,
       };
-    });
-    return items;
-  });
-  const feedData = totalData.flat();
-  return { feedData };
-};
-
-export const CommunityFeedSmallSelector = (data) => {
-  const totalData = data.pages.map((page) => {
-    const items = page.res.map((card) => {
-      return card;
     });
     return items;
   });

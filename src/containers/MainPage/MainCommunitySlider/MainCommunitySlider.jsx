@@ -10,7 +10,17 @@ const MainCommunitySlider = ({ isLoading, ...props }) => {
   };
 
   const { data } = GetCommunityList(search);
-  return <FeedSmallSlider data={data.pages[0].res} {...props} />;
+  const communityData = data.pages[0].res.map((card) => {
+    return {
+      ...card,
+      writerInfo: {
+        ...card.writerInfo,
+        ordinal: `${card.writerInfo.ordinal}기`,
+      },
+    };
+  });
+  console.log(communityData);
+  return <FeedSmallSlider data={communityData} {...props} />;
 };
 
 export default MainCommunitySlider;

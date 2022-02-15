@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -7,8 +7,9 @@ import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
 import { auth, token, themeState, loginModalState } from "@/recoil";
 
 import { NavDefaultItem } from "./NavDefaultItem";
-import { Avatar, Button, Dropdown, Switch, Notification } from "@/components";
-import { Logo } from "@/foundations";
+import { Notification } from "@/containers";
+import { Avatar, Button, Dropdown, Switch } from "@/components";
+import { Icon, Logo } from "@/foundations";
 import { colors, animations } from "@/_shared";
 
 const THEME = {
@@ -103,12 +104,23 @@ const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
                 size="small"
               />
             </SwitchBox>
-            <Notification
-              notificationOpen={notificationOpen}
-              setNotificationOpen={setNotificationOpen}
-              setDropdownOpen={setDropdownOpen}
-              {...props}
-            />
+            <Suspense
+              fallback={
+                <Icon
+                  icon="bell"
+                  stroke={colors.gray400}
+                  width="20"
+                  aria-hidden
+                />
+              }
+            >
+              <Notification
+                notificationOpen={notificationOpen}
+                setNotificationOpen={setNotificationOpen}
+                setDropdownOpen={setDropdownOpen}
+                {...props}
+              />
+            </Suspense>
             <Avatar
               size="medium"
               username={userData.nickname}

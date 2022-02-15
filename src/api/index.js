@@ -29,3 +29,6 @@ export * from "./putNickname";
 export * from "./putAuthorization";
 
 export * from "./getRefreshToken";
+
+export * from "./getNotifications";
+export * from "./deleteNotification";

@@ -78,7 +78,6 @@ const borderColor = {
 const Layout = styled.div`
   position: absolute;
   bottom: 0;
-
   width: 100%;
 `;
 

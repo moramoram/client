@@ -3,7 +3,12 @@ import styled from "styled-components";
 
 import { useParams, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
-import { GetStudyDetail, StudyDetailSelector, DeleteStudy } from "@/api";
+import {
+  GetStudyDetail,
+  StudyDetailSelector,
+  PutStudyRecruits,
+  DeleteStudy,
+} from "@/api";
 
 import { StudySideBar, StudyDetailComment } from "@/containers";
 import { Avatar, DropdownSmall, Toc } from "@/components";
@@ -16,6 +21,7 @@ import {
   lineHeight,
   loadings,
 } from "@/_shared";
+import { useEffect } from "react";
 
 const THEME = {
   LIGHT: "light",
@@ -31,6 +37,11 @@ const StudyDetail = ({ ...props }) => {
   const { data } = GetStudyDetail(id);
   const { titleData, contentData, tocItem, sidebarData } =
     StudyDetailSelector(data);
+  const [recruitState, setRecruitState] = useState(null);
+
+  useEffect(() => {
+    setRecruitState(data.recruitment);
+  }, [data.recruitment]);
 
   const deleteStudyMutation = useMutation(DeleteStudy, {
     onMutate: async (id) => {
@@ -42,7 +53,29 @@ const StudyDetail = ({ ...props }) => {
     },
   });
 
+  const putStudyRecruitsMutation = useMutation(PutStudyRecruits, {
+    onSuccess: (id) => {
+      queryClient.invalidateQueries("getStudyDetail", id);
+      setRecruitState(!recruitState);
+    },
+  });
+
+  const confirmMsg = {
+    true: "스터디원 모집을 끝낼까요?",
+    false: "스터디원을 다시 모집할까요?",
+  };
+
   const dropdownItems = [
+    {
+      name: "recruitment",
+      title: recruitState ? "모집 완료하기" : "다시 모집하기",
+      onClick: () => {
+        if (window.confirm(confirmMsg[recruitState])) {
+          putStudyRecruitsMutation.mutate(id);
+          setIsDropdownOpen(false);
+        }
+      },
+    },
     {
       name: "edit",
       title: "수정",
@@ -52,7 +85,7 @@ const StudyDetail = ({ ...props }) => {
       name: "delete",
       title: "삭제",
       onClick: () => {
-        if (window.confirm("정말 삭제하시겠습니까?")) {
+        if (window.confirm("정말 삭제할까요?")) {
           deleteStudyMutation.mutate(id);
         }
       },
@@ -64,7 +97,9 @@ const StudyDetail = ({ ...props }) => {
       <Layout>
         <Header>
           <TitleBox {...props}>
-            <Highlight {...props}>{titleData.highlight}</Highlight>
+            <Highlight status={recruitState} {...props}>
+              {recruitState ? "모집중" : "모집완료"}
+            </Highlight>
             <Title {...props}>{titleData.title}</Title>
             <div>
               <SubTitle {...props}>
@@ -79,7 +114,7 @@ const StudyDetail = ({ ...props }) => {
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             />
             {isDropdownOpen && (
-              <DropdownSmall items={dropdownItems} size="small" {...props} />
+              <Dropdown items={dropdownItems} size="small" {...props} />
             )}
           </DropdownBox>
         </Header>
@@ -97,6 +132,11 @@ StudyDetail.defaultProps = {
 };
 
 export default StudyDetail;
+
+const highlightColor = {
+  true: colors.blue100,
+  false: colors.gray500,
+};
 
 const titleColor = {
   light: colors.gray900,
@@ -149,7 +189,7 @@ const Highlight = styled.div`
   font-size: ${fontSize.lg};
   line-height: ${lineHeight.lg};
   font-weight: ${fontWeight.bold};
-  color: ${colors.blue100};
+  color: ${(props) => highlightColor[props.status]};
 `;
 
 const Title = styled.div`
@@ -189,6 +229,10 @@ const DropdownBox = styled.div`
     right: 0px;
     animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
   }
+`;
+
+const Dropdown = styled(DropdownSmall)`
+  width: 160px;
 `;
 
 const Content = styled.div`

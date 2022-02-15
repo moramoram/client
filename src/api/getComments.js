@@ -21,7 +21,7 @@ const fetchData = async (data) => {
 export const CommentSelector = (data) => {
   const commentData = data.map((comment) => {
     return {
-      username: comment.userInfo?.nickname,
+      username: comment.writerInfo?.nickname,
       src: comment.profileImg,
       created: daysFromToday(comment.createdDate),
       content: comment.content,

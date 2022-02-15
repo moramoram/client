@@ -12,7 +12,6 @@ const fetchData = async (id) => {
 };
 
 export const JobDetailSelector = (data) => {
-  console.log(data);
   const { parsedhtml } = parseHtml(data.content);
   const titleData = {
     title: data.title,

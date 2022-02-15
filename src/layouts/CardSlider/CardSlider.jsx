@@ -19,7 +19,6 @@ const THEME = {
 
 const CardSlider = ({ data, isLoading, theme, ...props }) => {
   const items = isLoading ? cardData : data;
-  console.log(items);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 

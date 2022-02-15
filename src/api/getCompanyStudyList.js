@@ -14,15 +14,12 @@ const fetchData = async (companyName) => {
 };
 
 export const StudyCardSmallSelector = (data) => {
-  console.log(data);
   const onOff = {
     0: "온라인",
     1: "오프라인",
     2: "온/오프라인",
   };
   const smallCardData = data?.data?.map((card) => {
-    console.log(card);
-
     const badgeData = [
       card.studyType,
       onOff[card.onOff],

@@ -38,7 +38,6 @@ export const StudyCardSelector = (data) => {
 
   const totalData = data?.pages.map((page) => {
     const items = page.res.map((card) => {
-      console.log(card);
       const badgeData = [
         card.studyType,
         onOff[card.onOff],

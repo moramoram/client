@@ -10,6 +10,7 @@ import "swiper/css";
 import { CardSmall } from "@/components";
 
 const CardSmallSlider = ({ data, theme, isLoading, ...props }) => {
+  const items = isLoading ? cardData : data;
   const swiperParams = {
     spaceBetween: 20,
     slidesPerView: "auto",
@@ -18,9 +19,9 @@ const CardSmallSlider = ({ data, theme, isLoading, ...props }) => {
   return (
     <Layout {...props}>
       <Swiper {...swiperParams}>
-        {data.map(({ id, url, ...props }) => (
+        {items.map(({ id, ...props }) => (
           <SwiperSlide key={id}>
-            <CardItemLink to={url}>
+            <CardItemLink to={id}>
               <CardSmall theme={theme} isLoading={isLoading} {...props} />
             </CardItemLink>
           </SwiperSlide>
@@ -35,6 +36,17 @@ CardSmallSlider.propTypes = {
 };
 
 export default CardSmallSlider;
+
+const cardData = new Array(6).fill({
+  contents: {
+    title: "",
+    subtitle: "",
+    highlight: "",
+    src: "",
+  },
+  badges: ["", "", ""],
+  id: "",
+});
 
 const Layout = styled.div`
   width: 100%;

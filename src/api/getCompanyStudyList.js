@@ -14,6 +14,7 @@ const fetchData = async (companyName) => {
 };
 
 export const StudyCardSmallSelector = (data) => {
+  console.log(data);
   const onOff = {
     0: "온라인",
     1: "오프라인",
@@ -21,6 +22,7 @@ export const StudyCardSmallSelector = (data) => {
   };
   const smallCardData = data?.data?.map((card) => {
     console.log(card);
+
     const badgeData = [
       card.studyType,
       onOff[card.onOff],
@@ -32,7 +34,7 @@ export const StudyCardSmallSelector = (data) => {
         title: card.title,
         subtitle: `${card.writerInfo.nickname} (${card.writerInfo.ordinal}기 / ${card.writerInfo.campus})`,
         highlight: card.recruitment ? "모집중" : "모집완료",
-        src: card.studyId,
+        src: "",
       },
       badges: badgeData,
       id: `/study/${card.studyId}`,

@@ -8,7 +8,7 @@ import { CommentInput } from "@/components";
 import { CommentList } from "@/layouts";
 import { colors, fontSize, fontWeight, lineHeight } from "@/_shared";
 
-const JobDetailComment = ({ companyId }, props) => {
+const JobDetailComment = ({ companyId, ...props }) => {
   const queryClient = useQueryClient();
   const { data } = GetComments({ type: "company", id: companyId });
   const { commentData } = CommentSelector(data);
@@ -20,7 +20,6 @@ const JobDetailComment = ({ companyId }, props) => {
   });
 
   const handleClick = (comment) => {
-    console.log(companyId);
     CommentMutation.mutate({
       type: "company",
       companyId: companyId,

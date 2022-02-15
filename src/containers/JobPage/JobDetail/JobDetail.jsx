@@ -32,7 +32,6 @@ const JobDetail = ({ commentData, ...props }) => {
     ? smallCardData.filter((data) => !data.isDisabled).length
     : 0;
 
-  console.log(smallCardData);
   return (
     <>
       <Layout>

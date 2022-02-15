@@ -12,6 +12,7 @@ export * from "./getStudyDetail";
 export * from "./postStudy";
 export * from "./putStudyScrap";
 export * from "./putStudy";
+export * from "./putStudyRecruits";
 export * from "./deleteStudy";
 
 export * from "./getCommunityList";

@@ -16,8 +16,8 @@ export const CommunityDetailSelector = (data) => {
   const contentData = {
     username: data.writerInfo.nickname,
     avatar: data.writerInfo.profileImg,
-    campus: data.writerInfo.ordinal,
-    ordinal: data.writerInfo.campus,
+    campus: data.writerInfo.campus,
+    ordinal: data.writerInfo.ordinal,
     created: daysFromToday(data.createdDate),
     title: data.title,
     content: parsedhtml,

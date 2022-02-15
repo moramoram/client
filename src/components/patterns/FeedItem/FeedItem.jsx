@@ -30,7 +30,7 @@ const FeedItem = ({
   isLoading,
   ...props
 }) => {
-  let userDetail = ordinal && campus ? `(${ordinal} / ${campus})` : "";
+  let userDetail = ordinal && campus ? `(${ordinal}기 / ${campus})` : "";
 
   const isDefault = useMediaQuery({ query: "(min-width:530px)" });
   const isSmall = useMediaQuery({ query: "(max-width:530px)" });

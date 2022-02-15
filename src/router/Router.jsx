@@ -22,6 +22,7 @@ import {
   CommunityPage,
   CommunityDetailPage,
   MyPage,
+  NotFoundPage,
 } from "@/pages";
 
 const Router = () => {
@@ -113,7 +114,7 @@ const Router = () => {
           element={<PrivateRoute component={MyPage} fallback="" />}
         />
         <Route path="auth/login/*" element={<LoginPage />} />
-        <Route path="*" element={<div>page not found</div>} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );

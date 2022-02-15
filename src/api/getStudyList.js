@@ -40,6 +40,11 @@ export const StudyCardSelector = (data) => {
 
   const totalData = data.pages.map((page) => {
     const items = page.res.map((card) => {
+      const writerDetail =
+        card.writerInfo.ordinal && card.writerInfo.campus
+          ? ` (${card.writerInfo.ordinal}기 / ${card.writerInfo.campus})`
+          : null;
+
       const badgeData = [
         card.studyType,
         onOff[card.onOff],
@@ -49,7 +54,7 @@ export const StudyCardSelector = (data) => {
       return {
         contents: {
           title: card.title,
-          subtitle: `${card.writerInfo.nickname} (${card.writerInfo.ordinal}기 / ${card.writerInfo.campus})`,
+          subtitle: [card.writerInfo.nickname, writerDetail],
           highlight: card.recruitment ? "모집중" : "모집완료",
           src: card.thumbnailImg,
         },

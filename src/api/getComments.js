@@ -14,13 +14,14 @@ const fetchData = async (data) => {
   const res = await axiosInstance({
     url: `/${commentType[data.type]}/${data.id} `,
   });
+  console.log(res);
   return res.data;
 };
 
 export const CommentSelector = (data) => {
   const commentData = data.map((comment) => {
     return {
-      username: comment.userInfo.nickname,
+      username: comment.userInfo?.nickname,
       src: comment.profileImg,
       created: daysFromToday(comment.createdDate),
       content: comment.content,

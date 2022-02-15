@@ -34,8 +34,11 @@ const CommunityDetail = ({ ...props }) => {
   const putLikeMutation = useMutation(putCommunityLike);
 
   const deletePostMutation = useMutation(deleteCommunity, {
-    onSuccess: () => {
+    onMutate: async (id) => {
+      queryClient.removeQueries("getCommunityDetail", id);
       navigate("/community");
+    },
+    onSuccess: () => {
       queryClient.invalidateQueries("getCommunityList");
     },
   });

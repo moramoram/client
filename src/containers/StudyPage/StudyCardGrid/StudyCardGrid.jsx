@@ -6,6 +6,7 @@ import { themeState, studySearch } from "@/recoil";
 import { useIntersectionObserver } from "@/hooks";
 import { StudyCardSelector, GetStudyList } from "@/api";
 
+import { StudyNoContent } from "@/containers";
 import { CardGrid } from "@/layouts";
 
 const StudyCardGrid = () => {
@@ -28,6 +29,7 @@ const StudyCardGrid = () => {
 
   return (
     <>
+      {!cardData[0] && <StudyNoContent theme={theme} />}
       <CardGrid data={cardData} theme={theme} />
       <div ref={loader} />
     </>

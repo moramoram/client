@@ -19,6 +19,7 @@ const THEME = {
 
 const CardSlider = ({ data, isLoading, theme, ...props }) => {
   const items = isLoading ? cardData : data;
+  console.log(items);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
@@ -35,7 +36,6 @@ const CardSlider = ({ data, isLoading, theme, ...props }) => {
       prevEl: prevRef.current,
       nextEl: nextRef.current,
     },
-
     modules: [Navigation],
   };
 
@@ -48,11 +48,11 @@ const CardSlider = ({ data, isLoading, theme, ...props }) => {
         <Icon icon="chevronRight" />
       </Button>
       <Swiper {...swiperParams}>
-        {items.map(({ id, ...props }) => (
-          <SwiperSlide key={id}>
-            <CardItemLink to={id}>
+        {items.map(({ id, ...props }, idx) => (
+          <SwiperSlide key={idx}>
+            <CardItemLink to="/main">
               <CardResponsive
-                {...cardData}
+                id={id}
                 isLoading={isLoading}
                 theme={theme}
                 {...props}

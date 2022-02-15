@@ -5,6 +5,11 @@ export const modalState = atom({
   default: false,
 });
 
+export const smallModalState = atom({
+  key: "smallModalState",
+  default: null,
+});
+
 export const loginModalState = atom({
   key: "loginModalState",
   default: null,

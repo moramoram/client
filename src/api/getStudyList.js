@@ -36,8 +36,9 @@ export const StudyCardSelector = (data) => {
     2: "온/오프라인",
   };
 
-  const totalData = data.pages.map((page) => {
+  const totalData = data?.pages.map((page) => {
     const items = page.res.map((card) => {
+      console.log(card);
       const badgeData = [
         card.studyType,
         onOff[card.onOff],
@@ -58,6 +59,6 @@ export const StudyCardSelector = (data) => {
     });
     return items;
   });
-  const cardData = totalData.flat();
+  const cardData = totalData?.flat();
   return { cardData };
 };

@@ -45,3 +45,14 @@ export const CommunityFeedSelector = (data) => {
   const feedData = totalData.flat();
   return { feedData };
 };
+
+export const CommunityFeedSmallSelector = (data) => {
+  const totalData = data.pages.map((page) => {
+    const items = page.res.map((card) => {
+      return card;
+    });
+    return items;
+  });
+  const feedData = totalData.flat();
+  return { feedData };
+};

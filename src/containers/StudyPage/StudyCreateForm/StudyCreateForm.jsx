@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
-import { PostStudy } from "@/api";
+import { GetCompanyList, PostStudy } from "@/api";
 
 import { StudyCreateSummary, StudyCreateDetail } from "@/containers";
 import { Button } from "@/components";
@@ -12,6 +12,13 @@ import { Button } from "@/components";
 const StudyCreateForm = ({ ...props }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [croppedImage, setCroppedImage] = useState(null);
+  // const imgProps = { croppedImage, setCroppedImage };
+
+  useEffect(async () => {
+    const data = await GetCompanyList();
+    console.log(data);
+  }, []);
+
   const {
     register,
     control,

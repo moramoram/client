@@ -22,6 +22,8 @@ const StudyCreateSummary = ({
   isChecked,
   setIsChecked,
   originalData,
+  croppedImage,
+  setCroppedImage,
   ...props
 }) => {
   const [radioState, setRadioState] = useState({
@@ -30,10 +32,9 @@ const StudyCreateSummary = ({
     2: originalData?.onOff === 2,
   });
 
-  const required = {
-    required: true,
-  };
+  const required = { required: true };
   const requiredError = "필수 항목입니다";
+
   const typeOption = [
     { value: "recruit", label: "채용" },
     { value: "Algorithm", label: "알고리즘" },
@@ -78,9 +79,19 @@ const StudyCreateSummary = ({
     { value: "Vue.js", label: "Vue.js" },
   ];
 
-  const defaultTechStack = techStackOption.filter((option) =>
-    originalData?.techStack?.split(",").includes(option.value)
-  );
+  const defaultMemberNumber = () => {
+    const value = originalData?.memberNumber;
+    if (value && value !== "무관") {
+      return Number(value);
+    }
+    return null;
+  };
+
+  const defaultTechStack = originalData
+    ? techStackOption.filter((option) =>
+        originalData.techStack?.split(",").includes(option.value)
+      )
+    : "";
 
   useEffect(() => {
     if (originalData?.memberNumber === "무관") {
@@ -101,9 +112,13 @@ const StudyCreateSummary = ({
               name="studyType"
               control={control}
               rules={{ ...required }}
-              defaultValue={typeOption.filter(
-                (option) => option.label === originalData?.studyType
-              )}
+              defaultValue={
+                originalData
+                  ? typeOption.filter(
+                      (option) => option.label === originalData.studyType
+                    )
+                  : ""
+              }
               render={({ field }) => (
                 <Selector
                   title="종류"
@@ -127,9 +142,13 @@ const StudyCreateSummary = ({
               <Controller
                 name="companyName"
                 control={control}
-                defaultValue={companyOption.filter(
-                  (option) => option.label === originalData?.company_name
-                )}
+                defaultValue={
+                  originalData
+                    ? companyOption.filter(
+                        (option) => option.label === originalData?.company_name
+                      )
+                    : ""
+                }
                 render={({ field }) => (
                   <Selector
                     title="목표 기업"
@@ -153,7 +172,7 @@ const StudyCreateSummary = ({
             type="number"
             isRequired
             disabled={isChecked}
-            defaultValue={Number(originalData?.memberNumber)}
+            defaultValue={defaultMemberNumber()}
             status={!errors?.memberNumber ? "default" : "error"}
             {...register("memberNumber", {
               validate: {
@@ -187,7 +206,7 @@ const StudyCreateSummary = ({
           </Label>
           <RadioBox>
             <Radio
-              value="1"
+              value="0"
               label="온라인"
               checked={radioState[0]}
               onClick={() =>
@@ -201,7 +220,7 @@ const StudyCreateSummary = ({
               {...props}
             />
             <Radio
-              value="2"
+              value="1"
               label="오프라인"
               checked={radioState[1]}
               onClick={() =>
@@ -215,7 +234,7 @@ const StudyCreateSummary = ({
               {...props}
             />
             <Radio
-              value="3"
+              value="2"
               label="온/오프라인 병행"
               checked={radioState[2]}
               onClick={() =>
@@ -255,6 +274,8 @@ const StudyCreateSummary = ({
           <ThumbnailUploader
             originalData={originalData}
             aspect="2"
+            croppedImage={croppedImage}
+            setCroppedImage={setCroppedImage}
             {...props}
           />
           <Message status="default" {...props}>

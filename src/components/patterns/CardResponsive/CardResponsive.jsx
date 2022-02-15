@@ -108,6 +108,16 @@ const Layout = styled.div`
 
   position: relative;
   margin-bottom: 1rem;
+
+  > div:nth-child(2) {
+    transition: transform 0.3s;
+  }
+
+  :hover {
+    > div:nth-child(2) {
+      transform: scale(1.05);
+    }
+  }
 `;
 
 const ContentBox = styled.div`

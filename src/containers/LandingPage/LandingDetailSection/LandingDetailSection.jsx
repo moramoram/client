@@ -97,6 +97,7 @@ const Title = styled.div`
   font-size: ${fontSize.h1};
   line-height: ${lineHeight.h1};
   font-weight: ${fontWeight.bold};
+  white-space: pre-line;
   transition: 0.3s;
 
   @media screen and (max-width: 530px) {
@@ -121,6 +122,7 @@ const Description = styled.div`
   font-size: ${fontSize.h4};
   line-height: ${lineHeight.h4};
   transition: 0.3s;
+  white-space: pre-line;
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.p};

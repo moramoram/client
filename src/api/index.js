@@ -13,6 +13,7 @@ export * from "./getStudyDetail";
 export * from "./postStudy";
 export * from "./putStudyScrap";
 export * from "./putStudy";
+export * from "./putStudyRecruits";
 export * from "./deleteStudy";
 
 export * from "./getCommunityList";
@@ -32,3 +33,5 @@ export * from "./putAuthorization";
 export * from "./getRefreshToken";
 
 export * from "./getCompanyList";
+export * from "./getNotifications";
+export * from "./deleteNotification";

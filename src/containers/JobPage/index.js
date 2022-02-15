@@ -6,3 +6,4 @@ export { default as JobIntro } from "./JobIntro";
 export { default as JobSideBar } from "./JobSideBar";
 export { default as JobMain } from "./JobMain";
 export { default as JobMainMobile } from "./JobMainMobile";
+export { default as JobNoContent } from "./JobNoContent";

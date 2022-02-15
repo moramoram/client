@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { colors, fontSize, fontWeight } from "@/_shared";
 
@@ -93,6 +93,13 @@ const Layout = styled.div`
 
   transition: 0.1s;
   cursor: pointer;
+
+  ${(props) =>
+    props.itemFor &&
+    css`
+      border-left: 4px solid ${borderColor.default};
+      background: ${bgColor.default};
+    `}
 `;
 
 const Text = styled.span`

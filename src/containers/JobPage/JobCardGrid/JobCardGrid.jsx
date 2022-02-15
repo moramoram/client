@@ -6,6 +6,7 @@ import { themeState, jobSearch } from "@/recoil";
 import { useIntersectionObserver } from "@/hooks";
 import { GetJobList, JobCardSelector } from "@/api";
 
+import { JobNoContent } from "@/containers";
 import { CardGrid } from "@/layouts";
 
 const JobCardGrid = () => {
@@ -28,6 +29,7 @@ const JobCardGrid = () => {
 
   return (
     <>
+      {!cardData[0] && <JobNoContent theme={theme} />}
       <CardGrid data={cardData} theme={theme} />
       <FetchBox ref={loader} />
     </>

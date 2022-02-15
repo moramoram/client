@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
 import { auth, token, themeState, loginModalState } from "@/recoil";
 
 import { NavMobileItem } from "./NavMobileItem";
+import { Notification } from "@/containers";
 import { Avatar, Button, Switch } from "@/components";
 import { Logo, Icon } from "@/foundations";
 import { colors, fontSize, fontWeight, animations, shadows } from "@/_shared";
@@ -22,15 +23,17 @@ const TYPE = {
 };
 
 const NavMobile = ({ isLogin, userData, navData, userMenuData, ...props }) => {
+  const navigate = useNavigate();
   const [navbarOpen, setnavbarOpen] = useState(false);
+  const [notificationOpen, setNotificationOpen] = useState(false);
   const [theme, setTheme] = useRecoilState(themeState);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const resetToken = useResetRecoilState(token);
   const resetAuth = useResetRecoilState(auth);
 
   const navbar = useRef();
-  const path = useLocation();
-  const [current, setCurrent] = useState(path.pathname.split("/")[1]);
+  const { pathname } = useLocation();
+  const [current, setCurrent] = useState(pathname.split("/")[1]);
 
   const onToggle = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
@@ -45,6 +48,7 @@ const NavMobile = ({ isLogin, userData, navData, userMenuData, ...props }) => {
   };
 
   useEffect(() => {
+    setCurrent(pathname.split("/")[1]);
     const handleClickOutside = (event) => {
       if (navbarOpen && !navbar?.current.contains(event.target)) {
         setnavbarOpen(false);
@@ -54,19 +58,40 @@ const NavMobile = ({ isLogin, userData, navData, userMenuData, ...props }) => {
     return () => {
       document.removeEventListener("click", handleClickOutside, true);
     };
-  }, [navbarOpen]);
+  }, [navbarOpen, pathname]);
 
   const onLogout = () => {
     resetToken();
     resetAuth();
   };
 
+  const navTitle = {
+    community: "커뮤니티",
+    study: "스터디",
+    job: "취업정보",
+    mypage: "내 프로필",
+  };
+
   return (
     <Layout blur={navbarOpen} ref={navbar} {...props}>
       <Navbar {...props}>
-        <Link to="main">
-          <Logo width="80" height="20" {...props} />
-        </Link>
+        {!pathname.split("/")[2] || navbarOpen ? (
+          <LogoBox
+            onClick={() => {
+              navigate("/main");
+              setnavbarOpen(false);
+            }}
+          >
+            <Logo width="80" height="20" {...props} />
+          </LogoBox>
+        ) : (
+          <>
+            <LogoBox>
+              <Icon icon="arrowLeft" onClick={() => navigate(-1)} {...props} />
+            </LogoBox>
+            <NavTitle {...props}>{navTitle[current]}</NavTitle>
+          </>
+        )}
         <Icon
           icon={navbarOpen ? "x" : "menu"}
           onClick={() => setnavbarOpen(!navbarOpen)}
@@ -90,8 +115,8 @@ const NavMobile = ({ isLogin, userData, navData, userMenuData, ...props }) => {
           </LinkBox>
 
           {isLogin ? (
-            <>
-              <UserInfoBox {...props}>
+            <UserInfoBox {...props}>
+              <div>
                 <UserInfo {...props}>
                   <Avatar
                     username={userData.nickname}
@@ -103,39 +128,50 @@ const NavMobile = ({ isLogin, userData, navData, userMenuData, ...props }) => {
                     안녕하세요!
                   </div>
                 </UserInfo>
-                <IconBox {...props}>
-                  <SwitchBox>
-                    <Switch
-                      isSelected={theme !== "light"}
-                      onToggle={onToggle}
-                      size="small"
-                    />
-                  </SwitchBox>
-                  <Icon
-                    icon="bell"
-                    stroke={colors.gray400}
-                    width="20"
-                    aria-hidden
+                <LinkBox>
+                  {userMenuData.map(({ name, title, url }, idx) => (
+                    <UserMobileItemLink to={url} key={idx}>
+                      <UserMobileItem
+                        {...props}
+                        onClick={() => onNavItem(name)}
+                        status={current === name ? "active" : "default"}
+                        itemFor="user"
+                      >
+                        {title}
+                      </UserMobileItem>
+                    </UserMobileItemLink>
+                  ))}
+                  <UserMobileItem {...props} onClick={onLogout}>
+                    로그아웃
+                  </UserMobileItem>
+                </LinkBox>
+              </div>
+              <IconBox {...props}>
+                <SwitchBox>
+                  <Switch
+                    isSelected={theme !== "light"}
+                    onToggle={onToggle}
+                    size="small"
                   />
-                </IconBox>
-              </UserInfoBox>
-              <LinkBox>
-                {userMenuData.map(({ name, title, url }, idx) => (
-                  <UserMobileItemLink to={url} key={idx}>
-                    <UserMobileItem
-                      {...props}
-                      onClick={() => onNavItem(name)}
-                      status={current === name ? "active" : "default"}
-                    >
-                      {title}
-                    </UserMobileItem>
-                  </UserMobileItemLink>
-                ))}
-                <UserMobileItem {...props} onClick={onLogout}>
-                  로그아웃
-                </UserMobileItem>
-              </LinkBox>
-            </>
+                </SwitchBox>
+                <Suspense
+                  fallback={
+                    <Icon
+                      icon="bell"
+                      stroke={colors.gray400}
+                      width="20"
+                      aria-hidden
+                    />
+                  }
+                >
+                  <Notification
+                    notificationOpen={notificationOpen}
+                    setNotificationOpen={setNotificationOpen}
+                    {...props}
+                  />
+                </Suspense>
+              </IconBox>
+            </UserInfoBox>
           ) : (
             <ButtonBox>
               <Button
@@ -263,6 +299,14 @@ const Navbar = styled.div`
   transition: 0.3s;
 `;
 
+const LogoBox = styled.div`
+  cursor: pointer;
+`;
+
+const NavTitle = styled.div`
+  color: ${(props) => textColor[props.theme][props.type]};
+`;
+
 const NavDropdown = styled.div`
   padding-bottom: 1rem;
   box-shadow: ${(props) => boxShadow[props.theme]};
@@ -273,11 +317,7 @@ const NavDropdown = styled.div`
 `;
 
 const LinkBox = styled.div`
-  padding: 1rem 0;
-
-  :last-child {
-    padding: 0 0 0.5rem 0;
-  }
+  padding: 1rem 0 0.5rem 0;
 `;
 
 const NavItemLink = styled(Link)`
@@ -287,9 +327,9 @@ const NavItemLink = styled(Link)`
 const UserInfoBox = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 
-  padding: 18px 10% 15px 8%;
+  padding: 18px 10% 8px 8%;
   border-top: 1px solid rgba(134, 142, 150, 0.2);
 `;
 
@@ -306,18 +346,6 @@ const UserName = styled.span`
   font-weight: ${fontWeight.bold};
 `;
 
-const IconBox = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-`;
-
-const SwitchBox = styled.div`
-  display: flex;
-  align-items: center;
-  width: 36px;
-`;
-
 const UserMobileItemLink = styled(Link)`
   text-decoration: none;
 `;
@@ -326,7 +354,22 @@ const UserMobileItem = styled(NavMobileItem)`
   display: flex;
   align-items: center;
   font-size: ${fontSize.sm};
+  padding: 0;
   height: 36px;
+`;
+
+const IconBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  height: 28px;
+`;
+
+const SwitchBox = styled.div`
+  display: flex;
+  align-items: center;
+  width: 36px;
 `;
 
 const ButtonBox = styled.div`

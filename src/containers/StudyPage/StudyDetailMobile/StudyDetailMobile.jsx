@@ -1,6 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+
+import { useParams, useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "react-query";
+import {
+  GetStudyDetail,
+  StudyDetailSelector,
+  putStudyScrap,
+  PutStudyRecruits,
+  DeleteStudy,
+} from "@/api";
 
 import { StudyDetailComment } from "@/containers";
 import {
@@ -24,10 +34,6 @@ import {
   loadings,
 } from "@/_shared";
 
-import { useMutation } from "react-query";
-import { GetStudyDetail, StudyDetailSelector, putStudyScrap } from "@/api";
-import { useParams } from "react-router-dom";
-
 const THEME = {
   LIGHT: "light",
   DARK: "dark",
@@ -35,7 +41,8 @@ const THEME = {
 
 const StudyDetailMobile = ({ ...props }) => {
   const id = useParams().studyId;
-
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const { data } = GetStudyDetail(id);
@@ -43,26 +50,62 @@ const StudyDetailMobile = ({ ...props }) => {
     StudyDetailSelector(data);
 
   const [isMarked, setIsMarked] = useState(sidebarData.scrap);
-
   const putScrapMutation = useMutation(putStudyScrap);
+  const [recruitState, setRecruitState] = useState(null);
+
+  useEffect(() => {
+    setRecruitState(data.recruitment);
+  }, [data.recruitment]);
 
   const onScrap = () => {
     setIsMarked(!isMarked);
     putScrapMutation.mutate(id);
   };
 
+  const deleteStudyMutation = useMutation(DeleteStudy, {
+    onMutate: async (id) => {
+      queryClient.removeQueries("getStudyDetail", id);
+      navigate("/study");
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("getStudyList");
+    },
+  });
+
+  const putStudyRecruitsMutation = useMutation(PutStudyRecruits, {
+    onSuccess: (id) => {
+      queryClient.invalidateQueries("getStudyDetail", id);
+      setRecruitState(!recruitState);
+    },
+  });
+
+  const confirmMsg = {
+    true: "스터디원 모집을 끝낼까요?",
+    false: "스터디원을 다시 모집할까요?",
+  };
+
   const dropdownItems = [
+    {
+      name: "recruitment",
+      title: recruitState ? "모집 완료하기" : "다시 모집하기",
+      onClick: () => {
+        if (window.confirm(confirmMsg[recruitState])) {
+          putStudyRecruitsMutation.mutate(id);
+          setIsDropdownOpen(false);
+        }
+      },
+    },
     {
       name: "edit",
       title: "수정",
-      onClick: () => console.log("수정"),
+      onClick: () => navigate(`/study/${id}/update`),
     },
     {
       name: "delete",
       title: "삭제",
       onClick: () => {
-        if (window.confirm("정말 삭제하시겠습니까?")) {
-          console.log("삭제");
+        if (window.confirm("정말 삭제할까요?")) {
+          deleteStudyMutation.mutate(id);
         }
       },
     },
@@ -78,7 +121,9 @@ const StudyDetailMobile = ({ ...props }) => {
         />
         <Header>
           <TitleBox {...props}>
-            <Highlight {...props}>{titleData.highlight}</Highlight>
+            <Highlight status={recruitState} {...props}>
+              {recruitState ? "모집중" : "모집완료"}
+            </Highlight>
             <Title {...props}>{titleData.title}</Title>
             <SubTitle {...props}>
               <Avatar size="small" src={titleData.src} {...props} />
@@ -119,7 +164,7 @@ const StudyDetailMobile = ({ ...props }) => {
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             />
             {isDropdownOpen && (
-              <DropdownSmall items={dropdownItems} size="small" {...props} />
+              <Dropdown items={dropdownItems} size="small" {...props} />
             )}
           </DropdownBox>
         </Header>
@@ -191,6 +236,11 @@ const bgColor = {
   dark: colors.black,
 };
 
+const highlightColor = {
+  true: colors.blue100,
+  false: colors.gray500,
+};
+
 const titleColor = {
   light: colors.gray900,
   dark: colors.gray25,
@@ -252,7 +302,7 @@ const Highlight = styled.div`
   font-size: ${fontSize.lg};
   line-height: ${lineHeight.lg};
   font-weight: ${fontWeight.bold};
-  color: ${colors.blue100};
+  color: ${(props) => highlightColor[props.status]};
 `;
 
 const Title = styled.div`
@@ -292,6 +342,10 @@ const DropdownBox = styled.div`
     right: 0px;
     animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
   }
+`;
+
+const Dropdown = styled(DropdownSmall)`
+  width: 160px;
 `;
 
 const Content = styled.div`

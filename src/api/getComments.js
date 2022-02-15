@@ -14,6 +14,7 @@ const fetchData = async (data) => {
   const res = await axiosInstance({
     url: `/${commentType[data.type]}/${data.id} `,
   });
+  console.log(res);
   return res.data;
 };
 

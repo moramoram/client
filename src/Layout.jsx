@@ -57,7 +57,10 @@ const Layout = () => {
         userMenuData={userMenuData}
         isLogin={isLogined}
       />
-      <Outlet />
+      <ContentBox>
+        <Outlet />
+        <Footer theme={theme} />
+      </ContentBox>
       <ScrollToTop />
       <ScrollTopBox>
         <ScrollTopButton
@@ -65,7 +68,6 @@ const Layout = () => {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         />
       </ScrollTopBox>
-      <Footer theme={theme} />
     </LayoutBox>
   );
 };
@@ -81,9 +83,13 @@ const LayoutBox = styled.div`
   position: relative;
   width: 100%;
   min-height: 100vh;
-  padding-bottom: 500px;
-
   background: ${(props) => bgColor[props.theme]};
+`;
+
+const ContentBox = styled.div`
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 500px;
 
   @media screen and (max-width: 540px) {
     padding-bottom: 800px;

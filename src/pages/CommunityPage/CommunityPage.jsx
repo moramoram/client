@@ -3,9 +3,10 @@ import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
 import {
+  authState,
   themeState,
   communitySearch,
-  isAuthenticated,
+  modalState,
   createModalState,
   loginModalState,
 } from "@/recoil";
@@ -24,9 +25,12 @@ import { debounce } from "@/utils";
 
 const CommunityPage = () => {
   const theme = useRecoilValue(themeState);
-  const isAuthorized = useRecoilValue(isAuthenticated);
+  const authorizedState = useRecoilValue(authState);
+
   const setCreateModalOpen = useSetRecoilState(createModalState);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
+  const setModalOpen = useSetRecoilState(modalState);
+
   const [search, setSearch] = useRecoilState(communitySearch);
 
   const handleCategory = (id) => {
@@ -43,7 +47,10 @@ const CommunityPage = () => {
   });
 
   const handleCreation = () => {
-    isAuthorized ? setCreateModalOpen(true) : setLoginModalOpen("require");
+    !authorizedState && setLoginModalOpen("require");
+    authorizedState === 3 && setCreateModalOpen(true);
+    authorizedState === 2 && setModalOpen(true);
+    authorizedState === 1 && setModalOpen(true);
   };
 
   const isPc = useMediaQuery({ query: "(min-width:980px)" });

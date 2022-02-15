@@ -19,7 +19,6 @@ const MainCommunitySlider = ({ isLoading, ...props }) => {
       },
     };
   });
-  console.log(communityData);
   return <FeedSmallSlider data={communityData} {...props} />;
 };
 

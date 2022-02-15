@@ -24,7 +24,6 @@ export const GetCommunityList = (data) =>
 export const CommunityFeedSelector = (data) => {
   const totalData = data.pages.map((page) => {
     const items = page.res.map((card) => {
-      console.log(card);
       const { thumbnail, tagDeletedHtml } = parseHtml(card.content);
       return {
         username: card.writerInfo.nickname,

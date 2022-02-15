@@ -24,9 +24,15 @@ const CommunityDetail = ({ ...props }) => {
 
   const { data } = GetCommunityDetail(id);
   const { contentData } = CommunityDetailSelector(data);
+
   const [isLike, setIsLiked] = useState(contentData.likeStatus);
   const [likeCount, setLikeCount] = useState(contentData.likecount);
-  const commendData = GetComments({ type: "board", id: id });
+
+  const commentData = GetComments({
+    type: "board",
+    boardType: contentData.boardType,
+    id: id,
+  });
   const setUpdateModalOpen = useSetRecoilState(updateModalState);
 
   const queryClient = useQueryClient();
@@ -85,7 +91,7 @@ const CommunityDetail = ({ ...props }) => {
           </IconBox>
           <IconBox>
             <Icon icon="messageCircle" width="18" />
-            <CountNums>{commendData.data.length}</CountNums>
+            <CountNums>{commentData.data.length}</CountNums>
           </IconBox>
           <IconBox>
             <Icon icon="eye" width="18" />
@@ -94,7 +100,7 @@ const CommunityDetail = ({ ...props }) => {
         </CountBox>
       </Footer>
       <CommentBox {...props}>
-        <CommunityDetailComment {...props} />
+        <CommunityDetailComment boardType={contentData.boardType} {...props} />
       </CommentBox>
     </Layout>
   );

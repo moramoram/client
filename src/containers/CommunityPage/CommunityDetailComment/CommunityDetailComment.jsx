@@ -9,17 +9,16 @@ import { CommentInput } from "@/components";
 import { CommentList } from "@/layouts";
 import { colors, fontSize, fontWeight } from "@/_shared";
 
-const CommunityDetailComment = (props) => {
+const CommunityDetailComment = ({ boardType }, props) => {
   const queryClient = useQueryClient();
   const id = useParams().contentId;
-  const { data } = GetComments({ type: "board", id: id });
+  const { data } = GetComments({ type: "board", boardType: boardType, id: id });
   const { commentData } = CommentSelector(data);
   const CommentMutation = useMutation((data) => postComment(data), {
     onSuccess: () => {
       queryClient.invalidateQueries("getComments");
     },
   });
-
   const handleClick = (comment) => {
     CommentMutation.mutate({
       type: "board",

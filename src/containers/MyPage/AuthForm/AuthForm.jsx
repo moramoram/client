@@ -157,7 +157,7 @@ const AuthForm = ({ userProfile, ...props }) => {
   if (authstate.authCheck === 2) {
     return <AuthMessage />;
   }
-
+  console.log(authstate.authCheck);
   return (
     <>
       <Layout>

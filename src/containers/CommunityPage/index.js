@@ -7,3 +7,4 @@ export { default as CommunityFeedGrid } from "./CommunityFeedGrid";
 export { default as CommunitySlider } from "./CommunitySlider";
 export { default as CommunityUpdate } from "./CommunityUpdate";
 export { default as CommunityDetailComment } from "./CommunityDetailComment";
+export { default as CommunityNoContent } from "./CommunityNoContent";

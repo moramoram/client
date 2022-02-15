@@ -6,6 +6,7 @@ import { themeState, communitySearch } from "@/recoil";
 import { useIntersectionObserver } from "@/hooks";
 import { GetCommunityList, CommunityFeedSelector } from "@/api";
 
+import { CommunityNoContent } from "@/containers";
 import { FeedGrid } from "@/layouts";
 
 const CommunityFeedGrid = () => {
@@ -28,6 +29,7 @@ const CommunityFeedGrid = () => {
 
   return (
     <>
+      {!feedData[0] && <CommunityNoContent theme={theme} />}
       <FeedGrid data={feedData} theme={theme} />
       <FetchBox ref={loader} />
     </>

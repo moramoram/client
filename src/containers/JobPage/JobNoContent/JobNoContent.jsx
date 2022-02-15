@@ -1,15 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Link } from "react-router-dom";
-
-import { Button } from "@/components";
 import { colors, fontSize, fontWeight, lineHeight } from "@/_shared";
 
 const JobNoContent = ({ ...props }) => {
   return (
     <Layout>
       <Title {...props}>검색 결과가 없어요 🥺</Title>
+      <Content {...props}></Content>
     </Layout>
   );
 };
@@ -58,8 +56,4 @@ const Content = styled.div`
   font-size: ${fontSize.p};
   line-height: ${lineHeight.p};
   text-overflow: ellipsis;
-`;
-
-const ButtonLink = styled(Link)`
-  text-decoration: none;
 `;

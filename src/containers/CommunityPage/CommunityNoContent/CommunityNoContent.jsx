@@ -34,8 +34,8 @@ const titleColor = {
 };
 
 const contentColor = {
-  dark: colors.gray300,
-  light: colors.gray700,
+  dark: colors.gray400,
+  light: colors.gray600,
 };
 
 const Layout = styled.div`
@@ -44,7 +44,7 @@ const Layout = styled.div`
   align-items: center;
   gap: 0.5rem;
   width: 100%;
-  padding: 2rem 0 0 0;
+  padding: 4rem 0;
 `;
 
 const Title = styled.div`

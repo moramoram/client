@@ -20,8 +20,8 @@ const fetchData = async (data) => {
 export const CommentSelector = (data) => {
   const commentData = data.map((comment) => {
     return {
-      username: comment.userInfo.nickname,
-      src: comment.profileImg,
+      username: comment.writerInfo.nickname,
+      src: comment.writerInfo.profileImg,
       created: daysFromToday(comment.createdDate),
       content: comment.content,
       commentId: comment.commentId,

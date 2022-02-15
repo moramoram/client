@@ -305,6 +305,8 @@ const LogoBox = styled.div`
 
 const NavTitle = styled.div`
   color: ${(props) => textColor[props.theme][props.type]};
+  font-size: ${fontSize.lg};
+  font-weight: ${fontWeight.bold};
 `;
 
 const NavDropdown = styled.div`

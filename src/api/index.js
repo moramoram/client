@@ -29,3 +29,5 @@ export * from "./putNickname";
 export * from "./putAuthorization";
 
 export * from "./getRefreshToken";
+
+export * from "./getCompanyList";

@@ -43,34 +43,38 @@ const StudyMain = ({ categoryData }) => {
         <StickyNav data={categoryData} theme={theme} onClick={handleCategory} />
       </StickyNavBox>
       <CardGridBox>
-        <InputBox>
-          <Input
-            theme={theme}
-            onChange={handleKeyword}
-            icon="search"
-            placeholder="스터디 검색하기"
-            defaultValue={search.title}
-          />
-          <Selector
-            theme={theme}
-            placeholder="종류"
-            onChange={handleType}
-            options={studyOptions}
-            defaultValue={studyOptions.find(
-              (v) => v.value === search.studyType
-            )}
-            isClearable
-          />
-        </InputBox>
-        <SortBox>
-          <Sort theme={theme} onClick={handleSort} items={criteriaData} />
-          <Checkbox
-            label="마감된 스터디 숨기기"
-            onChange={handleFilter}
-            defaultChecked={filter}
-            theme={theme}
-          />
-        </SortBox>
+        {search.category === 1 && (
+          <>
+            <InputBox>
+              <Input
+                theme={theme}
+                onChange={handleKeyword}
+                icon="search"
+                placeholder="스터디 검색하기"
+                defaultValue={search.title}
+              />
+              <Selector
+                theme={theme}
+                placeholder="종류"
+                onChange={handleType}
+                options={studyOptions}
+                defaultValue={studyOptions.find(
+                  (v) => v.value === search.studyType
+                )}
+                isClearable
+              />
+            </InputBox>
+            <SortBox>
+              <Sort theme={theme} onClick={handleSort} items={criteriaData} />
+              <Checkbox
+                label="마감된 스터디 숨기기"
+                onChange={handleFilter}
+                defaultChecked={filter}
+                theme={theme}
+              />
+            </SortBox>
+          </>
+        )}
         <Suspense fallback={<CardGrid theme={theme} isLoading />}>
           <StudyCardGrid theme={theme} />
         </Suspense>

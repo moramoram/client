@@ -40,24 +40,28 @@ const StudyMainMobile = ({ categoryData }) => {
         onClick={handleCategory}
         view="mobile"
       />
-      <SearchBox>
-        <Input
-          icon="search"
-          placeholder="스터디 검색하기"
-          theme={theme}
-          onChange={handleKeyword}
-          defaultValue={search.title}
-        />
-      </SearchBox>
-      <SortBox>
-        <Sort items={criteriaData} theme={theme} onClick={handleSort} />
-        <Checkbox
-          label="마감된 스터디 숨기기"
-          theme={theme}
-          onChange={handleFilter}
-          defaultChecked={filter}
-        />
-      </SortBox>
+      {search.category === 1 && (
+        <>
+          <SearchBox>
+            <Input
+              icon="search"
+              placeholder="스터디 검색하기"
+              theme={theme}
+              onChange={handleKeyword}
+              defaultValue={search.title}
+            />
+          </SearchBox>
+          <SortBox>
+            <Sort items={criteriaData} theme={theme} onClick={handleSort} />
+            <Checkbox
+              label="마감된 스터디 숨기기"
+              theme={theme}
+              onChange={handleFilter}
+              defaultChecked={filter}
+            />
+          </SortBox>
+        </>
+      )}
       <MobileCardBox>
         <Suspense fallback={<CardGrid theme={theme} isLoading />}>
           <StudyCardGrid theme={theme} />

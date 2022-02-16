@@ -19,7 +19,6 @@ const fetchData = async (data) => {
   const res = await axiosInstance({
     url: url,
   });
-
   return res.data;
 };
 
@@ -27,6 +26,8 @@ export const CommentSelector = (data) => {
   const commentData = data.map((comment) => {
     return {
       username: comment.writerInfo.nickname,
+      ordinal: comment.writerInfo.ordinal,
+      campus: comment.writerInfo.campus,
       src: comment.writerInfo.profileImg,
       created: daysFromToday(comment.createdDate),
       content: comment.content,

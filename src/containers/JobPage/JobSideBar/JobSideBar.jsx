@@ -31,7 +31,12 @@ const JobSideBar = ({ data, isLoading, ...props }) => {
 
   return (
     <Layout isLoading={isLoading} {...props}>
-      <ImageBox className="thumbnail" isLoading={isLoading} {...props} />
+      <ImageBox
+        className="thumbnail"
+        isLoading={isLoading}
+        src={data.src}
+        {...props}
+      />
       <SideBarBox {...props}>
         {summaryData.map(({ title, icon, id }) => (
           <SideBarItem

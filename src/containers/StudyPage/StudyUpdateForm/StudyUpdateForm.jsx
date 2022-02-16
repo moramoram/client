@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
-import { GetStudyDetail, PutStudy } from "@/api";
+import { GetStudyDetail, getCompanyList, PutStudy } from "@/api";
 
 import { StudyCreateSummary, StudyCreateDetail } from "@/containers";
 import { Button } from "@/components";
@@ -13,6 +13,16 @@ const StudyUpdateForm = ({ ...props }) => {
   const id = useParams().studyId;
   const [isChecked, setIsChecked] = useState(false);
   const [croppedImage, setCroppedImage] = useState(null);
+  const [companyOptions, setCompanyOptions] = useState(null);
+
+  useEffect(() => {
+    const getCompanyData = async () => {
+      const data = await getCompanyList();
+      setCompanyOptions(data);
+    };
+    getCompanyData();
+  }, []);
+
   const {
     register,
     control,
@@ -45,8 +55,9 @@ const StudyUpdateForm = ({ ...props }) => {
 
       data.studyType = originalData.studyType;
       data.companyName = originalData.company_name;
-      data.techStack =
-        data.techStack.map((option) => option.value).join(",") ?? "";
+      data.techStack = data.techStack
+        ? data.techStack.map((option) => option.value).join(",")
+        : "";
       if (isChecked) data.memberNumber = "무관";
 
       Object.keys(data).forEach((key) => formData.append(key, data[key]));
@@ -104,6 +115,7 @@ const StudyUpdateForm = ({ ...props }) => {
             croppedImage={croppedImage}
             setCroppedImage={setCroppedImage}
             originalData={originalData}
+            companyOptions={companyOptions}
             {...props}
           />
           <ButtonBox>

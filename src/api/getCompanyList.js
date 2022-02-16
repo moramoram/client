@@ -2,9 +2,9 @@ import { useQuery } from "react-query";
 import { axiosInstance } from "@/utils";
 
 export const GetCompanyList = () =>
-  useQuery("getCompanyList", () => fetchData(), { suspense: false });
+  useQuery("getCompanyList", () => getCompanyList(), { suspense: false });
 
-const fetchData = async () => {
+export const getCompanyList = async () => {
   const res = await axiosInstance({
     url: "/companies",
   });

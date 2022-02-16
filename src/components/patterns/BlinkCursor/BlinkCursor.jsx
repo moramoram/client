@@ -5,22 +5,26 @@ const BlinkCursor = ({ blinkSpeed = 500, active = true, ...props }) => {
   const [blinking, setBlinking] = useState({
     style: { ...props.style },
   });
+  const [isActive, setIsActive] = useState(active);
 
   const makeBlink = useCallback(() => {
-    if (active) {
-      const { visibility } = blinking.style || blinking;
-      const toggleBlink = visibility === "visible" ? "hidden" : "visible";
-      const blink = { visibility: toggleBlink };
+    const { visibility } = blinking.style || blinking;
+    const toggleBlink = visibility === "visible" ? "hidden" : "visible";
+    const blink = { visibility: toggleBlink };
 
-      setTimeout(() => {
-        setBlinking({ style: { ...props.style, ...blink } });
-      }, blinkSpeed);
-    }
-  }, [blinking, blinkSpeed, active, props.style]);
+    setTimeout(() => {
+      setBlinking({ style: { ...props.style, ...blink } });
+    }, blinkSpeed);
+  }, [blinking, blinkSpeed, props.style]);
 
   useEffect(() => {
-    makeBlink();
-  }, [makeBlink, active]);
+    if (isActive) {
+      makeBlink();
+    }
+    return () => {
+      setIsActive(!isActive);
+    };
+  }, [makeBlink, isActive]);
 
   return (
     <span {...props} {...blinking}>

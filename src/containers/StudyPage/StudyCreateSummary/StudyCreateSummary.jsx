@@ -22,6 +22,10 @@ const StudyCreateSummary = ({
   isChecked,
   setIsChecked,
   originalData,
+  croppedImage,
+  setCroppedImage,
+  companyOptions,
+  defaultCompanyName,
   ...props
 }) => {
   const [radioState, setRadioState] = useState({
@@ -30,10 +34,9 @@ const StudyCreateSummary = ({
     2: originalData?.onOff === 2,
   });
 
-  const required = {
-    required: true,
-  };
+  const required = { required: true };
   const requiredError = "필수 항목입니다";
+
   const typeOption = [
     { value: "recruit", label: "채용" },
     { value: "Algorithm", label: "알고리즘" },
@@ -42,17 +45,10 @@ const StudyCreateSummary = ({
     { value: "etc", label: "기타" },
   ];
 
-  const companyOption = [
-    { value: "naver", label: "네이버" },
-    { value: "kakao", label: "카카오" },
-    { value: "line", label: "라인" },
-    { value: "coupang", label: "쿠팡" },
-    { value: "woowahan", label: "우아한형제들" },
-    { value: "daangn", label: "당근마켓" },
-    { value: "toss", label: "토스" },
-    { value: "zigbang", label: "직방" },
-    { value: "yanolka", label: "야놀자" },
-  ];
+  const companyOption = companyOptions?.map(({ companyName }) => ({
+    label: companyName,
+    value: companyName,
+  }));
 
   const techStackOption = [
     { value: "Android", label: "Android" },
@@ -78,9 +74,19 @@ const StudyCreateSummary = ({
     { value: "Vue.js", label: "Vue.js" },
   ];
 
-  const defaultTechStack = techStackOption.filter((option) =>
-    originalData?.techStack?.split(",").includes(option.value)
-  );
+  const defaultMemberNumber = () => {
+    const value = originalData?.memberNumber;
+    if (value && value !== "무관") {
+      return Number(value);
+    }
+    return null;
+  };
+
+  const defaultTechStack = originalData?.techStack
+    ? techStackOption.filter((option) =>
+        originalData.techStack.split(",").includes(option.value)
+      )
+    : "";
 
   useEffect(() => {
     if (originalData?.memberNumber === "무관") {
@@ -101,9 +107,15 @@ const StudyCreateSummary = ({
               name="studyType"
               control={control}
               rules={{ ...required }}
-              defaultValue={typeOption.filter(
-                (option) => option.label === originalData?.studyType
-              )}
+              defaultValue={
+                originalData
+                  ? typeOption.filter(
+                      (option) => option.label === originalData.studyType
+                    )
+                  : defaultCompanyName
+                  ? typeOption.find((option) => option.label === "채용")
+                  : ""
+              }
               render={({ field }) => (
                 <Selector
                   title="종류"
@@ -121,21 +133,39 @@ const StudyCreateSummary = ({
               )}
             />
           </InputBox>
-          {(watch("studyType")?.value === "recruit" ||
-            originalData?.company_name) && (
+          {originalData?.studyType === "채용" && originalData?.company_name && (
+            <InputBox>
+              <Selector
+                title="목표 기업"
+                placeholder="목표 기업을 선택하세요"
+                value={{
+                  label: originalData.company_name,
+                  value: originalData.company_name,
+                }}
+                isDisabled
+                {...props}
+              />
+            </InputBox>
+          )}
+          {watch("studyType")?.value === "recruit" && (
             <InputBox>
               <Controller
                 name="companyName"
                 control={control}
-                defaultValue={companyOption.filter(
-                  (option) => option.label === originalData?.company_name
-                )}
+                defaultValue={
+                  defaultCompanyName
+                    ? companyOption.filter(
+                        (option) => option.label === defaultCompanyName
+                      )
+                    : ""
+                }
                 render={({ field }) => (
                   <Selector
                     title="목표 기업"
                     placeholder="목표 기업을 선택하세요"
                     options={companyOption}
                     isDisabled={originalData?.company_name}
+                    isClearable
                     {...field}
                     {...props}
                   />
@@ -153,7 +183,7 @@ const StudyCreateSummary = ({
             type="number"
             isRequired
             disabled={isChecked}
-            defaultValue={Number(originalData?.memberNumber)}
+            defaultValue={defaultMemberNumber()}
             status={!errors?.memberNumber ? "default" : "error"}
             {...register("memberNumber", {
               validate: {
@@ -187,7 +217,7 @@ const StudyCreateSummary = ({
           </Label>
           <RadioBox>
             <Radio
-              value="1"
+              value="0"
               label="온라인"
               checked={radioState[0]}
               onClick={() =>
@@ -201,7 +231,7 @@ const StudyCreateSummary = ({
               {...props}
             />
             <Radio
-              value="2"
+              value="1"
               label="오프라인"
               checked={radioState[1]}
               onClick={() =>
@@ -215,7 +245,7 @@ const StudyCreateSummary = ({
               {...props}
             />
             <Radio
-              value="3"
+              value="2"
               label="온/오프라인 병행"
               checked={radioState[2]}
               onClick={() =>
@@ -255,6 +285,8 @@ const StudyCreateSummary = ({
           <ThumbnailUploader
             originalData={originalData}
             aspect="2"
+            croppedImage={croppedImage}
+            setCroppedImage={setCroppedImage}
             {...props}
           />
           <Message status="default" {...props}>

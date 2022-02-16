@@ -1,10 +1,10 @@
 import React, { useEffect, useCallback, useState } from "react";
 import styled from "styled-components";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
-import { PostStudy } from "@/api";
+import { getCompanyList, PostStudy } from "@/api";
 
 import { StudyCreateSummary, StudyCreateDetail } from "@/containers";
 import { Button } from "@/components";
@@ -12,6 +12,17 @@ import { Button } from "@/components";
 const StudyCreateForm = ({ ...props }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [croppedImage, setCroppedImage] = useState(null);
+  const [companyOptions, setCompanyOptions] = useState(null);
+
+  // console.log(company);
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getCompanyList();
+      setCompanyOptions(data);
+    };
+    getData();
+  }, []);
+
   const {
     register,
     control,
@@ -23,6 +34,9 @@ const StudyCreateForm = ({ ...props }) => {
   } = useForm();
 
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const defaultCompanyName = searchParams.get("company");
+
   const queryClient = useQueryClient();
   const mutateStudy = useMutation(PostStudy, {
     onSuccess: () => {
@@ -37,8 +51,9 @@ const StudyCreateForm = ({ ...props }) => {
 
       data.studyType = data.studyType.label;
       data.companyName = data.companyName?.label ?? "-";
-      data.techStack =
-        data.techStack?.map((option) => option.value).join(",") ?? "";
+      data.techStack = data.techStack
+        ? data.techStack.map((option) => option.value).join(",")
+        : "";
       if (isChecked) data.memberNumber = "무관";
 
       Object.keys(data).forEach((key) => formData.append(key, data[key]));
@@ -90,6 +105,8 @@ const StudyCreateForm = ({ ...props }) => {
             setIsChecked={setIsChecked}
             croppedImage={croppedImage}
             setCroppedImage={setCroppedImage}
+            companyOptions={companyOptions}
+            defaultCompanyName={defaultCompanyName}
             {...props}
           />
           <ButtonBox>

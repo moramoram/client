@@ -35,7 +35,7 @@ const feedData = [
     avatar:
       "https://image.bada.io/files//crawling/2021/04/05/bobaedream/1612930_i14788674553.jpg",
     campus: "서울",
-    ordinal: "6기",
+    ordinal: "6",
     created: daysFromToday("2022-02-01"),
     title: "겨울잠",
     content:

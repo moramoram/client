@@ -38,6 +38,13 @@ export const JobCardSelector = (data) => {
   const totalData = data.pages.map((page) => {
     const items = page.res.map((card) => {
       const dday = daysLeftFromToday(card.closeDate);
+
+      const badgeData = [
+        card.job,
+        card.sbenefit ? "SSAFY우대" : "",
+        ...card?.techStack?.split(",").slice(0, 2),
+      ].filter((data) => data);
+
       return {
         contents: {
           title: card.title,
@@ -45,7 +52,7 @@ export const JobCardSelector = (data) => {
           highlight: dday ? dday : "모집마감",
           src: card.company.logoImg,
         },
-        badges: card.techStack.split(","),
+        badges: badgeData,
         id: `/job/${card.recruitId}`,
         isDisabled: !dday,
       };

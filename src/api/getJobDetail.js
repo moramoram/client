@@ -16,8 +16,7 @@ export const JobDetailSelector = (data) => {
   const titleData = {
     title: data.title,
     subtitle: data.company.companyName,
-    src: data.logoImg,
-    highlight: daysLeftFromToday(data.closeData) ? "모집중" : "모집완료",
+    highlight: daysLeftFromToday(data.closeDate) ? "모집중" : "모집마감",
   };
   const contentData = parsedhtml;
 
@@ -29,6 +28,7 @@ export const JobDetailSelector = (data) => {
     badges: data.techStack.split(","),
     scrap: data.scrapStatus,
     url: data.recruitUrl,
+    src: data.company.logoImg,
   };
   const companyData = data.company;
   return { contentData, titleData, sidebarData, companyData };

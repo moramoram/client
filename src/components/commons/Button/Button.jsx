@@ -27,7 +27,7 @@ const Button = ({ isLoading, loadingText, isLink, children, ...props }) => {
 };
 
 Button.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   theme: PropTypes.oneOf(Object.values(THEME)),
   mode: PropTypes.oneOf(Object.values(MODE)),
   isLoading: PropTypes.bool,

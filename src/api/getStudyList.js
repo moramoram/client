@@ -9,8 +9,10 @@ const URL = {
 const fetchPage = async (data, pageParam) => {
   const param = {
     ...data,
+    criteria: data.criteria.value,
     offset: pageParam,
   };
+
   const res = await axiosInstance({
     url: URL[data.category],
     params: param,

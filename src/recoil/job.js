@@ -7,7 +7,10 @@ export const jobSearch = atom({
     title: "",
     techStack: [],
     job: "",
-    criteria: "",
+    criteria: {
+      label: "",
+      value: "",
+    },
   },
 });
 

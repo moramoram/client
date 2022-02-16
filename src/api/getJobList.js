@@ -15,8 +15,10 @@ const fetchPage = async (data, pageParam) => {
   const param = {
     ...data,
     techStack: tech.join(),
+    criteria: data.criteria.value,
     offset: pageParam,
   };
+
   const res = await axiosInstance({
     url: URL[data.category],
     params: param,

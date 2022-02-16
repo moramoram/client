@@ -2,7 +2,11 @@ import { useInfiniteQuery } from "react-query";
 import { axiosInstance, daysFromToday, numToMillion, parseHtml } from "@/utils";
 
 const fetchPage = async (data, pageParam) => {
-  const param = { ...data, offset: pageParam };
+  const param = {
+    ...data,
+    criteria: data.criteria.value,
+    offset: pageParam,
+  };
   const res = await axiosInstance({
     url: `/boards/search/`,
     params: param,

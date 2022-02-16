@@ -11,14 +11,16 @@ const THEME = {
   DARK: "dark",
 };
 
-const Sort = ({ items, onClick, ...props }) => {
+const Sort = ({ items, onClick, value, ...props }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [current, setCurrent] = useState(items[0]);
-
-  const dropdownItems = items.map((item, idx) => ({
+  const [current, setCurrent] = useState(
+    !!value.label ? value.label : items[0].label
+  );
+  console.log(value);
+  const dropdownItems = items.map((item) => ({
     onClick: () => {
-      onClick(item.name);
-      setCurrent(items[idx]);
+      onClick(item);
+      setCurrent(item.label);
       setDropdownOpen(!dropdownOpen);
     },
     ...item,
@@ -28,7 +30,7 @@ const Sort = ({ items, onClick, ...props }) => {
     <>
       <Layout>
         <Button onClick={() => setDropdownOpen(!dropdownOpen)} {...props}>
-          <Text {...props}>{current.title}</Text>
+          <Text {...props}>{current}</Text>
           <Icon icon="chevronDown" />
         </Button>
         {dropdownOpen && (

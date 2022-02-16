@@ -6,7 +6,10 @@ export const studySearch = atom({
     category: 1,
     title: "",
     studyType: "",
-    criteria: "",
+    criteria: {
+      label: "",
+      value: "",
+    },
   },
 });
 

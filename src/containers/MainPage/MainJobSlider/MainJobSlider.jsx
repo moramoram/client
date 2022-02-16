@@ -10,7 +10,10 @@ const MainJobSlider = ({ ...props }) => {
     title: "",
     techStack: [],
     job: "",
-    criteria: "",
+    criteria: {
+      label: "",
+      value: "",
+    },
   };
 
   const { data } = GetJobList(search);

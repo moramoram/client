@@ -96,7 +96,7 @@ const categoryData = [
   { id: 2, title: "내 인증 현황" },
   { id: 3, title: "내가 쓴 글" },
   { id: 4, title: "나의 스터디" },
-  { id: 5, title: "내가 쓴 댓글" },
+  // { id: 5, title: "내가 쓴 댓글" },
 ];
 
 const Layout = styled.div`

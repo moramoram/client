@@ -10,7 +10,7 @@ import {
 } from "@/api";
 import { useParams } from "react-router-dom";
 
-import { JobSideBar, JobDetailComment } from "@/containers";
+import { JobSideBar, JobDetailComment, JobNoStudy } from "@/containers";
 import { CardSmallSlider } from "@/layouts";
 import { Toc } from "@/components";
 import { colors, fontSize, fontWeight, lineHeight, loadings } from "@/_shared";
@@ -50,9 +50,11 @@ const JobDetail = ({ commentData, ...props }) => {
           <BoxDescription {...props}>
             이 기업을 준비하는 {countAvailableStudy}개의 스터디가 열려있어요
           </BoxDescription>
-          {!!smallCardData && (
-            <CardSmallSlider data={smallCardData} {...props} />
-          )}
+          <CardSmallSlider
+            data={smallCardData}
+            createMsg="스터디 만들기"
+            {...props}
+          />
         </CardBox>
         <JobDetailComment companyId={companyData.companyId} {...props} />
       </Layout>

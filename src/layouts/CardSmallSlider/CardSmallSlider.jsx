@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
-import { CardSmall } from "@/components";
+import { CardSmall, CardSmallCreate } from "@/components";
 
-const CardSmallSlider = ({ data, theme, isLoading, ...props }) => {
+const CardSmallSlider = ({ createMsg, data, theme, isLoading, ...props }) => {
   const items = isLoading ? cardData : data;
   const swiperParams = {
     spaceBetween: 20,
@@ -19,7 +19,12 @@ const CardSmallSlider = ({ data, theme, isLoading, ...props }) => {
   return (
     <Layout {...props}>
       <Swiper {...swiperParams}>
-        {items.map(({ id, ...props }) => (
+        {createMsg && (
+          <SwiperSlide>
+            <CardSmallCreate theme={theme} content={createMsg} {...props} />
+          </SwiperSlide>
+        )}
+        {items?.map(({ id, ...props }) => (
           <SwiperSlide key={id}>
             <CardItemLink to={id}>
               <CardSmall theme={theme} isLoading={isLoading} {...props} />

@@ -4,6 +4,7 @@ export { default as BlinkCursor } from "./BlinkCursor";
 export { default as Card } from "./Card";
 export { default as CardResponsive } from "./CardResponsive";
 export { default as CardSmall } from "./CardSmall";
+export { default as CardSmallCreate } from "./CardSmallCreate";
 export { default as Comment } from "./Comment";
 export { default as CommentInput } from "./CommentInput";
 export { default as Dropdown } from "./Dropdown";

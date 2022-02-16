@@ -10,7 +10,7 @@ const axiosInstance = Axios.create({
 
 axiosInstance.interceptors.request.use((config) => {
   const token = JSON.parse(localStorage.getItem("ssafe_token"));
-  console.log(token.refreshToken);
+  // console.log(token.refreshToken);
   if (token) {
     config.headers.Authorization = `Bearer ${token.refreshToken}`;
   }

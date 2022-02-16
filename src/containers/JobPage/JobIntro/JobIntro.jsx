@@ -47,7 +47,7 @@ const Layout = styled.div`
 
   width: 100%;
   height: 400px;
-  background: url("https://i.imgur.com/3QTKlkH.jpg");
+  background: url("/images/job-intro.png");
   background-repeat: no-repeat;
   background-size: cover;
 

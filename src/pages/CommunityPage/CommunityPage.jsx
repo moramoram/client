@@ -33,6 +33,10 @@ const CommunityPage = () => {
 
   const [search, setSearch] = useRecoilState(communitySearch);
 
+  const handleKeyword = debounce((e) => {
+    setSearch({ ...search, title: e.target.value });
+  });
+
   const handleCategory = (id) => {
     window.scrollTo({ top: 0 });
     setSearch({ ...search, boardType: id });
@@ -41,10 +45,6 @@ const CommunityPage = () => {
   const handleSort = (criteria) => {
     setSearch({ ...search, criteria: criteria });
   };
-
-  const handleKeyword = debounce((keyword) => {
-    setSearch({ ...search, title: keyword });
-  });
 
   const handleCreation = () => {
     !authorizedState && setLoginModalOpen("require");
@@ -77,6 +77,7 @@ const CommunityPage = () => {
                 theme={theme}
                 onChange={handleKeyword}
                 placeholder="게시글 검색"
+                value={search.title}
               />
             </SortBox>
             <Suspense fallback={<FeedGrid isLoading theme={theme} />}>
@@ -102,6 +103,7 @@ const CommunityPage = () => {
                 theme={theme}
                 onChange={handleKeyword}
                 placeholder="게시글 검색"
+                value={search.title}
               />
             </SortBox>
           </div>

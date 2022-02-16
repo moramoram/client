@@ -33,6 +33,7 @@ const FeedDetail = ({
   commentcount,
   viewcount,
   dropdownItems,
+  boardType,
   ...props
 }) => {
   const usernameRender = username ?? "User";
@@ -43,7 +44,7 @@ const FeedDetail = ({
     <Layout>
       <Header>
         <TitleBox>
-          <Category>자유게시판</Category>
+          <Category>{categoryData[boardType]}</Category>
           <Title {...props}>{title}</Title>
         </TitleBox>
         <DropdownBox>
@@ -109,6 +110,13 @@ FeedDetail.defaultProps = {
 };
 
 export default FeedDetail;
+
+const categoryData = {
+  1: "자유게시판",
+  2: "익명게시판",
+  3: "취업 정보 게시판",
+  4: "질문 게시판",
+};
 
 const titleColor = {
   dark: colors.gray25,

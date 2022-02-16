@@ -6,7 +6,6 @@ import { useMutation } from "react-query";
 import { GetJobDetail, putJobScrap, JobDetailSelector } from "@/api";
 import { useParams } from "react-router-dom";
 
-import { CardSmallSlider } from "@/layouts";
 import {
   Badge,
   BookMark,
@@ -25,10 +24,11 @@ const THEME = {
   DARK: "dark",
 };
 
-const JobDetailMobile = ({ cardData, ...props }) => {
+const JobDetailMobile = (props) => {
   const id = useParams().jobId;
   const { data } = GetJobDetail(id);
-  const { contentData, titleData, sidebarData } = JobDetailSelector(data);
+  const { contentData, titleData, sidebarData, companyData } =
+    JobDetailSelector(data);
 
   const [isMarked, setIsMarked] = useState(sidebarData.scrap);
 
@@ -81,9 +81,9 @@ const JobDetailMobile = ({ cardData, ...props }) => {
         <CardBox>
           <BoxTitle {...props}>스터디</BoxTitle>
           <BoxDescription {...props}>같이 준비해요</BoxDescription>
-          <CardSmallSlider data={cardData} {...props} />
+          {/* <CardSmallSlider data={cardData} {...props} /> */}
         </CardBox>
-        <JobDetailComment {...props} />
+        <JobDetailComment companyId={companyData.companyId} {...props} />
       </Layout>
       <FixedBox>
         <ButtonBg {...props} />

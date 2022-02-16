@@ -6,6 +6,7 @@ export * from "./postComment";
 export * from "./getJobList";
 export * from "./getJobDetail";
 export * from "./putJobScrap";
+export * from "./getCompanyStudyList";
 
 export * from "./getStudyList";
 export * from "./getStudyDetail";
@@ -33,5 +34,6 @@ export * from "./putAuthorization";
 
 export * from "./getRefreshToken";
 
+export * from "./getCompanyList";
 export * from "./getNotifications";
 export * from "./deleteNotification";

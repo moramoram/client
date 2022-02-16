@@ -30,15 +30,13 @@ export const GetStudyList = (data) =>
   );
 
 export const StudyCardSelector = (data) => {
-  console.log(data);
-
   const onOff = {
     0: "온라인",
     1: "오프라인",
     2: "온/오프라인",
   };
 
-  const totalData = data.pages.map((page) => {
+  const totalData = data?.pages.map((page) => {
     const items = page.res.map((card) => {
       const writerDetail =
         card.writerInfo.ordinal && card.writerInfo.campus
@@ -65,6 +63,6 @@ export const StudyCardSelector = (data) => {
     });
     return items;
   });
-  const cardData = totalData.flat();
+  const cardData = totalData?.flat();
   return { cardData };
 };

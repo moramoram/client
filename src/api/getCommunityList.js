@@ -29,7 +29,7 @@ export const CommunityFeedSelector = (data) => {
         username: card.writerInfo.nickname,
         avatar: card.writerInfo.profileImg,
         campus: card.writerInfo.campus,
-        ordinal: card.writerInfo.ordinal,
+        ordinal: `${card.writerInfo.ordinal}기`,
         created: daysFromToday(card.createdDate),
         title: card.title,
         content: tagDeletedHtml,

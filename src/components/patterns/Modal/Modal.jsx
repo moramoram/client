@@ -15,7 +15,15 @@ const THEME = {
   LIGHT: "light",
 };
 
-const Modal = ({ title, description, secondary, primary, ...props }) => {
+const Modal = ({
+  title,
+  description,
+  secondary,
+  primary,
+  onClickPrimary,
+  onClickSecondary,
+  ...props
+}) => {
   const [isModalOpened, setIsModalOpened] = useRecoilState(modalState);
   const modal = useRef();
 
@@ -46,10 +54,20 @@ const Modal = ({ title, description, secondary, primary, ...props }) => {
             <Description type="paragraph">{description}</Description>
           </ContentBox>
           <ButtonBox>
-            <Button mode="secondary" width="200" {...props}>
+            <Button
+              mode="secondary"
+              width="200"
+              onClick={onClickPrimary}
+              {...props}
+            >
               {secondary}
             </Button>
-            <Button mode="primary" width="200" {...props}>
+            <Button
+              mode="primary"
+              width="200"
+              onClick={onClickSecondary}
+              {...props}
+            >
               {primary}
             </Button>
           </ButtonBox>

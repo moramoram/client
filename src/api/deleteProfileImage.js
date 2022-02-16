@@ -5,6 +5,5 @@ export const DeleteProfileImage = async () => {
     url: "/users/profile-images",
     method: "delete",
   });
-  console.log(res);
   return res.data;
 };

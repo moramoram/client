@@ -8,7 +8,6 @@ const fetchData = async () => {
   const res = await axiosInstance({
     url: "/users/me",
   });
-  console.log(res.data);
   return res.data;
 };
 

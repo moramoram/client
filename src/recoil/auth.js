@@ -38,6 +38,13 @@ export const isAuthenticated = selector({
   },
 });
 
+export const authState = selector({
+  key: "authState",
+  get: ({ get }) => {
+    return get(auth)?.authCheck;
+  },
+});
+
 export const accessToken = selector({
   key: "accessToken",
   get: ({ get }) => {

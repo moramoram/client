@@ -31,7 +31,7 @@ const JobMainMobile = ({ categoryData }) => {
   const handleFilter = (e) => {
     setFilter(e.target.checked);
   };
-  console.log(search);
+
   return (
     <>
       <SubNavMobile

@@ -67,7 +67,6 @@ const StudyUpdateForm = ({ ...props }) => {
         formData.append("thumbnailImg", file, "image.png");
       } else if (!croppedImage && originalData.thumbnailImg) {
         const file = await convertURLtoFile(originalData.thumbnailImg);
-        console.log(file);
         formData.append("thumbnailImg", file, "image.png");
       } else {
         const file = new Blob();

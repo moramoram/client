@@ -29,7 +29,6 @@ const JobMain = ({ categoryData }) => {
   };
 
   const handleTechStack = (e) => {
-    console.log(e);
     setSearch({
       ...search,
       techStack: e,

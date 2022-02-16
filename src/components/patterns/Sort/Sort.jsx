@@ -16,7 +16,7 @@ const Sort = ({ items, onClick, value, ...props }) => {
   const [current, setCurrent] = useState(
     !!value.label ? value.label : items[0].label
   );
-  console.log(value);
+
   const dropdownItems = items.map((item) => ({
     onClick: () => {
       onClick(item);

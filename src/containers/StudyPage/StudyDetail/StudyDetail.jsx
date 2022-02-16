@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import { useRecoilValue } from "recoil";
+import { auth } from "@/recoil";
 import { useParams, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import {
@@ -33,6 +35,7 @@ const StudyDetail = ({ ...props }) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const user = useRecoilValue(auth);
 
   const { data } = GetStudyDetail(id);
   const { titleData, contentData, tocItem, sidebarData } =
@@ -67,8 +70,8 @@ const StudyDetail = ({ ...props }) => {
 
   const dropdownItems = [
     {
-      name: "recruitment",
-      title: recruitState ? "모집 완료하기" : "다시 모집하기",
+      label: recruitState ? "모집 완료하기" : "다시 모집하기",
+      value: "recruitment",
       onClick: () => {
         if (window.confirm(confirmMsg[recruitState])) {
           putStudyRecruitsMutation.mutate(id);
@@ -77,13 +80,14 @@ const StudyDetail = ({ ...props }) => {
       },
     },
     {
-      name: "edit",
-      title: "수정",
+      label: "수정",
+      value: "edit",
+
       onClick: () => navigate(`/study/${id}/update`),
     },
     {
-      name: "delete",
-      title: "삭제",
+      label: "삭제",
+      value: "delete",
       onClick: () => {
         if (window.confirm("정말 삭제할까요?")) {
           deleteStudyMutation.mutate(id);
@@ -108,15 +112,17 @@ const StudyDetail = ({ ...props }) => {
               </SubTitle>
             </div>
           </TitleBox>
-          <DropdownBox>
-            <Icon
-              icon="moreVertical"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            />
-            {isDropdownOpen && (
-              <Dropdown items={dropdownItems} size="small" {...props} />
-            )}
-          </DropdownBox>
+          {data.writerInfo.userId === user.userId && (
+            <DropdownBox>
+              <Icon
+                icon="moreVertical"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              />
+              {isDropdownOpen && (
+                <Dropdown items={dropdownItems} size="small" {...props} />
+              )}
+            </DropdownBox>
+          )}
         </Header>
         <Toc items={tocItem} {...props} />
         <Content {...props}>{contentData}</Content>

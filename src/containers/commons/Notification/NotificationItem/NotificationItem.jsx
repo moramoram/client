@@ -140,12 +140,14 @@ const TextBox = styled.div`
   justify-content: center;
   gap: 4px;
 
+  min-height: 40px;
+  width: 100%;
+
   color: ${(props) => textColor[props.theme]};
   font-size: ${fontSize.sm};
   font-weight: ${fontWeight.regular};
 
-  min-height: 40px;
-  width: 100%;
+  white-space: pre-line;
 `;
 
 const CreatedAt = styled.div`

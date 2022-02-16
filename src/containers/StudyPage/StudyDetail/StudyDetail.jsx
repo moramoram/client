@@ -153,6 +153,11 @@ const subtitleColor = {
   dark: colors.gray500,
 };
 
+const borderColor = {
+  light: colors.gray300,
+  dark: colors.gray800,
+};
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
@@ -239,11 +244,47 @@ const Content = styled.div`
   padding: 0 0 2rem 0;
   color: ${(props) => textColor[props.theme]};
 
-  h3 {
-    margin-bottom: 0;
+  img {
+    width: 100%;
   }
 
-  ul {
+  h1 {
+    padding: 3px 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    padding: 3px 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  h3 {
+    padding: 3px 0;
+    font-size: 1.125em;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  p {
+    padding: 3px 0;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  ul,
+  ol {
     padding-left: 32px;
+  }
+
+  pre {
+    overflow-x: auto;
+  }
+
+  blockquote {
+    margin-left: 0;
+    padding-left: 1rem;
+    border-left: 4px solid ${(props) => borderColor[props.theme]};
   }
 `;

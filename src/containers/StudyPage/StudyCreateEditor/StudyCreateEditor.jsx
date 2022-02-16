@@ -30,9 +30,9 @@ const StudyCreateEditor = ({
     },
     toolbar: [
       [{ header: [1, 2, 3, false] }],
-      ["bold", "italic", "underline", "strike", "blockquote", "code-block"],
+      ["bold", "italic", "underline", "strike", "blockquote"],
       [{ list: "ordered" }, { list: "bullet" }],
-      ["link", "image", "video"],
+      ["link"],
       ["clean"],
     ],
     markdownShortcuts: {},
@@ -41,9 +41,10 @@ const StudyCreateEditor = ({
   const mobileModules = {
     ...modules,
     toolbar: [
-      ["bold", "italic", "underline", "code-block"],
+      ["bold", "italic", "underline"],
       [{ list: "ordered" }, { list: "bullet" }],
-      ["link", "image", "video"],
+      ["link"],
+      ["clean"],
     ],
   };
 
@@ -58,7 +59,6 @@ const StudyCreateEditor = ({
     "bullet",
     "link",
     "image",
-    "video",
     "code-block",
     "code",
   ];

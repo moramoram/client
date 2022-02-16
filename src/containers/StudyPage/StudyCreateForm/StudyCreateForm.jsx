@@ -14,7 +14,6 @@ const StudyCreateForm = ({ ...props }) => {
   const [croppedImage, setCroppedImage] = useState(null);
   const [companyOptions, setCompanyOptions] = useState(null);
 
-  // console.log(company);
   useEffect(() => {
     const getData = async () => {
       const data = await getCompanyList();
@@ -138,6 +137,7 @@ const Layout = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: auto;
+  padding-bottom: 4rem;
 `;
 
 const ContentBox = styled.div`

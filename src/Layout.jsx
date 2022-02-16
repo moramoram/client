@@ -25,7 +25,6 @@ import {
   AuthModal,
   SmallModal,
 } from "@/containers";
-import { ScrollTopButton } from "@/components";
 import { colors } from "@/_shared";
 
 const Layout = () => {
@@ -69,12 +68,6 @@ const Layout = () => {
         <Footer theme={theme} />
       </ContentBox>
       <ScrollToTop />
-      <ScrollTopBox>
-        <ScrollTopButton
-          theme={theme}
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        />
-      </ScrollTopBox>
     </LayoutBox>
   );
 };

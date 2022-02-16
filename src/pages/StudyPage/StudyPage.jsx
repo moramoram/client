@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
 import { useMediaQuery } from "react-responsive";
 
-import { useSetRecoilState } from "recoil";
-import { navTypeState } from "@/recoil/theme";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { navTypeState, themeState } from "@/recoil/theme";
+
 import {
   StudyIntro,
   StudyMain,
   StudyMainMobile,
   ErrorBoundary,
 } from "@/containers";
+import { ScrollTopButton } from "@/components";
 import { throttle } from "@/utils";
 
 const StudyPage = () => {
+  const theme = useRecoilValue(themeState);
   const setNavType = useSetRecoilState(navTypeState);
   const [offset, setOffset] = useState(0);
 
@@ -39,6 +43,12 @@ const StudyPage = () => {
       <StudyIntro />
       {isPc && <StudyMain categoryData={categoryData} />}
       {isMobile && <StudyMainMobile categoryData={categoryData} />}
+      <ScrollTopBox>
+        <ScrollTopButton
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          theme={theme}
+        />
+      </ScrollTopBox>
     </ErrorBoundary>
   );
 };
@@ -54,3 +64,10 @@ const categoryData = [
   },
 ];
 export default StudyPage;
+
+const ScrollTopBox = styled.div`
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 999;
+`;

@@ -8,7 +8,6 @@ import { GetJobList, JobCardSelector } from "@/api";
 
 import { JobNoContent } from "@/containers";
 import { CardGrid } from "@/layouts";
-import { jobilter } from "@/recoil/filter";
 
 const JobCardGrid = () => {
   const theme = useRecoilValue(themeState);

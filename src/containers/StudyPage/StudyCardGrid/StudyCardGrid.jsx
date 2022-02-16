@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 
 import { useRecoilValue } from "recoil";
 import { themeState, studySearch, studyfilter } from "@/recoil";

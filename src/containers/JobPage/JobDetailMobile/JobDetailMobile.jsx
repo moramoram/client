@@ -3,16 +3,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { useMutation } from "react-query";
-import {
-  GetJobDetail,
-  putJobScrap,
-  JobDetailSelector,
-  GetCompanyStudyList,
-  StudyCardSelector,
-} from "@/api";
+import { GetJobDetail, putJobScrap, JobDetailSelector } from "@/api";
 import { useParams } from "react-router-dom";
 
-import { CardSmallSlider } from "@/layouts";
 import {
   Badge,
   BookMark,
@@ -36,9 +29,6 @@ const JobDetailMobile = (props) => {
   const { data } = GetJobDetail(id);
   const { contentData, titleData, sidebarData, companyData } =
     JobDetailSelector(data);
-
-  const { studyCardData } = GetCompanyStudyList(companyData.companyName);
-  const { cardData } = StudyCardSelector(studyCardData);
 
   const [isMarked, setIsMarked] = useState(sidebarData.scrap);
 

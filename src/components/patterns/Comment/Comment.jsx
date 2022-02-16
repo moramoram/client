@@ -12,8 +12,18 @@ const THEME = {
   LIGHT: "light",
 };
 
-const Comment = ({ username, src, created, content, ...props }) => {
-  const usernameRender = username ? username : "User";
+const Comment = ({
+  username,
+  ordinal,
+  campus,
+  src,
+  created,
+  content,
+  ...props
+}) => {
+  const usernameRender = username ?? "익명";
+  const userDetailRender =
+    ordinal && campus ? `(${ordinal}기 / ${campus})` : null;
 
   return (
     <Layout>
@@ -21,6 +31,8 @@ const Comment = ({ username, src, created, content, ...props }) => {
       <ContentBox>
         <InfoBox>
           <User {...props}>{usernameRender}</User>
+          <UserDetail {...props}>{userDetailRender}</UserDetail>
+
           <CreatedAt>{created}</CreatedAt>
         </InfoBox>
         <Content {...props}>{content}</Content>
@@ -52,6 +64,11 @@ const usernameColor = {
   light: colors.gray900,
 };
 
+const userDetailColor = {
+  dark: colors.gray400,
+  light: colors.gray600,
+};
+
 const contentColor = {
   dark: colors.gray300,
   light: colors.gray700,
@@ -78,6 +95,12 @@ const User = styled.div`
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.sm};
   color: ${(props) => usernameColor[props.theme]};
+`;
+
+const UserDetail = styled.div`
+  font-weight: ${fontWeight.regular};
+  font-size: ${fontSize.sm};
+  color: ${(props) => userDetailColor[props.theme]};
 `;
 
 const CreatedAt = styled.div`

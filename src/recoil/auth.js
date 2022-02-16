@@ -1,19 +1,5 @@
 import { atom, selector } from "recoil";
-import { localStorageEffect } from "@/utils";
-
-export const auth = atom({
-  key: "auth",
-  default: {
-    userId: null,
-    email: null,
-    nickname: null,
-    authCheck: null,
-    campus: null,
-    ordinal: null,
-    likeJob: null,
-    profileImg: null,
-  },
-});
+import { axiosInstance, localStorageEffect } from "@/utils";
 
 export const token = atom({
   key: "token",
@@ -22,6 +8,17 @@ export const token = atom({
     refreshToken: undefined,
   },
   effects_UNSTABLE: [localStorageEffect("ssafe_token")],
+});
+
+export const auth = selector({
+  key: "auth",
+  get: async ({ get }) => {
+    if (!!get(token).accessToken) {
+      const res = await axiosInstance({ url: "users/me" });
+      return res.data;
+    }
+    return {};
+  },
 });
 
 export const isLoginState = selector({

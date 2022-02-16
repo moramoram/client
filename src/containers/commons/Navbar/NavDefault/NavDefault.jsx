@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { Link, useLocation } from "react-router-dom";
 import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
-import { auth, token, themeState, loginModalState } from "@/recoil";
+import { token, themeState, loginModalState } from "@/recoil";
 
 import { NavDefaultItem } from "./NavDefaultItem";
 import { Notification } from "@/containers";
@@ -29,7 +29,6 @@ const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const resetToken = useResetRecoilState(token);
-  const resetAuth = useResetRecoilState(auth);
   const { pathname } = useLocation();
   const navbarRight = useRef();
 
@@ -46,7 +45,6 @@ const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
 
   const onLogout = () => {
     resetToken();
-    resetAuth();
   };
 
   useEffect(() => {

@@ -3,11 +3,11 @@ import styled from "styled-components";
 
 import { Icon, Logo, Typography } from "@/foundations";
 import { Button } from "@/components";
-import { colors, fontWeight } from "@/_shared";
+import { colors } from "@/_shared";
 import { useSetRecoilState } from "recoil";
 import { modalState } from "@/recoil";
 
-const AuthMessage = ({ ...props }) => {
+const AuthComplete = ({ ...props }) => {
   const setIsModalOpened = useSetRecoilState(modalState);
 
   return (
@@ -20,22 +20,23 @@ const AuthMessage = ({ ...props }) => {
           <Logo width="80" height="20" />
         </LogoBox>
         <TextBox>
-          <Title type="h2">아직 인증이 완료되지 않았어요.</Title>
-          <SubTitle type="paragraph">
-            {`관리자가 열심히 확인중이에요. \n 조금만 더 기다려주세요!`}
+          <Title type="h2" {...props}>
+            인증이 완료되었습니다.
+          </Title>
+          <SubTitle {...props} type="paragraph">
+            {`많은 싸피인들을 만나보세요. \n 더 자유롭고 쉽게 소통하세요!`}
           </SubTitle>
         </TextBox>
-
         <ButtonLink href="/main">
           <Button>메인으로 돌아가기</Button>
         </ButtonLink>
-        <AskingForHelp>도움이 필요하신가요?</AskingForHelp>
+        <QuitText>탈퇴하기</QuitText>
       </ContentBox>
     </>
   );
 };
 
-export default AuthMessage;
+export default AuthComplete;
 
 const LogoBox = styled.div``;
 
@@ -82,9 +83,8 @@ const ButtonLink = styled.a`
   text-decoration: none;
 `;
 
-const AskingForHelp = styled.div`
-  color: ${colors.blue100};
-  font-weight: ${fontWeight.bold};
+const QuitText = styled.div`
+  color: ${colors.gray500};
 
   cursor: pointer;
 `;

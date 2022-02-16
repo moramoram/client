@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import styled from "styled-components";
 
-import { useRecoilValue, useRecoilState } from "recoil";
-import { authState, modalState } from "@/recoil";
+import { useRecoilState } from "recoil";
+import { modalState } from "@/recoil";
 
-import { AuthMessage } from "@/containers";
+import { AuthWait } from "@/containers";
 import { animations, colors, shadows } from "@/_shared";
 
 const AuthModal = ({ ...props }) => {
-  const authorizedState = useRecoilValue(authState);
   const [isModalOpened, setIsModalOpened] = useRecoilState(modalState);
   const modal = useRef();
 
@@ -33,8 +32,7 @@ const AuthModal = ({ ...props }) => {
       <Overlay />
       <ModalBox>
         <Layout ref={modal} {...props}>
-          {authorizedState === 2 && <AuthMessage />}
-          {authorizedState === 1 && <AuthMessage />}
+          <AuthWait />
         </Layout>
       </ModalBox>
     </>

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import { useMediaQuery } from "react-responsive";
 
-import { useSetRecoilState } from "recoil";
-import { navTypeState } from "@/recoil/theme";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isAuthenticatedState, navTypeState } from "@/recoil";
+
 import {
   StudyIntro,
   StudyMain,
@@ -15,6 +16,8 @@ import { throttle } from "@/utils";
 const StudyPage = () => {
   const setNavType = useSetRecoilState(navTypeState);
   const [offset, setOffset] = useState(0);
+  const isAuthenticated = useRecoilValue(isAuthenticatedState);
+  const category = isAuthenticated ? categoryData : categoryData.slice(0, 1);
 
   useEffect(() => {
     !!offset ? setNavType("default") : setNavType("transparent");
@@ -37,8 +40,8 @@ const StudyPage = () => {
   return (
     <ErrorBoundary fallback={<div />}>
       <StudyIntro />
-      {isPc && <StudyMain categoryData={categoryData} />}
-      {isMobile && <StudyMainMobile categoryData={categoryData} />}
+      {isPc && <StudyMain categoryData={category} />}
+      {isMobile && <StudyMainMobile categoryData={category} />}
     </ErrorBoundary>
   );
 };

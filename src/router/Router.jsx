@@ -26,7 +26,13 @@ import {
 const Router = () => {
   return (
     <Routes>
-      <Route element={<Layout />}>
+      <Route
+        element={
+          <Suspense fallback={<div />}>
+            <Layout />
+          </Suspense>
+        }
+      >
         <Route
           path="/"
           element={

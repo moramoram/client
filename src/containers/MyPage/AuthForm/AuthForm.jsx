@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { useForm, Controller } from "react-hook-form";
 import { useRecoilValue } from "recoil";
-import { auth, themeState } from "@/recoil";
+import { authState, themeState } from "@/recoil";
 import { useMutation, useQueryClient } from "react-query";
 import { PostNicknameCheck, PutAuthorization } from "@/api";
 
@@ -19,7 +19,7 @@ const THEME = {
 
 const AuthForm = ({ userProfile, ...props }) => {
   const theme = useRecoilValue(themeState);
-  const authstate = useRecoilValue(auth);
+  const authCheck = useRecoilValue(authState);
   const [imageSrc, setImageSrc] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
   const {
@@ -154,11 +154,11 @@ const AuthForm = ({ userProfile, ...props }) => {
     }
   });
 
-  if (authstate.authCheck === 2) {
+  if (authCheck === 2) {
     return <AuthWait />;
   }
 
-  if (authstate.authCheck === 3) {
+  if (authCheck === 3) {
     return <AuthComplete />;
   }
   return (

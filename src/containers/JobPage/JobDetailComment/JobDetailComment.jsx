@@ -29,8 +29,8 @@ const JobDetailComment = ({ companyId, ...props }) => {
 
   const dropdownItems = [
     {
-      name: "delete",
-      title: "삭제",
+      value: "delete",
+      label: "삭제",
       onClick: () => {
         window.alert("준비중인 기능이에요. 조금만 기다려주세요!");
       },

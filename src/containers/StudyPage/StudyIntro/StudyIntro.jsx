@@ -50,7 +50,7 @@ const Layout = styled.div`
 
   width: 100%;
   height: 400px;
-  background: url("https://i.imgur.com/75UN6MO.jpg");
+  background: url("/images/study-intro.png");
   background-repeat: no-repeat;
   background-size: cover;
 

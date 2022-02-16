@@ -29,7 +29,7 @@ const titleColor = {
 };
 
 const Layout = styled.div`
-  padding: 12rem 0;
+  padding: 12rem 0 8rem 0;
 `;
 
 const ContentBox = styled.div`

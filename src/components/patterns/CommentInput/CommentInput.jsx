@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { Icon } from "@/foundations";
+// import { Icon } from "@/foundations";
 import { colors, fontSize } from "@/_shared";
 
 const THEME = {
@@ -54,7 +54,7 @@ const CommentInput = ({ theme, onClick, ...props }) => {
       <Footer>
         <CharCounter>{comment.count}/500</CharCounter>
         <ButtonBox>
-          <Icon icon="smile" aria-hidden />
+          {/* <Icon icon="smile" aria-hidden /> */}
           <Button
             disabled={!comment.value ? true : false}
             theme={theme}

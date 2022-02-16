@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
@@ -9,6 +10,7 @@ import {
   LandingCTASection,
   ErrorBoundary,
 } from "@/containers";
+import { ScrollTopButton } from "@/components";
 
 const LandingPage = () => {
   const theme = useRecoilValue(themeState);
@@ -19,6 +21,12 @@ const LandingPage = () => {
         <LandingDetailSection theme={theme} key={idx} {...data} />
       ))}
       <LandingCTASection text="지금 시작해보세요" theme={theme} />
+      <ScrollTopBox>
+        <ScrollTopButton
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          theme={theme}
+        />
+      </ScrollTopBox>
     </ErrorBoundary>
   );
 };
@@ -59,3 +67,10 @@ const detailData = [
     mode: "background",
   },
 ];
+
+const ScrollTopBox = styled.div`
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 999;
+`;

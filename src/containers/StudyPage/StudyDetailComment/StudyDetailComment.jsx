@@ -35,6 +35,16 @@ const StudyDetailComment = () => {
     });
   };
 
+  const dropdownItems = [
+    {
+      value: "delete",
+      label: "삭제",
+      onClick: () => {
+        window.alert("준비중인 기능이에요. 조금만 기다려주세요!");
+      },
+    },
+  ];
+
   return (
     <CommentBox>
       <BoxTitle theme={theme}>댓글</BoxTitle>
@@ -42,7 +52,11 @@ const StudyDetailComment = () => {
         총 {commentData.length}개의 댓글이 달렸습니다.
       </BoxDescription>
       <CommentInput theme={theme} onClick={(comment) => handleClick(comment)} />
-      <CommentList data={commentData} theme={theme} />
+      <CommentList
+        data={commentData}
+        dropdownItems={dropdownItems}
+        theme={theme}
+      />
     </CommentBox>
   );
 };

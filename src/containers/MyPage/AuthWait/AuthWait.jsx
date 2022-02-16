@@ -28,7 +28,12 @@ const AuthWait = ({ ...props }) => {
         <ButtonLink href="/main">
           <Button>메인으로 돌아가기</Button>
         </ButtonLink>
-        <AskingForHelp>도움이 필요하신가요?</AskingForHelp>
+        <Link
+          href="https://github.com/moramoram/ssafe-service/discussions/categories/q-a"
+          target="_blank"
+        >
+          <AskingForHelp>도움이 필요하신가요?</AskingForHelp>
+        </Link>
       </ContentBox>
     </>
   );
@@ -55,7 +60,6 @@ const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
   margin: 40px;
   gap: 30px;
 `;
@@ -84,6 +88,9 @@ const ButtonLink = styled.a`
 const AskingForHelp = styled.div`
   color: ${colors.blue100};
   font-weight: ${fontWeight.bold};
-
   cursor: pointer;
+`;
+
+const Link = styled.a`
+  text-decoration: none;
 `;

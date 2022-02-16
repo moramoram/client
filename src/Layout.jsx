@@ -27,7 +27,6 @@ import {
   SmallModal,
   SubmitModal,
 } from "@/containers";
-import { ScrollTopButton } from "@/components";
 import { colors } from "@/_shared";
 
 const Layout = () => {
@@ -85,12 +84,6 @@ const Layout = () => {
         <Footer theme={theme} />
       </ContentBox>
       <ScrollToTop />
-      <ScrollTopBox>
-        <ScrollTopButton
-          theme={theme}
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        />
-      </ScrollTopBox>
     </LayoutBox>
   );
 };
@@ -120,12 +113,5 @@ const ContentBox = styled.div`
 `;
 
 const Nav = styled(Navbar)`
-  z-index: 999;
-`;
-
-const ScrollTopBox = styled.div`
-  position: fixed;
-  right: 2rem;
-  bottom: 2rem;
   z-index: 999;
 `;

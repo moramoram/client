@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isAuthenticatedState, navTypeState } from "@/recoil";
+import { isAuthenticatedState, navTypeState, themeState } from "@/recoil";
 
 import { useMediaQuery } from "react-responsive";
 
 import { JobIntro, JobMain, JobMainMobile, ErrorBoundary } from "@/containers";
+import { ScrollTopButton } from "@/components";
+
 import { throttle } from "@/utils";
+
 const JobsPage = () => {
+  const theme = useRecoilValue(themeState);
   const setNavType = useSetRecoilState(navTypeState);
   const [offset, setOffset] = useState(0);
   const isAuthenticated = useRecoilValue(isAuthenticatedState);
@@ -35,6 +40,12 @@ const JobsPage = () => {
       <JobIntro />
       {isPc && <JobMain categoryData={category} />}
       {isMobile && <JobMainMobile categoryData={category} />}
+      <ScrollTopBox>
+        <ScrollTopButton
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          theme={theme}
+        />
+      </ScrollTopBox>
     </ErrorBoundary>
   );
 };
@@ -59,3 +70,10 @@ const categoryData = [
     title: "내 관심 공고",
   },
 ];
+
+const ScrollTopBox = styled.div`
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 999;
+`;

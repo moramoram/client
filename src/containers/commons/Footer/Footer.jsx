@@ -25,10 +25,10 @@ const Footer = ({ ...props }) => {
               <ItemLink to="#">
                 <Item>만든 사람</Item>
               </ItemLink>
-              <ItemLink to="#">
+              <ItemLink to="/terms">
                 <Item>이용약관</Item>
               </ItemLink>
-              <ItemLink to="#">
+              <ItemLink to="/privacy">
                 <Item>개인정보처리방침</Item>
               </ItemLink>
             </Column>
@@ -46,12 +46,15 @@ const Footer = ({ ...props }) => {
             </Column>
             <Column>
               <Heading>문의</Heading>
-              <ItemLink to="#">
-                <Item>FAQ</Item>
-              </ItemLink>
-              <ItemLink to="#">
+              <HyperLink
+                href="https://github.com/moramoram/ssafe-service/discussions/categories/q-a"
+                target="_blank"
+              >
+                <Item>Q&A</Item>
+              </HyperLink>
+              <HyperLink href="mailto:moramoram604@gmail.com">
                 <Item>1:1문의</Item>
-              </ItemLink>
+              </HyperLink>
             </Column>
           </Row>
         </Container>
@@ -142,6 +145,10 @@ const LogoBox = styled.div`
 `;
 
 const ItemLink = styled(Link)`
+  text-decoration: none;
+`;
+
+const HyperLink = styled.a`
   text-decoration: none;
 `;
 

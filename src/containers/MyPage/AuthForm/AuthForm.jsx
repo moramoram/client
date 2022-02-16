@@ -158,11 +158,11 @@ const AuthForm = ({ userProfile, ...props }) => {
   });
 
   if (authCheck === 2) {
-    return <AuthWait />;
+    return <AuthWait theme={theme} />;
   }
 
   if (authCheck === 3) {
-    return <AuthComplete />;
+    return <AuthComplete theme={theme} />;
   }
   return (
     <>

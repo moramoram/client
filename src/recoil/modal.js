@@ -10,6 +10,11 @@ export const smallModalState = atom({
   default: false,
 });
 
+export const submitModalState = atom({
+  key: "submitModalState",
+  default: false,
+});
+
 export const loginModalState = atom({
   key: "loginModalState",
   default: null,

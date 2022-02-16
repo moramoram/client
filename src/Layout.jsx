@@ -99,10 +99,3 @@ const ContentBox = styled.div`
 const Nav = styled(Navbar)`
   z-index: 999;
 `;
-
-const ScrollTopBox = styled.div`
-  position: fixed;
-  right: 2rem;
-  bottom: 2rem;
-  z-index: 999;
-`;

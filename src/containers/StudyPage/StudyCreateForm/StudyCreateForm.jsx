@@ -12,11 +12,14 @@ import { Button } from "@/components";
 const StudyCreateForm = ({ ...props }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [croppedImage, setCroppedImage] = useState(null);
-  // const imgProps = { croppedImage, setCroppedImage };
+  const [companyOptions, setCompanyOptions] = useState(null);
 
-  useEffect(async () => {
-    const data = await GetCompanyList();
-    console.log(data);
+  useEffect(() => {
+    const getCompanyList = async () => {
+      const data = await GetCompanyList();
+      setCompanyOptions(data);
+    };
+    getCompanyList();
   }, []);
 
   const {
@@ -44,8 +47,9 @@ const StudyCreateForm = ({ ...props }) => {
 
       data.studyType = data.studyType.label;
       data.companyName = data.companyName?.label ?? "-";
-      data.techStack =
-        data.techStack?.map((option) => option.value).join(",") ?? "";
+      data.techStack = data.techStack
+        ? data.techStack.map((option) => option.value).join(",")
+        : "";
       if (isChecked) data.memberNumber = "무관";
 
       Object.keys(data).forEach((key) => formData.append(key, data[key]));
@@ -97,6 +101,7 @@ const StudyCreateForm = ({ ...props }) => {
             setIsChecked={setIsChecked}
             croppedImage={croppedImage}
             setCroppedImage={setCroppedImage}
+            companyOptions={companyOptions}
             {...props}
           />
           <ButtonBox>

@@ -24,6 +24,7 @@ const StudyCreateSummary = ({
   originalData,
   croppedImage,
   setCroppedImage,
+  companyOptions,
   ...props
 }) => {
   const [radioState, setRadioState] = useState({
@@ -43,17 +44,10 @@ const StudyCreateSummary = ({
     { value: "etc", label: "기타" },
   ];
 
-  const companyOption = [
-    { value: "naver", label: "네이버" },
-    { value: "kakao", label: "카카오" },
-    { value: "line", label: "라인" },
-    { value: "coupang", label: "쿠팡" },
-    { value: "woowahan", label: "우아한형제들" },
-    { value: "daangn", label: "당근마켓" },
-    { value: "toss", label: "토스" },
-    { value: "zigbang", label: "직방" },
-    { value: "yanolka", label: "야놀자" },
-  ];
+  const companyOption = companyOptions.map(({ companyName }) => ({
+    label: companyName,
+    value: companyName,
+  }));
 
   const techStackOption = [
     { value: "Android", label: "Android" },
@@ -155,6 +149,7 @@ const StudyCreateSummary = ({
                     placeholder="목표 기업을 선택하세요"
                     options={companyOption}
                     isDisabled={originalData?.company_name}
+                    isClearable
                     {...field}
                     {...props}
                   />

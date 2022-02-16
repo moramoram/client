@@ -64,7 +64,12 @@ const SignUpModal = ({ ...props }) => {
                 </Button>
               </ButtonLink>
             </ButtonBox>
-            <AskingForHelp>도움이 필요하신가요?</AskingForHelp>
+            <Link
+              href="https://github.com/moramoram/ssafe-service/discussions/categories/q-a"
+              target="_blank"
+            >
+              <AskingForHelp>도움이 필요하신가요?</AskingForHelp>
+            </Link>
           </ContentBox>
         </Layout>
       </ModalBox>
@@ -201,10 +206,16 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const AskingForHelp = styled.div`
-  text-align: center;
+const Link = styled.a`
+  text-decoration: none;
+`;
+
+const AskingForHelp = styled.span`
   color: ${colors.blue100};
   font-weight: ${fontWeight.bold};
-
   cursor: pointer;
+
+  :hover {
+    color: ${colors.blue200};
+  }
 `;

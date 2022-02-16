@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState } from "recoil";
-import { themeState, jobSearch } from "@/recoil";
+import { themeState, jobSearch, jobFilter } from "@/recoil";
 
 import { SubNavbar, Input, Selector, Checkbox, Sort } from "@/components";
 import { JobCardGrid } from "@/containers";
@@ -13,19 +13,20 @@ import { debounce } from "@/utils";
 const JobMain = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);
   const [search, setSearch] = useRecoilState(jobSearch);
+  const [filter, setFilter] = useRecoilState(jobFilter);
 
   const handleCategory = (id) => {
     window.scrollTo({ top: 0 });
     id === 3 ? alert("싸피") : setSearch({ ...search, category: id });
   };
 
-  const handleSort = (criteria) => {
-    setSearch({ ...search, criteria: criteria });
-  };
-
   const handleKeyword = debounce((e) => {
     setSearch({ ...search, title: e.target.value });
   });
+
+  const handleSort = (criteria) => {
+    setSearch({ ...search, criteria: criteria });
+  };
 
   const handleTechStack = (e) => {
     setSearch({
@@ -38,6 +39,10 @@ const JobMain = ({ categoryData }) => {
 
   const handleJob = (e) => {
     setSearch({ ...search, job: e.label });
+  };
+
+  const handleFilter = (e) => {
+    setFilter(e.target.checked);
   };
 
   return (
@@ -75,7 +80,12 @@ const JobMain = ({ categoryData }) => {
             </InputBox>
             <SortBox>
               <Sort items={criteriaData} theme={theme} onClick={handleSort} />
-              <Checkbox label="마감된 스터디 숨기기" theme={theme} />
+              <Checkbox
+                label="마감된 스터디 숨기기"
+                theme={theme}
+                onChange={handleFilter}
+                defaultChecked={filter}
+              />
             </SortBox>
           </>
         )}

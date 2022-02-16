@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState } from "recoil";
-import { themeState, jobSearch } from "@/recoil";
+import { themeState, jobSearch, jobFilter } from "@/recoil";
 
 import { SubNavbar, Input, Checkbox, Sort } from "@/components";
 import { CardGrid } from "@/layouts";
@@ -13,6 +13,8 @@ import { debounce } from "@/utils";
 const JobMainMobile = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);
   const [search, setSearch] = useRecoilState(jobSearch);
+  const [filter, setFilter] = useRecoilState(jobFilter);
+
   const handleCategory = (id) => {
     window.scrollTo({ top: 0 });
     id !== 3 && setSearch({ ...search, category: id });
@@ -24,6 +26,10 @@ const JobMainMobile = ({ categoryData }) => {
 
   const handleSort = (criteria) => {
     setSearch({ ...search, criteria: criteria });
+  };
+
+  const handleFilter = (e) => {
+    setFilter(e.target.checked);
   };
 
   return (
@@ -46,7 +52,12 @@ const JobMainMobile = ({ categoryData }) => {
           </SearchBox>
           <SortBox>
             <Sort items={criteriaData} theme={theme} onClick={handleSort} />
-            <Checkbox label="마감된 스터디 숨기기" theme={theme} />
+            <Checkbox
+              label="마감된 스터디 숨기기"
+              theme={theme}
+              onChange={handleFilter}
+              defaultChecked={filter}
+            />
           </SortBox>
         </>
       )}

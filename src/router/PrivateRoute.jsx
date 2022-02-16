@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Navigate } from "react-router-dom";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { authState, modalState, loginModalState, isLoginState } from "@/recoil";
@@ -8,9 +10,9 @@ const PrivateRoute = ({
   checkAuthorized,
 }) => {
   const isLogined = useRecoilValue(isLoginState);
-  const authorizedState = useRecoilValue(authState);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const setModalOpen = useSetRecoilState(modalState);
+  const authorizedState = useRecoilValue(authState);
 
   if (!isLogined) {
     setLoginModalOpen("require");

@@ -1,10 +1,6 @@
-import React, { useEffect } from "react";
+import React, { Suspense } from "react";
 
 import { Route, Routes } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { auth, token } from "@/recoil";
-
-import { axiosInstance } from "@/utils";
 import Layout from "@/Layout";
 import { PrivateRoute } from "@/router";
 
@@ -28,87 +24,100 @@ import {
 } from "@/pages";
 
 const Router = () => {
-  const jwtToken = useRecoilValue(token);
-  const setAuth = useSetRecoilState(auth);
-
-  const getMyPageInfo = async () => {
-    const { data } = await axiosInstance({ url: "users/me" });
-    setAuth(data);
-  };
-
-  useEffect(() => {
-    if (!!jwtToken.accessToken) {
-      getMyPageInfo();
-    }
-  });
-
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={<div />}>
+              <LandingPage />
+            </Suspense>
+          }
+        />
         <Route path="main" element={<MainPage />} />
         <Route path="job" element={<JobPage />} />
         <Route path="job/create" element={<JobCreatePage />} />
         <Route
           path="job/create"
           element={
-            <PrivateRoute
-              component={JobCreatePage}
-              fallback="job"
-              checkAuthorized
-            />
+            <Suspense fallback={<div />}>
+              <PrivateRoute
+                component={JobCreatePage}
+                fallback="job"
+                checkAuthorized
+              />
+            </Suspense>
           }
         />
         <Route
           path="job/:jobId"
           element={
-            <PrivateRoute
-              component={JobDetailPage}
-              fallback="job"
-              checkAuthorized
-            />
+            <Suspense fallback={<div />}>
+              <PrivateRoute
+                component={JobDetailPage}
+                fallback="job"
+                checkAuthorized
+              />
+            </Suspense>
           }
         />
         <Route path="study" element={<StudyPage />} />
         <Route
           path="study/create"
           element={
-            <PrivateRoute
-              component={StudyCreatePage}
-              fallback="study"
-              checkAuthorized
-            />
+            <Suspense fallback={<div />}>
+              <PrivateRoute
+                component={StudyCreatePage}
+                fallback="study"
+                checkAuthorized
+              />
+            </Suspense>
           }
         />
         <Route
           path="study/:studyId"
           element={
-            <PrivateRoute
-              component={StudyDetailPage}
-              fallback="study"
-              checkAuthorized
-            />
+            <Suspense fallback={<div />}>
+              <PrivateRoute
+                component={StudyDetailPage}
+                fallback="study"
+                checkAuthorized
+              />
+            </Suspense>
           }
         />
         <Route
           path="study/:studyId/update"
           element={
-            <PrivateRoute
-              component={StudyUpdatePage}
-              fallback="study"
-              checkAuthorized
-            />
+            <Suspense fallback={<div />}>
+              <PrivateRoute
+                component={StudyUpdatePage}
+                fallback="study"
+                checkAuthorized
+              />
+            </Suspense>
           }
         />
-        <Route path="community" element={<CommunityPage />} />
+
+        <Route
+          path="community"
+          element={
+            <Suspense fallback={<div />}>
+              <CommunityPage />
+            </Suspense>
+          }
+        />
         <Route
           path="community/:contentId"
           element={
-            <PrivateRoute
-              component={CommunityDetailPage}
-              fallback="community"
-              checkAuthorized
-            />
+            <Suspense fallback={<div />}>
+              <PrivateRoute
+                component={CommunityDetailPage}
+                fallback="community"
+                checkAuthorized
+              />
+            </Suspense>
           }
         />
         <Route

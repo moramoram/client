@@ -29,7 +29,6 @@ const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const resetToken = useResetRecoilState(token);
-  const resetAuth = useResetRecoilState(auth);
   const { pathname } = useLocation();
   const navbarRight = useRef();
 
@@ -46,7 +45,6 @@ const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
 
   const onLogout = () => {
     resetToken();
-    resetAuth();
   };
 
   useEffect(() => {

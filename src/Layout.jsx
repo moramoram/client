@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import styled from "styled-components";
 
 import { Outlet } from "react-router-dom";
@@ -50,13 +50,16 @@ const Layout = () => {
       {isloginModal && <SignUpModal theme={theme} />}
       {isCreateModal && <CommunityCreate theme={theme} />}
       {isUpdateModal && <CommunityUpdate theme={theme} />}
-      <Nav
-        theme={theme}
-        type={navType}
-        navData={navData}
-        userMenuData={userMenuData}
-        isLogin={isLogined}
-      />
+      <Suspense fallback={<div />}>
+        <Nav
+          theme={theme}
+          type={navType}
+          navData={navData}
+          userMenuData={userMenuData}
+          isLogin={isLogined}
+        />
+      </Suspense>
+
       <ContentBox>
         <Outlet />
         <Footer theme={theme} />

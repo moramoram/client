@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -25,6 +25,7 @@ const JobDetail = ({ commentData, ...props }) => {
   const { data } = GetJobDetail(id);
   const { contentData, titleData, sidebarData, companyData } =
     JobDetailSelector(data);
+  const recruitState = titleData.highlight === "모집중";
 
   const studyCardData = GetCompanyStudyList(companyData.companyName);
   const { smallCardData } = StudyCardSmallSelector(studyCardData);
@@ -36,7 +37,9 @@ const JobDetail = ({ commentData, ...props }) => {
     <>
       <Layout>
         <TitleBox {...props}>
-          <Highlight {...props}>{titleData.highlight}</Highlight>
+          <Highlight status={recruitState} {...props}>
+            {titleData.highlight}
+          </Highlight>
           <Title {...props}>{titleData.title}</Title>
           <SubTitle {...props}>{titleData.subtitle}</SubTitle>
         </TitleBox>
@@ -86,6 +89,11 @@ const tocItem = [
     number: null,
   },
 ];
+
+const highlightColor = {
+  true: colors.blue100,
+  false: colors.gray500,
+};
 
 const titleColor = {
   light: colors.gray900,
@@ -138,7 +146,7 @@ const Highlight = styled.div`
   font-size: ${fontSize.lg};
   line-height: ${lineHeight.lg};
   font-weight: ${fontWeight.bold};
-  color: ${colors.blue100};
+  color: ${(props) => highlightColor[props.status]};
 `;
 
 const Title = styled.div`

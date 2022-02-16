@@ -14,11 +14,13 @@ const CommunityDetailComment = ({ boardType, ...props }) => {
   const id = useParams().contentId;
   const { data } = GetComments({ type: "board", boardType: boardType, id: id });
   const { commentData } = CommentSelector(data);
+
   const CommentMutation = useMutation((data) => postComment(data), {
     onSuccess: () => {
       queryClient.invalidateQueries("getComments");
     },
   });
+
   const handleClick = (comment) => {
     CommentMutation.mutate({
       type: "board",
@@ -27,11 +29,25 @@ const CommunityDetailComment = ({ boardType, ...props }) => {
     });
   };
 
+  const dropdownItems = [
+    {
+      name: "delete",
+      title: "삭제",
+      onClick: () => {
+        window.alert("준비중인 기능이에요. 조금만 기다려주세요!");
+      },
+    },
+  ];
+
   return (
     <>
       <Title {...props}>댓글</Title>
       <CommentInput onClick={(comment) => handleClick(comment)} {...props} />
-      <CommentList data={commentData} {...props} />
+      <CommentList
+        data={commentData}
+        dropdownItems={dropdownItems}
+        {...props}
+      />
     </>
   );
 };

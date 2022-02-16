@@ -27,6 +27,16 @@ const JobDetailComment = ({ companyId, ...props }) => {
     });
   };
 
+  const dropdownItems = [
+    {
+      name: "delete",
+      title: "삭제",
+      onClick: () => {
+        window.alert("준비중인 기능이에요. 조금만 기다려주세요!");
+      },
+    },
+  ];
+
   return (
     <Layout>
       <BoxTitle {...props}>댓글</BoxTitle>
@@ -34,7 +44,11 @@ const JobDetailComment = ({ companyId, ...props }) => {
         이 기업에 대한 의견을 나눠보세요
       </BoxDescription>
       <CommentInput onClick={(comment) => handleClick(comment)} {...props} />
-      <CommentList data={commentData} {...props} />
+      <CommentList
+        data={commentData}
+        dropdownItems={dropdownItems}
+        {...props}
+      />
     </Layout>
   );
 };

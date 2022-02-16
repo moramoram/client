@@ -17,7 +17,7 @@ const JobMainMobile = ({ categoryData }) => {
 
   const handleCategory = (id) => {
     window.scrollTo({ top: 0 });
-    id !== 3 && setSearch({ ...search, category: id });
+    setSearch({ ...search, category: id });
   };
 
   const handleKeyword = debounce((e) => {

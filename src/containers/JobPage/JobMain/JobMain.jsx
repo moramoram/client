@@ -17,7 +17,7 @@ const JobMain = ({ categoryData }) => {
 
   const handleCategory = (id) => {
     window.scrollTo({ top: 0 });
-    id === 3 ? alert("싸피") : setSearch({ ...search, category: id });
+    setSearch({ ...search, category: id });
   };
 
   const handleKeyword = debounce((e) => {

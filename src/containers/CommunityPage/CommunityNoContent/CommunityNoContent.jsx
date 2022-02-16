@@ -2,17 +2,29 @@ import React from "react";
 import styled from "styled-components";
 
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isAuthenticated, createModalState, loginModalState } from "@/recoil";
+import {
+  authState,
+  createModalState,
+  modalState,
+  smallModalState,
+  loginModalState,
+} from "@/recoil";
 
 import { Button } from "@/components";
 import { colors, fontSize, fontWeight, lineHeight } from "@/_shared";
 
 const CommunityNoContent = ({ ...props }) => {
-  const isAuthorized = useRecoilValue(isAuthenticated);
+  const authorizedState = useRecoilValue(authState);
+
   const setCreateModalOpen = useSetRecoilState(createModalState);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
+  const setModalOpen = useSetRecoilState(modalState);
+  const setSmallModalState = useSetRecoilState(smallModalState);
   const handleCreation = () => {
-    isAuthorized ? setCreateModalOpen(true) : setLoginModalOpen("require");
+    !authorizedState && setLoginModalOpen("require");
+    authorizedState === 3 && setCreateModalOpen(true);
+    authorizedState === 2 && setModalOpen(true);
+    authorizedState === 1 && setSmallModalState(true);
   };
 
   return (

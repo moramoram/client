@@ -54,7 +54,7 @@ export const StudyDetailSelector = (data) => {
         ? data.memberNumber
         : `${data.memberNumber}명`,
     onOff: onOff[data.onOff],
-    badges: data.techStack?.split(","),
+    badges: data.techStack?.split(",").filter((data) => data),
     scrap: data.scrapStatus,
   };
   return { contentData, titleData, tocItem, sidebarData };

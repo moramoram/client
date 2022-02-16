@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
-import { GetStudyDetail, GetCompanyList, PutStudy } from "@/api";
+import { GetStudyDetail, getCompanyList, PutStudy } from "@/api";
 
 import { StudyCreateSummary, StudyCreateDetail } from "@/containers";
 import { Button } from "@/components";
@@ -15,18 +15,12 @@ const StudyUpdateForm = ({ ...props }) => {
   const [croppedImage, setCroppedImage] = useState(null);
   const [companyOptions, setCompanyOptions] = useState(null);
 
-  // const getCompanyList = async () => {
-  //   const data = await GetCompanyList();
-  //   setCompanyOptions(data);
-  //   console.log(companyOptions);
-  // };
-
   useEffect(() => {
-    const getCompanyList = async () => {
-      const data = await GetCompanyList();
+    const getCompanyData = async () => {
+      const data = await getCompanyList();
       setCompanyOptions(data);
     };
-    getCompanyList();
+    getCompanyData();
   }, []);
 
   const {

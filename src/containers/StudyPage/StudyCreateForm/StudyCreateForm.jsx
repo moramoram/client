@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
-import { GetCompanyList, PostStudy } from "@/api";
+import { getCompanyList, PostStudy } from "@/api";
 
 import { StudyCreateSummary, StudyCreateDetail } from "@/containers";
 import { Button } from "@/components";
@@ -15,11 +15,11 @@ const StudyCreateForm = ({ ...props }) => {
   const [companyOptions, setCompanyOptions] = useState(null);
 
   useEffect(() => {
-    const getCompanyList = async () => {
-      const data = await GetCompanyList();
+    const getData = async () => {
+      const data = await getCompanyList();
       setCompanyOptions(data);
     };
-    getCompanyList();
+    getData();
   }, []);
 
   const {

@@ -74,7 +74,12 @@ const CommunityDetail = ({ ...props }) => {
 
   return (
     <Layout>
-      <FeedDetail {...contentData} dropdownItems={dropdownItems} {...props} />
+      <FeedDetail
+        boardType={contentData.boardType}
+        {...contentData}
+        dropdownItems={dropdownItems}
+        {...props}
+      />
       <Footer>
         <Button
           mode={isLike ? "primary" : "secondary"}

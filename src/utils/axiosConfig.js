@@ -22,7 +22,9 @@ axiosInstance.interceptors.response.use(
     return config.data;
   },
   (err) => {
+    console.log(err.response.data.message);
     if (err.response.data.message === "Expired access token.") {
+      console.log("토큰 재발급 시작");
       return getRefreshToken()
         .then((data) => {
           console.log("토근 재발급 성공", data);
@@ -32,7 +34,7 @@ axiosInstance.interceptors.response.use(
         })
         .catch((err) => {
           console.log("토근 재발급 실패");
-          console.log(err);
+          localStorage.removeItem("ssafe_token");
         });
     }
     return Promise.reject(err);

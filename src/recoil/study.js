@@ -9,3 +9,8 @@ export const studySearch = atom({
     criteria: "",
   },
 });
+
+export const studyfilter = atom({
+  key: "studyfilter",
+  default: false,
+});

@@ -23,6 +23,8 @@ import {
   CommunityDetailPage,
   MyPage,
   NotFoundPage,
+  PrivacyPage,
+  TermsPage,
 } from "@/pages";
 
 const Router = () => {
@@ -114,6 +116,10 @@ const Router = () => {
           element={<PrivateRoute component={MyPage} fallback="" />}
         />
         <Route path="auth/login/*" element={<LoginPage />} />
+        <Route path="auth/login/*" element={<LoginPage />} />
+        <Route path="auth/login/*" element={<LoginPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

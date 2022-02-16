@@ -9,7 +9,7 @@ import { CommentInput } from "@/components";
 import { CommentList } from "@/layouts";
 import { colors, fontSize, fontWeight } from "@/_shared";
 
-const CommunityDetailComment = ({ boardType }, props) => {
+const CommunityDetailComment = ({ boardType, ...props }) => {
   const queryClient = useQueryClient();
   const id = useParams().contentId;
   const { data } = GetComments({ type: "board", boardType: boardType, id: id });

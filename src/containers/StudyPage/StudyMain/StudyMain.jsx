@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState } from "recoil";
-import { themeState, studySearch } from "@/recoil";
+import { themeState, studySearch, studyfilter } from "@/recoil";
 
 import { StudyCardGrid } from "@/containers";
 import { CardGrid } from "@/layouts";
@@ -13,24 +13,27 @@ import { debounce } from "@/utils";
 const StudyMain = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);
   const [search, setSearch] = useRecoilState(studySearch);
+  const [filter, setFilter] = useRecoilState(studyfilter);
 
   const handleCategory = (id) => {
     window.scrollTo({ top: 0 });
     setSearch({ ...search, category: id });
   };
+  const handleKeyword = debounce((e) => {
+    setSearch({ ...search, title: e.target.value });
+  });
 
   const handleSort = (criteria) => {
     setSearch({ ...search, criteria: criteria });
   };
 
-  const handleKeyword = debounce((e) => {
-    setSearch({ ...search, title: e.target.value });
-  });
-
   const handleType = (e) => {
-    setSearch({ ...search, studyType: e.title });
+    setSearch({ ...search, studyType: e.label });
   };
 
+  const handleFilter = (e) => {
+    setFilter(e.target.checked);
+  };
   return (
     <Layout>
       <StickyNavBox>
@@ -54,7 +57,12 @@ const StudyMain = ({ categoryData }) => {
         </InputBox>
         <SortBox>
           <Sort theme={theme} onClick={handleSort} items={criteriaData} />
-          <Checkbox label="마감된 스터디 숨기기" theme={theme} />
+          <Checkbox
+            label="마감된 스터디 숨기기"
+            onChange={handleFilter}
+            defaultChecked={filter}
+            theme={theme}
+          />
         </SortBox>
         <Suspense fallback={<CardGrid theme={theme} isLoading />}>
           <StudyCardGrid theme={theme} />

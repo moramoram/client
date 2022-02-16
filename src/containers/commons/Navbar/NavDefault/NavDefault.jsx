@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { Link, useLocation } from "react-router-dom";
 import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
-import { auth, token, themeState, loginModalState } from "@/recoil";
+import { token, themeState, loginModalState } from "@/recoil";
 
 import { NavDefaultItem } from "./NavDefaultItem";
 import { Notification } from "@/containers";

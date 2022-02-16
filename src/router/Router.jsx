@@ -120,9 +120,14 @@ const Router = () => {
             </Suspense>
           }
         />
+
         <Route
           path="mypage"
-          element={<PrivateRoute component={MyPage} fallback="" />}
+          element={
+            <Suspense fallback={<div />}>
+              <PrivateRoute component={MyPage} fallback="main" />
+            </Suspense>
+          }
         />
         <Route path="auth/login/*" element={<LoginPage />} />
         <Route path="auth/login/*" element={<LoginPage />} />

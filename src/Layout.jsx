@@ -11,6 +11,7 @@ import {
   loginModalState,
   createModalState,
   updateModalState,
+  smallModalState,
 } from "@/recoil/modal";
 import { navMenuData, navUserData } from "@/recoil/menu";
 
@@ -22,6 +23,7 @@ import {
   CommunityCreate,
   CommunityUpdate,
   AuthModal,
+  SmallModal,
 } from "@/containers";
 import { ScrollTopButton } from "@/components";
 import { colors } from "@/_shared";
@@ -37,6 +39,7 @@ const Layout = () => {
   const isCreateModal = useRecoilValue(createModalState);
   const isUpdateModal = useRecoilValue(updateModalState);
   const isAuthModal = useRecoilValue(modalState);
+  const isSmallModal = useRecoilValue(smallModalState);
 
   useEffect(() => {
     (isAuthModal || isloginModal || isCreateModal || isUpdateModal) &&
@@ -47,6 +50,7 @@ const Layout = () => {
   return (
     <LayoutBox theme={theme}>
       {isAuthModal && <AuthModal theme={theme} />}
+      {isSmallModal && <SmallModal theme={theme} />}
       {isloginModal && <SignUpModal theme={theme} />}
       {isCreateModal && <CommunityCreate theme={theme} />}
       {isUpdateModal && <CommunityUpdate theme={theme} />}

@@ -3,9 +3,7 @@ const daysLeftFromToday = (value) => {
   const today = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
   const timeValue = new Date(value);
 
-  const betweenTime = Math.floor(
-    (timeValue.getTime() - today.getTime()) / 1000 / 60
-  );
+  const betweenTime = Math.floor((timeValue.getTime() - today) / 1000 / 60);
 
   if (betweenTime < 1) return false;
 

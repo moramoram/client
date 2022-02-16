@@ -3,9 +3,7 @@ const daysFromToday = (value) => {
   const today = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
   const timeValue = new Date(value);
 
-  const betweenTime = Math.floor(
-    (today.getTime() - timeValue.getTime()) / 1000 / 60
-  );
+  const betweenTime = Math.floor((today - timeValue.getTime()) / 1000 / 60);
   if (betweenTime < 1) return "방금 전";
   if (betweenTime < 60) {
     return `${betweenTime}분 전`;

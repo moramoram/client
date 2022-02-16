@@ -1,5 +1,5 @@
 export { default as AuthForm } from "./AuthForm";
-export { default as AuthMessage } from "./AuthMessage";
+export { default as AuthWait } from "./AuthWait";
 export { default as MyComment } from "./MyComment";
 export { default as MyFeed } from "./MyFeed";
 export { default as MyInfo } from "./MyInfo";

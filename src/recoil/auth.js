@@ -13,7 +13,6 @@ export const token = atom({
 export const auth = selector({
   key: "auth",
   get: async ({ get }) => {
-    console.log(!!get(token).accessToken, get(token).accessToken);
     if (!!get(token).accessToken) {
       const res = await axiosInstance({ url: "users/me" });
       return res.data;

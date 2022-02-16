@@ -7,7 +7,7 @@ import { colors, fontWeight } from "@/_shared";
 import { useSetRecoilState } from "recoil";
 import { modalState } from "@/recoil";
 
-const AuthMessage = ({ ...props }) => {
+const AuthWait = ({ ...props }) => {
   const setIsModalOpened = useSetRecoilState(modalState);
 
   return (
@@ -25,7 +25,6 @@ const AuthMessage = ({ ...props }) => {
             {`관리자가 열심히 확인중이에요. \n 조금만 더 기다려주세요!`}
           </SubTitle>
         </TextBox>
-
         <ButtonLink href="/main">
           <Button>메인으로 돌아가기</Button>
         </ButtonLink>
@@ -35,7 +34,7 @@ const AuthMessage = ({ ...props }) => {
   );
 };
 
-export default AuthMessage;
+export default AuthWait;
 
 const LogoBox = styled.div``;
 

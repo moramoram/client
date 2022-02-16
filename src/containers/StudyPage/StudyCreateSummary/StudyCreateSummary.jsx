@@ -44,7 +44,7 @@ const StudyCreateSummary = ({
     { value: "etc", label: "기타" },
   ];
 
-  const companyOption = companyOptions.map(({ companyName }) => ({
+  const companyOption = companyOptions?.map(({ companyName }) => ({
     label: companyName,
     value: companyName,
   }));
@@ -81,9 +81,9 @@ const StudyCreateSummary = ({
     return null;
   };
 
-  const defaultTechStack = originalData
+  const defaultTechStack = originalData?.techStack
     ? techStackOption.filter((option) =>
-        originalData.techStack?.split(",").includes(option.value)
+        originalData.techStack.split(",").includes(option.value)
       )
     : "";
 
@@ -130,19 +130,25 @@ const StudyCreateSummary = ({
               )}
             />
           </InputBox>
-          {(watch("studyType")?.value === "recruit" ||
-            originalData?.company_name) && (
+          {originalData?.studyType === "채용" && originalData?.company_name && (
+            <InputBox>
+              <Selector
+                title="목표 기업"
+                placeholder="목표 기업을 선택하세요"
+                value={{
+                  label: originalData.company_name,
+                  value: originalData.company_name,
+                }}
+                isDisabled
+                {...props}
+              />
+            </InputBox>
+          )}
+          {watch("studyType")?.value === "recruit" && (
             <InputBox>
               <Controller
                 name="companyName"
                 control={control}
-                defaultValue={
-                  originalData
-                    ? companyOption.filter(
-                        (option) => option.label === originalData?.company_name
-                      )
-                    : ""
-                }
                 render={({ field }) => (
                   <Selector
                     title="목표 기업"

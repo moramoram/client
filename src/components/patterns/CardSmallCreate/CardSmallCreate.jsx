@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { Link } from "react-router-dom";
+
 import { Icon } from "@/foundations";
 import { colors, fontSize, fontWeight, loadings } from "@/_shared";
 
@@ -10,16 +12,23 @@ const THEME = {
   DARK: "dark",
 };
 
-const CardSmallCreate = ({ content, ...props }) => {
+const CardSmallCreate = ({ content, companyData, ...props }) => {
   return (
-    <Layout {...props}>
-      <Thumbnail {...props}>
-        <Icon icon="plus" stroke={colors.gray500} />
-      </Thumbnail>
-      <TextBox>
-        <Title {...props}>{content}</Title>
-      </TextBox>
-    </Layout>
+    <ItemLink
+      to={{
+        pathname: "/study/create",
+        search: `?company=${companyData.companyName}`,
+      }}
+    >
+      <Layout {...props}>
+        <Thumbnail {...props}>
+          <Icon icon="plus" stroke={colors.gray500} />
+        </Thumbnail>
+        <TextBox>
+          <Title {...props}>{content}</Title>
+        </TextBox>
+      </Layout>
+    </ItemLink>
   );
 };
 
@@ -33,15 +42,19 @@ CardSmallCreate.defaultProps = {
 
 export default CardSmallCreate;
 
-const bgColor = {
-  light: colors.gray25,
-  dark: colors.gray900,
-};
-
 const borderColor = {
   light: colors.gray200,
   dark: colors.gray800,
 };
+
+const hoverBgColor = {
+  light: colors.gray50,
+  dark: colors.gray900,
+};
+
+const ItemLink = styled(Link)`
+  text-decoration: none;
+`;
 
 const Layout = styled.div`
   width: 220px;
@@ -66,6 +79,15 @@ const Thumbnail = styled.div`
   margin-bottom: 16px;
   border: 2px dashed ${(props) => borderColor[props.theme]};
   border-radius: 8px;
+  transition: 0.3s;
+
+  :hover {
+    background-color: ${(props) => hoverBgColor[props.theme]};
+  }
+
+  :active {
+    background: none;
+  }
 `;
 
 const Title = styled.div`

@@ -25,6 +25,7 @@ const StudyCreateSummary = ({
   croppedImage,
   setCroppedImage,
   companyOptions,
+  defaultCompanyName,
   ...props
 }) => {
   const [radioState, setRadioState] = useState({
@@ -111,6 +112,8 @@ const StudyCreateSummary = ({
                   ? typeOption.filter(
                       (option) => option.label === originalData.studyType
                     )
+                  : defaultCompanyName
+                  ? typeOption.find((option) => option.label === "채용")
                   : ""
               }
               render={({ field }) => (
@@ -149,6 +152,13 @@ const StudyCreateSummary = ({
               <Controller
                 name="companyName"
                 control={control}
+                defaultValue={
+                  defaultCompanyName
+                    ? companyOption.filter(
+                        (option) => option.label === defaultCompanyName
+                      )
+                    : ""
+                }
                 render={({ field }) => (
                   <Selector
                     title="목표 기업"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -10,7 +10,7 @@ import {
 } from "@/api";
 import { useParams } from "react-router-dom";
 
-import { JobSideBar, JobDetailComment, JobNoStudy } from "@/containers";
+import { JobSideBar, JobDetailComment } from "@/containers";
 import { CardSmallSlider } from "@/layouts";
 import { Toc } from "@/components";
 import { colors, fontSize, fontWeight, lineHeight, loadings } from "@/_shared";
@@ -53,6 +53,7 @@ const JobDetail = ({ commentData, ...props }) => {
           <CardSmallSlider
             data={smallCardData}
             createMsg="스터디 만들기"
+            companyData={companyData}
             {...props}
           />
         </CardBox>

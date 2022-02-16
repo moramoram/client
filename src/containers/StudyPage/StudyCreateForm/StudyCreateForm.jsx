@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback, useState } from "react";
 import styled from "styled-components";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { getCompanyList, PostStudy } from "@/api";
@@ -14,6 +14,7 @@ const StudyCreateForm = ({ ...props }) => {
   const [croppedImage, setCroppedImage] = useState(null);
   const [companyOptions, setCompanyOptions] = useState(null);
 
+  // console.log(company);
   useEffect(() => {
     const getData = async () => {
       const data = await getCompanyList();
@@ -33,6 +34,9 @@ const StudyCreateForm = ({ ...props }) => {
   } = useForm();
 
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const defaultCompanyName = searchParams.get("company");
+
   const queryClient = useQueryClient();
   const mutateStudy = useMutation(PostStudy, {
     onSuccess: () => {
@@ -102,6 +106,7 @@ const StudyCreateForm = ({ ...props }) => {
             croppedImage={croppedImage}
             setCroppedImage={setCroppedImage}
             companyOptions={companyOptions}
+            defaultCompanyName={defaultCompanyName}
             {...props}
           />
           <ButtonBox>

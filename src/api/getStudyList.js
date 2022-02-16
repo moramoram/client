@@ -29,6 +29,26 @@ export const GetStudyList = (data) =>
     }
   );
 
+const fetchMyPage = async (pageParam) => {
+  const param = { offset: pageParam };
+  const res = await axiosInstance({
+    url: `/studies/users`,
+    params: param,
+  });
+  return { res: res.data, nextPage: pageParam + 1 };
+};
+
+export const GetMyStudyList = () =>
+  useInfiniteQuery(
+    "getMyStudyList",
+    ({ pageParam = 1 }) => fetchMyPage(pageParam),
+    {
+      getNextPageParam: (prevPage) => {
+        return !!prevPage.res.length ? prevPage.nextPage : undefined;
+      },
+    }
+  );
+
 export const StudyCardSelector = (data) => {
   const onOff = {
     0: "온라인",

@@ -21,6 +21,26 @@ export const GetCommunityList = (data) =>
     }
   );
 
+const fetchMyPage = async (pageParam) => {
+  const param = { offset: pageParam };
+  const res = await axiosInstance({
+    url: `/boards/users`,
+    params: param,
+  });
+  return { res: res.data, nextPage: pageParam + 1 };
+};
+
+export const GetMyCommunityList = () =>
+  useInfiniteQuery(
+    "getMyCommunityList",
+    ({ pageParam = 1 }) => fetchMyPage(pageParam),
+    {
+      getNextPageParam: (prevPage) => {
+        return !!prevPage.res.length ? prevPage.nextPage : undefined;
+      },
+    }
+  );
+
 export const CommunityFeedSelector = (data) => {
   const totalData = data.pages.map((page) => {
     const items = page.res.map((card) => {

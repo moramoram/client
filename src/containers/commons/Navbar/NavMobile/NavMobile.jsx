@@ -78,6 +78,7 @@ const NavMobile = ({ isLogin, userData, navData, userMenuData, ...props }) => {
             onClick={() => {
               navigate("/main");
               setnavbarOpen(false);
+              window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
             <Logo width="80" height="20" {...props} />

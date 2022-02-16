@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, Suspense } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
 import { token, themeState, loginModalState } from "@/recoil";
 
@@ -23,6 +23,7 @@ const TYPE = {
 };
 
 const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
+  const navigate = useNavigate();
   const [current, setCurrent] = useState();
   const [theme, setTheme] = useRecoilState(themeState);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -75,9 +76,14 @@ const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
   return (
     <Layout {...props}>
       <FlexBox>
-        <Link to="main">
+        <LogoBox
+          onClick={() => {
+            navigate("/main");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        >
           <Logo width="80" height="20" {...props} />
-        </Link>
+        </LogoBox>
         <NavbarItemBox>
           {navData.map(({ name, title, url }) => (
             <NavItemLink to={url} key={name}>
@@ -233,6 +239,10 @@ const FlexBox = styled.div`
   div {
     cursor: pointer;
   }
+`;
+
+const LogoBox = styled.div`
+  cursor: pointer;
 `;
 
 const NavbarItemBox = styled.div`

@@ -5,7 +5,6 @@ export const DeleteNotification = async (notificationId) => {
     url: `/notifications/${notificationId}`,
     method: "delete",
   });
-  console.log(res);
   return res.data;
 };
 
@@ -14,6 +13,5 @@ export const DeleteNotificationsAll = async () => {
     url: `/notifications`,
     method: "delete",
   });
-  console.log(res);
   return res.data;
 };

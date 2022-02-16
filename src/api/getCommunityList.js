@@ -2,7 +2,11 @@ import { useInfiniteQuery } from "react-query";
 import { axiosInstance, daysFromToday, numToMillion, parseHtml } from "@/utils";
 
 const fetchPage = async (data, pageParam) => {
-  const param = { ...data, offset: pageParam };
+  const param = {
+    ...data,
+    criteria: data.criteria.value,
+    offset: pageParam,
+  };
   const res = await axiosInstance({
     url: `/boards/search/`,
     params: param,
@@ -14,6 +18,26 @@ export const GetCommunityList = (data) =>
   useInfiniteQuery(
     ["getCommunityList", data],
     ({ pageParam = 1 }) => fetchPage(data, pageParam),
+    {
+      getNextPageParam: (prevPage) => {
+        return !!prevPage.res.length ? prevPage.nextPage : undefined;
+      },
+    }
+  );
+
+const fetchMyPage = async (pageParam) => {
+  const param = { offset: pageParam };
+  const res = await axiosInstance({
+    url: `/boards/users`,
+    params: param,
+  });
+  return { res: res.data, nextPage: pageParam + 1 };
+};
+
+export const GetMyCommunityList = () =>
+  useInfiniteQuery(
+    "getMyCommunityList",
+    ({ pageParam = 1 }) => fetchMyPage(pageParam),
     {
       getNextPageParam: (prevPage) => {
         return !!prevPage.res.length ? prevPage.nextPage : undefined;

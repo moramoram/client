@@ -24,7 +24,6 @@ const StudyMain = ({ categoryData }) => {
   });
 
   const handleSort = (criteria) => {
-    console.log(criteria);
     setSearch({ ...search, criteria: criteria });
   };
 
@@ -65,7 +64,12 @@ const StudyMain = ({ categoryData }) => {
               />
             </InputBox>
             <SortBox>
-              <Sort theme={theme} onClick={handleSort} items={criteriaData} />
+              <Sort
+                theme={theme}
+                onClick={handleSort}
+                items={criteriaData}
+                value={search.criteria}
+              />
               <Checkbox
                 label="마감된 스터디 숨기기"
                 onChange={handleFilter}
@@ -87,12 +91,12 @@ export default StudyMain;
 
 const criteriaData = [
   {
-    name: "date",
-    title: "최신순",
+    label: "최신순",
+    value: "date",
   },
   {
-    name: "scrap",
-    title: "인기순",
+    label: "인기순",
+    value: "scrap",
   },
 ];
 

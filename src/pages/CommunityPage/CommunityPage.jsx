@@ -73,7 +73,12 @@ const CommunityPage = () => {
           <ContentBox>
             <CommunityCreateButton onClick={handleCreation} theme={theme} />
             <SortBox>
-              <Sort items={criteriaData} onClick={handleSort} theme={theme} />
+              <Sort
+                items={criteriaData}
+                onClick={handleSort}
+                theme={theme}
+                value={search.criteria}
+              />
               <Search
                 theme={theme}
                 onChange={handleKeyword}
@@ -99,7 +104,12 @@ const CommunityPage = () => {
           <div>
             <CommunityCreateButton onClick={handleCreation} theme={theme} />
             <SortBox>
-              <Sort items={criteriaData} onClick={handleSort} theme={theme} />
+              <Sort
+                items={criteriaData}
+                onClick={handleSort}
+                theme={theme}
+                value={search.criteria}
+              />
               <Search
                 theme={theme}
                 onChange={handleKeyword}
@@ -146,16 +156,16 @@ const categoryData = [
 
 const criteriaData = [
   {
-    name: "date",
-    title: "최신순",
+    label: "최신순",
+    value: "date",
   },
   {
-    name: "scrap",
-    title: "인기순",
+    label: "조회순",
+    value: "view",
   },
   {
-    name: "view",
-    title: "조회순",
+    label: "좋아요순",
+    value: "like",
   },
 ];
 

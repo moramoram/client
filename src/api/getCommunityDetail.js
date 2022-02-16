@@ -15,6 +15,7 @@ export const CommunityDetailSelector = (data) => {
   const { parsedhtml } = parseHtml(data.content);
   const contentData = {
     username: data.writerInfo.nickname,
+    userId: data.writerInfo.userId,
     avatar: data.writerInfo.profileImg,
     campus: data.writerInfo.campus,
     ordinal: data.writerInfo.ordinal,

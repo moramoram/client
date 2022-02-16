@@ -35,6 +35,7 @@ const FeedDetail = ({
   viewcount,
   dropdownItems,
   boardType,
+  isDisabled,
   ...props
 }) => {
   const usernameRender = username ?? "User";
@@ -48,15 +49,17 @@ const FeedDetail = ({
           <Category>{categoryData[boardType]}</Category>
           <Title {...props}>{title}</Title>
         </TitleBox>
-        <DropdownBox>
-          <Icon
-            icon="moreVertical"
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          />
-          {isDropdownOpen && (
-            <DropdownSmall items={dropdownItems} size="small" {...props} />
-          )}
-        </DropdownBox>
+        {!isDisabled && (
+          <DropdownBox>
+            <Icon
+              icon="moreVertical"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            />
+            {isDropdownOpen && (
+              <DropdownSmall items={dropdownItems} size="small" {...props} />
+            )}
+          </DropdownBox>
+        )}
       </Header>
       <AvatarBox {...props}>
         <Avatar

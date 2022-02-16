@@ -17,7 +17,7 @@ const JobMain = ({ categoryData }) => {
 
   const handleCategory = (id) => {
     window.scrollTo({ top: 0 });
-    id === 3 ? alert("싸피") : setSearch({ ...search, category: id });
+    setSearch({ ...search, category: id });
   };
 
   const handleKeyword = debounce((e) => {
@@ -29,7 +29,6 @@ const JobMain = ({ categoryData }) => {
   };
 
   const handleTechStack = (e) => {
-    console.log(e);
     setSearch({
       ...search,
       techStack: e,
@@ -84,7 +83,12 @@ const JobMain = ({ categoryData }) => {
               />
             </InputBox>
             <SortBox>
-              <Sort items={criteriaData} theme={theme} onClick={handleSort} />
+              <Sort
+                items={criteriaData}
+                theme={theme}
+                onClick={handleSort}
+                value={search.criteria}
+              />
               <Checkbox
                 label="마감된 스터디 숨기기"
                 theme={theme}
@@ -106,12 +110,12 @@ export default JobMain;
 
 const criteriaData = [
   {
-    name: "date",
-    title: "최신순",
+    label: "최신순",
+    value: "date",
   },
   {
-    name: "scrap",
-    title: "인기순",
+    label: "인기순",
+    value: "scrap",
   },
 ];
 

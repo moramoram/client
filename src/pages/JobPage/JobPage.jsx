@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { useSetRecoilState, useRecoilValue } from "recoil";
-import { navTypeState, themeState } from "@/recoil/theme";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isAuthenticatedState, navTypeState, themeState } from "@/recoil";
+
 import { useMediaQuery } from "react-responsive";
 
 import { JobIntro, JobMain, JobMainMobile, ErrorBoundary } from "@/containers";
@@ -14,6 +15,8 @@ const JobsPage = () => {
   const theme = useRecoilValue(themeState);
   const setNavType = useSetRecoilState(navTypeState);
   const [offset, setOffset] = useState(0);
+  const isAuthenticated = useRecoilValue(isAuthenticatedState);
+  const category = isAuthenticated ? categoryData : categoryData.slice(0, 3);
 
   useEffect(() => {
     !!offset ? setNavType("default") : setNavType("transparent");
@@ -35,8 +38,8 @@ const JobsPage = () => {
   return (
     <ErrorBoundary fallback={<div />}>
       <JobIntro />
-      {isPc && <JobMain categoryData={categoryData} />}
-      {isMobile && <JobMainMobile categoryData={categoryData} />}
+      {isPc && <JobMain categoryData={category} />}
+      {isMobile && <JobMainMobile categoryData={category} />}
       <ScrollTopBox>
         <ScrollTopButton
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

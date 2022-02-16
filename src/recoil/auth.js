@@ -28,8 +28,8 @@ export const isLoginState = selector({
   },
 });
 
-export const isAuthenticated = selector({
-  key: "isAuthenticated",
+export const isAuthenticatedState = selector({
+  key: "isAuthenticatedState",
   get: ({ get }) => {
     return !!(get(auth)?.authCheck === 3);
   },

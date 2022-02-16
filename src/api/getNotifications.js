@@ -2,7 +2,12 @@ import { useQuery } from "react-query";
 import { axiosInstance } from "@/utils";
 
 export const GetNotificationList = () =>
-  useQuery(["getNotificationList"], () => fetchData());
+  useQuery(["getNotificationList"], () => fetchData(), {
+    refetchOnWindowFocus: "always",
+    refetchOnMount: "always",
+    refetchOnReconnect: "always",
+    refetchInterval: 100000,
+  });
 
 const fetchData = async () => {
   const res = await axiosInstance({

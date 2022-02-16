@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { useSetRecoilState } from "recoil";
-import { updateModalState } from "@/recoil/modal";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { auth, updateModalState } from "@/recoil";
 import { useParams, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import {
@@ -24,9 +24,9 @@ const CommunityDetail = ({ ...props }) => {
 
   const { data } = GetCommunityDetail(id);
   const { contentData } = CommunityDetailSelector(data);
-
   const [isLike, setIsLiked] = useState(contentData.likeStatus);
   const [likeCount, setLikeCount] = useState(contentData.likecount);
+  const user = useRecoilValue(auth);
 
   const commentData = GetComments({
     type: "board",
@@ -57,13 +57,13 @@ const CommunityDetail = ({ ...props }) => {
 
   const dropdownItems = [
     {
-      name: "edit",
-      title: "수정",
+      label: "수정",
+      value: "edit",
       onClick: () => setUpdateModalOpen(id),
     },
     {
-      name: "delete",
-      title: "삭제",
+      label: "삭제",
+      value: "delete",
       onClick: () => {
         if (window.confirm("정말 삭제하시겠습니까?")) {
           deletePostMutation.mutate(id);
@@ -78,6 +78,7 @@ const CommunityDetail = ({ ...props }) => {
         boardType={contentData.boardType}
         {...contentData}
         dropdownItems={dropdownItems}
+        isDisabled={contentData.userId !== user.userId}
         {...props}
       />
       <Footer>

@@ -4,6 +4,7 @@ import { useInfiniteQuery } from "react-query";
 const URL = {
   1: "/recruits/search",
   2: "/recruits/close-date",
+  3: "/recruits/benefits",
   4: "/recruits/scraps/users",
 };
 
@@ -14,8 +15,10 @@ const fetchPage = async (data, pageParam) => {
   const param = {
     ...data,
     techStack: tech.join(),
+    criteria: data.criteria.value,
     offset: pageParam,
   };
+
   const res = await axiosInstance({
     url: URL[data.category],
     params: param,

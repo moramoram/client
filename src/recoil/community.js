@@ -5,6 +5,9 @@ export const communitySearch = atom({
   default: {
     boardType: 1,
     title: "",
-    criteria: "",
+    criteria: {
+      label: "",
+      value: "",
+    },
   },
 });

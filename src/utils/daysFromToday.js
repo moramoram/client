@@ -1,6 +1,7 @@
 const daysFromToday = (value) => {
   const now = new Date();
-  const today = now.getTime() + now.getTimezoneOffset() * 60 * 1000;
+  const today =
+    now.getTime() + now.getTimezoneOffset() * 60 * 1000 + 9 * 60 * 60 * 1000;
   const timeValue = new Date(value);
 
   const betweenTime = Math.floor((today - timeValue.getTime()) / 1000 / 60);

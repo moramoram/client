@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 import { useMediaQuery } from "react-responsive";
 
-import { useSetRecoilState, useRecoilValue } from "recoil";
-import { navTypeState, themeState } from "@/recoil/theme";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isAuthenticatedState, navTypeState, themeState } from "@/recoil";
 
 import {
   StudyIntro,
@@ -19,6 +19,8 @@ const StudyPage = () => {
   const theme = useRecoilValue(themeState);
   const setNavType = useSetRecoilState(navTypeState);
   const [offset, setOffset] = useState(0);
+  const isAuthenticated = useRecoilValue(isAuthenticatedState);
+  const category = isAuthenticated ? categoryData : categoryData.slice(0, 1);
 
   useEffect(() => {
     !!offset ? setNavType("default") : setNavType("transparent");
@@ -41,8 +43,8 @@ const StudyPage = () => {
   return (
     <ErrorBoundary fallback={<div />}>
       <StudyIntro />
-      {isPc && <StudyMain categoryData={categoryData} />}
-      {isMobile && <StudyMainMobile categoryData={categoryData} />}
+      {isPc && <StudyMain categoryData={category} />}
+      {isMobile && <StudyMainMobile categoryData={category} />}
       <ScrollTopBox>
         <ScrollTopButton
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

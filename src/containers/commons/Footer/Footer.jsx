@@ -25,10 +25,10 @@ const Footer = ({ ...props }) => {
               <ItemLink to="#">
                 <Item>만든 사람</Item>
               </ItemLink>
-              <ItemLink to="#">
+              <ItemLink to="/terms">
                 <Item>이용약관</Item>
               </ItemLink>
-              <ItemLink to="#">
+              <ItemLink to="/privacy">
                 <Item>개인정보처리방침</Item>
               </ItemLink>
             </Column>

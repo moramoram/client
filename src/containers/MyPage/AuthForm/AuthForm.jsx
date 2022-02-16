@@ -174,7 +174,9 @@ const AuthForm = ({ userProfile, ...props }) => {
                   ? "사용할 수 있는 별명입니다!"
                   : nicknameErrors[errors?.nickname?.type]
               }
-              defaultValue={userProfile.nickname}
+              defaultValue={
+                userProfile.nickname !== "Guest" ? userProfile.nickname : null
+              }
               autocomplete="off"
               theme={theme}
               {...register("nickname", {

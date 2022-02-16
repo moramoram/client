@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
@@ -24,19 +24,25 @@ const MainPage = () => {
           <TitleBox>
             <Title theme={theme}>새로 올라온 공고</Title>
           </TitleBox>
-          <MainJobSlider theme={theme} />
+          <Suspense fallback={<div />}>
+            <MainJobSlider theme={theme} />
+          </Suspense>
         </ContentBox>
         <ContentBox>
           <TitleBox>
             <Title theme={theme}>새로 올라온 스터디</Title>
           </TitleBox>
-          <MainStudySilder theme={theme} />
+          <Suspense fallback={<div />}>
+            <MainStudySilder theme={theme} />
+          </Suspense>
         </ContentBox>
         <ContentBox>
           <TitleBox>
             <Title theme={theme}>커뮤니티 인기글</Title>
           </TitleBox>
-          <MainCommunitySlider theme={theme} />
+          <Suspense fallback={<div />}>
+            <MainCommunitySlider theme={theme} />
+          </Suspense>
         </ContentBox>
       </Layout>
     </ErrorBoundary>

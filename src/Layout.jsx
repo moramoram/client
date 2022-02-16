@@ -21,8 +21,9 @@ import {
   SignUpModal,
   CommunityCreate,
   CommunityUpdate,
+  AuthModal,
 } from "@/containers";
-import { Modal, ScrollTopButton } from "@/components";
+import { ScrollTopButton } from "@/components";
 import { colors } from "@/_shared";
 
 const Layout = () => {
@@ -35,17 +36,17 @@ const Layout = () => {
   const isloginModal = useRecoilValue(loginModalState);
   const isCreateModal = useRecoilValue(createModalState);
   const isUpdateModal = useRecoilValue(updateModalState);
-  const isModal = useRecoilValue(modalState);
+  const isAuthModal = useRecoilValue(modalState);
 
   useEffect(() => {
-    (isModal || isloginModal || isCreateModal || isUpdateModal) &&
+    (isAuthModal || isloginModal || isCreateModal || isUpdateModal) &&
       (document.body.style.overflow = "hidden");
     return () => (document.body.style.overflow = "unset");
-  }, [isModal, isloginModal, isCreateModal, isUpdateModal]);
+  }, [isAuthModal, isloginModal, isCreateModal, isUpdateModal]);
 
   return (
     <LayoutBox theme={theme}>
-      {isModal && <Modal theme={theme} />}
+      {isAuthModal && <AuthModal theme={theme} />}
       {isloginModal && <SignUpModal theme={theme} />}
       {isCreateModal && <CommunityCreate theme={theme} />}
       {isUpdateModal && <CommunityUpdate theme={theme} />}

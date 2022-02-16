@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import { GetComments, CommentSelector, postComment } from "@/api";
 
@@ -9,12 +8,11 @@ import { CommentInput } from "@/components";
 import { CommentList } from "@/layouts";
 import { colors, fontSize, fontWeight, lineHeight } from "@/_shared";
 
-const JobDetailComment = (props) => {
+const JobDetailComment = ({ companyId, ...props }) => {
   const queryClient = useQueryClient();
-  const id = useParams().jobId;
-  const { data } = GetComments({ type: "company", id: id });
-
+  const { data } = GetComments({ type: "company", id: companyId });
   const { commentData } = CommentSelector(data);
+
   const CommentMutation = useMutation((data) => postComment(data), {
     onSuccess: () => {
       queryClient.invalidateQueries("getComments");
@@ -24,7 +22,7 @@ const JobDetailComment = (props) => {
   const handleClick = (comment) => {
     CommentMutation.mutate({
       type: "company",
-      companyId: id,
+      companyId: companyId,
       content: comment.value,
     });
   };

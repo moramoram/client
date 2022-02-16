@@ -4,10 +4,11 @@ import styled from "styled-components";
 
 import { useForm, Controller } from "react-hook-form";
 import { useRecoilValue } from "recoil";
-import { themeState } from "@/recoil/theme";
+import { auth, themeState } from "@/recoil";
 import { useMutation, useQueryClient } from "react-query";
 import { PostNicknameCheck, PutAuthorization } from "@/api";
 
+import { AuthMessage } from "@/containers";
 import { Input, InputImage, Button, Selector } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
@@ -18,6 +19,7 @@ const THEME = {
 
 const AuthForm = ({ userProfile, ...props }) => {
   const theme = useRecoilValue(themeState);
+  const authstate = useRecoilValue(auth);
   const [imageSrc, setImageSrc] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
   const {
@@ -70,7 +72,6 @@ const AuthForm = ({ userProfile, ...props }) => {
       nickname: watch("nickname"),
     };
     const data = await PostNicknameCheck(body);
-    console.log(data);
     if (data) {
       setError("nickname", {
         type: "duplicate",
@@ -153,6 +154,10 @@ const AuthForm = ({ userProfile, ...props }) => {
     }
   });
 
+  if (authstate.authCheck === 2) {
+    return <AuthMessage />;
+  }
+  console.log(authstate.authCheck);
   return (
     <>
       <Layout>

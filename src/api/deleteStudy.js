@@ -5,6 +5,6 @@ export const DeleteStudy = async (studyId) => {
     url: `/studies/${studyId}`,
     method: "delete",
   });
-  console.log(res);
+
   return res.data;
 };

@@ -2,7 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { GetJobDetail, JobDetailSelector } from "@/api";
+import {
+  GetJobDetail,
+  JobDetailSelector,
+  GetCompanyStudyList,
+  StudyCardSmallSelector,
+} from "@/api";
 import { useParams } from "react-router-dom";
 
 import { JobSideBar, JobDetailComment } from "@/containers";
@@ -15,13 +20,17 @@ const THEME = {
   DARK: "dark",
 };
 
-const JobDetail = ({ cardData, commentData, ...props }) => {
+const JobDetail = ({ commentData, ...props }) => {
   const id = useParams().jobId;
   const { data } = GetJobDetail(id);
-  const { contentData, titleData, sidebarData } = JobDetailSelector(data);
-  const countAvailableStudy = cardData.filter(
-    (data) => !data.isDisabled
-  ).length;
+  const { contentData, titleData, sidebarData, companyData } =
+    JobDetailSelector(data);
+
+  const studyCardData = GetCompanyStudyList(companyData.companyName);
+  const { smallCardData } = StudyCardSmallSelector(studyCardData);
+  const countAvailableStudy = !!smallCardData
+    ? smallCardData.filter((data) => !data.isDisabled).length
+    : 0;
 
   return (
     <>
@@ -36,12 +45,13 @@ const JobDetail = ({ cardData, commentData, ...props }) => {
         <CardBox>
           <BoxTitle {...props}>스터디</BoxTitle>
           <BoxDescription {...props}>
-            이 기업을 준비하는 {countAvailableStudy}
-            개의 스터디가 열려있어요
+            이 기업을 준비하는 {countAvailableStudy}개의 스터디가 열려있어요
           </BoxDescription>
-          <CardSmallSlider data={cardData} {...props} />
+          {!!smallCardData && (
+            <CardSmallSlider data={smallCardData} {...props} />
+          )}
         </CardBox>
-        <JobDetailComment {...props} />
+        <JobDetailComment companyId={companyData.companyId} {...props} />
       </Layout>
       <JobSideBar {...props} data={sidebarData} />
     </>

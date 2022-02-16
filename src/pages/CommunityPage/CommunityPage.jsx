@@ -3,9 +3,10 @@ import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
 import {
+  authState,
   themeState,
   communitySearch,
-  isAuthenticated,
+  modalState,
   createModalState,
   loginModalState,
 } from "@/recoil";
@@ -24,10 +25,17 @@ import { debounce } from "@/utils";
 
 const CommunityPage = () => {
   const theme = useRecoilValue(themeState);
-  const isAuthorized = useRecoilValue(isAuthenticated);
+  const authorizedState = useRecoilValue(authState);
+
   const setCreateModalOpen = useSetRecoilState(createModalState);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
+  const setModalOpen = useSetRecoilState(modalState);
+
   const [search, setSearch] = useRecoilState(communitySearch);
+
+  const handleKeyword = debounce((e) => {
+    setSearch({ ...search, title: e.target.value });
+  });
 
   const handleCategory = (id) => {
     window.scrollTo({ top: 0 });
@@ -38,12 +46,11 @@ const CommunityPage = () => {
     setSearch({ ...search, criteria: criteria });
   };
 
-  const handleKeyword = debounce((keyword) => {
-    setSearch({ ...search, title: keyword });
-  });
-
   const handleCreation = () => {
-    isAuthorized ? setCreateModalOpen(true) : setLoginModalOpen("require");
+    !authorizedState && setLoginModalOpen("require");
+    authorizedState === 3 && setCreateModalOpen(true);
+    authorizedState === 2 && setModalOpen(true);
+    authorizedState === 1 && setModalOpen(true);
   };
 
   const isPc = useMediaQuery({ query: "(min-width:980px)" });
@@ -70,6 +77,7 @@ const CommunityPage = () => {
                 theme={theme}
                 onChange={handleKeyword}
                 placeholder="게시글 검색"
+                value={search.title}
               />
             </SortBox>
             <Suspense fallback={<FeedGrid isLoading theme={theme} />}>
@@ -95,6 +103,7 @@ const CommunityPage = () => {
                 theme={theme}
                 onChange={handleKeyword}
                 placeholder="게시글 검색"
+                value={search.title}
               />
             </SortBox>
           </div>

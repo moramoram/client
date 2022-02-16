@@ -11,18 +11,23 @@ export const GetComments = (data) =>
   useQuery(["getComments", data], () => fetchData(data));
 
 const fetchData = async (data) => {
+  const url =
+    data.type === "board"
+      ? `/${commentType[data.type]}/${data.boardType}/${data.id}`
+      : `/${commentType[data.type]}/${data.id}`;
+
   const res = await axiosInstance({
-    url: `/${commentType[data.type]}/${data.id} `,
+    url: url,
   });
-  console.log(res);
+
   return res.data;
 };
 
 export const CommentSelector = (data) => {
   const commentData = data.map((comment) => {
     return {
-      username: comment.userInfo?.nickname,
-      src: comment.profileImg,
+      username: comment.writerInfo.nickname,
+      src: comment.writerInfo.profileImg,
       created: daysFromToday(comment.createdDate),
       content: comment.content,
       commentId: comment.commentId,

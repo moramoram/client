@@ -10,3 +10,8 @@ export const jobSearch = atom({
     criteria: "",
   },
 });
+
+export const jobFilter = atom({
+  key: "jobFilter",
+  default: false,
+});

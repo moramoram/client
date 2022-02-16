@@ -47,7 +47,7 @@ const FeedItemSmall = ({
           <User {...props}>{writerInfo.nickname}</User>
           {writerInfo.ordinal && writerInfo.campus && (
             <UserDetail>
-              ({writerInfo.ordinal}/{writerInfo.campus})
+              ({writerInfo.ordinal} / {writerInfo.campus})
             </UserDetail>
           )}
         </UserBox>

@@ -25,6 +25,7 @@ export const CommunityDetailSelector = (data) => {
     commentcount: numToMillion(data.totalComment),
     viewcount: numToMillion(data.views),
     likeStatus: data.likeStatus,
+    boardType: data.boardType,
   };
   return { contentData };
 };

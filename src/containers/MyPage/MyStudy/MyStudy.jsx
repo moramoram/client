@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
-import { themeState } from "@/recoil/theme";
+import { themeState } from "@/recoil";
+import { useIntersectionObserver } from "@/hooks";
+import { StudyCardSelector, GetMyStudyList } from "@/api";
 
+import { StudyNoContent } from "@/containers";
 import { CardGrid } from "@/layouts";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
@@ -15,6 +18,19 @@ const THEME = {
 
 const MyStudy = () => {
   const theme = useRecoilValue(themeState);
+  const loader = useRef(null);
+  const { data, fetchNextPage, hasNextPage } = GetMyStudyList();
+  const { cardData } = StudyCardSelector(data);
+
+  const onFetchNewData = () => {
+    fetchNextPage();
+  };
+
+  useIntersectionObserver({
+    target: loader,
+    onIntersect: onFetchNewData,
+    enabled: hasNextPage,
+  });
 
   return (
     <Layout>
@@ -22,21 +38,12 @@ const MyStudy = () => {
       <SubTitle theme={theme}>
         지금까지 {cardData.length}개의 스터디를 개설했어요
       </SubTitle>
+      {!cardData[0] && <StudyNoContent theme={theme} />}
       <CardGrid data={cardData} theme={theme} />
+      <div ref={loader} />
     </Layout>
   );
 };
-
-const cardData = new Array(2).fill({
-  contents: {
-    title: "알고리즘 스터디 모집",
-    subtitle: "김싸피(6기 / 서울)",
-    highlight: "모집중",
-    src: "",
-  },
-  badges: ["JavaScript", "React", "Vue.js"],
-  id: "/study/1",
-});
 
 MyStudy.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),

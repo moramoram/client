@@ -10,7 +10,10 @@ const MainStudySilder = ({ ...props }) => {
     category: 1,
     title: "",
     studyType: "",
-    criteria: "",
+    criteria: {
+      label: "",
+      value: "",
+    },
   };
 
   const { data } = GetStudyList(search);

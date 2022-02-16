@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import { useSetRecoilState } from "recoil";
-import { navTypeState } from "@/recoil/theme";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isAuthenticatedState, navTypeState } from "@/recoil";
 
 import { useMediaQuery } from "react-responsive";
 
@@ -10,6 +10,8 @@ import { throttle } from "@/utils";
 const JobsPage = () => {
   const setNavType = useSetRecoilState(navTypeState);
   const [offset, setOffset] = useState(0);
+  const isAuthenticated = useRecoilValue(isAuthenticatedState);
+  const category = isAuthenticated ? categoryData : categoryData.slice(0, 3);
 
   useEffect(() => {
     !!offset ? setNavType("default") : setNavType("transparent");
@@ -31,8 +33,8 @@ const JobsPage = () => {
   return (
     <ErrorBoundary fallback={<div />}>
       <JobIntro />
-      {isPc && <JobMain categoryData={categoryData} />}
-      {isMobile && <JobMainMobile categoryData={categoryData} />}
+      {isPc && <JobMain categoryData={category} />}
+      {isMobile && <JobMainMobile categoryData={category} />}
     </ErrorBoundary>
   );
 };

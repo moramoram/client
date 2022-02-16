@@ -9,8 +9,10 @@ const URL = {
 const fetchPage = async (data, pageParam) => {
   const param = {
     ...data,
+    criteria: data.criteria.value,
     offset: pageParam,
   };
+
   const res = await axiosInstance({
     url: URL[data.category],
     params: param,
@@ -22,6 +24,26 @@ export const GetStudyList = (data) =>
   useInfiniteQuery(
     ["getStudyList", data],
     ({ pageParam = 1 }) => fetchPage(data, pageParam),
+    {
+      getNextPageParam: (prevPage) => {
+        return !!prevPage.res.length ? prevPage.nextPage : undefined;
+      },
+    }
+  );
+
+const fetchMyPage = async (pageParam) => {
+  const param = { offset: pageParam };
+  const res = await axiosInstance({
+    url: `/studies/users`,
+    params: param,
+  });
+  return { res: res.data, nextPage: pageParam + 1 };
+};
+
+export const GetMyStudyList = () =>
+  useInfiniteQuery(
+    "getMyStudyList",
+    ({ pageParam = 1 }) => fetchMyPage(pageParam),
     {
       getNextPageParam: (prevPage) => {
         return !!prevPage.res.length ? prevPage.nextPage : undefined;

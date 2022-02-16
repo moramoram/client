@@ -14,7 +14,6 @@ const StudyCreateForm = ({ ...props }) => {
   const [croppedImage, setCroppedImage] = useState(null);
   const [companyOptions, setCompanyOptions] = useState(null);
 
-  // console.log(company);
   useEffect(() => {
     const getData = async () => {
       const data = await getCompanyList();

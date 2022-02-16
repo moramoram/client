@@ -6,7 +6,10 @@ const MainCommunitySlider = ({ isLoading, ...props }) => {
   const search = {
     boardType: 1,
     title: "",
-    criteria: "like",
+    criteria: {
+      label: "좋아요순",
+      value: "like",
+    },
   };
 
   const { data } = GetCommunityList(search);

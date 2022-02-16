@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { useForm, Controller } from "react-hook-form";
-import { useRecoilValue } from "recoil";
-import { auth, themeState } from "@/recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { authState, themeState, submitModalState } from "@/recoil";
 import { useMutation, useQueryClient } from "react-query";
 import { PostNicknameCheck, PutAuthorization } from "@/api";
 
@@ -19,9 +19,11 @@ const THEME = {
 
 const AuthForm = ({ userProfile, ...props }) => {
   const theme = useRecoilValue(themeState);
-  const authstate = useRecoilValue(auth);
+  const authCheck = useRecoilValue(authState);
   const [imageSrc, setImageSrc] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
+  const setIsModalOpened = useSetRecoilState(submitModalState);
+
   const {
     register,
     control,
@@ -37,6 +39,7 @@ const AuthForm = ({ userProfile, ...props }) => {
   const mutateNickname = useMutation(PutAuthorization, {
     onSuccess: () => {
       queryClient.invalidateQueries("getUserProfile");
+      setIsModalOpened(true);
     },
   });
 
@@ -154,11 +157,11 @@ const AuthForm = ({ userProfile, ...props }) => {
     }
   });
 
-  if (authstate.authCheck === 2) {
+  if (authCheck === 2) {
     return <AuthWait />;
   }
 
-  if (authstate.authCheck === 3) {
+  if (authCheck === 3) {
     return <AuthComplete />;
   }
   return (

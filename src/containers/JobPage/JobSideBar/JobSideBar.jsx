@@ -70,7 +70,7 @@ const JobSideBar = ({ data, isLoading, ...props }) => {
       <Button
         isLoading={isLoading}
         minWidth="380px"
-        onClick={() => window.open(`https://${data.url}`, "_blank")}
+        onClick={() => window.open(`${data.url}`, "_blank")}
       >
         <Icon icon="edit" />
         지원하기

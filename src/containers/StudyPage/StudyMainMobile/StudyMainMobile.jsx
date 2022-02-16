@@ -46,6 +46,7 @@ const StudyMainMobile = ({ categoryData }) => {
           placeholder="스터디 검색하기"
           theme={theme}
           onChange={handleKeyword}
+          defaultValue={search.title}
         />
       </SearchBox>
       <SortBox>

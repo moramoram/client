@@ -46,7 +46,7 @@ const CardItemLink = styled(Link)`
   text-decoration: none;
 `;
 
-const cardData = new Array(6).fill({
+const cardData = new Array(3).fill({
   contents: {
     title: "",
     subtitle: "",

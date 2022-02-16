@@ -44,10 +44,11 @@ const JobMainMobile = ({ categoryData }) => {
         <>
           <SearchBox>
             <Input
+              theme={theme}
               icon="search"
               placeholder="공고 검색하기"
               onChange={handleKeyword}
-              theme={theme}
+              defaultValue={search.title}
             />
           </SearchBox>
           <SortBox>

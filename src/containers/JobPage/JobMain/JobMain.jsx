@@ -29,16 +29,15 @@ const JobMain = ({ categoryData }) => {
   };
 
   const handleTechStack = (e) => {
+    console.log(e);
     setSearch({
       ...search,
-      techStack: e.map((tech) => {
-        return tech.value;
-      }),
+      techStack: e,
     });
   };
-
   const handleJob = (e) => {
-    setSearch({ ...search, job: e.label });
+    const value = e ? e.label : "";
+    setSearch({ ...search, job: value });
   };
 
   const handleFilter = (e) => {
@@ -64,11 +63,13 @@ const JobMain = ({ categoryData }) => {
                 icon="search"
                 placeholder="공고 검색하기"
                 onChange={handleKeyword}
+                defaultValue={search.title}
               />
               <Selector
                 theme={theme}
                 placeholder="기술 스택"
                 onChange={handleTechStack}
+                value={search.techStack}
                 isMulti
               />
               <Selector
@@ -76,6 +77,10 @@ const JobMain = ({ categoryData }) => {
                 placeholder="직무"
                 onChange={handleJob}
                 options={techStackOptions}
+                defaultValue={techStackOptions.find(
+                  (v) => v.value === search.job
+                )}
+                isClearable
               />
             </InputBox>
             <SortBox>
@@ -111,9 +116,9 @@ const criteriaData = [
 ];
 
 const techStackOptions = [
-  { value: "Frontend", label: "프론트엔드" },
-  { value: "Backend", label: "백엔드" },
-  { value: "Android", label: "안드로이드" },
+  { value: "프론트엔드", label: "프론트엔드" },
+  { value: "백엔드", label: "백엔드" },
+  { value: "안드로이드", label: "안드로이드" },
   { value: "iOS", label: "iOS" },
   { value: "임베디드", label: "임베디드" },
 ];

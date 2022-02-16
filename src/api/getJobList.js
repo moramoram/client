@@ -8,9 +8,12 @@ const URL = {
 };
 
 const fetchPage = async (data, pageParam) => {
+  const tech = data.techStack.map((tech) => {
+    return tech.value;
+  });
   const param = {
     ...data,
-    techStack: data.techStack.join(),
+    techStack: tech.join(),
     offset: pageParam,
   };
   const res = await axiosInstance({

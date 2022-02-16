@@ -24,16 +24,19 @@ const StudyMain = ({ categoryData }) => {
   });
 
   const handleSort = (criteria) => {
+    console.log(criteria);
     setSearch({ ...search, criteria: criteria });
   };
 
   const handleType = (e) => {
-    setSearch({ ...search, studyType: e.label });
+    const value = e ? e.label : "";
+    setSearch({ ...search, studyType: value });
   };
 
   const handleFilter = (e) => {
     setFilter(e.target.checked);
   };
+
   return (
     <Layout>
       <StickyNavBox>
@@ -46,14 +49,18 @@ const StudyMain = ({ categoryData }) => {
             onChange={handleKeyword}
             icon="search"
             placeholder="스터디 검색하기"
+            defaultValue={search.title}
           />
           <Selector
             theme={theme}
-            onChange={handleType}
             placeholder="종류"
+            onChange={handleType}
             options={studyOptions}
+            defaultValue={studyOptions.find(
+              (v) => v.value === search.studyType
+            )}
+            isClearable
           />
-          {/* <Selector placeholder="기술 스택" isMulti /> */}
         </InputBox>
         <SortBox>
           <Sort theme={theme} onClick={handleSort} items={criteriaData} />
@@ -86,10 +93,10 @@ const criteriaData = [
 ];
 
 const studyOptions = [
-  { value: "recruit", label: "채용" },
-  { value: "Algorithm", label: "알고리즘" },
+  { value: "채용", label: "채용" },
+  { value: "알고리즘", label: "알고리즘" },
   { value: "CS", label: "CS" },
-  { value: "Project", label: "프로젝트" },
+  { value: "프로젝트", label: "프로젝트" },
 ];
 
 const Layout = styled.div`

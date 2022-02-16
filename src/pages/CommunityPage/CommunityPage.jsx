@@ -145,7 +145,7 @@ const criteriaData = [
     title: "최신순",
   },
   {
-    name: "scrap",
+    name: "like",
     title: "인기순",
   },
   {

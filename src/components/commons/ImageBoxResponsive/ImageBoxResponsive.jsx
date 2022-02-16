@@ -92,7 +92,7 @@ const ImageBoxWrapper = styled.div`
 
     width: 33%;
     height: 33%;
-    filter: ${(props) => props.isDisabled && `blur(5px)`};
+    filter: ${(props) => props.isDisabled && `blur(3px) grayscale(70%)`};
   }
 
   img {
@@ -105,6 +105,6 @@ const ImageBoxWrapper = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: ${(props) => props.isDisabled && `blur(5px)`};
+    filter: ${(props) => props.isDisabled && `blur(3px) grayscale(70%)`};
   }
 `;

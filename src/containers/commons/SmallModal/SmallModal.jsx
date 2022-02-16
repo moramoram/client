@@ -22,7 +22,7 @@ const SmallModal = ({ ...props }) => {
   const handleOnSubmit = useCallback(() => {
     setIsModalOpened(null);
     navigate("/mypage");
-  }, [setIsModalOpened]);
+  }, [setIsModalOpened, navigate]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {

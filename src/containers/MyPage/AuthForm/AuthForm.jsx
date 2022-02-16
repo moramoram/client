@@ -8,7 +8,7 @@ import { auth, themeState } from "@/recoil";
 import { useMutation, useQueryClient } from "react-query";
 import { PostNicknameCheck, PutAuthorization } from "@/api";
 
-import { AuthWait } from "@/containers";
+import { AuthWait, AuthComplete } from "@/containers";
 import { Input, InputImage, Button, Selector } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
@@ -159,7 +159,7 @@ const AuthForm = ({ userProfile, ...props }) => {
   }
 
   if (authstate.authCheck === 3) {
-    return <AuthWait />;
+    return <AuthComplete />;
   }
   return (
     <>

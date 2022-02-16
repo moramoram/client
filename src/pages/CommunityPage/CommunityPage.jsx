@@ -9,6 +9,7 @@ import {
   modalState,
   createModalState,
   loginModalState,
+  smallModalState,
 } from "@/recoil";
 
 import { useMediaQuery } from "react-responsive";
@@ -30,6 +31,7 @@ const CommunityPage = () => {
   const setCreateModalOpen = useSetRecoilState(createModalState);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const setModalOpen = useSetRecoilState(modalState);
+  const setSmallModalState = useSetRecoilState(smallModalState);
 
   const [search, setSearch] = useRecoilState(communitySearch);
 
@@ -50,7 +52,7 @@ const CommunityPage = () => {
     !authorizedState && setLoginModalOpen("require");
     authorizedState === 3 && setCreateModalOpen(true);
     authorizedState === 2 && setModalOpen(true);
-    authorizedState === 1 && setModalOpen(true);
+    authorizedState === 1 && setSmallModalState(true);
   };
 
   const isPc = useMediaQuery({ query: "(min-width:980px)" });

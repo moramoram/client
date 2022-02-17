@@ -52,8 +52,11 @@ const Footer = ({ ...props }) => {
               >
                 <Item>Q&A</Item>
               </HyperLink>
-              <HyperLink href="mailto:moramoram604@gmail.com">
-                <Item>1:1문의</Item>
+              <HyperLink
+                href="https://github.com/moramoram/ssafe-service/issues"
+                target="_blank"
+              >
+                <Item>버그 리포트</Item>
               </HyperLink>
             </Column>
           </Row>

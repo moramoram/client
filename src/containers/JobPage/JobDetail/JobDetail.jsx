@@ -177,7 +177,7 @@ const Content = styled.div`
   color: ${(props) => textColor[props.theme]};
 
   img {
-    width: 100%;
+    max-width: 100%;
   }
 
   h1 {

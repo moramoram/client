@@ -107,9 +107,6 @@ const Title = styled.div`
 `;
 
 const ImgBox = styled.div`
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.1);
   margin-top: 2rem;
 
   > img {

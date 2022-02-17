@@ -87,15 +87,15 @@ const Layout = styled.div`
 const Item = styled.div`
   position: relative;
   overflow: hidden;
-  height: 100%;
+  height: 400px;
   padding: 40px 0 0 0px;
 `;
 
 const Content = styled.div`
   display: flex;
+  height: 400px;
   justify-content: center;
   align-items: center;
-  height: 100%;
 `;
 
 const Background = styled.div`

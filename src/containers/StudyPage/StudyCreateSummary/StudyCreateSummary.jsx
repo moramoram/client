@@ -45,10 +45,12 @@ const StudyCreateSummary = ({
     { value: "etc", label: "기타" },
   ];
 
-  const companyOption = companyOptions?.map(({ companyName }) => ({
-    label: companyName,
-    value: companyName,
-  }));
+  const companyOption = companyOptions?.map(
+    ({ companyName, engCompanyName }) => ({
+      label: companyName,
+      value: engCompanyName,
+    })
+  );
 
   const techStackOption = [
     { value: "Android", label: "Android" },
@@ -152,13 +154,6 @@ const StudyCreateSummary = ({
               <Controller
                 name="companyName"
                 control={control}
-                defaultValue={
-                  defaultCompanyName
-                    ? companyOption.filter(
-                        (option) => option.label === defaultCompanyName
-                      )
-                    : ""
-                }
                 render={({ field }) => (
                   <Selector
                     title="목표 기업"

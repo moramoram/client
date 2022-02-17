@@ -22,7 +22,7 @@ const Footer = ({ ...props }) => {
               <ItemLink to=".">
                 <Item>서비스 소개</Item>
               </ItemLink>
-              <ItemLink to="#">
+              <ItemLink to="/madeby">
                 <Item>만든 사람</Item>
               </ItemLink>
               <ItemLink to="/terms">
@@ -52,8 +52,11 @@ const Footer = ({ ...props }) => {
               >
                 <Item>Q&A</Item>
               </HyperLink>
-              <HyperLink href="mailto:moramoram604@gmail.com">
-                <Item>1:1문의</Item>
+              <HyperLink
+                href="https://github.com/moramoram/ssafe-service/issues"
+                target="_blank"
+              >
+                <Item>버그 리포트</Item>
               </HyperLink>
             </Column>
           </Row>

@@ -22,7 +22,19 @@ export const auth = selector({
       const res = await axiosInstance({ url: "users/me" });
       return res?.data;
     }
-    return null;
+    return {
+      authCheck: "",
+      campus: "",
+      createdDate: "",
+      email: "",
+      likeJob: "",
+      modifiedDate: "",
+      nickname: "",
+      ordinal: "",
+      profileImg: "",
+      realName: "",
+      userId: "",
+    };
   },
   set: ({ set }, value) => {
     if (value instanceof Recoil.DefaultValue) {

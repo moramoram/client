@@ -13,6 +13,7 @@ import {
   updateModalState,
   smallModalState,
   submitModalState,
+  deleteModalState,
 } from "@/recoil/modal";
 import { navMenuData, navUserData } from "@/recoil/menu";
 
@@ -26,6 +27,7 @@ import {
   AuthModal,
   SmallModal,
   SubmitModal,
+  DeleteModal,
 } from "@/containers";
 import { colors } from "@/_shared";
 
@@ -42,6 +44,7 @@ const Layout = () => {
   const isAuthModal = useRecoilValue(modalState);
   const isSmallModal = useRecoilValue(smallModalState);
   const isSubmitModal = useRecoilValue(submitModalState);
+  const isDeleteModal = useRecoilValue(deleteModalState);
 
   useEffect(() => {
     (isAuthModal ||
@@ -49,7 +52,8 @@ const Layout = () => {
       isCreateModal ||
       isUpdateModal ||
       isSmallModal ||
-      isSubmitModal) &&
+      isSubmitModal ||
+      isDeleteModal) &&
       (document.body.style.overflow = "hidden");
     return () => (document.body.style.overflow = "unset");
   }, [
@@ -59,12 +63,14 @@ const Layout = () => {
     isUpdateModal,
     isSmallModal,
     isSubmitModal,
+    isDeleteModal,
   ]);
 
   return (
     <LayoutBox theme={theme}>
       {isAuthModal && <AuthModal theme={theme} />}
       {isSmallModal && <SmallModal theme={theme} />}
+      {isDeleteModal && <DeleteModal theme={theme} />}
       {isSubmitModal && <SubmitModal theme={theme} />}
       {isloginModal && <SignUpModal theme={theme} />}
       {isCreateModal && <CommunityCreate theme={theme} />}

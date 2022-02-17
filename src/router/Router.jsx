@@ -1,5 +1,8 @@
 import React, { Suspense } from "react";
 
+import { useRecoilValue } from "recoil";
+import { isLoginState } from "@/recoil";
+
 import { Route, Routes } from "react-router-dom";
 import Layout from "@/Layout";
 import { PrivateRoute } from "@/router";
@@ -24,6 +27,8 @@ import {
 } from "@/pages";
 
 const Router = () => {
+  const isLogined = useRecoilValue(isLoginState);
+
   return (
     <Routes>
       <Route
@@ -35,6 +40,18 @@ const Router = () => {
       >
         <Route
           path="/"
+          element={
+            isLogined ? (
+              <MainPage />
+            ) : (
+              <Suspense fallback={<div />}>
+                <LandingPage />
+              </Suspense>
+            )
+          }
+        />
+        <Route
+          path="landing"
           element={
             <Suspense fallback={<div />}>
               <LandingPage />

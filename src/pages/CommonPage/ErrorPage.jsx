@@ -11,7 +11,7 @@ const NotFoundPage = () => {
   const theme = useRecoilValue(themeState);
 
   return (
-    <Layout>
+    <Layout theme={theme}>
       <Title theme={theme}>
         알 수 없는 에러가 발생했어요.
         <br /> 아래 새로고침 버튼을 눌러주세요.
@@ -29,6 +29,11 @@ const NotFoundPage = () => {
 
 export default NotFoundPage;
 
+const bgColor = {
+  light: colors.white,
+  dark: colors.black,
+};
+
 const titleColor = {
   light: colors.gray900,
   dark: colors.gray25,
@@ -39,7 +44,9 @@ const Layout = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   height: 100vh;
+  background-color: ${(props) => bgColor[props.theme]};
 
   > svg {
     width: 100%;

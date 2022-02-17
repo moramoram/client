@@ -19,7 +19,7 @@ const Footer = ({ ...props }) => {
           <Row>
             <Column>
               <Heading>소개</Heading>
-              <ItemLink to=".">
+              <ItemLink to="/landing">
                 <Item>서비스 소개</Item>
               </ItemLink>
               <ItemLink to="/madeby">

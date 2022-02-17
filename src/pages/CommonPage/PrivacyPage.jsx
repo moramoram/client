@@ -55,7 +55,7 @@ const PrivacyPage = () => {
         </li>
       </ul>
       <br />
-      <Typography type="h3">2. 수집하는 개인정보 항목 및 수집방법</Typography>
+      <Typography type="h2">2. 수집하는 개인정보 항목 및 수집방법</Typography>
       <br />
       <Typography type="h4">가. 수집하는 개인정보의 항목</Typography>
       <ul>
@@ -397,7 +397,7 @@ const PrivacyPage = () => {
       <ul>
         <li>
           "싸페"의 서비스 내에 링크되어 있는 웹사이트 등 타 서비스들이
-          개인정보를 수집하는 행위에 대해서는 본 서담 개인정보처리방침이
+          개인정보를 수집하는 행위에 대해서는 본 "싸페" 개인정보처리방침이
           적용되지 않습니다.
         </li>
       </ul>
@@ -428,11 +428,16 @@ const textColor = {
 const Layout = styled.div`
   max-width: 1280px;
   margin: auto;
-  padding: 10rem 0;
+  padding: 10rem 20px;
   color: ${(props) => textColor[props.theme]};
 
   li {
     padding: 0.5rem 0;
+  }
+
+  ol,
+  ul {
+    padding: 0 2rem;
   }
 
   li ul,

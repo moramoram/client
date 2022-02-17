@@ -10,7 +10,7 @@ const axiosInstance = Axios.create({
 
 axiosInstance.interceptors.request.use((config) => {
   const token = JSON.parse(localStorage.getItem("ssafe_token"));
-  // console.log(token.refreshToken);
+
   if (token) {
     config.headers.Authorization = `Bearer ${token.refreshToken}`;
   }
@@ -22,5 +22,7 @@ export const getRefreshToken = async () => {
     url: `/users/refresh`,
     method: "put",
   });
+  await localStorage.setItem("ssafe_token", JSON.stringify(res.data.data));
+
   return res.data;
 };

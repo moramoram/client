@@ -28,8 +28,7 @@ axiosInstance.interceptors.response.use(
       return getRefreshToken()
         .then((data) => {
           // console.log("토근 재발급 성공", data);
-          localStorage.setItem("ssafe_token", JSON.stringify(data));
-          err.config.headers.Authorization = `Bearer ${data.accessToken}`;
+          err.config.headers.Authorization = `Bearer ${data.data.accessToken}`;
           return axiosInstance.request(err.config);
         })
         .catch((err) => {

@@ -29,3 +29,8 @@ export const updateModalState = atom({
   key: "updateModalState",
   default: null,
 });
+
+export const deleteModalState = atom({
+  key: "deleteModalState",
+  default: null,
+});

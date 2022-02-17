@@ -38,6 +38,7 @@ const JobMainMobile = ({ categoryData }) => {
         data={categoryData}
         theme={theme}
         onClick={handleCategory}
+        selected={search.category}
         view="mobile"
       />
       {search.category === 1 && (
@@ -59,7 +60,7 @@ const JobMainMobile = ({ categoryData }) => {
               value={search.criteria}
             />
             <Checkbox
-              label="마감된 스터디 숨기기"
+              label="마감된 채용 숨기기"
               theme={theme}
               value={search.criteria}
               onChange={handleFilter}

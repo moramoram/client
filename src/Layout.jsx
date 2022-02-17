@@ -16,6 +16,7 @@ import {
 } from "@/recoil/modal";
 import { navMenuData, navUserData } from "@/recoil/menu";
 
+import { ErrorPage } from "@/pages";
 import {
   Navbar,
   ScrollToTop,
@@ -26,6 +27,7 @@ import {
   AuthModal,
   SmallModal,
   SubmitModal,
+  ErrorBoundary,
 } from "@/containers";
 import { colors } from "@/_shared";
 
@@ -62,29 +64,31 @@ const Layout = () => {
   ]);
 
   return (
-    <LayoutBox theme={theme}>
-      {isAuthModal && <AuthModal theme={theme} />}
-      {isSmallModal && <SmallModal theme={theme} />}
-      {isSubmitModal && <SubmitModal theme={theme} />}
-      {isloginModal && <SignUpModal theme={theme} />}
-      {isCreateModal && <CommunityCreate theme={theme} />}
-      {isUpdateModal && <CommunityUpdate theme={theme} />}
-      <Suspense fallback={<div />}>
-        <Nav
-          theme={theme}
-          type={navType}
-          navData={navData}
-          userMenuData={userMenuData}
-          isLogin={isLogined}
-        />
-      </Suspense>
+    <ErrorBoundary fallback={<ErrorPage />}>
+      <LayoutBox theme={theme}>
+        {isAuthModal && <AuthModal theme={theme} />}
+        {isSmallModal && <SmallModal theme={theme} />}
+        {isSubmitModal && <SubmitModal theme={theme} />}
+        {isloginModal && <SignUpModal theme={theme} />}
+        {isCreateModal && <CommunityCreate theme={theme} />}
+        {isUpdateModal && <CommunityUpdate theme={theme} />}
+        <Suspense fallback={<div />}>
+          <Nav
+            theme={theme}
+            type={navType}
+            navData={navData}
+            userMenuData={userMenuData}
+            isLogin={isLogined}
+          />
+        </Suspense>
 
-      <ContentBox>
-        <Outlet />
-        <Footer theme={theme} />
-      </ContentBox>
-      <ScrollToTop />
-    </LayoutBox>
+        <ContentBox>
+          <Outlet />
+          <Footer theme={theme} />
+        </ContentBox>
+        <ScrollToTop />
+      </LayoutBox>
+    </ErrorBoundary>
   );
 };
 

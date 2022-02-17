@@ -127,8 +127,8 @@ const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
             </Suspense>
             <Avatar
               size="medium"
-              username={userData.nickname}
-              src={userData.profileImg}
+              username={userData?.nickname}
+              src={userData?.profileImg}
               onClick={() => {
                 setDropdownOpen(!dropdownOpen);
                 setNotificationOpen(false);

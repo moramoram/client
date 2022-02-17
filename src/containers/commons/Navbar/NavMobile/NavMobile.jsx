@@ -118,8 +118,8 @@ const NavMobile = ({ isLogin, userData, navData, userMenuData, ...props }) => {
               <div>
                 <UserInfo {...props}>
                   <Avatar
-                    username={userData.nickname}
-                    src={userData.profileImg}
+                    username={userData?.nickname}
+                    src={userData?.profileImg}
                     size="medium"
                   />
                   <div>

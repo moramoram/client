@@ -62,7 +62,7 @@ const categoryData = [
   },
   {
     id: 2,
-    title: "나의 스터디",
+    title: "내 관심 스터디",
   },
 ];
 export default StudyPage;

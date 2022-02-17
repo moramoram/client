@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 import { useParams } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { deleteModalState } from "@/recoil";
+
 import { useMutation, useQueryClient } from "react-query";
 import { GetComments, CommentSelector, postComment } from "@/api";
 
@@ -14,6 +17,7 @@ const CommunityDetailComment = ({ boardType, ...props }) => {
   const id = useParams().contentId;
   const { data } = GetComments({ type: "board", boardType: boardType, id: id });
   const { commentData } = CommentSelector(data);
+  const setIsModalOpened = useSetRecoilState(deleteModalState);
 
   const CommentMutation = useMutation((data) => postComment(data), {
     onSuccess: () => {
@@ -34,7 +38,7 @@ const CommunityDetailComment = ({ boardType, ...props }) => {
       value: "delete",
       label: "삭제",
       onClick: () => {
-        window.alert("준비중인 기능이에요. 조금만 기다려주세요!");
+        setIsModalOpened(true);
       },
     },
   ];

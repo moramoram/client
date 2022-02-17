@@ -3,8 +3,14 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { useMutation } from "react-query";
-import { GetJobDetail, putJobScrap, JobDetailSelector } from "@/api";
 import { useParams } from "react-router-dom";
+import {
+  GetJobDetail,
+  JobDetailSelector,
+  putJobScrap,
+  GetCompanyStudyList,
+  StudyCardSmallSelector,
+} from "@/api";
 
 import {
   Badge,
@@ -15,6 +21,7 @@ import {
   Toc,
 } from "@/components";
 import { JobDetailComment } from "@/containers";
+import { CardSmallSlider } from "@/layouts";
 
 import { Icon } from "@/foundations";
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";
@@ -30,8 +37,10 @@ const JobDetailMobile = (props) => {
   const { contentData, titleData, sidebarData, companyData } =
     JobDetailSelector(data);
 
-  const [isMarked, setIsMarked] = useState(sidebarData.scrap);
+  const studyCardData = GetCompanyStudyList(companyData.companyName);
+  const { smallCardData } = StudyCardSmallSelector(studyCardData);
 
+  const [isMarked, setIsMarked] = useState(sidebarData.scrap);
   const putScrapMutation = useMutation(putJobScrap);
 
   const onScrap = () => {
@@ -81,7 +90,12 @@ const JobDetailMobile = (props) => {
         <CardBox>
           <BoxTitle {...props}>스터디</BoxTitle>
           <BoxDescription {...props}>같이 준비해요</BoxDescription>
-          {/* <CardSmallSlider data={cardData} {...props} /> */}
+          <CardSmallSlider
+            data={smallCardData}
+            createMsg="스터디 만들기"
+            companyData={companyData}
+            {...props}
+          />
         </CardBox>
         <JobDetailComment companyId={companyData.companyId} {...props} />
       </Layout>

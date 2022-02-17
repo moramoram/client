@@ -25,7 +25,7 @@ const FeedItemSmall = ({
       ordinal: "",
       campus: "",
       authCheck: 0,
-      avatar: "",
+      profileImg: "",
     };
     title = "";
     category = "";
@@ -41,7 +41,7 @@ const FeedItemSmall = ({
         <Avatar
           size="small"
           username={writerInfo.nickname}
-          src={writerInfo.avatar}
+          src={writerInfo.profileImg}
         />
         <UserBox>
           <User {...props}>{writerInfo.nickname}</User>

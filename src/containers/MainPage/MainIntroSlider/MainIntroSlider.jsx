@@ -17,7 +17,7 @@ const MainIntroSlider = ({ ...props }) => {
 
   const { data } = GetJobList(search);
 
-  return <IntroSlider data={data.pages[0].res} {...props} />;
+  return <IntroSlider data={data.pages[0].res.slice(0, 4)} {...props} />;
 };
 
 export default MainIntroSlider;

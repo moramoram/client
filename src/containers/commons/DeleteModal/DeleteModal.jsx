@@ -1,32 +1,25 @@
 import React, { useEffect, useRef, useCallback } from "react";
 import styled from "styled-components";
 
-import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { submitModalState } from "@/recoil";
-import { getRefreshToken } from "@/api";
+import { deleteModalState } from "@/recoil";
 
 import { Button } from "@/components";
 import { Icon, Typography } from "@/foundations";
 
 import { animations, colors, shadows } from "@/_shared";
 
-const SubmitModal = ({ ...props }) => {
-  const [isModalOpened, setIsModalOpened] = useRecoilState(submitModalState);
-  // const resetAuth = useResetRecoilState(auth);
-
+const DeleteModal = ({ ...props }) => {
+  const [isModalOpened, setIsModalOpened] = useRecoilState(deleteModalState);
   const modal = useRef();
-  const navigate = useNavigate();
 
   const handleClose = useCallback(() => {
     setIsModalOpened(null);
   }, [setIsModalOpened]);
 
-  const handleOnSubmit = useCallback(() => {
-    setIsModalOpened(null);
-    getRefreshToken();
-    navigate("/main");
-  }, [setIsModalOpened, navigate]);
+  // const handleOnSubmit = useCallback(() => {
+  //   setIsModalOpened(null);
+  // }, [setIsModalOpened]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -45,25 +38,34 @@ const SubmitModal = ({ ...props }) => {
       <Overlay />
       <ModalBox>
         <Layout ref={modal} {...props}>
-          <CloseIconBox onClick={handleOnSubmit}>
+          <CloseIconBox onClick={handleClose}>
             <Icon icon="x" />
           </CloseIconBox>
           <ContentBox>
             <Title type="h4" {...props}>
-              인증 요청을 완료했어요!
+              {/* {"댓글을 삭제하시면 되돌릴 수 없어요.\n 정말 삭제하실건가요?"} */}
+              {"준비중인 서비스입니다.\n 조금만 기다려주세요"}
             </Title>
-            <Description type="paragraph">
-              승인 여부는 알림 메세지로 보내드릴게요.
-            </Description>
+            <Description type="paragraph"></Description>
           </ContentBox>
           <ButtonBox>
+            {/* <Button
+              mode="secondary"
+              width="200"
+              onClick={handleClose}
+              {...props}
+            >
+              아니요!
+            </Button> */}
             <Button
               mode="primary"
               width="200"
-              onClick={handleOnSubmit}
+              // onClick={handleOnSubmit}
+              onClick={handleClose}
               {...props}
             >
-              네! 알겠습니다.
+              {/* 네! 삭제할래요 */}
+              돌아가기
             </Button>
           </ButtonBox>
         </Layout>
@@ -72,7 +74,7 @@ const SubmitModal = ({ ...props }) => {
   );
 };
 
-export default SubmitModal;
+export default DeleteModal;
 
 const bgColor = {
   dark: colors.black,
@@ -90,7 +92,7 @@ const Overlay = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 10000;
 
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(15px);
@@ -104,7 +106,7 @@ const ModalBox = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 10000;
+  z-index: 10001;
 `;
 
 const Layout = styled.div`

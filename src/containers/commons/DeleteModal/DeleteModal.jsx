@@ -17,9 +17,9 @@ const DeleteModal = ({ ...props }) => {
     setIsModalOpened(null);
   }, [setIsModalOpened]);
 
-  const handleOnSubmit = useCallback(() => {
-    setIsModalOpened(null);
-  }, [setIsModalOpened]);
+  // const handleOnSubmit = useCallback(() => {
+  //   setIsModalOpened(null);
+  // }, [setIsModalOpened]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {

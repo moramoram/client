@@ -22,16 +22,6 @@ const StudyCreateForm = ({ ...props }) => {
     getData();
   }, []);
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    setValue,
-    watch,
-    clearErrors,
-    formState: { errors },
-  } = useForm();
-
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const defaultCompanyName = searchParams.get("company");
@@ -49,7 +39,7 @@ const StudyCreateForm = ({ ...props }) => {
       const formData = new FormData();
 
       data.studyType = data.studyType.label;
-      data.companyName = data.companyName?.label ?? "-";
+      data.companyName = data.companyName?.label || "-";
       data.techStack = data.techStack
         ? data.techStack.map((option) => option.value).join(",")
         : "";
@@ -76,6 +66,23 @@ const StudyCreateForm = ({ ...props }) => {
     },
     [transformData, mutateStudy]
   );
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    setValue,
+    watch,
+    clearErrors,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      companyName: {
+        label: defaultCompanyName ?? "",
+        value: defaultCompanyName ?? "",
+      },
+    },
+  });
 
   useEffect(() => {
     if (isChecked) {

@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import Recoil, { atom, selector } from "recoil";
 import { axiosInstance, localStorageEffect } from "@/utils";
 
 export const token = atom({
@@ -10,6 +10,11 @@ export const token = atom({
   effects_UNSTABLE: [localStorageEffect("ssafe_token")],
 });
 
+const authTrigger = atom({
+  key: "authTrigger",
+  default: 0,
+});
+
 export const auth = selector({
   key: "auth",
   get: async ({ get }) => {
@@ -18,6 +23,11 @@ export const auth = selector({
       return res?.data;
     }
     return null;
+  },
+  set: ({ set }, value) => {
+    if (value instanceof Recoil.DefaultValue) {
+      set(authTrigger, (v) => v + 1);
+    }
   },
 });
 

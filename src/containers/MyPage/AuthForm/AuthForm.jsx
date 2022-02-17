@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { useForm, Controller } from "react-hook-form";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { authState, themeState, submitModalState } from "@/recoil";
+import { useRecoilValue, useSetRecoilState, useResetRecoilState } from "recoil";
+import { auth, authState, themeState, submitModalState } from "@/recoil";
 import { useMutation, useQueryClient } from "react-query";
 import { PostNicknameCheck, PutAuthorization } from "@/api";
 

@@ -38,6 +38,7 @@ const JobMainMobile = ({ categoryData }) => {
         data={categoryData}
         theme={theme}
         onClick={handleCategory}
+        selected={search.category}
         view="mobile"
       />
       {search.category === 1 && (

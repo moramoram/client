@@ -39,7 +39,12 @@ const StudyMain = ({ categoryData }) => {
   return (
     <Layout>
       <StickyNavBox>
-        <StickyNav data={categoryData} theme={theme} onClick={handleCategory} />
+        <StickyNav
+          data={categoryData}
+          theme={theme}
+          onClick={handleCategory}
+          selected={search.category}
+        />
       </StickyNavBox>
       <CardGridBox>
         {search.category === 1 && (

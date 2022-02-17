@@ -22,5 +22,7 @@ export const getRefreshToken = async () => {
     url: `/users/refresh`,
     method: "put",
   });
+
+  await localStorage.setItem("ssafe_token", JSON.stringify(res.data.data));
   return res.data;
 };

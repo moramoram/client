@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useCallback } from "react";
 import styled from "styled-components";
 
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useResetRecoilState } from "recoil";
-import { auth, submitModalState } from "@/recoil";
+import { useRecoilState } from "recoil";
+import { submitModalState } from "@/recoil";
+import { getRefreshToken } from "@/api";
 
 import { Button } from "@/components";
 import { Icon, Typography } from "@/foundations";
@@ -12,7 +13,7 @@ import { animations, colors, shadows } from "@/_shared";
 
 const SubmitModal = ({ ...props }) => {
   const [isModalOpened, setIsModalOpened] = useRecoilState(submitModalState);
-  const resetAuth = useResetRecoilState(auth);
+  // const resetAuth = useResetRecoilState(auth);
 
   const modal = useRef();
   const navigate = useNavigate();
@@ -23,9 +24,9 @@ const SubmitModal = ({ ...props }) => {
 
   const handleOnSubmit = useCallback(() => {
     setIsModalOpened(null);
-    resetAuth();
+    getRefreshToken();
     navigate("/main");
-  }, [setIsModalOpened, navigate, resetAuth]);
+  }, [setIsModalOpened, navigate]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {

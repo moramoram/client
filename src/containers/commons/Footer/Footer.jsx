@@ -22,7 +22,7 @@ const Footer = ({ ...props }) => {
               <ItemLink to=".">
                 <Item>서비스 소개</Item>
               </ItemLink>
-              <ItemLink to="#">
+              <ItemLink to="/madeby">
                 <Item>만든 사람</Item>
               </ItemLink>
               <ItemLink to="/terms">

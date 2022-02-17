@@ -21,6 +21,7 @@ import {
   NotFoundPage,
   PrivacyPage,
   TermsPage,
+  MadeByPage,
 } from "@/pages";
 
 const Router = () => {
@@ -140,6 +141,7 @@ const Router = () => {
         <Route path="auth/login/*" element={<LoginPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/madeby" element={<MadeByPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

@@ -57,6 +57,12 @@ const Text = styled.div`
 
   text-align: center;
   white-space: pre-line;
+  transition: 0.3s;
+
+  @media screen and (max-width: 620px) {
+    font-size: ${fontSize.h4};
+    line-height: calc(${lineHeight.h3});
+  }
 `;
 
 const GetStartedBtn = styled.button`

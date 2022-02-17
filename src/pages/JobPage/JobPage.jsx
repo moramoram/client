@@ -63,7 +63,7 @@ const categoryData = [
   },
   {
     id: 3,
-    title: "싸피 채용관",
+    title: "싸피 우대 공고",
   },
   {
     id: 4,

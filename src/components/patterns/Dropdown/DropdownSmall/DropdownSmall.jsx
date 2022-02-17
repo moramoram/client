@@ -11,7 +11,6 @@ const THEME = {
 };
 
 const DropdownSmall = ({ items, ...props }) => {
-  console.log(items);
   return (
     <Layout {...props}>
       <MenuBox {...props}>

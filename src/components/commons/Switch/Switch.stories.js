@@ -9,7 +9,7 @@ export default {
 };
 
 const onToggle = () => {
-  console.log("toggle");
+  // console.log("toggle");
 };
 
 export const Default = (args) => (

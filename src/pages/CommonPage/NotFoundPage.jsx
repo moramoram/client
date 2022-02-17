@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
+import { Link } from "react-router-dom";
 
 import { Button } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
@@ -50,7 +51,10 @@ const NotFoundPage = () => {
       </svg>
 
       <Title theme={theme}>요청하신 페이지를 찾을 수 없어요.</Title>
-      <Button>메인으로 돌아가기</Button>
+
+      <ItemLink to="/main">
+        <Button>메인으로 돌아가기</Button>
+      </ItemLink>
     </Layout>
   );
 };
@@ -89,4 +93,8 @@ const Title = styled.div`
     line-height: ${lineHeight.h4};
     font-size: ${fontSize.h4};
   }
+`;
+
+const ItemLink = styled(Link)`
+  text-decoration: none;
 `;

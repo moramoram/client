@@ -81,7 +81,6 @@ const MyPage = () => {
                 <AuthForm userProfile={userProfile} />
               </ContentBox>
             )}
-            )
           </MobileBox>
         )}
       </Layout>

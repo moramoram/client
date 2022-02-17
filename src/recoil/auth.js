@@ -15,9 +15,9 @@ export const auth = selector({
   get: async ({ get }) => {
     if (!!get(token).accessToken) {
       const res = await axiosInstance({ url: "users/me" });
-      return res.data;
+      return res?.data;
     }
-    return {};
+    return null;
   },
 });
 

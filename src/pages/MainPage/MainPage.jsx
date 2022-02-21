@@ -1,6 +1,8 @@
 import React, { Suspense } from "react";
 import styled from "styled-components";
 
+import { useMediaQuery } from "react-responsive";
+
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
@@ -16,10 +18,14 @@ import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 const MainPage = () => {
   const theme = useRecoilValue(themeState);
 
+  const isPc = useMediaQuery({ query: "(min-width:980px)" });
+  const isMobile = useMediaQuery({ query: "(max-width:980px)" });
+
   return (
     <ErrorBoundary fallback={<div />}>
       <Layout>
-        <MainIntroSlider theme={theme} />
+        {isPc && <MainIntroSlider theme={theme} />}
+        {isMobile && <EmptyBox />}
         <ContentBox>
           <TitleBox>
             <Title theme={theme}>새로 올라온 공고</Title>
@@ -62,6 +68,10 @@ const Layout = styled.div`
   gap: 5rem;
 
   padding-bottom: 10rem;
+`;
+
+const EmptyBox = styled.div`
+  height: 40px;
 `;
 
 const ContentBox = styled.div``;

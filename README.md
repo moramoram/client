@@ -9,14 +9,13 @@
 
 
 1. [**웹 서비스 소개**](#웹-서비스-ssafé-소개)
-2. [**개발 팀 소개**](#개발-팀-소개)
-3. [**개발 기간**](#개발-기간)
-4. [**기술 스택**](#기술-스택)
-5. [**주요 기능**](#주요-기능)
-6. [**프로젝트 구성도**](#프로젝트-구성도)
-7. [**데모 영상**](#데모-영상)
-8. [**기록**](#기록)
-9. [**실행 방법**](#실행-방법)
+2. [**개발 기간**](#개발-기간)
+3. [**기술 스택**](#기술-스택)
+4. [**주요 기능**](#주요-기능)
+5. [**프로젝트 구성도**](#프로젝트-구성도)
+6. [**개발 팀 소개**](#개발-팀-소개)
+7. [**기록**](#기록)
+8. [**실행 방법**](#실행-방법)
 
 
 <br />
@@ -28,14 +27,7 @@
 
 ### ✨ [SSAFE 바로가기 ](http://i6a604.p.ssafy.io) ✨
 - [디자인 시스템](http://ssafe-design-system.netlify.app/)
-
-
-<br />
-
-
-# 개발 팀 소개
-![](https://i.imgur.com/8d7OGIt.jpg)
-
+- [서비스 소개 영상](https://www.youtube.com/watch?v=pDnROgpKGXM)
 
 <br />
 
@@ -51,7 +43,7 @@
 
 
 ## 💻 Front-end 
-<p align="center">
+<p align="left">
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
 <img src="https://img.shields.io/badge/React Query-CA4245?style=for-the-badge&logo=react&logoColor=white">
 <img src="https://img.shields.io/badge/Recoil-2496ED?style=for-the-badge&logo=react&logoColor=white">
@@ -66,7 +58,7 @@
 <br />
 
 ## 💻 Back-end
-<p align="center">
+<p align="left">
 <img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=white">    <img src="https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white"> 
     <img src="https://img.shields.io/badge/QueryDSL-CA4245?style=for-the-badge&logo=QueryDSL&logoColor=white">
   </p>
@@ -78,15 +70,14 @@
 <br />
 
 ## 💎 DB
-
-<p align="center">
+<p align="left">
 <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
 
 - 데이터 베이스는 MySQL을 사용했어요.
 
 <br />
 
-## ⭐ Infra Structure
+<!-- ## ⭐ Infra Structure
     
 <p align="center">
 <img src="https://img.shields.io/badge/Amazon AWS-232F3E?style=for-the-badge&logo=Amazon AWS&logoColor=white"> <img src="https://img.shields.io/badge/Amazon S3-569A31?style=for-the-badge&logo=Amazon S3&logoColor=white">   <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white"> 
@@ -94,11 +85,12 @@
 
 - AWS EC2 와 Docker 를 사용해 서버를 구축했어요.
 - AWS S3 이미지 스토리지 서버를 사용하고 있어요.
-
+ -->
+    
 <br />
 
 ## 🌐 Network
-<p align="center">
+<p align="left">
 <img src="https://img.shields.io/badge/NGINX-009639?style=for-the-badge&logo=NGINX&logoColor=white">
 </p>
 
@@ -107,16 +99,13 @@
 <br />
 
 ## 💻 Testing
-<p align="center">
+<p align="left">
 <img src="https://img.shields.io/badge/apache jmeter-D11?style=for-the-badge&logo=apache-jmeter&logoColor=white">
 </p>
 
 - JMeter 를 통해 성능 테스트를 진행했어요.
 
-
 <br />
-
-
 
 
 
@@ -168,8 +157,6 @@
 |![](https://i.imgur.com/O4emzDQ.gif)|
 
 
-
-
 <br />
 
 - #### 싸피생들 간의 연결고리, 커뮤니티 🗣
@@ -210,7 +197,6 @@
 
 - #### 콘솔에 깜짝 메세지를 숨겨 뒀어요 :D
 
-
 <br />
 
 
@@ -226,9 +212,9 @@
 <br />
 
 
-# 데모 영상
-### 🎥 [SSAFE UCC](https://www.youtube.com/watch?v=pDnROgpKGXM)
-<br />
+# 개발 팀 소개
+![](https://i.imgur.com/8d7OGIt.jpg)
+
 
 
 # 기록

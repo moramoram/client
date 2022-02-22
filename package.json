@@ -13,7 +13,6 @@
     "dompurify": "^2.3.5",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "highlight.js": "^11.4.0",
     "html-react-parser": "^1.4.8",
     "node-fetch": "^3.2.0",
     "normalize.css": "^8.0.1",
@@ -33,7 +32,6 @@
     "recoil": "^0.5.2",
     "styled-components": "^5.3.3",
     "swiper": "^8.0.3",
-    "three": "^0.137.4",
     "web-vitals": "^2.1.0"
   },
   "scripts": {

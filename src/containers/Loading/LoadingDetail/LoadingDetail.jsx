@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { StudySideBar } from "@/containers";
-import { CommentList } from "@/layouts";
-import { CommentInput, Toc } from "@/components";
+import { CommentInput, CommentList, Toc } from "@/components";
 import { colors, fontSize, fontWeight, lineHeight, loadings } from "@/_shared";
 
 const THEME = {

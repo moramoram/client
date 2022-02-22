@@ -1,7 +1,7 @@
 import React from "react";
 
 import { GetJobList } from "@/api";
-import { IntroSlider } from "@/layouts";
+import { IntroSlider } from "@/components";
 
 const MainIntroSlider = ({ ...props }) => {
   const search = {

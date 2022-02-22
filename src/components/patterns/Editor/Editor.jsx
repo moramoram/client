@@ -6,9 +6,6 @@ import ReactQuill, { Quill } from "react-quill";
 import MarkdownShortcuts from "quill-markdown-shortcuts";
 import "react-quill/dist/quill.snow.css";
 
-import hljs from "highlight.js";
-import "highlight.js/styles/base16/decaf.css";
-
 import { colors } from "@/_shared";
 
 const THEME = {
@@ -18,12 +15,8 @@ const THEME = {
 
 const Editor = (props) => {
   Quill.register("modules/markdownShortcuts", MarkdownShortcuts);
-  window.hljs = hljs;
 
   const modules = {
-    syntax: {
-      highlight: (text) => hljs.highlightAuto(text).value,
-    },
     toolbar: [
       [{ header: [1, 2, 3, false] }],
       ["bold", "italic", "strike", "blockquote", "code-block"],

@@ -1,11 +1,10 @@
+/* eslint-disable prettier/prettier */
 import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import ReactQuill, { Quill } from "react-quill";
 import MarkdownShortcuts from "quill-markdown-shortcuts";
-import hljs from "highlight.js";
 import "react-quill/dist/quill.snow.css";
-import "highlight.js/styles/base16/decaf.css";
 
 import { Controller } from "react-hook-form";
 import { useMediaQuery } from "react-responsive";
@@ -22,12 +21,8 @@ const CommunityEditor = ({
 }) => {
   Quill.register("modules/markdownShortcuts", MarkdownShortcuts);
   Quill.debug("error");
-  window.hljs = hljs;
 
   const modules = {
-    syntax: {
-      highlight: (text) => hljs.highlightAuto(text).value,
-    },
     toolbar: [
       [{ header: [1, 2, 3, false] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
@@ -110,7 +105,7 @@ const CommunityEditor = ({
         className="title"
         status={
           errors.title?.type === "required" ||
-          errors.title?.type === "maxLength"
+            errors.title?.type === "maxLength"
             ? "error"
             : "default"
         }

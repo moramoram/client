@@ -7,7 +7,7 @@ import { useIntersectionObserver } from "@/hooks";
 import { GetCommunityList, CommunityFeedSelector } from "@/api";
 
 import { CommunityNoContent } from "@/containers";
-import { FeedGrid } from "@/layouts";
+import { FeedGrid } from "@/components";
 
 const CommunityFeedGrid = () => {
   const theme = useRecoilValue(themeState);

@@ -4,9 +4,15 @@ import styled from "styled-components";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { themeState, jobSearch, jobFilter } from "@/recoil";
 
-import { SubNavbar, Input, Selector, Checkbox, Sort } from "@/components";
+import {
+  SubNavbar,
+  Input,
+  Selector,
+  Checkbox,
+  Sort,
+  CardGrid,
+} from "@/components";
 import { JobCardGrid } from "@/containers";
-import { CardGrid } from "@/layouts";
 
 import { debounce } from "@/utils";
 

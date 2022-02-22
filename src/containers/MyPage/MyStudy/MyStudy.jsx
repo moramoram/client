@@ -8,7 +8,7 @@ import { useIntersectionObserver } from "@/hooks";
 import { StudyCardSelector, GetMyStudyList } from "@/api";
 
 import { StudyNoContent } from "@/containers";
-import { CardGrid } from "@/layouts";
+import { CardGrid } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const THEME = {

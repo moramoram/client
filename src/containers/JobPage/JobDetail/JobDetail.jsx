@@ -11,8 +11,7 @@ import {
 import { useParams } from "react-router-dom";
 
 import { JobSideBar, JobDetailComment } from "@/containers";
-import { CardSmallSlider } from "@/layouts";
-import { Toc } from "@/components";
+import { Toc, CardSmallSlider } from "@/components";
 import { colors, fontSize, fontWeight, lineHeight, loadings } from "@/_shared";
 
 const THEME = {

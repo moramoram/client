@@ -4,8 +4,7 @@ import styled from "styled-components";
 import { useMutation, useQueryClient } from "react-query";
 import { GetComments, CommentSelector, postComment } from "@/api";
 
-import { CommentInput } from "@/components";
-import { CommentList } from "@/layouts";
+import { CommentInput, CommentList } from "@/components";
 import { colors, fontSize, fontWeight, lineHeight } from "@/_shared";
 
 const JobDetailComment = ({ companyId, ...props }) => {

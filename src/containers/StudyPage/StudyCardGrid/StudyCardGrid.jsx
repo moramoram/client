@@ -7,7 +7,7 @@ import { useIntersectionObserver } from "@/hooks";
 import { StudyCardSelector, GetStudyList } from "@/api";
 
 import { StudyNoContent } from "@/containers";
-import { CardGrid } from "@/layouts";
+import { CardGrid } from "@/components";
 
 const StudyCardGrid = () => {
   const theme = useRecoilValue(themeState);

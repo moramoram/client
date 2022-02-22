@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { GetStudyList, StudyCardSelector } from "@/api";
 
-import { CardSlider } from "@/layouts";
+import { CardSlider } from "@/components";
 
 const MainStudySilder = ({ ...props }) => {
   const search = {

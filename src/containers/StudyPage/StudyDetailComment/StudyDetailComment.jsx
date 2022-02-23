@@ -4,23 +4,35 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
 import { useRecoilValue } from "recoil";
-import { themeState } from "@/recoil";
+import { themeState, auth } from "@/recoil";
 
 import { useMutation, useQueryClient } from "react-query";
-import { GetComments, CommentSelector, postComment } from "@/api";
+import {
+  GetComments,
+  CommentSelector,
+  postComment,
+  deleteComments,
+} from "@/api";
 
 import { CommentList, CommentInput } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const StudyDetailComment = () => {
   const theme = useRecoilValue(themeState);
+  const user = useRecoilValue(auth);
   const id = useParams().studyId;
+
   const queryClient = useQueryClient();
   const { data } = GetComments({ type: "study", id: id });
-
   const { commentData } = CommentSelector(data);
 
   const CommentMutation = useMutation((data) => postComment(data), {
+    onSuccess: () => {
+      queryClient.invalidateQueries("getComments");
+    },
+  });
+
+  const commentDeleteMutation = useMutation((data) => deleteComments(data), {
     onSuccess: () => {
       queryClient.invalidateQueries("getComments");
     },
@@ -38,8 +50,13 @@ const StudyDetailComment = () => {
     {
       value: "delete",
       label: "삭제",
-      onClick: () => {
-        window.alert("준비중인 기능이에요. 조금만 기다려주세요!");
+      onClick: (e) => {
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+          commentDeleteMutation.mutate({
+            type: "study",
+            id: e.target.id,
+          });
+        }
       },
     },
   ];
@@ -54,6 +71,7 @@ const StudyDetailComment = () => {
       <CommentList
         data={commentData}
         dropdownItems={dropdownItems}
+        currentUser={user.userId}
         theme={theme}
       />
     </CommentBox>

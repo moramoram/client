@@ -9,8 +9,7 @@ import { themeState } from "@/recoil";
 import { useMutation, useQueryClient } from "react-query";
 import { GetComments, CommentSelector, postComment } from "@/api";
 
-import { CommentList } from "@/layouts";
-import { CommentInput } from "@/components";
+import { CommentList, CommentInput } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const StudyDetailComment = () => {

@@ -5,8 +5,7 @@ import { useRecoilValue, useRecoilState } from "recoil";
 import { themeState, studySearch, studyfilter } from "@/recoil";
 
 import { StudyCardGrid } from "@/containers";
-import { CardGrid } from "@/layouts";
-import { SubNavbar, Input, Checkbox, Sort } from "@/components";
+import { SubNavbar, Input, Checkbox, CardGrid, Sort } from "@/components";
 
 import { debounce } from "@/utils";
 

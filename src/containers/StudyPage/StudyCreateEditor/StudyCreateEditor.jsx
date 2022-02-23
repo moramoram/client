@@ -5,9 +5,7 @@ import { Controller } from "react-hook-form";
 
 import ReactQuill, { Quill } from "react-quill";
 import MarkdownShortcuts from "quill-markdown-shortcuts";
-import hljs from "highlight.js";
 import "react-quill/dist/quill.snow.css";
-import "highlight.js/styles/base16/decaf.css";
 
 import { useMediaQuery } from "react-responsive";
 
@@ -22,12 +20,8 @@ const StudyCreateEditor = ({
 }) => {
   Quill.register("modules/markdownShortcuts", MarkdownShortcuts);
   Quill.debug("error");
-  window.hljs = hljs;
 
   const modules = {
-    syntax: {
-      highlight: (text) => hljs.highlightAuto(text).value,
-    },
     toolbar: [
       [{ header: [1, 2, 3, false] }],
       ["bold", "italic", "underline", "strike", "blockquote"],

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { GetJobList, JobCardSelector } from "@/api";
-import { CardSlider } from "@/layouts";
+import { CardSlider } from "@/components";
 
 const MainJobSlider = ({ ...props }) => {
   const search = {

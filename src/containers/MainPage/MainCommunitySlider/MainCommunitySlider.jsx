@@ -1,5 +1,5 @@
 import React from "react";
-import { FeedSmallSlider } from "@/layouts";
+import { FeedSmallSlider } from "@/components";
 import { GetCommunityList } from "@/api";
 
 const MainCommunitySlider = ({ isLoading, ...props }) => {

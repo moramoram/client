@@ -7,7 +7,7 @@ import { useIntersectionObserver } from "@/hooks";
 import { GetJobList, JobCardSelector } from "@/api";
 
 import { JobNoContent } from "@/containers";
-import { CardGrid } from "@/layouts";
+import { CardGrid } from "@/components";
 
 const JobCardGrid = () => {
   const theme = useRecoilValue(themeState);

@@ -57,7 +57,7 @@ const Layout = styled.div`
   height: 100vh;
   margin: auto;
 
-  background: url("/images/background.png");
+  background: url("/images/background.webp");
 `;
 
 const ContentBox = styled.div`

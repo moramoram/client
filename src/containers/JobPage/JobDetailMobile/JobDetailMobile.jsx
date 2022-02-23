@@ -16,12 +16,12 @@ import {
   Badge,
   BookMark,
   Button,
+  CardSmallSlider,
   ImageBoxResponsive,
   SideBarItem,
   Toc,
 } from "@/components";
 import { JobDetailComment } from "@/containers";
-import { CardSmallSlider } from "@/layouts";
 
 import { Icon } from "@/foundations";
 import { colors, fontSize, lineHeight, fontWeight, loadings } from "@/_shared";

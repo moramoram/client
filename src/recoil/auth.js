@@ -10,7 +10,7 @@ export const token = atom({
   effects_UNSTABLE: [localStorageEffect("ssafe_token")],
 });
 
-const authTrigger = atom({
+export const authTrigger = atom({
   key: "authTrigger",
   default: 0,
 });

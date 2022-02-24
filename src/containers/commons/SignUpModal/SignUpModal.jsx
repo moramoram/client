@@ -123,7 +123,7 @@ const Layout = styled.div`
 
   @media screen and (max-width: 500px) {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     border-radius: 0;
   }
 `;
@@ -196,14 +196,14 @@ const Button = styled.button`
   align-items: center;
   gap: 0.5rem;
 
-  height: 54px;
-  width: 255px;
-  padding: 1rem 2rem;
+  padding: 1rem 2.2rem;
   border-radius: 8px;
   border: 0px solid;
 
   box-shadow: ${shadows.base};
   cursor: pointer;
+
+  white-space: nowrap;
 `;
 
 const Link = styled.a`

@@ -19,8 +19,14 @@ Default.args = {
 };
 
 export const AllTypes = () => (
-  <Background>
-    <NotificationItem />
-    <NotificationItem status="new" />
-  </Background>
+  <>
+    <Background theme="light">
+      <NotificationItem />
+      <NotificationItem status="new" />
+    </Background>
+    <Background theme="dark">
+      <NotificationItem theme="dark" />
+      <NotificationItem status="new" theme="dark" />
+    </Background>
+  </>
 );

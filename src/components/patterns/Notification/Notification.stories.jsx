@@ -1,5 +1,7 @@
 import React from "react";
+
 import Notification from ".";
+import { Background } from "@/foundations";
 
 export default {
   title: "Patterns/Notification",
@@ -23,3 +25,14 @@ Default.args = {
     },
   ],
 };
+
+export const AllType = () => (
+  <>
+    <Background theme="light">
+      <Notification />
+    </Background>
+    <Background theme="dark">
+      <Notification theme="dark" />
+    </Background>
+  </>
+);

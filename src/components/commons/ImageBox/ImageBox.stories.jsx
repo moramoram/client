@@ -1,5 +1,8 @@
 import React from "react";
+import styled from "styled-components";
+
 import ImageBox from "./";
+import { Typography } from "@/foundations";
 
 export default {
   title: "Components/ImageBox",
@@ -14,25 +17,28 @@ Default.args = {
 
 export const AllTypes = () => (
   <>
-    <h1>Size</h1>
-    <hr />
-    <p />
-    <ImageBox />
-    <p />
-    <ImageBox size="medium" />
-    <p />
-    <ImageBox size="small" />
-    <h1>Light ImageBox</h1>
-    <hr />
-    <p />
-    <ImageBox />
-    <p />
-    <ImageBox isLoading />
-    <h1>Dark ImageBox</h1>
-    <hr />
-    <p />
-    <ImageBox theme="dark" />
-    <p />
-    <ImageBox theme="dark" isLoading />
+    <TypeBox>
+      <Typography type="h3">Size</Typography>
+      <ImageBox />
+      <ImageBox size="medium" />
+      <ImageBox size="small" />
+    </TypeBox>
+    <TypeBox>
+      <Typography type="h3">Light ImageBox</Typography>
+      <ImageBox />
+      <ImageBox isLoading />
+    </TypeBox>
+    <TypeBox>
+      <Typography type="h3">Dark ImageBox</Typography>
+      <ImageBox theme="dark" />
+      <ImageBox theme="dark" isLoading />
+    </TypeBox>
   </>
 );
+
+const TypeBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+`;

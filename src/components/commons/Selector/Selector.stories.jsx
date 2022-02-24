@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import Selector from "./";
 import { Background } from "@/foundations";
@@ -40,44 +41,49 @@ Default.args = {
 export const AllTypes = () => (
   <>
     <Background theme="light">
-      <Selector theme="light" isMulti />
-      <br />
-      <Selector theme="light" title="라벨" isMulti />
-      <br />
-      <Selector
-        theme="light"
-        title="라벨"
-        message="This is a hint text to help user."
-        isMulti
-      />
-      <br />
-      <Selector
-        theme="light"
-        title="라벨"
-        status="error"
-        message="This is error message."
-        isMulti
-      />
+      <TypeBox>
+        <Selector theme="light" isMulti />
+        <Selector theme="light" title="라벨" isMulti />
+        <Selector
+          theme="light"
+          title="라벨"
+          message="This is a hint text to help user."
+          isMulti
+        />
+        <Selector
+          theme="light"
+          title="라벨"
+          status="error"
+          message="This is error message."
+          isMulti
+        />
+      </TypeBox>
     </Background>
     <Background theme="dark">
-      <Selector theme="dark" isMulti />
-      <br />
-      <Selector theme="dark" title="라벨" isMulti />
-      <br />
-      <Selector
-        theme="dark"
-        title="라벨"
-        message="This is a hint text to help user."
-        isMulti
-      />
-      <br />
-      <Selector
-        theme="dark"
-        title="라벨"
-        status="error"
-        message="This is error message."
-        isMulti
-      />
+      <TypeBox>
+        <Selector theme="dark" isMulti />
+        <Selector theme="dark" title="라벨" isMulti />
+        <Selector
+          theme="dark"
+          title="라벨"
+          message="This is a hint text to help user."
+          isMulti
+        />
+        <Selector
+          theme="dark"
+          title="라벨"
+          status="error"
+          message="This is error message."
+          isMulti
+        />
+      </TypeBox>
     </Background>
   </>
 );
+
+const TypeBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+`;

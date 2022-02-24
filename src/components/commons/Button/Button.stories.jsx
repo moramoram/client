@@ -1,8 +1,8 @@
 import React from "react";
 
 import Button from "./";
-import { Icon } from "@/foundations";
-import { Background } from "@/foundations";
+import { Background, Icon, Typography } from "@/foundations";
+import { colors } from "@/_shared";
 
 export default {
   title: "Components/Button",
@@ -19,6 +19,8 @@ Standard.args = {
 export const AllTypes = () => (
   <>
     <Background theme="light">
+      <Typography type="h4">Primary Light</Typography>
+      <br />
       <Button width="200px">Primary</Button>
       <br />
       <Button width="200px" disabled>
@@ -35,6 +37,8 @@ export const AllTypes = () => (
       </Button>
       <br />
       <br />
+      <br />
+      <Typography type="h4">Secondary Light</Typography>
       <br />
       <Button mode="secondary" width="200px">
         Secondary
@@ -55,6 +59,8 @@ export const AllTypes = () => (
       <br />
       <br />
       <br />
+      <Typography type="h4">Transparent Light</Typography>
+      <br />
       <Button mode="transparent" width="200px">
         Transparent
       </Button>
@@ -69,10 +75,12 @@ export const AllTypes = () => (
       <br />
       <Button mode="transparent" width="200px">
         <Icon icon="info" aria-label="Link" />
-        Secondary
+        Transparent
       </Button>
       <br />
       <br />
+      <br />
+      <Typography type="h4">Active Light</Typography>
       <br />
       <Button mode="active" width="200px">
         Active
@@ -88,10 +96,14 @@ export const AllTypes = () => (
       <br />
       <Button mode="active" width="200px">
         <Icon icon="info" aria-label="Link" />
-        Secondary
+        Active
       </Button>
     </Background>
     <Background theme="dark">
+      <Typography type="h4" style={{ color: colors.gray25 }}>
+        Primary Dark
+      </Typography>
+      <br />
       <Button width="200px" theme="dark">
         Primary
       </Button>
@@ -110,6 +122,10 @@ export const AllTypes = () => (
       </Button>
       <br />
       <br />
+      <br />
+      <Typography type="h4" style={{ color: colors.gray25 }}>
+        Secondary Dark
+      </Typography>
       <br />
       <Button mode="secondary" width="200px" theme="dark">
         Secondary
@@ -130,6 +146,10 @@ export const AllTypes = () => (
       <br />
       <br />
       <br />
+      <Typography type="h4" style={{ color: colors.gray25 }}>
+        Transparent Dark
+      </Typography>
+      <br />
       <Button mode="transparent" width="200px" theme="dark">
         Transparent
       </Button>
@@ -144,10 +164,14 @@ export const AllTypes = () => (
       <br />
       <Button mode="transparent" width="200px" theme="dark">
         <Icon icon="info" aria-label="Link" />
-        Secondary
+        Transparent
       </Button>
       <br />
       <br />
+      <br />
+      <Typography type="h4" style={{ color: colors.gray25 }}>
+        Active Dark
+      </Typography>
       <br />
       <Button mode="active" width="200px" theme="dark">
         Active
@@ -163,7 +187,7 @@ export const AllTypes = () => (
       <br />
       <Button mode="active" width="200px" theme="dark">
         <Icon icon="info" aria-label="Link" />
-        Secondary
+        Active
       </Button>
     </Background>
   </>

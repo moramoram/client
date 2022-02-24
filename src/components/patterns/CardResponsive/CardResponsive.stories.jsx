@@ -1,5 +1,9 @@
 import React from "react";
+import styled from "styled-components";
+
 import CardResponsive from ".";
+import { Background, Typography } from "@/foundations";
+import { colors } from "@/_shared";
 
 export default {
   title: "Patterns/CardResponsive",
@@ -20,12 +24,59 @@ Default.args = {
 
 export const AllTypes = (args) => (
   <>
-    <CardResponsive {...args} />
-    <CardResponsive isLiked {...args} />
-    <CardResponsive isLoading {...args} />
-    <CardResponsive theme="dark" {...args} />
-    <CardResponsive theme="dark" isLiked {...args} />
-    <CardResponsive theme="dark" isLoading {...args} />
+    <Background theme="light">
+      <TypeBox>
+        <CardBox>
+          <Typography type="h4" style={{ width: "100px" }}>
+            Default
+          </Typography>
+          <CardResponsive {...args} />
+        </CardBox>
+        <CardBox>
+          <Typography type="h4" style={{ width: "100px" }}>
+            isLiked
+          </Typography>
+          <CardResponsive isLiked {...args} />
+        </CardBox>
+        <CardBox>
+          <Typography type="h4" style={{ width: "100px" }}>
+            isLoading
+          </Typography>
+          <CardResponsive isLoading {...args} />
+        </CardBox>
+      </TypeBox>
+    </Background>
+    <Background theme="dark">
+      <TypeBox>
+        <CardBox>
+          <Typography
+            type="h4"
+            style={{ width: "100px", color: colors.gray25 }}
+          >
+            Default
+          </Typography>
+          <CardResponsive theme="dark" {...args} />
+        </CardBox>
+        <CardBox>
+          <Typography
+            type="h4"
+            style={{ width: "100px", color: colors.gray25 }}
+          >
+            isLiked
+          </Typography>
+          <CardResponsive isLiked theme="dark" {...args} />
+        </CardBox>
+        <CardBox>
+          <Typography
+            type="h4"
+            style={{ width: "100px", color: colors.gray25 }}
+          >
+            isLoading
+          </Typography>
+          <CardResponsive isLoading theme="dark" {...args} />
+        </CardBox>
+      </TypeBox>
+    </Background>
   </>
 );
 
@@ -38,3 +89,16 @@ AllTypes.args = {
   },
   badges: ["JavaScript", "React", "Vue.js"],
 };
+
+const TypeBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 1rem;
+`;
+
+const CardBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;

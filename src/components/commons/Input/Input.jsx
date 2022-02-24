@@ -17,10 +17,7 @@ const STATUS = {
 };
 
 const Input = forwardRef(
-  (
-    { title, placeholder, message, status, icon, required, ...props },
-    inputRef
-  ) => {
+  ({ title, placeholder, message, status, icon, ...props }, inputRef) => {
     return (
       <Layout>
         <Label status={status} {...props}>
@@ -48,6 +45,7 @@ Input.propTypes = {
   title: PropTypes.string,
   placeholder: PropTypes.string,
   message: PropTypes.string,
+  icon: PropTypes.string,
 };
 
 Input.defaultProps = {

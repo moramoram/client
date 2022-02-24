@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Link } from "react-router-dom";
-
 import { CardResponsive } from "@/components";
 
 const THEME = {
@@ -15,8 +14,8 @@ const CardGrid = ({ data, theme, isLoading, ...props }) => {
   const items = isLoading ? cardData : data;
   return (
     <Layout {...props}>
-      {items.map(({ id, ...props }, idx) => (
-        <CardItemLink to={id} key={idx}>
+      {items.map(({ id, ...props }) => (
+        <CardItemLink to={id} key={id}>
           <CardResponsive theme={theme} isLoading={isLoading} {...props} />
         </CardItemLink>
       ))}
@@ -24,12 +23,14 @@ const CardGrid = ({ data, theme, isLoading, ...props }) => {
   );
 };
 
-CardGrid.defaultProps = {
-  theme: THEME.LIGHT,
-};
-
 CardGrid.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
+  data: PropTypes.array,
+  isLoading: PropTypes.bool,
+};
+
+CardGrid.defaultProps = {
+  theme: THEME.LIGHT,
 };
 
 export default CardGrid;

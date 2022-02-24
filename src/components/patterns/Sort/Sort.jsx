@@ -45,13 +45,27 @@ const Sort = ({ items, onClick, value, ...props }) => {
   );
 };
 
+const criteriaData = [
+  {
+    label: "메뉴",
+    value: "menu",
+  },
+  {
+    label: "메뉴",
+    value: "menu",
+  },
+];
+
 Sort.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   items: PropTypes.array,
+  value: PropTypes.node,
 };
 
 Sort.defaultProps = {
   theme: THEME.LIGHT,
+  items: criteriaData,
+  value: criteriaData[0],
 };
 
 export default Sort;

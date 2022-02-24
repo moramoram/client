@@ -49,7 +49,7 @@ const JobDetailComment = ({ companyId, ...props }) => {
       onClick: (e) => {
         if (window.confirm("정말 삭제하시겠습니까?")) {
           commentDeleteMutation.mutate({
-            type: "job",
+            type: "company",
             id: e.target.id,
           });
         }

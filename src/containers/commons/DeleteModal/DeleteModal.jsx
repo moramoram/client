@@ -44,7 +44,6 @@ const DeleteModal = ({ ...props }) => {
           <ContentBox>
             <Title type="h4" {...props}>
               {/* {"댓글을 삭제하시면 되돌릴 수 없어요.\n 정말 삭제하실건가요?"} */}
-              {"준비중인 서비스입니다.\n 조금만 기다려주세요"}
             </Title>
             <Description type="paragraph"></Description>
           </ContentBox>

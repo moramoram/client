@@ -16,11 +16,12 @@ const CommentList = ({
   return (
     <Layout>
       {items.map((props, idx) => {
+        console.log("user", currentUser, props.userId);
         return (
           <CommentBox key={idx}>
             <Comment
               theme={theme}
-              isDisabled={currentUser !== props?.writerInfo?.userId}
+              isDisabled={currentUser !== props.userId}
               dropdownItems={dropdownItems}
               {...props}
             ></Comment>

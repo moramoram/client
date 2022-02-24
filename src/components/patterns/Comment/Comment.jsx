@@ -61,7 +61,7 @@ const Comment = ({
         ref={dropdownRef}
         isDropdownOpen={isDropdownOpen}
       >
-        {isDisabled && (
+        {!isDisabled && (
           <Icon
             icon="moreVertical"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}

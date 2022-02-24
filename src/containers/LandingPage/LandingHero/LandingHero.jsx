@@ -57,7 +57,27 @@ const Layout = styled.div`
   height: 100vh;
   margin: auto;
 
-  background: url("/images/background.webp");
+  background: radial-gradient(
+      101.82% 101.82% at 49.99% -1.82%,
+      rgba(74, 131, 239, 0.1) 0%,
+      rgba(74, 131, 239, 0.1) 0.01%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    linear-gradient(
+      235.93deg,
+      rgba(207, 238, 255, 0.05) 0%,
+      rgba(101, 201, 255, 0) 70.17%
+    ),
+    linear-gradient(
+      133.3deg,
+      rgba(87, 74, 239, 0.02) 0.83%,
+      rgba(74, 131, 239, 0) 45.87%
+    ),
+    radial-gradient(
+      34.08% 56.27% at 94.97% 3.42%,
+      rgba(74, 131, 239, 0.02) 0%,
+      rgba(74, 131, 239, 0) 100%
+    );
 `;
 
 const ContentBox = styled.div`
@@ -116,12 +136,13 @@ const GetStartedBtn = styled.button`
   text-align: center;
   text-decoration: none;
 
-  transition: 0.2s;
+  transition: 0.3s;
   user-select: none;
   cursor: pointer;
 
   :hover {
     background: ${colors.blue200};
+    transform: scale(1.05);
   }
 
   :active {

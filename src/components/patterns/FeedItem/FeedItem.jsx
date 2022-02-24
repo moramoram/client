@@ -35,6 +35,14 @@ const FeedItem = ({
   const isDefault = useMediaQuery({ query: "(min-width:530px)" });
   const isSmall = useMediaQuery({ query: "(max-width:530px)" });
 
+  if (isLoading) {
+    username = "";
+    userDetail = "";
+    created = "";
+    title = "";
+    content = "";
+  }
+
   return (
     <Layout>
       <FlexBox>
@@ -119,7 +127,7 @@ FeedItem.propTypes = {
 
 FeedItem.defaultProps = {
   theme: THEME.LIGHT,
-  username: null,
+  username: "User",
   avatar: null,
   campus: "서울",
   ordinal: "6",

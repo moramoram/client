@@ -1,5 +1,8 @@
 import React from "react";
+import styled from "styled-components";
+
 import Badge from "./";
+import { Typography } from "@/foundations";
 
 export const Standard = (args) => <Badge {...args} />;
 Standard.args = {
@@ -12,31 +15,46 @@ export default {
 };
 
 export const AllTypes = () => (
-  <div>
-    <h4>Primary</h4>
-    <Badge mode="primary">BADGE</Badge>
-    <p />
-    <h4>Secondary</h4>
-    <Badge mode="secondary">BADGE</Badge>
-    <p />
-    <h4>Secondary Dark</h4>
-    <Badge mode="secondary" theme="dark">
-      BADGE
-    </Badge>
-    <p />
-    <h4>Secondary Bold</h4>
-    <Badge mode="secondary" isBold>
-      BADGE
-    </Badge>
-    <p />
-    <h4>Loading Light</h4>
-    <Badge mode="primary" isLoading>
-      BADGE
-    </Badge>
-    <p />
-    <h4>Loading Dark</h4>
-    <Badge mode="primary" isLoading theme="dark">
-      BADGE
-    </Badge>
-  </div>
+  <>
+    <TypeBox>
+      <Typography type="h4">Primary</Typography>
+      <Badge mode="primary">BADGE</Badge>
+    </TypeBox>
+    <TypeBox>
+      <Typography type="h4">Secondary</Typography>
+      <Badge mode="secondary">BADGE</Badge>
+    </TypeBox>
+    <TypeBox>
+      <Typography type="h4">Secondary Dark</Typography>
+      <Badge mode="secondary" theme="dark">
+        BADGE
+      </Badge>
+    </TypeBox>
+    <TypeBox>
+      <Typography type="h4">Secondary Bold</Typography>
+      <Badge mode="secondary" isBold>
+        BADGE
+      </Badge>
+    </TypeBox>
+    <TypeBox>
+      <Typography type="h4">Loading Light</Typography>
+      <Badge mode="primary" isLoading>
+        BADGE
+      </Badge>
+    </TypeBox>
+    <TypeBox>
+      <Typography type="h4">Loading Dark</Typography>
+      <Badge mode="primary" isLoading theme="dark">
+        BADGE
+      </Badge>
+    </TypeBox>
+  </>
 );
+
+const TypeBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+`;

@@ -1,7 +1,6 @@
 import React from "react";
-
+import styled from "styled-components";
 import Typography from "./";
-import { Icon } from "@/foundations";
 
 export default {
   title: "Foundations/Typography",
@@ -14,46 +13,69 @@ Default.args = {
   children: "Typography",
 };
 
-export const AllTypes = (args) => (
-  <div>
-    <h1>H1</h1>
-    <hr />
-    <Typography type="h1">Typography</Typography>
-    <br />
-    <h1>H2</h1>
-    <hr />
-    <Typography type="h2">Typography</Typography>
-    <br />
-    <h1>H3</h1>
-    <hr />
-    <Typography type="h3">Typography</Typography>
-    <br />
-    <h1>H4</h1>
-    <hr />
-    <Typography type="h4">Typography</Typography>
-    <br />
-    <h1>Large</h1>
-    <hr />
-    <Typography type="large">Typography</Typography>
-    <br />
-    <h1>Paragraph</h1>
-    <hr />
-    <Typography type="paragraph">Typography</Typography>
-    <br />
-    <h1>Small</h1>
-    <hr />
-    <Typography type="small">Typography</Typography>
-    <br />
-    <h1>With Icon</h1>
-    <hr />
-    <Typography {...args}>
-      <Icon {...args} />
-      with icon
-    </Typography>
-  </div>
+export const AllTypes = () => (
+  <Layout>
+    <Row>
+      <Info>
+        <Typography type="h1">H1</Typography>
+      </Info>
+      <Typography type="h1">당신이 찾던 싸피만의 커뮤니티</Typography>
+    </Row>
+    <Row>
+      <Info>
+        <Typography type="h2">H1</Typography>
+      </Info>
+      <Typography type="h2">당신이 찾던 싸피만의 커뮤니티</Typography>
+    </Row>
+    <Row>
+      <Info>
+        <Typography type="h3">H1</Typography>
+      </Info>
+      <Typography type="h3">당신이 찾던 싸피만의 커뮤니티</Typography>
+    </Row>
+    <Row>
+      <Info>
+        <Typography type="h4">H1</Typography>
+      </Info>
+      <Typography type="h4">당신이 찾던 싸피만의 커뮤니티</Typography>
+    </Row>
+    <Row>
+      <Info>
+        <Typography type="large">H1</Typography>
+      </Info>
+      <Typography type="large">당신이 찾던 싸피만의 커뮤니티</Typography>
+    </Row>
+    <Row>
+      <Info>
+        <Typography type="paragraph">H1</Typography>
+      </Info>
+      <Typography type="paragraph">당신이 찾던 싸피만의 커뮤니티</Typography>
+    </Row>
+    <Row>
+      <Info>
+        <Typography type="small">H1</Typography>
+      </Info>
+      <Typography type="small">당신이 찾던 싸피만의 커뮤니티</Typography>
+    </Row>
+  </Layout>
 );
 
 AllTypes.args = {
   icon: "smile",
   inline: true,
 };
+
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const Row = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Info = styled.div`
+  width: 100px;
+`;

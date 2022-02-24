@@ -14,6 +14,20 @@ const Meta = styled.div`
   font-size: 12px;
 `;
 
+export const AllTypes = () => (
+  <>
+    There are {Object.keys(iconsSocial).length} social icons
+    <List>
+      {Object.keys(iconsSocial).map((key) => (
+        <Item key={key}>
+          <IconSocial icon={key} aria-hidden />
+          <Meta>{key}</Meta>
+        </Item>
+      ))}
+    </List>
+  </>
+);
+
 const Item = styled.li`
   display: inline-flex;
   flex-direction: row;
@@ -33,17 +47,3 @@ const List = styled.ul`
   flex-flow: row wrap;
   list-style: none;
 `;
-
-export const Default = () => (
-  <>
-    There are {Object.keys(iconsSocial).length} social icons
-    <List>
-      {Object.keys(iconsSocial).map((key) => (
-        <Item key={key}>
-          <IconSocial icon={key} aria-hidden />
-          <Meta>{key}</Meta>
-        </Item>
-      ))}
-    </List>
-  </>
-);

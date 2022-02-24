@@ -1,5 +1,9 @@
 import React from "react";
+import styled from "styled-components";
+
 import Card from "./";
+import { Background, Typography } from "@/foundations";
+import { colors } from "@/_shared";
 
 export default {
   title: "Patterns/Card",
@@ -24,12 +28,59 @@ Default.args = {
 
 export const AllTypes = (args) => (
   <>
-    <Card {...args} />
-    <Card isLiked {...args} />
-    <Card isLoading {...args} />
-    <Card theme="dark" {...args} />
-    <Card theme="dark" isLiked {...args} />
-    <Card theme="dark" isLoading {...args} />
+    <Background theme="light">
+      <TypeBox>
+        <CardBox>
+          <Typography type="h4" style={{ width: "100px" }}>
+            Default
+          </Typography>
+          <Card {...args} />
+        </CardBox>
+        <CardBox>
+          <Typography type="h4" style={{ width: "100px" }}>
+            isLiked
+          </Typography>
+          <Card isLiked {...args} />
+        </CardBox>
+        <CardBox>
+          <Typography type="h4" style={{ width: "100px" }}>
+            isLoading
+          </Typography>
+          <Card isLoading {...args} />
+        </CardBox>
+      </TypeBox>
+    </Background>
+    <Background theme="dark">
+      <TypeBox>
+        <CardBox>
+          <Typography
+            type="h4"
+            style={{ width: "100px", color: colors.gray25 }}
+          >
+            Default
+          </Typography>
+          <Card theme="dark" {...args} />
+        </CardBox>
+        <CardBox>
+          <Typography
+            type="h4"
+            style={{ width: "100px", color: colors.gray25 }}
+          >
+            isLiked
+          </Typography>
+          <Card isLiked theme="dark" {...args} />
+        </CardBox>
+        <CardBox>
+          <Typography
+            type="h4"
+            style={{ width: "100px", color: colors.gray25 }}
+          >
+            isLoading
+          </Typography>
+          <Card isLoading theme="dark" {...args} />
+        </CardBox>
+      </TypeBox>
+    </Background>
   </>
 );
 
@@ -42,3 +93,15 @@ AllTypes.args = {
   },
   badges: ["JavaScript", "React", "Vue.js"],
 };
+
+const TypeBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 1rem;
+`;
+
+const CardBox = styled.div`
+  display: flex;
+  gap: 2rem;
+`;

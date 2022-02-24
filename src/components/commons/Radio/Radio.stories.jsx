@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import Radio from ".";
 import { Background } from "@/foundations";
@@ -10,34 +11,38 @@ export default {
 
 export const Default = (args) => (
   <>
-    <Background
-      style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-      {...args}
-    >
-      <Radio name="group" {...args} />
-      <Radio name="group" {...args} />
-      <Radio name="group" {...args} />
+    <Background {...args}>
+      <TypeBox>
+        <Radio name="group" {...args} />
+        <Radio name="group" {...args} />
+        <Radio name="group" {...args} />
+      </TypeBox>
     </Background>
   </>
 );
 
 export const All = () => (
   <>
-    <Background
-      style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-      theme="light"
-    >
-      <Radio name="light" theme="light" />
-      <Radio name="light" theme="light" />
-      <Radio name="light" theme="light" />
+    <Background theme="light">
+      <TypeBox>
+        <Radio name="light" theme="light" />
+        <Radio name="light" theme="light" />
+        <Radio name="light" theme="light" />
+      </TypeBox>
     </Background>
-    <Background
-      style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-      theme="dark"
-    >
-      <Radio name="dark" theme="dark" />
-      <Radio name="dark" theme="dark" />
-      <Radio name="dark" theme="dark" />
+    <Background theme="dark">
+      <TypeBox>
+        <Radio name="dark" theme="dark" />
+        <Radio name="dark" theme="dark" />
+        <Radio name="dark" theme="dark" />
+      </TypeBox>
     </Background>
   </>
 );
+
+const TypeBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+`;

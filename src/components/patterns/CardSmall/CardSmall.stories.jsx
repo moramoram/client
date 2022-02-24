@@ -1,16 +1,15 @@
 import React from "react";
+import styled from "styled-components";
+
 import CardSmall from "./";
+import { Background } from "@/foundations";
 
 export default {
   title: "Patterns/CardSmall",
   component: CardSmall,
 };
 
-export const Default = (args) => (
-  <>
-    <CardSmall {...args} />
-  </>
-);
+export const Default = (args) => <CardSmall {...args} />;
 
 Default.args = {
   contents: {
@@ -22,10 +21,18 @@ Default.args = {
 
 export const AllTypes = (args) => (
   <>
-    <CardSmall {...args} />
-    <CardSmall isLoading {...args} />
-    <CardSmall theme="dark" {...args} />
-    <CardSmall theme="dark" isLoading {...args} />
+    <Background theme="light">
+      <TypeBox>
+        <CardSmall {...args} />
+        <CardSmall isLoading {...args} />
+      </TypeBox>
+    </Background>
+    <Background theme="dark">
+      <TypeBox>
+        <CardSmall theme="dark" {...args} />
+        <CardSmall theme="dark" isLoading {...args} />
+      </TypeBox>
+    </Background>
   </>
 );
 
@@ -36,3 +43,10 @@ AllTypes.args = {
     src: "",
   },
 };
+
+const TypeBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 1rem;
+`;

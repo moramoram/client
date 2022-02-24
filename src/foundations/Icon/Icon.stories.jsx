@@ -9,31 +9,6 @@ export default {
   component: Icon,
 };
 
-const Meta = styled.div`
-  color: #666;
-  font-size: 12px;
-`;
-
-const Item = styled.li`
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  flex: 0 1 20%;
-  min-width: 120px;
-
-  padding: 0px 7.5px 20px;
-
-  svg {
-    margin-right: 10px;
-  }
-`;
-
-const List = styled.ul`
-  display: flex;
-  flex-flow: row wrap;
-  list-style: none;
-`;
-
 export const Default = (args) => (
   <>
     This is a {args.block ? "block" : "inline"} <Icon {...args} /> icon
@@ -59,3 +34,28 @@ export const AllTypes = () => (
     </List>
   </>
 );
+
+const Meta = styled.div`
+  color: #666;
+  font-size: 12px;
+`;
+
+const Item = styled.li`
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 0 1 20%;
+  min-width: 120px;
+
+  padding: 0px 7.5px 20px;
+
+  svg {
+    margin-right: 10px;
+  }
+`;
+
+const List = styled.ul`
+  display: flex;
+  flex-flow: row wrap;
+  list-style: none;
+`;

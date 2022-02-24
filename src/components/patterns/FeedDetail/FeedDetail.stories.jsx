@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import FeedDetail from ".";
 import { Background } from "@/foundations";
@@ -64,10 +65,23 @@ Default.args = {
 export const AllTypes = () => (
   <>
     <Background theme="light">
-      <FeedDetail theme="light" />
+      <TypeBox>
+        <FeedDetail theme="light" />
+        <FeedDetail theme="light" isLoading />
+      </TypeBox>
     </Background>
     <Background theme="dark">
-      <FeedDetail theme="dark" />
+      <TypeBox>
+        <FeedDetail theme="dark" />
+        <FeedDetail theme="dark" isLoading />
+      </TypeBox>
     </Background>
   </>
 );
+
+const TypeBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 1rem;
+`;

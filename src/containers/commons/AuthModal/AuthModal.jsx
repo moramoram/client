@@ -85,7 +85,7 @@ const Layout = styled.div`
 
   @media screen and (max-width: 500px) {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     border-radius: 0;
   }
 `;

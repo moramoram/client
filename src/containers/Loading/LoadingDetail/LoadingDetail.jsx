@@ -119,7 +119,7 @@ const SubTitle = styled.div`
 
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.lg};
-  line-height: ${lineHeight.lg}
+  line-height: ${lineHeight.lg};
   color: ${(props) => subtitleColor[props.theme]};
 `;
 

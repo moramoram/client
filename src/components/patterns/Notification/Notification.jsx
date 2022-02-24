@@ -2,7 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-// import { NotificationItem } from "./NotificationItem";
+import { useMediaQuery } from "react-responsive";
+
+import { NotificationItem } from "./NotificationItem";
 import { Icon } from "@/foundations";
 import { colors, shadows, animations, fontWeight, fontSize } from "@/_shared";
 
@@ -12,35 +14,46 @@ const THEME = {
 };
 
 const Notification = ({
-  isUpdated,
   notificationOpen,
   setNotificationOpen,
   setDropdownOpen,
+  data,
   ...props
 }) => {
+  const isMobile = useMediaQuery({ query: "(max-width:980px)" });
+
   return (
-    <Layout>
-      <Iconbox
-        onClick={() => {
-          setNotificationOpen(!notificationOpen);
-          setDropdownOpen(false);
-        }}
-      >
-        <Icon icon="bell" stroke={colors.gray400} width="20" aria-hidden />
-        {isUpdated && <Updated />}
-      </Iconbox>
-      {notificationOpen && (
-        <Dropdown {...props}>
+    <>
+      <Dropdown {...props}>
+        {isMobile && (
+          <CloseIconBox>
+            <Icon
+              icon="arrowLeft"
+              onClick={() => setNotificationOpen(false)}
+              {...props}
+            />
+          </CloseIconBox>
+        )}
+        <DropdownHeader>
           <Title {...props}>알림</Title>
-          <MenuBox {...props}>
-            <EmptyBox>알림이 없습니다</EmptyBox>
-            {/* <NotificationItem isNew {...props} />
-            <NotificationItem {...props} />
-            <NotificationItem {...props} /> */}
-          </MenuBox>
-        </Dropdown>
-      )}
-    </Layout>
+          <DeleteAll>모두 삭제</DeleteAll>
+        </DropdownHeader>
+        <MenuBox {...props}>
+          {data ? (
+            data.map(({ notificationId, ...data }) => (
+              <NotificationItem
+                key={notificationId}
+                id={notificationId}
+                {...data}
+                {...props}
+              />
+            ))
+          ) : (
+            <EmptyBox>새로운 알림이 없습니다</EmptyBox>
+          )}
+        </MenuBox>
+      </Dropdown>
+    </>
   );
 };
 
@@ -48,10 +61,24 @@ export default Notification;
 
 Notification.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
+  data: PropTypes.node,
 };
 
 Notification.defaultProps = {
   theme: THEME.LIGHT,
+  data: [
+    {
+      message:
+        "축하드려요! ✨ \n SSAFY 인증이 완료되었어요. \n\n 재로그인 하시면 모든 서비스를 이용할 수 있어요 :)",
+      createdDate: new Date(),
+      status: "new",
+    },
+    {
+      message: "처음 오신 것을 환영해요! ✨",
+      createdDate: new Date(),
+      status: "default",
+    },
+  ],
 };
 
 const borderColor = {
@@ -74,34 +101,13 @@ const titleColor = {
   dark: colors.gray25,
 };
 
-const Layout = styled.div`
-  position: relative;
-`;
-
-const Iconbox = styled.div`
-  display: inline-block;
-  position: relative;
-`;
-
-const Updated = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: ${colors.blue100};
-`;
-
 const Dropdown = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  position: absolute;
-  padding-bottom: 0.5rem;
-  top: 38px;
-  right: -48px;
+  width: 300px;
 
+  padding-bottom: 0.5rem;
   border-radius: 8px;
   border: 1px solid ${(props) => borderColor[props.theme]};
 
@@ -110,18 +116,60 @@ const Dropdown = styled.div`
   box-shadow: ${(props) => boxShadow[props.theme]};
 
   animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
+  z-index: 99999;
+
+  @media screen and (max-width: 980px) {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    border-radius: 0;
+  }
+`;
+
+const CloseIconBox = styled.div`
+  display: flex;
+  padding: 1rem;
+
+  svg {
+    width: 24px;
+    stroke: ${colors.gray500};
+    cursor: pointer;
+  }
+`;
+
+const DropdownHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
 `;
 
 const Title = styled.div`
-  padding: 1rem;
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.lg};
   color: ${(props) => titleColor[props.theme]};
   user-select: none;
 `;
 
+const DeleteAll = styled.div`
+  font-weight: ${fontWeight.bold};
+  font-size: ${fontSize.xs};
+  color: ${colors.blue100};
+  user-select: none;
+`;
+
 const MenuBox = styled.div`
   padding: 4px 0;
+  max-height: 500px;
+  overflow-y: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
   > div {
     justify-content: center;
@@ -130,7 +178,7 @@ const MenuBox = styled.div`
 
 const EmptyBox = styled.div`
   display: flex;
-  padding: 1rem 0 3rem 0;
+  padding: 1.5rem 0 3rem 0;
 
   width: 100%;
   min-width: 300px;

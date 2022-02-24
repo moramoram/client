@@ -12,6 +12,7 @@ import {
   fontWeight,
   animations,
   lineHeight,
+  loadings,
 } from "@/_shared";
 
 import { daysFromToday, numToMillion } from "@/utils";
@@ -36,18 +37,32 @@ const FeedDetail = ({
   dropdownItems,
   boardType,
   isDisabled,
+  isLoading,
   ...props
 }) => {
-  const usernameRender = username ?? "User";
+  let usernameRender = username ?? "User";
+  let userDetailRender = `(${ordinal}기 / ${campus})`;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const isDefault = useMediaQuery({ query: "(min-width:530px)" });
+  const category = !isLoading ? categoryData[boardType] : "";
+  if (isLoading) {
+    title = "";
+    usernameRender = "";
+    userDetailRender = "";
+    created = "";
+    content = "";
+  }
 
   return (
     <Layout>
       <Header>
         <TitleBox>
-          <Category>{categoryData[boardType]}</Category>
-          <Title {...props}>{title}</Title>
+          <Category isLoading={isLoading} {...props}>
+            {category}
+          </Category>
+          <Title isLoading={isLoading} {...props}>
+            {title}
+          </Title>
         </TitleBox>
         {!isDisabled && (
           <DropdownBox>
@@ -66,21 +81,22 @@ const FeedDetail = ({
           size={isDefault ? "large" : "medium"}
           username={username}
           src={avatar}
+          isLoading={isLoading}
           {...props}
         />
         <InfoBox>
-          <UserBox>
+          <UserBox isLoading={isLoading} {...props}>
             <User {...props}>{usernameRender}</User>
-            {!!ordinal && campus && (
-              <UserDetail>
-                ({ordinal}기 / {campus})
-              </UserDetail>
-            )}
+            {!!ordinal && campus && <UserDetail>{userDetailRender}</UserDetail>}
           </UserBox>
-          <CreatedAt>{created}</CreatedAt>
+          <CreatedAt isLoading={isLoading} {...props}>
+            {created}
+          </CreatedAt>
         </InfoBox>
       </AvatarBox>
-      <Content {...props}>{content}</Content>
+      <Content isLoading={isLoading} {...props}>
+        {content}
+      </Content>
     </Layout>
   );
 };
@@ -97,6 +113,7 @@ FeedDetail.propTypes = {
   likecount: PropTypes.node,
   commentcount: PropTypes.node,
   viewcount: PropTypes.node,
+  isLoading: PropTypes.bool,
 };
 
 FeedDetail.defaultProps = {
@@ -111,6 +128,7 @@ FeedDetail.defaultProps = {
   likecount: numToMillion(0),
   commentcount: numToMillion(0),
   viewcount: numToMillion(0),
+  isLoading: false,
 };
 
 export default FeedDetail;
@@ -153,6 +171,8 @@ const Header = styled.div`
 const TitleBox = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+
   gap: 0.8rem;
 
   @media screen and (max-width: 530px) {
@@ -161,15 +181,26 @@ const TitleBox = styled.div`
 `;
 
 const Category = styled.div`
+  height: ${lineHeight.p};
+  min-width: 100px;
+
   color: ${colors.blue100};
+  line-height: ${lineHeight.p};
   font-weight: ${fontWeight.bold};
+
+  animation: ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const Title = styled.div`
+  height: ${lineHeight.h2};
+  min-width: 375px;
+
   color: ${(props) => titleColor[props.theme]};
   font-size: ${fontSize.h2};
   line-height: ${lineHeight.h2};
   font-weight: ${fontWeight.bold};
+
+  animation: ${(props) => props.isLoading && loadings[props.theme]};
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.h3};
@@ -201,6 +232,7 @@ const AvatarBox = styled.div`
 const InfoBox = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 4px;
 `;
 
@@ -208,12 +240,17 @@ const UserBox = styled.div`
   display: flex;
   align-items: baseline;
   gap: 0.5rem;
+
+  height: ${lineHeight.p};
+  min-width: 150px;
+  animation: ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const User = styled.div`
   color: ${(props) => titleColor[props.theme]};
   font-size: ${fontSize.p};
   font-weight: ${fontWeight.bold};
+  line-height: ${lineHeight.p};
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.sm};
@@ -230,8 +267,12 @@ const UserDetail = styled.div`
 `;
 
 const CreatedAt = styled.div`
+  height: ${lineHeight.sm};
+  min-width: 80px;
   color: ${colors.gray500};
   font-size: ${fontSize.sm};
+
+  animation: ${(props) => props.isLoading && loadings[props.theme]};
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.xs};

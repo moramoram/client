@@ -22,6 +22,7 @@ const Comment = ({
   content,
   commentId,
   dropdownItems,
+  isDisabled,
   ...props
 }) => {
   const usernameRender = username ?? "익명";
@@ -60,14 +61,16 @@ const Comment = ({
         ref={dropdownRef}
         isDropdownOpen={isDropdownOpen}
       >
-        <Icon
-          icon="moreVertical"
-          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-        />
+        {!isDisabled && (
+          <Icon
+            icon="moreVertical"
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          />
+        )}
         {isDropdownOpen && (
           <DropdownSmall
             items={dropdownItems}
-            commentId={commentId}
+            id={commentId}
             size="small"
             {...props}
           />

@@ -4,7 +4,14 @@ import styled from "styled-components";
 
 import { Comment } from "@/components";
 
-const CommentList = ({ data, theme, isLoading, dropdownItems, ...props }) => {
+const CommentList = ({
+  currentUser,
+  data,
+  theme,
+  isLoading,
+  dropdownItems,
+  ...props
+}) => {
   const items = isLoading ? dummy : data;
   return (
     <Layout>
@@ -13,6 +20,7 @@ const CommentList = ({ data, theme, isLoading, dropdownItems, ...props }) => {
           <CommentBox key={idx}>
             <Comment
               theme={theme}
+              isDisabled={currentUser !== props.userId}
               dropdownItems={dropdownItems}
               {...props}
             ></Comment>

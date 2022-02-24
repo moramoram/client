@@ -2,10 +2,16 @@ import React, { Suspense, useEffect } from "react";
 import styled from "styled-components";
 
 import { Outlet } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { themeState, navTypeState } from "@/recoil/theme";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  themeState,
+  authTrigger,
+  navTypeState,
+  isLoginState,
+  authState,
+} from "@/recoil";
+import { getRefreshToken } from "@/api";
 
-import { isLoginState } from "@/recoil/auth";
 import {
   modalState,
   loginModalState,
@@ -39,6 +45,8 @@ const Layout = () => {
   const navData = useRecoilValue(navMenuData);
   const userMenuData = useRecoilValue(navUserData);
 
+  const authStatus = useRecoilValue(authState);
+  const authChange = useSetRecoilState(authTrigger);
   const isLogined = useRecoilValue(isLoginState);
   const isloginModal = useRecoilValue(loginModalState);
   const isCreateModal = useRecoilValue(createModalState);
@@ -67,6 +75,12 @@ const Layout = () => {
     isSubmitModal,
     isDeleteModal,
   ]);
+
+  useEffect(() => {
+    isLogined &&
+      authStatus !== 3 &&
+      getRefreshToken().then(authChange((v) => v + 1));
+  }, [authStatus, isLogined, authChange]);
 
   return (
     <ErrorBoundary fallback={<ErrorPage />}>

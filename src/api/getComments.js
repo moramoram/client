@@ -26,6 +26,7 @@ export const CommentSelector = (data) => {
   const commentData = data.map((comment) => {
     return {
       username: comment.writerInfo.nickname,
+      userId: comment.writerInfo.userId,
       ordinal: comment.writerInfo.ordinal,
       campus: comment.writerInfo.campus,
       src: comment.writerInfo.profileImg,

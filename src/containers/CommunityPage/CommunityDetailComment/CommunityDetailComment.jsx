@@ -2,11 +2,16 @@ import React from "react";
 import styled from "styled-components";
 
 import { useParams } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import { deleteModalState } from "@/recoil";
+import { useRecoilValue } from "recoil";
+import { auth } from "@/recoil";
 
 import { useMutation, useQueryClient } from "react-query";
-import { GetComments, CommentSelector, postComment } from "@/api";
+import {
+  GetComments,
+  CommentSelector,
+  postComment,
+  deleteComments,
+} from "@/api";
 
 import { CommentInput, CommentList } from "@/components";
 import { colors, fontSize, fontWeight } from "@/_shared";
@@ -14,18 +19,25 @@ import { colors, fontSize, fontWeight } from "@/_shared";
 const CommunityDetailComment = ({ boardType, ...props }) => {
   const queryClient = useQueryClient();
   const id = useParams().contentId;
+  const user = useRecoilValue(auth);
+
   const { data } = GetComments({ type: "board", boardType: boardType, id: id });
   const { commentData } = CommentSelector(data);
-  const setIsModalOpened = useSetRecoilState(deleteModalState);
 
-  const CommentMutation = useMutation((data) => postComment(data), {
+  const CommentCreateMutation = useMutation((data) => postComment(data), {
+    onSuccess: () => {
+      queryClient.invalidateQueries("getComments");
+    },
+  });
+
+  const commentDeleteMutation = useMutation((data) => deleteComments(data), {
     onSuccess: () => {
       queryClient.invalidateQueries("getComments");
     },
   });
 
   const handleClick = (comment) => {
-    CommentMutation.mutate({
+    CommentCreateMutation.mutate({
       type: "board",
       boardId: id,
       content: comment.value,
@@ -36,8 +48,13 @@ const CommunityDetailComment = ({ boardType, ...props }) => {
     {
       value: "delete",
       label: "삭제",
-      onClick: () => {
-        setIsModalOpened(true);
+      onClick: (e) => {
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+          commentDeleteMutation.mutate({
+            type: "board",
+            id: e.target.id,
+          });
+        }
       },
     },
   ];
@@ -49,6 +66,7 @@ const CommunityDetailComment = ({ boardType, ...props }) => {
       <CommentList
         data={commentData}
         dropdownItems={dropdownItems}
+        currentUser={user.userId}
         {...props}
       />
     </>

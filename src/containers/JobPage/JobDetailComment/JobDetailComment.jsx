@@ -2,17 +2,33 @@ import React from "react";
 import styled from "styled-components";
 
 import { useMutation, useQueryClient } from "react-query";
-import { GetComments, CommentSelector, postComment } from "@/api";
+import {
+  GetComments,
+  CommentSelector,
+  postComment,
+  deleteComments,
+} from "@/api";
+
+import { useRecoilValue } from "recoil";
+import { auth } from "@/recoil";
 
 import { CommentInput, CommentList } from "@/components";
 import { colors, fontSize, fontWeight, lineHeight } from "@/_shared";
 
 const JobDetailComment = ({ companyId, ...props }) => {
   const queryClient = useQueryClient();
+  const user = useRecoilValue(auth);
+
   const { data } = GetComments({ type: "company", id: companyId });
   const { commentData } = CommentSelector(data);
 
   const CommentMutation = useMutation((data) => postComment(data), {
+    onSuccess: () => {
+      queryClient.invalidateQueries("getComments");
+    },
+  });
+
+  const commentDeleteMutation = useMutation((data) => deleteComments(data), {
     onSuccess: () => {
       queryClient.invalidateQueries("getComments");
     },
@@ -30,8 +46,13 @@ const JobDetailComment = ({ companyId, ...props }) => {
     {
       value: "delete",
       label: "삭제",
-      onClick: () => {
-        window.alert("준비중인 기능이에요. 조금만 기다려주세요!");
+      onClick: (e) => {
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+          commentDeleteMutation.mutate({
+            type: "company",
+            id: e.target.id,
+          });
+        }
       },
     },
   ];
@@ -46,6 +67,7 @@ const JobDetailComment = ({ companyId, ...props }) => {
       <CommentList
         data={commentData}
         dropdownItems={dropdownItems}
+        currentUser={user.userId}
         {...props}
       />
     </Layout>

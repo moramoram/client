@@ -2,6 +2,7 @@ export * from "./getDummyApi";
 
 export * from "./getComments";
 export * from "./postComment";
+export * from "./deleteComments";
 
 export * from "./getJobList";
 export * from "./getJobDetail";

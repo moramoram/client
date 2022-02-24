@@ -6,6 +6,7 @@ import { isLoginState } from "@/recoil";
 import { Route, Routes } from "react-router-dom";
 import Layout from "@/Layout";
 import { PrivateRoute } from "@/router";
+import { useGaTracker } from "@/hooks";
 
 import {
   LandingPage,
@@ -29,6 +30,7 @@ import {
 
 const Router = () => {
   const isLogined = useRecoilValue(isLoginState);
+  useGaTracker();
 
   return (
     <Routes>

@@ -17,3 +17,10 @@ export const Default = (args) => (
 Default.args = {
   children: "싸피 인증이 승인되었어요. 이제 모든 서비스를 이용해보세요!",
 };
+
+export const AllTypes = () => (
+  <Background>
+    <NotificationItem />
+    <NotificationItem status="new" />
+  </Background>
+);

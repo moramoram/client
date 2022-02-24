@@ -6,15 +6,20 @@ export default {
   component: Notification,
 };
 
-export const Default = (args) => (
-  <div>
-    <Notification {...args} />
-  </div>
-);
+export const Default = (args) => <Notification {...args} />;
 
-export const All = () => (
-  <div style={{ display: "flex", gap: "2rem" }}>
-    <Notification />
-    <Notification isUpdated />
-  </div>
-);
+Default.args = {
+  data: [
+    {
+      message:
+        "축하드려요! ✨ \n SSAFY 인증이 완료되었어요. \n\n 재로그인 하시면 모든 서비스를 이용할 수 있어요 :)",
+      createdDate: new Date(),
+      status: "new",
+    },
+    {
+      message: "처음 오신 것을 환영해요! ✨",
+      createdDate: new Date(),
+      status: "default",
+    },
+  ],
+};

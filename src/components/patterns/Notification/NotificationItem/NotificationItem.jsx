@@ -6,25 +6,29 @@ import { Icon } from "@/foundations";
 import { Avatar } from "@/components";
 import { colors, fontSize, fontWeight } from "@/_shared";
 
+import { daysFromToday } from "@/utils";
+
 const THEME = {
   DARK: "dark",
   LIGHT: "light",
 };
 
-// const STATUS = {
-//   DEFAULT: "default",
-//   NEW: "new"
-// }
+const STATUS = {
+  NEW: "new",
+  DEFAULT: "default",
+};
 
-const NotificationItem = ({ children, ...props }) => {
+const NotificationItem = ({ id, status, message, createdDate, ...props }) => {
   return (
-    <Layout {...props}>
-      <AvatarBox {...props}>
-        <Avatar size="large" src="/images/admin.svg" />
-      </AvatarBox>
+    <Layout status={status} {...props}>
       <ContentBox>
-        {children}
-        <CreatedAt>1분 전</CreatedAt>
+        <AvatarBox {...props}>
+          <Avatar size="large" src="/images/admin.svg" />
+        </AvatarBox>
+        <TextBox {...props}>
+          {message}
+          <CreatedAt>{daysFromToday(createdDate)}</CreatedAt>
+        </TextBox>
       </ContentBox>
       <CloseBox>
         <Icon icon="x" width="12px" stroke={colors.gray400} />
@@ -35,12 +39,16 @@ const NotificationItem = ({ children, ...props }) => {
 
 NotificationItem.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
-  children: PropTypes.node.isRequired,
+  message: PropTypes.node.isRequired,
+  createdDate: PropTypes.node,
+  status: PropTypes.oneOf(Object.values(STATUS)),
 };
 
 NotificationItem.defaultProps = {
   theme: THEME.LIGHT,
-  children: "싸피 인증이 승인되었어요. 이제 모든 서비스를 이용해보세요!",
+  message: "싸피 인증이 승인되었어요. 이제 모든 서비스를 이용해보세요!",
+  createdDate: new Date(),
+  status: STATUS.DEFAULT,
 };
 
 export default NotificationItem;
@@ -60,20 +68,11 @@ const avatarBgColor = {
   light: colors.gray50,
 };
 
-// const bgColor = {
-//   dark: colors.gray800,
-//   light: colors.gray50,
-// };
-
 const Layout = styled.div`
   display: flex;
-  gap: 1rem;
-
-  padding: 1rem;
-
-  color: ${(props) => textColor[props.theme]};
-  font-size: ${fontSize.sm};
-  font-weight: ${fontWeight.regular};
+  justify-content: space-between;
+  width: 100%;
+  min-width: 300px;
 
   cursor: pointer;
   user-select: none;
@@ -84,7 +83,7 @@ const Layout = styled.div`
   }
 
   ${(props) =>
-    props.isNew &&
+    props.status === "new" &&
     css`
       background-color: ${colors.blueOpacity50};
       :hover {
@@ -96,6 +95,14 @@ const Layout = styled.div`
     `}
 `;
 
+const ContentBox = styled.div`
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+
+  width: 100%;
+`;
+
 const AvatarBox = styled.div`
   background-color: ${(props) => avatarBgColor[props.theme]};
   border-radius: 50%;
@@ -103,13 +110,20 @@ const AvatarBox = styled.div`
   width: 40px;
 `;
 
-const ContentBox = styled.div`
+const TextBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 4px;
 
   min-height: 40px;
+  width: 100%;
+
+  color: ${(props) => textColor[props.theme]};
+  font-size: ${fontSize.sm};
+  font-weight: ${fontWeight.regular};
+
+  white-space: pre-line;
 `;
 
 const CreatedAt = styled.div`
@@ -119,5 +133,5 @@ const CreatedAt = styled.div`
 `;
 
 const CloseBox = styled.div`
-  padding-left: 1rem;
+  padding: 1rem;
 `;

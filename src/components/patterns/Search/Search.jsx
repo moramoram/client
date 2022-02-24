@@ -17,7 +17,12 @@ const Search = ({ items, placeholder, value, ...props }) => {
   return (
     <Layout>
       <InputBox inputOpen={inputOpen} {...props}>
-        <Input placeholder={placeholder} inputOpen={inputOpen} defaultValue={value}  {...props} />
+        <Input
+          placeholder={placeholder}
+          inputOpen={inputOpen}
+          defaultValue={value}
+          {...props}
+        />
       </InputBox>
       <Button onClick={() => setInputOpen(!inputOpen)} {...props}>
         <Icon icon="search" {...props} />
@@ -28,10 +33,12 @@ const Search = ({ items, placeholder, value, ...props }) => {
 
 Search.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
+  placeholder: PropTypes.string,
 };
 
 Search.defaultProps = {
   theme: THEME.LIGHT,
+  placeholder: "검색",
 };
 
 export default Search;
@@ -101,7 +108,7 @@ const Input = styled.input`
 
   ::placeholder {
     color: ${(props) =>
-    props.inputOpen ? colors.gray500 : colors.transparent};
+      props.inputOpen ? colors.gray500 : colors.transparent};
     font-size: ${fontSize.p};
   }
 

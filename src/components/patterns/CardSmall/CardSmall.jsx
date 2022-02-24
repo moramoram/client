@@ -30,8 +30,12 @@ const CardSmall = ({ isLoading, contents, ...props }) => {
         {...props}
       />
       <TextBox isLoading={isLoading}>
-        <Title {...props}>{title}</Title>
-        <Highlight {...props}>{highlight}</Highlight>
+        <Title isLoading={isLoading} {...props}>
+          {title}
+        </Title>
+        <Highlight isLoading={isLoading} {...props}>
+          {highlight}
+        </Highlight>
       </TextBox>
     </Layout>
   );
@@ -61,24 +65,33 @@ const titleColor = {
 
 const Layout = styled.div`
   width: 220px;
+  user-select: none;
 
   .thumbnail {
     margin-bottom: 16px;
   }
+`;
 
-  user-select: none;
+const Thumbnail = styled(ImageBox)`
+  width: 100%;
 `;
 
 const TextBox = styled.div`
   div {
     display: inline-block;
     border-radius: 4px;
-    animation: ${(props) => props.isLoading && loadings[props.theme]};
   }
 `;
 
-const Thumbnail = styled(ImageBox)`
-  width: 100%;
+const Title = styled.div`
+  min-width: 160px;
+  min-height: ${fontSize.p};
+
+  font-weight: ${fontWeight.bold};
+  font-size: ${fontSize.sm};
+  color: ${(props) => titleColor[props.theme]};
+
+  animation: ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const Highlight = styled.div`
@@ -89,13 +102,6 @@ const Highlight = styled.div`
   font-size: ${fontSize.xs};
   font-weight: ${fontWeight.bold};
   color: ${(props) => (props.isDisabled ? colors.gray400 : colors.blue100)};
-`;
 
-const Title = styled.div`
-  min-width: 160px;
-  min-height: ${fontSize.p};
-
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.sm};
-  color: ${(props) => titleColor[props.theme]};
+  animation: ${(props) => props.isLoading && loadings[props.theme]};
 `;

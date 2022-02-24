@@ -50,10 +50,8 @@ export default SideBarItem;
 const Layout = styled.div`
   display: flex;
   align-items: center;
+  gap: 10px;
 
-  border-radius: 4px;
-
-  width: 400px;
   height: 36px;
   padding: 0 10px;
 
@@ -64,10 +62,10 @@ const TitleBox = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 
   width: 124px;
-  height: 20px;
-  margin-right: 10px;
+  height: 28px;
   border-radius: 4px;
 
   font-size: ${fontSize.p};
@@ -80,12 +78,13 @@ const TitleBox = styled.div`
 const Title = styled.div``;
 
 const Content = styled.div`
-  display: inline-block;
-  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
 
-  width: 244px;
-  height: 20px;
+  width: 100%;
+  height: 28px;
   border-radius: 4px;
+  overflow: hidden;
 
   font-size: ${fontSize.p};
   font-weight: ${fontWeight.regular};

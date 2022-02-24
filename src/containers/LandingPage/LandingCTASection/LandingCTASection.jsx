@@ -82,12 +82,13 @@ const GetStartedBtn = styled.button`
   text-align: center;
   text-decoration: none;
 
-  transition: 0.2s;
+  transition: 0.3s;
   user-select: none;
   cursor: pointer;
 
   :hover {
     background: ${colors.blue200};
+    transform: scale(1.05);
   }
 
   :active {

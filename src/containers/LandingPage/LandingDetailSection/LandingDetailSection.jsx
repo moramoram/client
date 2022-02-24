@@ -97,6 +97,7 @@ const Title = styled.div`
   font-size: ${fontSize.h1};
   line-height: ${lineHeight.h1};
   font-weight: ${fontWeight.bold};
+  white-space: pre-line;
   transition: 0.3s;
 
   @media screen and (max-width: 530px) {
@@ -106,9 +107,6 @@ const Title = styled.div`
 `;
 
 const ImgBox = styled.div`
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.1);
   margin-top: 2rem;
 
   > img {
@@ -121,6 +119,7 @@ const Description = styled.div`
   font-size: ${fontSize.h4};
   line-height: ${lineHeight.h4};
   transition: 0.3s;
+  white-space: pre-line;
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.p};

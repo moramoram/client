@@ -5,6 +5,7 @@ import { useSetRecoilState } from "recoil";
 import { loginModalState } from "@/recoil";
 
 import { AutoTyping, BlinkCursor } from "@/components";
+import { Icon } from "@/foundations";
 import { colors, fontSize, fontWeight } from "@/_shared";
 
 const LandingHero = ({ ...props }) => {
@@ -31,6 +32,10 @@ const LandingHero = ({ ...props }) => {
             시작하기
           </GetStartedBtn>
         </ContentBox>
+        <ScrollSection>
+          스크롤을 내려보세요
+          <Icon icon="chevronDown" />
+        </ScrollSection>
       </Layout>
     </>
   );
@@ -44,17 +49,23 @@ const titleColor = {
 };
 
 const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   position: relative;
   height: 100vh;
   margin: auto;
-  background: url("/images/background.png");
+
+  background: url("/images/background.webp");
 `;
 
 const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 240px 0 240px 20px;
+  height: 100%;
+  padding: 240px 0 0 20px;
   z-index: 2;
 
   @media screen and (max-width: 530px) {
@@ -121,4 +132,24 @@ const GetStartedBtn = styled.button`
     padding: 16px 40px;
     font-size: ${fontSize.p};
   }
+`;
+
+const ScrollSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  padding: 1rem;
+  color: ${colors.gray500};
+
+  @keyframes scrollAni {
+    0% {
+      transform: translateY(10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  animation: scrollAni 1s infinite alternate;
 `;

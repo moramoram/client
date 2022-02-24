@@ -6,6 +6,5 @@ export const PostStudy = async (data) => {
     method: "post",
     data,
   });
-  console.log(res);
   return res.data;
 };

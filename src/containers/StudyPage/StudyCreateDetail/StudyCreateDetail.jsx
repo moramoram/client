@@ -35,7 +35,7 @@ const StudyCreateDetail = ({
               : "default"
           }
           message={titleErrors[errors.title?.type]}
-          // defaultValue={originalData?.title}
+          defaultValue={originalData ? originalData.title : ""}
           {...register("title", {
             required: !originalData,
             maxLength: 45,

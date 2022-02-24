@@ -6,6 +6,5 @@ export const putCommunity = async (contentId, data) => {
     method: "put",
     data,
   });
-  console.log(res);
   return res.data;
 };

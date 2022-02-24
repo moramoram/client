@@ -22,17 +22,18 @@ axiosInstance.interceptors.response.use(
     return config.data;
   },
   (err) => {
+    // console.log(err.response.data.message);
     if (err.response.data.message === "Expired access token.") {
+      // console.log("토큰 재발급 시작");
       return getRefreshToken()
         .then((data) => {
-          console.log("토근 재발급 성공", data);
-          localStorage.setItem("ssafe_token", JSON.stringify(data));
-          err.config.headers.Authorization = `Bearer ${data.accessToken}`;
+          // console.log("토근 재발급 성공", data);
+          err.config.headers.Authorization = `Bearer ${data.data.accessToken}`;
           return axiosInstance.request(err.config);
         })
         .catch((err) => {
-          console.log("토근 재발급 실패");
-          console.log(err);
+          // console.log("토근 재발급 실패");
+          localStorage.removeItem("ssafe_token");
         });
     }
     return Promise.reject(err);

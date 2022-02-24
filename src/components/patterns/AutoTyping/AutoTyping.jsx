@@ -11,6 +11,7 @@ const AutoTyping = ({
   ...props
 }) => {
   const [autoTyper, setAutoTyper] = useState("");
+  const [isActive, setIsActive] = useState(active);
   const [whichFuncStart, setWhichFuncStart] = useState(true);
 
   const countReducer = (state) => (state + 1) % arrayRef.length;
@@ -55,11 +56,14 @@ const AutoTyping = ({
   }, [autoTyper, delayToWrite, deleteInterval, letterRemover, arrayRef, count]);
 
   useEffect(() => {
-    if (active) {
+    if (isActive) {
       if (!whichFuncStart) writer();
       if (whichFuncStart) remover();
     }
-  }, [active, whichFuncStart, writer, remover]);
+    return () => {
+      setIsActive(!isActive);
+    };
+  }, [isActive, whichFuncStart, writer, remover]);
 
   return <span {...props}>{autoTyper}</span>;
 };

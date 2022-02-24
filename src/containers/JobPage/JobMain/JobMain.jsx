@@ -2,42 +2,51 @@ import React, { Suspense } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState } from "recoil";
-import { themeState, jobSearch } from "@/recoil";
+import { themeState, jobSearch, jobFilter } from "@/recoil";
 
-import { SubNavbar, Input, Selector, Checkbox, Sort } from "@/components";
+import {
+  SubNavbar,
+  Input,
+  Selector,
+  Checkbox,
+  Sort,
+  CardGrid,
+} from "@/components";
 import { JobCardGrid } from "@/containers";
-import { CardGrid } from "@/layouts";
 
 import { debounce } from "@/utils";
 
 const JobMain = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);
   const [search, setSearch] = useRecoilState(jobSearch);
+  const [filter, setFilter] = useRecoilState(jobFilter);
 
   const handleCategory = (id) => {
     window.scrollTo({ top: 0 });
-    id === 3 ? alert("싸피") : setSearch({ ...search, category: id });
-  };
-
-  const handleSort = (criteria) => {
-    setSearch({ ...search, criteria: criteria });
+    setSearch({ ...search, category: id });
   };
 
   const handleKeyword = debounce((e) => {
     setSearch({ ...search, title: e.target.value });
   });
 
+  const handleSort = (criteria) => {
+    setSearch({ ...search, criteria: criteria });
+  };
+
   const handleTechStack = (e) => {
     setSearch({
       ...search,
-      techStack: e.map((tech) => {
-        return tech.value;
-      }),
+      techStack: e,
     });
   };
-
   const handleJob = (e) => {
-    setSearch({ ...search, job: e.label });
+    const value = e ? e.label : "";
+    setSearch({ ...search, job: value });
+  };
+
+  const handleFilter = (e) => {
+    setFilter(e.target.checked);
   };
 
   return (
@@ -59,11 +68,13 @@ const JobMain = ({ categoryData }) => {
                 icon="search"
                 placeholder="공고 검색하기"
                 onChange={handleKeyword}
+                defaultValue={search.title}
               />
               <Selector
                 theme={theme}
                 placeholder="기술 스택"
                 onChange={handleTechStack}
+                value={search.techStack}
                 isMulti
               />
               <Selector
@@ -71,11 +82,25 @@ const JobMain = ({ categoryData }) => {
                 placeholder="직무"
                 onChange={handleJob}
                 options={techStackOptions}
+                defaultValue={techStackOptions.find(
+                  (v) => v.value === search.job
+                )}
+                isClearable
               />
             </InputBox>
             <SortBox>
-              <Sort items={criteriaData} theme={theme} onClick={handleSort} />
-              <Checkbox label="마감된 스터디 숨기기" theme={theme} />
+              <Sort
+                items={criteriaData}
+                theme={theme}
+                onClick={handleSort}
+                value={search.criteria}
+              />
+              <Checkbox
+                label="마감된 채용 숨기기"
+                theme={theme}
+                onChange={handleFilter}
+                defaultChecked={filter}
+              />
             </SortBox>
           </>
         )}
@@ -91,19 +116,19 @@ export default JobMain;
 
 const criteriaData = [
   {
-    name: "date",
-    title: "최신순",
+    label: "최신순",
+    value: "date",
   },
   {
-    name: "scrap",
-    title: "인기순",
+    label: "인기순",
+    value: "scrap",
   },
 ];
 
 const techStackOptions = [
-  { value: "Frontend", label: "프론트엔드" },
-  { value: "Backend", label: "백엔드" },
-  { value: "Android", label: "안드로이드" },
+  { value: "프론트엔드", label: "프론트엔드" },
+  { value: "백엔드", label: "백엔드" },
+  { value: "안드로이드", label: "안드로이드" },
   { value: "iOS", label: "iOS" },
   { value: "임베디드", label: "임베디드" },
 ];

@@ -1,3 +1,5 @@
+export * from "./CommonPage";
+
 export * from "./CommunityPage";
 export * from "./JobPage";
 export * from "./LandingPage";

@@ -2,60 +2,94 @@ import React, { Suspense } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState } from "recoil";
-import { themeState, studySearch } from "@/recoil";
+import { themeState, studySearch, studyfilter } from "@/recoil";
 
 import { StudyCardGrid } from "@/containers";
-import { CardGrid } from "@/layouts";
-import { SubNavbar, Input, Selector, Checkbox, Sort } from "@/components";
+import {
+  CardGrid,
+  SubNavbar,
+  Input,
+  Selector,
+  Checkbox,
+  Sort,
+} from "@/components";
 
 import { debounce } from "@/utils";
 
 const StudyMain = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);
   const [search, setSearch] = useRecoilState(studySearch);
+  const [filter, setFilter] = useRecoilState(studyfilter);
 
   const handleCategory = (id) => {
     window.scrollTo({ top: 0 });
     setSearch({ ...search, category: id });
   };
+  const handleKeyword = debounce((e) => {
+    setSearch({ ...search, title: e.target.value });
+  });
 
   const handleSort = (criteria) => {
     setSearch({ ...search, criteria: criteria });
   };
 
-  const handleKeyword = debounce((e) => {
-    setSearch({ ...search, title: e.target.value });
-  });
-
   const handleType = (e) => {
-    setSearch({ ...search, studyType: e.title });
+    const value = e ? e.label : "";
+    setSearch({ ...search, studyType: value });
+  };
+
+  const handleFilter = (e) => {
+    setFilter(e.target.checked);
   };
 
   return (
     <Layout>
       <StickyNavBox>
-        <StickyNav data={categoryData} theme={theme} onClick={handleCategory} />
+        <StickyNav
+          data={categoryData}
+          theme={theme}
+          onClick={handleCategory}
+          selected={search.category}
+        />
       </StickyNavBox>
       <CardGridBox>
-        <InputBox>
-          <Input
-            theme={theme}
-            onChange={handleKeyword}
-            icon="search"
-            placeholder="스터디 검색하기"
-          />
-          <Selector
-            theme={theme}
-            onChange={handleType}
-            placeholder="종류"
-            options={studyOptions}
-          />
-          {/* <Selector placeholder="기술 스택" isMulti /> */}
-        </InputBox>
-        <SortBox>
-          <Sort theme={theme} onClick={handleSort} items={criteriaData} />
-          <Checkbox label="마감된 스터디 숨기기" theme={theme} />
-        </SortBox>
+        {search.category === 1 && (
+          <>
+            <InputBox>
+              <Input
+                theme={theme}
+                onChange={handleKeyword}
+                icon="search"
+                placeholder="스터디 검색하기"
+                defaultValue={search.title}
+              />
+              <Selector
+                theme={theme}
+                placeholder="종류"
+                onChange={handleType}
+                options={studyOptions}
+                defaultValue={studyOptions.find(
+                  (v) => v.value === search.studyType
+                )}
+                isClearable
+              />
+            </InputBox>
+            <SortBox>
+              <Sort
+                theme={theme}
+                onClick={handleSort}
+                items={criteriaData}
+                value={search.criteria}
+              />
+              <Checkbox
+                label="마감된 스터디 숨기기"
+                onChange={handleFilter}
+                defaultChecked={filter}
+                theme={theme}
+              />
+            </SortBox>
+          </>
+        )}
         <Suspense fallback={<CardGrid theme={theme} isLoading />}>
           <StudyCardGrid theme={theme} />
         </Suspense>
@@ -68,20 +102,20 @@ export default StudyMain;
 
 const criteriaData = [
   {
-    name: "date",
-    title: "최신순",
+    label: "최신순",
+    value: "date",
   },
   {
-    name: "scrap",
-    title: "인기순",
+    label: "인기순",
+    value: "scrap",
   },
 ];
 
 const studyOptions = [
-  { value: "recruit", label: "채용" },
-  { value: "Algorithm", label: "알고리즘" },
+  { value: "채용", label: "채용" },
+  { value: "알고리즘", label: "알고리즘" },
   { value: "CS", label: "CS" },
-  { value: "Project", label: "프로젝트" },
+  { value: "프로젝트", label: "프로젝트" },
 ];
 
 const Layout = styled.div`

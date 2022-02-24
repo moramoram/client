@@ -2,19 +2,22 @@ import React from "react";
 import styled from "styled-components";
 
 import { useParams } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { deleteModalState } from "@/recoil";
+
 import { useMutation, useQueryClient } from "react-query";
 import { GetComments, CommentSelector, postComment } from "@/api";
 
-import { CommentInput } from "@/components";
-import { CommentList } from "@/layouts";
+import { CommentInput, CommentList } from "@/components";
 import { colors, fontSize, fontWeight } from "@/_shared";
 
-const CommunityDetailComment = (props) => {
+const CommunityDetailComment = ({ boardType, ...props }) => {
   const queryClient = useQueryClient();
   const id = useParams().contentId;
-  const { data } = GetComments({ type: "board", id: id });
-
+  const { data } = GetComments({ type: "board", boardType: boardType, id: id });
   const { commentData } = CommentSelector(data);
+  const setIsModalOpened = useSetRecoilState(deleteModalState);
+
   const CommentMutation = useMutation((data) => postComment(data), {
     onSuccess: () => {
       queryClient.invalidateQueries("getComments");
@@ -29,11 +32,25 @@ const CommunityDetailComment = (props) => {
     });
   };
 
+  const dropdownItems = [
+    {
+      value: "delete",
+      label: "삭제",
+      onClick: () => {
+        setIsModalOpened(true);
+      },
+    },
+  ];
+
   return (
     <>
       <Title {...props}>댓글</Title>
       <CommentInput onClick={(comment) => handleClick(comment)} {...props} />
-      <CommentList data={commentData} {...props} />
+      <CommentList
+        data={commentData}
+        dropdownItems={dropdownItems}
+        {...props}
+      />
     </>
   );
 };

@@ -1,28 +1,31 @@
 import React, { useEffect, useCallback, useState } from "react";
 import styled from "styled-components";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
-import { PostStudy } from "@/api";
+import { getCompanyList, PostStudy } from "@/api";
 
 import { StudyCreateSummary, StudyCreateDetail } from "@/containers";
 import { Button } from "@/components";
 
-const StudyCreatePage = ({ ...props }) => {
+const StudyCreateForm = ({ ...props }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [croppedImage, setCroppedImage] = useState(null);
-  const {
-    register,
-    control,
-    handleSubmit,
-    setValue,
-    watch,
-    clearErrors,
-    formState: { errors },
-  } = useForm();
+  const [companyOptions, setCompanyOptions] = useState(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getCompanyList();
+      setCompanyOptions(data);
+    };
+    getData();
+  }, []);
 
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const defaultCompanyName = searchParams.get("company");
+
   const queryClient = useQueryClient();
   const mutateStudy = useMutation(PostStudy, {
     onSuccess: () => {
@@ -35,10 +38,11 @@ const StudyCreatePage = ({ ...props }) => {
     async (data) => {
       const formData = new FormData();
 
-      data.studyType = data.studyType.value;
-      data.companyName = data.companyName?.value ?? "";
-      data.techStack =
-        data.techStack?.map((option) => option.value).join(",") ?? "";
+      data.studyType = data.studyType.label;
+      data.companyName = data.companyName?.label || "-";
+      data.techStack = data.techStack
+        ? data.techStack.map((option) => option.value).join(",")
+        : "";
       if (isChecked) data.memberNumber = "무관";
 
       Object.keys(data).forEach((key) => formData.append(key, data[key]));
@@ -62,6 +66,23 @@ const StudyCreatePage = ({ ...props }) => {
     },
     [transformData, mutateStudy]
   );
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    setValue,
+    watch,
+    clearErrors,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      companyName: {
+        label: defaultCompanyName ?? "",
+        value: defaultCompanyName ?? "",
+      },
+    },
+  });
 
   useEffect(() => {
     if (isChecked) {
@@ -90,6 +111,8 @@ const StudyCreatePage = ({ ...props }) => {
             setIsChecked={setIsChecked}
             croppedImage={croppedImage}
             setCroppedImage={setCroppedImage}
+            companyOptions={companyOptions}
+            defaultCompanyName={defaultCompanyName}
             {...props}
           />
           <ButtonBox>
@@ -115,12 +138,13 @@ const StudyCreatePage = ({ ...props }) => {
   );
 };
 
-export default StudyCreatePage;
+export default StudyCreateForm;
 
 const Layout = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: auto;
+  padding-bottom: 4rem;
 `;
 
 const ContentBox = styled.div`

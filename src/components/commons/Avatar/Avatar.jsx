@@ -88,6 +88,7 @@ const Image = styled.div`
 
   line-height: ${(props) => sizeNum[props.size]}px;
   text-transform: uppercase;
+  user-select: none;
 
   img {
     width: 100%;

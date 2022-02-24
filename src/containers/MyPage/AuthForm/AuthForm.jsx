@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { useForm, Controller } from "react-hook-form";
-import { useRecoilValue } from "recoil";
-import { themeState } from "@/recoil/theme";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { authState, themeState, submitModalState } from "@/recoil";
 import { useMutation, useQueryClient } from "react-query";
 import { PostNicknameCheck, PutAuthorization } from "@/api";
 
+import { AuthWait, AuthComplete } from "@/containers";
 import { Input, InputImage, Button, Selector } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
@@ -18,8 +19,11 @@ const THEME = {
 
 const AuthForm = ({ userProfile, ...props }) => {
   const theme = useRecoilValue(themeState);
+  const authCheck = useRecoilValue(authState);
   const [imageSrc, setImageSrc] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
+  const setIsModalOpened = useSetRecoilState(submitModalState);
+
   const {
     register,
     control,
@@ -35,6 +39,7 @@ const AuthForm = ({ userProfile, ...props }) => {
   const mutateNickname = useMutation(PutAuthorization, {
     onSuccess: () => {
       queryClient.invalidateQueries("getUserProfile");
+      setIsModalOpened(true);
     },
   });
 
@@ -70,7 +75,6 @@ const AuthForm = ({ userProfile, ...props }) => {
       nickname: watch("nickname"),
     };
     const data = await PostNicknameCheck(body);
-    console.log(data);
     if (data) {
       setError("nickname", {
         type: "duplicate",
@@ -153,6 +157,13 @@ const AuthForm = ({ userProfile, ...props }) => {
     }
   });
 
+  if (authCheck === 2) {
+    return <AuthWait theme={theme} />;
+  }
+
+  if (authCheck === 3) {
+    return <AuthComplete theme={theme} />;
+  }
   return (
     <>
       <Layout>
@@ -174,7 +185,9 @@ const AuthForm = ({ userProfile, ...props }) => {
                   ? "사용할 수 있는 별명입니다!"
                   : nicknameErrors[errors?.nickname?.type]
               }
-              defaultValue={userProfile.nickname}
+              defaultValue={
+                userProfile.nickname !== "Guest" ? userProfile.nickname : null
+              }
               autocomplete="off"
               theme={theme}
               {...register("nickname", {
@@ -255,7 +268,11 @@ const AuthForm = ({ userProfile, ...props }) => {
                 />
               )}
             />
-            {imageSrc && <img src={imageSrc} alt="auth" />}
+            {imageSrc && (
+              <ImgBox>
+                <img src={imageSrc} alt="auth" />
+              </ImgBox>
+            )}
             <Message status={!errors?.authImg ? "default" : "error"}>
               {errors?.authImg?.type === "required"
                 ? requiredError
@@ -407,4 +424,11 @@ const ButtonBox = styled.div`
   justify-content: flex-end;
   gap: 1rem;
   padding-top: 2rem;
+`;
+
+const ImgBox = styled.div`
+  img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
 `;

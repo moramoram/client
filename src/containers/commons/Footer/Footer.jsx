@@ -19,16 +19,16 @@ const Footer = ({ ...props }) => {
           <Row>
             <Column>
               <Heading>소개</Heading>
-              <ItemLink to=".">
+              <ItemLink to="/landing">
                 <Item>서비스 소개</Item>
               </ItemLink>
-              <ItemLink to="#">
+              <ItemLink to="/madeby">
                 <Item>만든 사람</Item>
               </ItemLink>
-              <ItemLink to="#">
+              <ItemLink to="/terms">
                 <Item>이용약관</Item>
               </ItemLink>
-              <ItemLink to="#">
+              <ItemLink to="/privacy">
                 <Item>개인정보처리방침</Item>
               </ItemLink>
             </Column>
@@ -46,12 +46,18 @@ const Footer = ({ ...props }) => {
             </Column>
             <Column>
               <Heading>문의</Heading>
-              <ItemLink to="#">
-                <Item>FAQ</Item>
-              </ItemLink>
-              <ItemLink to="#">
-                <Item>1:1문의</Item>
-              </ItemLink>
+              <HyperLink
+                href="https://github.com/moramoram/ssafe-service/discussions/categories/q-a"
+                target="_blank"
+              >
+                <Item>Q&A</Item>
+              </HyperLink>
+              <HyperLink
+                href="https://github.com/moramoram/ssafe-service/issues"
+                target="_blank"
+              >
+                <Item>버그 리포트</Item>
+              </HyperLink>
             </Column>
           </Row>
         </Container>
@@ -78,7 +84,6 @@ const borderColor = {
 const Layout = styled.div`
   position: absolute;
   bottom: 0;
-
   width: 100%;
 `;
 
@@ -143,6 +148,10 @@ const LogoBox = styled.div`
 `;
 
 const ItemLink = styled(Link)`
+  text-decoration: none;
+`;
+
+const HyperLink = styled.a`
   text-decoration: none;
 `;
 

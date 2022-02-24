@@ -14,10 +14,10 @@ const DropdownSmall = ({ items, ...props }) => {
   return (
     <Layout {...props}>
       <MenuBox {...props}>
-        {items.map(({ name, title, onClick }) => (
+        {items.map(({ label, value, onClick }) => (
           <DropdownItem
-            children={title}
-            key={name}
+            children={label}
+            key={value}
             onClick={onClick}
             {...props}
           />

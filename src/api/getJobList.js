@@ -4,15 +4,21 @@ import { useInfiniteQuery } from "react-query";
 const URL = {
   1: "/recruits/search",
   2: "/recruits/close-date",
+  3: "/recruits/benefits",
   4: "/recruits/scraps/users",
 };
 
 const fetchPage = async (data, pageParam) => {
+  const tech = data.techStack.map((tech) => {
+    return tech.value;
+  });
   const param = {
     ...data,
-    techStack: data.techStack.join(),
+    techStack: tech.join(),
+    criteria: data.criteria.value,
     offset: pageParam,
   };
+
   const res = await axiosInstance({
     url: URL[data.category],
     params: param,
@@ -35,6 +41,13 @@ export const JobCardSelector = (data) => {
   const totalData = data.pages.map((page) => {
     const items = page.res.map((card) => {
       const dday = daysLeftFromToday(card.closeDate);
+
+      const badgeData = [
+        card.job,
+        card.sbenefit ? "SSAFY우대" : "",
+        ...card?.techStack?.split(",").slice(0, 2),
+      ].filter((data) => data);
+
       return {
         contents: {
           title: card.title,
@@ -42,7 +55,7 @@ export const JobCardSelector = (data) => {
           highlight: dday ? dday : "모집마감",
           src: card.company.logoImg,
         },
-        badges: card.techStack.split(","),
+        badges: badgeData,
         id: `/job/${card.recruitId}`,
         isDisabled: !dday,
       };

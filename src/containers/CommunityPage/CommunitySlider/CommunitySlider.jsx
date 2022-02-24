@@ -1,5 +1,5 @@
 import React from "react";
-import { FeedSmallSlider } from "@/layouts";
+import { FeedSmallSlider } from "@/components/layouts";
 
 const CommunitySlider = ({ ...props }) => {
   return <FeedSmallSlider data={data} {...props} />;

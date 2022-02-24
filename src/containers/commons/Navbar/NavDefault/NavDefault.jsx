@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
-import { auth, token, themeState, loginModalState } from "@/recoil";
+import { token, themeState, loginModalState } from "@/recoil";
 
 import { NavDefaultItem } from "./NavDefaultItem";
+import { Notification } from "@/containers";
 import { Avatar, Button, Dropdown, Switch } from "@/components";
-import { Logo, Icon } from "@/foundations";
+import { Icon, Logo } from "@/foundations";
 import { colors, animations } from "@/_shared";
 
 const THEME = {
@@ -22,12 +23,13 @@ const TYPE = {
 };
 
 const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
+  const navigate = useNavigate();
   const [current, setCurrent] = useState();
   const [theme, setTheme] = useRecoilState(themeState);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [notificationOpen, setNotificationOpen] = useState(false);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
   const resetToken = useResetRecoilState(token);
-  const resetAuth = useResetRecoilState(auth);
   const { pathname } = useLocation();
   const navbarRight = useRef();
 
@@ -44,7 +46,6 @@ const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
 
   const onLogout = () => {
     resetToken();
-    resetAuth();
   };
 
   useEffect(() => {
@@ -60,12 +61,29 @@ const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
     };
   }, [pathname, dropdownOpen]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (notificationOpen && !navbarRight?.current.contains(event.target)) {
+        setNotificationOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, [notificationOpen]);
+
   return (
     <Layout {...props}>
       <FlexBox>
-        <Link to="main">
+        <LogoBox
+          onClick={() => {
+            navigate("/main");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        >
           <Logo width="80" height="20" {...props} />
-        </Link>
+        </LogoBox>
         <NavbarItemBox>
           {navData.map(({ name, title, url }) => (
             <NavItemLink to={url} key={name}>
@@ -90,12 +108,31 @@ const NavDefault = ({ isLogin, userData, navData, userMenuData, ...props }) => {
                 size="small"
               />
             </SwitchBox>
-            <Icon icon="bell" stroke={colors.gray400} width="20" aria-hidden />
+            <Suspense
+              fallback={
+                <Icon
+                  icon="bell"
+                  stroke={colors.gray400}
+                  width="20"
+                  aria-hidden
+                />
+              }
+            >
+              <Notification
+                notificationOpen={notificationOpen}
+                setNotificationOpen={setNotificationOpen}
+                setDropdownOpen={setDropdownOpen}
+                {...props}
+              />
+            </Suspense>
             <Avatar
               size="medium"
-              username={userData.nickname}
-              src={userData.profileImg}
-              onClick={() => setDropdownOpen(!dropdownOpen)}
+              username={userData?.nickname}
+              src={userData?.profileImg}
+              onClick={() => {
+                setDropdownOpen(!dropdownOpen);
+                setNotificationOpen(false);
+              }}
             />
             {dropdownOpen && (
               <UserDropdown
@@ -202,6 +239,10 @@ const FlexBox = styled.div`
   div {
     cursor: pointer;
   }
+`;
+
+const LogoBox = styled.div`
+  cursor: pointer;
 `;
 
 const NavbarItemBox = styled.div`

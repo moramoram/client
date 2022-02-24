@@ -2,12 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { GetJobDetail, JobDetailSelector } from "@/api";
+import {
+  GetJobDetail,
+  JobDetailSelector,
+  GetCompanyStudyList,
+  StudyCardSmallSelector,
+} from "@/api";
 import { useParams } from "react-router-dom";
 
 import { JobSideBar, JobDetailComment } from "@/containers";
-import { CardSmallSlider } from "@/layouts";
-import { Toc } from "@/components";
+import { Toc, CardSmallSlider } from "@/components";
 import { colors, fontSize, fontWeight, lineHeight, loadings } from "@/_shared";
 
 const THEME = {
@@ -15,19 +19,26 @@ const THEME = {
   DARK: "dark",
 };
 
-const JobDetail = ({ cardData, commentData, ...props }) => {
+const JobDetail = ({ commentData, ...props }) => {
   const id = useParams().jobId;
   const { data } = GetJobDetail(id);
-  const { contentData, titleData, sidebarData } = JobDetailSelector(data);
-  const countAvailableStudy = cardData.filter(
-    (data) => !data.isDisabled
-  ).length;
+  const { contentData, titleData, sidebarData, companyData } =
+    JobDetailSelector(data);
+  const recruitState = titleData.highlight === "모집중";
+
+  const studyCardData = GetCompanyStudyList(companyData.companyName);
+  const { smallCardData } = StudyCardSmallSelector(studyCardData);
+  const countAvailableStudy = !!smallCardData
+    ? smallCardData.filter((data) => !data.isDisabled).length
+    : 0;
 
   return (
     <>
       <Layout>
         <TitleBox {...props}>
-          <Highlight {...props}>{titleData.highlight}</Highlight>
+          <Highlight status={recruitState} {...props}>
+            {titleData.highlight}
+          </Highlight>
           <Title {...props}>{titleData.title}</Title>
           <SubTitle {...props}>{titleData.subtitle}</SubTitle>
         </TitleBox>
@@ -36,12 +47,16 @@ const JobDetail = ({ cardData, commentData, ...props }) => {
         <CardBox>
           <BoxTitle {...props}>스터디</BoxTitle>
           <BoxDescription {...props}>
-            이 기업을 준비하는 {countAvailableStudy}
-            개의 스터디가 열려있어요
+            이 기업을 준비하는 {countAvailableStudy}개의 스터디가 열려있어요
           </BoxDescription>
-          <CardSmallSlider data={cardData} {...props} />
+          <CardSmallSlider
+            data={smallCardData}
+            createMsg="스터디 만들기"
+            companyData={companyData}
+            {...props}
+          />
         </CardBox>
-        <JobDetailComment {...props} />
+        <JobDetailComment companyId={companyData.companyId} {...props} />
       </Layout>
       <JobSideBar {...props} data={sidebarData} />
     </>
@@ -76,6 +91,11 @@ const tocItem = [
     number: null,
   },
 ];
+
+const highlightColor = {
+  true: colors.blue100,
+  false: colors.gray500,
+};
 
 const titleColor = {
   light: colors.gray900,
@@ -128,7 +148,7 @@ const Highlight = styled.div`
   font-size: ${fontSize.lg};
   line-height: ${lineHeight.lg};
   font-weight: ${fontWeight.bold};
-  color: ${colors.blue100};
+  color: ${(props) => highlightColor[props.status]};
 `;
 
 const Title = styled.div`
@@ -155,12 +175,48 @@ const Content = styled.div`
   padding: 0 0 2rem 0;
   color: ${(props) => textColor[props.theme]};
 
-  h3 {
-    margin-bottom: 0;
+  img {
+    max-width: 100%;
   }
 
-  ul {
+  h1 {
+    padding: 3px 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    padding: 3px 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  h3 {
+    padding: 3px 0;
+    font-size: 1.125em;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  p {
+    padding: 3px 0;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  ul,
+  ol {
     padding-left: 32px;
+  }
+
+  pre {
+    overflow-x: auto;
+  }
+
+  blockquote {
+    margin-left: 0;
+    padding-left: 1rem;
+    border-left: 4px solid ${(props) => borderColor[props.theme]};
   }
 `;
 

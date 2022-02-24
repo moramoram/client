@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
-import { useSetRecoilState } from "recoil";
-import { navTypeState } from "@/recoil/theme";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isAuthenticatedState, navTypeState, themeState } from "@/recoil";
 
 import { useMediaQuery } from "react-responsive";
 
 import { JobIntro, JobMain, JobMainMobile, ErrorBoundary } from "@/containers";
+import { ScrollTopButton } from "@/components";
+
 import { throttle } from "@/utils";
+
 const JobsPage = () => {
+  const theme = useRecoilValue(themeState);
   const setNavType = useSetRecoilState(navTypeState);
   const [offset, setOffset] = useState(0);
+  const isAuthenticated = useRecoilValue(isAuthenticatedState);
+  const category = isAuthenticated ? categoryData : categoryData.slice(0, 3);
 
   useEffect(() => {
     !!offset ? setNavType("default") : setNavType("transparent");
@@ -31,8 +38,14 @@ const JobsPage = () => {
   return (
     <ErrorBoundary fallback={<div />}>
       <JobIntro />
-      {isPc && <JobMain categoryData={categoryData} />}
-      {isMobile && <JobMainMobile categoryData={categoryData} />}
+      {isPc && <JobMain categoryData={category} />}
+      {isMobile && <JobMainMobile categoryData={category} />}
+      <ScrollTopBox>
+        <ScrollTopButton
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          theme={theme}
+        />
+      </ScrollTopBox>
     </ErrorBoundary>
   );
 };
@@ -50,10 +63,17 @@ const categoryData = [
   },
   {
     id: 3,
-    title: "싸피 채용관",
+    title: "싸피 우대 공고",
   },
   {
     id: 4,
     title: "내 관심 공고",
   },
 ];
+
+const ScrollTopBox = styled.div`
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 999;
+`;

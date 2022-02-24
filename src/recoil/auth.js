@@ -1,19 +1,5 @@
-import { atom, selector } from "recoil";
-import { localStorageEffect } from "@/utils";
-
-export const auth = atom({
-  key: "auth",
-  default: {
-    userId: null,
-    email: null,
-    nickname: null,
-    authCheck: null,
-    campus: null,
-    ordinal: null,
-    likeJob: null,
-    profileImg: null,
-  },
-});
+import Recoil, { atom, selector } from "recoil";
+import { axiosInstance, localStorageEffect } from "@/utils";
 
 export const token = atom({
   key: "token",
@@ -24,6 +10,39 @@ export const token = atom({
   effects_UNSTABLE: [localStorageEffect("ssafe_token")],
 });
 
+const authTrigger = atom({
+  key: "authTrigger",
+  default: 0,
+});
+
+export const auth = selector({
+  key: "auth",
+  get: async ({ get }) => {
+    if (!!get(token).accessToken) {
+      const res = await axiosInstance({ url: "users/me" });
+      return res?.data;
+    }
+    return {
+      authCheck: "",
+      campus: "",
+      createdDate: "",
+      email: "",
+      likeJob: "",
+      modifiedDate: "",
+      nickname: "",
+      ordinal: "",
+      profileImg: "",
+      realName: "",
+      userId: "",
+    };
+  },
+  set: ({ set }, value) => {
+    if (value instanceof Recoil.DefaultValue) {
+      set(authTrigger, (v) => v + 1);
+    }
+  },
+});
+
 export const isLoginState = selector({
   key: "isLoginState",
   get: ({ get }) => {
@@ -31,10 +50,17 @@ export const isLoginState = selector({
   },
 });
 
-export const isAuthenticated = selector({
-  key: "isAuthenticated",
+export const isAuthenticatedState = selector({
+  key: "isAuthenticatedState",
   get: ({ get }) => {
     return !!(get(auth)?.authCheck === 3);
+  },
+});
+
+export const authState = selector({
+  key: "authState",
+  get: ({ get }) => {
+    return get(auth)?.authCheck;
   },
 });
 

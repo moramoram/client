@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import { useRecoilValue } from "recoil";
+import { auth } from "@/recoil";
+import { useParams, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
-import { GetStudyDetail, StudyDetailSelector, postComment } from "@/api";
-import { useParams } from "react-router-dom";
+import {
+  GetStudyDetail,
+  StudyDetailSelector,
+  PutStudyRecruits,
+  DeleteStudy,
+} from "@/api";
 
-import { StudySideBar } from "@/containers";
-import { CommentList } from "@/layouts";
-import { Avatar, CommentInput, DropdownSmall, Toc } from "@/components";
+import { StudySideBar, StudyDetailComment } from "@/containers";
+import { Avatar, DropdownSmall, Toc } from "@/components";
 import { Icon } from "@/foundations";
 import {
   animations,
@@ -17,6 +23,7 @@ import {
   lineHeight,
   loadings,
 } from "@/_shared";
+import { useEffect } from "react";
 
 const THEME = {
   LIGHT: "light",
@@ -25,35 +32,65 @@ const THEME = {
 
 const StudyDetail = ({ ...props }) => {
   const id = useParams().studyId;
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const user = useRecoilValue(auth);
 
   const { data } = GetStudyDetail(id);
   const { titleData, contentData, tocItem, sidebarData } =
     StudyDetailSelector(data);
-  const queryClient = useQueryClient();
-  const commentData = [];
-  const mutation = useMutation("postStudyDetailComment", postComment);
-  console.log(data);
-  const onPostComment = (comment) => {
-    mutation.mutate(comment.value, {
-      onSuccess: () => {
-        queryClient.invalidateQueries("getStudyDetail");
-      },
-    });
+  const [recruitState, setRecruitState] = useState(null);
+
+  useEffect(() => {
+    setRecruitState(data.recruitment);
+  }, [data.recruitment]);
+
+  const deleteStudyMutation = useMutation(DeleteStudy, {
+    onMutate: async (id) => {
+      queryClient.removeQueries("getStudyDetail", id);
+      navigate("/study");
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("getStudyList");
+    },
+  });
+
+  const putStudyRecruitsMutation = useMutation(PutStudyRecruits, {
+    onSuccess: (id) => {
+      queryClient.invalidateQueries("getStudyDetail", id);
+      setRecruitState(!recruitState);
+    },
+  });
+
+  const confirmMsg = {
+    true: "스터디원 모집을 끝낼까요?",
+    false: "스터디원을 다시 모집할까요?",
   };
 
   const dropdownItems = [
     {
-      name: "edit",
-      title: "수정",
-      onClick: () => console.log("수정"),
+      label: recruitState ? "모집 완료하기" : "다시 모집하기",
+      value: "recruitment",
+      onClick: () => {
+        if (window.confirm(confirmMsg[recruitState])) {
+          putStudyRecruitsMutation.mutate(id);
+          setIsDropdownOpen(false);
+        }
+      },
     },
     {
-      name: "delete",
-      title: "삭제",
+      label: "수정",
+      value: "edit",
+
+      onClick: () => navigate(`/study/${id}/update`),
+    },
+    {
+      label: "삭제",
+      value: "delete",
       onClick: () => {
-        if (window.confirm("정말 삭제하시겠습니까?")) {
-          console.log("삭제");
+        if (window.confirm("정말 삭제할까요?")) {
+          deleteStudyMutation.mutate(id);
         }
       },
     },
@@ -64,38 +101,32 @@ const StudyDetail = ({ ...props }) => {
       <Layout>
         <Header>
           <TitleBox {...props}>
-            <Highlight {...props}>{titleData.highlight}</Highlight>
+            <Highlight status={recruitState} {...props}>
+              {recruitState ? "모집중" : "모집완료"}
+            </Highlight>
             <Title {...props}>{titleData.title}</Title>
             <div>
               <SubTitle {...props}>
-                <Avatar size="medium" src={titleData.src} {...props} />
+                <Avatar size="small" src={titleData.src} {...props} />
                 {titleData.subtitle}
               </SubTitle>
             </div>
           </TitleBox>
-          <DropdownBox>
-            <Icon
-              icon="moreVertical"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            />
-            {isDropdownOpen && (
-              <DropdownSmall items={dropdownItems} size="small" {...props} />
-            )}
-          </DropdownBox>
+          {data.writerInfo.userId === user.userId && (
+            <DropdownBox>
+              <Icon
+                icon="moreVertical"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              />
+              {isDropdownOpen && (
+                <Dropdown items={dropdownItems} size="small" {...props} />
+              )}
+            </DropdownBox>
+          )}
         </Header>
         <Toc items={tocItem} {...props} />
         <Content {...props}>{contentData}</Content>
-        <div>
-          <BoxTitle {...props}>댓글</BoxTitle>
-          <BoxDescription {...props}>
-            총 {commentData.length}개의 댓글이 달렸습니다.
-          </BoxDescription>
-          <CommentInput
-            {...props}
-            onClick={(comment) => onPostComment(comment)}
-          />
-          <CommentList data={commentData} {...props} />
-        </div>
+        <StudyDetailComment />
       </Layout>
       <StudySideBar {...props} data={sidebarData} />
     </>
@@ -107,6 +138,11 @@ StudyDetail.defaultProps = {
 };
 
 export default StudyDetail;
+
+const highlightColor = {
+  true: colors.blue100,
+  false: colors.gray500,
+};
 
 const titleColor = {
   light: colors.gray900,
@@ -124,8 +160,8 @@ const subtitleColor = {
 };
 
 const borderColor = {
-  dark: colors.gray700,
-  light: colors.gray200,
+  light: colors.gray300,
+  dark: colors.gray800,
 };
 
 const Layout = styled.div`
@@ -164,7 +200,7 @@ const Highlight = styled.div`
   font-size: ${fontSize.lg};
   line-height: ${lineHeight.lg};
   font-weight: ${fontWeight.bold};
-  color: ${colors.blue100};
+  color: ${(props) => highlightColor[props.status]};
 `;
 
 const Title = styled.div`
@@ -184,8 +220,8 @@ const SubTitle = styled.div`
   min-width: 160px;
   min-height: ${lineHeight.lg};
 
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.lg};
+  font-weight: ${fontWeight.medium};
+  font-size: ${fontSize.p};
   line-height: ${lineHeight.lg};
   color: ${(props) => subtitleColor[props.theme]};
 `;
@@ -206,34 +242,55 @@ const DropdownBox = styled.div`
   }
 `;
 
+const Dropdown = styled(DropdownSmall)`
+  width: 160px;
+`;
+
 const Content = styled.div`
   padding: 0 0 2rem 0;
   color: ${(props) => textColor[props.theme]};
 
-  h3 {
-    margin-bottom: 0;
+  img {
+    max-width: 100%;
   }
 
-  ul {
+  h1 {
+    padding: 3px 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    padding: 3px 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  h3 {
+    padding: 3px 0;
+    font-size: 1.125em;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  p {
+    padding: 3px 0;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  ul,
+  ol {
     padding-left: 32px;
   }
-`;
 
-const BoxTitle = styled.div`
-  padding: 4rem 0 0.2rem 0;
-  min-height: ${lineHeight.h3};
+  pre {
+    overflow-x: auto;
+  }
 
-  border-top: 1px solid ${(props) => borderColor[props.theme]};
-  color: ${(props) => titleColor[props.theme]};
-
-  font-size: ${fontSize.h3};
-  line-height: ${lineHeight.h3};
-  font-weight: ${fontWeight.bold};
-`;
-
-const BoxDescription = styled.div`
-  padding-bottom: 2rem;
-  color: ${(props) => subtitleColor[props.theme]};
-  font-size: ${fontSize.p};
-  line-height: ${lineHeight.p};
+  blockquote {
+    margin-left: 0;
+    padding-left: 1rem;
+    border-left: 4px solid ${(props) => borderColor[props.theme]};
+  }
 `;

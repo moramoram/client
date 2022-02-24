@@ -6,16 +6,17 @@ import { loginModalState } from "@/recoil";
 
 import { colors, fontSize, fontWeight, lineHeight } from "@/_shared";
 
-const LandingCTASection = ({ text, ...props }) => {
+const LandingCTASection = ({ text, isButton, ...props }) => {
   const setLoginModalOpen = useSetRecoilState(loginModalState);
-
   return (
-    <Layout {...props}>
+    <Layout isButton={isButton} {...props}>
       <ContentBox>
         <Text {...props}>{text}</Text>
-        <GetStartedBtn onClick={() => setLoginModalOpen(true)}>
-          시작하기
-        </GetStartedBtn>
+        {isButton && (
+          <GetStartedBtn onClick={() => setLoginModalOpen(true)}>
+            시작하기
+          </GetStartedBtn>
+        )}
       </ContentBox>
     </Layout>
   );
@@ -28,8 +29,14 @@ const titleColor = {
   dark: colors.gray25,
 };
 
+const bgColor = {
+  light: colors.gray100,
+  dark: colors.gray900,
+};
+
 const Layout = styled.div`
-  padding: 12rem 0;
+  padding: 8rem 0;
+  background-color: ${(props) => !props.isButton && bgColor[props.theme]};
 `;
 
 const ContentBox = styled.div`
@@ -45,8 +52,17 @@ const ContentBox = styled.div`
 const Text = styled.div`
   color: ${(props) => titleColor[props.theme]};
   font-size: ${fontSize.h2};
-  line-height: ${lineHeight.h2};
+  line-height: calc(${lineHeight.h2} + 1rem);
   font-weight: ${fontWeight.bold};
+
+  text-align: center;
+  white-space: pre-line;
+  transition: 0.3s;
+
+  @media screen and (max-width: 620px) {
+    font-size: ${fontSize.h4};
+    line-height: calc(${lineHeight.h3});
+  }
 `;
 
 const GetStartedBtn = styled.button`

@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { axiosInstance, daysLeftFromToday } from "@/utils";
+import { axiosInstance, daysLeftFromToday, parseHtml } from "@/utils";
 
 export const GetJobDetail = (id) =>
   useQuery(["getJobDetail", id], () => fetchData(id));
@@ -12,22 +12,23 @@ const fetchData = async (id) => {
 };
 
 export const JobDetailSelector = (data) => {
+  const { parsedhtml } = parseHtml(data.content);
   const titleData = {
     title: data.title,
     subtitle: data.company.companyName,
-    src: data.logoImg,
-    highlight: daysLeftFromToday(data.closeData) ? "모집중" : "모집완료",
+    highlight: daysLeftFromToday(data.closeDate) ? "모집중" : "모집마감",
   };
-  const contentData = data.content;
+  const contentData = parsedhtml;
 
   const sidebarData = {
-    type: data.job,
-    target: data.empType,
-    people: data.career,
+    task: data.job,
+    type: data.empType,
+    career: data.career,
     location: data.location,
-    badges: data.techStack.split(","),
+    badges: data.techStack.split(",").filter((data) => data),
     scrap: data.scrapStatus,
     url: data.recruitUrl,
+    src: data.company.logoImg,
   };
   const companyData = data.company;
   return { contentData, titleData, sidebarData, companyData };

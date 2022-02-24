@@ -6,6 +6,14 @@ export const studySearch = atom({
     category: 1,
     title: "",
     studyType: "",
-    criteria: "",
+    criteria: {
+      label: "",
+      value: "",
+    },
   },
+});
+
+export const studyfilter = atom({
+  key: "studyfilter",
+  default: false,
 });

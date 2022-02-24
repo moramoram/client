@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -11,16 +11,25 @@ const THEME = {
   LIGHT: "light",
 };
 
-const Notification = ({ isUpdated, ...props }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+const Notification = ({
+  isUpdated,
+  notificationOpen,
+  setNotificationOpen,
+  setDropdownOpen,
+  ...props
+}) => {
   return (
     <Layout>
-      <Iconbox onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+      <Iconbox
+        onClick={() => {
+          setNotificationOpen(!notificationOpen);
+          setDropdownOpen(false);
+        }}
+      >
         <Icon icon="bell" stroke={colors.gray400} width="20" aria-hidden />
         {isUpdated && <Updated />}
       </Iconbox>
-      {isDropdownOpen && (
+      {notificationOpen && (
         <Dropdown {...props}>
           <Title {...props}>알림</Title>
           <MenuBox {...props}>
@@ -88,9 +97,10 @@ const Dropdown = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  position: fixed;
-  padding: 0.5rem 0;
-  top: 3rem;
+  position: absolute;
+  padding-bottom: 0.5rem;
+  top: 38px;
+  right: -48px;
 
   border-radius: 8px;
   border: 1px solid ${(props) => borderColor[props.theme]};
@@ -107,6 +117,7 @@ const Title = styled.div`
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.lg};
   color: ${(props) => titleColor[props.theme]};
+  user-select: none;
 `;
 
 const MenuBox = styled.div`
@@ -125,4 +136,5 @@ const EmptyBox = styled.div`
   min-width: 300px;
 
   color: ${colors.gray500};
+  user-select: none;
 `;

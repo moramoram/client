@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { useMediaQuery } from "react-responsive";
+
 import { Avatar, DropdownSmall } from "@/components";
 import { Icon } from "@/foundations";
 import {
@@ -33,6 +34,8 @@ const FeedDetail = ({
   commentcount,
   viewcount,
   dropdownItems,
+  boardType,
+  isDisabled,
   ...props
 }) => {
   const usernameRender = username ?? "User";
@@ -43,18 +46,20 @@ const FeedDetail = ({
     <Layout>
       <Header>
         <TitleBox>
-          <Category>자유게시판</Category>
+          <Category>{categoryData[boardType]}</Category>
           <Title {...props}>{title}</Title>
         </TitleBox>
-        <DropdownBox>
-          <Icon
-            icon="moreVertical"
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-          />
-          {isDropdownOpen && (
-            <DropdownSmall items={dropdownItems} size="small" {...props} />
-          )}
-        </DropdownBox>
+        {!isDisabled && (
+          <DropdownBox>
+            <Icon
+              icon="moreVertical"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            />
+            {isDropdownOpen && (
+              <DropdownSmall items={dropdownItems} size="small" {...props} />
+            )}
+          </DropdownBox>
+        )}
       </Header>
       <AvatarBox {...props}>
         <Avatar
@@ -66,9 +71,11 @@ const FeedDetail = ({
         <InfoBox>
           <UserBox>
             <User {...props}>{usernameRender}</User>
-            <UserDetail>
-              ({ordinal}/{campus})
-            </UserDetail>
+            {!!ordinal && campus && (
+              <UserDetail>
+                ({ordinal}기 / {campus})
+              </UserDetail>
+            )}
           </UserBox>
           <CreatedAt>{created}</CreatedAt>
         </InfoBox>
@@ -83,7 +90,7 @@ FeedDetail.propTypes = {
   username: PropTypes.string,
   avatar: PropTypes.string,
   campus: PropTypes.string,
-  ordinal: PropTypes.string,
+  ordinal: PropTypes.number,
   created: PropTypes.string,
   title: PropTypes.string,
   content: PropTypes.any,
@@ -107,6 +114,13 @@ FeedDetail.defaultProps = {
 };
 
 export default FeedDetail;
+
+const categoryData = {
+  1: "자유게시판",
+  2: "익명게시판",
+  3: "취업 정보 게시판",
+  4: "질문 게시판",
+};
 
 const titleColor = {
   dark: colors.gray25,
@@ -234,5 +248,49 @@ const Content = styled.div`
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.sm};
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  h1 {
+    padding: 3px 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    padding: 3px 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  h3 {
+    padding: 3px 0;
+    font-size: 1.125em;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  p {
+    padding: 3px 0;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  ul,
+  ol {
+    padding-left: 32px;
+  }
+
+  pre {
+    overflow-x: auto;
+  }
+
+  blockquote {
+    margin-left: 0;
+    padding-left: 1rem;
+    border-left: 4px solid ${(props) => borderColor[props.theme]};
   }
 `;

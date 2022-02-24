@@ -2,15 +2,21 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { useMutation, useQueryClient } from "react-query";
-import { GetJobDetail, putJobScrap, JobDetailSelector } from "@/api";
+import { useMutation } from "react-query";
 import { useParams } from "react-router-dom";
+import {
+  GetJobDetail,
+  JobDetailSelector,
+  putJobScrap,
+  GetCompanyStudyList,
+  StudyCardSmallSelector,
+} from "@/api";
 
-import { CardSmallSlider } from "@/layouts";
 import {
   Badge,
   BookMark,
   Button,
+  CardSmallSlider,
   ImageBoxResponsive,
   SideBarItem,
   Toc,
@@ -25,19 +31,17 @@ const THEME = {
   DARK: "dark",
 };
 
-const JobDetailMobile = ({ cardData, ...props }) => {
+const JobDetailMobile = (props) => {
   const id = useParams().jobId;
   const { data } = GetJobDetail(id);
-  const { contentData, titleData, sidebarData } = JobDetailSelector(data);
+  const { contentData, titleData, sidebarData, companyData } =
+    JobDetailSelector(data);
+
+  const studyCardData = GetCompanyStudyList(companyData.companyName);
+  const { smallCardData } = StudyCardSmallSelector(studyCardData);
 
   const [isMarked, setIsMarked] = useState(sidebarData.scrap);
-
-  const queryClient = useQueryClient();
-  const putScrapMutation = useMutation(putJobScrap, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("getJobDetail");
-    },
-  });
+  const putScrapMutation = useMutation(putJobScrap);
 
   const onScrap = () => {
     setIsMarked(!isMarked);
@@ -86,14 +90,22 @@ const JobDetailMobile = ({ cardData, ...props }) => {
         <CardBox>
           <BoxTitle {...props}>스터디</BoxTitle>
           <BoxDescription {...props}>같이 준비해요</BoxDescription>
-          <CardSmallSlider data={cardData} {...props} />
+          <CardSmallSlider
+            data={smallCardData}
+            createMsg="스터디 만들기"
+            companyData={companyData}
+            {...props}
+          />
         </CardBox>
-        <JobDetailComment {...props} />
+        <JobDetailComment companyId={companyData.companyId} {...props} />
       </Layout>
       <FixedBox>
         <ButtonBg {...props} />
         <ButtonBox {...props}>
-          <Button minWidth="380px">
+          <Button
+            minWidth="380px"
+            onClick={() => window.open(`https://${sidebarData.url}`, "_blank")}
+          >
             <Icon icon="edit" />
             지원하기
           </Button>

@@ -15,9 +15,10 @@ export const CommunityDetailSelector = (data) => {
   const { parsedhtml } = parseHtml(data.content);
   const contentData = {
     username: data.writerInfo.nickname,
+    userId: data.writerInfo.userId,
     avatar: data.writerInfo.profileImg,
-    campus: data.writerInfo.ordinal,
-    ordinal: data.writerInfo.campus,
+    campus: data.writerInfo.campus,
+    ordinal: data.writerInfo.ordinal,
     created: daysFromToday(data.createdDate),
     title: data.title,
     content: parsedhtml,
@@ -25,6 +26,7 @@ export const CommunityDetailSelector = (data) => {
     commentcount: numToMillion(data.totalComment),
     viewcount: numToMillion(data.views),
     likeStatus: data.likeStatus,
+    boardType: data.boardType,
   };
   return { contentData };
 };

@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
-import { themeState } from "@/recoil/theme";
+import { isAuthenticatedState, themeState } from "@/recoil";
 import { useMediaQuery } from "react-responsive";
 import { GetUserProfile, UserProfileSelector } from "@/api";
 
@@ -20,6 +20,7 @@ const MyPage = () => {
   const theme = useRecoilValue(themeState);
   const { data } = GetUserProfile();
   const userProfile = UserProfileSelector(data);
+  const isAuthenticated = useRecoilValue(isAuthenticatedState);
 
   const contentsData = {
     1: <MyInfo userProfile={userProfile} />,
@@ -45,25 +46,41 @@ const MyPage = () => {
       <Layout>
         {isPc && (
           <MainBox>
-            <StickyNavBox>
-              <StickyNav
-                data={categoryData}
-                theme={theme}
-                onClick={handleCategory}
-              />
-            </StickyNavBox>
-            <ContentBox>{contents}</ContentBox>
+            {isAuthenticated ? (
+              <>
+                <StickyNavBox>
+                  <StickyNav
+                    data={categoryData}
+                    theme={theme}
+                    onClick={handleCategory}
+                  />
+                </StickyNavBox>
+                <ContentBox>{contents}</ContentBox>
+              </>
+            ) : (
+              <ContentBox>
+                <AuthForm userProfile={userProfile} />
+              </ContentBox>
+            )}
           </MainBox>
         )}
         {isMobile && (
           <MobileBox>
-            <SubNavbar
-              data={categoryData}
-              theme={theme}
-              onClick={handleCategory}
-              view="mobile"
-            />
-            <ContentBox>{contents}</ContentBox>
+            {isAuthenticated ? (
+              <>
+                <SubNavbar
+                  data={categoryData}
+                  theme={theme}
+                  onClick={handleCategory}
+                  view="mobile"
+                />
+                <ContentBox>{contents}</ContentBox>
+              </>
+            ) : (
+              <ContentBox ContentBox>
+                <AuthForm userProfile={userProfile} />
+              </ContentBox>
+            )}
           </MobileBox>
         )}
       </Layout>
@@ -78,7 +95,7 @@ const categoryData = [
   { id: 2, title: "내 인증 현황" },
   { id: 3, title: "내가 쓴 글" },
   { id: 4, title: "나의 스터디" },
-  { id: 5, title: "내가 쓴 댓글" },
+  // { id: 5, title: "내가 쓴 댓글" },
 ];
 
 const Layout = styled.div`

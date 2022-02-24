@@ -47,7 +47,7 @@ const Layout = styled.div`
 
   width: 100%;
   height: 400px;
-  background: url("https://i.imgur.com/3QTKlkH.jpg");
+  background: url("/images/job-intro.webp");
   background-repeat: no-repeat;
   background-size: cover;
 
@@ -56,15 +56,18 @@ const Layout = styled.div`
 
 const Title = styled.div`
   padding-top: 2rem;
+
   line-height: ${lineHeight.h2};
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h2};
   color: ${colors.gray25};
+
+  user-select: none;
 `;
 
 const SubTitle = styled.div`
   height: ${lineHeight.h4};
-
   font-size: ${fontSize.p};
   color: ${(props) => subtitleColor[props.theme]};
+  user-select: none;
 `;

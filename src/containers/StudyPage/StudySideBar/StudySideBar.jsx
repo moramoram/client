@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { useParams } from "react-router-dom";
+import { useMutation } from "react-query";
+import { putStudyScrap } from "@/api";
+
 import { ImageBox, Badge, Button, BookMark, SideBarItem } from "@/components";
 import { Icon } from "@/foundations";
 
@@ -12,6 +16,14 @@ const THEME = {
 
 const StudySideBar = ({ data, isLoading, ...props }) => {
   const [isMarked, setIsMarked] = useState(data?.scrap);
+  const id = useParams().studyId;
+
+  const putScrapMutation = useMutation(putStudyScrap);
+
+  const onScrap = () => {
+    setIsMarked(!isMarked);
+    putScrapMutation.mutate(id);
+  };
 
   if (isLoading) {
     data = { badges: ["", "", ""] };
@@ -19,7 +31,12 @@ const StudySideBar = ({ data, isLoading, ...props }) => {
 
   return (
     <Layout isLoading={isLoading} {...props}>
-      <ImageBox className="thumbnail" isLoading={isLoading} {...props} />
+      <ImageBox
+        className="thumbnail"
+        isLoading={isLoading}
+        src={data.src}
+        {...props}
+      />
       <SideBarBox>
         {summaryData.map(({ title, icon, id }) => (
           <SideBarItem
@@ -34,7 +51,7 @@ const StudySideBar = ({ data, isLoading, ...props }) => {
         ))}
       </SideBarBox>
       <BadgeBox>
-        {data.badges.map((children, idx) => {
+        {data.badges?.map((children, idx) => {
           return (
             <Badge
               className="badge-item"
@@ -54,7 +71,7 @@ const StudySideBar = ({ data, isLoading, ...props }) => {
         isLoading={isLoading}
         mode={isMarked ? "active" : "secondary"}
         minWidth="380px"
-        onClick={() => setIsMarked(!isMarked)}
+        onClick={onScrap}
         {...props}
       >
         {isMarked ? (
@@ -96,14 +113,14 @@ const summaryData = [
     id: "target",
   },
   {
+    title: "진행 방식",
+    icon: "tag",
+    id: "onOff",
+  },
+  {
     title: "모집 인원",
     icon: "users",
     id: "people",
-  },
-  {
-    title: "스터디 지역",
-    icon: "mapPin",
-    id: "location",
   },
 ];
 

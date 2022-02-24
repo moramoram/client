@@ -3,13 +3,14 @@ import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
 import {
+  authState,
   themeState,
   communitySearch,
-  isAuthenticated,
+  modalState,
   createModalState,
   loginModalState,
+  smallModalState,
 } from "@/recoil";
-
 import { useMediaQuery } from "react-responsive";
 
 import {
@@ -18,16 +19,30 @@ import {
   CommunityFeedGrid,
   ErrorBoundary,
 } from "@/containers";
-import { FeedGrid } from "@/layouts";
-import { SubNavbar, Sort, Search } from "@/components";
+
+import {
+  SubNavbar,
+  Sort,
+  Search,
+  ScrollTopButton,
+  FeedGrid,
+} from "@/components";
 import { debounce } from "@/utils";
 
 const CommunityPage = () => {
   const theme = useRecoilValue(themeState);
-  const isAuthorized = useRecoilValue(isAuthenticated);
+  const authorizedState = useRecoilValue(authState);
+
   const setCreateModalOpen = useSetRecoilState(createModalState);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
+  const setModalOpen = useSetRecoilState(modalState);
+  const setSmallModalState = useSetRecoilState(smallModalState);
+
   const [search, setSearch] = useRecoilState(communitySearch);
+
+  const handleKeyword = debounce((e) => {
+    setSearch({ ...search, title: e.target.value });
+  });
 
   const handleCategory = (id) => {
     window.scrollTo({ top: 0 });
@@ -38,12 +53,11 @@ const CommunityPage = () => {
     setSearch({ ...search, criteria: criteria });
   };
 
-  const handleKeyword = debounce((keyword) => {
-    setSearch({ ...search, title: keyword });
-  });
-
   const handleCreation = () => {
-    isAuthorized ? setCreateModalOpen(true) : setLoginModalOpen("require");
+    !authorizedState && setLoginModalOpen("require");
+    authorizedState === 3 && setCreateModalOpen(true);
+    authorizedState === 2 && setModalOpen(true);
+    authorizedState === 1 && setSmallModalState(true);
   };
 
   const isPc = useMediaQuery({ query: "(min-width:980px)" });
@@ -65,11 +79,17 @@ const CommunityPage = () => {
           <ContentBox>
             <CommunityCreateButton onClick={handleCreation} theme={theme} />
             <SortBox>
-              <Sort items={criteriaData} onClick={handleSort} theme={theme} />
+              <Sort
+                items={criteriaData}
+                onClick={handleSort}
+                theme={theme}
+                value={search.criteria}
+              />
               <Search
                 theme={theme}
                 onChange={handleKeyword}
                 placeholder="게시글 검색"
+                value={search.title}
               />
             </SortBox>
             <Suspense fallback={<FeedGrid isLoading theme={theme} />}>
@@ -90,11 +110,17 @@ const CommunityPage = () => {
           <div>
             <CommunityCreateButton onClick={handleCreation} theme={theme} />
             <SortBox>
-              <Sort items={criteriaData} onClick={handleSort} theme={theme} />
+              <Sort
+                items={criteriaData}
+                onClick={handleSort}
+                theme={theme}
+                value={search.criteria}
+              />
               <Search
                 theme={theme}
                 onChange={handleKeyword}
                 placeholder="게시글 검색"
+                value={search.title}
               />
             </SortBox>
           </div>
@@ -103,6 +129,12 @@ const CommunityPage = () => {
           </Suspense>
         </MobileBox>
       )}
+      <ScrollTopBox>
+        <ScrollTopButton
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          theme={theme}
+        />
+      </ScrollTopBox>
     </ErrorBoundary>
   );
 };
@@ -130,16 +162,16 @@ const categoryData = [
 
 const criteriaData = [
   {
-    name: "date",
-    title: "최신순",
+    label: "최신순",
+    value: "date",
   },
   {
-    name: "scrap",
-    title: "인기순",
+    label: "조회순",
+    value: "view",
   },
   {
-    name: "view",
-    title: "조회순",
+    label: "좋아요순",
+    value: "like",
   },
 ];
 
@@ -183,4 +215,11 @@ const SortBox = styled.div`
   align-items: center;
   padding: 16px 0px 20px 0;
   margin-bottom: 20px;
+`;
+
+const ScrollTopBox = styled.div`
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 999;
 `;

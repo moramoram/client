@@ -2,10 +2,9 @@ import React, { Suspense } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState } from "recoil";
-import { themeState, jobSearch } from "@/recoil";
+import { themeState, jobSearch, jobFilter } from "@/recoil";
 
-import { SubNavbar, Input, Checkbox, Sort } from "@/components";
-import { CardGrid } from "@/layouts";
+import { CardGrid, SubNavbar, Input, Checkbox, Sort } from "@/components";
 import { JobCardGrid } from "@/containers";
 
 import { debounce } from "@/utils";
@@ -13,9 +12,11 @@ import { debounce } from "@/utils";
 const JobMainMobile = ({ categoryData }) => {
   const theme = useRecoilValue(themeState);
   const [search, setSearch] = useRecoilState(jobSearch);
+  const [filter, setFilter] = useRecoilState(jobFilter);
+
   const handleCategory = (id) => {
     window.scrollTo({ top: 0 });
-    id !== 3 && setSearch({ ...search, category: id });
+    setSearch({ ...search, category: id });
   };
 
   const handleKeyword = debounce((e) => {
@@ -26,27 +27,44 @@ const JobMainMobile = ({ categoryData }) => {
     setSearch({ ...search, criteria: criteria });
   };
 
+  const handleFilter = (e) => {
+    setFilter(e.target.checked);
+  };
+
   return (
     <>
       <SubNavMobile
         data={categoryData}
         theme={theme}
         onClick={handleCategory}
+        selected={search.category}
         view="mobile"
       />
       {search.category === 1 && (
         <>
           <SearchBox>
             <Input
+              theme={theme}
               icon="search"
               placeholder="공고 검색하기"
               onChange={handleKeyword}
-              theme={theme}
+              defaultValue={search.title}
             />
           </SearchBox>
           <SortBox>
-            <Sort items={criteriaData} theme={theme} onClick={handleSort} />
-            <Checkbox label="마감된 스터디 숨기기" theme={theme} />
+            <Sort
+              items={criteriaData}
+              theme={theme}
+              onClick={handleSort}
+              value={search.criteria}
+            />
+            <Checkbox
+              label="마감된 채용 숨기기"
+              theme={theme}
+              value={search.criteria}
+              onChange={handleFilter}
+              defaultChecked={filter}
+            />
           </SortBox>
         </>
       )}
@@ -63,12 +81,12 @@ export default JobMainMobile;
 
 const criteriaData = [
   {
-    name: "date",
-    title: "최신순",
+    label: "최신순",
+    value: "date",
   },
   {
-    name: "scrap",
-    title: "인기순",
+    label: "인기순",
+    value: "scrap",
   },
 ];
 

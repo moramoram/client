@@ -1,21 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { CommentList } from "@/layouts";
+import { useRecoilValue } from "recoil";
+import { auth } from "@/recoil";
 
+import { useParams, useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "react-query";
+import {
+  GetStudyDetail,
+  StudyDetailSelector,
+  putStudyScrap,
+  PutStudyRecruits,
+  DeleteStudy,
+} from "@/api";
+
+import { StudyDetailComment } from "@/containers";
 import {
   Avatar,
   Badge,
   BookMark,
   Button,
-  CommentInput,
   DropdownSmall,
   ImageBoxResponsive,
   SideBarItem,
   Toc,
 } from "@/components";
 import { Icon } from "@/foundations";
+
 import {
   animations,
   colors,
@@ -25,51 +37,79 @@ import {
   loadings,
 } from "@/_shared";
 
-import { useMutation, useQueryClient } from "react-query";
-import { GetStudyDetail, StudyDetailSelector, postComment } from "@/api";
-import { useParams } from "react-router-dom";
-
 const THEME = {
   LIGHT: "light",
   DARK: "dark",
 };
 
 const StudyDetailMobile = ({ ...props }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const id = useParams().studyId;
-
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const user = useRecoilValue(auth);
+
   const { data } = GetStudyDetail(id);
-
-  const commentData = [];
-
   const { titleData, contentData, tocItem, sidebarData } =
     StudyDetailSelector(data);
+
   const [isMarked, setIsMarked] = useState(sidebarData.scrap);
+  const putScrapMutation = useMutation(putStudyScrap);
+  const [recruitState, setRecruitState] = useState(null);
 
-  const mutation = useMutation("postComment", postComment);
+  useEffect(() => {
+    setRecruitState(data.recruitment);
+  }, [data.recruitment]);
 
-  const onPostComment = (comment) => {
+  const onScrap = () => {
     setIsMarked(!isMarked);
-    mutation.mutate(comment.value, {
-      onSuccess: () => {
-        queryClient.invalidateQueries("getStudyDetail");
-      },
-    });
+    putScrapMutation.mutate(id);
+  };
+
+  const deleteStudyMutation = useMutation(DeleteStudy, {
+    onMutate: async (id) => {
+      queryClient.removeQueries("getStudyDetail", id);
+      navigate("/study");
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries("getStudyList");
+    },
+  });
+
+  const putStudyRecruitsMutation = useMutation(PutStudyRecruits, {
+    onSuccess: (id) => {
+      queryClient.invalidateQueries("getStudyDetail", id);
+      setRecruitState(!recruitState);
+    },
+  });
+
+  const confirmMsg = {
+    true: "스터디원 모집을 끝낼까요?",
+    false: "스터디원을 다시 모집할까요?",
   };
 
   const dropdownItems = [
     {
-      name: "edit",
-      title: "수정",
-      onClick: () => console.log("수정"),
+      value: "recruitment",
+      label: recruitState ? "모집 완료하기" : "다시 모집하기",
+      onClick: () => {
+        if (window.confirm(confirmMsg[recruitState])) {
+          putStudyRecruitsMutation.mutate(id);
+          setIsDropdownOpen(false);
+        }
+      },
     },
     {
-      name: "delete",
-      title: "삭제",
+      value: "edit",
+      label: "수정",
+      onClick: () => navigate(`/study/${id}/update`),
+    },
+    {
+      value: "delete",
+      label: "삭제",
       onClick: () => {
-        if (window.confirm("정말 삭제하시겠습니까?")) {
-          console.log("삭제");
+        if (window.confirm("정말 삭제할까요?")) {
+          deleteStudyMutation.mutate(id);
         }
       },
     },
@@ -78,13 +118,19 @@ const StudyDetailMobile = ({ ...props }) => {
   return (
     <>
       <Layout>
-        <ImageBoxResponsive className="thumbnail" {...props} />
+        <ImageBoxResponsive
+          className="thumbnail"
+          src={sidebarData.src}
+          {...props}
+        />
         <Header>
           <TitleBox {...props}>
-            <Highlight {...props}>{titleData?.highlight}</Highlight>
-            <Title {...props}>{titleData?.title}</Title>
+            <Highlight status={recruitState} {...props}>
+              {recruitState ? "모집중" : "모집완료"}
+            </Highlight>
+            <Title {...props}>{titleData.title}</Title>
             <SubTitle {...props}>
-              <Avatar size="medium" src={titleData?.src} {...props} />
+              <Avatar size="small" src={titleData.src} {...props} />
               {titleData?.subtitle}
             </SubTitle>
             <SideBarBox>
@@ -100,7 +146,7 @@ const StudyDetailMobile = ({ ...props }) => {
               ))}
             </SideBarBox>
             <BadgeBox>
-              {sidebarData.badges.map((children, idx) => {
+              {sidebarData.badges?.map((children, idx) => {
                 return (
                   <Badge
                     className="badge-item"
@@ -116,26 +162,21 @@ const StudyDetailMobile = ({ ...props }) => {
               })}
             </BadgeBox>
           </TitleBox>
-          <DropdownBox>
-            <Icon
-              icon="moreVertical"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            />
-            {isDropdownOpen && (
-              <DropdownSmall items={dropdownItems} size="small" {...props} />
-            )}
-          </DropdownBox>
+          {data.writerInfo.userId === user.userId && (
+            <DropdownBox>
+              <Icon
+                icon="moreVertical"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              />
+              {isDropdownOpen && (
+                <Dropdown items={dropdownItems} size="small" {...props} />
+              )}
+            </DropdownBox>
+          )}
         </Header>
         <Toc items={tocItem} {...props} />
         <Content {...props}>{contentData}</Content>
-        <CommentBox>
-          <BoxTitle {...props}>댓글</BoxTitle>
-          <BoxDescription {...props}>
-            총 {commentData.length}개의 댓글이 달렸습니다.
-          </BoxDescription>
-          <CommentInput {...props} />
-          <CommentList data={commentData} {...props} />
-        </CommentBox>
+        <StudyDetailComment />
       </Layout>
       <FixedBox>
         <ButtonBg {...props} />
@@ -143,7 +184,7 @@ const StudyDetailMobile = ({ ...props }) => {
           <Button
             mode={isMarked ? "active" : "secondary"}
             minWidth="380px"
-            onClick={(comment) => onPostComment(comment)}
+            onClick={onScrap}
             {...props}
           >
             {isMarked ? (
@@ -185,20 +226,25 @@ const summaryData = [
     id: "target",
   },
   {
+    title: "진행 방식",
+    icon: "tag",
+    id: "onOff",
+  },
+  {
     title: "모집 인원",
     icon: "users",
     id: "people",
-  },
-  {
-    title: "스터디 지역",
-    icon: "mapPin",
-    id: "location",
   },
 ];
 
 const bgColor = {
   light: colors.white,
   dark: colors.black,
+};
+
+const highlightColor = {
+  true: colors.blue100,
+  false: colors.gray500,
 };
 
 const titleColor = {
@@ -214,11 +260,6 @@ const textColor = {
 const subtitleColor = {
   light: colors.gray400,
   dark: colors.gray500,
-};
-
-const borderColor = {
-  dark: colors.gray700,
-  light: colors.gray200,
 };
 
 const Layout = styled.div`
@@ -251,7 +292,7 @@ const TitleBox = styled.div`
 `;
 
 const SideBarBox = styled.div`
-  margin: 10px 0px;
+  margin: 20px 0px;
 `;
 
 const BadgeBox = styled.div`
@@ -267,7 +308,7 @@ const Highlight = styled.div`
   font-size: ${fontSize.lg};
   line-height: ${lineHeight.lg};
   font-weight: ${fontWeight.bold};
-  color: ${colors.blue100};
+  color: ${(props) => highlightColor[props.status]};
 `;
 
 const Title = styled.div`
@@ -287,8 +328,8 @@ const SubTitle = styled.div`
   min-width: 160px;
   min-height: ${lineHeight.lg};
 
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.lg};
+  font-weight: ${fontWeight.medium};
+  font-size: ${fontSize.p};
   line-height: ${lineHeight.lg};
   color: ${(props) => subtitleColor[props.theme]};
 `;
@@ -309,6 +350,10 @@ const DropdownBox = styled.div`
   }
 `;
 
+const Dropdown = styled(DropdownSmall)`
+  width: 160px;
+`;
+
 const Content = styled.div`
   padding: 0 1rem 2rem 1rem;
   color: ${(props) => textColor[props.theme]};
@@ -321,27 +366,6 @@ const Content = styled.div`
     padding-left: 32px;
   }
 `;
-
-const BoxTitle = styled.div`
-  padding: 4rem 0 0.2rem 0;
-  min-height: ${lineHeight.h3};
-
-  border-top: 1px solid ${(props) => borderColor[props.theme]};
-  color: ${(props) => titleColor[props.theme]};
-
-  font-size: ${fontSize.h3};
-  line-height: ${lineHeight.h3};
-  font-weight: ${fontWeight.bold};
-`;
-
-const BoxDescription = styled.div`
-  padding-bottom: 2rem;
-  color: ${(props) => subtitleColor[props.theme]};
-  font-size: ${fontSize.p};
-  line-height: ${lineHeight.p};
-`;
-
-const CommentBox = styled.div``;
 
 const FixedBox = styled.div`
   position: fixed;

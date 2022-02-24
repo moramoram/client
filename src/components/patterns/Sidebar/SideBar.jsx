@@ -20,7 +20,12 @@ const SideBar = ({ theme, isLoading, contents, badges, src, ...props }) => {
 
   return (
     <SideBarWrapper theme={theme} isLoading={isLoading} {...props}>
-      <ImageBox className="thumbnail" theme={theme} isLoading={isLoading} />
+      <ImageBox
+        className="thumbnail"
+        src={src}
+        theme={theme}
+        isLoading={isLoading}
+      />
       <SideBarBox>
         {contents.map(({ title, icon, description }, idx) => {
           return (

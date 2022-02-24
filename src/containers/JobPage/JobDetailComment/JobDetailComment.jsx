@@ -1,20 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-import { useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import { GetComments, CommentSelector, postComment } from "@/api";
 
-import { CommentInput } from "@/components";
-import { CommentList } from "@/layouts";
+import { CommentInput, CommentList } from "@/components";
 import { colors, fontSize, fontWeight, lineHeight } from "@/_shared";
 
-const JobDetailComment = (props) => {
+const JobDetailComment = ({ companyId, ...props }) => {
   const queryClient = useQueryClient();
-  const id = useParams().jobId;
-  const { data } = GetComments({ type: "company", id: id });
-
+  const { data } = GetComments({ type: "company", id: companyId });
   const { commentData } = CommentSelector(data);
+
   const CommentMutation = useMutation((data) => postComment(data), {
     onSuccess: () => {
       queryClient.invalidateQueries("getComments");
@@ -24,10 +21,20 @@ const JobDetailComment = (props) => {
   const handleClick = (comment) => {
     CommentMutation.mutate({
       type: "company",
-      companyId: id,
+      companyId: companyId,
       content: comment.value,
     });
   };
+
+  const dropdownItems = [
+    {
+      value: "delete",
+      label: "삭제",
+      onClick: () => {
+        window.alert("준비중인 기능이에요. 조금만 기다려주세요!");
+      },
+    },
+  ];
 
   return (
     <Layout>
@@ -36,7 +43,11 @@ const JobDetailComment = (props) => {
         이 기업에 대한 의견을 나눠보세요
       </BoxDescription>
       <CommentInput onClick={(comment) => handleClick(comment)} {...props} />
-      <CommentList data={commentData} {...props} />
+      <CommentList
+        data={commentData}
+        dropdownItems={dropdownItems}
+        {...props}
+      />
     </Layout>
   );
 };

@@ -30,7 +30,7 @@ const FeedItem = ({
   isLoading,
   ...props
 }) => {
-  let userDetail = ordinal && campus ? `(${ordinal} / ${campus})` : "";
+  let userDetail = ordinal && campus ? `(${ordinal}기 / ${campus})` : "";
 
   const isDefault = useMediaQuery({ query: "(min-width:530px)" });
   const isSmall = useMediaQuery({ query: "(max-width:530px)" });
@@ -122,7 +122,7 @@ FeedItem.defaultProps = {
   username: null,
   avatar: null,
   campus: "서울",
-  ordinal: "6기",
+  ordinal: "6",
   created: daysFromToday("2022-01-24"),
   title: "Lorem ipsum",
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",

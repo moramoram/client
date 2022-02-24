@@ -5,9 +5,7 @@ import { Controller } from "react-hook-form";
 
 import ReactQuill, { Quill } from "react-quill";
 import MarkdownShortcuts from "quill-markdown-shortcuts";
-import hljs from "highlight.js";
 import "react-quill/dist/quill.snow.css";
-import "highlight.js/styles/base16/decaf.css";
 
 import { useMediaQuery } from "react-responsive";
 
@@ -22,17 +20,13 @@ const StudyCreateEditor = ({
 }) => {
   Quill.register("modules/markdownShortcuts", MarkdownShortcuts);
   Quill.debug("error");
-  window.hljs = hljs;
 
   const modules = {
-    syntax: {
-      highlight: (text) => hljs.highlightAuto(text).value,
-    },
     toolbar: [
       [{ header: [1, 2, 3, false] }],
-      ["bold", "italic", "underline", "strike", "blockquote", "code-block"],
+      ["bold", "italic", "underline", "strike", "blockquote"],
       [{ list: "ordered" }, { list: "bullet" }],
-      ["link", "image", "video"],
+      ["link"],
       ["clean"],
     ],
     markdownShortcuts: {},
@@ -41,9 +35,10 @@ const StudyCreateEditor = ({
   const mobileModules = {
     ...modules,
     toolbar: [
-      ["bold", "italic", "underline", "code-block"],
+      ["bold", "italic", "underline"],
       [{ list: "ordered" }, { list: "bullet" }],
-      ["link", "image", "video"],
+      ["link"],
+      ["clean"],
     ],
   };
 
@@ -58,7 +53,6 @@ const StudyCreateEditor = ({
     "bullet",
     "link",
     "image",
-    "video",
     "code-block",
     "code",
   ];
@@ -74,6 +68,7 @@ const StudyCreateEditor = ({
           required: (v) => v !== "<p><br></p>",
         },
       }}
+      defaultValue={originalData?.content}
       render={({ field }) => (
         <Layout status={!errors?.content ? "default" : "error"} {...props}>
           <ReactQuill

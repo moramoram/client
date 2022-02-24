@@ -16,7 +16,7 @@ Default.args = {
   username: "파워블로거",
   avatar: "",
   campus: "서울",
-  ordinal: "6기",
+  ordinal: "6",
   created: daysFromToday("2022-01-24"),
   title: "Lorem Ipsum",
   content: (

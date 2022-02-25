@@ -6,6 +6,8 @@ export default {
   component: BookMark,
 };
 
+export const Default = (args) => <BookMark {...args} />;
+
 export const AllTypes = () => (
   <>
     <BookMark mode="primary" theme="light" />

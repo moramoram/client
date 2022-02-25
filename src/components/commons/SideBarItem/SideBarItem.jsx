@@ -1,18 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
+import { Layout, TitleBox, Title, Content } from "./SideBarItem.styled";
 import { Icon } from "@/foundations";
-import { colors, fontSize, fontWeight, loadings } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
   DARK: "dark",
-};
-
-const textColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
 };
 
 const SideBarItem = ({ title, description, icon, isLoading, ...props }) => {
@@ -46,50 +40,3 @@ SideBarItem.defaultProps = {
 };
 
 export default SideBarItem;
-
-const Layout = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  height: 36px;
-  padding: 0 10px;
-
-  color: ${(props) => textColor[props.theme]};
-`;
-
-const TitleBox = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-
-  width: 124px;
-  height: 28px;
-  border-radius: 4px;
-
-  font-size: ${fontSize.p};
-  font-weight: ${fontWeight.bold};
-  white-space: nowrap;
-
-  ${(props) => props.isLoading && loadings[props.theme]};
-`;
-
-const Title = styled.div``;
-
-const Content = styled.div`
-  display: inline-flex;
-  align-items: center;
-
-  width: 100%;
-  height: 28px;
-  border-radius: 4px;
-  overflow: hidden;
-
-  font-size: ${fontSize.p};
-  font-weight: ${fontWeight.regular};
-  text-overflow: ellipsis;
-  white-space: nowrap;
-
-  ${(props) => props.isLoading && loadings[props.theme]};
-`;

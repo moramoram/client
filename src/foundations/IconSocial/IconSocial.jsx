@@ -1,6 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import PropTypes from "prop-types";
 
+import { Svg } from "./IconSocial.styled";
 import { iconsSocial } from "@/_shared";
 
 const IconSocial = ({ icon, block, ...props }) => {
@@ -19,9 +20,13 @@ const IconSocial = ({ icon, block, ...props }) => {
   );
 };
 
-export default IconSocial;
+IconSocial.propTypes = {
+  icon: PropTypes.string.isRequired,
+  block: PropTypes.bool,
+};
 
-const Svg = styled.svg`
-  display: ${(props) => (props.block ? "block" : "inline-block")};
-  vertical-align: middle;
-`;
+IconSocial.defaultProps = {
+  block: false,
+};
+
+export default IconSocial;

@@ -1,9 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
-import { Link } from "react-router-dom";
-
+import { Layout, FeedItemLink } from "./FeedSmallGrid.styled";
 import { FeedItemSmall } from "@/components";
 
 const FeedSmallGrid = ({ data, isLoading, ...props }) => {
@@ -39,20 +37,3 @@ FeedSmallGrid.propTypes = {
 };
 
 export default FeedSmallGrid;
-
-const Layout = styled.div`
-  display: flex;
-  gap: 20px;
-  max-width: 940px;
-  overflow-x: auto;
-
-  @media screen and (max-width: 530px) {
-    flex-direction: column;
-    gap: 12px;
-  }
-`;
-
-const FeedItemLink = styled(Link)`
-  text-decoration: none;
-  width: 100%;
-`;

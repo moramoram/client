@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
 import Cropper from "react-easy-crop";
 
-import { Button, InputImage } from "@/components";
+import { Layout, CropperBox, Submit, ImgBox } from "./ImageUploader.styled";
+import { InputImage } from "@/components";
 import { getCroppedImg } from "@/utils";
 
 const THEME = {
@@ -66,14 +66,14 @@ const ImageUploader = ({ aspect, ...props }) => {
             onCropComplete={onCropComplete}
             onZoomChange={setZoom}
           />
-          <SubmitButton
+          <Submit
             onClick={() => {
               showCroppedImage();
               onClose();
             }}
           >
             이미지 자르기
-          </SubmitButton>
+          </Submit>
         </CropperBox>
       )}
       <Layout>
@@ -99,33 +99,3 @@ ImageUploader.defaultProps = {
 };
 
 export default ImageUploader;
-
-const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-`;
-
-const CropperBox = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-`;
-
-const SubmitButton = styled(Button)`
-  position: absolute;
-  left: calc(50% - 90px);
-  bottom: 18%;
-
-  width: 180px;
-  margin: auto;
-`;
-
-const ImgBox = styled.div`
-  img {
-    border-radius: 8px;
-  }
-`;

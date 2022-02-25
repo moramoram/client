@@ -30,11 +30,6 @@ const userMenuData = [
     title: "내 프로필",
     url: "profile",
   },
-  {
-    name: "logout",
-    title: "로그아웃",
-    url: "logout",
-  },
 ];
 
 export const Default = (args) => <NavMobile {...args} />;

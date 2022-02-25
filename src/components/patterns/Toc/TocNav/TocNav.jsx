@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
+import { Layout } from "./TocNav.styled";
 import { TocItem } from "../TocItem";
-import { colors } from "@/_shared";
 
 const THEME = {
   DARK: "dark",
@@ -59,26 +58,3 @@ TocNav.defaultProps = {
 };
 
 export default TocNav;
-
-const bgColors = {
-  dark: colors.black,
-  light: colors.white,
-};
-
-const borderColor = {
-  dark: colors.gray700,
-  light: colors.gray200,
-};
-
-const Layout = styled.div`
-  display: flex;
-  align-items: flex-end;
-
-  width: 100%;
-  height: 60px;
-  // TODO : 레이아웃에 맞게 맞추기
-  padding-left: 468px;
-  border-bottom: 1px solid ${(props) => borderColor[props.theme]};
-
-  background-color: ${(props) => bgColors[props.theme]};
-`;

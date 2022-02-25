@@ -9,10 +9,17 @@ export default {
   component: IconSocial,
 };
 
-const Meta = styled.div`
-  color: #666;
-  font-size: 12px;
-`;
+export const Default = (args) => (
+  <>
+    This is a {args.block ? "block" : "inline"} <IconSocial {...args} /> icon
+  </>
+);
+
+Default.args = {
+  icon: "google",
+  "aria-label": "google",
+  block: false,
+};
 
 export const AllTypes = () => (
   <>
@@ -28,6 +35,12 @@ export const AllTypes = () => (
   </>
 );
 
+const List = styled.ul`
+  display: flex;
+  flex-flow: row wrap;
+  list-style: none;
+`;
+
 const Item = styled.li`
   display: inline-flex;
   flex-direction: row;
@@ -42,8 +55,7 @@ const Item = styled.li`
   }
 `;
 
-const List = styled.ul`
-  display: flex;
-  flex-flow: row wrap;
-  list-style: none;
+const Meta = styled.div`
+  color: #666;
+  font-size: 12px;
 `;

@@ -1,8 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 
 import { GetStudyList, StudyCardSelector } from "@/api";
-
 import { CardSlider } from "@/components";
 
 const MainStudySilder = ({ ...props }) => {
@@ -19,13 +17,7 @@ const MainStudySilder = ({ ...props }) => {
   const { data } = GetStudyList(search);
   const { cardData } = StudyCardSelector(data);
 
-  return (
-    <Layout>
-      <CardSlider data={cardData} {...props} />
-    </Layout>
-  );
+  return <CardSlider data={cardData} {...props} />;
 };
 
 export default MainStudySilder;
-
-const Layout = styled.div``;

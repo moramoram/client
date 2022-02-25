@@ -1,16 +1,32 @@
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
 
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
 import { token, themeState, loginModalState } from "@/recoil";
 
+import {
+  Layout,
+  Navbar,
+  LogoBox,
+  NavTitle,
+  NavDropdown,
+  LinkBox,
+  NavItemLink,
+  UserInfoBox,
+  UserInfo,
+  UserName,
+  UserMobileItemLink,
+  UserMobileItem,
+  IconBox,
+  SwitchBox,
+  ButtonBox,
+} from "./NavMobile.styled";
 import { NavMobileItem } from "./NavMobileItem";
 import { Notification } from "@/containers";
 import { Avatar, Button, Switch } from "@/components";
 import { Logo, Icon } from "@/foundations";
-import { colors, fontSize, fontWeight, animations, shadows } from "@/_shared";
+import { colors } from "@/_shared";
 
 const THEME = {
   DARK: "dark",
@@ -212,170 +228,3 @@ NavMobile.defaultProps = {
 };
 
 export default NavMobile;
-
-const borderColor = {
-  dark: {
-    default: colors.gray700,
-    transparent: colors.gray800,
-  },
-  light: {
-    default: colors.gray200,
-    transparent: colors.gray800,
-  },
-};
-
-const bgColor = {
-  dark: {
-    default: colors.black,
-    transparent: "#00000000",
-  },
-  light: {
-    default: colors.white,
-    transparent: "#00000000",
-  },
-};
-
-const dropdownBgColor = {
-  dark: {
-    default: colors.black,
-    transparent: "rgba(0, 0, 0, 0.5)",
-  },
-  light: {
-    default: colors.white,
-    transparent: "rgba(0, 0, 0, 0.185)",
-  },
-};
-
-const textColor = {
-  dark: {
-    default: colors.gray25,
-    transparent: colors.gray25,
-  },
-  light: {
-    default: colors.gray900,
-    transparent: colors.gray25,
-  },
-};
-
-const boxShadow = {
-  dark: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-  light: shadows.base,
-};
-
-const Layout = styled.div`
-  position: ${(props) => (props.isStatic ? "static" : "fixed")};
-  width: 100%;
-  z-index: 9999;
-
-  ${(props) =>
-    props.type === TYPE.TRANSPARENT &&
-    `
-      background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0.5) 0%,
-        rgba(196, 196, 196, 0) 100%
-      );
-    `}
-
-  ${(props) =>
-    props.blur &&
-    css`
-      backdrop-filter: blur(10px);
-    `}
-`;
-
-const Navbar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 0 8%;
-  height: 65px;
-  border-bottom: 1px solid ${(props) => borderColor[props.theme][props.type]};
-  background-color: ${(props) => bgColor[props.theme][props.type]};
-
-  color: ${colors.gray500};
-  transition: 0.3s;
-`;
-
-const LogoBox = styled.div`
-  cursor: pointer;
-`;
-
-const NavTitle = styled.div`
-  color: ${(props) => textColor[props.theme][props.type]};
-  font-size: ${fontSize.lg};
-  font-weight: ${fontWeight.bold};
-`;
-
-const NavDropdown = styled.div`
-  padding-bottom: 1rem;
-  box-shadow: ${(props) => boxShadow[props.theme]};
-  background-color: ${(props) => dropdownBgColor[props.theme][props.type]};
-
-  animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
-  transition: background-color 0.3s;
-`;
-
-const LinkBox = styled.div`
-  padding: 1rem 0 0.5rem 0;
-`;
-
-const NavItemLink = styled(Link)`
-  text-decoration: none;
-`;
-
-const UserInfoBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-
-  padding: 18px 10% 8px 8%;
-  border-top: 1px solid rgba(134, 142, 150, 0.2);
-`;
-
-const UserInfo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-
-  font-size: ${fontSize.sm};
-  color: ${(props) => textColor[props.theme][props.type]};
-`;
-
-const UserName = styled.span`
-  font-weight: ${fontWeight.bold};
-`;
-
-const UserMobileItemLink = styled(Link)`
-  text-decoration: none;
-`;
-
-const UserMobileItem = styled(NavMobileItem)`
-  display: flex;
-  align-items: center;
-  font-size: ${fontSize.sm};
-  padding: 0;
-  height: 36px;
-`;
-
-const IconBox = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-
-  height: 28px;
-`;
-
-const SwitchBox = styled.div`
-  display: flex;
-  align-items: center;
-  width: 36px;
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 0 8%;
-`;

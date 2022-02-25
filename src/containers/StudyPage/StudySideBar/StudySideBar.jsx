@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
 import { useParams } from "react-router-dom";
 import { useMutation } from "react-query";
 import { putStudyScrap } from "@/api";
 
+import { SideBarBox, BadgeBox, Layout } from "./StudySideBar.styled";
 import { ImageBox, Badge, Button, BookMark, SideBarItem } from "@/components";
 import { Icon } from "@/foundations";
 
@@ -123,34 +123,3 @@ const summaryData = [
     id: "people",
   },
 ];
-
-const SideBarBox = styled.div`
-  margin: 10px 0px;
-`;
-
-const BadgeBox = styled.div`
-  display: flex;
-  gap: 5px;
-  margin: 20px 10px;
-  div {
-    margin-left: 4px;
-  }
-`;
-
-const Layout = styled.div`
-  display: block;
-  position: sticky;
-  top: 180px;
-
-  width: 400px;
-  height: 540px;
-  border-radius: 16px;
-
-  button {
-    margin: 6px 10px;
-    width: calc(100% - 20px);
-  }
-  .thumbnail {
-    margin-bottom: 12px;
-  }
-`;

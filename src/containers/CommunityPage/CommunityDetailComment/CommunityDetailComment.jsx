@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 
 import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -13,8 +12,8 @@ import {
   deleteComments,
 } from "@/api";
 
+import { Title } from "./CommunityDetailComment.styled";
 import { CommentInput, CommentList } from "@/components";
-import { colors, fontSize, fontWeight } from "@/_shared";
 
 const CommunityDetailComment = ({ boardType, ...props }) => {
   const queryClient = useQueryClient();
@@ -74,16 +73,3 @@ const CommunityDetailComment = ({ boardType, ...props }) => {
 };
 
 export default CommunityDetailComment;
-
-const titleColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
-};
-
-const Title = styled.div`
-  margin: 2rem 0;
-
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h3};
-  color: ${(props) => titleColor[props.theme]};
-`;

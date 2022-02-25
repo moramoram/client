@@ -1,12 +1,12 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
 import { useMutation, useQueryClient } from "react-query";
 import { PutProfileImage, DeleteProfileImage } from "@/api";
 
 import Cropper from "react-easy-crop";
 
+import { Layout, CropperBox, ButtonBox, ImgBox } from "./ProfileImage.styled";
 import { Avatar, Button, InputImage } from "@/components";
 import { getCroppedImg } from "@/utils";
 
@@ -131,41 +131,3 @@ ProfileImage.defaultProps = {
 };
 
 export default ProfileImage;
-
-const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  @media screen and (max-width: 530px) {
-    flex-direction: column;
-  }
-`;
-
-const CropperBox = styled.div`
-  position: fixed;
-  top: 68px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
-  gap: 1rem;
-  position: absolute;
-  left: calc(50% - 115px);
-  bottom: 10%;
-  margin: auto;
-`;
-
-const ImgBox = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-
-  img {
-    border-radius: 8px;
-  }
-`;

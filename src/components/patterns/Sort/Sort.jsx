@@ -58,7 +58,6 @@ const criteriaData = [
 Sort.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   items: PropTypes.array,
-  value: PropTypes.node,
 };
 
 Sort.defaultProps = {

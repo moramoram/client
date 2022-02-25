@@ -98,7 +98,7 @@ Comment.propTypes = {
   created: PropTypes.string,
   content: PropTypes.string,
   commentId: PropTypes.number,
-  dropdownItems: PropTypes.node,
+  dropdownItems: PropTypes.array,
   isDisabled: PropTypes.bool,
 };
 

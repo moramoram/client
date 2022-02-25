@@ -37,13 +37,11 @@ const IconBookMark = ({ ...props }) => {
 IconBookMark.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   mode: PropTypes.oneOf(Object.values(MODE)),
-  block: PropTypes.bool,
 };
 
 IconBookMark.defaultProps = {
   theme: THEME.LIGHT,
   mode: MODE.PRIMARY,
-  block: false,
 };
 
 export default IconBookMark;

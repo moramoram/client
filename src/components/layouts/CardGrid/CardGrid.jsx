@@ -13,8 +13,8 @@ const CardGrid = ({ data, theme, isLoading, ...props }) => {
   const items = isLoading ? cardData : data;
   return (
     <Layout {...props}>
-      {items.map(({ id, ...props }) => (
-        <CardItemLink to={id} key={id}>
+      {items.map(({ id, ...props }, idx) => (
+        <CardItemLink to={id} key={idx}>
           <CardResponsive theme={theme} isLoading={isLoading} {...props} />
         </CardItemLink>
       ))}

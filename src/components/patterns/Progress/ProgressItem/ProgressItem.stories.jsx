@@ -22,38 +22,30 @@ Default.args = {
 
 export const AllTypes = () => (
   <>
-    <h1>Light Theme</h1>
     <Background theme="light">
-      <h2>Completed</h2>
       <div style={{ display: "flex" }}>
         <ProgressItem status="completed" theme="light" {...item} />
       </div>
       <br />
-      <h2>Current</h2>
       <div>
         <ProgressItem status="current" theme="light" {...item} />
       </div>
-
       <br />
-      <h2>Default</h2>
       <div>
         <ProgressItem status="default" theme="light" {...item} />
       </div>
     </Background>
-    <h1>Dark Theme</h1>
+
     <br />
     <Background theme="dark">
-      <h2 style={{ color: "white" }}>Completed</h2>
       <div>
         <ProgressItem status="completed" theme="dark" {...item} />
       </div>
       <br />
-      <h2 style={{ color: "white" }}>Current</h2>
       <div>
         <ProgressItem status="current" theme="dark" {...item} />
       </div>
       <br />
-      <h2 style={{ color: "white" }}>Default</h2>
       <div>
         <ProgressItem status="default" theme="dark" {...item} />
       </div>

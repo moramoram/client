@@ -11,38 +11,32 @@ export default {
 
 export const Default = (args) => <CardSmall {...args} />;
 
-Default.args = {
-  contents: {
-    title: "주니어 웹 개발자 채용",
-    highlight: "모집중",
-    src: "",
-  },
+const defaultContents = {
+  title: "주니어 웹 개발자 채용",
+  highlight: "모집중",
+  src: "",
 };
 
-export const AllTypes = (args) => (
+Default.args = {
+  contents: defaultContents,
+};
+
+export const AllTypes = () => (
   <>
     <Background theme="light">
       <TypeBox>
-        <CardSmall {...args} />
-        <CardSmall isLoading {...args} />
+        <CardSmall contents={defaultContents} />
+        <CardSmall isLoading />
       </TypeBox>
     </Background>
     <Background theme="dark">
       <TypeBox>
-        <CardSmall theme="dark" {...args} />
-        <CardSmall theme="dark" isLoading {...args} />
+        <CardSmall contents={defaultContents} theme="dark" />
+        <CardSmall theme="dark" isLoading />
       </TypeBox>
     </Background>
   </>
 );
-
-AllTypes.args = {
-  contents: {
-    title: "주니어 웹 개발자 채용",
-    highlight: "모집중",
-    src: "",
-  },
-};
 
 const TypeBox = styled.div`
   display: flex;

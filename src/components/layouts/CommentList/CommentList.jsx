@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
+import { Layout, CommentBox } from "./CommentList.styled";
 import { Comment } from "@/components";
 
 const CommentList = ({
@@ -43,11 +43,3 @@ const dummy = new Array(6).fill({
   created: null,
   content: null,
 });
-
-const Layout = styled.div`
-  padding: 2rem 0;
-`;
-
-const CommentBox = styled.div`
-  padding: 1rem 0;
-`;

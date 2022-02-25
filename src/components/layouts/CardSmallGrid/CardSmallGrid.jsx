@@ -1,9 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
-import { Link } from "react-router-dom";
-
+import { Layout, CardItemLink } from "./CardSmallGrid.styled";
 import { CardSmall } from "@/components";
 
 const CardSmallGrid = ({ data, theme, isLoading, ...props }) => {
@@ -25,17 +23,3 @@ CardSmallGrid.propTypes = {
 };
 
 export default CardSmallGrid;
-
-const Layout = styled.div`
-  display: flex;
-  gap: 20px;
-
-  width: 100%;
-  overflow-x: scroll;
-  margin: auto;
-  align-items: center;
-`;
-
-const CardItemLink = styled(Link)`
-  text-decoration: none;
-`;

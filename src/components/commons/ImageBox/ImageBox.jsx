@@ -93,7 +93,8 @@ const ImageBoxWrapper = styled.div`
 
   align-items: center;
   justify-content: center;
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
+
+  ${(props) => props.isLoading && loadings[props.theme]};
 
   overflow: hidden;
   transition: 0.3s;

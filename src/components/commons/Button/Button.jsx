@@ -111,7 +111,8 @@ const Layout = styled.button`
   transition: 0.2s;
   user-select: none;
   cursor: pointer;
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
+
+  ${(props) => props.isLoading && loadings[props.theme]};
 
   svg {
     width: 20px;

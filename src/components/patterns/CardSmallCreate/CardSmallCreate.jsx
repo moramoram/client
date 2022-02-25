@@ -65,7 +65,7 @@ const TextBox = styled.div`
   div {
     display: inline-block;
     border-radius: 4px;
-    animation: ${(props) => props.isLoading && loadings[props.theme]};
+    ${(props) => props.isLoading && loadings[props.theme]};
   }
 `;
 

@@ -91,7 +91,7 @@ const Title = styled.div`
   font-size: ${fontSize.sm};
   color: ${(props) => titleColor[props.theme]};
 
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
+  ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const Highlight = styled.div`
@@ -103,5 +103,5 @@ const Highlight = styled.div`
   font-weight: ${fontWeight.bold};
   color: ${(props) => (props.isDisabled ? colors.gray400 : colors.blue100)};
 
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
+  ${(props) => props.isLoading && loadings[props.theme]};
 `;

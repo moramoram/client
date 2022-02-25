@@ -69,7 +69,7 @@ const Layout = styled.div`
   border-radius: 8px;
   background: ${(props) => bgColor[props.theme][props.mode]};
 
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
+  ${(props) => props.isLoading && loadings[props.theme]};
 
   ${(props) =>
     props.isLoading &&

@@ -188,7 +188,7 @@ const Category = styled.div`
   line-height: ${lineHeight.p};
   font-weight: ${fontWeight.bold};
 
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
+  ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const Title = styled.div`
@@ -200,7 +200,7 @@ const Title = styled.div`
   line-height: ${lineHeight.h2};
   font-weight: ${fontWeight.bold};
 
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
+  ${(props) => props.isLoading && loadings[props.theme]};
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.h3};
@@ -243,7 +243,7 @@ const UserBox = styled.div`
 
   height: ${lineHeight.p};
   min-width: 150px;
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
+  ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const User = styled.div`
@@ -272,7 +272,7 @@ const CreatedAt = styled.div`
   color: ${colors.gray500};
   font-size: ${fontSize.sm};
 
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
+  ${(props) => props.isLoading && loadings[props.theme]};
 
   @media screen and (max-width: 530px) {
     font-size: ${fontSize.xs};

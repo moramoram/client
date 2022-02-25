@@ -142,7 +142,7 @@ const TextBox = styled.div`
 
   div {
     border-radius: 4px;
-    animation: ${(props) => props.isLoading && loadings[props.theme]};
+    ${(props) => props.isLoading && loadings[props.theme]};
   }
 `;
 

@@ -1,4 +1,3 @@
-// Handy CSS animations for micro-interactions
 import { keyframes } from "styled-components";
 import { colors } from "../colors";
 

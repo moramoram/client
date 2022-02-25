@@ -72,7 +72,7 @@ const TitleBox = styled.div`
   font-weight: ${fontWeight.bold};
   white-space: nowrap;
 
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
+  ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
 const Title = styled.div``;
@@ -91,5 +91,5 @@ const Content = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
+  ${(props) => props.isLoading && loadings[props.theme]};
 `;

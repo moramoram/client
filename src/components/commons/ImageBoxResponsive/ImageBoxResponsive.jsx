@@ -83,7 +83,8 @@ const ImageBoxWrapper = styled.div`
   overflow: hidden;
 
   background: ${(props) => imageBgColor[props.theme]};
-  animation: ${(props) => props.isLoading && loadings[props.theme]};
+
+  ${(props) => props.isLoading && loadings[props.theme]};
 
   svg {
     position: absolute;

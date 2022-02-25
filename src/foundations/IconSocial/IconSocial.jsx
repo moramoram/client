@@ -4,6 +4,11 @@ import PropTypes from "prop-types";
 import { Svg } from "./IconSocial.styled";
 import { iconsSocial } from "@/_shared";
 
+const SOCIAL = {
+  GOOGLE: "google",
+  GITHUB: "github",
+};
+
 const IconSocial = ({ icon, block, ...props }) => {
   return (
     <Svg
@@ -21,7 +26,7 @@ const IconSocial = ({ icon, block, ...props }) => {
 };
 
 IconSocial.propTypes = {
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.oneOf(Object.values(SOCIAL)),
   block: PropTypes.bool,
 };
 

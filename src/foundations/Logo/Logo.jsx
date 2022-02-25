@@ -2,17 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import { THEME, TYPE } from "@/_shared/componentProps";
 import { colors } from "@/_shared";
 
-const THEME = {
-  DARK: "dark",
+const LOGOTHEME = {
+  ...THEME,
   BLUE: "blue",
-  LIGHT: "light",
-};
-
-const TYPE = {
-  DEFAULT: "default",
-  TRANSPARENT: "transparent",
 };
 
 const Logo = ({ width, height, ...props }) => {
@@ -59,12 +54,12 @@ const Logo = ({ width, height, ...props }) => {
 };
 
 Logo.propTypes = {
-  theme: PropTypes.oneOf(Object.values(THEME)),
+  theme: PropTypes.oneOf(Object.values(LOGOTHEME)),
   type: PropTypes.oneOf(Object.values(TYPE)),
 };
 
 Logo.defaultProps = {
-  theme: THEME.LIGHT,
+  theme: LOGOTHEME.LIGHT,
   type: TYPE.DEFAULT,
   width: 1000,
   height: 260,

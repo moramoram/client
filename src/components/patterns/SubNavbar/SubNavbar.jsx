@@ -1,9 +1,9 @@
 import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
 import { useSlider } from "@/hooks";
 
+import { Layout } from "./SubNavbar.styled";
 import { SubNavbarItem } from "./SubNavbarItem";
 
 const THEME = {
@@ -75,25 +75,3 @@ SubNavbar.defaultProps = {
 };
 
 export default SubNavbar;
-
-const Layout = styled.div`
-  display: flex;
-  overflow-x: scroll;
-
-  ${(props) =>
-    props.view === VIEW.DEFAULT &&
-    `
-      flex-direction: column;
-      align-items: stretch;
-      width: 200px;
-  `}
-
-  > div {
-    flex-shrink: 0;
-  }
-
-  scroll-behavior: smooth;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-`;

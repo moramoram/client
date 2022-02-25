@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
+import { Layout, SideBarBox, BadgeBox } from "./SideBar.styled";
 import { ImageBox, Badge, Button, BookMark, SideBarItem } from "@/components";
 import { Icon } from "@/foundations";
 
@@ -19,7 +19,7 @@ const SideBar = ({ theme, isLoading, contents, badges, src, ...props }) => {
   }
 
   return (
-    <SideBarWrapper theme={theme} isLoading={isLoading} {...props}>
+    <Layout theme={theme} isLoading={isLoading} {...props}>
       <ImageBox
         className="thumbnail"
         src={src}
@@ -80,7 +80,7 @@ const SideBar = ({ theme, isLoading, contents, badges, src, ...props }) => {
           </>
         )}
       </Button>
-    </SideBarWrapper>
+    </Layout>
   );
 };
 
@@ -99,28 +99,3 @@ SideBar.defaultProps = {
 };
 
 export default SideBar;
-
-const SideBarBox = styled.div`
-  margin: 10px 0px;
-`;
-
-const BadgeBox = styled.div`
-  display: flex;
-  gap: 5px;
-  margin: 20px 10px;
-`;
-
-const SideBarWrapper = styled.div`
-  display: block;
-  border-radius: 16px;
-  width: 400px;
-  height: 540px;
-
-  button {
-    margin: 6px 10px;
-    width: calc(100% - 20px);
-  }
-  .thumbnail {
-    margin-bottom: 12px;
-  }
-`;

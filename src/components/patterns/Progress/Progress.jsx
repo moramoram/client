@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
+import { Layout } from "./Progress.styled";
 import { ProgressItem } from "./ProgressItem";
 
 const THEME = {
@@ -70,8 +70,3 @@ Progress.defaultProps = {
 };
 
 export default Progress;
-
-const Layout = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;

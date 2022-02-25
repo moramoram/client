@@ -2,11 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Svg, Symbol, Wordmark } from "./Logo.styled";
-import { THEME, TYPE } from "@/_shared/componentProps";
 
-const LOGOTHEME = {
-  ...THEME,
+const THEME = {
+  DARK: "dark",
   BLUE: "blue",
+  LIGHT: "light",
+};
+
+const TYPE = {
+  DEFAULT: "default",
+  TRANSPARENT: "transparent",
 };
 
 const Logo = ({ width, height, ...props }) => {
@@ -53,12 +58,12 @@ const Logo = ({ width, height, ...props }) => {
 };
 
 Logo.propTypes = {
-  theme: PropTypes.oneOf(Object.values(LOGOTHEME)),
+  theme: PropTypes.oneOf(Object.values(THEME)),
   type: PropTypes.oneOf(Object.values(TYPE)),
 };
 
 Logo.defaultProps = {
-  theme: LOGOTHEME.LIGHT,
+  theme: THEME.LIGHT,
   type: TYPE.DEFAULT,
   width: 1000,
   height: 260,

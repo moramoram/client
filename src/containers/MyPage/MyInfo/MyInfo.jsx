@@ -1,15 +1,23 @@
 import React, { useState, useEffect, useCallback, Suspense } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 import { useMutation, useQueryClient } from "react-query";
 import { PostNicknameCheck, PutNickname } from "@/api";
 
+import {
+  Layout,
+  Title,
+  SubTitle,
+  Form,
+  InputBox,
+  LabelBox,
+  Label,
+  AvatarBox,
+} from "./MyInfo.styled";
 import { ProfileImage } from "@/containers";
 import { Input, Button } from "@/components";
-import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -161,76 +169,3 @@ MyInfo.defaultProps = {
 };
 
 export default MyInfo;
-
-const textColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
-};
-
-const subtitleColor = {
-  light: colors.gray400,
-  dark: colors.gray500,
-};
-
-const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-top: 86px;
-`;
-
-const Title = styled.div`
-  line-height: ${lineHeight.h2};
-  margin-bottom: 0.5rem;
-
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h3};
-  color: ${(props) => textColor[props.theme]};
-`;
-
-const SubTitle = styled.div`
-  margin-bottom: 3rem;
-
-  font-size: ${fontSize.p};
-  color: ${(props) => subtitleColor[props.theme]};
-`;
-
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-`;
-
-const InputBox = styled.div`
-  display: flex;
-  gap: 1rem;
-
-  button {
-    margin: 6px 0;
-    flex-shrink: 0;
-  }
-
-  div {
-    flex-grow: 1;
-  }
-`;
-
-const LabelBox = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  div:last-child {
-    flex-grow: 1;
-  }
-`;
-
-const Label = styled.div`
-  font-size: ${fontSize.sm};
-  font-weight: ${fontWeight.bold};
-  color: ${(props) => textColor[props.theme]};
-`;
-
-const AvatarBox = styled.div`
-  display: flex;
-  gap: 1rem;
-  padding-top: 12px;
-`;

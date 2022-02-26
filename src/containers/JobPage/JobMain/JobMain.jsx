@@ -1,17 +1,17 @@
 import React, { Suspense } from "react";
-import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState } from "recoil";
 import { themeState, jobSearch, jobFilter } from "@/recoil";
 
 import {
-  SubNavbar,
-  Input,
-  Selector,
-  Checkbox,
-  Sort,
-  CardGrid,
-} from "@/components";
+  Layout,
+  StickyNavBox,
+  StickyNav,
+  CardGridBox,
+  InputBox,
+  SortBox,
+} from "./JobMain.styled";
+import { Input, Selector, Checkbox, Sort, CardGrid } from "@/components";
 import { JobCardGrid } from "@/containers";
 
 import { debounce } from "@/utils";
@@ -132,48 +132,3 @@ const techStackOptions = [
   { value: "iOS", label: "iOS" },
   { value: "임베디드", label: "임베디드" },
 ];
-
-const Layout = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 100px;
-
-  max-width: 1280px;
-  margin: auto;
-`;
-
-const StickyNavBox = styled.div`
-  padding-top: 86px;
-`;
-
-const StickyNav = styled(SubNavbar)`
-  position: sticky;
-  top: 150px;
-`;
-
-const CardGridBox = styled.div`
-  width: calc(100% - 320px);
-  padding-top: 80px;
-`;
-
-const InputBox = styled.div`
-  display: flex;
-  gap: 0.5rem;
-
-  max-width: 940px;
-
-  > div {
-    flex-grow: 1;
-  }
-`;
-
-const SortBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  max-width: 940px;
-
-  padding: 20px 0px 20px 0;
-  margin-bottom: 20px;
-`;

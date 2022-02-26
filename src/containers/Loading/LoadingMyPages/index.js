@@ -1,1 +1,1 @@
-export { default } from "./LodaingMyPages";
+export { default } from "./LoadingMyPages";

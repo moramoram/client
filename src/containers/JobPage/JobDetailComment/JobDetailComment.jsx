@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 
 import { useMutation, useQueryClient } from "react-query";
 import {
@@ -12,8 +11,8 @@ import {
 import { useRecoilValue } from "recoil";
 import { auth } from "@/recoil";
 
+import { Layout, BoxTitle, BoxDescription } from "./JobDetailComment.styled";
 import { CommentInput, CommentList } from "@/components";
-import { colors, fontSize, fontWeight, lineHeight } from "@/_shared";
 
 const JobDetailComment = ({ companyId, ...props }) => {
   const queryClient = useQueryClient();
@@ -75,39 +74,3 @@ const JobDetailComment = ({ companyId, ...props }) => {
 };
 
 export default JobDetailComment;
-
-const titleColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
-};
-
-const subtitleColor = {
-  light: colors.gray400,
-  dark: colors.gray500,
-};
-
-const borderColor = {
-  dark: colors.gray700,
-  light: colors.gray200,
-};
-
-const Layout = styled.div``;
-
-const BoxTitle = styled.div`
-  padding: 4rem 0 0.2rem 0;
-  min-height: ${lineHeight.h3};
-
-  border-top: 1px solid ${(props) => borderColor[props.theme]};
-  color: ${(props) => titleColor[props.theme]};
-
-  font-size: ${fontSize.h3};
-  line-height: ${lineHeight.h3};
-  font-weight: ${fontWeight.bold};
-`;
-
-const BoxDescription = styled.div`
-  padding-bottom: 2rem;
-  color: ${(props) => subtitleColor[props.theme]};
-  font-size: ${fontSize.p};
-  line-height: ${lineHeight.p};
-`;

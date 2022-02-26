@@ -1,11 +1,11 @@
 import React, { useEffect, useCallback, useState } from "react";
-import styled from "styled-components";
 
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import { GetStudyDetail, getCompanyList, PutStudy } from "@/api";
 
+import { Layout, ContentBox, ButtonBox } from "./StudyUpdateForm.styled";
 import { StudyCreateSummary, StudyCreateDetail } from "@/containers";
 import { Button } from "@/components";
 
@@ -141,21 +141,3 @@ const StudyUpdateForm = ({ ...props }) => {
 };
 
 export default StudyUpdateForm;
-
-const Layout = styled.div`
-  width: 100%;
-  max-width: 1280px;
-  margin: auto;
-  padding-bottom: 4rem;
-`;
-
-const ContentBox = styled.div`
-  padding: 20px;
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  padding-top: 2rem;
-`;

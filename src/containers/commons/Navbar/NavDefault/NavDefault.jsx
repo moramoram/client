@@ -1,16 +1,25 @@
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
 import { token, themeState, loginModalState } from "@/recoil";
 
+import {
+  Layout,
+  FlexBox,
+  LogoBox,
+  NavbarItemBox,
+  NavItemLink,
+  SwitchBox,
+  UserDropdown,
+  ButtonBox,
+} from "./NavDefault.styled";
 import { NavDefaultItem } from "./NavDefaultItem";
 import { Notification } from "@/containers";
-import { Avatar, Button, Dropdown, Switch } from "@/components";
+import { Avatar, Button, Switch } from "@/components";
 import { Icon, Logo } from "@/foundations";
-import { colors, animations } from "@/_shared";
+import { colors } from "@/_shared";
 
 const THEME = {
   DARK: "dark",
@@ -184,91 +193,3 @@ NavDefault.defaultProps = {
 };
 
 export default NavDefault;
-
-const bgColor = {
-  dark: {
-    default: colors.black,
-    transparent: "#00000000",
-  },
-  light: {
-    default: colors.white,
-    transparent: "#00000000",
-  },
-};
-
-const borderColor = {
-  dark: {
-    default: colors.gray700,
-    transparent: colors.gray800,
-  },
-  light: {
-    default: colors.gray200,
-    transparent: colors.gray800,
-  },
-};
-
-const Layout = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: ${(props) => (props.isStatic ? "static" : "fixed")};
-  z-index: 9999;
-
-  width: 100%;
-  border-bottom: 1px solid ${(props) => borderColor[props.theme][props.type]};
-  background-color: ${(props) => bgColor[props.theme][props.type]};
-
-  transition: 0.5s;
-`;
-
-const FlexBox = styled.div`
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-  position: relative;
-
-  :first-child {
-    margin-left: 8%;
-  }
-
-  :last-child {
-    margin-right: 10%;
-  }
-
-  svg,
-  div {
-    cursor: pointer;
-  }
-`;
-
-const LogoBox = styled.div`
-  cursor: pointer;
-`;
-
-const NavbarItemBox = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: 2rem;
-`;
-
-const NavItemLink = styled(Link)`
-  text-decoration: none;
-`;
-
-const SwitchBox = styled.div`
-  display: flex;
-  align-items: center;
-  width: 36px;
-`;
-
-const UserDropdown = styled(Dropdown)`
-  z-index: 9999;
-  top: 40px;
-  right: 8%;
-  animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
-  gap: 0.5rem;
-`;

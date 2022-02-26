@@ -1,11 +1,18 @@
 import React, { useReducer } from "react";
-import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
 import { isAuthenticatedState, themeState } from "@/recoil";
 import { useMediaQuery } from "react-responsive";
 import { GetUserProfile, UserProfileSelector } from "@/api";
 
+import {
+  Layout,
+  MainBox,
+  MobileBox,
+  ContentBox,
+  StickyNavBox,
+  StickyNav,
+} from "./MyPages.styled";
 import {
   AuthForm,
   MyInfo,
@@ -97,37 +104,3 @@ const categoryData = [
   { id: 4, title: "나의 스터디" },
   // { id: 5, title: "내가 쓴 댓글" },
 ];
-
-const Layout = styled.div`
-  padding: 20px;
-`;
-
-const MainBox = styled.div`
-  display: flex;
-  gap: 100px;
-
-  max-width: 1280px;
-  width: 100%;
-  margin: auto;
-  padding: 0 0 4rem 0;
-`;
-
-const MobileBox = styled.div`
-  max-width: 1280px;
-  width: 100%;
-  padding: 0 0 4rem 0;
-`;
-
-const ContentBox = styled.div`
-  width: 100%;
-  margin-right: 20px;
-`;
-
-const StickyNavBox = styled.div`
-  padding-top: 86px;
-`;
-
-const StickyNav = styled(SubNavbar)`
-  position: sticky;
-  top: 150px;
-`;

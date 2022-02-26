@@ -1,15 +1,14 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
 import { themeState, communitySearch } from "@/recoil";
 import { useIntersectionObserver } from "@/hooks";
 import { GetMyCommunityList, CommunityFeedSelector } from "@/api";
 
+import { Layout, Title, SubTitle, FetchBox } from "./MyFeed.styled";
 import { CommunityNoContent } from "@/containers";
 import { FeedGrid } from "@/components";
-import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -57,39 +56,3 @@ MyFeed.defaultProps = {
 };
 
 export default MyFeed;
-
-const titleColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
-};
-
-const subtitleColor = {
-  light: colors.gray400,
-  dark: colors.gray500,
-};
-
-const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-top: 86px;
-`;
-
-const Title = styled.div`
-  line-height: ${lineHeight.h2};
-  margin-bottom: 0.5rem;
-
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h3};
-  color: ${(props) => titleColor[props.theme]};
-`;
-
-const SubTitle = styled.div`
-  margin-bottom: 3rem;
-
-  font-size: ${fontSize.p};
-  color: ${(props) => subtitleColor[props.theme]};
-`;
-
-const FetchBox = styled.div`
-  height: 30px;
-`;

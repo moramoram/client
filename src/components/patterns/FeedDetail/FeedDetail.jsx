@@ -112,7 +112,7 @@ FeedDetail.propTypes = {
   username: PropTypes.string,
   avatar: PropTypes.string,
   campus: PropTypes.string,
-  ordinal: PropTypes.number,
+  ordinal: PropTypes.node,
   created: PropTypes.string,
   title: PropTypes.string,
   content: PropTypes.any,

@@ -22,7 +22,7 @@ export const Layout = styled.div`
   align-items: stretch;
   position: absolute;
 
-  width: 100px;
+  min-width: 100px;
   border-radius: 8px;
   border: 1px solid ${(props) => borderColor[props.theme]};
 
@@ -30,10 +30,12 @@ export const Layout = styled.div`
   box-shadow: ${(props) => boxShadow[props.theme]};
 `;
 
-export const MenuBox = styled.div`
+export const MenuBox = styled.ul`
+  margin: 0;
   padding: 4px 0;
 
-  > div {
+  > li {
     justify-content: center;
+    padding: 0;
   }
 `;

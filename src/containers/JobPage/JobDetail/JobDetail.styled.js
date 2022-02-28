@@ -38,7 +38,7 @@ export const Layout = styled.div`
   max-width: 940px;
 `;
 
-export const TitleBox = styled.div`
+export const TitleBox = styled.header`
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -50,9 +50,10 @@ export const TitleBox = styled.div`
   }
 `;
 
-export const Highlight = styled.div`
+export const Highlight = styled.h2`
   min-width: 70px;
   min-height: ${lineHeight.lg};
+  margin: 0;
 
   font-size: ${fontSize.lg};
   line-height: ${lineHeight.lg};
@@ -60,9 +61,10 @@ export const Highlight = styled.div`
   color: ${(props) => highlightColor[props.status]};
 `;
 
-export const Title = styled.div`
+export const Title = styled.h1`
   min-width: 160px;
   min-height: ${lineHeight.h2};
+  margin: 0;
 
   font-size: ${fontSize.h2};
   line-height: ${lineHeight.h2};
@@ -70,9 +72,10 @@ export const Title = styled.div`
   color: ${(props) => titleColor[props.theme]};
 `;
 
-export const SubTitle = styled.div`
+export const SubTitle = styled.h2`
   min-width: 160px;
   min-height: ${lineHeight.lg};
+  margin: 0;
 
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.lg};
@@ -80,7 +83,7 @@ export const SubTitle = styled.div`
   color: ${(props) => subtitleColor[props.theme]};
 `;
 
-export const Content = styled.div`
+export const Content = styled.article`
   padding: 0 0 2rem 0;
   color: ${(props) => textColor[props.theme]};
 
@@ -129,7 +132,7 @@ export const Content = styled.div`
   }
 `;
 
-export const CardBox = styled.div``;
+export const CardBox = styled.section``;
 
 export const BoxTitle = styled.div`
   padding: 4rem 0 0.2rem 0;

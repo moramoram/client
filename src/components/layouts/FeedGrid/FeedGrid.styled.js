@@ -7,14 +7,14 @@ const borderColor = {
   dark: colors.gray900,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 32px;
 
   width: 100%;
-  margin: auto;
+  max-width: 940px;
   padding-top: 32px;
 `;
 

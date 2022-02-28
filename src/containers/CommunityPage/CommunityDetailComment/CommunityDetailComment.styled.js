@@ -6,7 +6,7 @@ const titleColor = {
   dark: colors.gray25,
 };
 
-export const Title = styled.div`
+export const Title = styled.h2`
   margin: 2rem 0;
 
   font-weight: ${fontWeight.bold};

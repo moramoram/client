@@ -34,7 +34,7 @@ const subtitleColor = {
   dark: colors.gray500,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.section`
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -47,12 +47,12 @@ export const Layout = styled.div`
   max-width: 940px;
 `;
 
-export const Header = styled.div`
+export const Header = styled.header`
   display: flex;
   justify-content: space-between;
 `;
 
-export const TitleBox = styled.div`
+export const TitleBox = styled.hgroup`
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -63,19 +63,22 @@ export const TitleBox = styled.div`
   }
 `;
 
-export const SideBarBox = styled.div`
+export const SideBarBox = styled.ul`
   margin: 20px 0px;
+  padding: 0;
 `;
 
-export const BadgeBox = styled.div`
+export const BadgeBox = styled.ul`
   display: flex;
   gap: 5px;
   margin: 20px 10px;
+  padding: 0;
 `;
 
-export const Highlight = styled.div`
+export const Highlight = styled.h2`
   min-width: 70px;
   min-height: ${lineHeight.lg};
+  margin: 0;
 
   font-size: ${fontSize.lg};
   line-height: ${lineHeight.lg};
@@ -83,9 +86,10 @@ export const Highlight = styled.div`
   color: ${(props) => highlightColor[props.status]};
 `;
 
-export const Title = styled.div`
+export const Title = styled.h1`
   min-width: 160px;
   min-height: ${lineHeight.h2};
+  margin: 0;
 
   font-size: calc(${fontSize.h2} - 2px);
   line-height: ${lineHeight.h2};
@@ -126,7 +130,7 @@ export const Dropdown = styled(DropdownSmall)`
   width: 160px;
 `;
 
-export const Content = styled.div`
+export const Content = styled.article`
   padding: 0 1rem 2rem 1rem;
   color: ${(props) => textColor[props.theme]};
 

@@ -6,7 +6,7 @@ import { themeState } from "@/recoil";
 import { useIntersectionObserver } from "@/hooks";
 import { StudyCardSelector, GetMyStudyList } from "@/api";
 
-import { Layout, Title, SubTitle } from "./MyStudy.styled";
+import { Layout, Title, SubTitle, FetchBox } from "./MyStudy.styled";
 import { StudyNoContent } from "@/containers";
 import { CardGrid } from "@/components";
 
@@ -39,7 +39,7 @@ const MyStudy = () => {
       </SubTitle>
       {!cardData[0] && <StudyNoContent theme={theme} />}
       <CardGrid data={cardData} theme={theme} />
-      <div ref={loader} />
+      <FetchBox ref={loader} />
     </Layout>
   );
 };

@@ -16,7 +16,7 @@ const fontSize = {
   small: "0.625rem",
 };
 
-export const Image = styled.div`
+export const Image = styled.figure`
   display: inline-block;
   overflow: hidden;
   object-fit: cover;
@@ -24,6 +24,7 @@ export const Image = styled.div`
   height: ${(props) => sizeNum[props.size]}px;
   width: ${(props) => sizeNum[props.size]}px;
   min-width: ${(props) => sizeNum[props.size]}px;
+  margin: 0;
   border-radius: 50%;
 
   background-color: ${colors.gray100};

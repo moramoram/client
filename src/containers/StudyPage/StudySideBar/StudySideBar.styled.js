@@ -1,19 +1,6 @@
 import styled from "styled-components";
 
-export const SideBarBox = styled.div`
-  margin: 10px 0px;
-`;
-
-export const BadgeBox = styled.div`
-  display: flex;
-  gap: 5px;
-  margin: 20px 10px;
-  div {
-    margin-left: 4px;
-  }
-`;
-
-export const Layout = styled.div`
+export const Layout = styled.aside`
   display: block;
   position: sticky;
   top: 180px;
@@ -28,5 +15,21 @@ export const Layout = styled.div`
   }
   .thumbnail {
     margin-bottom: 12px;
+  }
+`;
+
+export const SideBarItemBox = styled.ul`
+  margin: 10px 0px;
+  padding: 0;
+`;
+
+export const BadgeBox = styled.ul`
+  display: flex;
+  gap: 5px;
+  margin: 20px 10px;
+  padding: 0;
+
+  li {
+    margin-left: 4px;
   }
 `;

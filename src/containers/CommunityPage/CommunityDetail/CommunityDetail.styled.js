@@ -6,14 +6,14 @@ const borderColor = {
   dark: colors.gray800,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
   padding-bottom: 40px;
 `;
 
-export const Footer = styled.div`
+export const Footer = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,10 +45,10 @@ export const IconBox = styled.div`
   color: ${colors.gray500};
 `;
 
-export const CountNums = styled.div`
+export const CountNums = styled.span`
   font-size: ${fontSize.sm};
 `;
 
-export const CommentBox = styled.div`
+export const CommentBox = styled.section`
   border-top: 1px solid ${(props) => borderColor[props.theme]};
 `;

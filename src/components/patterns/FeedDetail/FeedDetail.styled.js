@@ -23,20 +23,20 @@ const borderColor = {
   dark: colors.gray800,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.article`
   display: flex;
   flex-direction: column;
   gap: 2rem;
   width: 100%;
 `;
 
-export const Header = styled.div`
+export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   gap: 1rem;
 `;
 
-export const TitleBox = styled.div`
+export const TitleBox = styled.hgroup`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -48,20 +48,23 @@ export const TitleBox = styled.div`
   }
 `;
 
-export const Category = styled.div`
+export const Category = styled.h2`
   height: ${lineHeight.p};
   min-width: 100px;
+  margin: 0;
 
   color: ${colors.blue100};
   line-height: ${lineHeight.p};
+  font-size: ${fontSize.p};
   font-weight: ${fontWeight.bold};
 
   ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
-export const Title = styled.div`
+export const Title = styled.h1`
   height: ${lineHeight.h2};
   min-width: 375px;
+  margin: 0;
 
   color: ${(props) => titleColor[props.theme]};
   font-size: ${fontSize.h2};
@@ -90,7 +93,7 @@ export const DropdownBox = styled.div`
   }
 `;
 
-export const AvatarBox = styled.div`
+export const AvatarBox = styled.section`
   display: flex;
   gap: 1rem;
   padding-bottom: 1.5rem;
@@ -114,7 +117,8 @@ export const UserBox = styled.div`
   ${(props) => props.isLoading && loadings[props.theme]};
 `;
 
-export const User = styled.div`
+export const User = styled.h2`
+  margin: 0;
   color: ${(props) => titleColor[props.theme]};
   font-size: ${fontSize.p};
   font-weight: ${fontWeight.bold};
@@ -125,7 +129,7 @@ export const User = styled.div`
   }
 `;
 
-export const UserDetail = styled.div`
+export const UserDetail = styled.span`
   color: ${colors.gray500};
   font-size: ${fontSize.sm};
 
@@ -134,7 +138,7 @@ export const UserDetail = styled.div`
   }
 `;
 
-export const CreatedAt = styled.div`
+export const CreatedAt = styled.span`
   height: ${lineHeight.sm};
   min-width: 80px;
   color: ${colors.gray500};
@@ -147,7 +151,7 @@ export const CreatedAt = styled.div`
   }
 `;
 
-export const Content = styled.div`
+export const Content = styled.section`
   padding: 1rem 0 1rem 0;
 
   color: ${(props) => contentColor[props.theme]};

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useMutation } from "react-query";
 import { putJobScrap } from "@/api";
 
-import { SideBarBox, BadgeBox, Layout } from "./JobSideBar.styled";
+import { SideBarItemBox, BadgeBox, Layout } from "./JobSideBar.styled";
 import { ImageBox, Badge, Button, BookMark, SideBarItem } from "@/components";
 import { Icon } from "@/foundations";
 
@@ -37,7 +37,7 @@ const JobSideBar = ({ data, isLoading, ...props }) => {
         src={data.src}
         {...props}
       />
-      <SideBarBox {...props}>
+      <SideBarItemBox {...props}>
         {summaryData.map(({ title, icon, id }) => (
           <SideBarItem
             className="contents-item"
@@ -49,7 +49,7 @@ const JobSideBar = ({ data, isLoading, ...props }) => {
             {...props}
           />
         ))}
-      </SideBarBox>
+      </SideBarItemBox>
       <BadgeBox>
         {data.badges.map((children, idx) => {
           return (

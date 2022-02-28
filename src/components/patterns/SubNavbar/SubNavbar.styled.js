@@ -1,8 +1,10 @@
 import styled, { css } from "styled-components";
 
-export const Layout = styled.div`
+export const Layout = styled.ul`
   display: flex;
   overflow-x: scroll;
+  margin: 0;
+  padding: 0;
 
   ${(props) =>
     props.view === "default" &&

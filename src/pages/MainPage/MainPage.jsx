@@ -74,9 +74,9 @@ const EmptyBox = styled.div`
   height: 40px;
 `;
 
-const ContentBox = styled.div``;
+const ContentBox = styled.section``;
 
-const TitleBox = styled.div`
+const TitleBox = styled.hgroup`
   max-width: 940px;
   margin: auto;
   padding: 20px 0;
@@ -86,9 +86,9 @@ const TitleBox = styled.div`
   }
 `;
 
-const Title = styled.div`
+const Title = styled.h1`
   line-height: ${lineHeight.h2};
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem 0;
 
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h3};

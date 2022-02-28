@@ -21,6 +21,7 @@ export const Layout = styled.div`
   align-items: center;
 
   height: 42px;
+  max-width: 940px;
   margin: 6px 0;
   padding: 0 16px;
   border: 1px solid ${(props) => borderColor[props.theme]};

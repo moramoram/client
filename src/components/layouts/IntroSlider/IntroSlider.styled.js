@@ -12,7 +12,7 @@ const subtitleColor = {
   dark: colors.gray500,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.section`
   width: 100%;
 
   .swiper {

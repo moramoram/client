@@ -34,7 +34,7 @@ const borderColor = {
   dark: colors.gray800,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.section`
   display: flex;
   flex-direction: column;
   gap: 4rem;
@@ -46,12 +46,12 @@ export const Layout = styled.div`
   max-width: 940px;
 `;
 
-export const Header = styled.div`
+export const Header = styled.header`
   display: flex;
   justify-content: space-between;
 `;
 
-export const TitleBox = styled.div`
+export const TitleBox = styled.hgroup`
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -63,9 +63,10 @@ export const TitleBox = styled.div`
   }
 `;
 
-export const Highlight = styled.div`
+export const Highlight = styled.h2`
   min-width: 70px;
   min-height: ${lineHeight.lg};
+  margin: 0;
 
   font-size: ${fontSize.lg};
   line-height: ${lineHeight.lg};
@@ -73,9 +74,10 @@ export const Highlight = styled.div`
   color: ${(props) => highlightColor[props.status]};
 `;
 
-export const Title = styled.div`
+export const Title = styled.h1`
   min-width: 160px;
   min-height: ${lineHeight.h2};
+  margin: 0;
 
   font-size: ${fontSize.h2};
   line-height: ${lineHeight.h2};
@@ -83,7 +85,7 @@ export const Title = styled.div`
   color: ${(props) => titleColor[props.theme]};
 `;
 
-export const SubTitle = styled.div`
+export const SubTitle = styled.span`
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -116,7 +118,7 @@ export const Dropdown = styled(DropdownSmall)`
   width: 160px;
 `;
 
-export const Content = styled.div`
+export const Content = styled.article`
   padding: 0 0 2rem 0;
   color: ${(props) => textColor[props.theme]};
 

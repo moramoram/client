@@ -16,7 +16,7 @@ const borderColor = {
   dark: colors.gray900,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.section`
   width: 100%;
   height: 400px;
   border-bottom: 1px solid ${(props) => borderColor[props.theme]};
@@ -33,7 +33,7 @@ export const ContentBox = styled.div`
   margin: auto;
 `;
 
-export const TitleBox = styled.div`
+export const TitleBox = styled.hgroup`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,15 +41,17 @@ export const TitleBox = styled.div`
   gap: 0.5rem;
 `;
 
-export const Title = styled.div`
+export const Title = styled.h1`
+  margin: 0;
   line-height: ${lineHeight.h2};
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h3};
   color: ${(props) => titleColor[props.theme]};
 `;
 
-export const SubTitle = styled.div`
+export const SubTitle = styled.p`
   height: ${lineHeight.h4};
+  margin: 0;
 
   font-size: ${fontSize.sm};
   color: ${(props) => subtitleColor[props.theme]};

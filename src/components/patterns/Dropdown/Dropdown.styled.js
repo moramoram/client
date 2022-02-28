@@ -43,7 +43,8 @@ export const UserName = styled.span`
   font-weight: ${fontWeight.bold};
 `;
 
-export const MenuBox = styled.div`
+export const MenuBox = styled.ul`
+  margin: 0;
   padding: 4px 0;
 
   a {

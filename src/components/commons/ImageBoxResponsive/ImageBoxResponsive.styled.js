@@ -6,8 +6,9 @@ const imageBgColor = {
   dark: colors.gray900,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.figure`
   position: relative;
+  margin: 0;
 
   :before {
     content: "";

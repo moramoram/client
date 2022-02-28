@@ -11,7 +11,7 @@ const contentColor = {
   light: colors.gray700,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.article`
   display: flex;
   justify-content: space-between;
   gap: 2rem;
@@ -44,7 +44,8 @@ export const UserBox = styled.div`
   gap: 0.5rem;
 `;
 
-export const User = styled.div`
+export const User = styled.h3`
+  margin: 0;
   font-size: ${fontSize.p};
   line-height: ${lineHeight.p};
   font-weight: ${fontWeight.bold};
@@ -64,7 +65,7 @@ export const User = styled.div`
   ${(props) => props.isLoading && loadings[props.theme]}
 `;
 
-export const UserDetail = styled.div`
+export const UserDetail = styled.span`
   font-size: ${fontSize.sm};
   line-height: ${fontSize.p};
   color: ${colors.gray500};
@@ -74,7 +75,8 @@ export const UserDetail = styled.div`
   }
 `;
 
-export const CreatedAt = styled.div`
+export const CreatedAt = styled.span`
+  display: block;
   font-size: ${fontSize.sm};
   line-height: ${fontSize.sm};
   color: ${colors.gray500};
@@ -102,7 +104,8 @@ export const ContentBox = styled.div`
   width: 100%;
 `;
 
-export const Title = styled.div`
+export const Title = styled.h2`
+  margin: 0;
   font-size: ${fontSize.lg};
   line-height: ${lineHeight.lg};
   font-weight: ${fontWeight.bold};
@@ -122,7 +125,7 @@ export const Title = styled.div`
   ${(props) => props.isLoading && loadings[props.theme]}
 `;
 
-export const Content = styled.div`
+export const Content = styled.span`
   display: -webkit-box;
   overflow: hidden;
   height: 3rem;

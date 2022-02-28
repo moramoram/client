@@ -16,11 +16,12 @@ const borderColor = {
   light: colors.gray200,
 };
 
-export const Layout = styled.div``;
+export const Layout = styled.section``;
 
-export const BoxTitle = styled.div`
-  padding: 4rem 0 0.2rem 0;
+export const BoxTitle = styled.h2`
   min-height: ${lineHeight.h3};
+  padding: 4rem 0 0.2rem 0;
+  margin: 0;
 
   border-top: 1px solid ${(props) => borderColor[props.theme]};
   color: ${(props) => titleColor[props.theme]};
@@ -30,8 +31,10 @@ export const BoxTitle = styled.div`
   font-weight: ${fontWeight.bold};
 `;
 
-export const BoxDescription = styled.div`
+export const BoxDescription = styled.p`
   padding-bottom: 2rem;
+  margin: 0;
+
   color: ${(props) => subtitleColor[props.theme]};
   font-size: ${fontSize.p};
   line-height: ${lineHeight.p};

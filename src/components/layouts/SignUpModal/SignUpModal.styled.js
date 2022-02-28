@@ -115,13 +115,14 @@ export const Button = styled.button`
   gap: 0.5rem;
 
   height: 54px;
-  width: 255px;
-  padding: 1rem 2rem;
+  padding: 0 2rem;
   border-radius: 8px;
   border: 0px solid;
 
   box-shadow: ${shadows.base};
   cursor: pointer;
+
+  white-space: nowrap;
 `;
 
 export const AskingForHelp = styled.div`
@@ -130,4 +131,8 @@ export const AskingForHelp = styled.div`
   font-weight: ${fontWeight.bold};
 
   cursor: pointer;
+
+  :hover {
+    color: ${colors.blue200};
+  }
 `;

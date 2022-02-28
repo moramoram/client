@@ -120,7 +120,8 @@ export const Button = styled.button`
   align-items: center;
   gap: 0.5rem;
 
-  padding: 1rem 2.2rem;
+  height: 54px;
+  padding: 0 2rem;
   border-radius: 8px;
   border: 0px solid;
 

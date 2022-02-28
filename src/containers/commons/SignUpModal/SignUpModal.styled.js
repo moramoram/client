@@ -2,6 +2,16 @@ import styled from "styled-components";
 import { Typography } from "@/foundations";
 import { animations, colors, fontWeight, shadows } from "@/_shared";
 
+const bgColor = {
+  light: colors.white,
+  dark: "rgba(41, 45, 50, 0.7)",
+};
+
+const titleColor = {
+  light: colors.gray900,
+  dark: colors.gray25,
+};
+
 export const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -40,7 +50,8 @@ export const Layout = styled.div`
   border-radius: 12px;
   box-shadow: ${shadows.base};
 
-  background-color: ${colors.white};
+  background-color: ${(props) => bgColor[props.theme]};
+  backdrop-filter: blur(30px);
   transform: translateY(-50%);
   animation: ${animations.modal} 0.4s cubic-bezier(0.3, 0, 0, 1);
 
@@ -73,7 +84,7 @@ export const ContentBox = styled.div`
 `;
 
 export const Title = styled(Typography)`
-  color: ${colors.gray900};
+  color: ${(props) => titleColor[props.theme]};
   text-align: center;
   white-space: pre-line;
 `;

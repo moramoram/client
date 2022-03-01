@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import { SubNavbar } from "@/components";
 
-export const Layout = styled.div`
+export const Layout = styled.section`
   display: flex;
-  justify-content: center;
-  gap: 100px;
+  justify-content: space-between;
 
   max-width: 1280px;
+  padding: 0 20px 20px 20px;
   margin: auto;
 `;
 
-export const StickyNavBox = styled.div`
+export const StickyNavBox = styled.nav`
   padding-top: 86px;
 `;
 
@@ -20,7 +20,7 @@ export const StickyNav = styled(SubNavbar)`
 `;
 
 export const CardGridBox = styled.div`
-  width: calc(100% - 320px);
+  width: calc(100% - 300px);
   padding-top: 80px;
 `;
 

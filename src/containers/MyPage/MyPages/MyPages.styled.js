@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { SubNavbar } from "@/components";
 
-export const Layout = styled.div`
+export const Layout = styled.section`
   padding: 20px;
 `;
 
@@ -21,12 +21,12 @@ export const MobileBox = styled.div`
   padding: 0 0 4rem 0;
 `;
 
-export const ContentBox = styled.div`
+export const ContentBox = styled.section`
   width: 100%;
   margin-right: 20px;
 `;
 
-export const StickyNavBox = styled.div`
+export const StickyNavBox = styled.nav`
   padding-top: 86px;
 `;
 

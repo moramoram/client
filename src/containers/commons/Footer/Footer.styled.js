@@ -13,7 +13,7 @@ const borderColor = {
   dark: colors.gray700,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.footer`
   position: absolute;
   bottom: 0;
   width: 100%;

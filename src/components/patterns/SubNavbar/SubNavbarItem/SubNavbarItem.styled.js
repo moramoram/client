@@ -33,16 +33,17 @@ const background = {
   },
 };
 
-export const Layout = styled.div`
+export const Layout = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  flex-shrink: 0;
 
   height: 42px;
   padding: 0 20px;
   border-radius: 8px;
-
+  list-style: none;
   background: ${(props) => background[props.theme][props.status]};
 
   color: ${(props) => textColor[props.theme][props.status]};

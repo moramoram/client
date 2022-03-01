@@ -17,23 +17,23 @@ export const Layout = styled.div`
   padding-top: 86px;
 `;
 
-export const Title = styled.div`
+export const Title = styled.h1`
   line-height: ${lineHeight.h2};
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem 0;
 
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h3};
   color: ${(props) => textColor[props.theme]};
 `;
 
-export const SubTitle = styled.div`
-  margin-bottom: 3rem;
+export const SubTitle = styled.p`
+  margin: 0 0 3rem 0;
 
   font-size: ${fontSize.p};
   color: ${(props) => subtitleColor[props.theme]};
 `;
 
-export const Form = styled.div`
+export const Form = styled.section`
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -53,7 +53,7 @@ export const InputBox = styled.div`
   }
 `;
 
-export const LabelBox = styled.div`
+export const LabelBox = styled.form`
   display: flex;
   flex-direction: column;
 
@@ -62,7 +62,7 @@ export const LabelBox = styled.div`
   }
 `;
 
-export const Label = styled.div`
+export const Label = styled.label`
   font-size: ${fontSize.sm};
   font-weight: ${fontWeight.bold};
   color: ${(props) => textColor[props.theme]};

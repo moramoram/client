@@ -22,17 +22,17 @@ export const LogoBox = styled.div`
   padding-bottom: 1rem;
 `;
 
-export const Title = styled.div`
+export const Title = styled.h1`
   line-height: ${lineHeight.h2};
-  margin-bottom: 2rem;
+  margin: 0 0 2rem 0;
 
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h3};
   color: ${(props) => titleColor[props.theme]};
 `;
 
-export const SubTitle = styled.div`
-  margin-bottom: 6rem;
+export const SubTitle = styled.p`
+  margin: 0 0 6rem 0;
 
   color: ${(props) => subtitleColor[props.theme]};
   font-size: ${fontSize.p};

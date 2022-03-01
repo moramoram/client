@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Layout = styled.div`
+export const Layout = styled.aside`
   display: block;
   border-radius: 16px;
   width: 400px;

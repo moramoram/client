@@ -52,7 +52,7 @@ const boxShadow = {
   light: shadows.base,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.nav`
   position: ${(props) => (props.isStatic ? "static" : "fixed")};
   width: 100%;
   z-index: 9999;

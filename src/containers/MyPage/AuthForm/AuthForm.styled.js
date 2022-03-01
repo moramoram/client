@@ -23,24 +23,24 @@ const msgColor = {
   success: colors.blue100,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
   padding-top: 86px;
 `;
 
-export const Title = styled.div`
+export const Title = styled.h1`
   line-height: ${lineHeight.h2};
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem 0;
 
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.h3};
   color: ${(props) => titleColor[props.theme]};
 `;
 
-export const SubTitle = styled.div`
-  margin-bottom: 3rem;
+export const SubTitle = styled.p`
+  margin: 0 0 3rem 0;
 
   color: ${(props) => subtitleColor[props.theme]};
   font-size: ${fontSize.p};
@@ -63,7 +63,7 @@ export const InformBox = styled.div`
   }
 `;
 
-export const Label = styled.div`
+export const Label = styled.label`
   font-size: ${fontSize.sm};
   font-weight: ${fontWeight.bold};
   line-height: ${lineHeight.sm};

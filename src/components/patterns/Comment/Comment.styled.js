@@ -66,24 +66,26 @@ export const InfoBox = styled.div`
   gap: 0.5rem;
 `;
 
-export const User = styled.div`
+export const User = styled.h3`
+  margin: 0;
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.sm};
   color: ${(props) => usernameColor[props.theme]};
 `;
 
-export const UserDetail = styled.div`
+export const UserDetail = styled.span`
   font-weight: ${fontWeight.regular};
   font-size: ${fontSize.sm};
   color: ${(props) => userDetailColor[props.theme]};
 `;
 
-export const CreatedAt = styled.div`
+export const CreatedAt = styled.span`
   color: ${colors.gray500};
   font-size: ${fontSize.xs};
 `;
 
-export const Content = styled.div`
+export const Content = styled.p`
+  margin: 0;
   font-weight: ${fontWeight.regular};
   font-size: ${fontSize.sm};
   color: ${(props) => contentColor[props.theme]};

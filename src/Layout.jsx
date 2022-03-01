@@ -84,28 +84,28 @@ const Layout = () => {
 
   return (
     <ErrorBoundary fallback={<ErrorPage />}>
+      {isAuthModal && <AuthModal theme={theme} />}
+      {isSmallModal && <SmallModal theme={theme} />}
+      {isDeleteModal && <DeleteModal theme={theme} />}
+      {isSubmitModal && <SubmitModal theme={theme} />}
+      {isloginModal && <SignUpModal theme={theme} />}
+      {isCreateModal && <CommunityCreate theme={theme} />}
+      {isUpdateModal && <CommunityUpdate theme={theme} />}
+      <Suspense fallback={<div />}>
+        <Nav
+          theme={theme}
+          type={navType}
+          navData={navData}
+          userMenuData={userMenuData}
+          isLogin={isLogined}
+        />
+      </Suspense>
       <LayoutBox theme={theme}>
-        {isAuthModal && <AuthModal theme={theme} />}
-        {isSmallModal && <SmallModal theme={theme} />}
-        {isDeleteModal && <DeleteModal theme={theme} />}
-        {isSubmitModal && <SubmitModal theme={theme} />}
-        {isloginModal && <SignUpModal theme={theme} />}
-        {isCreateModal && <CommunityCreate theme={theme} />}
-        {isUpdateModal && <CommunityUpdate theme={theme} />}
-        <Suspense fallback={<div />}>
-          <Nav
-            theme={theme}
-            type={navType}
-            navData={navData}
-            userMenuData={userMenuData}
-            isLogin={isLogined}
-          />
-        </Suspense>
         <ContentBox>
           <Outlet />
-          <Footer theme={theme} />
         </ContentBox>
         <ScrollToTop />
+        <Footer theme={theme} />
       </LayoutBox>
     </ErrorBoundary>
   );
@@ -120,12 +120,10 @@ const bgColor = {
 
 const LayoutBox = styled.div`
   position: relative;
-  width: 100%;
-  min-height: 100vh;
   background: ${(props) => bgColor[props.theme]};
 `;
 
-const ContentBox = styled.div`
+const ContentBox = styled.main`
   position: relative;
   min-height: 100vh;
   padding-bottom: 500px;

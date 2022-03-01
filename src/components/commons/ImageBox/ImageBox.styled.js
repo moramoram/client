@@ -24,10 +24,11 @@ const borderRadius = {
   small: "8px",
 };
 
-export const ImageBoxWrapper = styled.div`
+export const ImageBoxWrapper = styled.figure`
   display: flex;
   width: ${(props) => imageWidth[props.size]};
   height: ${(props) => imageHeight[props.size]};
+  margin: 0;
   border-radius: ${(props) => borderRadius[props.size]};
 
   background: ${(props) => imageBgColor[props.theme]};

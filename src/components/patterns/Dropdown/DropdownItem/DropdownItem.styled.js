@@ -11,7 +11,7 @@ const hoverColor = {
   light: colors.gray100,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.li`
   display: flex;
   align-items: center;
 
@@ -21,6 +21,7 @@ export const Layout = styled.div`
   color: ${(props) => textColor[props.theme]};
   font-size: ${fontSize.sm};
   font-weight: ${fontWeight.regular};
+  list-style: none;
 
   cursor: pointer;
   user-select: none;

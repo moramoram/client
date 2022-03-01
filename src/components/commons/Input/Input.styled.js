@@ -151,7 +151,7 @@ export const InputText = styled.input`
   }
 `;
 
-export const Label = styled.div`
+export const Label = styled.label`
   font-size: ${fontSize.sm};
   font-weight: ${fontWeight.bold};
   color: ${(props) => labelColor[props.theme]};

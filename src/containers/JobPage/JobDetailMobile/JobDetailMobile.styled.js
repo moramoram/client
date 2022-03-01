@@ -26,7 +26,7 @@ const borderColor = {
   light: colors.gray200,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.section`
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -39,7 +39,7 @@ export const Layout = styled.div`
   max-width: 940px;
 `;
 
-export const TitleBox = styled.div`
+export const TitleBox = styled.header`
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -50,19 +50,22 @@ export const TitleBox = styled.div`
   }
 `;
 
-export const SideBarBox = styled.div`
+export const SideBarBox = styled.ul`
   margin: 10px 0px;
+  padding: 0;
 `;
 
-export const BadgeBox = styled.div`
+export const BadgeBox = styled.ul`
   display: flex;
   gap: 5px;
   margin: 20px 10px;
+  padding: 0;
 `;
 
-export const Highlight = styled.div`
+export const Highlight = styled.h2`
   min-width: 70px;
   min-height: ${lineHeight.lg};
+  margin: 0;
 
   font-size: ${fontSize.lg};
   line-height: ${lineHeight.lg};
@@ -70,9 +73,10 @@ export const Highlight = styled.div`
   color: ${colors.blue100};
 `;
 
-export const Title = styled.div`
+export const Title = styled.h1`
   min-width: 160px;
   min-height: ${lineHeight.h2};
+  margin: 0;
 
   font-size: calc(${fontSize.h2} - 2px);
   line-height: ${lineHeight.h2};
@@ -80,9 +84,10 @@ export const Title = styled.div`
   color: ${(props) => titleColor[props.theme]};
 `;
 
-export const SubTitle = styled.div`
+export const SubTitle = styled.h2`
   min-width: 160px;
   min-height: ${lineHeight.lg};
+  margin: 0;
 
   font-weight: ${fontWeight.bold};
   font-size: ${fontSize.lg};
@@ -90,7 +95,7 @@ export const SubTitle = styled.div`
   color: ${(props) => subtitleColor[props.theme]};
 `;
 
-export const Content = styled.div`
+export const Content = styled.article`
   padding: 0 1rem 2rem 1rem;
   color: ${(props) => textColor[props.theme]};
 
@@ -103,7 +108,7 @@ export const Content = styled.div`
   }
 `;
 
-export const CardBox = styled.div``;
+export const CardBox = styled.section``;
 
 export const BoxTitle = styled.div`
   padding: 4rem 0 0.2rem 0;

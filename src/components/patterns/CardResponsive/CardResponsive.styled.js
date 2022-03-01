@@ -11,7 +11,7 @@ const subtitleColor = {
   dark: colors.gray500,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.article`
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -44,7 +44,7 @@ export const BookMarkBox = styled.div`
   z-index: 1;
 `;
 
-export const TextBox = styled.div`
+export const TextBox = styled.hgroup`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -56,10 +56,10 @@ export const TextBox = styled.div`
   }
 `;
 
-export const Highlight = styled.div`
+export const Highlight = styled.h3`
   min-width: 70px;
   min-height: ${lineHeight.sm};
-  margin-bottom: 4px;
+  margin: 0 0 4px 0;
 
   font-size: ${fontSize.sm};
   font-weight: ${fontWeight.bold};
@@ -67,10 +67,11 @@ export const Highlight = styled.div`
   color: ${(props) => (props.isDisabled ? colors.gray400 : colors.blue100)};
 `;
 
-export const Title = styled.div`
+export const Title = styled.h2`
   width: 100%;
   min-width: 240px;
   min-height: ${lineHeight.h4};
+  margin: 0;
   overflow: hidden;
 
   font-size: ${fontSize.h4};
@@ -82,7 +83,7 @@ export const Title = styled.div`
   text-overflow: ellipsis;
 `;
 
-export const Subtitle = styled.div`
+export const Subtitle = styled.span`
   min-width: 140px;
   min-height: ${lineHeight.sm};
 
@@ -91,7 +92,9 @@ export const Subtitle = styled.div`
   color: ${(props) => subtitleColor[props.theme]};
 `;
 
-export const BadgeBox = styled.div`
+export const BadgeBox = styled.ul`
   display: flex;
   gap: 5px;
+  margin: 0;
+  padding: 0;
 `;

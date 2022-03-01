@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Layout = styled.div`
+export const Layout = styled.section`
   display: grid;
   width: 100%;
   max-width: 940px;

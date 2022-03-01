@@ -25,7 +25,7 @@ const borderColor = {
   },
 };
 
-export const Layout = styled.div`
+export const Layout = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;

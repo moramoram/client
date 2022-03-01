@@ -6,7 +6,7 @@ const subtitleColor = {
   dark: colors.gray500,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,8 +22,9 @@ export const Layout = styled.div`
   overflow: hidden;
 `;
 
-export const Title = styled.div`
+export const Title = styled.h1`
   padding-top: 2rem;
+  margin: 0;
 
   line-height: ${lineHeight.h2};
   font-weight: ${fontWeight.bold};
@@ -33,7 +34,8 @@ export const Title = styled.div`
   user-select: none;
 `;
 
-export const SubTitle = styled.div`
+export const SubTitle = styled.span`
+  display: block;
   height: ${lineHeight.h4};
   font-size: ${fontSize.p};
   color: ${(props) => subtitleColor[props.theme]};

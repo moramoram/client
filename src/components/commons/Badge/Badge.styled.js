@@ -23,12 +23,13 @@ const bgColor = {
   },
 };
 
-export const Layout = styled.div`
+export const Layout = styled.li`
   display: inline-flex;
   align-items: center;
 
   border-radius: 8px;
   background: ${(props) => bgColor[props.theme][props.mode]};
+  list-style: none;
 
   ${(props) => props.isLoading && loadings[props.theme]};
 

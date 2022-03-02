@@ -23,37 +23,37 @@ export const AllTypes = () => (
     </Row>
     <Row>
       <Info>
-        <Typography type="h2">H1</Typography>
+        <Typography type="h2">H2</Typography>
       </Info>
       <Typography type="h2">당신이 찾던 싸피만의 커뮤니티</Typography>
     </Row>
     <Row>
       <Info>
-        <Typography type="h3">H1</Typography>
+        <Typography type="h3">H3</Typography>
       </Info>
       <Typography type="h3">당신이 찾던 싸피만의 커뮤니티</Typography>
     </Row>
     <Row>
       <Info>
-        <Typography type="h4">H1</Typography>
+        <Typography type="h4">H4</Typography>
       </Info>
       <Typography type="h4">당신이 찾던 싸피만의 커뮤니티</Typography>
     </Row>
     <Row>
       <Info>
-        <Typography type="large">H1</Typography>
+        <Typography type="large">Large</Typography>
       </Info>
       <Typography type="large">당신이 찾던 싸피만의 커뮤니티</Typography>
     </Row>
     <Row>
       <Info>
-        <Typography type="paragraph">H1</Typography>
+        <Typography type="paragraph">Paragraph</Typography>
       </Info>
       <Typography type="paragraph">당신이 찾던 싸피만의 커뮤니티</Typography>
     </Row>
     <Row>
       <Info>
-        <Typography type="small">H1</Typography>
+        <Typography type="small">Small</Typography>
       </Info>
       <Typography type="small">당신이 찾던 싸피만의 커뮤니티</Typography>
     </Row>

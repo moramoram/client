@@ -18,7 +18,7 @@ const JobCardGrid = () => {
   const { data, fetchNextPage, hasNextPage } = GetJobList(search);
   const { cardData } = JobCardSelector(data);
 
-  const cardItems = !filter
+  const cardItems = filter
     ? cardData
     : cardData.filter((data) => !data.isDisabled);
 

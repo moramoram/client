@@ -17,7 +17,7 @@ const StudyCardGrid = () => {
   const { data, fetchNextPage, hasNextPage } = GetStudyList(search);
   const { cardData } = StudyCardSelector(data);
 
-  const cardItems = !filter
+  const cardItems = filter
     ? cardData
     : cardData.filter((data) => !data.isDisabled);
 

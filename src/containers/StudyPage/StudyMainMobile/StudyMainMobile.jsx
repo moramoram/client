@@ -64,7 +64,7 @@ const StudyMainMobile = ({ categoryData }) => {
               value={search.criteria}
             />
             <Checkbox
-              label="마감된 스터디 숨기기"
+              label="마감된 스터디 보기"
               theme={theme}
               onChange={handleFilter}
               defaultChecked={filter}

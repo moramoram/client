@@ -96,7 +96,7 @@ const JobMain = ({ categoryData }) => {
                 value={search.criteria}
               />
               <Checkbox
-                label="마감된 채용 숨기기"
+                label="마감된 채용공고 보기"
                 theme={theme}
                 onChange={handleFilter}
                 defaultChecked={filter}

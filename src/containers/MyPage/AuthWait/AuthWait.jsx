@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { Icon, Logo, Typography } from "@/foundations";
@@ -6,9 +6,14 @@ import { Button } from "@/components";
 import { colors, fontWeight } from "@/_shared";
 import { useSetRecoilState } from "recoil";
 import { modalState } from "@/recoil";
+import { DeleteAccountModal } from "@/containers";
 
 const AuthWait = ({ ...props }) => {
   const setIsModalOpened = useSetRecoilState(modalState);
+  const [showModal, setShowModal] = useState(false);
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
 
   return (
     <>
@@ -34,6 +39,8 @@ const AuthWait = ({ ...props }) => {
         >
           <AskingForHelp>도움이 필요하신가요?</AskingForHelp>
         </Link>
+        <AskingForHelp onClick={openModal}>탈퇴하고 싶어요</AskingForHelp>
+        <DeleteAccountModal showModal={showModal} setShowModal={setShowModal} />
       </ContentBox>
     </>
   );

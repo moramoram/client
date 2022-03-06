@@ -8,7 +8,7 @@ import { authState, themeState, submitModalState } from "@/recoil";
 import { useMutation, useQueryClient } from "react-query";
 import { PostNicknameCheck, PutAuthorization } from "@/api";
 
-import { AuthWait, AuthComplete } from "@/containers";
+import { AuthWait, AuthComplete, DeleteAccountModal } from "@/containers";
 import { Input, InputImage, Button, Selector } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
@@ -23,6 +23,11 @@ const AuthForm = ({ userProfile, ...props }) => {
   const [imageSrc, setImageSrc] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
   const setIsModalOpened = useSetRecoilState(submitModalState);
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
 
   const {
     register,
@@ -306,6 +311,8 @@ const AuthForm = ({ userProfile, ...props }) => {
             </Button>
           </ButtonBox>
         </FormSection>
+        <AskingForHelp onClick={openModal}>탈퇴하고 싶어요</AskingForHelp>
+        <DeleteAccountModal showModal={showModal} setShowModal={setShowModal} />
       </Layout>
     </>
   );
@@ -431,4 +438,10 @@ const ImgBox = styled.div`
     max-width: 100%;
     border-radius: 8px;
   }
+`;
+
+const AskingForHelp = styled.div`
+  color: ${colors.blue100};
+  font-weight: ${fontWeight.bold};
+  cursor: pointer;
 `;

@@ -7,7 +7,7 @@ import { themeState } from "@/recoil/theme";
 import { useMutation, useQueryClient } from "react-query";
 import { PostNicknameCheck, PutNickname } from "@/api";
 
-import { ProfileImage } from "@/containers";
+import { ProfileImage, DeleteAccountModal } from "@/containers";
 import { Input, Button } from "@/components";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
@@ -19,6 +19,11 @@ const THEME = {
 const MyInfo = ({ userProfile, ...props }) => {
   const theme = useRecoilValue(themeState);
   const { profileImg } = userProfile;
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
 
   const [nickname, setNickname] = useState(userProfile.nickname);
   const [nickValue, setNickValue] = useState(nickname);
@@ -147,6 +152,10 @@ const MyInfo = ({ userProfile, ...props }) => {
           </AvatarBox>
         </LabelBox>
       </Form>
+      <AskingForHelp style={{ paddingTop: "50px" }} onClick={openModal}>
+        탈퇴하고 싶어요
+      </AskingForHelp>
+      <DeleteAccountModal showModal={showModal} setShowModal={setShowModal} />
     </Layout>
   );
 };
@@ -233,4 +242,10 @@ const AvatarBox = styled.div`
   display: flex;
   gap: 1rem;
   padding-top: 12px;
+`;
+
+const AskingForHelp = styled.div`
+  color: ${colors.blue100};
+  font-weight: ${fontWeight.bold};
+  cursor: pointer;
 `;

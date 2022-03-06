@@ -1,13 +1,24 @@
-/* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
 
 import { Controller } from "react-hook-form";
 
+import {
+  Layout,
+  TitleBox,
+  Title,
+  SubTitle,
+  Form,
+  LabelBox,
+  Label,
+  InputBox,
+  CheckboxBox,
+  RadioBox,
+  TypeBox,
+  Message,
+} from "./StudyCreateSummary.styled";
 import { ThumbnailUploader } from "@/containers";
 import { Input, Selector, Checkbox, Radio } from "@/components";
-import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -128,7 +139,7 @@ const StudyCreateSummary = ({
     { value: "Vuex", label: "Vuex" },
     { value: "WebAssembly", label: "WebAssembly" },
     { value: "webpack", label: "webpack" },
-  ]
+  ];
 
   const defaultMemberNumber = () => {
     const value = originalData?.memberNumber;
@@ -140,8 +151,8 @@ const StudyCreateSummary = ({
 
   const defaultTechStack = originalData?.techStack
     ? techStackOption.filter((option) =>
-      originalData.techStack.split(",").includes(option.value)
-    )
+        originalData.techStack.split(",").includes(option.value)
+      )
     : "";
 
   useEffect(() => {
@@ -166,11 +177,11 @@ const StudyCreateSummary = ({
               defaultValue={
                 originalData
                   ? typeOption.filter(
-                    (option) => option.label === originalData.studyType
-                  )
+                      (option) => option.label === originalData.studyType
+                    )
                   : defaultCompanyName
-                    ? typeOption.find((option) => option.label === "채용")
-                    : ""
+                  ? typeOption.find((option) => option.label === "채용")
+                  : ""
               }
               render={({ field }) => (
                 <Selector
@@ -357,125 +368,3 @@ StudyCreateSummary.defaultProps = {
 };
 
 export default StudyCreateSummary;
-
-const titleColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
-};
-
-const subtitleColor = {
-  light: colors.gray400,
-  dark: colors.gray500,
-};
-
-const labelColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
-};
-
-const msgColor = {
-  default: colors.gray400,
-  error: colors.error,
-};
-
-const requiredColor = {
-  default: colors.blue100,
-  error: colors.errorOpacity200,
-};
-
-const Layout = styled.div`
-  display: flex;
-  gap: 4rem;
-  padding-top: 86px;
-
-  @media screen and (max-width: 979px) {
-    flex-direction: column;
-    gap: 2rem;
-  }
-`;
-
-const TitleBox = styled.div`
-  width: 300px;
-`;
-
-const Title = styled.div`
-  line-height: ${lineHeight.h2};
-  margin-bottom: 0.5rem;
-
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h3};
-  color: ${(props) => titleColor[props.theme]};
-`;
-
-const SubTitle = styled.div`
-  font-size: ${fontSize.p};
-  color: ${(props) => subtitleColor[props.theme]};
-`;
-
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* align-items: flex-start; */
-  gap: 2rem;
-
-  flex-grow: 1;
-`;
-
-const LabelBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-`;
-
-const Label = styled.div`
-  font-size: ${fontSize.sm};
-  font-weight: ${fontWeight.bold};
-  color: ${(props) => labelColor[props.theme]};
-
-  ${(props) =>
-    props.isRequired &&
-    css`
-      ::after {
-        content: "*";
-        color: ${requiredColor[props.status]};
-        padding-left: 0.2rem;
-      }
-    `}
-`;
-
-const InputBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-`;
-
-const CheckboxBox = styled.div`
-  padding-bottom: 6px;
-`;
-
-const RadioBox = styled.div`
-  display: flex;
-  gap: 1rem;
-
-  padding: 1rem 0;
-`;
-
-const TypeBox = styled.div`
-  display: flex;
-  gap: 1rem;
-
-  > div {
-    flex: 1;
-  }
-
-  @media screen and (max-width: 450px) {
-    flex-direction: column;
-    gap: 2rem;
-  }
-`;
-
-const Message = styled.div`
-  font-size: ${fontSize.sm};
-  font-weight: ${fontWeight.regular};
-  color: ${(props) => msgColor[props.status]};
-`;

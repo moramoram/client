@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
-import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
 import { themeState, jobSearch, jobFilter } from "@/recoil";
 import { useIntersectionObserver } from "@/hooks";
 import { GetJobList, JobCardSelector } from "@/api";
 
+import { FetchBox } from "./JobCardGrid.styled";
 import { JobNoContent } from "@/containers";
 import { CardGrid } from "@/components";
 
@@ -18,7 +18,7 @@ const JobCardGrid = () => {
   const { data, fetchNextPage, hasNextPage } = GetJobList(search);
   const { cardData } = JobCardSelector(data);
 
-  const cardItems = !filter
+  const cardItems = filter
     ? cardData
     : cardData.filter((data) => !data.isDisabled);
 
@@ -42,7 +42,3 @@ const JobCardGrid = () => {
 };
 
 export default JobCardGrid;
-
-const FetchBox = styled.div`
-  height: 30px;
-`;

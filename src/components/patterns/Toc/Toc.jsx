@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
+import { Layout } from "./Toc.styled";
 import { TocItem } from "./TocItem";
-import { colors } from "@/_shared";
 
 const THEME = {
   DARK: "dark",
@@ -42,14 +41,3 @@ Toc.defaultProps = {
 };
 
 export default Toc;
-
-const borderColor = {
-  dark: colors.gray700,
-  light: colors.gray200,
-};
-
-const Layout = styled.div`
-  display: flex;
-  width: 100%;
-  border-bottom: 1px solid ${(props) => borderColor[props.theme]};
-`;

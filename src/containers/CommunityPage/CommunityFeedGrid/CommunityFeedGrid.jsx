@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
-import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
 import { themeState, communitySearch } from "@/recoil";
 import { useIntersectionObserver } from "@/hooks";
 import { GetCommunityList, CommunityFeedSelector } from "@/api";
 
+import { FetchBox } from "./CommunityFeedGrid.styled";
 import { CommunityNoContent } from "@/containers";
 import { FeedGrid } from "@/components";
 
@@ -37,7 +37,3 @@ const CommunityFeedGrid = () => {
 };
 
 export default CommunityFeedGrid;
-
-const FetchBox = styled.div`
-  height: 30px;
-`;

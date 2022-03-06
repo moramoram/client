@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
 import Cropper from "react-easy-crop";
 
+import { Layout, CropperBox, ImgBox } from "./AvatarUploader.styled";
 import { Avatar, Button, InputImage } from "@/components";
 import { getCroppedImg } from "@/utils";
 
@@ -67,19 +67,18 @@ const AvatarUploader = ({ aspect, ...props }) => {
             onZoomChange={setZoom}
             cropShape="round"
           />
-          <SubmitButton
+          <Button
             onClick={() => {
               showCroppedImage();
               onClose();
             }}
           >
             이미지 자르기
-          </SubmitButton>
+          </Button>
         </CropperBox>
       )}
       <Layout>
         <ImgBox>
-          {/* TODO : 프로필 state 있을 경우 아바타 띄워주기 */}
           <Avatar size="extraLarge" src={croppedImage} alt="Cropped" />
         </ImgBox>
         <InputImage onChange={onFileChange} accept="image/*" {...props} />
@@ -99,36 +98,3 @@ AvatarUploader.defaultProps = {
 };
 
 export default AvatarUploader;
-
-const Layout = styled.div`
-  display: flex;
-  gap: 1rem;
-
-  @media screen and (max-width: 530px) {
-    flex-direction: column;
-  }
-`;
-
-const CropperBox = styled.div`
-  position: fixed;
-  top: 68px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-`;
-
-const SubmitButton = styled(Button)`
-  position: absolute;
-  left: calc(50% - 90px);
-  bottom: 18%;
-
-  width: 180px;
-  margin: auto;
-`;
-
-const ImgBox = styled.div`
-  img {
-    border-radius: 8px;
-  }
-`;

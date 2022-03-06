@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
-import { colors } from "@/_shared";
+import { Svg, Symbol, Wordmark } from "./Logo.styled";
 
 const THEME = {
   DARK: "dark",
@@ -71,45 +70,3 @@ Logo.defaultProps = {
 };
 
 export default Logo;
-
-const symbolColors = {
-  dark: {
-    default: colors.blue100,
-    transparent: colors.blue100,
-  },
-  blue: {
-    default: colors.white,
-    transparent: colors.blue100,
-  },
-  light: {
-    default: colors.blue100,
-    transparent: colors.blue100,
-  },
-};
-
-const wordColors = {
-  dark: {
-    default: colors.gray25,
-    transparent: colors.gray25,
-  },
-  blue: {
-    default: colors.white,
-    transparent: colors.gray25,
-  },
-  light: {
-    default: colors.gray900,
-    transparent: colors.gray25,
-  },
-};
-
-const Svg = styled.svg`
-  display: block;
-`;
-
-const Symbol = styled.path`
-  fill: ${(props) => symbolColors[props.theme][props.type]};
-`;
-
-const Wordmark = styled.path`
-  fill: ${(props) => wordColors[props.theme][props.type]};
-`;

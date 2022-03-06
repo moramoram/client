@@ -1,11 +1,16 @@
 import React, { Suspense } from "react";
-import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState } from "recoil";
 import { themeState, studySearch, studyfilter } from "@/recoil";
 
+import {
+  SubNavMobile,
+  MobileCardBox,
+  SearchBox,
+  SortBox,
+} from "./StudyMainMobile.styled";
 import { StudyCardGrid } from "@/containers";
-import { SubNavbar, Input, Checkbox, CardGrid, Sort } from "@/components";
+import { Input, Checkbox, CardGrid, Sort } from "@/components";
 
 import { debounce } from "@/utils";
 
@@ -59,7 +64,7 @@ const StudyMainMobile = ({ categoryData }) => {
               value={search.criteria}
             />
             <Checkbox
-              label="마감된 스터디 숨기기"
+              label="마감된 스터디 보기"
               theme={theme}
               onChange={handleFilter}
               defaultChecked={filter}
@@ -88,29 +93,3 @@ const criteriaData = [
     value: "scrap",
   },
 ];
-
-const SubNavMobile = styled(SubNavbar)`
-  padding: 20px 20px 0 20px;
-`;
-
-const MobileCardBox = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 100px;
-  max-width: 1280px;
-
-  padding: 20px;
-  margin: auto;
-`;
-
-const SearchBox = styled.div`
-  padding: 20px 20px 0 20px;
-`;
-
-const SortBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-`;

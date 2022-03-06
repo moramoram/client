@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 
 import { GetJobList, JobCardSelector } from "@/api";
 import { CardSlider } from "@/components";
@@ -19,13 +18,7 @@ const MainJobSlider = ({ ...props }) => {
   const { data } = GetJobList(search);
   const { cardData } = JobCardSelector(data);
 
-  return (
-    <Layout>
-      <CardSlider data={cardData} {...props} />
-    </Layout>
-  );
+  return <CardSlider data={cardData} {...props} />;
 };
 
 export default MainJobSlider;
-
-const Layout = styled.div``;

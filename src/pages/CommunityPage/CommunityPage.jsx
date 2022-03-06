@@ -175,31 +175,31 @@ const criteriaData = [
   },
 ];
 
-const MainBox = styled.div`
+const MainBox = styled.section`
   display: flex;
-  justify-content: center;
-  gap: 100px;
-
+  justify-content: space-between;
   max-width: 1280px;
+  padding: 0 20px 20px 20px;
   margin: auto;
 `;
 
-const ContentBox = styled.div`
+const ContentBox = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: calc(100% - 320px);
-  padding: 80px 20px 0 0;
+
+  max-width: calc(100% - 300px);
+  padding-top: 80px;
 `;
 
-const MobileBox = styled.div`
+const MobileBox = styled.section`
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 20px;
 `;
 
-const StickyNavBox = styled.div`
+const StickyNavBox = styled.nav`
   padding-top: 86px;
 `;
 
@@ -213,6 +213,8 @@ const SortBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  max-width: 940px;
   padding: 16px 0px 20px 0;
   margin-bottom: 20px;
 `;

@@ -1,7 +1,13 @@
 import React from "react";
-import styled from "styled-components";
+import PropTypes from "prop-types";
 
+import { Svg } from "./IconSocial.styled";
 import { iconsSocial } from "@/_shared";
+
+const SOCIAL = {
+  GOOGLE: "google",
+  GITHUB: "github",
+};
 
 const IconSocial = ({ icon, block, ...props }) => {
   return (
@@ -19,9 +25,13 @@ const IconSocial = ({ icon, block, ...props }) => {
   );
 };
 
-export default IconSocial;
+IconSocial.propTypes = {
+  icon: PropTypes.oneOf(Object.values(SOCIAL)),
+  block: PropTypes.bool,
+};
 
-const Svg = styled.svg`
-  display: ${(props) => (props.block ? "block" : "inline-block")};
-  vertical-align: middle;
-`;
+IconSocial.defaultProps = {
+  block: false,
+};
+
+export default IconSocial;

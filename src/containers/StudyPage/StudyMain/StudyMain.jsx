@@ -1,18 +1,18 @@
 import React, { Suspense } from "react";
-import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState } from "recoil";
 import { themeState, studySearch, studyfilter } from "@/recoil";
 
-import { StudyCardGrid } from "@/containers";
 import {
-  CardGrid,
-  SubNavbar,
-  Input,
-  Selector,
-  Checkbox,
-  Sort,
-} from "@/components";
+  Layout,
+  StickyNavBox,
+  StickyNav,
+  CardGridBox,
+  InputBox,
+  SortBox,
+} from "./StudyMain.styled";
+import { StudyCardGrid } from "@/containers";
+import { CardGrid, Input, Selector, Checkbox, Sort } from "@/components";
 
 import { debounce } from "@/utils";
 
@@ -82,7 +82,7 @@ const StudyMain = ({ categoryData }) => {
                 value={search.criteria}
               />
               <Checkbox
-                label="마감된 스터디 숨기기"
+                label="마감된 스터디 보기"
                 onChange={handleFilter}
                 defaultChecked={filter}
                 theme={theme}
@@ -117,48 +117,3 @@ const studyOptions = [
   { value: "CS", label: "CS" },
   { value: "프로젝트", label: "프로젝트" },
 ];
-
-const Layout = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 100px;
-
-  max-width: 1280px;
-  margin: auto;
-`;
-
-const StickyNavBox = styled.div`
-  padding-top: 86px;
-`;
-
-const StickyNav = styled(SubNavbar)`
-  position: sticky;
-  top: 150px;
-`;
-
-const CardGridBox = styled.div`
-  width: calc(100% - 320px);
-  padding-top: 80px;
-`;
-
-const InputBox = styled.div`
-  display: flex;
-  gap: 0.5rem;
-
-  max-width: 940px;
-
-  > div {
-    flex-grow: 1;
-  }
-`;
-
-const SortBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  max-width: 940px;
-
-  padding: 20px 0px 20px 0;
-  margin-bottom: 20px;
-`;

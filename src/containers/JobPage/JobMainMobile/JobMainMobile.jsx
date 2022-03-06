@@ -1,10 +1,15 @@
 import React, { Suspense } from "react";
-import styled from "styled-components";
 
 import { useRecoilValue, useRecoilState } from "recoil";
 import { themeState, jobSearch, jobFilter } from "@/recoil";
 
-import { CardGrid, SubNavbar, Input, Checkbox, Sort } from "@/components";
+import {
+  SubNavMobile,
+  MobileCardBox,
+  SearchBox,
+  SortBox,
+} from "./JobMainMobile.styled";
+import { CardGrid, Input, Checkbox, Sort } from "@/components";
 import { JobCardGrid } from "@/containers";
 
 import { debounce } from "@/utils";
@@ -59,7 +64,7 @@ const JobMainMobile = ({ categoryData }) => {
               value={search.criteria}
             />
             <Checkbox
-              label="마감된 채용 숨기기"
+              label="마감된 채용공고 보기"
               theme={theme}
               value={search.criteria}
               onChange={handleFilter}
@@ -89,29 +94,3 @@ const criteriaData = [
     value: "scrap",
   },
 ];
-
-const SubNavMobile = styled(SubNavbar)`
-  padding: 20px 20px 0 20px;
-`;
-
-const MobileCardBox = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 100px;
-  max-width: 1280px;
-
-  padding: 20px;
-  margin: auto;
-`;
-
-const SearchBox = styled.div`
-  padding: 20px 20px 0 20px;
-`;
-
-const SortBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-`;

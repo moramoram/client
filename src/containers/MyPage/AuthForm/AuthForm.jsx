@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
 import { useForm, Controller } from "react-hook-form";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -8,9 +7,21 @@ import { authState, themeState, submitModalState } from "@/recoil";
 import { useMutation, useQueryClient } from "react-query";
 import { PostNicknameCheck, PutAuthorization } from "@/api";
 
+import {
+  Layout,
+  Title,
+  SubTitle,
+  FormSection,
+  Label,
+  InformBox,
+  ImageUploader,
+  ImgBox,
+  Message,
+  ButtonBox,
+  AskingForHelp,
+} from "./AuthForm.styled";
 import { AuthWait, AuthComplete, DeleteAccountModal } from "@/containers";
-import { Input, InputImage, Button, Selector } from "@/components";
-import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
+import { Input, Button, Selector } from "@/components";
 
 const THEME = {
   LIGHT: "light",
@@ -346,102 +357,3 @@ const regionOption = [
   { value: "구미", label: "구미" },
   { value: "부울경", label: "부울경" },
 ];
-
-const titleColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
-};
-
-const subtitleColor = {
-  light: colors.gray400,
-  dark: colors.gray500,
-};
-
-const labelColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
-};
-
-const msgColor = {
-  default: colors.gray400,
-  error: colors.error,
-  success: colors.blue100,
-};
-
-const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding-top: 86px;
-`;
-
-const Title = styled.div`
-  line-height: ${lineHeight.h2};
-  margin-bottom: 0.5rem;
-
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h3};
-  color: ${(props) => titleColor[props.theme]};
-`;
-
-const SubTitle = styled.div`
-  margin-bottom: 3rem;
-
-  color: ${(props) => subtitleColor[props.theme]};
-  font-size: ${fontSize.p};
-  line-height: ${lineHeight.p};
-`;
-
-const FormSection = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
-`;
-
-const InformBox = styled.div`
-  display: flex;
-  gap: 1rem;
-
-  > div {
-    flex-grow: 1;
-  }
-`;
-
-const Label = styled.div`
-  font-size: ${fontSize.sm};
-  font-weight: ${fontWeight.bold};
-  line-height: ${lineHeight.sm};
-  color: ${(props) => labelColor[props.theme]};
-`;
-
-const ImageUploader = styled(InputImage)`
-  margin: 6px 0;
-`;
-
-const Message = styled.div`
-  font-size: ${fontSize.sm};
-  font-weight: ${fontWeight.regular};
-  line-height: ${lineHeight.sm};
-  color: ${(props) => msgColor[props.status]};
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  padding-top: 2rem;
-`;
-
-const ImgBox = styled.div`
-  img {
-    max-width: 100%;
-    border-radius: 8px;
-  }
-`;
-
-const AskingForHelp = styled.div`
-  color: ${colors.blue100};
-  font-weight: ${fontWeight.bold};
-  cursor: pointer;
-`;

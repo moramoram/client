@@ -1,15 +1,14 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil";
 import { useIntersectionObserver } from "@/hooks";
 import { StudyCardSelector, GetMyStudyList } from "@/api";
 
+import { Layout, Title, SubTitle, FetchBox } from "./MyStudy.styled";
 import { StudyNoContent } from "@/containers";
 import { CardGrid } from "@/components";
-import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -40,7 +39,7 @@ const MyStudy = () => {
       </SubTitle>
       {!cardData[0] && <StudyNoContent theme={theme} />}
       <CardGrid data={cardData} theme={theme} />
-      <div ref={loader} />
+      <FetchBox ref={loader} />
     </Layout>
   );
 };
@@ -55,35 +54,3 @@ MyStudy.defaultProps = {
 };
 
 export default MyStudy;
-
-const titleColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
-};
-
-const subtitleColor = {
-  light: colors.gray400,
-  dark: colors.gray500,
-};
-
-const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-top: 86px;
-`;
-
-const Title = styled.div`
-  line-height: ${lineHeight.h2};
-  margin-bottom: 0.5rem;
-
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h3};
-  color: ${(props) => titleColor[props.theme]};
-`;
-
-const SubTitle = styled.div`
-  margin-bottom: 3rem;
-
-  font-size: ${fontSize.p};
-  color: ${(props) => subtitleColor[props.theme]};
-`;

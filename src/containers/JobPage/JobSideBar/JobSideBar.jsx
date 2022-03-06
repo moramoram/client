@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
 import { useParams } from "react-router-dom";
 import { useMutation } from "react-query";
 import { putJobScrap } from "@/api";
 
+import { SideBarItemBox, BadgeBox, Layout } from "./JobSideBar.styled";
 import { ImageBox, Badge, Button, BookMark, SideBarItem } from "@/components";
 import { Icon } from "@/foundations";
 
@@ -37,7 +37,7 @@ const JobSideBar = ({ data, isLoading, ...props }) => {
         src={data.src}
         {...props}
       />
-      <SideBarBox {...props}>
+      <SideBarItemBox {...props}>
         {summaryData.map(({ title, icon, id }) => (
           <SideBarItem
             className="contents-item"
@@ -49,7 +49,7 @@ const JobSideBar = ({ data, isLoading, ...props }) => {
             {...props}
           />
         ))}
-      </SideBarBox>
+      </SideBarItemBox>
       <BadgeBox>
         {data.badges.map((children, idx) => {
           return (
@@ -132,31 +132,3 @@ const summaryData = [
     id: "location",
   },
 ];
-
-const SideBarBox = styled.div`
-  margin: 10px 0px;
-`;
-
-const BadgeBox = styled.div`
-  display: flex;
-  gap: 5px;
-  margin: 20px 10px;
-`;
-
-const Layout = styled.div`
-  position: sticky;
-  top: 180px;
-
-  display: block;
-  border-radius: 16px;
-  width: 400px;
-  height: 540px;
-
-  button {
-    margin: 6px 10px;
-    width: calc(100% - 20px);
-  }
-  .thumbnail {
-    margin-bottom: 12px;
-  }
-`;

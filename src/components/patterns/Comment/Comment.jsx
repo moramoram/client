@@ -1,10 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
 
+import {
+  Layout,
+  ContentBox,
+  DropdownBox,
+  TextBox,
+  InfoBox,
+  User,
+  UserDetail,
+  CreatedAt,
+  Content,
+} from "./Comment.styled";
 import { Avatar, DropdownSmall } from "@/components";
 import { Icon } from "@/foundations";
-import { animations, colors, fontSize, fontWeight } from "@/_shared";
 
 import { daysFromToday } from "@/utils";
 
@@ -25,7 +34,7 @@ const Comment = ({
   isDisabled,
   ...props
 }) => {
-  const usernameRender = username ?? "익명";
+  const usernameRender = username || "익명";
   const userDetailRender =
     ordinal && campus ? `(${ordinal}기 / ${campus})` : null;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -84,106 +93,21 @@ Comment.propTypes = {
   theme: PropTypes.oneOf(Object.values(THEME)),
   username: PropTypes.string,
   src: PropTypes.string,
+  ordinal: PropTypes.number,
+  campus: PropTypes.string,
   created: PropTypes.string,
   content: PropTypes.string,
+  commentId: PropTypes.number,
+  dropdownItems: PropTypes.array,
+  isDisabled: PropTypes.bool,
 };
 
 Comment.defaultProps = {
   theme: THEME.LIGHT,
-  username: null,
+  username: "",
   src: null,
   created: daysFromToday("2022-01-24"),
   content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 };
 
 export default Comment;
-
-const usernameColor = {
-  dark: colors.gray25,
-  light: colors.gray900,
-};
-
-const userDetailColor = {
-  dark: colors.gray400,
-  light: colors.gray600,
-};
-
-const contentColor = {
-  dark: colors.gray300,
-  light: colors.gray700,
-};
-
-const Layout = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  :hover .dropdown {
-    opacity: 1;
-  }
-`;
-
-const ContentBox = styled.div`
-  display: flex;
-  gap: 1rem;
-  position: relative;
-`;
-
-const DropdownBox = styled.div`
-  position: relative;
-  transition: 0.3s;
-  opacity: 0;
-
-  ${(props) =>
-    props.isDropdownOpen &&
-    css`
-      opacity: 1;
-    `}
-
-  svg {
-    stroke: ${colors.gray500};
-    cursor: pointer;
-  }
-
-  > div {
-    z-index: 9999;
-    right: 0px;
-    animation: ${animations.dropdown} 0.3s cubic-bezier(0.3, 0, 0, 1);
-  }
-`;
-
-const TextBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
-
-const InfoBox = styled.div`
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-`;
-
-const User = styled.div`
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.sm};
-  color: ${(props) => usernameColor[props.theme]};
-`;
-
-const UserDetail = styled.div`
-  font-weight: ${fontWeight.regular};
-  font-size: ${fontSize.sm};
-  color: ${(props) => userDetailColor[props.theme]};
-`;
-
-const CreatedAt = styled.div`
-  color: ${colors.gray500};
-  font-size: ${fontSize.xs};
-`;
-
-const Content = styled.div`
-  font-weight: ${fontWeight.regular};
-  font-size: ${fontSize.sm};
-  color: ${(props) => contentColor[props.theme]};
-
-  white-space: pre-line;
-`;

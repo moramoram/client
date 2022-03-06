@@ -1,16 +1,13 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
-
-import { Link } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import "swiper/css";
 
+import { Layout, CardItemLink, Button } from "./CardSlider.styled";
 import { CardResponsive } from "@/components";
 import { Icon } from "@/foundations";
-import { colors } from "@/_shared";
 
 const THEME = {
   LIGHT: "light",
@@ -84,61 +81,3 @@ const cardData = new Array(6).fill({
   badges: ["", "", ""],
   id: "",
 });
-
-const buttonHoverColor = {
-  light: colors.gray25,
-  dark: colors.gray900,
-};
-
-const buttonIconColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
-};
-
-const Layout = styled.div`
-  display: flex;
-  justify-content: center;
-
-  .swiper {
-    max-width: 960px;
-    margin: 0 2rem;
-
-    @media screen and (max-width: 960px) {
-      margin: 0;
-    }
-  }
-
-  .swiper-slide {
-    width: 300px;
-  }
-`;
-
-const CardItemLink = styled(Link)`
-  text-decoration: none;
-`;
-
-const Button = styled.button`
-  height: 36px;
-  margin-top: 57px;
-  border: none;
-  border-radius: 4px;
-
-  background: none;
-  cursor: pointer;
-
-  :hover {
-    background-color: ${(props) => buttonHoverColor[props.theme]};
-  }
-
-  :nth-child(2) {
-    order: 1;
-  }
-
-  svg {
-    stroke: ${(props) => buttonIconColor[props.theme]};
-  }
-
-  @media screen and (max-width: 960px) {
-    display: none;
-  }
-`;

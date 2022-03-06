@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
+import { Layout, Title, SubTitle } from "./MyComment.styled";
 import { CommentList } from "@/components";
-import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 import { daysFromToday } from "@/utils";
 
@@ -92,33 +91,3 @@ const commentData = [
       "Nam tempus, est id rutrum suscipit, metus mi tincidunt nulla, ut rutrum magna tortor non velit. Suspendisse gravida pretium porta. Praesent eget vestibulum mauris. Nullam aliquet enim felis, in iaculis purus tempus pharetra.",
   },
 ];
-
-const titleColor = {
-  light: colors.gray900,
-  dark: colors.gray25,
-};
-
-const subtitleColor = {
-  light: colors.gray400,
-  dark: colors.gray500,
-};
-
-const Layout = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-top: 86px;
-`;
-
-const Title = styled.div`
-  line-height: ${lineHeight.h2};
-  margin-bottom: 0.5rem;
-
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.h3};
-  color: ${(props) => titleColor[props.theme]};
-`;
-
-const SubTitle = styled.div`
-  font-size: ${fontSize.p};
-  color: ${(props) => subtitleColor[props.theme]};
-`;

@@ -32,6 +32,7 @@ export * from "./deleteProfileImage";
 export * from "./postNicknameCheck";
 export * from "./putNickname";
 export * from "./putAuthorization";
+export * from "./deleteUser";
 
 export * from "./getRefreshToken";
 

@@ -73,3 +73,9 @@ export const AvatarBox = styled.div`
   gap: 1rem;
   padding-top: 12px;
 `;
+
+export const AskingForHelp = styled.div`
+  color: ${colors.blue100};
+  font-weight: ${fontWeight.bold};
+  cursor: pointer;
+`;

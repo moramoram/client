@@ -18,8 +18,9 @@ import {
   ImgBox,
   Message,
   ButtonBox,
+  AskingForHelp,
 } from "./AuthForm.styled";
-import { AuthWait, AuthComplete } from "@/containers";
+import { AuthWait, AuthComplete, DeleteAccountModal } from "@/containers";
 import { Input, Button, Selector } from "@/components";
 
 const THEME = {
@@ -33,6 +34,11 @@ const AuthForm = ({ userProfile, ...props }) => {
   const [imageSrc, setImageSrc] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
   const setIsModalOpened = useSetRecoilState(submitModalState);
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
 
   const {
     register,
@@ -316,6 +322,8 @@ const AuthForm = ({ userProfile, ...props }) => {
             </Button>
           </ButtonBox>
         </FormSection>
+        <AskingForHelp onClick={openModal}>탈퇴하고 싶어요</AskingForHelp>
+        <DeleteAccountModal showModal={showModal} setShowModal={setShowModal} />
       </Layout>
     </>
   );

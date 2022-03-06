@@ -94,3 +94,9 @@ export const ImgBox = styled.div`
     border-radius: 8px;
   }
 `;
+
+export const AskingForHelp = styled.div`
+  color: ${colors.blue100};
+  font-weight: ${fontWeight.bold};
+  cursor: pointer;
+`;

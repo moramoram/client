@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useCallback, useState } from "react";
 
-import { Button, Checkbox } from "@/components";
 import { Icon } from "@/foundations";
+import { Button, Checkbox } from "@/components";
 import { DeleteAccountCompleteModal } from "@/containers";
 import {
   Overlay,

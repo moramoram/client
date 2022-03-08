@@ -50,7 +50,7 @@ export const TextBox = styled.hgroup`
   align-items: flex-start;
   gap: 4px;
 
-  div {
+  * {
     border-radius: 4px;
     ${(props) => props.isLoading && loadings[props.theme]};
   }

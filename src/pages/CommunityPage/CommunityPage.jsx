@@ -51,7 +51,7 @@ const CommunityPage = () => {
 
   const handleCreation = () => {
     !isLogined && setLoginModalOpen("require");
-    isLogined === 3 && setCreateModalOpen(true);
+    isLogined && setCreateModalOpen(true);
   };
 
   const isPc = useMediaQuery({ query: "(min-width:980px)" });

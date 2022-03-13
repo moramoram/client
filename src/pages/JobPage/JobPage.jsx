@@ -61,10 +61,10 @@ const categoryData = [
     id: 2,
     title: "마감 임박",
   },
-  {
-    id: 3,
-    title: "싸피 우대 공고",
-  },
+  // {
+  //   id: 3,
+  //   title: "싸피 우대 공고",
+  // },
   {
     id: 4,
     title: "내 관심 공고",

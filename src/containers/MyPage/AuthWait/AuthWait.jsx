@@ -50,7 +50,7 @@ const AuthWait = ({ ...props }) => {
           <AskingForHelp>도움이 필요하신가요?</AskingForHelp>
         </Link>
         <AskingForHelp onClick={openModal}>탈퇴하고 싶어요</AskingForHelp>
-        <DeleteAccountModal showModal={true} setShowModal={setShowModal} />
+        <DeleteAccountModal showModal={showModal} setShowModal={setShowModal} />
       </ContentBox>
     </>
   );

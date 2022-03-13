@@ -41,97 +41,51 @@ const Router = () => {
           </Suspense>
         }
       >
-        <Route
-          path="/"
-          element={
-            isLogined ? (
-              <MainPage />
-            ) : (
-              <Suspense fallback={<div />}>
-                <LandingPage />
-              </Suspense>
-            )
-          }
-        />
-        <Route
-          path="landing"
-          element={
-            <Suspense fallback={<div />}>
-              <LandingPage />
-            </Suspense>
-          }
-        />
+        <Route path="/" element={isLogined ? <MainPage /> : <LandingPage />} />
+        <Route path="landing" element={<LandingPage />} />
         <Route path="main" element={<MainPage />} />
         <Route path="job" element={<JobPage />} />
         <Route
           path="job/create"
-          element={
-            <Suspense fallback={<div />}>
-              <PrivateRoute component={JobCreatePage} fallback="job" />
-            </Suspense>
-          }
+          element={<PrivateRoute component={JobCreatePage} fallback="job" />}
         />
         <Route
           path="job/:jobId"
-          element={
-            <Suspense fallback={<div />}>
-              <PrivateRoute component={JobDetailPage} fallback="job" />
-            </Suspense>
-          }
+          element={<PrivateRoute component={JobDetailPage} fallback="job" />}
         />
         <Route path="study" element={<StudyPage />} />
         <Route
           path="study/create"
           element={
-            <Suspense fallback={<div />}>
-              <PrivateRoute component={StudyCreatePage} fallback="study" />
-            </Suspense>
+            <PrivateRoute component={StudyCreatePage} fallback="study" />
           }
         />
         <Route
           path="study/:studyId"
           element={
-            <Suspense fallback={<div />}>
-              <PrivateRoute component={StudyDetailPage} fallback="study" />
-            </Suspense>
+            <PrivateRoute component={StudyDetailPage} fallback="study" />
           }
         />
         <Route
           path="study/:studyId/update"
           element={
-            <Suspense fallback={<div />}>
-              <PrivateRoute component={StudyUpdatePage} fallback="study" />
-            </Suspense>
+            <PrivateRoute component={StudyUpdatePage} fallback="study" />
           }
         />
 
-        <Route
-          path="community"
-          element={
-            <Suspense fallback={<div />}>
-              <CommunityPage />
-            </Suspense>
-          }
-        />
+        <Route path="community" element={<CommunityPage />} />
         <Route
           path="community/:contentId"
           element={
-            <Suspense fallback={<div />}>
-              <PrivateRoute
-                component={CommunityDetailPage}
-                fallback="community"
-              />
-            </Suspense>
+            <PrivateRoute
+              component={CommunityDetailPage}
+              fallback="community"
+            />
           }
         />
-
         <Route
           path="mypage"
-          element={
-            <Suspense fallback={<div />}>
-              <PrivateRoute component={MyPage} fallback="main" />
-            </Suspense>
-          }
+          element={<PrivateRoute component={MyPage} fallback="main" />}
         />
         <Route path="auth/login/*" element={<LoginPage />} />
         <Route path="/terms" element={<TermsPage />} />

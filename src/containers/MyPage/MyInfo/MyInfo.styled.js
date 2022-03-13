@@ -78,4 +78,5 @@ export const AskingForHelp = styled.div`
   color: ${colors.blue100};
   font-weight: ${fontWeight.bold};
   cursor: pointer;
+  padding-top: 50px;
 `;

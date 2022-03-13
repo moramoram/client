@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 
+import { useNavigate } from "react-router-dom";
 import { useResetRecoilState } from "recoil";
 import { token } from "@/recoil";
-
 import { useMutation } from "react-query";
 import { DeleteUser } from "@/api";
 
-import { Logo, Icon } from "@/foundations";
-import { Button } from "@/components";
 import {
   Overlay,
   ModalBox,
@@ -19,6 +16,8 @@ import {
   ButtonBox,
   LogoBox,
 } from "./DeleteAccountCompleteModal.styled";
+import { Button } from "@/components";
+import { Logo, Icon } from "@/foundations";
 
 const DeleteAccountCompleteModal = ({ showModal, setShowModal }) => {
   const navigate = useNavigate();
@@ -54,7 +53,7 @@ const DeleteAccountCompleteModal = ({ showModal, setShowModal }) => {
 
   return (
     <>
-      {showModal ? (
+      {showModal && (
         <div>
           <Overlay />
           <ModalBox>
@@ -79,7 +78,7 @@ const DeleteAccountCompleteModal = ({ showModal, setShowModal }) => {
             </Layout>
           </ModalBox>
         </div>
-      ) : null}
+      )}
     </>
   );
 };

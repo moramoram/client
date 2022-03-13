@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { useSetRecoilState } from "recoil";
 import { modalState } from "@/recoil";
-import { DeleteAccountModal } from "@/containers";
 
 import {
   CloseIconBox,
@@ -17,6 +16,7 @@ import {
 } from "./AuthWait.styled";
 import { Icon, Logo } from "@/foundations";
 import { Button } from "@/components";
+import { DeleteAccountModal } from "@/containers";
 
 const AuthWait = ({ ...props }) => {
   const setIsModalOpened = useSetRecoilState(modalState);

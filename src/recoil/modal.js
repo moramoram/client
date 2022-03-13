@@ -34,3 +34,8 @@ export const deleteModalState = atom({
   key: "deleteModalState",
   default: null,
 });
+
+export const deleteAccountModalState = atom({
+  key: "deleteAccountModalState",
+  default: true,
+});

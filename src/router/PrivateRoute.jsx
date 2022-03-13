@@ -1,46 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Navigate } from "react-router-dom";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import {
-  authState,
-  smallModalState,
-  modalState,
-  loginModalState,
-  isLoginState,
-} from "@/recoil";
+import { loginModalState, isLoginState } from "@/recoil";
 
-const PrivateRoute = ({
-  component: RouteComponent,
-  fallback: fallbackUrl,
-  checkAuthorized,
-}) => {
+const PrivateRoute = ({ component: RouteComponent, fallback: fallbackUrl }) => {
   const isLogined = useRecoilValue(isLoginState);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
-  const setModalOpen = useSetRecoilState(modalState);
-  const setSmallModalState = useSetRecoilState(smallModalState);
-  const authorizedState = useRecoilValue(authState);
+
+  useEffect(() => {
+    !isLogined && setLoginModalOpen("require");
+  });
 
   if (!isLogined) {
-    setLoginModalOpen("require");
     return <Navigate to={`/${fallbackUrl}`} />;
   }
 
-  if (checkAuthorized && authorizedState === 1) {
-    setSmallModalState(true);
-    return <Navigate to={`/${fallbackUrl}`} />;
-  }
-
-  if (checkAuthorized && authorizedState === 2) {
-    setModalOpen(true);
-    return <Navigate to={`/${fallbackUrl}`} />;
-  }
-
-  if (!checkAuthorized || authorizedState === 3) {
-    return <RouteComponent />;
-  }
-
-  return <Navigate to="/" />;
+  return <RouteComponent />;
 };
 
 export default PrivateRoute;

@@ -63,16 +63,11 @@ const Router = () => {
         />
         <Route path="main" element={<MainPage />} />
         <Route path="job" element={<JobPage />} />
-        <Route path="job/create" element={<JobCreatePage />} />
         <Route
           path="job/create"
           element={
             <Suspense fallback={<div />}>
-              <PrivateRoute
-                component={JobCreatePage}
-                fallback="job"
-                checkAuthorized
-              />
+              <PrivateRoute component={JobCreatePage} fallback="job" />
             </Suspense>
           }
         />
@@ -80,11 +75,7 @@ const Router = () => {
           path="job/:jobId"
           element={
             <Suspense fallback={<div />}>
-              <PrivateRoute
-                component={JobDetailPage}
-                fallback="job"
-                checkAuthorized
-              />
+              <PrivateRoute component={JobDetailPage} fallback="job" />
             </Suspense>
           }
         />
@@ -93,11 +84,7 @@ const Router = () => {
           path="study/create"
           element={
             <Suspense fallback={<div />}>
-              <PrivateRoute
-                component={StudyCreatePage}
-                fallback="study"
-                checkAuthorized
-              />
+              <PrivateRoute component={StudyCreatePage} fallback="study" />
             </Suspense>
           }
         />
@@ -105,11 +92,7 @@ const Router = () => {
           path="study/:studyId"
           element={
             <Suspense fallback={<div />}>
-              <PrivateRoute
-                component={StudyDetailPage}
-                fallback="study"
-                checkAuthorized
-              />
+              <PrivateRoute component={StudyDetailPage} fallback="study" />
             </Suspense>
           }
         />
@@ -117,11 +100,7 @@ const Router = () => {
           path="study/:studyId/update"
           element={
             <Suspense fallback={<div />}>
-              <PrivateRoute
-                component={StudyUpdatePage}
-                fallback="study"
-                checkAuthorized
-              />
+              <PrivateRoute component={StudyUpdatePage} fallback="study" />
             </Suspense>
           }
         />
@@ -141,7 +120,6 @@ const Router = () => {
               <PrivateRoute
                 component={CommunityDetailPage}
                 fallback="community"
-                checkAuthorized
               />
             </Suspense>
           }
@@ -155,8 +133,6 @@ const Router = () => {
             </Suspense>
           }
         />
-        <Route path="auth/login/*" element={<LoginPage />} />
-        <Route path="auth/login/*" element={<LoginPage />} />
         <Route path="auth/login/*" element={<LoginPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />

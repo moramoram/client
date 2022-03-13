@@ -31,10 +31,9 @@ const MyPage = () => {
 
   const contentsData = {
     1: <MyInfo userProfile={userProfile} />,
-    2: <AuthForm userProfile={userProfile} />,
-    3: <MyFeed />,
-    4: <MyStudy />,
-    5: <MyComment />,
+    2: <MyFeed />,
+    3: <MyStudy />,
+    4: <MyComment />,
   };
 
   const handleCategory = (id) => dispatchContents(id);
@@ -99,8 +98,8 @@ export default MyPage;
 
 const categoryData = [
   { id: 1, title: "내 프로필" },
-  { id: 2, title: "내 인증 현황" },
-  { id: 3, title: "내가 쓴 글" },
-  { id: 4, title: "나의 스터디" },
+  // { id: 2, title: "내 인증 현황" },
+  { id: 2, title: "내가 쓴 글" },
+  { id: 3, title: "나의 스터디" },
   // { id: 5, title: "내가 쓴 댓글" },
 ];

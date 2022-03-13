@@ -161,9 +161,7 @@ const MyInfo = ({ userProfile, ...props }) => {
           </AvatarBox>
         </LabelBox>
       </Form>
-      <AskingForHelp onClick={openModal}>
-        탈퇴하고 싶어요
-      </AskingForHelp>
+      <AskingForHelp onClick={openModal}>탈퇴하고 싶어요</AskingForHelp>
       <DeleteAccountModal showModal={showModal} setShowModal={setShowModal} />
     </Layout>
   );

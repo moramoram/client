@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isAuthenticatedState, navTypeState, themeState } from "@/recoil";
+import { isLoginState, navTypeState, themeState } from "@/recoil";
 
 import { useMediaQuery } from "react-responsive";
 
@@ -15,8 +15,8 @@ const JobsPage = () => {
   const theme = useRecoilValue(themeState);
   const setNavType = useSetRecoilState(navTypeState);
   const [offset, setOffset] = useState(0);
-  const isAuthenticated = useRecoilValue(isAuthenticatedState);
-  const category = isAuthenticated ? categoryData : categoryData.slice(0, 3);
+  const isLogined = useRecoilValue(isLoginState);
+  const category = isLogined ? categoryData : categoryData.slice(0, 3);
 
   useEffect(() => {
     !!offset ? setNavType("default") : setNavType("transparent");
@@ -61,10 +61,10 @@ const categoryData = [
     id: 2,
     title: "마감 임박",
   },
-  {
-    id: 3,
-    title: "싸피 우대 공고",
-  },
+  // {
+  //   id: 3,
+  //   title: "싸피 우대 공고",
+  // },
   {
     id: 4,
     title: "내 관심 공고",

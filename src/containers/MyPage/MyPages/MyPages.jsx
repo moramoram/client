@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 
 import { useRecoilValue } from "recoil";
-import { isAuthenticatedState, themeState } from "@/recoil";
+import { isLoginState, themeState } from "@/recoil";
 import { useMediaQuery } from "react-responsive";
 import { GetUserProfile, UserProfileSelector } from "@/api";
 
@@ -27,14 +27,13 @@ const MyPage = () => {
   const theme = useRecoilValue(themeState);
   const { data } = GetUserProfile();
   const userProfile = UserProfileSelector(data);
-  const isAuthenticated = useRecoilValue(isAuthenticatedState);
+  const isLogined = useRecoilValue(isLoginState);
 
   const contentsData = {
     1: <MyInfo userProfile={userProfile} />,
-    2: <AuthForm userProfile={userProfile} />,
-    3: <MyFeed />,
-    4: <MyStudy />,
-    5: <MyComment />,
+    2: <MyFeed />,
+    3: <MyStudy />,
+    4: <MyComment />,
   };
 
   const handleCategory = (id) => dispatchContents(id);
@@ -53,7 +52,7 @@ const MyPage = () => {
       <Layout>
         {isPc && (
           <MainBox>
-            {isAuthenticated ? (
+            {isLogined ? (
               <>
                 <StickyNavBox>
                   <StickyNav
@@ -73,7 +72,7 @@ const MyPage = () => {
         )}
         {isMobile && (
           <MobileBox>
-            {isAuthenticated ? (
+            {isLogined ? (
               <>
                 <SubNavbar
                   data={categoryData}
@@ -99,8 +98,8 @@ export default MyPage;
 
 const categoryData = [
   { id: 1, title: "내 프로필" },
-  { id: 2, title: "내 인증 현황" },
-  { id: 3, title: "내가 쓴 글" },
-  { id: 4, title: "나의 스터디" },
+  // { id: 2, title: "내 인증 현황" },
+  { id: 2, title: "내가 쓴 글" },
+  { id: 3, title: "나의 스터디" },
   // { id: 5, title: "내가 쓴 댓글" },
 ];

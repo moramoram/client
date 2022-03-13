@@ -80,10 +80,9 @@ const DeleteAccountModal = ({ showModal, setShowModal }) => {
                     뒤로 돌아갈래요
                   </Button>
                   <Button
-                    mode="primary"
+                    mode="secondary"
                     width="200"
                     onClick={openModal}
-                    style={{ backgroundColor: "gray" }}
                     disabled={!checked}
                   >
                     탈퇴할래요

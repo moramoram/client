@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { useSetRecoilState } from "recoil";
 import { modalState } from "@/recoil";
-import { DeleteAccountModal } from "@/containers";
 
 import {
   CloseIconBox,
@@ -17,6 +16,7 @@ import {
 } from "./AuthWait.styled";
 import { Icon, Logo } from "@/foundations";
 import { Button } from "@/components";
+import { DeleteAccountModal } from "@/containers";
 
 const AuthWait = ({ ...props }) => {
   const setIsModalOpened = useSetRecoilState(modalState);
@@ -50,7 +50,7 @@ const AuthWait = ({ ...props }) => {
           <AskingForHelp>도움이 필요하신가요?</AskingForHelp>
         </Link>
         <AskingForHelp onClick={openModal}>탈퇴하고 싶어요</AskingForHelp>
-        <DeleteAccountModal showModal={showModal} setShowModal={setShowModal} />
+        <DeleteAccountModal showModal={true} setShowModal={setShowModal} />
       </ContentBox>
     </>
   );

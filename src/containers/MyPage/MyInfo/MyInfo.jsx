@@ -161,7 +161,7 @@ const MyInfo = ({ userProfile, ...props }) => {
           </AvatarBox>
         </LabelBox>
       </Form>
-      <AskingForHelp style={{ paddingTop: "50px" }} onClick={openModal}>
+      <AskingForHelp onClick={openModal}>
         탈퇴하고 싶어요
       </AskingForHelp>
       <DeleteAccountModal showModal={showModal} setShowModal={setShowModal} />

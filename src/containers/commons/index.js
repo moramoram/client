@@ -7,5 +7,5 @@ export { default as AuthModal } from "./AuthModal";
 export { default as SmallModal } from "./SmallModal";
 export { default as SubmitModal } from "./SubmitModal";
 export { default as DeleteModal } from "./DeleteModal";
-export { default as DeleteAccountModal } from "./DeleteAccountModal";
-export { default as DeleteAccountCompleteModal } from "./DeleteAccountCompleteModal";
+export { default as DeleteAccountModal } from "../MyPage/DeleteAccountModal";
+export { default as DeleteAccountCompleteModal } from "../MyPage/DeleteAccountCompleteModal";

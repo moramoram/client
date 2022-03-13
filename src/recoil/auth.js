@@ -50,13 +50,6 @@ export const isLoginState = selector({
   },
 });
 
-export const isAuthenticatedState = selector({
-  key: "isAuthenticatedState",
-  get: ({ get }) => {
-    return !!(get(auth)?.authCheck === 3);
-  },
-});
-
 export const authState = selector({
   key: "authState",
   get: ({ get }) => {

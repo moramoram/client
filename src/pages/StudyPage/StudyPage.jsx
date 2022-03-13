@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isAuthenticatedState, navTypeState, themeState } from "@/recoil";
+import { isLoginState, navTypeState, themeState } from "@/recoil";
 
 import {
   StudyIntro,
@@ -19,8 +19,8 @@ const StudyPage = () => {
   const theme = useRecoilValue(themeState);
   const setNavType = useSetRecoilState(navTypeState);
   const [offset, setOffset] = useState(0);
-  const isAuthenticated = useRecoilValue(isAuthenticatedState);
-  const category = isAuthenticated ? categoryData : categoryData.slice(0, 1);
+  const isLogined = useRecoilValue(isLoginState);
+  const category = isLogined ? categoryData : categoryData.slice(0, 1);
 
   useEffect(() => {
     !!offset ? setNavType("default") : setNavType("transparent");

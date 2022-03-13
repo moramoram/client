@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 
 import { useRecoilValue } from "recoil";
-import { isAuthenticatedState, themeState } from "@/recoil";
+import { isLoginState, themeState } from "@/recoil";
 import { useMediaQuery } from "react-responsive";
 import { GetUserProfile, UserProfileSelector } from "@/api";
 
@@ -27,7 +27,7 @@ const MyPage = () => {
   const theme = useRecoilValue(themeState);
   const { data } = GetUserProfile();
   const userProfile = UserProfileSelector(data);
-  const isAuthenticated = useRecoilValue(isAuthenticatedState);
+  const isLogined = useRecoilValue(isLoginState);
 
   const contentsData = {
     1: <MyInfo userProfile={userProfile} />,
@@ -53,7 +53,7 @@ const MyPage = () => {
       <Layout>
         {isPc && (
           <MainBox>
-            {isAuthenticated ? (
+            {isLogined ? (
               <>
                 <StickyNavBox>
                   <StickyNav
@@ -73,7 +73,7 @@ const MyPage = () => {
         )}
         {isMobile && (
           <MobileBox>
-            {isAuthenticated ? (
+            {isLogined ? (
               <>
                 <SubNavbar
                   data={categoryData}

@@ -16,13 +16,7 @@ const THEME = {
 };
 
 const MyPageIntro = ({ userProfile, ...props }) => {
-  const { profileImg, nickname, authCheck } = userProfile;
-
-  const authState = {
-    1: "인증이 필요해요",
-    2: "아직 인증이 완료되지 않았어요",
-    3: `${nickname}님 안녕하세요!`,
-  };
+  const { profileImg, nickname } = userProfile;
 
   return (
     <>
@@ -31,7 +25,7 @@ const MyPageIntro = ({ userProfile, ...props }) => {
           <Avatar size="extraLarge" src={profileImg} />
           <TitleBox>
             <Title {...props}>{nickname}</Title>
-            <SubTitle {...props}>{authState[authCheck]}</SubTitle>
+            <SubTitle {...props}>${nickname}님 안녕하세요!</SubTitle>
           </TitleBox>
         </ContentBox>
       </Layout>

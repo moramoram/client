@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isAuthenticatedState, navTypeState, themeState } from "@/recoil";
+import { isLoginState, navTypeState, themeState } from "@/recoil";
 
 import { useMediaQuery } from "react-responsive";
 
@@ -15,8 +15,8 @@ const JobsPage = () => {
   const theme = useRecoilValue(themeState);
   const setNavType = useSetRecoilState(navTypeState);
   const [offset, setOffset] = useState(0);
-  const isAuthenticated = useRecoilValue(isAuthenticatedState);
-  const category = isAuthenticated ? categoryData : categoryData.slice(0, 3);
+  const isLogined = useRecoilValue(isLoginState);
+  const category = isLogined ? categoryData : categoryData.slice(0, 3);
 
   useEffect(() => {
     !!offset ? setNavType("default") : setNavType("transparent");

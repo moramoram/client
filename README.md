@@ -19,7 +19,7 @@
 4. [**주요 기능**](#주요-기능)
 5. [**프로젝트 구성도**](#프로젝트-구성도)
 6. [**개발 팀 소개**](#개발-팀-소개)
-7. [**기록**](#기록)
+7. [**버전 기록**](#버전-기록)
 8. [**실행 방법**](#실행-방법)
 
 <br />
@@ -41,6 +41,8 @@
 
 - [디자인 시스템](http://ssafe-design-system.netlify.app/)
 - [서비스 소개 영상](https://www.youtube.com/watch?v=pDnROgpKGXM)
+- [Notion](https://endurable-wanderer-fa3.notion.site/moramoram-09fa48957b0c4d4f885f04af6365e664)
+- [Figma](<https://www.figma.com/file/KKHRfTcEuNC1vChK7ExJLU/ssafe-(public)?node-id=0%3A1>)
 
 <br />
 
@@ -208,7 +210,7 @@
 
 |        아키텍처(Architecture)        |
 | :----------------------------------: |
-| ![](https://i.imgur.com/TIluJNJ.png) |
+| ![image](https://user-images.githubusercontent.com/74908906/158919393-278e3803-d120-4f74-80d9-1182c9612e4a.png) |
 
 <br />
 
@@ -253,27 +255,13 @@
 
 <br />
 
-## 기록
-
-### moramoram의 기록들
-
-- [Notion](https://endurable-wanderer-fa3.notion.site/moramoram-09fa48957b0c4d4f885f04af6365e664)
-- [Figma](<https://www.figma.com/file/KKHRfTcEuNC1vChK7ExJLU/ssafe-(public)?node-id=0%3A1>)
-
-<br />
-
-### 버전기록
+## 버전 기록
 
 | 버전   | 업데이트 내용                                                                                                                              | 업데이트 날짜 |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| v1.0.0 | - SSAFE 서비스 오픈                                                                                                                        | 22.02.12      |
-| v1.0.1 | - AWS S3 Image Server CORS 수정<br/> - 댓글 작성자 Response 통일                                                                           | 22.02.12      |
-| v1.0.2 | - 게시판 새로고침 시 목록으로 이동하는 오류 수정<br/> -유저 닉네임 중복확인 및 프로필 사진 오류 수정 <br/>                                 | 22.02.12      |
-| v1.1.0 | - 관리자 페이지 추가 <br/> - 랜딩 페이지 수정 <br/>                                                                                        | 22.02.12      |
-| v1.2.0 | - 알림 기능 추가 <br/> - Admin 알림 API 추가<br/>                                                                                          | 22.02.12      |
-| v1.3.0 | - footer 내용 생성(만든 사람, 이용 약관, 개인정보처리방침 등) 및 링크 연결<br/>                                                            | 22.02.14      |
-| v1.3.1 | - 첫 접속 시 랜딩 페이지 type error 수정 <br/> - 채용 상세보기 시 관련 스터디가 로딩되지 않는 오류 수정<br/>                               | 22.02.14      |
-| v1.3.2 | - 디테일 페이지에서 Refresh시 Home redirect 현상 수정 <br/> - main 페이지 carousel banner 연결 <br/> - 취업 정보 페이지 마감임박 버튼 수정 | 22.02.16      |
+| v0.1.0 | - SSAFE 서비스 오픈                                                                                                                        | 22.02.12      |
+| v0.1.1 | - footer 내용 생성(만든 사람, 이용 약관, 개인정보처리방침 등) 및 링크 연결<br/>    - 첫 접속 시 랜딩 페이지 type error 수정 <br/> - 채용 상세보기 시 관련 스터디가 로딩되지 않는 오류 수정<br/>                                                           | 22.02.20      |
+| v0.1.2 | - 디테일 페이지에서 Refresh시 Home redirect 현상 수정 <br/> - main 페이지 carousel banner 연결 <br/> - 취업 정보 페이지 마감임박 버튼 수정 | 22.02.24      |
 
 <br />
 

@@ -16,7 +16,7 @@ import {
 } from "@/recoil/modal";
 import { navMenuData, navUserData } from "@/recoil/menu";
 
-import { ErrorPage } from "@/pages";
+import ErrorPage from "@/pages/CommonPage/ErrorPage";
 import {
   Navbar,
   ScrollToTop,

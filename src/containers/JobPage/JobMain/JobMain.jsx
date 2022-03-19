@@ -12,7 +12,7 @@ import {
   SortBox,
 } from "./JobMain.styled";
 import { Input, Selector, Checkbox, Sort, CardGrid } from "@/components";
-import { JobCardGrid } from "@/containers";
+import { JobCardGrid } from "@/containers/JobPage";
 
 import { debounce } from "@/utils";
 

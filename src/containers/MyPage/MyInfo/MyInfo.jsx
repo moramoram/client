@@ -17,7 +17,7 @@ import {
   AvatarBox,
   AskingForHelp,
 } from "./MyInfo.styled";
-import { ProfileImage, DeleteAccountModal } from "@/containers";
+import { ProfileImage, DeleteAccountModal } from "@/containers/MyPage";
 import { Input, Button } from "@/components";
 
 const THEME = {

@@ -11,7 +11,7 @@ import {
   InputBox,
   SortBox,
 } from "./StudyMain.styled";
-import { StudyCardGrid } from "@/containers";
+import { StudyCardGrid } from "@/containers/StudyPage";
 import { CardGrid, Input, Selector, Checkbox, Sort } from "@/components";
 
 import { debounce } from "@/utils";

@@ -22,6 +22,7 @@ const Logo = ({ width, height, ...props }) => {
       viewBox="0 0 1000 260"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      aria-label="ssafe logo"
     >
       <g>
         <Symbol

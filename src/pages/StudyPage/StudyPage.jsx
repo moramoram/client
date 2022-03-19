@@ -6,12 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isLoginState, navTypeState, themeState } from "@/recoil";
 
-import {
-  StudyIntro,
-  StudyMain,
-  StudyMainMobile,
-  ErrorBoundary,
-} from "@/containers";
+import { StudyIntro, StudyMain, StudyMainMobile } from "@/containers/StudyPage";
 import { ScrollTopButton } from "@/components";
 import { throttle } from "@/utils";
 
@@ -31,7 +26,6 @@ const StudyPage = () => {
 
   useEffect(() => {
     const onScroll = throttle(() => setOffset(window.pageYOffset));
-
     window.removeEventListener("scroll", onScroll);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -41,7 +35,7 @@ const StudyPage = () => {
   const isMobile = useMediaQuery({ query: "(max-width:980px)" });
 
   return (
-    <ErrorBoundary fallback={<div />}>
+    <>
       <StudyIntro />
       {isPc && <StudyMain categoryData={category} />}
       {isMobile && <StudyMainMobile categoryData={category} />}
@@ -51,7 +45,7 @@ const StudyPage = () => {
           theme={theme}
         />
       </ScrollTopBox>
-    </ErrorBoundary>
+    </>
   );
 };
 

@@ -8,3 +8,5 @@ export { default as MyPageIntro } from "./MyPageIntro";
 export { default as MyPages } from "./MyPages";
 export { default as MyStudy } from "./MyStudy";
 export { default as ProfileImage } from "./ProfileImage";
+export { default as DeleteAccountModal } from "./DeleteAccountModal";
+export { default as DeleteAccountCompleteModal } from "./DeleteAccountCompleteModal";

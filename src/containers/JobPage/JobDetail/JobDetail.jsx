@@ -20,7 +20,7 @@ import {
   BoxTitle,
   BoxDescription,
 } from "./JobDetail.styled";
-import { JobSideBar, JobDetailComment } from "@/containers";
+import { JobSideBar, JobDetailComment } from "@/containers/JobPage";
 import { Toc, CardSmallSlider } from "@/components";
 
 const THEME = {

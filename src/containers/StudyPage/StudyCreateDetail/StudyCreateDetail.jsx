@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 
 import {
   Layout,
@@ -8,7 +8,12 @@ import {
   Form,
   InputTitle,
 } from "./StudyCreateDetail.styled";
-import { StudyCreateEditor } from "@/containers";
+
+import EmptyPage from "@/pages/CommonPage/EmptyPage";
+
+const StudyCreateEditor = lazy(() =>
+  import("@/containers/StudyPage/StudyCreateEditor")
+);
 
 const StudyCreateDetail = ({
   register,
@@ -47,13 +52,15 @@ const StudyCreateDetail = ({
           })}
           {...props}
         />
-        <StudyCreateEditor
-          register={register}
-          control={control}
-          errors={errors}
-          originalData={originalData}
-          {...props}
-        />
+        <Suspense fallback={<EmptyPage />}>
+          <StudyCreateEditor
+            register={register}
+            control={control}
+            errors={errors}
+            originalData={originalData}
+            {...props}
+          />
+        </Suspense>
       </Form>
     </Layout>
   );

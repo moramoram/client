@@ -10,7 +10,7 @@ import {
   BoxTitle,
   BoxDescription,
 } from "./LoadingDetail.styled";
-import { StudySideBar } from "@/containers";
+import { StudySideBar } from "@/containers/StudyPage";
 import { CommentInput, CommentList, Toc } from "@/components";
 
 const THEME = {

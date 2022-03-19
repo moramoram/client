@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+import { useMediaQuery } from "react-responsive";
+
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isLoginState, navTypeState, themeState } from "@/recoil";
 
-import { useMediaQuery } from "react-responsive";
-
-import { JobIntro, JobMain, JobMainMobile, ErrorBoundary } from "@/containers";
+import { JobIntro, JobMain, JobMainMobile } from "@/containers/JobPage";
 import { ScrollTopButton } from "@/components";
-
 import { throttle } from "@/utils";
 
 const JobsPage = () => {
@@ -36,7 +35,7 @@ const JobsPage = () => {
   const isMobile = useMediaQuery({ query: "(max-width:980px)" });
 
   return (
-    <ErrorBoundary fallback={<div />}>
+    <>
       <JobIntro />
       {isPc && <JobMain categoryData={category} />}
       {isMobile && <JobMainMobile categoryData={category} />}
@@ -46,7 +45,7 @@ const JobsPage = () => {
           theme={theme}
         />
       </ScrollTopBox>
-    </ErrorBoundary>
+    </>
   );
 };
 

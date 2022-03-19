@@ -16,7 +16,7 @@ import {
 } from "./AuthWait.styled";
 import { Icon, Logo } from "@/foundations";
 import { Button } from "@/components";
-import { DeleteAccountModal } from "@/containers";
+import { DeleteAccountModal } from "@/containers/MyPage";
 
 const AuthWait = ({ ...props }) => {
   const setIsModalOpened = useSetRecoilState(modalState);

@@ -27,7 +27,7 @@ import {
   ButtonBox,
   ButtonBg,
 } from "./JobDetailMobile.styled";
-import { JobDetailComment } from "@/containers";
+import { JobDetailComment } from "@/containers/JobPage";
 import {
   Badge,
   BookMark,

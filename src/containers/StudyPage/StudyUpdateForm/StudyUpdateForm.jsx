@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from "react-query";
 import { GetStudyDetail, getCompanyList, PutStudy } from "@/api";
 
 import { Layout, ContentBox, ButtonBox } from "./StudyUpdateForm.styled";
-import { StudyCreateSummary, StudyCreateDetail } from "@/containers";
+import { StudyCreateSummary, StudyCreateDetail } from "@/containers/StudyPage";
 import { Button } from "@/components";
 
 const StudyUpdateForm = ({ ...props }) => {

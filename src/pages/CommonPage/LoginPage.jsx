@@ -7,7 +7,7 @@ import { token } from "@/recoil";
 import queryString from "query-string";
 import { axiosInstance } from "@/utils";
 
-import { ErrorBoundary } from "@/containers";
+import { ErrorBoundary } from "@/containers/Loading";
 
 const LoginPage = () => {
   const location = useLocation();

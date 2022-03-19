@@ -15,7 +15,7 @@ import {
   ButtonBox,
   ContentBox,
 } from "./CommunityCreate.styled";
-import { CommunityEditor } from "@/containers/";
+import { CommunityEditor } from "@/containers/CommunityPage";
 import { Button } from "@/components";
 import { Icon } from "@/foundations";
 

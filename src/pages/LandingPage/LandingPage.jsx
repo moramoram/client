@@ -8,14 +8,13 @@ import {
   LandingHero,
   LandingDetailSection,
   LandingCTASection,
-  ErrorBoundary,
-} from "@/containers";
+} from "@/containers/LandingPage";
 import { ScrollTopButton } from "@/components";
 
 const LandingPage = () => {
   const theme = useRecoilValue(themeState);
   return (
-    <ErrorBoundary fallback={<div />}>
+    <>
       <LandingHero theme={theme} />
       <LandingCTASection
         text={`스터디, 취업 정보, 커뮤니티 기능을 모두 담은 \n싸피만의 공간, 들어 보셨나요?`}
@@ -31,7 +30,7 @@ const LandingPage = () => {
           theme={theme}
         />
       </ScrollTopBox>
-    </ErrorBoundary>
+    </>
   );
 };
 

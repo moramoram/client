@@ -10,7 +10,7 @@ import {
   SortBox,
 } from "./JobMainMobile.styled";
 import { CardGrid, Input, Checkbox, Sort } from "@/components";
-import { JobCardGrid } from "@/containers";
+import { JobCardGrid } from "@/containers/JobPage";
 
 import { debounce } from "@/utils";
 

@@ -22,7 +22,7 @@ import {
   Dropdown,
   Content,
 } from "./StudyDetail.styled";
-import { StudySideBar, StudyDetailComment } from "@/containers";
+import { StudySideBar, StudyDetailComment } from "@/containers/StudyPage";
 import { Avatar, Toc } from "@/components";
 import { Icon } from "@/foundations";
 

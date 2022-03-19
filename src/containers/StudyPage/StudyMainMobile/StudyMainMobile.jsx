@@ -9,7 +9,7 @@ import {
   SearchBox,
   SortBox,
 } from "./StudyMainMobile.styled";
-import { StudyCardGrid } from "@/containers";
+import { StudyCardGrid } from "@/containers/StudyPage";
 import { Input, Checkbox, CardGrid, Sort } from "@/components";
 
 import { debounce } from "@/utils";

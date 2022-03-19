@@ -17,7 +17,7 @@ import {
   TypeBox,
   Message,
 } from "./StudyCreateSummary.styled";
-import { ThumbnailUploader } from "@/containers";
+import { ThumbnailUploader } from "@/containers/StudyPage";
 import { Input, Selector, Checkbox, Radio } from "@/components";
 
 const THEME = {

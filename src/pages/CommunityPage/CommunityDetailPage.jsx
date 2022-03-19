@@ -4,7 +4,8 @@ import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
 
-import { CommunityDetail, LoadingCommunityDetail } from "@/containers";
+import { LoadingCommunityDetail } from "@/containers/Loading";
+import { CommunityDetail } from "@/containers/CommunityPage";
 
 const CommunityDetailPage = ({ match }) => {
   const theme = useRecoilValue(themeState);

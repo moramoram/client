@@ -6,7 +6,7 @@ import { useIntersectionObserver } from "@/hooks";
 import { GetJobList, JobCardSelector } from "@/api";
 
 import { FetchBox } from "./JobCardGrid.styled";
-import { JobNoContent } from "@/containers";
+import { JobNoContent } from "@/containers/JobPage";
 import { CardGrid } from "@/components";
 
 const JobCardGrid = () => {

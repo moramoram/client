@@ -7,7 +7,7 @@ import { useIntersectionObserver } from "@/hooks";
 import { GetMyCommunityList, CommunityFeedSelector } from "@/api";
 
 import { Layout, Title, SubTitle, FetchBox } from "./MyFeed.styled";
-import { CommunityNoContent } from "@/containers";
+import { CommunityNoContent } from "@/containers/CommunityPage";
 import { FeedGrid } from "@/components";
 
 const THEME = {

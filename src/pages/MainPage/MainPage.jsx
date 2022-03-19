@@ -11,8 +11,7 @@ import {
   MainJobSlider,
   MainStudySilder,
   MainCommunitySlider,
-  ErrorBoundary,
-} from "@/containers";
+} from "@/containers/MainPage";
 import { colors, fontSize, lineHeight, fontWeight } from "@/_shared";
 
 const MainPage = () => {
@@ -22,36 +21,34 @@ const MainPage = () => {
   const isMobile = useMediaQuery({ query: "(max-width:980px)" });
 
   return (
-    <ErrorBoundary fallback={<div />}>
-      <Layout>
-        {isPc && <MainIntroSlider theme={theme} />}
-        {isMobile && <EmptyBox />}
-        <ContentBox>
-          <TitleBox>
-            <Title theme={theme}>새로 올라온 공고</Title>
-          </TitleBox>
-          <Suspense fallback={<div />}>
-            <MainJobSlider theme={theme} />
-          </Suspense>
-        </ContentBox>
-        <ContentBox>
-          <TitleBox>
-            <Title theme={theme}>새로 올라온 스터디</Title>
-          </TitleBox>
-          <Suspense fallback={<div />}>
-            <MainStudySilder theme={theme} />
-          </Suspense>
-        </ContentBox>
-        <ContentBox>
-          <TitleBox>
-            <Title theme={theme}>커뮤니티 인기글</Title>
-          </TitleBox>
-          <Suspense fallback={<div />}>
-            <MainCommunitySlider theme={theme} />
-          </Suspense>
-        </ContentBox>
-      </Layout>
-    </ErrorBoundary>
+    <Layout>
+      {isPc && <MainIntroSlider theme={theme} />}
+      {isMobile && <EmptyBox />}
+      <ContentBox>
+        <TitleBox>
+          <Title theme={theme}>새로 올라온 공고</Title>
+        </TitleBox>
+        <Suspense fallback={<div />}>
+          <MainJobSlider theme={theme} />
+        </Suspense>
+      </ContentBox>
+      <ContentBox>
+        <TitleBox>
+          <Title theme={theme}>새로 올라온 스터디</Title>
+        </TitleBox>
+        <Suspense fallback={<div />}>
+          <MainStudySilder theme={theme} />
+        </Suspense>
+      </ContentBox>
+      <ContentBox>
+        <TitleBox>
+          <Title theme={theme}>커뮤니티 인기글</Title>
+        </TitleBox>
+        <Suspense fallback={<div />}>
+          <MainCommunitySlider theme={theme} />
+        </Suspense>
+      </ContentBox>
+    </Layout>
   );
 };
 

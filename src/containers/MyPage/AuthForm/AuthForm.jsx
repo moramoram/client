@@ -20,7 +20,11 @@ import {
   ButtonBox,
   AskingForHelp,
 } from "./AuthForm.styled";
-import { AuthWait, AuthComplete, DeleteAccountModal } from "@/containers";
+import {
+  AuthWait,
+  AuthComplete,
+  DeleteAccountModal,
+} from "@/containers/MyPage";
 import { Input, Button, Selector } from "@/components";
 
 const THEME = {

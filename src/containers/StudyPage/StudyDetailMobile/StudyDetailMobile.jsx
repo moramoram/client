@@ -30,7 +30,7 @@ import {
   ButtonBox,
   ButtonBg,
 } from "./StudyDetailMobile.styled";
-import { StudyDetailComment } from "@/containers";
+import { StudyDetailComment } from "@/containers/StudyPage";
 import {
   Avatar,
   Badge,

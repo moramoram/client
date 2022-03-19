@@ -20,7 +20,7 @@ import {
   CountNums,
   CommentBox,
 } from "./CommunityDetail.styled";
-import { CommunityDetailComment } from "@/containers";
+import { CommunityDetailComment } from "@/containers/CommunityPage";
 import { Button, FeedDetail } from "@/components";
 import { Icon } from "@/foundations";
 

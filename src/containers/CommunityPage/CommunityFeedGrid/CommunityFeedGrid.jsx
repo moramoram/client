@@ -6,7 +6,7 @@ import { useIntersectionObserver } from "@/hooks";
 import { GetCommunityList, CommunityFeedSelector } from "@/api";
 
 import { FetchBox } from "./CommunityFeedGrid.styled";
-import { CommunityNoContent } from "@/containers";
+import { CommunityNoContent } from "@/containers/CommunityPage";
 import { FeedGrid } from "@/components";
 
 const CommunityFeedGrid = () => {

@@ -11,12 +11,12 @@ import {
 } from "@/recoil";
 import { useMediaQuery } from "react-responsive";
 
+import { ErrorBoundary } from "@/containers/Loading";
 import {
   CommunityIntro,
   CommunityCreateButton,
   CommunityFeedGrid,
-  ErrorBoundary,
-} from "@/containers";
+} from "@/containers/CommunityPage";
 
 import {
   SubNavbar,

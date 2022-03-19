@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { loginModalState, isLoginState } from "@/recoil";
 
-const PrivateRoute = ({ component: RouteComponent, fallback: fallbackUrl }) => {
+const PrivateRoute = ({ element: RouteComponent, fallback: fallbackUrl }) => {
   const isLogined = useRecoilValue(isLoginState);
   const setLoginModalOpen = useSetRecoilState(loginModalState);
 

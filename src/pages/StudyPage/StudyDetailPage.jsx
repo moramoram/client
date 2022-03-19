@@ -6,13 +6,8 @@ import { themeState } from "@/recoil/theme";
 
 import { useMediaQuery } from "react-responsive";
 
-import {
-  LoadingDetail,
-  LoadingDetailMobile,
-  StudyDetail,
-  StudyDetailMobile,
-  ErrorBoundary,
-} from "@/containers";
+import { LoadingDetail, LoadingDetailMobile } from "@/containers/Loading";
+import { StudyDetail, StudyDetailMobile } from "@/containers/StudyPage";
 
 const StudyDetailPage = () => {
   const theme = useRecoilValue(themeState);
@@ -21,20 +16,18 @@ const StudyDetailPage = () => {
   const isMobile = useMediaQuery({ query: "(max-width:980px)" });
 
   return (
-    <ErrorBoundary fallback={<div />}>
-      <Layout>
-        {isPc && (
-          <Suspense fallback={<LoadingDetail theme={theme} />}>
-            <StudyDetail theme={theme} />
-          </Suspense>
-        )}
-        {isMobile && (
-          <Suspense fallback={<LoadingDetailMobile theme={theme} />}>
-            <StudyDetailMobile theme={theme} />
-          </Suspense>
-        )}
-      </Layout>
-    </ErrorBoundary>
+    <Layout>
+      {isPc && (
+        <Suspense fallback={<LoadingDetail theme={theme} />}>
+          <StudyDetail theme={theme} />
+        </Suspense>
+      )}
+      {isMobile && (
+        <Suspense fallback={<LoadingDetailMobile theme={theme} />}>
+          <StudyDetailMobile theme={theme} />
+        </Suspense>
+      )}
+    </Layout>
   );
 };
 

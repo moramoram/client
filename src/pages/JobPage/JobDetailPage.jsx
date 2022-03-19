@@ -9,10 +9,10 @@ import { useMediaQuery } from "react-responsive";
 import {
   LoadingDetail,
   LoadingDetailMobile,
-  JobDetail,
-  JobDetailMobile,
   ErrorBoundary,
-} from "@/containers";
+} from "@/containers/Loading";
+
+import { JobDetail, JobDetailMobile } from "@/containers/JobPage";
 import { daysFromToday } from "@/utils";
 
 const JobsDetailPage = () => {

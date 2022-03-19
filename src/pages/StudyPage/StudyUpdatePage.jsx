@@ -1,18 +1,23 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 
 import { useRecoilValue } from "recoil";
 import { themeState } from "@/recoil/theme";
+import EmptyPage from "@/pages/CommonPage/EmptyPage";
 
-import { StudyCreateIntro, StudyUpdateForm, ErrorBoundary } from "@/containers";
-
+const StudyCreateIntro = lazy(() =>
+  import("@/containers/StudyPage/StudyCreateIntro")
+);
+const StudyUpdateForm = lazy(() =>
+  import("@/containers/StudyPage/StudyUpdateForm")
+);
 const StudyCreatePage = () => {
   const theme = useRecoilValue(themeState);
 
   return (
-    <ErrorBoundary fallback={<div />}>
+    <Suspense fallback={<EmptyPage />}>
       <StudyCreateIntro theme={theme} />
       <StudyUpdateForm theme={theme} />
-    </ErrorBoundary>
+    </Suspense>
   );
 };
 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useCallback, useState } from "react";
 
 import { Icon } from "@/foundations";
 import { Button, Checkbox } from "@/components";
-import { DeleteAccountCompleteModal } from "@/containers";
+import { DeleteAccountCompleteModal } from "@/containers/MyPage";
 import {
   Overlay,
   ModalBox,

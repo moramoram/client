@@ -16,20 +16,21 @@ import {
 } from "@/recoil/modal";
 import { navMenuData, navUserData } from "@/recoil/menu";
 
-import { ErrorPage } from "@/pages";
+import ErrorPage from "@/pages/CommonPage/ErrorPage";
+
 import {
   Navbar,
   ScrollToTop,
   Footer,
   SignUpModal,
-  CommunityCreate,
-  CommunityUpdate,
   AuthModal,
   SmallModal,
   SubmitModal,
   ErrorBoundary,
   DeleteModal,
-} from "@/containers";
+} from "@/containers/Common";
+
+// import { CommunityCreate, CommunityUpdate } from "@/containers/CommunityPage";
 import { colors } from "@/_shared";
 
 const Layout = () => {
@@ -74,8 +75,8 @@ const Layout = () => {
       {isDeleteModal && <DeleteModal theme={theme} />}
       {isSubmitModal && <SubmitModal theme={theme} />}
       {isloginModal && <SignUpModal theme={theme} />}
-      {isCreateModal && <CommunityCreate theme={theme} />}
-      {isUpdateModal && <CommunityUpdate theme={theme} />}
+      {/* {isCreateModal && <CommunityCreate theme={theme} />}
+      {isUpdateModal && <CommunityUpdate theme={theme} />} */}
       <Suspense fallback={<div />}>
         <Nav
           theme={theme}

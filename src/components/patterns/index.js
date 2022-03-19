@@ -9,7 +9,6 @@ export { default as Comment } from "./Comment";
 export { default as CommentInput } from "./CommentInput";
 export { default as Dropdown } from "./Dropdown";
 export { default as DropdownSmall } from "./Dropdown/DropdownSmall";
-export { default as Editor } from "./Editor";
 export { default as FeedDetail } from "./FeedDetail";
 export { default as FeedItem } from "./FeedItem";
 export { default as FeedItemSmall } from "./FeedItemSmall";

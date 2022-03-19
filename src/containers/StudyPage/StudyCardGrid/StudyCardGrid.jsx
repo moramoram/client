@@ -6,7 +6,7 @@ import { themeState, studySearch, studyfilter } from "@/recoil";
 import { useIntersectionObserver } from "@/hooks";
 import { StudyCardSelector, GetStudyList } from "@/api";
 
-import { StudyNoContent } from "@/containers";
+import { StudyNoContent } from "@/containers/StudyPage";
 import { CardGrid } from "@/components";
 
 const StudyCardGrid = () => {

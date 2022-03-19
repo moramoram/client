@@ -20,7 +20,7 @@ import {
   MyComment,
   MyPageIntro,
   MyStudy,
-} from "@/containers";
+} from "@/containers/MyPage";
 import { SubNavbar } from "@/components";
 
 const MyPage = () => {

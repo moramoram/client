@@ -64,7 +64,7 @@ const JobDetailMobile = (props) => {
   return (
     <>
       <Layout>
-        <ImageBoxResponsive className="thumbnail" {...props} />
+        <ImageBoxResponsive className="thumbnail" src={sidebarData.src} />
         <TitleBox {...props}>
           <Highlight {...props}>{titleData.highlight}</Highlight>
           <Title {...props}>{titleData.title}</Title>

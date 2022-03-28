@@ -40,34 +40,33 @@ const Router = () => {
   useGaTracker();
 
   return (
-    <Routes>
-      <Route
-        element={
-          <Suspense fallback={<EmptyPage />}>
-            <Layout />
-          </Suspense>
-        }
-      >
-        <Route path="/" element={isLogined ? <MainPage /> : <LandingPage />} />
+    <Suspense fallback={<EmptyPage />}>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route
+            path="/"
+            element={isLogined ? <MainPage /> : <LandingPage />}
+          />
 
-        {routes.map(({ path, element, privateRoute }) => {
-          return !privateRoute ? (
-            <Route key={path} path={path} element={element} />
-          ) : (
-            <Route
-              key={path}
-              path={path}
-              element={
-                <PrivateRoute
-                  component={element}
-                  fallback={privateRoute.fallback}
-                />
-              }
-            />
-          );
-        })}
-      </Route>
-    </Routes>
+          {routes.map(({ path, element, privateRoute }) => {
+            return !privateRoute ? (
+              <Route key={path} path={path} element={element} />
+            ) : (
+              <Route
+                key={path}
+                path={path}
+                element={
+                  <PrivateRoute
+                    element={element}
+                    fallback={privateRoute.fallback}
+                  />
+                }
+              />
+            );
+          })}
+        </Route>
+      </Routes>
+    </Suspense>
   );
 };
 
@@ -88,14 +87,14 @@ const routes = [
   },
   {
     path: "/job/:jobId",
-    element: <JobDetailPage />,
+    element: JobDetailPage,
     privateRoute: {
       fallback: "job",
     },
   },
   {
     path: "/job/create",
-    element: <JobCreatePage />,
+    element: JobCreatePage,
     privateRoute: {
       fallback: "job",
     },
@@ -106,21 +105,21 @@ const routes = [
   },
   {
     path: "/study/create",
-    element: <StudyCreatePage />,
+    element: StudyCreatePage,
     privateRoute: {
       fallback: "study",
     },
   },
   {
     path: "/study/:studyId",
-    element: <StudyDetailPage />,
+    element: StudyDetailPage,
     privateRoute: {
       fallback: "study",
     },
   },
   {
     path: "/study/:studyId/update",
-    element: <StudyUpdatePage />,
+    element: StudyUpdatePage,
     privateRoute: {
       fallback: "study",
     },
@@ -131,14 +130,14 @@ const routes = [
   },
   {
     path: "/community/:contentId",
-    element: <CommunityDetailPage />,
+    element: CommunityDetailPage,
     privateRoute: {
       fallback: "community",
     },
   },
   {
     path: "/mypage",
-    element: <MyPage />,
+    element: MyPage,
     privateRoute: {
       fallback: "main",
     },

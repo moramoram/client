@@ -17,7 +17,7 @@ import {
 import { navMenuData, navUserData } from "@/recoil/menu";
 
 import ErrorPage from "@/pages/CommonPage/ErrorPage";
-
+import EmptyPage from "@/pages/CommonPage/EmptyPage";
 import {
   Navbar,
   ScrollToTop,
@@ -30,7 +30,7 @@ import {
   DeleteModal,
 } from "@/containers/Common";
 
-// import { CommunityCreate, CommunityUpdate } from "@/containers/CommunityPage";
+import { CommunityCreate, CommunityUpdate } from "@/containers/CommunityPage";
 import { colors } from "@/_shared";
 
 const Layout = () => {
@@ -75,9 +75,11 @@ const Layout = () => {
       {isDeleteModal && <DeleteModal theme={theme} />}
       {isSubmitModal && <SubmitModal theme={theme} />}
       {isloginModal && <SignUpModal theme={theme} />}
-      {/* {isCreateModal && <CommunityCreate theme={theme} />}
-      {isUpdateModal && <CommunityUpdate theme={theme} />} */}
-      <Suspense fallback={<div />}>
+      <Suspense fallback={<EmptyPage />}>
+        {isCreateModal && <CommunityCreate theme={theme} />}
+        {isUpdateModal && <CommunityUpdate theme={theme} />}
+      </Suspense>
+      <Suspense fallback={<EmptyPage />}>
         <Nav
           theme={theme}
           type={navType}
